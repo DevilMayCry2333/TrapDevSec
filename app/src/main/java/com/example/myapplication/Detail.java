@@ -6,6 +6,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +52,9 @@ public class Detail extends AppCompatActivity {
             info.put("latitude",String.valueOf(currentLocation.getLatitude()));
             info.put("accuracy",String.valueOf(currentLocation.getAccuracy()));
             info.put("isGps",String.valueOf(isGps));
-            info.put("isNet",String.valueOf(isNetwork));
+//            info.put("isNet",String.valueOf(isNetwork));
+
+            info.put("isNet", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
             detailArray.add(info);
             detailAdapter.notifyDataSetChanged();
 
@@ -70,6 +73,12 @@ public class Detail extends AppCompatActivity {
             Toast.makeText(this,s,Toast.LENGTH_LONG).show();
         }
         else{
+            HashMap<String,String> info = new HashMap<>();
+            info.put("isGps",String.valueOf(isGps));
+//            info.put("isNet",String.valueOf(isNetwork));
+            info.put("isNet", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
+            detailArray.add(info);
+            detailAdapter.notifyDataSetChanged();
 
         }
     }
@@ -90,19 +99,42 @@ public class Detail extends AppCompatActivity {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, new LocationListener() {
             public void onLocationChanged(Location location) {
+                LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                 Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+                 Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
                 // TODO Auto-generated method stub
-                showLocation(location,isGps,isNetwork);
+                showLocation(location,isGps2,isNetwork2);
             }
             public void onProviderDisabled(String provider) {
+                LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+                Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
                 // TODO Auto-generated method stub
-                showLocation(null,isGps,isNetwork);
+                showLocation(null,isGps2,isNetwork2);
             }
             public void onProviderEnabled(String provider) {
+                LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+                Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-                showLocation(locationManager.getLastKnownLocation(provider),isGps,isNetwork);
+                showLocation(locationManager.getLastKnownLocation(provider),isGps2,isNetwork2);
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {
                 // TODO Auto-generated method stub
+                LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+                Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+                // TODO Auto-generated method stub
+                showLocation(null,isGps2,isNetwork2);
+
+
             }
         });
 
