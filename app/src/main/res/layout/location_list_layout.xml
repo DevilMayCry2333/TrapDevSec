@@ -55,34 +55,34 @@
     />
     <TextView
         android:layout_below="@id/accuracyName"
-        android:id="@+id/isGpsName"
+        android:id="@+id/altitudeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="isGps: "
+        android:text="海拔: "
         android:textSize="16sp"
         />
     <TextView
-        android:layout_toRightOf="@id/isGpsName"
+        android:layout_toRightOf="@id/altitudeName"
         android:layout_below="@id/accuracyName"
-        android:id="@+id/isGps"
+        android:id="@+id/altitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="16sp"
         />
     <TextView
-        android:layout_toRightOf="@id/isGps"
-        android:layout_below="@id/accuracyName"
-        android:id="@+id/isNetName"
+
+        android:layout_below="@id/altitudeName"
+        android:id="@+id/GPSmodeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="   isNetwork: "
+        android:text="定位模式： "
         android:textSize="16sp"
         />
     <TextView
-        android:layout_toRightOf="@id/isNetName"
-        android:layout_below="@id/accuracyName"
-        android:id="@+id/isNet"
+        android:layout_toRightOf="@id/GPSmodeName"
+        android:layout_below="@id/altitudeName"
+        android:id="@+id/GPSmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""

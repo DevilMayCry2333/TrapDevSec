@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private TextView res ;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         String resText = bundle.getString("res");
         try {
-            JSONObject token = new JSONObject(resText);
-            if(token.has("token")){
+            JSONObject tokenObj = new JSONObject(resText);
+            if(tokenObj.has("token")){
                TextView tokenTextView = findViewById(R.id.token);
-                tokenTextView.setText(token.getString("token"));
+                tokenTextView.setText(tokenObj.getString("token"));
+                token = tokenObj.getString("token");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -59,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 int i = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
                 Intent intent = new Intent(MainActivity.this,Detail.class);
-                intent.putExtra("result",result.getContents());
+                intent.putExtra("codeString",result.getContents());
+                intent.putExtra("token",token);
                 startActivity(intent);
 
                 Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
