@@ -3,18 +3,31 @@ package com.example.myapplication;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.myapplication.R;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,13 +35,19 @@ public class Detail extends AppCompatActivity {
     private ArrayList<HashMap<String,String>> detailArray;
     private ListView locationArray;
     private DetailAdapter detailAdapter;
+    private Button submit;
+    private String codeString;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_detail);
 
-
+        Bundle bundle = this.getIntent().getExtras();
+        codeString = bundle.getString("codeString");
+        token = bundle.getString("token");
+        Log.i("codeInfo:",codeString+",token:"+token);
         ActivityCompat.requestPermissions(this, new String[] {
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION },
@@ -43,18 +62,151 @@ public class Detail extends AppCompatActivity {
 
 //        Log.i("getCount:",String.valueOf(detailAdapter.getCount()));
         getLocation();
-    }
 
-    public void showLocation(Location currentLocation,boolean isGps,boolean isNetwork){
+        submit = (Button)findViewById(R.id.submit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitInfo();
+            }
+        });
+
+    }
+    public void submitInfo(){new Thread(runnable).start();}
+
+
+    public String sendPost(String url, HashMap<String,String> params){
+        PrintWriter out = null;
+        BufferedReader in =null;
+        String result = "";
+        StringBuilder tempParams = new StringBuilder();
+        int pos = 0;
+
+        try{
+
+            for (String key : params.keySet()) {
+                if (pos > 0) {
+                    tempParams.append("&");
+                }
+                tempParams.append(String.format("%s=%s", key,  URLEncoder.encode(params.get(key),"utf-8")));
+                pos++;
+            }
+
+            URL realUrl = new URL(url);
+            HttpURLConnection urlConn = (HttpURLConnection) realUrl.openConnection();
+
+            urlConn.setDoOutput(true);
+            //设置请求允许输入 默认是true
+            urlConn.setDoInput(true);
+            // Post请求不能使用缓存
+            urlConn.setUseCaches(false);
+            urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConn.setRequestProperty("token",token);
+            //获取URLConnection对象对应的输出流
+            out = new PrintWriter(urlConn.getOutputStream());
+            //发送请求参数
+            out.print(tempParams);
+            //输出流的缓冲
+            out.flush();
+            if (urlConn.getResponseCode()==200)
+                in = new  BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+            else
+                in = new BufferedReader(new InputStreamReader(urlConn.getErrorStream()));
+            String line;
+            while ((line = in.readLine())!=null) {
+                result+="\n"+line;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }finally {
+            try{
+                if(out!=null){
+                    out.close();
+                }
+                if(in != null){
+                    in.close();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("value");
+            if (val.equals("err")){
+                Toast.makeText(Detail.this,"",Toast.LENGTH_LONG).show();
+            }
+            if (val.equals("notnull")){
+                Toast.makeText(Detail.this,"",Toast.LENGTH_LONG).show();
+            }
+
+        }
+    };
+
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            Bundle data = new Bundle();
+            String longtitude = detailArray.get(detailArray.size() - 1).get("longtitude");
+            String latitude = detailArray.get(detailArray.size() - 1).get("latitude");
+            String altitude = detailArray.get(detailArray.size() - 1).get("altitude");
+            HashMap<String, String> params = new HashMap<>();
+            params.put("longitude", longtitude);
+            params.put("latitude", latitude);
+            params.put("altitude",altitude);
+            params.put("id",codeString);
+            params.put("num","0");params.put("maleNum","0");params.put("femaleNum","0");
+            params.put("drug","test");params.put("remark","test");
+            params.put("workingContent","本条是用于位置测试的测试信息");
+            params.put("oth erNum","0");params.put("otherType","0");
+
+            String res = sendPost("http://39.108.184.47:8081/auth_api/maintenance", params);
+
+            Log.i("res:", res);
+            if (res == "") {
+                data.putString("value", "err");
+                msg.setData(data);
+                handler.sendMessage(msg);
+
+            } else {
+                try {
+                    JSONObject json = new JSONObject(res);
+                    if (json.has("")) {
+
+                    } else {
+                        data.putString("value", "err");
+                        msg.setData(data);
+                        handler.sendMessage(msg);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    };
+
+        public void showLocation(Location currentLocation,boolean isGps,boolean isNetwork){
         if(currentLocation != null){
             HashMap<String,String> info = new HashMap<>();
             info.put("longtitude",String.valueOf(currentLocation.getLongitude()));
             info.put("latitude",String.valueOf(currentLocation.getLatitude()));
             info.put("accuracy",String.valueOf(currentLocation.getAccuracy()));
-            info.put("isGps",String.valueOf(isGps));
+            info.put("altitude",String.valueOf(currentLocation.getAltitude()));
 //            info.put("isNet",String.valueOf(isNetwork));
 
-            info.put("isNet", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
+            info.put("GPSmode", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
             detailArray.add(info);
             detailAdapter.notifyDataSetChanged();
 
@@ -70,7 +222,7 @@ public class Detail extends AppCompatActivity {
             s += currentLocation.getBearing();
             s += "\n Accuracy: ";
             s += currentLocation.getAccuracy();
-            Toast.makeText(this,s,Toast.LENGTH_LONG).show();
+            Toast.makeText(Detail.this,s,Toast.LENGTH_LONG).show();
         }
         else{
             HashMap<String,String> info = new HashMap<>();
@@ -83,9 +235,8 @@ public class Detail extends AppCompatActivity {
         }
     }
     @SuppressLint("MissingPermission")
-    public void getLocation(){
+    public void getLocation() {
         final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
 
 
         final Boolean isGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -95,18 +246,19 @@ public class Detail extends AppCompatActivity {
         System.out.println(isGps);
         System.out.println(isNetwork);
         @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        showLocation(location,isGps,isNetwork);
+        showLocation(location, isGps, isNetwork);
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, new LocationListener() {
             public void onLocationChanged(Location location) {
                 LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                 Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
                 //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
-                 Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
                 // TODO Auto-generated method stub
-                showLocation(location,isGps2,isNetwork2);
+                showLocation(location, isGps2, isNetwork2);
             }
+
             public void onProviderDisabled(String provider) {
                 LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -114,16 +266,18 @@ public class Detail extends AppCompatActivity {
                 Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
                 // TODO Auto-generated method stub
-                showLocation(null,isGps2,isNetwork2);
+                showLocation(null, isGps2, isNetwork2);
             }
+
             public void onProviderEnabled(String provider) {
                 LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 Boolean isGps2 = locationManager2.isProviderEnabled(LocationManager.GPS_PROVIDER);
                 //通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
                 Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-                showLocation(locationManager.getLastKnownLocation(provider),isGps2,isNetwork2);
+                showLocation(locationManager.getLastKnownLocation(provider), isGps2, isNetwork2);
             }
+
             public void onStatusChanged(String provider, int status, Bundle extras) {
                 // TODO Auto-generated method stub
                 LocationManager locationManager2 = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -132,15 +286,15 @@ public class Detail extends AppCompatActivity {
                 Boolean isNetwork2 = locationManager2.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
                 // TODO Auto-generated method stub
-                showLocation(null,isGps2,isNetwork2);
+                showLocation(null, isGps2, isNetwork2);
 
 
             }
         });
-
+        }
     }
 
 
 
 
-}
+

@@ -31,14 +31,14 @@ public class DetailAdapter extends BaseAdapter {
         TextView longtitude = (TextView) item.findViewById(R.id.longtitude);
         TextView latitude = (TextView)item.findViewById(R.id.latitude);
         TextView accuracy = (TextView)item.findViewById(R.id.accuracy);
-        TextView isGps = (TextView)item.findViewById(R.id.isGps);
-        TextView isNet = (TextView)item.findViewById(R.id.isNet);
+        TextView altitude = (TextView)item.findViewById(R.id.altitude);
+        TextView GPSmode = (TextView)item.findViewById(R.id.GPSmode);
 
         longtitude.setText(detailArray.get(position).get("longtitude"));
         latitude.setText(detailArray.get(position).get("latitude"));
         accuracy.setText(detailArray.get(position).get("accuracy"));
-        isGps.setText(detailArray.get(position).get("isGps"));
-        isNet.setText(detailArray.get(position).get("isNet"));
+        altitude.setText(detailArray.get(position).get("altitude"));
+        GPSmode.setText(detailArray.get(position).get("GPSmode"));
 
 
 
