@@ -142,10 +142,13 @@ public class Detail extends AppCompatActivity {
             Bundle data = msg.getData();
             String val = data.getString("value");
             if (val.equals("err")){
-                Toast.makeText(Detail.this,"",Toast.LENGTH_LONG).show();
+                Toast.makeText(Detail.this,"请求失败！出现了未知错误",Toast.LENGTH_LONG).show();
             }
-            if (val.equals("notnull")){
-                Toast.makeText(Detail.this,"",Toast.LENGTH_LONG).show();
+            if (val.equals("suc")){
+                Toast.makeText(Detail.this,"提交成功",Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(Detail.this,val+" (人员超过100m会导致失败)",Toast.LENGTH_LONG).show();
             }
 
         }
@@ -164,25 +167,27 @@ public class Detail extends AppCompatActivity {
             params.put("longitude", longtitude);
             params.put("latitude", latitude);
             params.put("altitude",altitude);
-            params.put("id",codeString);
+            params.put("deviceId",codeString);
             params.put("num","0");params.put("maleNum","0");params.put("femaleNum","0");
             params.put("drug","test");params.put("remark","test");
-            params.put("workingContent","本条是用于位置测试的测试信息");
-            params.put("oth erNum","0");params.put("otherType","0");
+            params.put("workingContent","0");
+            params.put("otherNum","0");params.put("otherType","0");
 
             String res = sendPost("http://39.108.184.47:8081/auth_api/maintenance", params);
 
             Log.i("res:", res);
             if (res == "") {
-                data.putString("value", "err");
+                data.putString("value", "suc");
                 msg.setData(data);
                 handler.sendMessage(msg);
 
             } else {
                 try {
                     JSONObject json = new JSONObject(res);
-                    if (json.has("")) {
-
+                    if (json.has("message")) {
+                        data.putString("value", json.getString("message"));
+                        msg.setData(data);
+                        handler.sendMessage(msg);
                     } else {
                         data.putString("value", "err");
                         msg.setData(data);
@@ -222,15 +227,16 @@ public class Detail extends AppCompatActivity {
             s += currentLocation.getBearing();
             s += "\n Accuracy: ";
             s += currentLocation.getAccuracy();
-            Toast.makeText(Detail.this,s,Toast.LENGTH_LONG).show();
+           // Toast.makeText(Detail.this,s,Toast.LENGTH_LONG).show();
         }
         else{
-            HashMap<String,String> info = new HashMap<>();
-            info.put("isGps",String.valueOf(isGps));
-//            info.put("isNet",String.valueOf(isNetwork));
-            info.put("isNet", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
-            detailArray.add(info);
-            detailAdapter.notifyDataSetChanged();
+//            HashMap<String,String> info = new HashMap<>();
+//            info.put("isGps",String.valueOf(isGps));
+////            info.put("isNet",String.valueOf(isNetwork));
+//            info.put("isNet", Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED));
+//            detailArray.add(info);
+//            detailAdapter.notifyDataSetChanged();
+            Toast.makeText(Detail.this,"获取不到定位信息，请打开GPS,或切换定位模式（不要选择 \"仅用网络定位\"）",Toast.LENGTH_LONG).show();
 
         }
     }
