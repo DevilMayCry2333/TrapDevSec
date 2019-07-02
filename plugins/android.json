@@ -1,0 +1,54 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.telerik.plugins.nativepagetransitions": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    }
+  },
+  "dependent_plugins": {}
+}
