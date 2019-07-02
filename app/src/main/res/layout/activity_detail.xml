@@ -11,17 +11,18 @@
         android:layout_height="wrap_content"
         android:text="Location记录："
         />
-<ListView
-        android:layout_below="@id/locationName"
-        android:id="@+id/locationArray"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-    />
     <Button
             android:id="@+id/submit"
-            android:layout_below="@id/locationArray"
+            android:layout_below="@id/locationName"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="提交测试数据到后台"
     />
+<ListView
+        android:layout_below="@id/submit"
+        android:id="@+id/locationArray"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+    />
+
 </RelativeLayout>
