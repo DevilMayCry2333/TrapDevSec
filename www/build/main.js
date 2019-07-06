@@ -947,51 +947,66 @@ var AboutPage = /** @class */ (function () {
         //
         // map.centerAndZoom('中国', 5);
     }
-    AboutPage.prototype.myLocation = function (map) {
+    AboutPage.prototype.myLocation = function (map, i) {
         // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
-        var geolocation = new BMap.Geolocation();
-        // 开启SDK辅助定位
-        geolocation.enableSDKLocation();
-        geolocation.getCurrentPosition(function (r) {
-            // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-            var point = new BMap.Point(r.point.lng, r.point.lat);
-            map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
-            function addMarker(point, index) {
-                var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
-                    // 指定定位位置。   
-                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                    // 图标中央下端的尖角位置。    
-                    anchor: new BMap.Size(10, 25),
-                    // 设置图片偏移。   
-                    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                    imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-                });
-                // 创建标注对象并添加到地图   
-                var marker = new BMap.Marker(point, { icon: myIcon });
-                map.addOverlay(marker);
-            }
-            addMarker(point, 0);
-            // }
-            // else {
-            // }
-        });
+        // }
+        // else {
+        // }
+    };
+    AboutPage.prototype.ionViewDidLoad = function () {
+        var myPoint = [];
+        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
+        // var point = new BMap.Point(116.331398, 39.897445);
+        // map.centerAndZoom(point, 12);
+        var i = 0;
+        setInterval(function () {
+            var geolocation = new BMap.Geolocation();
+            // 开启SDK辅助定位
+            geolocation.enableSDKLocation();
+            geolocation.getCurrentPosition(function (r) {
+                console.log(i);
+                console.log(r);
+                myPoint.push(r.point);
+                function addMarker(point, index) {
+                    var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
+                        // 指定定位位置。   
+                        // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                        // 图标中央下端的尖角位置。    
+                        anchor: new BMap.Size(10, 25),
+                        // 设置图片偏移。   
+                        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                        // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                        imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+                    });
+                    // 创建标注对象并添加到地图   
+                    var marker = new BMap.Marker(point, { icon: myIcon });
+                    map.addOverlay(marker);
+                }
+                // if (i <= 2) {
+                //   // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                //   var mk = new BMap.Marker(r.point);
+                //   map.addOverlay(mk);
+                //   map.panTo(r.point);
+                //   // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+                //   var point = new BMap.Point(r.point.lng, r.point.lat);
+                //   map.centerAndZoom(point, 15);  // 编写自定义函数，创建标注   
+                //   addMarker(point, 0);
+                // }
+                localStorage.setItem('location', JSON.stringify(myPoint));
+                console.log(localStorage.getItem('location'));
+            });
+            i++;
+        }, 20000);
     };
     AboutPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        var myPoint = [];
         var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
         var point = new BMap.Point(116.331398, 39.897445);
         map.centerAndZoom(point, 12);
         // setInterval("this.myLocation()",5000);
         // this.myLocation();
-        setInterval(function () {
-            _this.myLocation(map);
-        }, 5000);
         map.centerAndZoom('中国', 5);
         map.addControl(new BMap.MapTypeControl());
         var sizeMap = new BMap.Size(10, 80); //显示位置
@@ -1024,6 +1039,39 @@ var AboutPage = /** @class */ (function () {
                 }
             }
             _this.addMarker();
+        });
+        var geolocation = new BMap.Geolocation();
+        // 开启SDK辅助定位
+        geolocation.enableSDKLocation();
+        geolocation.getCurrentPosition(function (r) {
+            console.log(r);
+            myPoint.push(r.point);
+            function addMarker(point, index) {
+                var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
+                    // 指定定位位置。   
+                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                    // 图标中央下端的尖角位置。    
+                    anchor: new BMap.Size(10, 25),
+                    // 设置图片偏移。   
+                    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                    imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+                });
+                // 创建标注对象并添加到地图   
+                var marker = new BMap.Marker(point, { icon: myIcon });
+                map.addOverlay(marker);
+            }
+            // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+            var point = new BMap.Point(r.point.lng, r.point.lat);
+            map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
+            addMarker(point, 0);
+            localStorage.setItem('location', JSON.stringify(myPoint));
+            console.log(localStorage.getItem('location'));
         });
     };
     AboutPage.prototype.addMarker = function () {
