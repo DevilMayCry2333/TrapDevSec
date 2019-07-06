@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
@@ -16,7 +16,37 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\2\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
+            "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,126,197,267,337,405",
+                        "endColumns": "70,70,69,69,67,67",
+                        "endOffsets": "121,192,262,332,400,468"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,126,197,267,337,405",
+                        "endColumns": "70,70,69,69,67,67",
+                        "endOffsets": "121,192,262,332,400,468"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
@@ -46,22 +76,7 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
-            "map": [
-                {
-                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,126,197,267,337,405",
-                        "endColumns": "70,70,69,69,67,67",
-                        "endOffsets": "121,192,262,332,400,468"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\2\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-xlarge-v4\\values-xlarge-v4.xml",

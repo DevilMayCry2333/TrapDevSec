@@ -33,18 +33,8 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\2\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,212,347,416,480,549",
-                        "endColumns": "156,134,68,63,68,69",
-                        "endOffsets": "207,342,411,475,544,614"
-                    }
-                },
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\bc98a180c0ddeace16c5696c138cf655\\res\\values-v24\\values-v24.xml",
                     "from": {
@@ -60,23 +50,23 @@
                         "startOffsets": "619,685,746,812",
                         "endColumns": "65,60,65,66",
                         "endOffsets": "680,741,807,874"
+                    }
+                },
+                {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,212,347,416,480,549",
+                        "endColumns": "156,134,68,63,68,69",
+                        "endOffsets": "207,342,411,475,544,614"
                     }
                 }
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\2\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,212,347,416,480,549",
-                        "endColumns": "156,134,68,63,68,69",
-                        "endOffsets": "207,342,411,475,544,614"
-                    }
-                },
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\bc98a180c0ddeace16c5696c138cf655\\res\\values-v24\\values-v24.xml",
                     "from": {
@@ -92,6 +82,16 @@
                         "startOffsets": "619,685,746,812",
                         "endColumns": "65,60,65,66",
                         "endOffsets": "680,741,807,874"
+                    }
+                },
+                {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,212,347,416,480,549",
+                        "endColumns": "156,134,68,63,68,69",
+                        "endOffsets": "207,342,411,475,544,614"
                     }
                 }
             ]
@@ -100,6 +100,23 @@
             "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\bc98a180c0ddeace16c5696c138cf655\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
+                    },
+                    "to": {
+                        "startLines": "8,9,10,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "619,685,746,812",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "680,741,807,874"
+                    }
+                },
+                {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
@@ -108,7 +125,12 @@
                         "endColumns": "156,134,68,63,68,69",
                         "endOffsets": "207,342,411,475,544,614"
                     }
-                },
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "map": [
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\bc98a180c0ddeace16c5696c138cf655\\res\\values-v24\\values-v24.xml",
                     "from": {
@@ -125,12 +147,7 @@
                         "endColumns": "65,60,65,66",
                         "endOffsets": "680,741,807,874"
                     }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
-            "map": [
+                },
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v24\\values-v24.xml",
                     "from": {
@@ -140,9 +157,24 @@
                         "endColumns": "156,134,68,63,68,69",
                         "endOffsets": "207,342,411,475,544,614"
                     }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-v24/values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,212,347,416,480,549",
+                        "endColumns": "156,134,68,63,68,69",
+                        "endOffsets": "207,342,411,475,544,614"
+                    }
                 },
                 {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\bc98a180c0ddeace16c5696c138cf655\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/1d383d25bb689ed93e75b2267d5f2707/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

@@ -27,7 +27,7 @@
     "@ionic-native/diagnostic": "^4.16.0",
     "@ionic-native/file": "^4.20.0",
     "@ionic-native/file-transfer": "^4.11.0",
-    "@ionic-native/geolocation": "^4.8.0",
+    "@ionic-native/geolocation": "^4.20.0",
     "@ionic-native/in-app-browser": "^4.20.0",
     "@ionic-native/native-page-transitions": "^4.11.0",
     "@ionic-native/qr-scanner": "^4.8.0",

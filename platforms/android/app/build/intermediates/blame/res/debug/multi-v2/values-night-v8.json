@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593",
+                        "endColumns": "69,83,83,95,101,101,93",
+                        "endOffsets": "120,204,288,384,486,588,682"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
@@ -16,10 +31,10 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -61,10 +76,10 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",

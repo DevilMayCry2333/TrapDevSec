@@ -1,6 +1,74 @@
 {
     "logs": [
         {
+            "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/b6ae0de698a773ff6e1a8c32a52eaf75/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
@@ -35,77 +103,19 @@
             ]
         },
         {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
-            "map": [
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "121",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\1\\a\\appTest1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
-            "map": [
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "121",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\2\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
@@ -122,16 +132,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]
@@ -140,6 +140,16 @@
             "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\4\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
@@ -157,7 +167,12 @@
                         "endColumns": "12",
                         "endOffsets": "289"
                     }
-                },
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/D:\\Aqiye\\1\\GraduationProjectApp-master\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "map": [
                 {
                     "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e09bd97aaeabf6d8c422252768b9837c\\res\\values-v16\\values-v16.xml",
                     "from": {
@@ -166,6 +181,25 @@
                         "startOffsets": "55",
                         "endColumns": "65",
                         "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/Users/youkaiyu/Downloads/GraduationProjectApp-master 4/C:\\Users\\lenovo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\b8728fa86d21a1235bc1311fb1e92720\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
                     }
                 }
             ]
