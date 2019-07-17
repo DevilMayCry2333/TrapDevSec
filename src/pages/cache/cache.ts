@@ -3,6 +3,8 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpClient} from "@angular/common/http";
 import {Base} from "../../common/base.js";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+import {File} from "@ionic-native/file";
+
 import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the CachePage page.
@@ -28,7 +30,7 @@ export class CachePage {
   deviceForestCache: any;
 
   constructor(public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient,
-              private base: Base, private fileTransfer: FileTransfer) {
+              private base: Base, private fileTransfer: FileTransfer,private file:File) {
                 
                 // if (localStorage.getItem('maintenanceCache') != null) {
                 //       this.alldeviceCache = JSON.parse(localStorage.getItem('maintenanceCache'));
@@ -180,7 +182,7 @@ export class CachePage {
       }, res=>{
       //  this.base.showAlert('提示', '失败'+i, ()=>{});          
           tmpDeviceList.push(this.deviceCache[i]);  
-        
+
       }).catch((error)=>{
         
         
@@ -194,11 +196,22 @@ export class CachePage {
     //this.alldeviceCache = tmpDeviceList;
     
     
-    localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
-    loading.dismiss();
-    this.loadList()
-  }
+    this.file.writeFile(this.file.externalDataDirectory, "new_file4.txt", JSON.stringify(this.indexList), { replace: true }).then(function (success) {
+      console.log("newfile4");
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
 
+    localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
+
+
+    loading.dismiss();
+    this.loadList();
+  }
+  
   async submit1() {
     // 先提交设备信息，以防是新设备
     let indexList = [];
@@ -213,11 +226,23 @@ export class CachePage {
 
       });
     }
+    
     for (let i = 0; i < indexList.length; ++i) {
       tmpDeviceList.push(this.deviceCache[i]);
     }
     this.deviceCache = tmpDeviceList;
+    this.file.writeFile(this.file.externalDataDirectory, "new_file1.txt", JSON.stringify(this.deviceCache), { replace: true }).then(function (success) {
+      console.log("newfile1");
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
+
     localStorage.setItem('deviceCache', JSON.stringify(this.deviceCache));
+
+
     // this.loadList();
 
     // 提交天牛信息
@@ -235,7 +260,17 @@ export class CachePage {
       tmpDeviceBeetleList.push(this.deviceBeetleCache[i]);
     }
     this.deviceBeetleCache = tmpDeviceBeetleList;
+    this.file.writeFile(this.file.externalDataDirectory, "new_file2.txt", JSON.stringify(this.deviceBeetleCache), { replace: true }).then(function (success) {
+      console.log("newfile2");
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
     localStorage.setItem('deviceBeetleCache', JSON.stringify(this.deviceBeetleCache));
+
+
     // this.loadList();
 
     // 提交森林信息
@@ -253,7 +288,27 @@ export class CachePage {
       tmpDeviceForestList.push(this.deviceForestCache[i]);
     }
     this.deviceForestCache = tmpDeviceForestList;
+    
+    this.file.writeFile(this.file.externalDataDirectory, "new_file3.txt", JSON.stringify(this.deviceForestCache), { replace: true }).then(function (success) {
+      console.log("newfile3");
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
+
     localStorage.setItem('deviceForestCache', JSON.stringify(this.deviceForestCache));
+
+    //sd 卡上面
+    // this.file.createFile(this.file.applicationStorageDirectory, "new_file.txt", true).then(function (success) {
+    //   console.log(success);
+    //   // success
+    // }, function (error) {
+    //   console.log(error);
+    //   // error
+    // });
+
 
     this.loadList();
   }

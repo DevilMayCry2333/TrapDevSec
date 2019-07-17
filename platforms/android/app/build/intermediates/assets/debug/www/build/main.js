@@ -6,14 +6,14 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(218);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -151,7 +151,7 @@ var LoginPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScanPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(53);
@@ -434,7 +434,7 @@ var ScanPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
@@ -598,7 +598,7 @@ var LocatePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(107);
@@ -760,7 +760,7 @@ webpackEmptyAsyncContext.id = 163;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -907,7 +907,7 @@ var TabsPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__ = __webpack_require__(208);
@@ -947,51 +947,63 @@ var AboutPage = /** @class */ (function () {
         //
         // map.centerAndZoom('中国', 5);
     }
-    AboutPage.prototype.myLocation = function (map) {
+    AboutPage.prototype.myLocation = function (map, i) {
         // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
-        var geolocation = new BMap.Geolocation();
-        // 开启SDK辅助定位
-        geolocation.enableSDKLocation();
-        geolocation.getCurrentPosition(function (r) {
-            // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-            var point = new BMap.Point(r.point.lng, r.point.lat);
-            map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
-            function addMarker(point, index) {
-                var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
-                    // 指定定位位置。   
-                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                    // 图标中央下端的尖角位置。    
-                    anchor: new BMap.Size(10, 25),
-                    // 设置图片偏移。   
-                    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                    imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-                });
-                // 创建标注对象并添加到地图   
-                var marker = new BMap.Marker(point, { icon: myIcon });
-                map.addOverlay(marker);
-            }
-            addMarker(point, 0);
-            // }
-            // else {
-            // }
-        });
+        // }
+        // else {
+        // }
+    };
+    AboutPage.prototype.ionViewDidLoad = function () {
+        var myPoint = [];
+        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
+        // var point = new BMap.Point(116.331398, 39.897445);
+        // map.centerAndZoom(point, 12);
+        var i = 0;
+        setInterval(function () {
+            var geolocation = new BMap.Geolocation();
+            // 开启SDK辅助定位
+            geolocation.enableSDKLocation();
+            geolocation.getCurrentPosition(function (r) {
+                console.log(r);
+                myPoint.push(r.point);
+                function addMarker(point, index) {
+                    var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+                        // 指定定位位置。   
+                        // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                        // 图标中央下端的尖角位置。    
+                        anchor: new BMap.Size(10, 25),
+                        // 设置图片偏移。   
+                        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                        // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                        imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+                    });
+                    // 创建标注对象并添加到地图   
+                    var marker = new BMap.Marker(point, { icon: myIcon });
+                    map.addOverlay(marker);
+                }
+                // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+                var point = new BMap.Point(r.point.lng, r.point.lat);
+                map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
+                addMarker(point, 0);
+                localStorage.setItem('location', JSON.stringify(myPoint));
+                console.log(localStorage.getItem('location'));
+            });
+            i++;
+        }, 1800000);
     };
     AboutPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        var myPoint = [];
         var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
         var point = new BMap.Point(116.331398, 39.897445);
         map.centerAndZoom(point, 12);
         // setInterval("this.myLocation()",5000);
         // this.myLocation();
-        setInterval(function () {
-            _this.myLocation(map);
-        }, 5000);
         map.centerAndZoom('中国', 5);
         map.addControl(new BMap.MapTypeControl());
         var sizeMap = new BMap.Size(10, 80); //显示位置
@@ -1024,6 +1036,39 @@ var AboutPage = /** @class */ (function () {
                 }
             }
             _this.addMarker();
+        });
+        var geolocation = new BMap.Geolocation();
+        // 开启SDK辅助定位
+        geolocation.enableSDKLocation();
+        geolocation.getCurrentPosition(function (r) {
+            console.log(r);
+            myPoint.push(r.point);
+            function addMarker(point, index) {
+                var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+                    // 指定定位位置。   
+                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                    // 图标中央下端的尖角位置。    
+                    anchor: new BMap.Size(10, 25),
+                    // 设置图片偏移。   
+                    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                    imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+                });
+                // 创建标注对象并添加到地图   
+                var marker = new BMap.Marker(point, { icon: myIcon });
+                map.addOverlay(marker);
+            }
+            // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+            var point = new BMap.Point(r.point.lng, r.point.lat);
+            map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
+            addMarker(point, 0);
+            localStorage.setItem('location', JSON.stringify(myPoint));
+            console.log(localStorage.getItem('location'));
         });
     };
     AboutPage.prototype.addMarker = function () {
@@ -1151,21 +1196,21 @@ var CoordinateConvertor = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(295);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(217);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1637,7 +1682,7 @@ var PhotoUploadPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(213);
@@ -1945,10 +1990,11 @@ var MaintenancePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CachePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(215);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1999,6 +2045,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 /**
  * Generated class for the CachePage page.
  *
@@ -2006,7 +2053,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
  * Ionic pages and navigation.
  */
 var CachePage = /** @class */ (function () {
-    function CachePage(loadingCtrl, navCtrl, navParams, httpClient, base, fileTransfer) {
+    function CachePage(loadingCtrl, navCtrl, navParams, httpClient, base, fileTransfer, file) {
         // if (localStorage.getItem('maintenanceCache') != null) {
         //       this.alldeviceCache = JSON.parse(localStorage.getItem('maintenanceCache'));
         //       for (let i = 0; i < this.alldeviceCache.length; ++i) {
@@ -2016,6 +2063,7 @@ var CachePage = /** @class */ (function () {
         this.httpClient = httpClient;
         this.base = base;
         this.fileTransfer = fileTransfer;
+        this.file = file;
         this.record = [];
         this.indexList = [];
         this.have_submit = false;
@@ -2165,6 +2213,14 @@ var CachePage = /** @class */ (function () {
                             this.indexList.push(tmpDeviceList[i]);
                         }
                         //this.alldeviceCache = tmpDeviceList;
+                        this.file.writeFile(this.file.externalDataDirectory, "new_file4.txt", JSON.stringify(this.indexList), { replace: true }).then(function (success) {
+                            console.log("newfile4");
+                            console.log(success);
+                            // success
+                        }, function (error) {
+                            console.log(error);
+                            // error
+                        });
                         localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
                         loading.dismiss();
                         this.loadList();
@@ -2214,6 +2270,14 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceList.push(this.deviceCache[i]);
                         }
                         this.deviceCache = tmpDeviceList;
+                        this.file.writeFile(this.file.externalDataDirectory, "new_file1.txt", JSON.stringify(this.deviceCache), { replace: true }).then(function (success) {
+                            console.log("newfile1");
+                            console.log(success);
+                            // success
+                        }, function (error) {
+                            console.log(error);
+                            // error
+                        });
                         localStorage.setItem('deviceCache', JSON.stringify(this.deviceCache));
                         // this.loadList();
                         // 提交天牛信息
@@ -2250,6 +2314,14 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceBeetleList.push(this.deviceBeetleCache[i]);
                         }
                         this.deviceBeetleCache = tmpDeviceBeetleList;
+                        this.file.writeFile(this.file.externalDataDirectory, "new_file2.txt", JSON.stringify(this.deviceBeetleCache), { replace: true }).then(function (success) {
+                            console.log("newfile2");
+                            console.log(success);
+                            // success
+                        }, function (error) {
+                            console.log(error);
+                            // error
+                        });
                         localStorage.setItem('deviceBeetleCache', JSON.stringify(this.deviceBeetleCache));
                         // this.loadList();
                         // 提交森林信息
@@ -2286,7 +2358,23 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceForestList.push(this.deviceForestCache[i]);
                         }
                         this.deviceForestCache = tmpDeviceForestList;
+                        this.file.writeFile(this.file.externalDataDirectory, "new_file3.txt", JSON.stringify(this.deviceForestCache), { replace: true }).then(function (success) {
+                            console.log("newfile3");
+                            console.log(success);
+                            // success
+                        }, function (error) {
+                            console.log(error);
+                            // error
+                        });
                         localStorage.setItem('deviceForestCache', JSON.stringify(this.deviceForestCache));
+                        //sd 卡上面
+                        // this.file.createFile(this.file.applicationStorageDirectory, "new_file.txt", true).then(function (success) {
+                        //   console.log(success);
+                        //   // success
+                        // }, function (error) {
+                        //   console.log(error);
+                        //   // error
+                        // });
                         this.loadList();
                         return [2 /*return*/];
                 }
@@ -2368,7 +2456,7 @@ var CachePage = /** @class */ (function () {
             selector: 'page-cache',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/cache/cache.html"*/'<!--\n  Generated template for the CachePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>缓存页</ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n    <ion-buttons right>\n        <button ion-button marginRight="60px"  (click)="submit()"  [disabled]="have_submit">\n            提交\n          </button>   \n          <button ion-button  marginRight="60px" color="danger" (click)="clear()">\n            清除\n          </button></ion-buttons>\n \n    <ion-list>\n      <ion-item *ngFor="let item of record">\n        {{item}}\n      </ion-item>\n    </ion-list>\n    \n \n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/cache/cache.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__["a" /* FileTransfer */]])
+            __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__["a" /* FileTransfer */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__["a" /* File */]])
     ], CachePage);
     return CachePage;
 }());
@@ -2377,12 +2465,12 @@ var CachePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 216:
+/***/ 217:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceDataPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
@@ -2504,13 +2592,13 @@ var DeviceDataPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 218:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(240);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 
 
@@ -2521,17 +2609,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(282);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(203);
@@ -2546,20 +2634,26 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(218);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
 
 
@@ -2590,6 +2684,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+var MyErrorHandler = /** @class */ (function () {
+    function MyErrorHandler(alerts, splashScreen, file) {
+        this.alerts = alerts;
+        this.splashScreen = splashScreen;
+        this.file = file;
+    }
+    MyErrorHandler.prototype.handleError = function (err) {
+        // do something with the error
+        console.log(err);
+        // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
+        //   console.log(success);
+        //   // success
+        // }, function (error) {
+        //   console.log(error);
+        //   // error
+        // });
+        this.file.writeFile(this.file.externalDataDirectory, "new_file_error.txt", err.toString(), { replace: true }).then(function (success) {
+            console.log(success);
+            // success
+        }, function (error) {
+            console.log(error);
+            // error
+        });
+        // const alert = this.alerts.create({
+        //   title: '抱歉，崩溃原因如下:',
+        //   subTitle: err,
+        //   enableBackdropDismiss: false,
+        //   buttons: [
+        //     {
+        //       text: 'Restart',
+        //       handler: () => {
+        //         this.splashScreen.show();
+        //       }
+        //     }
+        //   ]
+        // });
+        // alert.present();
+    };
+    MyErrorHandler = __decorate([
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */])),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__["a" /* File */]])
+    ], MyErrorHandler);
+    return MyErrorHandler;
+}());
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -2666,13 +2808,13 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 281:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(103);
@@ -2712,7 +2854,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 294:
+/***/ 295:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2730,11 +2872,12 @@ var MyApp = /** @class */ (function () {
 //template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/device-beetle-fill/device-beetle-fill.html"*/'<!--\n  Generated template for the DeviceBeetleFillPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>天牛信息</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>更换次数</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="changeTimes"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>天牛数量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="beetleNum"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>半径内死亡松树</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="pineDeathNum"></ion-input>\n  </ion-item>\n  <ion-item>\n    <!--<ion-label>样本是否存活</ion-label>-->\n    <div style="display: flex; flex-direction: row; justify-content: space-between; align-content: center">\n      <div>样本是否存活</div>\n      <input type="checkbox"  [(ngModel)]="sampleAlive" style="line-height: 100%; vertical-align: middle;"/>\n    </div>\n\n  </ion-item>\n  <ion-item>\n    <!--<ion-label>是否疫点小班</ion-label>-->\n    <div style="display: flex; flex-direction: row; justify-content: space-between; align-content: center">\n      <div>是否疫点小班</div>\n      <input type="checkbox"  [(ngModel)]="epidemicArea" style="line-height: 100%; vertical-align: middle;"/>\n    </div>\n\n  </ion-item>\n  <button ion-button="" (click)="submit()" block>提交</button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/device-beetle-fill/device-beetle-fill.html"*/,
 // })
 var DeviceBeetleFillPage = /** @class */ (function () {
-    function DeviceBeetleFillPage(navCtrl, navParams, httpClient, base) {
+    function DeviceBeetleFillPage(navCtrl, navParams, httpClient, base, file) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpClient = httpClient;
         this.base = base;
+        this.file = file;
         // 更换次数
         this.changeTimes = '';
         // 天牛数量
@@ -2746,6 +2889,7 @@ var DeviceBeetleFillPage = /** @class */ (function () {
         console.log('ionViewDidLoad DeviceBeetleFillPage');
     };
     DeviceBeetleFillPage.prototype.submit = function () {
+        var _this = this;
         var deviceBeetle = {};
         deviceBeetle["deviceId"] = this.navParams.get("id");
         deviceBeetle["changeTimes"] = this.changeTimes;
@@ -2766,6 +2910,14 @@ var DeviceBeetleFillPage = /** @class */ (function () {
                 deviceBeetleCache = JSON.parse(deviceBeetleCache);
             }
             deviceBeetleCache.push(deviceBeetle);
+            _this.file.writeFile(_this.file.externalDataDirectory, "new_file5.txt", JSON.stringify(deviceBeetleCache), { replace: true }).then(function (success) {
+                console.log("newfile5");
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
             localStorage.setItem('deviceBeetleCache', JSON.stringify(deviceBeetleCache));
         }, function () {
         });
@@ -2778,13 +2930,13 @@ var DeviceBeetleFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2813,5 +2965,5 @@ var ContactPage = /** @class */ (function () {
 
 /***/ })
 
-},[218]);
+},[219]);
 //# sourceMappingURL=main.js.map

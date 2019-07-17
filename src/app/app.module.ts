@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler,Inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -30,6 +30,52 @@ import {DetailPage} from "../pages/detail/detail";
 import {DeviceDataPage} from "../pages/device-data/device-data";
 import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AlertController } from 'ionic-angular';
+
+
+class MyErrorHandler implements ErrorHandler {
+  constructor(
+    @Inject(AlertController) private alerts: AlertController,
+    @Inject(SplashScreen) public splashScreen: SplashScreen,
+    private file:File
+  ) { }
+
+  handleError(err: any): void {
+    // do something with the error
+    console.log(err);
+    // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
+    //   console.log(success);
+    //   // success
+    // }, function (error) {
+    //   console.log(error);
+    //   // error
+    // });
+    this.file.writeFile(this.file.externalDataDirectory, "new_file_error.txt", err.toString(), { replace: true }).then(function (success) {
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
+
+    
+    // const alert = this.alerts.create({
+    //   title: '抱歉，崩溃原因如下:',
+    //   subTitle: err,
+    //   enableBackdropDismiss: false,
+    //   buttons: [
+    //     {
+    //       text: 'Restart',
+    //       handler: () => {
+    //         this.splashScreen.show();
+    //       }
+    //     }
+    //   ]
+    // });
+    // alert.present();
+
+  }
+}
 
 @NgModule({
   declarations: [
@@ -90,7 +136,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Camera,
     File,
     FileTransfer,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

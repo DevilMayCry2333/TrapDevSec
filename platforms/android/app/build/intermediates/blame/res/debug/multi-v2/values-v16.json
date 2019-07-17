@@ -4,7 +4,7 @@
             "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/91587f34beb2b9828b714119e8a87ea1/res/values-v16/values-v16.xml",
+                    "source": "/private/var/root/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/7e3c7fda54cd3e7d9163b41cb24d2b85/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/b6ae0de698a773ff6e1a8c32a52eaf75/res/values-v16/values-v16.xml",
+                    "source": "/private/var/root/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/99552198003cff6df2026c7fd7747b35/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

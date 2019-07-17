@@ -25,9 +25,6 @@
     "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
     },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
-    },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
     },
@@ -35,9 +32,6 @@
       "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
     },
     "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
-    },
-    "cordova-plugin-qrscanner": {
       "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
     },
     "cordova-plugin-splashscreen": {
@@ -48,6 +42,12 @@
     },
     "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "cn.huihongcloud.demo.mobile"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.youkaiyu.ionicTrap"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.youkaiyu.ionicTrap"
     }
   },
   "dependent_plugins": {}

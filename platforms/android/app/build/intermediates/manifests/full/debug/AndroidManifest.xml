@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.huihongcloud.demo.mobile"
+    package="com.youkaiyu.ionicTrap"
     android:hardwareAccelerated="true"
     android:versionCode="1"
     android:versionName="0.0.1" >
@@ -19,11 +19,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-feature android:name="android.hardware.location.gps" />
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission
         android:name="android.permission.CAMERA"
         android:required="false" />
@@ -35,7 +31,10 @@
         android:name="android.hardware.camera.front"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
     <!-- TODO replace above two with next line after Android 4.2 -->
     <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
     <uses-feature
@@ -59,7 +58,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true" >
         <activity
-            android:name="cn.huihongcloud.demo.mobile.MainActivity"
+            android:name="com.youkaiyu.ionicTrap.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/activity_name"
             android:launchMode="singleTop"
@@ -74,7 +73,7 @@
 
         <provider
             android:name="org.apache.cordova.camera.FileProvider"
-            android:authorities="cn.huihongcloud.demo.mobile.provider"
+            android:authorities="com.youkaiyu.ionicTrap.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

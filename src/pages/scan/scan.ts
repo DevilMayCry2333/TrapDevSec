@@ -39,7 +39,6 @@ export class ScanPage {
     this.frontCamera = false;
     this.callBack = this.navParams.get('callBack');
   }
-
   ionViewDidLoad() {
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {

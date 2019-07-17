@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {DeviceForestFillPage} from "../device-forest-fill/device-forest-fill";
 import {HttpClient} from "@angular/common/http";
 import {Base} from "../../common/base.js";
+import {File} from "@ionic-native/file";
 
 /**
  * Generated class for the DeviceBeetleFillPage page.
@@ -28,7 +29,7 @@ export class DeviceBeetleFillPage {
   // 是否疫点小班
   epidemicArea : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient,
-              private base:Base) {
+    private base: Base, private file: File) {
   }
 
   ionViewDidLoad() {
@@ -56,8 +57,20 @@ export class DeviceBeetleFillPage {
       } else {
         deviceBeetleCache = JSON.parse(deviceBeetleCache);
       }
+
       deviceBeetleCache.push(deviceBeetle);
+
+          this.file.writeFile(this.file.externalDataDirectory, "new_file5.txt", JSON.stringify(deviceBeetleCache), { replace: true }).then(function (success) {
+            console.log("newfile5");
+            console.log(success);
+            // success
+          }, function (error) {
+            console.log(error);
+            // error
+          });
+
       localStorage.setItem('deviceBeetleCache', JSON.stringify(deviceBeetleCache));
+      
     }, () => {
 
     });

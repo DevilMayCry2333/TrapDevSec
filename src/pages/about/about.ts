@@ -59,11 +59,10 @@ export class AboutPage {
       // 开启SDK辅助定位
       geolocation.enableSDKLocation();
       geolocation.getCurrentPosition(function (r) {
-        console.log(i);
         console.log(r);
         myPoint.push(r.point);
         function addMarker(point, index) {  // 创建图标对象   
-          var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
+          var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
             // 指定定位位置。   
             // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
             // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
@@ -79,27 +78,25 @@ export class AboutPage {
           map.addOverlay(marker);
         }
 
-        // if (i <= 2) {
-        //   // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-        //   var mk = new BMap.Marker(r.point);
-        //   map.addOverlay(mk);
-        //   map.panTo(r.point);
-        //   // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+        // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        var mk = new BMap.Marker(r.point);
+        map.addOverlay(mk);
+        map.panTo(r.point);
+        // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
 
-        //   var point = new BMap.Point(r.point.lng, r.point.lat);
-
-
-        //   map.centerAndZoom(point, 15);  // 编写自定义函数，创建标注   
+        var point = new BMap.Point(r.point.lng, r.point.lat);
 
 
-        //   addMarker(point, 0);
-        // }
+        map.centerAndZoom(point, 15);  // 编写自定义函数，创建标注   
+
+
+        addMarker(point, 0);
         localStorage.setItem('location', JSON.stringify(myPoint));
         console.log(localStorage.getItem('location'));
       });
 
       i++;
-    }, 20000);
+    }, 1800000);
   }
   ionViewDidEnter() {
     var myPoint = [];
@@ -158,7 +155,7 @@ export class AboutPage {
       console.log(r);
       myPoint.push(r.point);
       function addMarker(point, index) {  // 创建图标对象   
-        var myIcon = new BMap.Icon("../../assets/imgs/myLocation.jpeg", new BMap.Size(23, 25), {
+        var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
           // 指定定位位置。   
           // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
           // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   

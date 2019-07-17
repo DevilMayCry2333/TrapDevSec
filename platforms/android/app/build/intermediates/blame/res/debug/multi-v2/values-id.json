@@ -64,7 +64,7 @@
             "outputFile": "/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "/Users/youkaiyu/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.3.0.aar/21ee45c7ef4caeb090d1f8c875d0d9a9/res/values-id/values-id.xml",
+                    "source": "/private/var/root/.gradle/caches/transforms-1/files-1.1/zxing-android-embedded-3.3.0.aar/936a3c73caf7f99e1bfde22b5f4e6776/res/values-id/values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
