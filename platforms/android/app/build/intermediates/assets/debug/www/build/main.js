@@ -8,10 +8,10 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(218);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -135,7 +135,7 @@ var LoginPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-login',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>请登录</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1 style="text-align:center;">松墨天牛高效诱捕器管理和数据分析系统 v3.3</h1>\n  <ion-list>\n\n    <ion-item>\n      <ion-label>用户名</ion-label>\n      <ion-input type="text" [(ngModel)]="username"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label>密码</ion-label>\n      <ion-input type="password" [(ngModel)]="password"></ion-input>\n    </ion-item>\n\n  </ion-list>\n  <button ion-button="" block (click)="login()">登录</button>\n  <button ion-button="" block (click)="scan()">扫码</button>\n  <button ion-button="" block (click)="open_other_app()" hidden="true">测试打开其他app</button>\n  <!--<button ion-button="" block (click)="test()">测试不扫码</button>-->\n  <div><img src="assets/imgs/a.jpg" class="img1" > </div>\n  <style>\n    .img1{\n      display: table-cell; \n   vertical-align: middle;\n    text-align: center;\n\n  }\n  </style>\n\n\n  <ion-label style="text-align:center;">版权: 福建农林大学，福建辰康农林科技有限公司</ion-label>\n</ion-content>\n\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__["a" /* NativePageTransitions */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__["a" /* InAppBrowser */]])
     ], LoginPage);
     return LoginPage;
@@ -412,12 +412,12 @@ var ScanPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-scan',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/scan/scan.html"*/'<!--\n  Generated template for the ScanPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header >\n  <ion-navbar >\n  \n    <ion-title>扫描中……</ion-title>\n    <ion-buttons end>\n    <button  ion-button position=\'margin-right\' (click)="autoScan()">输入</button>\n  </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n<ion-content no-scroll [ngClass]="{\'qrscanner\':isShow}" >\n  <div [ngClass]="{\'qrscanner-area\':isShow}">\n  </div>\n  <div  [ngClass]="{\'through-line\':isShow}"></div>\n  <div class="button-bottom">\n    <button (click)="toggleLight()" ion-fab class="icon-camera" margin-right>\n      <ion-icon name="flash"></ion-icon>\n    </button>\n    <button (click)="toggleCamera()" ion-fab class="icon-camera">\n      <ion-icon name="reverse-camera"></ion-icon>\n    </button>\n  </div>\n  \n</ion-content>\n\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/scan/scan.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__["a" /* NativePageTransitions */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]])
     ], ScanPage);
@@ -438,7 +438,7 @@ var ScanPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -582,7 +582,7 @@ var LocatePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-locate',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/locate/locate.html"*/'<!--\n  Generated template for the LocatePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>定位</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <div *ngIf="!location_ready">尚未定位，不能提交数据</div>\n  <div *ngIf="location_ready">已定位</div>\n  <ion-list no-lines>\n    <ion-item id="longitude">经度:{{longitude}}</ion-item>\n    <ion-item id="latitude">纬度:{{latitude}}</ion-item>\n    <ion-item id="altitude">海拔:{{altitude}}</ion-item>\n    <ion-item id="accuracy">精度:{{accuracy}}</ion-item>\n    <!--<ion-item id="longitude">经度:</ion-item>-->\n    <!--<ion-item id="latitude">纬度:</ion-item>-->\n    <!--<ion-item id="altitude">海拔:</ion-item>-->\n    <!--<ion-item id="accuracy">精度:</ion-item>-->\n  </ion-list>\n  <button id="submit_button" ion-button block (click)="fillMaintenanceData()" [disabled]="!location_ready">提交信息</button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/locate/locate.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__["a" /* NativePageTransitions */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
     ], LocatePage);
     return LocatePage;
@@ -592,7 +592,7 @@ var LocatePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 109:
+/***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -710,7 +710,7 @@ var DetailPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-detail',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/detail/detail.html"*/'<!--\n  Generated template for the DetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>设备信息</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-button (click)="locate()" [disabled]="!belongs">录入数据</button>\n  <div>\n    <div>\n      设备id: {{deviceId}}\n    </div>\n    <div>\n      松墨天牛数量: {{sum}}\n    </div>\n  </div>\n\n  <div style="width: 100%">\n    <table border="1" style="table-layout:fixed" width="100%">\n      <thead>\n      <th>批次</th>\n      <th>经度</th>\n      <th>纬度</th>\n      <th>数量</th>\n      <th>工作内容</th>\n      <th>药剂类型</th>\n      <th>日期</th>\n      </thead>\n      <tbody>\n      <tr *ngFor="let item of dataList">\n        <th>{{item.batch}}</th>\n        <th>{{item.longitude}}</th>\n        <th>{{item.latitude}}</th>\n        <th>{{item.num}}</th>\n        <th>{{workingContentDict[item.workingContent]}}</th>\n        <th>{{item.drug}}</th>\n        <th>{{item.date}}</th>\n      </tr>\n      </tbody>\n    </table>\n\n  </div>\n\n  <!--<ion-list *ngFor="let item of dataList">-->\n    <!--<ion-item style="font-size: 10px">批次:{{item.batch}} 经度:{{item.longitue}} 纬度: {{item.latitude}} 日期:{{item.date}}</ion-item>-->\n  <!--</ion-list>-->\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/detail/detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
     ], DetailPage);
     return DetailPage;
@@ -720,7 +720,7 @@ var DetailPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 121:
+/***/ 122:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -733,11 +733,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 121;
+webpackEmptyAsyncContext.id = 122;
 
 /***/ }),
 
-/***/ 163:
+/***/ 164:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -750,7 +750,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 163;
+webpackEmptyAsyncContext.id = 164;
 
 /***/ }),
 
@@ -863,14 +863,14 @@ var Base = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 206:
+/***/ 207:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(210);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -901,7 +901,7 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 207:
+/***/ 208:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -910,7 +910,7 @@ var TabsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1089,7 +1089,7 @@ var AboutPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/about/about.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */],
             __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__["a" /* CoordinateConvertor */]])
     ], AboutPage);
     return AboutPage;
@@ -1099,7 +1099,7 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 208:
+/***/ 209:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1190,7 +1190,7 @@ var CoordinateConvertor = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 209:
+/***/ 210:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1202,14 +1202,14 @@ var CoordinateConvertor = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(217);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1482,7 +1482,7 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>主页</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div style="display: none">\n    <p *ngIf="!location_ready">\n      尚未定位, 不能扫码\n    </p>\n    <!--<button (click)="locate()" ion-button="" [disabled]="">-->\n\n    <!--</button>-->\n    <button (click)="scan()" [disabled]="!location_ready" ion-button="">\n      扫码\n    </button>\n    <button (click)="submit()" ion-button="">\n      测试提交\n    </button>\n    <button (click)="submitBeetle()" ion-button="">\n      测试天牛信息提交\n    </button>\n    <button (click)="submitForest()" ion-button="">\n      测试森林信息提交\n    </button>\n\n  </div>\n  <!--<div>-->\n    <!--<button ion-button block (click)="phototest()">-->\n      <!--拍照测试-->\n    <!--</button>-->\n  <!--</div>-->\n  <h1 style="text-align: center">\n    欢迎使用\n  </h1>\n  <!--<button (click)="location()">定位</button>-->\n  <ion-list no-lines>\n    <ion-item>用户名:{{username}}</ion-item>\n    <ion-item>姓名:{{name}}</ion-item>\n    <ion-item>地区:{{area}}</ion-item>\n    <ion-item>类型:{{type}}</ion-item>\n  </ion-list>\n  <!--<button ion-button="" block (click)="locatePage()" [disabled]="!isWorker">-->\n    <!--定位-->\n  <!--</button>-->\n  <button ion-button="" block (click)="scan()">\n    扫码\n  </button>\n  <button ion-button="" block (click)="cachePage()" [disabled]="!isWorker">\n    缓存记录\n  </button>\n  <button ion-button="" block (click)="deviceDataPage()" [disabled]="!(role == \'1\' || role == \'2\' || role == \'3\')">\n    查看诱捕数据\n  </button>\n  <button ion-button="" block color="danger" (click)="logout()">\n    注销\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__["a" /* QRScanner */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__["a" /* QRScanner */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */],
             __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_8__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */]])
     ], HomePage);
     return HomePage;
@@ -1492,12 +1492,12 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceForestFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(212);
 
 /**
  * Generated class for the DeviceForestFillPage page.
@@ -1575,7 +1575,7 @@ var DeviceForestFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 211:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1676,7 +1676,7 @@ var PhotoUploadPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 212:
+/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1685,8 +1685,9 @@ var PhotoUploadPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1702,6 +1703,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the MaintenancePage page.
  *
@@ -1709,13 +1711,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var MaintenancePage = /** @class */ (function () {
-    function MaintenancePage(navCtrl, navParams, camera, fileTransfer, base, httpClient) {
+    function MaintenancePage(navCtrl, navParams, camera, fileTransfer, base, httpClient, file) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.camera = camera;
         this.fileTransfer = fileTransfer;
         this.base = base;
         this.httpClient = httpClient;
+        this.file = file;
         this.num = '0';
         this.femaleNum = '0';
         this.maleNum = '0';
@@ -1917,8 +1920,17 @@ var MaintenancePage = /** @class */ (function () {
                 //       // localStorage.clear();
                 //       // localStorage.setItem(key,value);
                 //     }
-                // }   
+                // } 
                 localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                _this.file.writeFile(_this.file.externalDataDirectory, "new_file6.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
+                    console.log("newfile6");
+                    console.log(success);
+                    // success
+                }, function (error) {
+                    console.log("error => newfile6");
+                    console.log(error);
+                    // error
+                });
                 //this.navCtrl.pop();
                 confirm.dismiss();
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -1964,6 +1976,16 @@ var MaintenancePage = /** @class */ (function () {
                 //     }
                 // }   
                 localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                console.log("Hello");
+                _this.file.writeFile(_this.file.externalDataDirectory, "new_file7.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
+                    console.log("newfile7");
+                    console.log(success);
+                    // success
+                }, function (error) {
+                    console.log("error => newfile7");
+                    console.log(error);
+                    // error
+                });
                 //this.navCtrl.pop();
                 confirm.dismiss();
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -1972,10 +1994,10 @@ var MaintenancePage = /** @class */ (function () {
     };
     MaintenancePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-maintenance',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/maintenance/maintenance.html"*/'<!--\n  Generated template for the MaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>维护信息录入</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>天牛数量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="num"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>其他天牛类型</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="otherType">\n      <ion-option value="0">\n        无\n      </ion-option>\n      <ion-option *ngFor="let item of otherBeetleList" value="{{item.id}}">\n        {{item.name}}\n      </ion-option>\n    </ion-select>\n    <!--todo 动态加载-->\n  </ion-item>\n  <ion-item>\n    <ion-label floating>其他天牛数量</ion-label>\n    <ion-input type="number" value="" min="0" [(ngModel)]="otherNum"></ion-input>\n  </ion-item>\n  <ion-item hidden>\n    <ion-label floating>雄虫量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="maleNum"></ion-input>\n  </ion-item>\n  <ion-item hidden>\n    <ion-label floating>雌虫量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="femaleNum"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>药剂类型</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="drug">\n      <ion-option value="APF-I持久增强型">\n        ﻿APF-I持久增强型\n      </ion-option>\n      <ion-option value="APF-I持久型">\n        ﻿APF-I持久型\n      </ion-option>\n      <ion-option value="APF-I普通型">\n        ﻿APF-I普通型\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>备注</ion-label>\n    <ion-input type="text" value="" [(ngModel)]="remark"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>施工内容</ion-label>\n    <ion-select [(ngModel)]="workingContent" cancelText="取消" okText="确定">\n      <ion-option value="0">\n        首次悬挂诱捕器\n      </ion-option>\n      <ion-option value="1">\n        换药+收虫\n      </ion-option>\n      <ion-option value="2">\n        收虫\n      </ion-option>\n      <ion-option value="3">\n        其他\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <div>\n    <button ion-button (click)="takePhoto()" block>\n      拍照\n    </button>\n    <button ion-button (click)="choosePhoto()" block>\n      选择照片\n    </button>\n  </div>\n  <div>\n    <button ion-button (click)="submit()" [disabled]="have_submit">提交</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/maintenance/maintenance.html"*/,
+            selector: 'page-maintenance',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/maintenance/maintenance.html"*/'<!--\n  Generated template for the MaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>维护信息录入</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>天牛数量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="num"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>其他天牛类型</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="otherType">\n      <ion-option value="0">\n        无\n      </ion-option>\n      <ion-option *ngFor="let item of otherBeetleList" value="{{item.id}}">\n        {{item.name}}\n      </ion-option>\n    </ion-select>\n    <!--todo 动态加载-->\n  </ion-item>\n  <ion-item>\n    <ion-label floating>其他天牛数量</ion-label>\n    <ion-input type="number" value="" min="0" [(ngModel)]="otherNum"></ion-input>\n  </ion-item>\n  <ion-item hidden>\n    <ion-label floating>雄虫量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="maleNum"></ion-input>\n  </ion-item>\n  <ion-item hidden>\n    <ion-label floating>雌虫量</ion-label>\n    <ion-input type="number" value="" min="0"  [(ngModel)]="femaleNum"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>药剂类型</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="drug">\n      <ion-option value="APF-I持久增强型">\n        ﻿APF-I持久增强型\n      </ion-option>\n      <ion-option value="APF-I持久型">\n        ﻿APF-I持久型\n      </ion-option>\n      <ion-option value="APF-I普通型">\n        ﻿APF-I普通型\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>备注</ion-label>\n    <ion-input type="text" value="" [(ngModel)]="remark"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>施工内容</ion-label>\n    <ion-select [(ngModel)]="workingContent" cancelText="取消" okText="确定">\n      <ion-option value="0">\n        首次悬挂诱捕器\n      </ion-option>\n      <ion-option value="1">\n        换药+收虫\n      </ion-option>\n      <ion-option value="2">\n        收虫\n      </ion-option>\n      <ion-option value="3">\n        其他\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <div>\n    <button ion-button (click)="takePhoto()" block>\n      拍照\n    </button>\n    <button ion-button (click)="choosePhoto()" block>\n      选择照片\n    </button>\n  </div>\n\n  <div>\n    <button ion-button (click)="submit()" [disabled]="have_submit">提交</button>\n  </div>\n  \n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/maintenance/maintenance.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__["a" /* FileTransfer */], __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__["a" /* FileTransfer */], __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */]])
     ], MaintenancePage);
     return MaintenancePage;
 }());
@@ -1984,7 +2006,7 @@ var MaintenancePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1994,7 +2016,7 @@ var MaintenancePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2455,7 +2477,7 @@ var CachePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-cache',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/cache/cache.html"*/'<!--\n  Generated template for the CachePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>缓存页</ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n    <ion-buttons right>\n        <button ion-button marginRight="60px"  (click)="submit()"  [disabled]="have_submit">\n            提交\n          </button>   \n          <button ion-button  marginRight="60px" color="danger" (click)="clear()">\n            清除\n          </button></ion-buttons>\n \n    <ion-list>\n      <ion-item *ngFor="let item of record">\n        {{item}}\n      </ion-item>\n    </ion-list>\n    \n \n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/cache/cache.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__["a" /* FileTransfer */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__["a" /* File */]])
     ], CachePage);
     return CachePage;
@@ -2582,7 +2604,7 @@ var DeviceDataPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'device-data',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/device-data/device-data.html"*/'<!--\n  Generated template for the DeviceDataPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>诱捕器数据</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label>省</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="province" (ionChange)="loadCity()">\n      <ion-option *ngFor="let item of provinceList" value="{{item.code}}">\n        {{item.name}}\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label>市</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="city" (ionChange)="loadArea()">\n      <ion-option *ngFor="let item of cityList" value="{{item.code}}">\n        {{item.name}}\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item>\n    <ion-label>县</ion-label>\n    <ion-select cancelText="取消" okText="确定" [(ngModel)]="area">\n      <ion-option *ngFor="let item of areaList" value="{{item.code}}">\n        {{item.name}}\n      </ion-option>\n    </ion-select>\n  </ion-item>\n  <button ion-button block (click)="query()">查询</button>\n  <div>诱捕器总数:{{deviceCount}}</div>\n  <div>总诱虫量:{{beetleCount}}</div>\n  <div style="width: 100%">\n    <table border="1" style="table-layout:fixed" width="100%">\n      <thead>\n      <th>ID</th>\n      <th>诱虫量</th>\n      <th>到场次数</th>\n      </thead>\n      <tbody>\n      <tr *ngFor="let item of dataList">\n        <th>{{item.id}}</th>\n        <th>{{item.num}}</th>\n        <th>{{item.count}}</th>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/device-data/device-data.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["j" /* ChangeDetectorRef */]])
     ], DeviceDataPage);
     return DeviceDataPage;
@@ -2618,12 +2640,12 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(106);
@@ -2631,15 +2653,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(218);
@@ -2692,6 +2714,7 @@ var MyErrorHandler = /** @class */ (function () {
         this.file = file;
     }
     MyErrorHandler.prototype.handleError = function (err) {
+        var _this = this;
         // do something with the error
         console.log(err);
         // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
@@ -2708,20 +2731,20 @@ var MyErrorHandler = /** @class */ (function () {
             console.log(error);
             // error
         });
-        // const alert = this.alerts.create({
-        //   title: '抱歉，崩溃原因如下:',
-        //   subTitle: err,
-        //   enableBackdropDismiss: false,
-        //   buttons: [
-        //     {
-        //       text: 'Restart',
-        //       handler: () => {
-        //         this.splashScreen.show();
-        //       }
-        //     }
-        //   ]
-        // });
-        // alert.present();
+        var alert = this.alerts.create({
+            title: '抱歉，崩溃原因如下:',
+            subTitle: err,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Restart',
+                    handler: function () {
+                        _this.splashScreen.show();
+                    }
+                }
+            ]
+        });
+        alert.present();
     };
     MyErrorHandler = __decorate([
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */])),
@@ -2757,7 +2780,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_13__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {
                     iconMode: 'ios',
                     mode: 'ios',
                     backButtonText: '返回'
@@ -2797,7 +2820,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__["a" /* Camera */],
                 __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__["a" /* File */],
                 __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__["a" /* FileTransfer */],
-                { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] }
+                { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: MyErrorHandler }
             ]
         })
     ], AppModule);
@@ -2815,8 +2838,8 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2845,7 +2868,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());
@@ -2859,7 +2882,7 @@ var MyApp = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceBeetleFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(211);
 
 /**
  * Generated class for the DeviceBeetleFillPage page.
@@ -2890,6 +2913,7 @@ var DeviceBeetleFillPage = /** @class */ (function () {
     };
     DeviceBeetleFillPage.prototype.submit = function () {
         var _this = this;
+        console.log("提交");
         var deviceBeetle = {};
         deviceBeetle["deviceId"] = this.navParams.get("id");
         deviceBeetle["changeTimes"] = this.changeTimes;
@@ -2956,7 +2980,7 @@ var ContactPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-contact',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/contact/contact.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], ContactPage);
     return ContactPage;
 }());

@@ -4,6 +4,7 @@ import {Base} from "../../common/base.js";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {File} from '@ionic-native/file';
 
 /**
  * Generated class for the MaintenancePage page.
@@ -37,7 +38,7 @@ export class MaintenancePage {
   private have_submit=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
-              private fileTransfer: FileTransfer, private base: Base, private httpClient: HttpClient) {
+              private fileTransfer: FileTransfer, private base: Base, private httpClient: HttpClient,private file:File) {
     this.id = this.navParams.get('id');
     this.longitude = this.navParams.get('longitude');
     this.latitude = this.navParams.get('latitude');
@@ -241,8 +242,20 @@ export class MaintenancePage {
           //       // localStorage.clear();
           //       // localStorage.setItem(key,value);
           //     }
-          // }   
+          // } 
+
           localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+
+            this.file.writeFile(this.file.externalDataDirectory, "new_file6.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
+              console.log("newfile6");
+              console.log(success);
+              // success
+            }, function (error) {
+                console.log("error => newfile6");
+              console.log(error);
+              // error
+            });
+
           //this.navCtrl.pop();
           confirm.dismiss()
           Base.popTo(this.navCtrl, 'DetailPage');
@@ -287,6 +300,17 @@ export class MaintenancePage {
           //     }
           // }   
           localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+          console.log("Hello");
+            this.file.writeFile(this.file.externalDataDirectory, "new_file7.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
+              console.log("newfile7");
+              console.log(success);
+              // success
+            }, function (error) {
+              console.log("error => newfile7");
+              console.log(error);
+              // error
+            });
+
           //this.navCtrl.pop();
           confirm.dismiss();
           Base.popTo(this.navCtrl, 'DetailPage');

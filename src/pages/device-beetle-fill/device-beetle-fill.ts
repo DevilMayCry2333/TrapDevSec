@@ -37,6 +37,8 @@ export class DeviceBeetleFillPage {
   }
 
   submit() {
+    console.log("提交");
+    
     let deviceBeetle = {};
     deviceBeetle["deviceId"] = this.navParams.get("id");
     deviceBeetle["changeTimes"] = this.changeTimes;
@@ -59,7 +61,7 @@ export class DeviceBeetleFillPage {
       }
 
       deviceBeetleCache.push(deviceBeetle);
-
+      
           this.file.writeFile(this.file.externalDataDirectory, "new_file5.txt", JSON.stringify(deviceBeetleCache), { replace: true }).then(function (success) {
             console.log("newfile5");
             console.log(success);
