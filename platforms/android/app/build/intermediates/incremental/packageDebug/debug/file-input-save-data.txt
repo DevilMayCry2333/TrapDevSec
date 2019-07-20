@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jul 10 15:40:35 CST 2019
+#Fri Jul 19 23:01:48 CST 2019
 60.set=ASSET
 52.set=ASSET
 53.base=/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/platforms/android/app/build/intermediates/assets/debug

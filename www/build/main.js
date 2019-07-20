@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 103:
+/***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10,9 +10,9 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(218);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -145,7 +145,7 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 105:
+/***/ 107:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -153,8 +153,8 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(20);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -428,15 +428,15 @@ var ScanPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 107:
+/***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -601,7 +601,7 @@ var LocatePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -909,8 +909,10 @@ var TabsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -920,6 +922,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
 
 
 
@@ -928,11 +937,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // declare var BMapLib;
 var markers = [];
 var AboutPage = /** @class */ (function () {
-    function AboutPage(navCtrl, httpClient, base, coordinateConvertor) {
+    function AboutPage(navCtrl, httpClient, base, coordinateConvertor, alerts, file, geolocation, changeDetectorRef) {
         this.navCtrl = navCtrl;
         this.httpClient = httpClient;
         this.base = base;
         this.coordinateConvertor = coordinateConvertor;
+        this.alerts = alerts;
+        this.file = file;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        // 是否定位成功
+        this.location_ready = false;
+        //username = '';
+        // 经度
+        this.longitude = '';
+        // 纬度
+        this.latitude = '';
+        // 海拔
+        this.altitude = '';
+        // 精度
+        this.accuracy = '';
         // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
         //
         // // map.centerAndZoom("广州",17); //设置城市设置中心和地图显示级别
@@ -947,54 +971,129 @@ var AboutPage = /** @class */ (function () {
         //
         // map.centerAndZoom('中国', 5);
     }
-    AboutPage.prototype.myLocation = function (map, i) {
-        // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
-        // }
-        // else {
-        // }
+    AboutPage.prototype.locate = function () {
+        var _this = this;
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 99999999,
+            maximumAge: 0
+        };
+        var that = this;
+        var watch = this.geolocation.watchPosition(options);
+        this.subscription = watch.subscribe(function (data) {
+            // data can be a set of coordinates, or an error (if an error occurred).
+            if (data['coords']) {
+                // setTimeout(() => {
+                _this.latitude = String(data.coords.latitude);
+                sessionStorage['latitude'] = String(data.coords.latitude);
+                _this.longitude = String(data.coords.longitude);
+                sessionStorage['longitude'] = String(data.coords.longitude);
+                _this.altitude = String(data.coords.altitude);
+                sessionStorage['altitude'] = String(data.coords.altitude);
+                _this.accuracy = String(data.coords.accuracy);
+                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                if (data.coords.altitude == null) {
+                    _this.altitude = '-10000';
+                    sessionStorage['altitude'] = '-10000';
+                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                }
+                setTimeout(function () {
+                    //this.location_ready = true;
+                    _this.location_ready = true;
+                    that.changeDetectorRef.detectChanges();
+                }, 5000);
+                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                that.changeDetectorRef.detectChanges();
+                // },5);
+                // if(this.altitude==null){
+                //   this.location_ready = false;
+                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                // }
+            }
+            // else{
+            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+            // }
+        }, function (res) {
+            // setTimeout(() => {
+            //    this.base.showAlert('提示','wu',()=>{});
+            _this.location_ready = false;
+            that.changeDetectorRef.detectChanges();
+            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+            // },5);
+            // alert();
+        });
     };
     AboutPage.prototype.ionViewDidLoad = function () {
-        var myPoint = [];
+        var _this = this;
         var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
-        // var point = new BMap.Point(116.331398, 39.897445);
-        // map.centerAndZoom(point, 12);
-        var i = 0;
-        setInterval(function () {
-            var geolocation = new BMap.Geolocation();
-            // 开启SDK辅助定位
-            geolocation.enableSDKLocation();
-            geolocation.getCurrentPosition(function (r) {
-                console.log(r);
-                myPoint.push(r.point);
-                function addMarker(point, index) {
-                    var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
-                        // 指定定位位置。   
-                        // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                        // 图标中央下端的尖角位置。    
-                        anchor: new BMap.Size(10, 25),
-                        // 设置图片偏移。   
-                        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                        // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                        imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-                    });
-                    // 创建标注对象并添加到地图   
-                    var marker = new BMap.Marker(point, { icon: myIcon });
-                    map.addOverlay(marker);
-                }
-                // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                var mk = new BMap.Marker(r.point);
-                map.addOverlay(mk);
-                map.panTo(r.point);
-                // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-                var point = new BMap.Point(r.point.lng, r.point.lat);
-                map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
-                addMarker(point, 0);
-                localStorage.setItem('location', JSON.stringify(myPoint));
-                console.log(localStorage.getItem('location'));
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+        var i = 1;
+        var that = this;
+        function addMarker(point, index) {
+            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+                // 指定定位位置。   
+                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                // 图标中央下端的尖角位置。    
+                anchor: new BMap.Size(10, 25),
+                // 设置图片偏移。   
+                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
             });
-            i++;
-        }, 1800000);
+            // 创建标注对象并添加到地图   
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+        }
+        var append = '';
+        setInterval(function () {
+            _this.locate();
+            // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
+            if (_this.latitude && _this.longitude) {
+                var alert_1 = _this.alerts.create({
+                    title: '数据',
+                    enableBackdropDismiss: false,
+                    buttons: [
+                        {
+                            text: _this.latitude + ',' + _this.longitude + ',' + _this.altitude,
+                            handler: function () {
+                            }
+                        }
+                    ]
+                });
+                alert_1.present();
+                setTimeout(function () {
+                    var point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
+                    console.log("point1=>");
+                    console.log(point);
+                    console.log(_this.latitude);
+                    console.log(_this.longitude);
+                    console.log(_this.altitude);
+                    var point2 = new BMap.Point(point[1], point[0]);
+                    console.log("point2=>");
+                    console.log(point2);
+                    var mk = new BMap.Marker(point2);
+                    map.addOverlay(mk);
+                    map.panTo(point2);
+                    // alert('您的位置：' + point.lng + ',' + point.lat);
+                    map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+                    addMarker(point2, i);
+                    append += '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']';
+                    that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+                        console.log(success);
+                        // success
+                    }, function (error) {
+                        console.log(error);
+                        // error
+                    });
+                    i++;
+                }, 5000);
+            }
+        }, 30000);
     };
     AboutPage.prototype.ionViewDidEnter = function () {
         var _this = this;
@@ -1010,6 +1109,7 @@ var AboutPage = /** @class */ (function () {
         map.addControl(new BMap.NavigationControl());
         map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
         map.enableContinuousZoom(true); //连续缩放效果，默认禁用
+        this.locate();
         this.httpClient.get('http://39.108.184.47:8081/auth_api/user', { headers: { token: localStorage['token'] } })
             .subscribe(function (data) {
             // console.log(d);
@@ -1029,6 +1129,8 @@ var AboutPage = /** @class */ (function () {
             params: { searchText: "", limit: "2000", page: "1" } }).subscribe(function (res) {
             for (var i = 0; i < res['data'].length; i++) {
                 if (res['data'][i].longitude && res['data'][i].latitude) {
+                    if (i == 0)
+                        console.log(res['data'][i].latitude);
                     var point = _this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
                     point = new BMap.Point(point[1], point[0]);
                     markers.push(point);
@@ -1037,39 +1139,46 @@ var AboutPage = /** @class */ (function () {
             }
             _this.addMarker();
         });
-        var geolocation = new BMap.Geolocation();
-        // 开启SDK辅助定位
-        geolocation.enableSDKLocation();
-        geolocation.getCurrentPosition(function (r) {
-            console.log(r);
-            myPoint.push(r.point);
-            function addMarker(point, index) {
-                var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
-                    // 指定定位位置。   
-                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                    // 图标中央下端的尖角位置。    
-                    anchor: new BMap.Size(10, 25),
-                    // 设置图片偏移。   
-                    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                    imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-                });
-                // 创建标注对象并添加到地图   
-                var marker = new BMap.Marker(point, { icon: myIcon });
-                map.addOverlay(marker);
-            }
-            // if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            var mk = new BMap.Marker(r.point);
+        function addMarker(point, index) {
+            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+                // 指定定位位置。   
+                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                // 图标中央下端的尖角位置。    
+                anchor: new BMap.Size(10, 25),
+                // 设置图片偏移。   
+                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+            });
+            // 创建标注对象并添加到地图   
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+        }
+        setTimeout(function () {
+            point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
+            console.log("Point1进来");
+            console.log(point);
+            var point2 = new BMap.Point(point[1], point[0]);
+            // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+            console.log("进来的");
+            console.log(point2);
+            var mk = new BMap.Marker(point2);
             map.addOverlay(mk);
-            map.panTo(r.point);
+            map.panTo(point2);
             // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-            var point = new BMap.Point(r.point.lng, r.point.lat);
-            map.centerAndZoom(point, 15); // 编写自定义函数，创建标注   
-            addMarker(point, 0);
-            localStorage.setItem('location', JSON.stringify(myPoint));
-            console.log(localStorage.getItem('location'));
-        });
+            map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+            addMarker(point2, 0);
+            // }
+            _this.file.writeFile(_this.file.externalDataDirectory, "new_location2.txt", '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']', { replace: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        }, 5000);
+        // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
     };
     AboutPage.prototype.addMarker = function () {
         var options = {
@@ -1089,8 +1198,9 @@ var AboutPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/TrapAndroidFrontEnd/src/pages/about/about.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_4__common_coordinate_convertor__["a" /* CoordinateConvertor */]])
+        __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
     ], AboutPage);
     return AboutPage;
 }());
@@ -1197,16 +1307,16 @@ var CoordinateConvertor = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(295);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(110);
@@ -1684,10 +1794,10 @@ var PhotoUploadPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2015,8 +2125,8 @@ var MaintenancePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2646,18 +2756,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(216);
@@ -2714,7 +2824,6 @@ var MyErrorHandler = /** @class */ (function () {
         this.file = file;
     }
     MyErrorHandler.prototype.handleError = function (err) {
-        var _this = this;
         // do something with the error
         console.log(err);
         // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
@@ -2731,20 +2840,20 @@ var MyErrorHandler = /** @class */ (function () {
             console.log(error);
             // error
         });
-        var alert = this.alerts.create({
-            title: '抱歉，崩溃原因如下:',
-            subTitle: err,
-            enableBackdropDismiss: false,
-            buttons: [
-                {
-                    text: 'Restart',
-                    handler: function () {
-                        _this.splashScreen.show();
-                    }
-                }
-            ]
-        });
-        alert.present();
+        // const alert = this.alerts.create({
+        //   title: '抱歉，崩溃原因如下:',
+        //   subTitle: err,
+        //   enableBackdropDismiss: false,
+        //   buttons: [
+        //     {
+        //       text: 'Restart',
+        //       handler: () => {
+        //         this.splashScreen.show();
+        //       }
+        //     }
+        //   ]
+        // });
+        // alert.present();
     };
     MyErrorHandler = __decorate([
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */])),
@@ -2840,7 +2949,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

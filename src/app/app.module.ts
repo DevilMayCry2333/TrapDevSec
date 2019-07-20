@@ -59,20 +59,20 @@ class MyErrorHandler implements ErrorHandler {
     });
 
     
-    const alert = this.alerts.create({
-      title: '抱歉，崩溃原因如下:',
-      subTitle: err,
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: 'Restart',
-          handler: () => {
-            this.splashScreen.show();
-          }
-        }
-      ]
-    });
-    alert.present();
+    // const alert = this.alerts.create({
+    //   title: '抱歉，崩溃原因如下:',
+    //   subTitle: err,
+    //   enableBackdropDismiss: false,
+    //   buttons: [
+    //     {
+    //       text: 'Restart',
+    //       handler: () => {
+    //         this.splashScreen.show();
+    //       }
+    //     }
+    //   ]
+    // });
+    // alert.present();
 
   }
 }
