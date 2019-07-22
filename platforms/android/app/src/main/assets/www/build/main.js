@@ -435,7 +435,7 @@ var ScanPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(213);
@@ -761,6 +761,7 @@ webpackEmptyAsyncContext.id = 164;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(44);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -772,9 +773,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var Base = /** @class */ (function () {
-    function Base(alertCtrl) {
+    function Base(alertCtrl, file) {
         this.alertCtrl = alertCtrl;
+        this.file = file;
         this.BASE_URL = "http://39.108.184.47:8081/";
         this.transitionOptions = {
             direction: 'left',
@@ -794,6 +797,15 @@ var Base = /** @class */ (function () {
             buttons: [{ text: '确认', handler: func }]
         });
         alert.present();
+    };
+    Base.prototype.logger = function (info, storage) {
+        this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+            console.log(success);
+            // success
+        }, function (error) {
+            console.log(error);
+            // error
+        });
     };
     Base.prototype.showPrompt = function (title, myName, func1, func2) {
         var prompt = this.alertCtrl.create({
@@ -854,7 +866,7 @@ var Base = /** @class */ (function () {
     };
     Base = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
     ], Base);
     return Base;
 }());
@@ -909,10 +921,10 @@ var TabsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(44);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1068,28 +1080,15 @@ var AboutPage = /** @class */ (function () {
                 alert_1.present();
                 setTimeout(function () {
                     var point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-                    console.log("point1=>");
-                    console.log(point);
-                    console.log(_this.latitude);
-                    console.log(_this.longitude);
-                    console.log(_this.altitude);
                     var point2 = new BMap.Point(point[1], point[0]);
-                    console.log("point2=>");
-                    console.log(point2);
                     var mk = new BMap.Marker(point2);
                     map.addOverlay(mk);
                     map.panTo(point2);
                     // alert('您的位置：' + point.lng + ',' + point.lat);
                     map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
                     addMarker(point2, i);
-                    append += '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']';
-                    that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
-                        console.log(success);
-                        // success
-                    }, function (error) {
-                        console.log(error);
-                        // error
-                    });
+                    append += _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
+                    _this.base.logger(append, "about_ionViewDidLoad.txt");
                     i++;
                 }, 5000);
             }
@@ -1169,14 +1168,8 @@ var AboutPage = /** @class */ (function () {
             // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
             map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
             addMarker(point2, 0);
-            // }
-            _this.file.writeFile(_this.file.externalDataDirectory, "new_location2.txt", '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']', { replace: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
+            var text = _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
+            _this.base.logger(text, "about_ionViewDidEnter.txt");
         }, 5000);
         // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
     };
@@ -1309,7 +1302,7 @@ var CoordinateConvertor = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(295);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(211);
@@ -1797,7 +1790,7 @@ var PhotoUploadPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(44);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1981,26 +1974,33 @@ var MaintenancePage = /** @class */ (function () {
         this.otherNum = '' + otherNum1;
         this.have_submit = true;
         if (this.imageData != null) {
-            var options = {};
-            options.fileKey = "image";
+            var options_1 = {};
+            options_1.fileKey = "image";
             var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
-            options.params = {
+            options_1.fileName = time + ".jpg";
+            options_1.mimeType = "image/jpeg";
+            options_1.chunkedMode = false;
+            options_1.httpMethod = "POST";
+            options_1.params = {
                 deviceId: this.id,
                 longitude: this.longitude, latitude: this.latitude, num: this.num,
                 maleNum: this.maleNum, femaleNum: this.femaleNum, altitude: this.altitude,
                 drug: this.drug, remark: this.remark, workingContent: this.workingContent,
                 otherNum: this.otherNum, otherType: this.otherType
             };
-            options.headers = { token: localStorage['token'] };
+            options_1.headers = { token: localStorage['token'] };
             //创建文件对象
             var fileTransfer = this.fileTransfer.create();
-            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+            this.base.logger(options_1.toString(), "Img_maintenance_submit_function_fileTransferPar.txt");
+            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
                 .then(function (res) {
                 console.log(res);
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                if (JSON.parse(JSON.stringify(res)).message == "失败") {
+                    _this.base.showAlert("提交失败", "数据已在文件中", function () { });
+                }
+                _this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                 _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (error) {
@@ -2032,15 +2032,6 @@ var MaintenancePage = /** @class */ (function () {
                 //     }
                 // } 
                 localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                _this.file.writeFile(_this.file.externalDataDirectory, "new_file6.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
-                    console.log("newfile6");
-                    console.log(success);
-                    // success
-                }, function (error) {
-                    console.log("error => newfile6");
-                    console.log(error);
-                    // error
-                });
                 //this.navCtrl.pop();
                 confirm.dismiss();
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -2052,11 +2043,22 @@ var MaintenancePage = /** @class */ (function () {
             //});
         }
         else {
+            var options = "deviceId: " + this.id +
+                "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+            this.base.logger(options.toString(), "NonImg_maintenance_submit_function_fileTransferPar.txt");
             this.httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, { headers: { token: localStorage['token'] }, params: { deviceId: this.id,
                     longitude: this.longitude, latitude: this.latitude, num: this.num,
                     maleNum: this.maleNum, femaleNum: this.femaleNum, altitude: this.altitude,
                     drug: this.drug, remark: this.remark, workingContent: this.workingContent, otherNum: this.otherNum, otherType: this.otherType } })
                 .subscribe(function (res) {
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                if (JSON.parse(JSON.stringify(res)).message == "失败") {
+                    _this.base.showAlert("提交失败", "数据已在文件中", function () { });
+                }
+                _this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                 _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (msg) {
@@ -2087,15 +2089,6 @@ var MaintenancePage = /** @class */ (function () {
                 // }   
                 localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
                 console.log("Hello");
-                _this.file.writeFile(_this.file.externalDataDirectory, "new_file7.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
-                    console.log("newfile7");
-                    console.log(success);
-                    // success
-                }, function (error) {
-                    console.log("error => newfile7");
-                    console.log(error);
-                    // error
-                });
                 //this.navCtrl.pop();
                 confirm.dismiss();
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -2126,7 +2119,7 @@ var MaintenancePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(44);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2758,7 +2751,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(20);
@@ -2766,7 +2759,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(213);

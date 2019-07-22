@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import { AlertController } from 'ionic-angular';
 import { text } from "@angular/core/src/render3/instructions";
+import { File } from "@ionic-native/file";
 
 @Injectable()
 export class Base {
@@ -16,7 +17,7 @@ export class Base {
     fixedPixelsTop: 0,
     fixedPixelsBottom: 60
   };
-  constructor(private alertCtrl: AlertController) {
+  constructor(private alertCtrl: AlertController, private file: File) {
 
   }
 
@@ -28,6 +29,17 @@ export class Base {
     });
     alert.present();
   }
+
+  logger(info:string,storage:string){
+    this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+      console.log(success);
+      // success
+    }, function (error) {
+      console.log(error);
+      // error
+    });
+  }
+  
   showPrompt(title, myName,func1, func2) {
     const prompt = this.alertCtrl.create({
       title: title,

@@ -177,17 +177,9 @@ export class AboutPage {
         alert.present();
         setTimeout(() => {
             var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-            console.log("point1=>");
-            console.log(point);
-
-            console.log(this.latitude);
-            console.log(this.longitude);
-            console.log(this.altitude);
 
 
             var point2 = new BMap.Point(point[1], point[0]);
-            console.log("point2=>");
-            console.log(point2);
             
               var mk = new BMap.Marker(point2);
               map.addOverlay(mk);
@@ -202,15 +194,9 @@ export class AboutPage {
 
               addMarker(point2, i);
 
-            append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
+            append += this.latitude + ',' + this.longitude + ',' + this.altitude;
 
-            that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt",append,{replace:true}).then(function (success) {
-              console.log(success);
-              // success
-            }, function (error) {
-              console.log(error);
-              // error
-            });
+            this.base.logger(append,"about_ionViewDidLoad.txt");
 
             i++;
       },5000)
@@ -312,14 +298,10 @@ export class AboutPage {
 
 
         addMarker(point2, 0);
-        // }
-        this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
-          console.log(success);
-          // success
-        }, function (error) {
-          console.log(error);
-          // error
-        });
+
+      var text: string = this.latitude + ',' + this.longitude + ',' + this.altitude;
+
+      this.base.logger(text,"about_ionViewDidEnter.txt");
 
       },5000)
     // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {

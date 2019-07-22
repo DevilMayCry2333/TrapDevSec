@@ -211,9 +211,20 @@ export class MaintenancePage {
       //创建文件对象
       const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
+      this.base.logger(options.toString(),"Img_maintenance_submit_function_fileTransferPar.txt");
+
       fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
         .then((res) => {
           console.log(res);
+          console.log(JSON.stringify(res));
+          console.log(JSON.parse(JSON.stringify(res)).message);
+
+          if (JSON.parse(JSON.stringify(res)).message == "失败") {
+            this.base.showAlert("提交失败", "数据已在文件中", () => { });
+          }
+          
+          this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
           this.base.showAlert('提示', '提交成功', ()=>{});
           Base.popTo(this.navCtrl, 'DetailPage');
         }, (error) => {//发送失败(网络出错等)
@@ -245,17 +256,6 @@ export class MaintenancePage {
           // } 
 
           localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-
-            this.file.writeFile(this.file.externalDataDirectory, "new_file6.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
-              console.log("newfile6");
-              console.log(success);
-              // success
-            }, function (error) {
-                console.log("error => newfile6");
-              console.log(error);
-              // error
-            });
-
           //this.navCtrl.pop();
           confirm.dismiss()
           Base.popTo(this.navCtrl, 'DetailPage');
@@ -266,12 +266,28 @@ export class MaintenancePage {
           //console.log(error);
         //});
     } else {
+
+      var options: string = "deviceId: " + this.id +
+        "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+          "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude+
+            "drug:" + this.drug + "remark:" + this.remark+ "workingContent:" + this.workingContent+ "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+
+      this.base.logger(options.toString(), "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
       this.httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {},
         {headers: {token: localStorage['token']}, params:{deviceId: this.id,
             longitude: this.longitude, latitude: this.latitude, num: this.num,
             maleNum: this.maleNum, femaleNum: this.femaleNum, altitude: this.altitude,
             drug: this.drug, remark: this.remark, workingContent: this.workingContent, otherNum: this.otherNum, otherType: this.otherType}})
         .subscribe(res => {
+          console.log(JSON.stringify(res));
+          console.log(JSON.parse(JSON.stringify(res)).message);
+
+          if(JSON.parse(JSON.stringify(res)).message=="失败"){
+            this.base.showAlert("提交失败", "数据已在文件中", () => { });
+          }
+
+          this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
               this.base.showAlert('提示', '提交成功', ()=>{});
               Base.popTo(this.navCtrl, 'DetailPage');
         }, (msg)=>{
@@ -301,15 +317,6 @@ export class MaintenancePage {
           // }   
           localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
           console.log("Hello");
-            this.file.writeFile(this.file.externalDataDirectory, "new_file7.txt", JSON.stringify(maintenanceCache), { replace: true }).then(function (success) {
-              console.log("newfile7");
-              console.log(success);
-              // success
-            }, function (error) {
-              console.log("error => newfile7");
-              console.log(error);
-              // error
-            });
 
           //this.navCtrl.pop();
           confirm.dismiss();
