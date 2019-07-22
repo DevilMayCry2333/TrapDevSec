@@ -220,12 +220,13 @@ export class MaintenancePage {
           console.log(JSON.parse(JSON.stringify(res)).message);
 
           if (JSON.parse(JSON.stringify(res)).message == "失败") {
-            this.base.showAlert("提交失败", "数据已在文件中", () => { });
-          }
+            this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", () => { });
+          }else{
           
           this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
           this.base.showAlert('提示', '提交成功', ()=>{});
+          }
           Base.popTo(this.navCtrl, 'DetailPage');
         }, (error) => {//发送失败(网络出错等)
           this.base.showAlert('提示', '提交失败', ()=>{});
@@ -284,11 +285,12 @@ export class MaintenancePage {
           console.log(JSON.parse(JSON.stringify(res)).message);
 
           if(JSON.parse(JSON.stringify(res)).message=="失败"){
-            this.base.showAlert("提交失败", "数据已在文件中", () => { });
-          }
+            this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", () => { });
+          }else{
 
           this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
               this.base.showAlert('提示', '提交成功', ()=>{});
+          }
               Base.popTo(this.navCtrl, 'DetailPage');
         }, (msg)=>{
           this.base.showAlert('提示', '提交失败', ()=>{});
