@@ -1,6 +1,12 @@
 # Compiled class file
 *.class
 .idea/
+
+platforms/
+plugins/
+node_modules/
+
+
 # Log file
 *.log
 .gradle/
