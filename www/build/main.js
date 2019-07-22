@@ -1998,10 +1998,12 @@ var MaintenancePage = /** @class */ (function () {
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
                 if (JSON.parse(JSON.stringify(res)).message == "失败") {
-                    _this.base.showAlert("提交失败", "数据已在文件中", function () { });
+                    _this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", function () { });
                 }
-                _this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
+                else {
+                    _this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                }
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (error) {
                 _this.base.showAlert('提示', '提交失败', function () { });
@@ -2056,10 +2058,12 @@ var MaintenancePage = /** @class */ (function () {
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
                 if (JSON.parse(JSON.stringify(res)).message == "失败") {
-                    _this.base.showAlert("提交失败", "数据已在文件中", function () { });
+                    _this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", function () { });
                 }
-                _this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
+                else {
+                    _this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                }
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (msg) {
                 _this.base.showAlert('提示', '提交失败', function () { });
