@@ -798,6 +798,9 @@ var Base = /** @class */ (function () {
         });
         alert.present();
     };
+    Base.prototype.readLogger = function (filename) {
+        return this.file.readAsText(this.file.externalDataDirectory, filename);
+    };
     Base.prototype.logger = function (info, storage) {
         this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
             console.log(success);
@@ -1991,19 +1994,18 @@ var MaintenancePage = /** @class */ (function () {
             options_1.headers = { token: localStorage['token'] };
             //创建文件对象
             var fileTransfer = this.fileTransfer.create();
-            this.base.logger(options_1.toString(), "Img_maintenance_submit_function_fileTransferPar.txt");
+            var lastString = this.base.readLogger("Img_maintenance_submit_function_fileTransferPar.txt").toString();
+            var writeString = lastString + options_1.toString();
+            this.base.logger(writeString, "Img_maintenance_submit_function_fileTransferPar.txt");
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
                 .then(function (res) {
                 console.log(res);
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
-                if (JSON.parse(JSON.stringify(res)).message == "失败") {
-                    _this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", function () { });
-                }
-                else {
-                    _this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
-                }
+                var lastString = _this.base.readLogger("Img_maintenance_submit_function_fileTransferRes.txt");
+                var writeString = lastString + JSON.stringify(res);
+                _this.base.logger(writeString, "Img_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (error) {
                 _this.base.showAlert('提示', '提交失败', function () { });
@@ -2049,6 +2051,8 @@ var MaintenancePage = /** @class */ (function () {
                 "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+            var lastString = this.base.readLogger("NonImg_maintenance_submit_function_fileTransferPar.txt").toString();
+            options = lastString + options;
             this.base.logger(options.toString(), "NonImg_maintenance_submit_function_fileTransferPar.txt");
             this.httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, { headers: { token: localStorage['token'] }, params: { deviceId: this.id,
                     longitude: this.longitude, latitude: this.latitude, num: this.num,
@@ -2057,13 +2061,10 @@ var MaintenancePage = /** @class */ (function () {
                 .subscribe(function (res) {
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
-                if (JSON.parse(JSON.stringify(res)).message == "失败") {
-                    _this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", function () { });
-                }
-                else {
-                    _this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
-                }
+                var lastString = _this.base.readLogger("NonImg_maintenance_submit_function_fileTransferRes.txt").toString();
+                var writeString = lastString + JSON.stringify(res);
+                _this.base.logger(writeString, "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (msg) {
                 _this.base.showAlert('提示', '提交失败', function () { });
@@ -2342,14 +2343,6 @@ var CachePage = /** @class */ (function () {
                             this.indexList.push(tmpDeviceList[i]);
                         }
                         //this.alldeviceCache = tmpDeviceList;
-                        this.file.writeFile(this.file.externalDataDirectory, "new_file4.txt", JSON.stringify(this.indexList), { replace: true }).then(function (success) {
-                            console.log("newfile4");
-                            console.log(success);
-                            // success
-                        }, function (error) {
-                            console.log(error);
-                            // error
-                        });
                         localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
                         loading.dismiss();
                         this.loadList();
@@ -2399,14 +2392,6 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceList.push(this.deviceCache[i]);
                         }
                         this.deviceCache = tmpDeviceList;
-                        this.file.writeFile(this.file.externalDataDirectory, "new_file1.txt", JSON.stringify(this.deviceCache), { replace: true }).then(function (success) {
-                            console.log("newfile1");
-                            console.log(success);
-                            // success
-                        }, function (error) {
-                            console.log(error);
-                            // error
-                        });
                         localStorage.setItem('deviceCache', JSON.stringify(this.deviceCache));
                         // this.loadList();
                         // 提交天牛信息
@@ -2443,14 +2428,6 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceBeetleList.push(this.deviceBeetleCache[i]);
                         }
                         this.deviceBeetleCache = tmpDeviceBeetleList;
-                        this.file.writeFile(this.file.externalDataDirectory, "new_file2.txt", JSON.stringify(this.deviceBeetleCache), { replace: true }).then(function (success) {
-                            console.log("newfile2");
-                            console.log(success);
-                            // success
-                        }, function (error) {
-                            console.log(error);
-                            // error
-                        });
                         localStorage.setItem('deviceBeetleCache', JSON.stringify(this.deviceBeetleCache));
                         // this.loadList();
                         // 提交森林信息
@@ -2487,14 +2464,6 @@ var CachePage = /** @class */ (function () {
                             tmpDeviceForestList.push(this.deviceForestCache[i]);
                         }
                         this.deviceForestCache = tmpDeviceForestList;
-                        this.file.writeFile(this.file.externalDataDirectory, "new_file3.txt", JSON.stringify(this.deviceForestCache), { replace: true }).then(function (success) {
-                            console.log("newfile3");
-                            console.log(success);
-                            // success
-                        }, function (error) {
-                            console.log(error);
-                            // error
-                        });
                         localStorage.setItem('deviceForestCache', JSON.stringify(this.deviceForestCache));
                         //sd 卡上面
                         // this.file.createFile(this.file.applicationStorageDirectory, "new_file.txt", true).then(function (success) {

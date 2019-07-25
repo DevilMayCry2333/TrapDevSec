@@ -211,25 +211,26 @@ export class MaintenancePage {
       //创建文件对象
       const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-      this.base.logger(options.toString(),"Img_maintenance_submit_function_fileTransferPar.txt");
+      var lastString:string = this.base.readLogger("Img_maintenance_submit_function_fileTransferPar.txt").toString();
+      var writeString = lastString + options.toString();
+
+      this.base.logger(writeString,"Img_maintenance_submit_function_fileTransferPar.txt");
 
       fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
         .then((res) => {
           console.log(res);
           console.log(JSON.stringify(res));
           console.log(JSON.parse(JSON.stringify(res)).message);
-
-          if (JSON.parse(JSON.stringify(res)).message == "失败") {
-            this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", () => { });
-          }else{
-          
-          this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+          var lastString = this.base.readLogger("Img_maintenance_submit_function_fileTransferRes.txt");
+          var writeString = lastString + JSON.stringify(res);
+          this.base.logger(writeString, "Img_maintenance_submit_function_fileTransferRes.txt");
 
           this.base.showAlert('提示', '提交成功', ()=>{});
-          }
           Base.popTo(this.navCtrl, 'DetailPage');
         }, (error) => {//发送失败(网络出错等)
           this.base.showAlert('提示', '提交失败', ()=>{});
+
+          
           console.log(error);
           let cacheData = {deviceId: this.id,
             longitude: this.longitude, latitude: this.latitude, num: this.num,
@@ -267,12 +268,14 @@ export class MaintenancePage {
           //console.log(error);
         //});
     } else {
-
+      
       var options: string = "deviceId: " + this.id +
         "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
           "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude+
             "drug:" + this.drug + "remark:" + this.remark+ "workingContent:" + this.workingContent+ "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
+      var lastString:string = this.base.readLogger("NonImg_maintenance_submit_function_fileTransferPar.txt").toString();
+      options = lastString + options;
       this.base.logger(options.toString(), "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
       this.httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {},
@@ -283,14 +286,11 @@ export class MaintenancePage {
         .subscribe(res => {
           console.log(JSON.stringify(res));
           console.log(JSON.parse(JSON.stringify(res)).message);
+            var lastString:string = this.base.readLogger("NonImg_maintenance_submit_function_fileTransferRes.txt").toString();
+            var writeString:string = lastString + JSON.stringify(res);
 
-          if(JSON.parse(JSON.stringify(res)).message=="失败"){
-            this.base.showAlert("提交失败", "数据已在文件中，扫其他码前务必先备份文件", () => { });
-          }else{
-
-          this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+          this.base.logger(writeString, "NonImg_maintenance_submit_function_fileTransferRes.txt");
               this.base.showAlert('提示', '提交成功', ()=>{});
-          }
               Base.popTo(this.navCtrl, 'DetailPage');
         }, (msg)=>{
           this.base.showAlert('提示', '提交失败', ()=>{});

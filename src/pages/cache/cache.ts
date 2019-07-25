@@ -196,14 +196,6 @@ export class CachePage {
     //this.alldeviceCache = tmpDeviceList;
     
     
-    this.file.writeFile(this.file.externalDataDirectory, "new_file4.txt", JSON.stringify(this.indexList), { replace: true }).then(function (success) {
-      console.log("newfile4");
-      console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
-    });
 
     localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
 
@@ -231,14 +223,6 @@ export class CachePage {
       tmpDeviceList.push(this.deviceCache[i]);
     }
     this.deviceCache = tmpDeviceList;
-    this.file.writeFile(this.file.externalDataDirectory, "new_file1.txt", JSON.stringify(this.deviceCache), { replace: true }).then(function (success) {
-      console.log("newfile1");
-      console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
-    });
 
     localStorage.setItem('deviceCache', JSON.stringify(this.deviceCache));
 
@@ -260,14 +244,6 @@ export class CachePage {
       tmpDeviceBeetleList.push(this.deviceBeetleCache[i]);
     }
     this.deviceBeetleCache = tmpDeviceBeetleList;
-    this.file.writeFile(this.file.externalDataDirectory, "new_file2.txt", JSON.stringify(this.deviceBeetleCache), { replace: true }).then(function (success) {
-      console.log("newfile2");
-      console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
-    });
     localStorage.setItem('deviceBeetleCache', JSON.stringify(this.deviceBeetleCache));
 
 
@@ -289,14 +265,6 @@ export class CachePage {
     }
     this.deviceForestCache = tmpDeviceForestList;
     
-    this.file.writeFile(this.file.externalDataDirectory, "new_file3.txt", JSON.stringify(this.deviceForestCache), { replace: true }).then(function (success) {
-      console.log("newfile3");
-      console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
-    });
 
     localStorage.setItem('deviceForestCache', JSON.stringify(this.deviceForestCache));
 
