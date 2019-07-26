@@ -175,17 +175,20 @@ export class CachePage {
     let tmpDeviceList = [];
     this.alldeviceCache=[];
     
+    this.base.logger(this.deviceCache, "CachePar.txt");
+
     for(let i = 0; i < this.deviceCache.length; ++i){
       
       await this.postMaintenance(this.deviceCache[i], this.httpClient, this.base).then(res=>{
       //  this.base.showAlert('提示', '成功'+i, ()=>{});
+        this.base.logger(res.toString(), "CacheRes1.txt");
       }, res=>{
       //  this.base.showAlert('提示', '失败'+i, ()=>{});          
           tmpDeviceList.push(this.deviceCache[i]);  
+          this.base.logger(res.toString(), "CacheRes2.txt");
 
       }).catch((error)=>{
-        
-        
+        this.base.logger(error.toString(), "CacheError.txt");
       });
      
     }    

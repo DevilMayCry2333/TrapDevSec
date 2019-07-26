@@ -30,12 +30,16 @@ export class Base {
     alert.present();
   }
 
-  readLogger(filename){
-    return this.file.readAsText(this.file.externalDataDirectory,filename);
+  readLogger(filename):string{
+    this.file.readAsText(this.file.externalDataDirectory,filename).then(function (success){
+      console.log(success);
+      return success;
+    });
+    return "";
   }
   
   logger(info:string,storage:string){
-    this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+    this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: false }).then(function (success) {
       console.log(success);
       // success
     }, function (error) {

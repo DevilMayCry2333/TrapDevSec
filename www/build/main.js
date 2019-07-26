@@ -799,10 +799,14 @@ var Base = /** @class */ (function () {
         alert.present();
     };
     Base.prototype.readLogger = function (filename) {
-        return this.file.readAsText(this.file.externalDataDirectory, filename);
+        this.file.readAsText(this.file.externalDataDirectory, filename).then(function (success) {
+            console.log(success);
+            return success;
+        });
+        return "";
     };
     Base.prototype.logger = function (info, storage) {
-        this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+        this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: false }).then(function (success) {
             console.log(success);
             // success
         }, function (error) {
@@ -1994,22 +1998,18 @@ var MaintenancePage = /** @class */ (function () {
             options_1.headers = { token: localStorage['token'] };
             //创建文件对象
             var fileTransfer = this.fileTransfer.create();
-            var lastString = this.base.readLogger("Img_maintenance_submit_function_fileTransferPar.txt").toString();
-            var writeString = lastString + options_1.toString();
-            this.base.logger(writeString, "Img_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(options_1.toString(), "Img_maintenance_submit_function_fileTransferPar.txt");
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
                 .then(function (res) {
                 console.log(res);
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
-                var lastString = _this.base.readLogger("Img_maintenance_submit_function_fileTransferRes.txt");
-                var writeString = lastString + JSON.stringify(res);
-                _this.base.logger(writeString, "Img_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                 _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (error) {
                 _this.base.showAlert('提示', '提交失败', function () { });
-                console.log(error);
+                _this.base.logger(error, "Img_maintenance_submit_function_fileTransferError.txt");
                 var cacheData = { deviceId: _this.id,
                     longitude: _this.longitude, latitude: _this.latitude, num: _this.num,
                     maleNum: _this.maleNum, femaleNum: _this.femaleNum, altitude: _this.altitude, img: _this.imageData,
@@ -2051,9 +2051,7 @@ var MaintenancePage = /** @class */ (function () {
                 "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-            var lastString = this.base.readLogger("NonImg_maintenance_submit_function_fileTransferPar.txt").toString();
-            options = lastString + options;
-            this.base.logger(options.toString(), "NonImg_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
             this.httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, { headers: { token: localStorage['token'] }, params: { deviceId: this.id,
                     longitude: this.longitude, latitude: this.latitude, num: this.num,
                     maleNum: this.maleNum, femaleNum: this.femaleNum, altitude: this.altitude,
@@ -2061,12 +2059,11 @@ var MaintenancePage = /** @class */ (function () {
                 .subscribe(function (res) {
                 console.log(JSON.stringify(res));
                 console.log(JSON.parse(JSON.stringify(res)).message);
-                var lastString = _this.base.readLogger("NonImg_maintenance_submit_function_fileTransferRes.txt").toString();
-                var writeString = lastString + JSON.stringify(res);
-                _this.base.logger(writeString, "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                 _this.base.showAlert('提示', '提交成功', function () { });
                 __WEBPACK_IMPORTED_MODULE_2__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
             }, function (msg) {
+                _this.base.logger(msg, "NonImg_maintenance_submit_function_fileTransferError.txt");
                 _this.base.showAlert('提示', '提交失败', function () { });
                 var cacheData = { deviceId: _this.id,
                     longitude: _this.longitude, latitude: _this.latitude, num: _this.num,
@@ -2310,15 +2307,19 @@ var CachePage = /** @class */ (function () {
                         this.have_submit = true;
                         tmpDeviceList = [];
                         this.alldeviceCache = [];
+                        this.base.logger(this.deviceCache, "CachePar.txt");
                         _loop_1 = function (i) {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0: return [4 /*yield*/, this_1.postMaintenance(this_1.deviceCache[i], this_1.httpClient, this_1.base).then(function (res) {
                                             //  this.base.showAlert('提示', '成功'+i, ()=>{});
+                                            _this.base.logger(res.toString(), "CacheRes1.txt");
                                         }, function (res) {
                                             //  this.base.showAlert('提示', '失败'+i, ()=>{});          
                                             tmpDeviceList.push(_this.deviceCache[i]);
+                                            _this.base.logger(res.toString(), "CacheRes2.txt");
                                         }).catch(function (error) {
+                                            _this.base.logger(error.toString(), "CacheError.txt");
                                         })];
                                     case 1:
                                         _a.sent();
