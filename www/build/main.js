@@ -2798,49 +2798,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 var MyErrorHandler = /** @class */ (function () {
-    function MyErrorHandler(alerts, splashScreen, file) {
+    function MyErrorHandler(alerts, splashScreen, base) {
         this.alerts = alerts;
         this.splashScreen = splashScreen;
-        this.file = file;
+        this.base = base;
     }
     MyErrorHandler.prototype.handleError = function (err) {
         // do something with the error
         console.log(err);
-        // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
-        //   console.log(success);
-        //   // success
-        // }, function (error) {
-        //   console.log(error);
-        //   // error
-        // });
-        this.file.writeFile(this.file.externalDataDirectory, "new_file_error.txt", err.toString(), { replace: true }).then(function (success) {
-            console.log(success);
-            // success
-        }, function (error) {
-            console.log(error);
-            // error
-        });
-        // const alert = this.alerts.create({
-        //   title: '抱歉，崩溃原因如下:',
-        //   subTitle: err,
-        //   enableBackdropDismiss: false,
-        //   buttons: [
-        //     {
-        //       text: 'Restart',
-        //       handler: () => {
-        //         this.splashScreen.show();
-        //       }
-        //     }
-        //   ]
-        // });
-        // alert.present();
+        this.base.logger(JSON.stringify(err), "error.txt");
     };
     MyErrorHandler = __decorate([
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */])),
         __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__["a" /* File */]])
+            __WEBPACK_IMPORTED_MODULE_15__common_base_js__["a" /* Base */]])
     ], MyErrorHandler);
     return MyErrorHandler;
 }());

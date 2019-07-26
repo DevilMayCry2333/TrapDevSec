@@ -32,48 +32,17 @@ import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
 
-
 class MyErrorHandler implements ErrorHandler {
   constructor(
     @Inject(AlertController) private alerts: AlertController,
     @Inject(SplashScreen) public splashScreen: SplashScreen,
-    private file:File
+    private base: Base
   ) { }
 
   handleError(err: any): void {
     // do something with the error
     console.log(err);
-    // this.file.createFile(this.file.applicationStorageDirectory, "new_file_error.txt", true).then(function (success) {
-    //   console.log(success);
-    //   // success
-    // }, function (error) {
-    //   console.log(error);
-    //   // error
-    // });
-    this.file.writeFile(this.file.externalDataDirectory, "new_file_error.txt", err.toString(), { replace: true }).then(function (success) {
-      console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
-    });
-
-    
-    // const alert = this.alerts.create({
-    //   title: '抱歉，崩溃原因如下:',
-    //   subTitle: err,
-    //   enableBackdropDismiss: false,
-    //   buttons: [
-    //     {
-    //       text: 'Restart',
-    //       handler: () => {
-    //         this.splashScreen.show();
-    //       }
-    //     }
-    //   ]
-    // });
-    // alert.present();
-
+    this.base.logger(JSON.stringify(err),"error.txt");
   }
 }
 
