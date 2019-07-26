@@ -212,7 +212,7 @@ export class MaintenancePage {
       const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-      this.base.logger(options.toString(),"Img_maintenance_submit_function_fileTransferPar.txt");
+      this.base.logger(JSON.stringify(options),"Img_maintenance_submit_function_fileTransferPar.txt");
 
       fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
         .then((res) => {
@@ -226,7 +226,7 @@ export class MaintenancePage {
           Base.popTo(this.navCtrl, 'DetailPage');
         }, (error) => {//发送失败(网络出错等)
           this.base.showAlert('提示', '提交失败', ()=>{});
-            this.base.logger(error, "Img_maintenance_submit_function_fileTransferError.txt");
+            this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
           let cacheData = {deviceId: this.id,
             longitude: this.longitude, latitude: this.latitude, num: this.num,
@@ -286,7 +286,7 @@ export class MaintenancePage {
               Base.popTo(this.navCtrl, 'DetailPage');
         }, (msg)=>{
 
-            this.base.logger(msg, "NonImg_maintenance_submit_function_fileTransferError.txt");
+            this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
             
           this.base.showAlert('提示', '提交失败', ()=>{});
           let cacheData = {deviceId: this.id,

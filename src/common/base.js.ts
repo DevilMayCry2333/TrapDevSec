@@ -39,12 +39,26 @@ export class Base {
   }
   
   logger(info:string,storage:string){
-    this.file.writeFile(this.file.externalDataDirectory, storage, '[' + info + '],', { replace: false }).then(function (success) {
+    var that = this;
+    this.file.checkFile(this.file.externalDataDirectory,storage).then(function (success){
       console.log(success);
-      // success
-    }, function (error) {
-      console.log(error);
-      // error
+      that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
+        console.log(success);
+        // success
+      }, function (error) {
+        console.log(error);
+        // error
+      });
+    },function(err){
+      console.log(err);
+        that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+          console.log(success);
+          // success
+        }, function (error) {
+          console.log(error);
+          // error
+        });
+
     });
   }
   
