@@ -222,7 +222,8 @@ export class AboutPage {
     map.enableScrollWheelZoom(true);//启动滚轮放大缩小，默认禁用
     map.enableContinuousZoom(true);//连续缩放效果，默认禁用
 
-    this.locate();
+
+
 
 
     this.httpClient.get('http://39.108.184.47:8081/auth_api/user', {headers: {token: localStorage['token']}})
@@ -259,24 +260,37 @@ export class AboutPage {
 
 
 
-      function addMarker(point, index) {  // 创建图标对象   
-        var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
-          // 指定定位位置。   
-          // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-          // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-          // 图标中央下端的尖角位置。    
-          anchor: new BMap.Size(10, 25),
-          // 设置图片偏移。   
-          // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-          // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-          imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移    
-        });
-        // 创建标注对象并添加到地图   
-        var marker = new BMap.Marker(point, { icon: myIcon });
-        map.addOverlay(marker);
-      }
 
-    setTimeout(() =>{
+
+    var a = setInterval(() => {
+      this.locate();
+    }, 1000)
+
+    function addMarker(point, index) {  // 创建图标对象   
+      var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+        // 指定定位位置。   
+        // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+        // 图标中央下端的尖角位置。    
+        anchor: new BMap.Size(10, 25),
+        // 设置图片偏移。   
+        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+        // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+        imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移    
+      });
+      // 创建标注对象并添加到地图   
+      var marker = new BMap.Marker(point, { icon: myIcon });
+      map.addOverlay(marker);
+    }
+
+    console.log(this.altitude);
+    
+    var text: string = this.latitude + ',' + this.longitude + ',' + this.altitude;
+    this.base.logger(text, "about_ionViewDidEnter.txt");
+
+    if (Number(this.altitude)!=-10000 && this.altitude!="" && this.altitude) {
+      clearInterval(a);
+      setTimeout(() => {
         point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
         console.log("Point1进来");
         console.log(point);
@@ -299,11 +313,12 @@ export class AboutPage {
 
         addMarker(point2, 0);
 
-      var text: string = this.latitude + ',' + this.longitude + ',' + this.altitude;
 
-      this.base.logger(text,"about_ionViewDidEnter.txt");
+       
 
-      },5000)
+      }, 1000)
+
+    }
     // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
 
 

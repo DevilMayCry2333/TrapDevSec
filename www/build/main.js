@@ -1128,7 +1128,6 @@ var AboutPage = /** @class */ (function () {
         map.addControl(new BMap.NavigationControl());
         map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
         map.enableContinuousZoom(true); //连续缩放效果，默认禁用
-        this.locate();
         this.httpClient.get('http://39.108.184.47:8081/auth_api/user', { headers: { token: localStorage['token'] } })
             .subscribe(function (data) {
             // console.log(d);
@@ -1158,6 +1157,9 @@ var AboutPage = /** @class */ (function () {
             }
             _this.addMarker();
         });
+        var a = setInterval(function () {
+            _this.locate();
+        }, 1000);
         function addMarker(point, index) {
             var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
                 // 指定定位位置。   
@@ -1174,23 +1176,27 @@ var AboutPage = /** @class */ (function () {
             var marker = new BMap.Marker(point, { icon: myIcon });
             map.addOverlay(marker);
         }
-        setTimeout(function () {
-            point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-            console.log("Point1进来");
-            console.log(point);
-            var point2 = new BMap.Point(point[1], point[0]);
-            // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-            console.log("进来的");
-            console.log(point2);
-            var mk = new BMap.Marker(point2);
-            map.addOverlay(mk);
-            map.panTo(point2);
-            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-            map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-            addMarker(point2, 0);
-            var text = _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
-            _this.base.logger(text, "about_ionViewDidEnter.txt");
-        }, 5000);
+        console.log(this.altitude);
+        var text = this.latitude + ',' + this.longitude + ',' + this.altitude;
+        this.base.logger(text, "about_ionViewDidEnter.txt");
+        if (Number(this.altitude) != -10000 && this.altitude != "" && this.altitude) {
+            clearInterval(a);
+            setTimeout(function () {
+                point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
+                console.log("Point1进来");
+                console.log(point);
+                var point2 = new BMap.Point(point[1], point[0]);
+                // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+                console.log("进来的");
+                console.log(point2);
+                var mk = new BMap.Marker(point2);
+                map.addOverlay(mk);
+                map.panTo(point2);
+                // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+                map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+                addMarker(point2, 0);
+            }, 1000);
+        }
         // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
     };
     AboutPage.prototype.addMarker = function () {
