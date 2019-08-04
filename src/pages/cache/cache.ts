@@ -181,14 +181,14 @@ export class CachePage {
       
       await this.postMaintenance(this.deviceCache[i], this.httpClient, this.base).then(res=>{
       //  this.base.showAlert('提示', '成功'+i, ()=>{});
-        this.base.logger(JSON.stringify(res), "CacheRes1.txt");
+        this.base.logger(this.deviceCache[i].deviceId + "#" + JSON.stringify(res), "CacheRes1.txt");
       }, res=>{
       //  this.base.showAlert('提示', '失败'+i, ()=>{});          
           tmpDeviceList.push(this.deviceCache[i]);  
-          this.base.logger(JSON.stringify(res), "CacheRes2.txt");
+          this.base.logger(this.deviceCache[i].deviceId + "#" +JSON.stringify(res), "CacheRes2.txt");
 
       }).catch((error)=>{
-        this.base.logger(JSON.stringify(error), "CacheError.txt");
+        this.base.logger(this.deviceCache[i].deviceId + "#" +JSON.stringify(error), "CacheError.txt");
       });
      
     }    
