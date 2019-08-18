@@ -48,7 +48,7 @@ export class CachePage {
   postMaintenance(cache, httpClient, base) {
     if (cache.img == undefined) {
       return new Promise((resolve, reject)=> {
-        httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {},
+        httpClient.post('http://localhost:8081/auth_api/maintenance', {},
           {
             headers: {token: localStorage['token']}, params: {
               deviceId: cache.deviceId,
