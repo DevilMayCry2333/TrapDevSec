@@ -778,8 +778,8 @@ var Base = /** @class */ (function () {
     function Base(alertCtrl, file) {
         this.alertCtrl = alertCtrl;
         this.file = file;
-        //BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://localhost:8081/";
+        this.BASE_URL = "http://39.108.184.47:8081/";
+        // BASE_URL = "http://localhost:8081/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
@@ -2226,7 +2226,7 @@ var CachePage = /** @class */ (function () {
     CachePage.prototype.postMaintenance = function (cache, httpClient, base) {
         if (cache.img == undefined) {
             return new Promise(function (resolve, reject) {
-                httpClient.post('http://localhost:8081/auth_api/maintenance', {}, {
+                httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: cache.deviceId,
                         longitude: cache.longitude, latitude: cache.latitude, num: cache.num,
