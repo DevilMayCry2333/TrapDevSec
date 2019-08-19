@@ -1,10 +1,9 @@
 page-scan {
   .qrscanner {
     background: none;
-    height: 50%;
     &-area {
       width: 100%;
-      height: 46%;
+      height: 86%;
       //background: url(../assets/imgs/scanner.svg) no-repeat center center;
       background-size: contain;
     }
@@ -20,28 +19,28 @@ page-scan {
   @keyframes myfirst {
     0% {
       background: red;
-      // top: 30%;
-      top: 10%;
+      top: 30%;
+      // top: 10%;
     }
     25% {
       background: yellow;
-      // top: 35%;
-      top: 10%;
+      top: 35%;
+      // top: 10%;
     }
     50% {
       background: blue;
-      // top: 40%;
-      top: 10%;
+      top: 40%;
+      // top: 10%;
     }
     75% {
       background: green;
-      // top: 45%;
-      top: 10%;
+      top: 45%;
+      // top: 10%;
     }
     100% {
       background: red;
-      // top: 50%;
-      top: 10%;
+      top: 50%;
+      // top: 10%;
     }
   }
   .button-bottom {

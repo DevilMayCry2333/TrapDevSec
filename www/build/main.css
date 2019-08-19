@@ -25697,6 +25697,7 @@ page-about #map_container2 {
 
 page-scan .qrscanner {
   background: none;
+  height: 50%;
 }
 
 page-scan .qrscanner-area {
@@ -25718,46 +25719,46 @@ page-scan .through-line {
 @-webkit-keyframes myfirst {
   0% {
     background: red;
-    top: 30%;
+    top: 10%;
   }
   25% {
     background: yellow;
-    top: 35%;
+    top: 10%;
   }
   50% {
     background: blue;
-    top: 40%;
+    top: 10%;
   }
   75% {
     background: green;
-    top: 45%;
+    top: 10%;
   }
   100% {
     background: red;
-    top: 50%;
+    top: 10%;
   }
 }
 
 @keyframes myfirst {
   0% {
     background: red;
-    top: 30%;
+    top: 10%;
   }
   25% {
     background: yellow;
-    top: 35%;
+    top: 10%;
   }
   50% {
     background: blue;
-    top: 40%;
+    top: 10%;
   }
   75% {
     background: green;
-    top: 45%;
+    top: 10%;
   }
   100% {
     background: red;
-    top: 50%;
+    top: 10%;
   }
 }
 
