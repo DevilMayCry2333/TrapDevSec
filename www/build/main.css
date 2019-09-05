@@ -25697,12 +25697,11 @@ page-about #map_container2 {
 
 page-scan .qrscanner {
   background: none;
-  height: 50%;
 }
 
 page-scan .qrscanner-area {
   width: 100%;
-  height: 46%;
+  height: 86%;
   background-size: contain;
 }
 
@@ -25719,46 +25718,46 @@ page-scan .through-line {
 @-webkit-keyframes myfirst {
   0% {
     background: red;
-    top: 10%;
+    top: 30%;
   }
   25% {
     background: yellow;
-    top: 10%;
+    top: 35%;
   }
   50% {
     background: blue;
-    top: 10%;
+    top: 40%;
   }
   75% {
     background: green;
-    top: 10%;
+    top: 45%;
   }
   100% {
     background: red;
-    top: 10%;
+    top: 50%;
   }
 }
 
 @keyframes myfirst {
   0% {
     background: red;
-    top: 10%;
+    top: 30%;
   }
   25% {
     background: yellow;
-    top: 10%;
+    top: 35%;
   }
   50% {
     background: blue;
-    top: 10%;
+    top: 40%;
   }
   75% {
     background: green;
-    top: 10%;
+    top: 45%;
   }
   100% {
     background: red;
-    top: 10%;
+    top: 50%;
   }
 }
 

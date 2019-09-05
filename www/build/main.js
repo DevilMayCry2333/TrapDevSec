@@ -2271,14 +2271,52 @@ var CachePage = /** @class */ (function () {
                     //   }
                 }, function (error) {
                     //   this.base.showAlert('提示', 'false2', ()=>{});
-                    console.log(error);
-                    reject('error');
+                    resolve('ok');
+                    return new Promise(function (resolve, reject) {
+                        httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: cache.deviceId,
+                                longitude: cache.longitude, latitude: cache.latitude, num: cache.num,
+                                maleNum: cache.maleNum, femaleNum: cache.femaleNum, altitude: cache.altitude,
+                                drug: cache.drug, remark: cache.remark, workingContent: cache.workingContent,
+                                otherType: cache.otherType, otherNum: cache.otherNum
+                            }
+                        }).toPromise().then(function (res) {
+                            console.log("OK");
+                            resolve('ok');
+                            //  this.base.showAlert('提示', 'false'+res['data'], ()=>{});
+                        }, function (res) {
+                            console.log("ERROR");
+                            reject('error');
+                        });
+                    });
+                    // console.log(error);
+                    // reject('error')
                 })
                     .catch(function (error) {
+                    return new Promise(function (resolve, reject) {
+                        httpClient.post('http://39.108.184.47:8081/auth_api/maintenance', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: cache.deviceId,
+                                longitude: cache.longitude, latitude: cache.latitude, num: cache.num,
+                                maleNum: cache.maleNum, femaleNum: cache.femaleNum, altitude: cache.altitude,
+                                drug: cache.drug, remark: cache.remark, workingContent: cache.workingContent,
+                                otherType: cache.otherType, otherNum: cache.otherNum
+                            }
+                        }).toPromise().then(function (res) {
+                            console.log("OK");
+                            resolve('ok');
+                            //  this.base.showAlert('提示', 'false'+res['data'], ()=>{});
+                        }, function (res) {
+                            console.log("ERROR");
+                            reject('error');
+                        });
+                    });
+                    //发送失败(文件不存在等)
                     // alert("出错" + error);
-                    console.log(error);
+                    // console.log(error);
                     //   this.base.showAlert('提示', 'false3', ()=>{});
-                    reject('error');
+                    // reject('error')
                 });
             });
         }
