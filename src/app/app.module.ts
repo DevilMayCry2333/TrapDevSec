@@ -31,6 +31,13 @@ import {DeviceDataPage} from "../pages/device-data/device-data";
 import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
+import { NewHomePage} from '../pages/newhome/newhome'
+import { switchProjectPage} from '../pages/newSwitchProject/newSwitchProject';
+import { TrapPage} from '../pages/newTrap/newTrap'
+import { DryPage} from '../pages/newDry/newDry';
+import { DeadtreePage} from '../pages/newDeadTree/newDeadTree';
+import { EnemyPage} from '../pages/newEnemy/newEnemy';
+import { TrackPage} from '../pages/newTrack/newTrack';
 
 class MyErrorHandler implements ErrorHandler {
   constructor(
@@ -54,7 +61,15 @@ class MyErrorHandler implements ErrorHandler {
     HomePage,
     TabsPage,
     ScanPage,
+    NewHomePage,
+    DryPage,
+    DeadtreePage,
+    EnemyPage,
+    TrackPage,
+
     LoginPage,
+    TrapPage,
+    switchProjectPage,
     // DeviceBeetleFillPage,
     // DeviceForestFillPage,
     LocatePage,
@@ -81,6 +96,13 @@ class MyErrorHandler implements ErrorHandler {
     HomePage,
     TabsPage,
     ScanPage,
+    NewHomePage,
+    DryPage,
+    DeadtreePage,
+    EnemyPage,
+    TrackPage,
+    switchProjectPage,
+    TrapPage,
     LoginPage,
     // DeviceBeetleFillPage,
     // DeviceForestFillPage,

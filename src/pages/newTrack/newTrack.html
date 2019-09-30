@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            轨迹追踪
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card>
+        <ion-card-content>
+            <h3>定位信息</h3>
+            <ion-item>
+                <ion-label>经度:</ion-label>
+                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>纬度:</ion-label>
+                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>海拔:</ion-label>
+                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>精度:</ion-label>
+                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>线路名称:</ion-label>
+                <ion-input [(ngModel)]="accuracy"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>工作内容:</ion-label>
+                <ion-input [(ngModel)]="accuracy"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>延时设置:</ion-label>
+                <!-- <ion-select [compareWith]="compareWith">
+                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
+                </ion-select> -->
+            </ion-item>
+
+            <ion-item>
+                <ion-label>备注:</ion-label>
+                <ion-input [(ngModel)]="accuracy"></ion-input>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+
+    <button size="large" expand="full">
+        <ion-label>开始录制</ion-label>
+        <ion-icon name="videocam"></ion-icon>
+    </button>
+
+    <button size="large" expand="full">
+        <ion-label>停止录制</ion-label>
+        <ion-icon name="square"></ion-icon>
+    </button>
+
+
+    <button size="large" expand="full">
+        <ion-label>拍照</ion-label>
+        <ion-icon name="camera"></ion-icon>
+    </button>
+
+    <button size="large" expand="full">
+        <ion-label>提交</ion-label>
+    </button>
+
+
+    <button size="large" expand="block">
+        <ion-label>地图查看</ion-label>
+    </button>
+
+</ion-content>

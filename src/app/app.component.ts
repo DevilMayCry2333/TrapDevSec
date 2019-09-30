@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import {HomePage} from "../pages/home/home";
 import {ScanPage} from "../pages/scan/scan";
 import {LoginPage} from "../pages/login/login";
+import { NewHomePage} from '../pages/newhome/newhome'
 import {DeviceForestFillPage} from "../pages/device-forest-fill/device-forest-fill";
 import {DeviceBeetleFillPage} from "../pages/device-beetle-fill/device-beetle-fill";
 import {LocatePage} from "../pages/locate/locate";
@@ -15,7 +16,7 @@ import {LocatePage} from "../pages/locate/locate";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage: any = NewHomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

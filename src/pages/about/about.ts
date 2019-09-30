@@ -163,18 +163,18 @@ export class AboutPage {
       // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
         
       if (this.latitude && this.longitude){
-        const alert = this.alerts.create({
-          title: '数据',
-          enableBackdropDismiss: false,
-          buttons: [
-            {
-              text: this.latitude + ',' + this.longitude + ',' + this.altitude,
-              handler: () => {
-              }
-            }
-          ]
-        });
-        alert.present();
+        // const alert = this.alerts.create({
+        //   title: '数据',
+        //   enableBackdropDismiss: false,
+        //   buttons: [
+        //     {
+        //       text: this.latitude + ',' + this.longitude + ',' + this.altitude,
+        //       handler: () => {
+        //       }
+        //     }
+        //   ]
+        // });
+        // alert.present();
         setTimeout(() => {
             var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
 
