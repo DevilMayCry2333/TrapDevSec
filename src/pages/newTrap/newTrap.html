@@ -53,20 +53,20 @@
             </ion-item>
             <ion-item>
                 <ion-label>类型</ion-label>
-                <ion-select>
-                    <ion-option *ngFor="let user of otherbettleType">{{user.name}}</ion-option>
+                <ion-select [(ngModel)]="BeetleType">
+                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>药剂类型</ion-label>
-                <ion-select>
+                <ion-select [(ngModel)]="injectTypeValue">
                     <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>工作内容</ion-label>
-                <ion-select>
-                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>
+                <ion-select [(ngModel)]="WorkContentValue">
+                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
@@ -74,7 +74,7 @@
                 <ion-input [(ngModel)]="remarks"></ion-input>
             </ion-item>
             <button ion-button (click)="takePhoto()">拍照</button>
-            <button ion-button>提交</button>
+            <button ion-button (click)="submit()">提交</button>
             <button ion-button>地图查看</button>
         </ion-card-content>
     </ion-card>

@@ -8,21 +8,26 @@ import { Subscription } from "rxjs/Subscription";
 import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
+import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 
 @Component({
     selector: 'app-home',
     templateUrl: 'newTrap.html',
 })
 export class TrapPage {
-    deviceId: String
-    deviceSerial: String
-    longtitude: String
-    latitude: String
-    altitude: String
-    accuracy: String
+    deviceId: string
+    deviceSerial: string
+    longtitude: string
+    latitude: string
+    BeetleType: string
+    injectTypeValue: string
+    WorkContentValue: string
+    altitude: string
+    accuracy: string
+    have_submit:boolean
     imageData: null
-    remarks:String
-    newbettle: String
+    remarks: "1"
+    newbettle: string
     otherbettleType:any[]
     injectType:any[]
     workContent:any[]
@@ -30,7 +35,7 @@ export class TrapPage {
     subscription: Subscription;
     // 是否定位成功
     location_ready = false;
-    otherbettle: String
+    otherbettle:string
 
     users: any[] = [
         {
@@ -111,6 +116,7 @@ export class TrapPage {
                 var c: any = res;
                 this.workContent = Array.from(c);
                 console.log(this.workContent);
+                console.log(this.workContent);
 
             },
                 res => {
@@ -125,7 +131,8 @@ export class TrapPage {
         private geolocation: Geolocation,
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
-        private camera: Camera) { }
+        private camera: Camera,
+        private fileTransfer: FileTransfer) { }
 
     callBack = (params) => {
         return new Promise((resolve, reject) => {
@@ -224,6 +231,168 @@ export class TrapPage {
         console.log("scan");
         console.log(localStorage['username']);
         this.navCtrl.push(ScanPage,{callBack:this.callBack});
+    }
+    submit(){
+        this.have_submit = true;
+        if (this.imageData != null) {
+            let options: FileUploadOptions = {};
+            options.fileKey = "image";
+            var time = Date.parse(Date());
+            options.fileName = time + ".jpg";
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.httpMethod = "POST";
+            options.params = {
+                deviceId: this.deviceId,
+                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                otherNum: this.otherbettle, otherType: this.BeetleType
+            };
+            options.headers = { token: localStorage['token'] };
+            console.log("options");
+            console.log(options);
+
+
+            //创建文件对象
+            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+
+            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+
+            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+                .then((res) => {
+                    console.log(res);
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+
+                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    Base.popTo(this.navCtrl, 'DetailPage');
+                }, (error) => {//发送失败(网络出错等)
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+
+                    let cacheData = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        img:this.imageData
+                    };
+                    let maintenanceCache: any;
+                    maintenanceCache = localStorage.getItem('maintenanceCache');
+                    if (maintenanceCache == null) {
+                        maintenanceCache = [];
+                    } else {
+                        maintenanceCache = JSON.parse(maintenanceCache);
+                    }
+                    maintenanceCache.push(cacheData);
+                    //localStorage安全保存数据
+                    // try{
+                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // } 
+
+                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    //this.navCtrl.pop();
+                    // confirm.dismiss()
+                    Base.popTo(this.navCtrl, 'DetailPage');
+                })
+            //.catch((error) => {//发送失败(文件不存在等)
+            // alert("出错" + error);
+            //alert('失败');
+            //console.log(error);
+            //});
+        } else {
+
+            // var options: string = "deviceId: " + this.id +
+            //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+            //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+            //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+
+
+            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
+            this.httpClient.post('http://192.168.31.254:8081/auth_api/maintenance', {},
+                {
+                    headers: {token: localStorage['token']}, params:{
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    }
+                })
+                .subscribe(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    
+                    // Base.popTo(this.navCtrl, 'DetailPage');
+                }, (msg) => {
+
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                        console.log("cacheData");
+                        console.log(cacheData);
+
+                    let maintenanceCache: any;
+                    maintenanceCache = localStorage.getItem('maintenanceCache');
+                    if (maintenanceCache == null) {
+                        maintenanceCache = [];
+                    } else {
+                        maintenanceCache = JSON.parse(maintenanceCache);
+                    }
+                    maintenanceCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    console.log("Hello");
+
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    // Base.popTo(this.navCtrl, 'DetailPage');
+                });
+
+        }
+
     }
     deviceIdInput() {
         console.log("ok");
