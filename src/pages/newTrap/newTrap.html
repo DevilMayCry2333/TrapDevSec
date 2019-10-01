@@ -15,12 +15,12 @@
                 <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>
              
             </ion-item>
-               <button (click)="scan()">扫描</button>
+               <button ion-button (click)="scan()">扫描</button>
             <ion-item>
                 <ion-label>设备编号</ion-label>
                 <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>
-                <button>绑定</button>
             </ion-item>
+             <button ion-button>绑定</button>
 
         </ion-card-content>
     </ion-card>
@@ -53,26 +53,29 @@
             </ion-item>
             <ion-item>
                 <ion-label>类型</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-select>
+                    <ion-option *ngFor="let user of otherbettleType">{{user.name}}</ion-option>
+                </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>药剂类型</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-select>
+                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>
+                </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>工作内容</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-select>
+                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>
+                </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>备注</ion-label>
-                <ion-input [(ngModel)]="accuracy"></ion-input>
+                <ion-input [(ngModel)]="remarks"></ion-input>
             </ion-item>
+            <button ion-button (click)="takePhoto()">拍照</button>
+            <button ion-button>提交</button>
+            <button ion-button>地图查看</button>
         </ion-card-content>
     </ion-card>
 
