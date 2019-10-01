@@ -49,7 +49,7 @@ export class ScanPage {
             // alert(text)
             // alert(text);
             let geshi=true;
-            if(text.length!=12){
+            if(text.length!=15){
               geshi=false;
             }
             if(geshi){
