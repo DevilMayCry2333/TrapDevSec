@@ -79,7 +79,7 @@ export class TrapPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
-        this.httpClient.post("http://192.168.31.254:8081/app/" + 'getBeetle', {},
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getBeetle', {},
             { headers: { token: localStorage['token'] }, 
             params: new HttpParams({ fromObject: { username: localStorage['username']} }) })
             .subscribe(res => {
@@ -92,7 +92,7 @@ export class TrapPage {
                     console.log(res);
                 })
 
-        this.httpClient.post("http://192.168.31.254:8081/app/" + 'getInject', {},
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getInject', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -107,7 +107,7 @@ export class TrapPage {
                     console.log(res);
                 })
 
-        this.httpClient.post("http://192.168.31.254:8081/app/" + 'getWorkContent', {},
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkContent', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -323,7 +323,7 @@ export class TrapPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.31.254:8081/auth_api/maintenance', {},
+            this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {},
                 {
                     headers: {token: localStorage['token']}, params:{
                         deviceId: this.deviceId,

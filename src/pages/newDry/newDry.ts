@@ -18,6 +18,8 @@ export class DryPage {
     deviceId: ""
     deviceSerial: ""
     longtitude: string
+    woodStatusValue:string
+    workContentValue:string
     latitude: string
     subscription: Subscription;
     altitude: string
@@ -25,6 +27,7 @@ export class DryPage {
     accuracy: string
     woodStatus:any[]
     injectNum:string
+    have_submit:boolean
     workContent:any[]
     remarks:string
     location_ready:boolean
@@ -56,6 +59,43 @@ export class DryPage {
         private fileTransfer: FileTransfer,
         public navCtrl: NavController
     ) { }
+
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad LocatePage');
+        console.log(localStorage['device']);
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWoodStatus', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
+            })
+            .subscribe(res => {
+                var c: any = res;
+                this.woodStatus = Array.from(c);
+                console.log(this.woodStatus);
+
+            },
+                res => {
+                    console.log(res);
+                })
+
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkingContent', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
+            })
+            .subscribe(res => {
+                var c: any = res;
+                this.workContent = Array.from(c);
+                console.log(this.workContent);
+
+            },
+                res => {
+                    console.log(res);
+                })
+
+    }
+
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,
@@ -174,6 +214,157 @@ export class DryPage {
         this.navCtrl.push(ScanPage, { callBack: this.callBack });
     }
 
+    submit() {
+        this.have_submit = true;
+        if (this.imageData != null) {
+            let options: FileUploadOptions = {};
+            options.fileKey = "image";
+            var time = Date.parse(Date());
+            options.fileName = time + ".jpg";
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.httpMethod = "POST";
+            options.params = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude:this.altitude,
+                accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks:this.remarks,
+                workingContent:this.workContentValue
+            };
+            options.headers = { token: localStorage['token'] };
+            console.log("options");
+            console.log(options);
+            
+            //创建文件对象
+            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+
+            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+
+            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
+                .then((res) => {
+                    console.log(res);
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+
+                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    Base.popTo(this.navCtrl, 'DetailPage');
+                }, (error) => {//发送失败(网络出错等)
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+
+                    let cacheData = {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                        workingContent: this.workContentValue,
+                        img: this.imageData
+                    };
+                    let maintenanceCache: any;
+                    maintenanceCache = localStorage.getItem('maintenanceCache');
+                    if (maintenanceCache == null) {
+                        maintenanceCache = [];
+                    } else {
+                        maintenanceCache = JSON.parse(maintenanceCache);
+                    }
+                    maintenanceCache.push(cacheData);
+                    //localStorage安全保存数据
+                    // try{
+                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // } 
+
+                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    //this.navCtrl.pop();
+                    // confirm.dismiss()
+                    Base.popTo(this.navCtrl, 'DetailPage');
+                })
+            //.catch((error) => {//发送失败(文件不存在等)
+            // alert("出错" + error);
+            //alert('失败');
+            //console.log(error);
+            //});
+        } else {
+
+            // var options: string = "deviceId: " + this.id +
+            //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+            //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+            //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+
+
+            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
+            this.httpClient.post('http://192.168.1.6:8081/app/AddInjectData', {},
+                {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                        workingContent: this.workContentValue
+                    }
+                })
+                .subscribe(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                        workingContent: this.workContentValue
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+
+                    // Base.popTo(this.navCtrl, 'DetailPage');
+                }, (msg) => {
+
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                        workingContent: this.workContentValue
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+
+                    let maintenanceCache: any;
+                    maintenanceCache = localStorage.getItem('maintenanceCache');
+                    if (maintenanceCache == null) {
+                        maintenanceCache = [];
+                    } else {
+                        maintenanceCache = JSON.parse(maintenanceCache);
+                    }
+                    maintenanceCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    console.log("Hello");
+
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    // Base.popTo(this.navCtrl, 'DetailPage');
+                });
+
+        }
+
+    }
 
     dryClick() {
         console.log("dry");

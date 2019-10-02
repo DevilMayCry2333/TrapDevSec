@@ -7,7 +7,7 @@ import { File } from "@ionic-native/file";
 @Injectable()
 export class Base {
   // BASE_URL = "http://39.108.184.47:8081/"
-  BASE_URL = "http://192.168.31.254:8081/"
+  BASE_URL = "http://192.168.1.6:8081/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,

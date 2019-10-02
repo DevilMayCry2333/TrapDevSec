@@ -50,37 +50,33 @@
 
             <ion-item>
                 <ion-label>树木状态：</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-select [(ngModel)]="woodStatusValue">
+                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>
+                </ion-select>
             </ion-item>
-
             <ion-item>
                 <ion-label>注剂数量:</ion-label>
-                <ion-input [(ngModel)]="newbettle"></ion-input>
+                <ion-input [(ngModel)]="injectNum"></ion-input>
             </ion-item>
-
-
-
             <ion-item>
                 <ion-label>工作内容</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-select [(ngModel)]="workContentValue">
+                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>
+                </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>备注</ion-label>
-                <ion-input [(ngModel)]="accuracy"></ion-input>
+                <ion-input [(ngModel)]="remarks"></ion-input>
             </ion-item>
         </ion-card-content>
     </ion-card>
 
-    <button ion-button size="large" expand="full">
+    <button ion-button size="large" expand="full" (click)="takePhoto()">
         <ion-label>拍照</ion-label>
         <ion-icon name="camera"></ion-icon>
     </button>
 
-    <button ion-button size="large" expand="full">
+    <button ion-button size="large" expand="full" (click)="submit()">
         <ion-label>提交</ion-label>
     </button>
 
