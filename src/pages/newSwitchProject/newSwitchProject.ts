@@ -16,7 +16,7 @@ export class switchProjectPage {
     constructor(private navCtl: NavController, private httpClient: HttpClient) { }
 
     ionViewDidLoad(){
-        this.httpClient.post("http://192.168.31.254:8081/app/" + 'getMyDevice', {},
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getMyDevice', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
