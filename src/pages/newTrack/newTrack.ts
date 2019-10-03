@@ -64,6 +64,70 @@ export class TrackPage {
             this.photosum = 0;
         }
 
+    ionViewDidLoad(){
+        if (localStorage["TrackCache"]) {
+            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+            tmpStorage.forEach(element => {
+                console.log(element);
+                if (element.img != null) {
+                    let options: FileUploadOptions = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                        lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                        current: "1"
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+
+
+                    //创建文件对象
+                    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+
+                    fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddTrack', options)
+                        .then((res) => {
+                            console.log(res);
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+
+                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('TrackCache');
+                        }, (error) => {//发送失败(网络出错等)
+                            this.base.showAlert('提示', '提交失败', () => { });
+                        })
+                } else {
+                    console.log(element);
+                    this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                current: "1"
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('TrackCache');
+                        }, (msg) => {
+                            this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                }
+            });
+        }
+    }
     deviceBind() {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
@@ -118,17 +182,17 @@ export class TrackPage {
                             current: "1",
                             img: this.imageData
                         };
-                        let maintenanceCache: any;
-                        maintenanceCache = localStorage.getItem('maintenanceCache');
-                        if (maintenanceCache == null) {
-                            maintenanceCache = [];
+                        let TrackCache: any;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
                         } else {
-                            maintenanceCache = JSON.parse(maintenanceCache);
+                            TrackCache = JSON.parse(TrackCache);
                         }
-                        maintenanceCache.push(cacheData);
+                        TrackCache.push(cacheData);
                         //localStorage安全保存数据
                         // try{
-                        //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -139,7 +203,7 @@ export class TrackPage {
                         //     }
                         // } 
 
-                        localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         //this.navCtrl.pop();
                         // confirm.dismiss()
                         // Base.popTo(this.navCtrl, 'DetailPage');
@@ -194,16 +258,16 @@ export class TrackPage {
                     console.log("cacheData");
                     console.log(cacheData);
 
-                    let maintenanceCache: any;
-                    maintenanceCache = localStorage.getItem('maintenanceCache');
-                    if (maintenanceCache == null) {
-                        maintenanceCache = [];
+                    let TrackCache: any;
+                    TrackCache = localStorage.getItem('TrackCache');
+                    if (TrackCache == null) {
+                        TrackCache = [];
                     } else {
-                        maintenanceCache = JSON.parse(maintenanceCache);
+                        TrackCache = JSON.parse(TrackCache);
                     }
-                    maintenanceCache.push(cacheData);
+                    TrackCache.push(cacheData);
                     // try{
-                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                     // }catch(oException){
                     //     if(oException.name == 'QuotaExceededError'){
                     //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -213,7 +277,7 @@ export class TrackPage {
                     //       // localStorage.setItem(key,value);
                     //     }
                     // }   
-                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                     console.log("Hello");
 
                     //this.navCtrl.pop();

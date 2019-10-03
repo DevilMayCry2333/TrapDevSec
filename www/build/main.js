@@ -1617,6 +1617,59 @@ var EnemyPage = /** @class */ (function () {
         var _this = this;
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        if (localStorage["enemyCache"]) {
+            var tmpStorage = JSON.parse(localStorage["enemyCache"]);
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddEnemy', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('enemyCache');
+                    }, function (error) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post('http://192.168.1.6:8081/app/AddEnemy', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('enemyCache');
+                    }, function (msg) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+            });
+        }
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getEnemyType', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
@@ -1707,18 +1760,18 @@ var EnemyPage = /** @class */ (function () {
                     accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks,
                     img: _this.imageData
                 };
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var enemyCache;
+                enemyCache = localStorage.getItem('enemyCache');
+                if (enemyCache == null) {
+                    enemyCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    enemyCache = JSON.parse(enemyCache);
                 }
-                maintenanceCache.push(cacheData);
+                enemyCache.push(cacheData);
                 //localStorage安全保存数据
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -1728,7 +1781,7 @@ var EnemyPage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // } 
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                 //this.navCtrl.pop();
                 // confirm.dismiss()
                 __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -1772,17 +1825,17 @@ var EnemyPage = /** @class */ (function () {
                 };
                 console.log("cacheData");
                 console.log(cacheData);
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var enemyCache;
+                enemyCache = localStorage.getItem('enemyCache');
+                if (enemyCache == null) {
+                    enemyCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    enemyCache = JSON.parse(enemyCache);
                 }
-                maintenanceCache.push(cacheData);
+                enemyCache.push(cacheData);
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -1792,7 +1845,7 @@ var EnemyPage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // }   
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                 console.log("Hello");
                 //this.navCtrl.pop();
                 // confirm.dismiss();
@@ -1804,16 +1857,10 @@ var EnemyPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n            </ion-item>\n            <button ion-button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button ion-button size="large" expand="block" (click)="deviceBind()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue">\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>释放数量:</ion-label>\n                <ion-input [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button ion-button size="large" expand="full" (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button ion-button size="large" expand="full" (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button ion-button size="large" expand="block">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object])
     ], EnemyPage);
     return EnemyPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=newEnemy.js.map
@@ -1967,6 +2014,62 @@ var DeadtreePage = /** @class */ (function () {
         var _this = this;
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        //deadCache
+        if (localStorage["deadCache"]) {
+            var tmpStorage = JSON.parse(localStorage["deadCache"]);
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                        killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddDeadtrees', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('deadCache');
+                    }, function (error) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                            killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('deadCache');
+                    }, function (msg) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+            });
+        }
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getKillMethods', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
@@ -2060,18 +2163,18 @@ var DeadtreePage = /** @class */ (function () {
                     killMethodsValue: _this.killMethodsValue, remarks: _this.remarks,
                     img: _this.imageData
                 };
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var deadCache;
+                deadCache = localStorage.getItem('deadCache');
+                if (deadCache == null) {
+                    deadCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    deadCache = JSON.parse(deadCache);
                 }
-                maintenanceCache.push(cacheData);
+                deadCache.push(cacheData);
                 //localStorage安全保存数据
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -2081,7 +2184,7 @@ var DeadtreePage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // } 
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('deadCache', JSON.stringify(deadCache));
                 //this.navCtrl.pop();
                 // confirm.dismiss()
                 __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
@@ -2128,17 +2231,17 @@ var DeadtreePage = /** @class */ (function () {
                 };
                 console.log("cacheData");
                 console.log(cacheData);
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var deadCache;
+                deadCache = localStorage.getItem('deadCache');
+                if (deadCache == null) {
+                    deadCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    deadCache = JSON.parse(deadCache);
                 }
-                maintenanceCache.push(cacheData);
+                deadCache.push(cacheData);
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -2148,7 +2251,7 @@ var DeadtreePage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // }   
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('deadCache', JSON.stringify(deadCache));
                 console.log("Hello");
                 //this.navCtrl.pop();
                 // confirm.dismiss();
@@ -2170,16 +2273,10 @@ var DeadtreePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树采伐\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n\n            </ion-item>\n            <button ion-button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button size="large" expand="block" ion-button (click)="deviceBind()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>桩径:</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树高:</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>材积:</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item>\n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button size="large" expand="full" ion-button (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n\n    <button size="large" expand="block" ion-button>\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object])
     ], DeadtreePage);
     return DeadtreePage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=newDeadTree.js.map
@@ -2246,6 +2343,64 @@ var TrackPage = /** @class */ (function () {
         ];
         this.photosum = 0;
     }
+    TrackPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        if (localStorage["TrackCache"]) {
+            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                        lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                        current: "1"
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddTrack', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('TrackCache');
+                    }, function (error) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                            lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                            current: "1"
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        localStorage.removeItem('TrackCache');
+                    }, function (msg) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                    });
+                }
+            });
+        }
+    };
     TrackPage.prototype.deviceBind = function () {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", function () { });
@@ -2294,18 +2449,18 @@ var TrackPage = /** @class */ (function () {
                     current: "1",
                     img: _this.imageData
                 };
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var TrackCache;
+                TrackCache = localStorage.getItem('TrackCache');
+                if (TrackCache == null) {
+                    TrackCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    TrackCache = JSON.parse(TrackCache);
                 }
-                maintenanceCache.push(cacheData);
+                TrackCache.push(cacheData);
                 //localStorage安全保存数据
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -2315,7 +2470,7 @@ var TrackPage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // } 
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                 //this.navCtrl.pop();
                 // confirm.dismiss()
                 // Base.popTo(this.navCtrl, 'DetailPage');
@@ -2362,17 +2517,17 @@ var TrackPage = /** @class */ (function () {
                 };
                 console.log("cacheData");
                 console.log(cacheData);
-                var maintenanceCache;
-                maintenanceCache = localStorage.getItem('maintenanceCache');
-                if (maintenanceCache == null) {
-                    maintenanceCache = [];
+                var TrackCache;
+                TrackCache = localStorage.getItem('TrackCache');
+                if (TrackCache == null) {
+                    TrackCache = [];
                 }
                 else {
-                    maintenanceCache = JSON.parse(maintenanceCache);
+                    TrackCache = JSON.parse(TrackCache);
                 }
-                maintenanceCache.push(cacheData);
+                TrackCache.push(cacheData);
                 // try{
-                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -2382,7 +2537,7 @@ var TrackPage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // }   
-                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                 console.log("Hello");
                 //this.navCtrl.pop();
                 // confirm.dismiss();
@@ -2489,16 +2644,10 @@ var TrackPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>定位信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>延时设置:(秒)</ion-label>\n                <ion-input [(ngModel)]="lateIntravl"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n\n    <button size="large" expand="full" ion-button (click)="startRecord()">\n        <ion-label>开始录制</ion-label>\n        <ion-icon name="videocam"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="stopRecord()">\n        <ion-label>停止录制</ion-label>\n        <ion-icon name="square"></ion-icon>\n    </button>\n\n\n    <button size="large" expand="full" ion-button (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n\n    <button size="large" expand="block" ion-button>\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _h || Object])
     ], TrackPage);
     return TrackPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=newTrack.js.map
