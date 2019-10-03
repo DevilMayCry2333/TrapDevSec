@@ -9,7 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
-
+import { AboutPage } from '../about/about';
 @Component({
     selector: 'app-home',
     templateUrl: 'newTrack.html'
@@ -63,6 +63,10 @@ export class TrackPage {
         ) {
             this.photosum = 0;
         }
+
+    NavToMap() {
+        this.navCtrl.push(AboutPage);
+    }
 
     ionViewDidLoad(){
         if (localStorage["TrackCache"]) {

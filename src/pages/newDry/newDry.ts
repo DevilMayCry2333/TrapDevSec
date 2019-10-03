@@ -9,6 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
+import { AboutPage } from '../about/about';
 
 @Component({
     selector: 'app-home',
@@ -65,6 +66,25 @@ export class DryPage {
         this.base.showAlert("成功", "", () => { });
     }
     
+    NavToMap() {
+        this.navCtrl.push(AboutPage);
+    }
+    bindNewId() {
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+            })
+            .subscribe(res => {
+                console.log(res);
+                this.base.showAlert("成功", "", () => { });
+            },
+                res => {
+                    console.log(res);
+                })
+    }
+
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
@@ -198,7 +218,7 @@ export class DryPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     console.log(element);
-                    if (element.id == params.id)
+                    if (element.scanId == params.id)
                         flag = 1;
                 });
                 if (flag == 1) {

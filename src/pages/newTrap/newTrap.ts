@@ -9,7 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
-
+import { AboutPage } from '../about/about';
 @Component({
     selector: 'app-home',
     templateUrl: 'newTrap.html',
@@ -59,6 +59,22 @@ export class TrapPage {
         //这里还没有实现，先弹框
         this.base.showAlert("成功","",()=>{});
     }
+
+    bindNewId() {
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+            })
+            .subscribe(res => {
+                console.log(res);
+                this.base.showAlert("成功", "", () => { });
+            },
+                res => {
+                    console.log(res);
+                })
+    }
+
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,
@@ -199,6 +215,9 @@ export class TrapPage {
 
     }
 
+    NavToMap(){
+        this.navCtrl.push(AboutPage);
+    }
     constructor(public navCtrl: NavController, 
         public qrScanner: QRScanner, 
         private base: Base, 
@@ -221,7 +240,7 @@ export class TrapPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     console.log(element);
-                    if(element.id == params.id)
+                    if(element.scanId == params.id)
                         flag=1;
                 });
                 if(flag==1){
