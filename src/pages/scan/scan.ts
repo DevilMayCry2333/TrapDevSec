@@ -164,7 +164,7 @@ export class ScanPage {
      // this.base.showAlert('提示',myid,()=>{});
       
       let geshi=true;
-            if(myid.length!=12){
+            if(myid.length!=15){
               geshi=false;
             //  this.base.showAlert('提示',myid.length,()=>{});
             }

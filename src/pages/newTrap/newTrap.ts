@@ -79,6 +79,75 @@ export class TrapPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        console.log(localStorage["maintenanceCache"]);
+        
+        if (localStorage["maintenanceCache"]){
+            var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+            tmpStorage.forEach(element => {
+                console.log(element);
+                if(element.img!=null){
+                    let options: FileUploadOptions = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId,
+                        longitude: element.longitude, latitude: element.latitude, num: element.num,
+                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                        otherNum: element.otherNum, otherType: element.otherType
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+
+
+                    //创建文件对象
+                    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+
+                    fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
+                        .then((res) => {
+                            console.log(res);
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+
+                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('maintenanceCache');
+                        }, (error) => {//发送失败(网络出错等)
+                            this.base.showAlert('提示', '提交失败', () => { });
+                        })
+                }else{
+                    console.log(element);
+                    this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId,
+                                longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                otherNum: element.otherNum, otherType: element.otherType
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('maintenanceCache');
+                        }, (msg) => {
+                                this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                }
+            });
+        }
+
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getBeetle', {},
             { headers: { token: localStorage['token'] }, 
             params: new HttpParams({ fromObject: { username: localStorage['username']} }) })
@@ -232,6 +301,7 @@ export class TrapPage {
         console.log(localStorage['username']);
         this.navCtrl.push(ScanPage,{callBack:this.callBack});
     }
+    
     submit(){
         this.have_submit = true;
         if (this.imageData != null) {
