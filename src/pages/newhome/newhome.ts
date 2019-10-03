@@ -12,6 +12,13 @@ export class NewHomePage {
     }
     username: ''
     password: ''
+    
+    ionViewDidLoad(){
+        if (localStorage['token']){
+            this.navCtl.push(switchProjectPage);
+        }
+    }
+
     login() {
         console.log(this.username);
         console.log(this.password);

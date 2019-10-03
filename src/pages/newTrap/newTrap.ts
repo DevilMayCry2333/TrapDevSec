@@ -54,6 +54,11 @@ export class TrapPage {
             last: 'Rosenburg',
         }
     ];
+
+    deviceBind(){
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功","",()=>{});
+    }
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,
@@ -80,7 +85,7 @@ export class TrapPage {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         console.log(localStorage["maintenanceCache"]);
-        
+
         if (localStorage["maintenanceCache"]){
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
             tmpStorage.forEach(element => {

@@ -79,6 +79,11 @@ export class DeadtreePage {
 
     }
 
+    deviceBind() {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", () => { });
+    }
+    
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,

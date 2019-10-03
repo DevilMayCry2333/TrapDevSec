@@ -64,6 +64,11 @@ export class TrackPage {
             this.photosum = 0;
         }
 
+    deviceBind() {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", () => { });
+    }
+    
     trapClick() {
         console.log('track');
     }

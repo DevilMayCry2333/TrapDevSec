@@ -75,6 +75,12 @@ export class EnemyPage {
                 })
 
     }
+
+    deviceBind() {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", () => { });
+    }
+    
     enemyClick() {
         console.log("enemy");
     }
