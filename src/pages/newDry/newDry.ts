@@ -29,7 +29,7 @@ export class DryPage {
     injectNum:string
     have_submit:boolean
     workContent:any[]
-    remarks:string
+    remarks:"1"
     location_ready:boolean
     users: any[] = [
         {
