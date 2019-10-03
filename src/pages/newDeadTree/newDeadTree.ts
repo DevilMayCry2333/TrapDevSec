@@ -9,6 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
+import { AboutPage } from '../about/about';
 
 @Component({
     selector: 'app-home',
@@ -60,9 +61,91 @@ export class DeadtreePage {
         public navCtrl: NavController
     ) { }
 
+    NavToMap() {
+        this.navCtrl.push(AboutPage);
+    }
+
+    bindNewId(){
+        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { scanId: this.deviceId, serial:this.deviceSerial} })
+            })
+            .subscribe(res => {
+                console.log(res);
+                this.base.showAlert("成功", "", () => { });
+            },
+                res => {
+                    console.log(res);
+                })
+    }
     ionViewDidLoad() {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        //deadCache
+        if (localStorage["deadCache"]) {
+            var tmpStorage = JSON.parse(localStorage["deadCache"]);
+            tmpStorage.forEach(element => {
+                console.log(element);
+                if (element.img != null) {
+                    let options: FileUploadOptions = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                        killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+
+
+                    //创建文件对象
+                    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+
+                    fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddDeadtrees', options)
+                        .then((res) => {
+                            console.log(res);
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+
+                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('deadCache');
+                        }, (error) => {//发送失败(网络出错等)
+                            this.base.showAlert('提示', '提交失败', () => { });
+                        })
+                } else {
+                    console.log(element);
+                    this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            localStorage.removeItem('deadCache');
+                        }, (msg) => {
+                            this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                }
+            });
+        }
+
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getKillMethods', {},
             {
                 headers: { token: localStorage['token'] },
@@ -79,6 +162,11 @@ export class DeadtreePage {
 
     }
 
+    deviceBind() {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", () => { });
+    }
+    
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,
@@ -124,7 +212,7 @@ export class DeadtreePage {
                 allDevice.forEach(element => {
                     console.log("element");
                     console.log(element);
-                    if (element.id == params.id)
+                    if (element.scanId== params.id)
                         flag = 1;
                 });
                 if (flag == 1) {
@@ -251,17 +339,17 @@ export class DeadtreePage {
                         killMethodsValue: this.killMethodsValue, remarks: this.remarks,
                         img: this.imageData
                     };
-                    let maintenanceCache: any;
-                    maintenanceCache = localStorage.getItem('maintenanceCache');
-                    if (maintenanceCache == null) {
-                        maintenanceCache = [];
+                    let deadCache: any;
+                    deadCache = localStorage.getItem('deadCache');
+                    if (deadCache == null) {
+                        deadCache = [];
                     } else {
-                        maintenanceCache = JSON.parse(maintenanceCache);
+                        deadCache = JSON.parse(deadCache);
                     }
-                    maintenanceCache.push(cacheData);
+                    deadCache.push(cacheData);
                     //localStorage安全保存数据
                     // try{
-                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
                     // }catch(oException){
                     //     if(oException.name == 'QuotaExceededError'){
                     //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -272,7 +360,7 @@ export class DeadtreePage {
                     //     }
                     // } 
 
-                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
                     Base.popTo(this.navCtrl, 'DetailPage');
@@ -327,16 +415,16 @@ export class DeadtreePage {
                     console.log("cacheData");
                     console.log(cacheData);
 
-                    let maintenanceCache: any;
-                    maintenanceCache = localStorage.getItem('maintenanceCache');
-                    if (maintenanceCache == null) {
-                        maintenanceCache = [];
+                    let deadCache: any;
+                    deadCache = localStorage.getItem('deadCache');
+                    if (deadCache == null) {
+                        deadCache = [];
                     } else {
-                        maintenanceCache = JSON.parse(maintenanceCache);
+                        deadCache = JSON.parse(deadCache);
                     }
-                    maintenanceCache.push(cacheData);
+                    deadCache.push(cacheData);
                     // try{
-                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
                     // }catch(oException){
                     //     if(oException.name == 'QuotaExceededError'){
                     //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -346,7 +434,7 @@ export class DeadtreePage {
                     //       // localStorage.setItem(key,value);
                     //     }
                     // }   
-                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
                     console.log("Hello");
 
                     //this.navCtrl.pop();

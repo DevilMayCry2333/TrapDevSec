@@ -30,51 +30,49 @@
 
             <ion-item>
                 <ion-label>线路名称:</ion-label>
-                <ion-input [(ngModel)]="accuracy"></ion-input>
+                <ion-input [(ngModel)]="lineName"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>工作内容:</ion-label>
-                <ion-input [(ngModel)]="accuracy"></ion-input>
+                <ion-input [(ngModel)]="workContent"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>延时设置:</ion-label>
-                <!-- <ion-select [compareWith]="compareWith">
-                    <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-                </ion-select> -->
+                <ion-label>延时设置:(秒)</ion-label>
+                <ion-input [(ngModel)]="lateIntravl"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>备注:</ion-label>
-                <ion-input [(ngModel)]="accuracy"></ion-input>
+                <ion-input [(ngModel)]="remarks"></ion-input>
             </ion-item>
         </ion-card-content>
     </ion-card>
 
 
-    <button size="large" expand="full">
+    <button size="large" expand="full" ion-button (click)="startRecord()">
         <ion-label>开始录制</ion-label>
         <ion-icon name="videocam"></ion-icon>
     </button>
 
-    <button size="large" expand="full">
+    <button size="large" expand="full" ion-button (click)="stopRecord()">
         <ion-label>停止录制</ion-label>
         <ion-icon name="square"></ion-icon>
     </button>
 
 
-    <button size="large" expand="full">
+    <button size="large" expand="full" ion-button (click)="takePhoto()">
         <ion-label>拍照</ion-label>
         <ion-icon name="camera"></ion-icon>
     </button>
 
-    <button size="large" expand="full">
+    <button size="large" expand="full" ion-button (click)="submit()">
         <ion-label>提交</ion-label>
     </button>
 
 
-    <button size="large" expand="block">
+    <button size="large" expand="block" ion-button (click)="NavToMap()">
         <ion-label>地图查看</ion-label>
     </button>
 
