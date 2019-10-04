@@ -139,6 +139,12 @@ export class EnemyPage {
                 }
             });
         }
+        if (localStorage["EnemyType"]) {
+            console.log(localStorage["EnemyType"]);
+            this.enemyType = JSON.parse(localStorage["EnemyType"]);
+            console.log("缓存");
+            console.log(this.enemyType);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getEnemyType', {},
             {
@@ -149,6 +155,7 @@ export class EnemyPage {
                 var c: any = res;
                 this.enemyType = Array.from(c);
                 console.log(this.enemyType);
+                localStorage['EnemyType'] = JSON.stringify(res);
             },
                 res => {
                     console.log(res);

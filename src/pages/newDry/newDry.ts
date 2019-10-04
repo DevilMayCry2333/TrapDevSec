@@ -150,6 +150,12 @@ export class DryPage {
                 }
             });
         }
+        if (localStorage["InjectWoodStatus"]) {
+            console.log(localStorage["InjectWoodStatus"]);
+            this.woodStatus = JSON.parse(localStorage["InjectWoodStatus"]);
+            console.log("缓存");
+            console.log(this.woodStatus);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWoodStatus', {},
             {
@@ -160,11 +166,19 @@ export class DryPage {
                 var c: any = res;
                 this.woodStatus = Array.from(c);
                 console.log(this.woodStatus);
+                localStorage['InjectWoodStatus'] = JSON.stringify(res);
 
             },
                 res => {
                     console.log(res);
                 })
+
+        if (localStorage["InjectWorkContent"]) {
+            console.log(localStorage["InjectWorkContent"]);
+            this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
+            console.log("缓存");
+            console.log(this.workContent);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkingContent', {},
             {
@@ -175,6 +189,7 @@ export class DryPage {
                 var c: any = res;
                 this.workContent = Array.from(c);
                 console.log(this.workContent);
+                localStorage['InjectWorkContent'] = JSON.stringify(res);
 
             },
                 res => {

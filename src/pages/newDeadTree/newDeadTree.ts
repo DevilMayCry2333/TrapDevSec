@@ -146,6 +146,12 @@ export class DeadtreePage {
             });
         }
 
+        if (localStorage["deadKill"]){
+            console.log(localStorage["deadKill"]);
+            this.killMethods = JSON.parse(localStorage["deadKill"]);
+            console.log("缓存");
+            console.log(this.killMethods);
+        }
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getKillMethods', {},
             {
                 headers: { token: localStorage['token'] },
@@ -154,7 +160,10 @@ export class DeadtreePage {
             .subscribe(res => {
                 var c: any = res;
                 this.killMethods = Array.from(c);
+                console.log("subb",res);
                 console.log(this.killMethods);
+                localStorage['deadKill'] = JSON.stringify(res);
+
             },
                 res => {
                     console.log(res);

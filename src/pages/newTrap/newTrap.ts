@@ -168,6 +168,12 @@ export class TrapPage {
                 }
             });
         }
+        if (localStorage["otherbettleType"]) {
+            console.log(localStorage["otherbettleType"]);
+            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
+            console.log("缓存");
+            console.log(this.otherbettleType);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getBeetle', {},
             { headers: { token: localStorage['token'] }, 
@@ -176,11 +182,19 @@ export class TrapPage {
                 var c:any = res;
                 this.otherbettleType = Array.from(c);
                 console.log(this.otherbettleType);
+                localStorage['otherbettleType'] = JSON.stringify(res);
 
             },
                 res => {
                     console.log(res);
                 })
+
+        if (localStorage["TrapinjectType"]) {
+            console.log(localStorage["TrapinjectType"]);
+            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
+            console.log("缓存");
+            console.log(this.injectType);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getInject', {},
             {
@@ -192,10 +206,19 @@ export class TrapPage {
                 this.injectType = Array.from(c);
                 console.log(this.injectType);
 
+                localStorage['TrapinjectType'] = JSON.stringify(res);
+
             },
                 res => {
                     console.log(res);
                 })
+
+        if (localStorage["TrapWorkContent"]) {
+            console.log(localStorage["TrapWorkContent"]);
+            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
+            console.log("缓存");
+            console.log(this.workContent);
+        }
 
         this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkContent', {},
             {
@@ -207,6 +230,8 @@ export class TrapPage {
                 this.workContent = Array.from(c);
                 console.log(this.workContent);
                 console.log(this.workContent);
+
+                localStorage['TrapWorkContent'] = JSON.stringify(res);
 
             },
                 res => {
