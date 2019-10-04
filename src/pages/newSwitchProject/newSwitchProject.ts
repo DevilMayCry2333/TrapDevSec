@@ -6,7 +6,7 @@ import { EnemyPage} from '../newEnemy/newEnemy';
 import { DeadtreePage} from '../newDeadTree/newDeadTree';
 import { TrackPage} from '../newTrack/newTrack';
 import { HttpClient, HttpParams } from "@angular/common/http";
-
+import { NewHomePage} from "../newhome/newhome";
 @Component({
     selector: 'app-switchProject',
     templateUrl: 'newSwitchProject.html',
@@ -39,6 +39,10 @@ export class switchProjectPage {
     }
     deadClick(){
         this.navCtl.push(DeadtreePage);
+    }
+    exitClick(){
+        localStorage.removeItem("token");
+        this.navCtl.push(NewHomePage);
     }
     enemyClick(){
         this.navCtl.push(EnemyPage);
