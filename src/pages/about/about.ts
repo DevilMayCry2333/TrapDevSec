@@ -226,7 +226,7 @@ export class AboutPage {
 
 
 
-    this.httpClient.get('http://39.108.184.47:8081/auth_api/user', {headers: {token: localStorage['token']}})
+    this.httpClient.get(this.base.BASE_URL + 'auth_api/user', {headers: {token: localStorage['token']}})
       .subscribe(data => {
         // console.log(d);
         var center = '';
