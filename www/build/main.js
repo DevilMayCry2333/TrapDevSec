@@ -1,14 +1,157 @@
 webpackJsonp([0],{
 
+/***/ 11:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(50);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Base = /** @class */ (function () {
+    function Base(alertCtrl, file) {
+        this.alertCtrl = alertCtrl;
+        this.file = file;
+        // BASE_URL = "http://39.108.184.47:8081/"
+        this.BASE_URL = "http://106.15.90.78:8081/";
+        this.transitionOptions = {
+            direction: 'left',
+            duration: 200,
+            slowdownfactor: 3,
+            slidePixels: 20,
+            iosdelay: 0,
+            androiddelay: 0,
+            fixedPixelsTop: 0,
+            fixedPixelsBottom: 60
+        };
+    }
+    Base.prototype.showAlert = function (title, content, func) {
+        var alert = this.alertCtrl.create({
+            title: title,
+            subTitle: content,
+            buttons: [{ text: '确认', handler: func }]
+        });
+        alert.present();
+    };
+    Base.prototype.readLogger = function (filename) {
+        this.file.readAsText(this.file.externalDataDirectory, filename).then(function (success) {
+            console.log(success);
+            return success;
+        });
+        return "";
+    };
+    Base.prototype.logger = function (info, storage) {
+        var that = this;
+        this.file.checkFile(this.file.externalDataDirectory, storage).then(function (success) {
+            console.log(success);
+            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        }, function (err) {
+            console.log(err);
+            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        });
+    };
+    Base.prototype.showPrompt = function (title, myName, func1, func2) {
+        var prompt = this.alertCtrl.create({
+            title: title,
+            inputs: [
+                {
+                    type: 'text',
+                    name: myName,
+                    placeholder: '设备id'
+                }
+            ],
+            buttons: [
+                {
+                    text: '取消',
+                    handler: func2
+                },
+                {
+                    text: '确认',
+                    handler: function (data) {
+                        func1(data);
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    Base.prototype.showConfirmAlert = function (title, content, func1, func2) {
+        var confirm = this.alertCtrl.create({
+            title: title,
+            message: content,
+            buttons: [
+                {
+                    text: '取消',
+                    handler: func2
+                },
+                {
+                    text: '确认',
+                    handler: function () {
+                        func1(confirm);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    Base.popTo = function (navCtrl, name) {
+        var views = navCtrl.getViews();
+        var target = -1;
+        for (var i = 0; i < views.length; ++i) {
+            if (views[i].name == name) {
+                target = i;
+                break;
+            }
+        }
+        if (target >= 0) {
+            navCtrl.popTo(navCtrl.getByIndex(target)).then(function () { });
+        }
+    };
+    Base = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
+    ], Base);
+    return Base;
+}());
+
+//# sourceMappingURL=base.js.js.map
+
+/***/ }),
+
 /***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(11);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22,10 +165,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var NewHomePage = /** @class */ (function () {
-    function NewHomePage(httpClient, navCtl) {
+    function NewHomePage(httpClient, navCtl, base) {
         this.httpClient = httpClient;
         this.navCtl = navCtl;
+        this.base = base;
     }
     NewHomePage.prototype.ionViewDidLoad = function () {
         if (localStorage['token']) {
@@ -36,7 +181,7 @@ var NewHomePage = /** @class */ (function () {
         var _this = this;
         console.log(this.username);
         console.log(this.password);
-        this.httpClient.post("http://192.168.1.6:8081/" + 'login', {}, { params: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: this.username, password: this.password } }) })
+        this.httpClient.post(this.base.BASE_URL + 'login', {}, { params: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: this.username, password: this.password } }) })
             .subscribe(function (res) {
             console.log(res);
             console.log(res['token']);
@@ -54,7 +199,8 @@ var NewHomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            请登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请先登录系统!</ion-card-title>\n        </ion-card-header>\n        <ion-item>\n            <ion-label>用户名</ion-label>\n            <ion-input [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label>密码</ion-label>\n            <ion-input type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button ion-button (click)="login()">登录</button>\n\n        <ion-card-content>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]])
     ], NewHomePage);
     return NewHomePage;
 }());
@@ -72,7 +218,7 @@ var NewHomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(219);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -234,8 +380,8 @@ var LocatePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(111);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -372,148 +518,6 @@ webpackEmptyAsyncContext.id = 124;
 
 /***/ }),
 
-/***/ 13:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(50);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var Base = /** @class */ (function () {
-    function Base(alertCtrl, file) {
-        this.alertCtrl = alertCtrl;
-        this.file = file;
-        // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://192.168.1.6:8081/";
-        this.transitionOptions = {
-            direction: 'left',
-            duration: 200,
-            slowdownfactor: 3,
-            slidePixels: 20,
-            iosdelay: 0,
-            androiddelay: 0,
-            fixedPixelsTop: 0,
-            fixedPixelsBottom: 60
-        };
-    }
-    Base.prototype.showAlert = function (title, content, func) {
-        var alert = this.alertCtrl.create({
-            title: title,
-            subTitle: content,
-            buttons: [{ text: '确认', handler: func }]
-        });
-        alert.present();
-    };
-    Base.prototype.readLogger = function (filename) {
-        this.file.readAsText(this.file.externalDataDirectory, filename).then(function (success) {
-            console.log(success);
-            return success;
-        });
-        return "";
-    };
-    Base.prototype.logger = function (info, storage) {
-        var that = this;
-        this.file.checkFile(this.file.externalDataDirectory, storage).then(function (success) {
-            console.log(success);
-            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
-        }, function (err) {
-            console.log(err);
-            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
-        });
-    };
-    Base.prototype.showPrompt = function (title, myName, func1, func2) {
-        var prompt = this.alertCtrl.create({
-            title: title,
-            inputs: [
-                {
-                    type: 'text',
-                    name: myName,
-                    placeholder: '设备id'
-                }
-            ],
-            buttons: [
-                {
-                    text: '取消',
-                    handler: func2
-                },
-                {
-                    text: '确认',
-                    handler: function (data) {
-                        func1(data);
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    Base.prototype.showConfirmAlert = function (title, content, func1, func2) {
-        var confirm = this.alertCtrl.create({
-            title: title,
-            message: content,
-            buttons: [
-                {
-                    text: '取消',
-                    handler: func2
-                },
-                {
-                    text: '确认',
-                    handler: function () {
-                        func1(confirm);
-                    }
-                }
-            ]
-        });
-        confirm.present();
-    };
-    Base.popTo = function (navCtrl, name) {
-        var views = navCtrl.getViews();
-        var target = -1;
-        for (var i = 0; i < views.length; ++i) {
-            if (views[i].name == name) {
-                target = i;
-                break;
-            }
-        }
-        if (target >= 0) {
-            navCtrl.popTo(navCtrl.getByIndex(target)).then(function () { });
-        }
-    };
-    Base = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
-    ], Base);
-    return Base;
-}());
-
-//# sourceMappingURL=base.js.js.map
-
-/***/ }),
-
 /***/ 166:
 /***/ (function(module, exports) {
 
@@ -543,8 +547,9 @@ webpackEmptyAsyncContext.id = 166;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newTrack_newTrack__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__newhome_newhome__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_base_js__ = __webpack_require__(11);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -563,13 +568,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var switchProjectPage = /** @class */ (function () {
-    function switchProjectPage(navCtl, httpClient) {
+    function switchProjectPage(navCtl, httpClient, base) {
         this.navCtl = navCtl;
         this.httpClient = httpClient;
+        this.base = base;
     }
     switchProjectPage.prototype.ionViewDidLoad = function () {
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getMyDevice', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
         })
@@ -604,7 +611,7 @@ var switchProjectPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            Ionic Blank\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请选择功能</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button ion-button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="exitClick()">Exit</button>\n\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_9__common_base_js__["a" /* Base */]])
     ], switchProjectPage);
     return switchProjectPage;
 }());
@@ -621,9 +628,9 @@ var switchProjectPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
@@ -766,7 +773,7 @@ var TrapPage = /** @class */ (function () {
     };
     TrapPage.prototype.bindNewId = function () {
         var _this = this;
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
         })
@@ -843,7 +850,7 @@ var TrapPage = /** @class */ (function () {
                 }
                 else {
                     console.log(element);
-                    _this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {}, {
+                    _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId,
                             longitude: element.longitude, latitude: element.latitude, num: element.num,
@@ -869,7 +876,7 @@ var TrapPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.otherbettleType);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getBeetle', {}, { headers: { token: localStorage['token'] },
+        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {}, { headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } }) })
             .subscribe(function (res) {
             var c = res;
@@ -885,7 +892,7 @@ var TrapPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.injectType);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getInject', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
         })
@@ -903,7 +910,7 @@ var TrapPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.workContent);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkContent', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
         })
@@ -1009,7 +1016,7 @@ var TrapPage = /** @class */ (function () {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-            this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {}, {
+            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId,
                     longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
@@ -1199,9 +1206,9 @@ var CoordinateConvertor = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
@@ -1345,7 +1352,7 @@ var DryPage = /** @class */ (function () {
     };
     DryPage.prototype.bindNewId = function () {
         var _this = this;
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
         })
@@ -1397,7 +1404,7 @@ var DryPage = /** @class */ (function () {
                 }
                 else {
                     console.log(element);
-                    _this.httpClient.post('http://192.168.1.6:8081/app/AddInjectData', {}, {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddInjectData', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                             accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
@@ -1421,7 +1428,7 @@ var DryPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.woodStatus);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWoodStatus', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getWoodStatus', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
         })
@@ -1439,7 +1446,7 @@ var DryPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.workContent);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkingContent', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkingContent', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
         })
@@ -1556,7 +1563,7 @@ var DryPage = /** @class */ (function () {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-            this.httpClient.post('http://192.168.1.6:8081/app/AddInjectData', {}, {
+            this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
@@ -1652,9 +1659,9 @@ var DryPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
@@ -1794,7 +1801,7 @@ var EnemyPage = /** @class */ (function () {
     };
     EnemyPage.prototype.bindNewId = function () {
         var _this = this;
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
         })
@@ -1845,7 +1852,7 @@ var EnemyPage = /** @class */ (function () {
                 }
                 else {
                     console.log(element);
-                    _this.httpClient.post('http://192.168.1.6:8081/app/AddEnemy', {}, {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddEnemy', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                             accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
@@ -1868,7 +1875,7 @@ var EnemyPage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.enemyType);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getEnemyType', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getEnemyType', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
         })
@@ -1997,7 +2004,7 @@ var EnemyPage = /** @class */ (function () {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-            this.httpClient.post('http://192.168.1.6:8081/app/AddEnemy', {}, {
+            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
@@ -2080,9 +2087,9 @@ var EnemyPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
@@ -2222,7 +2229,7 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage.prototype.bindNewId = function () {
         var _this = this;
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
         })
@@ -2275,7 +2282,7 @@ var DeadtreePage = /** @class */ (function () {
                 }
                 else {
                     console.log(element);
-                    _this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {}, {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                             accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
@@ -2299,7 +2306,7 @@ var DeadtreePage = /** @class */ (function () {
             console.log("缓存");
             console.log(this.killMethods);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getKillMethods', {}, {
+        this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {}, {
             headers: { token: localStorage['token'] },
             params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
         })
@@ -2432,7 +2439,7 @@ var DeadtreePage = /** @class */ (function () {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-            this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {}, {
+            this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
@@ -2528,8 +2535,8 @@ var DeadtreePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(31);
@@ -2624,7 +2631,7 @@ var TrackPage = /** @class */ (function () {
                 }
                 else {
                     console.log(element);
-                    _this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {}, {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                             lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
@@ -2729,7 +2736,7 @@ var TrackPage = /** @class */ (function () {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-            this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {}, {
+            this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                     lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
@@ -2813,71 +2820,76 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.startRecord = function () {
         var _this = this;
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 99999999,
-            maximumAge: 0
-        };
-        var that = this;
-        var watch = this.geolocation.watchPosition(options);
-        var longtitudeData = [];
-        var latitudeData = [];
-        var altitudeData = [];
-        var accuracyData = [];
-        this.myIntravl = setInterval(function () {
-            // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
-            // this.location_ready = true;
-            longtitudeData.push(_this.longtitude);
-            latitudeData.push(_this.latitude);
-            altitudeData.push(_this.altitude);
-            accuracyData.push(_this.accuracy);
-            _this.longtitudeData = longtitudeData;
-            _this.latitudeData = latitudeData;
-            _this.altitudeData = altitudeData;
-            _this.accuracyData = accuracyData;
-            console.log(_this.longtitude + "," + _this.latitude + "," + _this.altitude);
-        }, this.lateIntravl * 1000);
-        this.subscription = watch.subscribe(function (data) {
-            // data can be a set of coordinates, or an error (if an error occurred).
-            if (data['coords']) {
-                // this.changeDetectorRef.detectChanges();
-                // setTimeout(() => {
-                _this.latitude = String(data.coords.latitude);
-                sessionStorage['latitude'] = String(data.coords.latitude);
-                _this.longtitude = String(data.coords.longitude);
-                sessionStorage['longitude'] = String(data.coords.longitude);
-                _this.altitude = String(data.coords.altitude);
-                sessionStorage['altitude'] = String(data.coords.altitude);
-                _this.accuracy = String(data.coords.accuracy);
-                // 不是可以在这里直接判断海拔是不是null吗。。。。
-                if (data.coords.altitude == null) {
-                    _this.altitude = '-10000';
-                    sessionStorage['altitude'] = '-10000';
-                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+        if (!this.lateIntravl) {
+            this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", function () { });
+        }
+        else {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 99999999,
+                maximumAge: 0
+            };
+            var that_1 = this;
+            var watch = this.geolocation.watchPosition(options);
+            var longtitudeData_1 = [];
+            var latitudeData_1 = [];
+            var altitudeData_1 = [];
+            var accuracyData_1 = [];
+            this.myIntravl = setInterval(function () {
+                // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
+                // this.location_ready = true;
+                longtitudeData_1.push(_this.longtitude);
+                latitudeData_1.push(_this.latitude);
+                altitudeData_1.push(_this.altitude);
+                accuracyData_1.push(_this.accuracy);
+                _this.longtitudeData = longtitudeData_1;
+                _this.latitudeData = latitudeData_1;
+                _this.altitudeData = altitudeData_1;
+                _this.accuracyData = accuracyData_1;
+                console.log(_this.longtitude + "," + _this.latitude + "," + _this.altitude);
+            }, this.lateIntravl * 1000);
+            this.subscription = watch.subscribe(function (data) {
+                // data can be a set of coordinates, or an error (if an error occurred).
+                if (data['coords']) {
+                    // this.changeDetectorRef.detectChanges();
+                    // setTimeout(() => {
+                    _this.latitude = String(data.coords.latitude);
+                    sessionStorage['latitude'] = String(data.coords.latitude);
+                    _this.longtitude = String(data.coords.longitude);
+                    sessionStorage['longitude'] = String(data.coords.longitude);
+                    _this.altitude = String(data.coords.altitude);
+                    sessionStorage['altitude'] = String(data.coords.altitude);
+                    _this.accuracy = String(data.coords.accuracy);
+                    // 不是可以在这里直接判断海拔是不是null吗。。。。
+                    if (data.coords.altitude == null) {
+                        _this.altitude = '-10000';
+                        sessionStorage['altitude'] = '-10000';
+                        //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                    }
+                    // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                    // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                    // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                    // document.getElementById('sumbit_button').removeAttribute('disabled')
+                    that_1.changeDetectorRef.detectChanges();
+                    // },5);
+                    // if(this.altitude==null){
+                    //   this.location_ready = false;
+                    //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                    // }
                 }
-                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
-                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
-                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
-                // document.getElementById('sumbit_button').removeAttribute('disabled')
-                that.changeDetectorRef.detectChanges();
-                // },5);
-                // if(this.altitude==null){
-                //   this.location_ready = false;
-                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                // else{
+                //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
                 // }
-            }
-            // else{
-            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-            // }
-        }, function (res) {
-            // setTimeout(() => {
-            //    this.base.showAlert('提示','wu',()=>{});
-            _this.location_ready = false;
-            that.changeDetectorRef.detectChanges();
-            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
-            // },5);
-            // alert();
-        });
+            }, function (res) {
+                // setTimeout(() => {
+                //    this.base.showAlert('提示','wu',()=>{});
+                _this.location_ready = false;
+                that_1.changeDetectorRef.detectChanges();
+                // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                // },5);
+                // alert();
+            });
+        }
     };
     TrackPage.prototype.stopRecord = function () {
         clearInterval(this.myIntravl);
@@ -2912,10 +2924,10 @@ var TrackPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(303);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(221);
@@ -3395,10 +3407,10 @@ var PhotoUploadPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3720,8 +3732,8 @@ var MaintenancePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CachePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4211,9 +4223,9 @@ var CachePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(35);
@@ -4394,8 +4406,8 @@ var TabsPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceDataPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(11);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4549,9 +4561,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(60);
@@ -4896,10 +4908,10 @@ var DeviceBeetleFillPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScanPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(11);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5179,9 +5191,9 @@ var ScanPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

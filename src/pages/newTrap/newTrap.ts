@@ -61,7 +61,7 @@ export class TrapPage {
     }
 
     bindNewId() {
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
@@ -147,7 +147,7 @@ export class TrapPage {
                         })
                 }else{
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {},
+                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId,
@@ -175,7 +175,7 @@ export class TrapPage {
             console.log(this.otherbettleType);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getBeetle', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {},
             { headers: { token: localStorage['token'] }, 
             params: new HttpParams({ fromObject: { username: localStorage['username']} }) })
             .subscribe(res => {
@@ -196,7 +196,7 @@ export class TrapPage {
             console.log(this.injectType);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getInject', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -220,7 +220,7 @@ export class TrapPage {
             console.log(this.workContent);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkContent', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -442,7 +442,7 @@ export class TrapPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/auth_api/maintenance', {},
+            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                 {
                     headers: {token: localStorage['token']}, params:{
                         deviceId: this.deviceId,

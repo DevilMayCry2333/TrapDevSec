@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { NavController } from 'ionic-angular';
 import { switchProjectPage} from '../newSwitchProject/newSwitchProject'
+import { Base } from '../../common/base.js'
+
 @Component({
     selector: 'app-home',
     templateUrl: 'newhome.html'
 })
 export class NewHomePage {
-    constructor(private httpClient: HttpClient,private navCtl:NavController) {
+    constructor(private httpClient: HttpClient,private navCtl:NavController,
+        private base: Base) {
 
     }
     username: ''
@@ -22,7 +25,7 @@ export class NewHomePage {
     login() {
         console.log(this.username);
         console.log(this.password);
-        this.httpClient.post("http://192.168.1.6:8081/" + 'login', {},
+        this.httpClient.post(this.base.BASE_URL + 'login', {},
             { params: new HttpParams({ fromObject: { username: this.username, password: this.password } }) })
             .subscribe(res => {
                 console.log(res);

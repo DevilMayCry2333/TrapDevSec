@@ -63,7 +63,7 @@ export class EnemyPage {
         this.navCtrl.push(AboutPage);
     }
     bindNewId() {
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
@@ -121,7 +121,7 @@ export class EnemyPage {
                         })
                 } else {
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/app/AddEnemy', {},
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -146,7 +146,7 @@ export class EnemyPage {
             console.log(this.enemyType);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getEnemyType', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getEnemyType', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -378,7 +378,7 @@ export class EnemyPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/app/AddEnemy', {},
+            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,

@@ -70,7 +70,7 @@ export class DryPage {
         this.navCtrl.push(AboutPage);
     }
     bindNewId() {
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
@@ -131,7 +131,7 @@ export class DryPage {
                         })
                 } else {
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/app/AddInjectData', {},
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -157,7 +157,7 @@ export class DryPage {
             console.log(this.woodStatus);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWoodStatus', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getWoodStatus', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -180,7 +180,7 @@ export class DryPage {
             console.log(this.workContent);
         }
 
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getWorkingContent', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkingContent', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -402,7 +402,7 @@ export class DryPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/app/AddInjectData', {},
+            this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,

@@ -112,7 +112,7 @@ export class TrackPage {
                         })
                 } else {
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {},
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
@@ -227,7 +227,7 @@ export class TrackPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {},
+            this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -320,79 +320,83 @@ export class TrackPage {
     }
 
     startRecord(){
-        let options = {
-            enableHighAccuracy: true,
-            timeout: 99999999,
-            maximumAge: 0
-        };
-        let that = this
-        let watch = this.geolocation.watchPosition(options);
-        let longtitudeData: Array<string> = [];
-        let latitudeData: Array<string> = [];
-        let altitudeData: Array<string> = [];
-        let accuracyData: Array<string> = [];
+        if (!this.lateIntravl){
+            this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
+        }else{
+            let options = {
+                enableHighAccuracy: true,
+                timeout: 99999999,
+                maximumAge: 0
+            };
+            let that = this
+            let watch = this.geolocation.watchPosition(options);
+            let longtitudeData: Array<string> = [];
+            let latitudeData: Array<string> = [];
+            let altitudeData: Array<string> = [];
+            let accuracyData: Array<string> = [];
 
-        this.myIntravl = setInterval(()=>{
-            // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
-            // this.location_ready = true;
-            longtitudeData.push(this.longtitude);
-            latitudeData.push(this.latitude);
-            altitudeData.push(this.altitude);
-            accuracyData.push(this.accuracy);
-            this.longtitudeData = longtitudeData;
-            this.latitudeData = latitudeData;
-            this.altitudeData = altitudeData;
-            this.accuracyData = accuracyData;
-            console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
-        },this.lateIntravl*1000);
+            this.myIntravl = setInterval(()=>{
+                // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
+                // this.location_ready = true;
+                longtitudeData.push(this.longtitude);
+                latitudeData.push(this.latitude);
+                altitudeData.push(this.altitude);
+                accuracyData.push(this.accuracy);
+                this.longtitudeData = longtitudeData;
+                this.latitudeData = latitudeData;
+                this.altitudeData = altitudeData;
+                this.accuracyData = accuracyData;
+                console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
+            },this.lateIntravl*1000);
 
-        this.subscription = watch.subscribe((data) => {
-            // data can be a set of coordinates, or an error (if an error occurred).
-            if (data['coords']) {
-                        // this.changeDetectorRef.detectChanges();
-                // setTimeout(() => {
-                this.latitude = String(data.coords.latitude);
-                sessionStorage['latitude'] = String(data.coords.latitude);
-                this.longtitude = String(data.coords.longitude);
-                sessionStorage['longitude'] = String(data.coords.longitude);
-                this.altitude = String(data.coords.altitude);
-                sessionStorage['altitude'] = String(data.coords.altitude);
+            this.subscription = watch.subscribe((data) => {
+                // data can be a set of coordinates, or an error (if an error occurred).
+                if (data['coords']) {
+                            // this.changeDetectorRef.detectChanges();
+                    // setTimeout(() => {
+                    this.latitude = String(data.coords.latitude);
+                    sessionStorage['latitude'] = String(data.coords.latitude);
+                    this.longtitude = String(data.coords.longitude);
+                    sessionStorage['longitude'] = String(data.coords.longitude);
+                    this.altitude = String(data.coords.altitude);
+                    sessionStorage['altitude'] = String(data.coords.altitude);
 
-                this.accuracy = String(data.coords.accuracy);
+                    this.accuracy = String(data.coords.accuracy);
 
-                // 不是可以在这里直接判断海拔是不是null吗。。。。
-                if (data.coords.altitude == null) {
-                    this.altitude = '-10000';
-                    sessionStorage['altitude'] = '-10000';
-                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                    // 不是可以在这里直接判断海拔是不是null吗。。。。
+                    if (data.coords.altitude == null) {
+                        this.altitude = '-10000';
+                        sessionStorage['altitude'] = '-10000';
+                        //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
 
+                    }
+
+                    // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                    // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                    // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                    // document.getElementById('sumbit_button').removeAttribute('disabled')
+                    that.changeDetectorRef.detectChanges()
+                    // },5);
+                    // if(this.altitude==null){
+                    //   this.location_ready = false;
+                    //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                    // }
                 }
-
-                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
-                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
-                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
-                // document.getElementById('sumbit_button').removeAttribute('disabled')
-                that.changeDetectorRef.detectChanges()
-                // },5);
-                // if(this.altitude==null){
-                //   this.location_ready = false;
-                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                // else{
+                //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
                 // }
-            }
-            // else{
-            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-            // }
-        }, res => {
-            // setTimeout(() => {
-            //    this.base.showAlert('提示','wu',()=>{});
-            this.location_ready = false;
-            that.changeDetectorRef.detectChanges()
+            }, res => {
+                // setTimeout(() => {
+                //    this.base.showAlert('提示','wu',()=>{});
+                this.location_ready = false;
+                that.changeDetectorRef.detectChanges()
 
-            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
-            // },5);
+                // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                // },5);
 
-            // alert();
-        });
+                // alert();
+            });
+        }
     }
     stopRecord(){
         clearInterval(this.myIntravl);

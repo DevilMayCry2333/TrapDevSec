@@ -7,16 +7,18 @@ import { DeadtreePage} from '../newDeadTree/newDeadTree';
 import { TrackPage} from '../newTrack/newTrack';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { NewHomePage} from "../newhome/newhome";
+import { Base } from '../../common/base.js'
+
 @Component({
     selector: 'app-switchProject',
     templateUrl: 'newSwitchProject.html',
 })
 export class switchProjectPage {
 
-    constructor(private navCtl: NavController, private httpClient: HttpClient) { }
+    constructor(private navCtl: NavController, private httpClient: HttpClient, private base: Base) { }
 
     ionViewDidLoad(){
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getMyDevice', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
