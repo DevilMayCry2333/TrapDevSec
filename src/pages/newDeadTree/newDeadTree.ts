@@ -220,8 +220,11 @@ export class DeadtreePage {
                 allDevice.forEach(element => {
                     console.log("element");
                     console.log(element);
-                    if (element.scanId== params.id)
+                    console.log(element.scanId);
+                    console.log(params.id);
+                    if (element.scanId== params.id){
                         flag = 1;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;
