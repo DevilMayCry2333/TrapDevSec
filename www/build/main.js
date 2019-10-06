@@ -25,7 +25,7 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://192.168.1.6:8081/";
+        this.BASE_URL = "http://106.15.90.78:8081/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
@@ -2570,6 +2570,7 @@ var TrackPage = /** @class */ (function () {
         this.httpClient = httpClient;
         this.camera = camera;
         this.fileTransfer = fileTransfer;
+        this.recordTime = {};
         this.users = [
             {
                 id: 1,
@@ -2609,7 +2610,7 @@ var TrackPage = /** @class */ (function () {
                     options.params = {
                         longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                         lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(element.recordTime)
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -2635,7 +2636,7 @@ var TrackPage = /** @class */ (function () {
                         headers: { token: localStorage['token'] }, params: {
                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                             lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                            current: "1"
+                            current: "1", recordTime: JSON.stringify(element.recordTime)
                         }
                     })
                         .subscribe(function (res) {
@@ -2673,7 +2674,7 @@ var TrackPage = /** @class */ (function () {
             options.params = {
                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                 lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                current: "1"
+                current: "1", recordTime: JSON.stringify(this.recordTime)
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -2696,7 +2697,7 @@ var TrackPage = /** @class */ (function () {
                     longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                     lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
                     current: "1",
-                    img: _this.imageData
+                    img: _this.imageData, recordTime: JSON.stringify(_this.recordTime)
                 };
                 var TrackCache;
                 TrackCache = localStorage.getItem('TrackCache');
@@ -2740,7 +2741,7 @@ var TrackPage = /** @class */ (function () {
                 headers: { token: localStorage['token'] }, params: {
                     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                     lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                    current: "1"
+                    current: "1", recordTime: JSON.stringify(this.recordTime)
                 }
             })
                 .subscribe(function (res) {
@@ -2751,7 +2752,7 @@ var TrackPage = /** @class */ (function () {
                 var cacheData = {
                     longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                     lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                    current: "1"
+                    current: "1", recordTime: JSON.stringify(_this.recordTime)
                 };
                 console.log("cacheData");
                 console.log(cacheData);
@@ -2762,7 +2763,7 @@ var TrackPage = /** @class */ (function () {
                 var cacheData = {
                     longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                     lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                    current: "1"
+                    current: "1", recordTime: JSON.stringify(_this.recordTime)
                 };
                 console.log("cacheData");
                 console.log(cacheData);
@@ -2824,6 +2825,8 @@ var TrackPage = /** @class */ (function () {
             this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", function () { });
         }
         else {
+            this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+            console.log(this.recordTime.startTime);
             var options = {
                 enableHighAccuracy: true,
                 timeout: 99999999,
@@ -2893,6 +2896,8 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.stopRecord = function () {
         clearInterval(this.myIntravl);
+        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+        console.log(this.recordTime.endTime);
     };
     TrackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({

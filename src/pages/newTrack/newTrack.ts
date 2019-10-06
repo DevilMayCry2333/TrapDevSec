@@ -22,6 +22,7 @@ export class TrackPage {
     accuracyData: Array<string>;
     latitude: string;
     location_ready:boolean;
+    recordTime: any = {};
     photosum:number;
     imageData:null;
     have_submit:boolean;
@@ -84,7 +85,7 @@ export class TrackPage {
                     options.params = {
                         longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                         lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(element.recordTime)
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -117,7 +118,7 @@ export class TrackPage {
                             headers: { token: localStorage['token'] }, params: {
                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                                 lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                current: "1"
+                                current: "1", recordTime:JSON.stringify(element.recordTime)
                             }
                         })
                         .subscribe(res => {
@@ -155,7 +156,7 @@ export class TrackPage {
             options.params = {
                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                 lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                current: "1"
+                current: "1", recordTime: JSON.stringify(this.recordTime)
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -184,7 +185,7 @@ export class TrackPage {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                             current: "1",
-                            img: this.imageData
+                            img: this.imageData, recordTime: JSON.stringify(this.recordTime)
                         };
                         let TrackCache: any;
                         TrackCache = localStorage.getItem('TrackCache');
@@ -232,7 +233,7 @@ export class TrackPage {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     }
                 })
                 .subscribe(res => {
@@ -243,7 +244,7 @@ export class TrackPage {
                     let cacheData = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -257,7 +258,7 @@ export class TrackPage {
                     let cacheData = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -323,6 +324,9 @@ export class TrackPage {
         if (!this.lateIntravl){
             this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
         }else{
+            this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+            console.log(this.recordTime.startTime);
+
             let options = {
                 enableHighAccuracy: true,
                 timeout: 99999999,
@@ -400,6 +404,9 @@ export class TrackPage {
     }
     stopRecord(){
         clearInterval(this.myIntravl);
+        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+        console.log(this.recordTime.endTime);
+
 
 
     }
