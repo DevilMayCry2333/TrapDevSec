@@ -62,6 +62,21 @@ export class EnemyPage {
     NavToMap() {
         this.navCtrl.push(AboutPage);
     }
+    releaseNumInput(){
+        let num1 = 0;
+        if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.releaseNum) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.releaseNum);
+        this.releaseNum = '' + num1;
+        if (this.releaseNum == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+
+    }
     bindNewId() {
         this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {

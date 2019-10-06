@@ -32,7 +32,7 @@ export class TrackPage {
     subscription:Subscription;
     lineName:string;
     workContent:string;
-    lateIntravl:number;
+    lateIntravl:string;
     remarks:"1"
     users: any[] = [
         {
@@ -319,7 +319,20 @@ export class TrackPage {
         });
 
     }
-
+    LateInput(){
+        let num1 = 0;
+        if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.lateIntravl) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.lateIntravl);
+        this.lateIntravl = '' + num1;
+        if (this.lateIntravl == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+    }
     startRecord(){
         if (!this.lateIntravl){
             this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
@@ -351,7 +364,7 @@ export class TrackPage {
                 this.altitudeData = altitudeData;
                 this.accuracyData = accuracyData;
                 console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
-            },this.lateIntravl*1000);
+            },Number(this.lateIntravl)*1000);
 
             this.subscription = watch.subscribe((data) => {
                 // data can be a set of coordinates, or an error (if an error occurred).

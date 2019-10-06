@@ -478,5 +478,19 @@ export class DryPage {
     deviceSerialInput() {
         console.log(this.deviceSerial);
     }
+    injectNumInput(){
+        let num1 = 0;
+        if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.injectNum) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.injectNum);
+        this.injectNum = '' + num1;
+        if (this.injectNum == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+    }
 
 }

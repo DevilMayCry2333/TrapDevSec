@@ -40,7 +40,7 @@
 
             <ion-item>
                 <ion-label>延时设置:(秒)</ion-label>
-                <ion-input [(ngModel)]="lateIntravl"></ion-input>
+                <ion-input [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>
             </ion-item>
 
             <ion-item>

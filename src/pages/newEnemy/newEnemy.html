@@ -54,7 +54,7 @@
 
             <ion-item>
                 <ion-label>释放数量:</ion-label>
-                <ion-input [(ngModel)]="releaseNum"></ion-input>
+                <ion-input [(ngModel)]="releaseNum" (ionChange)="releaseNumInput()"></ion-input>
             </ion-item>
 
             <ion-item>

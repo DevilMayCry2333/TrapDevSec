@@ -516,6 +516,47 @@ export class TrapPage {
     deviceIdInput() {
         console.log("ok");
         console.log(this.deviceId);
+        let num1 = 0;
+        if (parseInt(this.deviceId) < 0 || parseInt(this.deviceId) == NaN) {
+            this.base.showAlert('提示', '设备ID不合法', () => { });
+        }
+        if (!this.deviceId) {
+            this.base.showAlert('提示', '设备ID不合法', () => { });
+        }
+        num1 = parseInt(this.deviceId);
+        this.deviceId = '' + num1;
+        if (this.deviceId == 'NaN') {
+            this.base.showAlert('提示', '设备ID不合法', () => { });
+        }
+
+    }
+    newBettleInput(){
+        let num1 = 0;
+        if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.newbettle) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.newbettle);
+        this.newbettle = '' + num1;
+        if (this.newbettle == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+    }
+    otherBettleInput(){
+        let num1 = 0;
+        if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.otherbettle) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.otherbettle);
+        this.otherbettle = '' + num1;
+        if (this.otherbettle == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
     }
     deviceSerialInput() {
         console.log(this.deviceSerial);
