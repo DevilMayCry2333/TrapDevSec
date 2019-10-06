@@ -25,7 +25,7 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.90.78:8081/";
+        this.BASE_URL = "http://192.168.1.6:8081/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
