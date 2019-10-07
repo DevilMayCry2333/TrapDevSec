@@ -194,6 +194,8 @@ var NewHomePage = /** @class */ (function () {
             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__["a" /* switchProjectPage */]);
         }, function (res) {
             console.log(res);
+            _this.base.showConfirmAlert('提示', '用户名或者密码错了', function () {
+            }, function () { });
         });
     };
     NewHomePage = __decorate([
@@ -5446,11 +5448,13 @@ var AboutPage = /** @class */ (function () {
                     var mk = new BMap.Marker(point2);
                     map.addOverlay(mk);
                     map.panTo(point2);
-                    // alert('您的位置：' + point.lng + ',' + point.lat);
+                    console.log(point2);
+                    // this.base.showAlert("提示", point2.lat.toString() + point2.lng.toString(), () => { });
+                    // alert('您的位置：' + point2.lng + ',' + point2.lat);
                     map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
                     addMarker(point2, i);
                     append += _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
-                    _this.base.logger(append, "about_ionViewDidLoad.txt");
+                    // this.base.logger(append,"about_ionViewDidLoad.txt");
                     i++;
                 }, 5000);
             }
@@ -5520,7 +5524,7 @@ var AboutPage = /** @class */ (function () {
         }
         console.log(this.altitude);
         var text = this.latitude + ',' + this.longitude + ',' + this.altitude;
-        this.base.logger(text, "about_ionViewDidEnter.txt");
+        // this.base.logger(text, "about_ionViewDidEnter.txt");
         if (Number(this.altitude) != -10000 && this.altitude != "" && this.altitude) {
             clearInterval(a);
             setTimeout(function () {
@@ -5534,6 +5538,8 @@ var AboutPage = /** @class */ (function () {
                 var mk = new BMap.Marker(point2);
                 map.addOverlay(mk);
                 map.panTo(point2);
+                console.log(point2);
+                // this.base.showAlert("提示",point2.lat.toString() + point2.lng.toString(),()=>{});
                 // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
                 map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
                 addMarker(point2, 0);

@@ -39,6 +39,10 @@ export class NewHomePage {
             },
                 res => {
                     console.log(res);
+                    this.base.showConfirmAlert('提示', '用户名或者密码错了', () => {
+                        
+                    }, () => { });
+
                 })
 
     }
