@@ -10,7 +10,6 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
-
 @Component({
     selector: 'app-home',
     templateUrl: 'newDeadTree.html'
@@ -66,7 +65,7 @@ export class DeadtreePage {
     }
 
     bindNewId(){
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'bindId', {},
+        this.httpClient.post(this.base.BASE_URL  + 'app/bindId', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { scanId: this.deviceId, serial:this.deviceSerial} })
@@ -126,7 +125,7 @@ export class DeadtreePage {
                         })
                 } else {
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {},
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -152,7 +151,7 @@ export class DeadtreePage {
             console.log("缓存");
             console.log(this.killMethods);
         }
-        this.httpClient.post("http://192.168.1.6:8081/app/" + 'getKillMethods', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -221,8 +220,11 @@ export class DeadtreePage {
                 allDevice.forEach(element => {
                     console.log("element");
                     console.log(element);
-                    if (element.scanId== params.id)
+                    console.log(element.scanId);
+                    console.log(params.id);
+                    if (element.scanId== params.id){
                         flag = 1;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;
@@ -389,7 +391,7 @@ export class DeadtreePage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/app/AddDeadtrees', {},
+            this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,

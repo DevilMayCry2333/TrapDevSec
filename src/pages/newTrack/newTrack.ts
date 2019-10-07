@@ -22,6 +22,7 @@ export class TrackPage {
     accuracyData: Array<string>;
     latitude: string;
     location_ready:boolean;
+    recordTime: any = {};
     photosum:number;
     imageData:null;
     have_submit:boolean;
@@ -31,7 +32,7 @@ export class TrackPage {
     subscription:Subscription;
     lineName:string;
     workContent:string;
-    lateIntravl:number;
+    lateIntravl:string;
     remarks:"1"
     users: any[] = [
         {
@@ -84,7 +85,7 @@ export class TrackPage {
                     options.params = {
                         longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                         lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(element.recordTime)
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -112,12 +113,12 @@ export class TrackPage {
                         })
                 } else {
                     console.log(element);
-                    this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {},
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                                 lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                current: "1"
+                                current: "1", recordTime:JSON.stringify(element.recordTime)
                             }
                         })
                         .subscribe(res => {
@@ -155,7 +156,7 @@ export class TrackPage {
             options.params = {
                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                 lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                current: "1"
+                current: "1", recordTime: JSON.stringify(this.recordTime)
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -184,7 +185,7 @@ export class TrackPage {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                             current: "1",
-                            img: this.imageData
+                            img: this.imageData, recordTime: JSON.stringify(this.recordTime)
                         };
                         let TrackCache: any;
                         TrackCache = localStorage.getItem('TrackCache');
@@ -227,12 +228,12 @@ export class TrackPage {
 
             // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post('http://192.168.1.6:8081/app/AddTrack', {},
+            this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     }
                 })
                 .subscribe(res => {
@@ -243,7 +244,7 @@ export class TrackPage {
                     let cacheData = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -257,7 +258,7 @@ export class TrackPage {
                     let cacheData = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1"
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -318,84 +319,107 @@ export class TrackPage {
         });
 
     }
-
+    LateInput(){
+        let num1 = 0;
+        if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.lateIntravl) {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.lateIntravl);
+        this.lateIntravl = '' + num1;
+        if (this.lateIntravl == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', () => { });
+        }
+    }
     startRecord(){
-        let options = {
-            enableHighAccuracy: true,
-            timeout: 99999999,
-            maximumAge: 0
-        };
-        let that = this
-        let watch = this.geolocation.watchPosition(options);
-        let longtitudeData: Array<string> = [];
-        let latitudeData: Array<string> = [];
-        let altitudeData: Array<string> = [];
-        let accuracyData: Array<string> = [];
+        if (!this.lateIntravl){
+            this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
+        }else{
+            this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+            console.log(this.recordTime.startTime);
 
-        this.myIntravl = setInterval(()=>{
-            // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
-            // this.location_ready = true;
-            longtitudeData.push(this.longtitude);
-            latitudeData.push(this.latitude);
-            altitudeData.push(this.altitude);
-            accuracyData.push(this.accuracy);
-            this.longtitudeData = longtitudeData;
-            this.latitudeData = latitudeData;
-            this.altitudeData = altitudeData;
-            this.accuracyData = accuracyData;
-            console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
-        },this.lateIntravl*1000);
+            let options = {
+                enableHighAccuracy: true,
+                timeout: 99999999,
+                maximumAge: 0
+            };
+            let that = this
+            let watch = this.geolocation.watchPosition(options);
+            let longtitudeData: Array<string> = [];
+            let latitudeData: Array<string> = [];
+            let altitudeData: Array<string> = [];
+            let accuracyData: Array<string> = [];
 
-        this.subscription = watch.subscribe((data) => {
-            // data can be a set of coordinates, or an error (if an error occurred).
-            if (data['coords']) {
-                        // this.changeDetectorRef.detectChanges();
-                // setTimeout(() => {
-                this.latitude = String(data.coords.latitude);
-                sessionStorage['latitude'] = String(data.coords.latitude);
-                this.longtitude = String(data.coords.longitude);
-                sessionStorage['longitude'] = String(data.coords.longitude);
-                this.altitude = String(data.coords.altitude);
-                sessionStorage['altitude'] = String(data.coords.altitude);
+            this.myIntravl = setInterval(()=>{
+                // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
+                // this.location_ready = true;
+                longtitudeData.push(this.longtitude);
+                latitudeData.push(this.latitude);
+                altitudeData.push(this.altitude);
+                accuracyData.push(this.accuracy);
+                this.longtitudeData = longtitudeData;
+                this.latitudeData = latitudeData;
+                this.altitudeData = altitudeData;
+                this.accuracyData = accuracyData;
+                console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
+            },Number(this.lateIntravl)*1000);
 
-                this.accuracy = String(data.coords.accuracy);
+            this.subscription = watch.subscribe((data) => {
+                // data can be a set of coordinates, or an error (if an error occurred).
+                if (data['coords']) {
+                            // this.changeDetectorRef.detectChanges();
+                    // setTimeout(() => {
+                    this.latitude = String(data.coords.latitude);
+                    sessionStorage['latitude'] = String(data.coords.latitude);
+                    this.longtitude = String(data.coords.longitude);
+                    sessionStorage['longitude'] = String(data.coords.longitude);
+                    this.altitude = String(data.coords.altitude);
+                    sessionStorage['altitude'] = String(data.coords.altitude);
 
-                // 不是可以在这里直接判断海拔是不是null吗。。。。
-                if (data.coords.altitude == null) {
-                    this.altitude = '-10000';
-                    sessionStorage['altitude'] = '-10000';
-                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                    this.accuracy = String(data.coords.accuracy);
 
+                    // 不是可以在这里直接判断海拔是不是null吗。。。。
+                    if (data.coords.altitude == null) {
+                        this.altitude = '-10000';
+                        sessionStorage['altitude'] = '-10000';
+                        //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+
+                    }
+
+                    // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                    // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                    // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                    // document.getElementById('sumbit_button').removeAttribute('disabled')
+                    that.changeDetectorRef.detectChanges()
+                    // },5);
+                    // if(this.altitude==null){
+                    //   this.location_ready = false;
+                    //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                    // }
                 }
-
-                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
-                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
-                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
-                // document.getElementById('sumbit_button').removeAttribute('disabled')
-                that.changeDetectorRef.detectChanges()
-                // },5);
-                // if(this.altitude==null){
-                //   this.location_ready = false;
-                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                // else{
+                //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
                 // }
-            }
-            // else{
-            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-            // }
-        }, res => {
-            // setTimeout(() => {
-            //    this.base.showAlert('提示','wu',()=>{});
-            this.location_ready = false;
-            that.changeDetectorRef.detectChanges()
+            }, res => {
+                // setTimeout(() => {
+                //    this.base.showAlert('提示','wu',()=>{});
+                this.location_ready = false;
+                that.changeDetectorRef.detectChanges()
 
-            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
-            // },5);
+                // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                // },5);
 
-            // alert();
-        });
+                // alert();
+            });
+        }
     }
     stopRecord(){
         clearInterval(this.myIntravl);
+        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+        console.log(this.recordTime.endTime);
+
 
 
     }
