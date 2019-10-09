@@ -47,12 +47,12 @@
             </ion-item>
             <ion-item>
                 <ion-label>桩径:</ion-label>
-                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>
+                <ion-input [(ngModel)]="diameter"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>树高:</ion-label>
-                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>
+                <ion-input [(ngModel)]="height"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -63,7 +63,7 @@
 
             <ion-item>
                 <ion-label>除害方式:</ion-label>
-                <ion-select [(ngModel)]="killMethodsValue">
+                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>

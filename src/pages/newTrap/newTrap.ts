@@ -26,7 +26,7 @@ export class TrapPage {
     accuracy: string
     have_submit:boolean
     imageData: null
-    remarks: "1"
+    remarks= ""
     newbettle: string
     otherbettleType:any[]
     injectType:any[]
@@ -141,10 +141,10 @@ export class TrapPage {
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('maintenanceCache');
                         }, (error) => {//发送失败(网络出错等)
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         })
                 }else{
                     console.log(element);
@@ -161,10 +161,10 @@ export class TrapPage {
                         .subscribe(res => {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('maintenanceCache');
                         }, (msg) => {
-                                this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.showAlert('提示', '提交失败', () => { });
                         });
                 }
             });
@@ -357,189 +357,276 @@ export class TrapPage {
         console.log(this.injectTypeValue);
         console.log(this.WorkContentValue);
         console.log(this.BeetleType);
-
-        if (!this.injectTypeValue){
-            console.log("this");
-            this.injectTypeValue = "0";
+        let num1 = 0;
+        if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
+            // this.base.showAlert('提示', '请输入数字', () => { });
+            this.newbettle = "";
         }
-        if (!this.WorkContentValue){
-            console.log("this");
-            this.WorkContentValue = "0";
+        if (!this.newbettle) {
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        if (!this.BeetleType){
-            console.log("this");
-            this.BeetleType = "0";
-        }
-        if (!this.newbettle){
-            this.newbettle = "0";
-        }
-        if (!this.otherbettle){
-            this.otherbettle = "0";
+        num1 = parseInt(this.newbettle);
+        this.newbettle = '' + num1;
+        if (this.newbettle == 'NaN') {
+            this.newbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
 
-        console.log(this.injectTypeValue);
-        console.log(this.WorkContentValue);
-        console.log(this.BeetleType);
-        if(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy){
-            this.base.showAlert("定位信息不准","请重试久一些",()=>{});
+        let num2 = 0;
+        if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.otherbettle) {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.otherbettle);
+        this.otherbettle = '' + num1;
+        if (this.otherbettle == 'NaN') {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+
+
+
+
+        const beizhu = this.remarks.replace(/\s/g, '');
+        const ischeck = /[^\a-\zA-\Z0-9\u4E00-\u9FA5]/;
+
+        if (ischeck.test(beizhu)) {
+            //this.remark = '';
+            this.base.showAlert('提示', '备注存在不合法字符', () => { });
         }else{
-            if (this.imageData != null) {
-                let options: FileUploadOptions = {};
-                options.fileKey = "image";
-                var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
-                    deviceId: this.deviceId,
-                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                    otherNum: this.otherbettle, otherType: this.BeetleType
-                };
-                options.headers = { token: localStorage['token'] };
-                console.log("options");
-                console.log(options);
+
+            console.log(this.injectTypeValue);
+            console.log(this.WorkContentValue);
+            console.log(this.BeetleType);
+            if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle){
+                this.base.showAlert("定位信息不准","或者是数据没有填完整哦",()=>{});
+            }else{
+                if (this.imageData != null) {
+                    let options: FileUploadOptions = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
 
 
-                //创建文件对象
-                const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                    //创建文件对象
+                    const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
-                    .then((res) => {
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+                        .then((res) => {
+                            console.log(res);
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
 
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                        this.base.showAlert('提示', '提交成功', () => { });
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
-                    }, (error) => {//发送失败(网络出错等)
-                        this.base.showAlert('提示', '提交失败', () => { });
-                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-
-                        let cacheData = {
-                            deviceId: this.deviceId,
-                            longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                            maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                            drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                            otherNum: this.otherbettle, otherType: this.BeetleType,
-                            img:this.imageData
-                        };
-                        let maintenanceCache: any;
-                        maintenanceCache = localStorage.getItem('maintenanceCache');
-                        if (maintenanceCache == null) {
-                            maintenanceCache = [];
-                        } else {
-                            maintenanceCache = JSON.parse(maintenanceCache);
-                        }
-                        maintenanceCache.push(cacheData);
-                        //localStorage安全保存数据
-                        // try{
-                        //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                        // }catch(oException){
-                        //     if(oException.name == 'QuotaExceededError'){
-                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
-                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                        //       // localStorage.clear();
-                        //       // localStorage.setItem(key,value);
-                        //     }
-                        // } 
-
-                        localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                        //this.navCtrl.pop();
-                        // confirm.dismiss()
+                            this.base.showAlert('提示', '提交成功', () => { });
                             Base.popTo(this.navCtrl, 'switchProjectPage');
-                    })
-                //.catch((error) => {//发送失败(文件不存在等)
-                // alert("出错" + error);
-                //alert('失败');
-                //console.log(error);
-                //});
-            } else {
+                        }, (error) => {//发送失败(网络出错等)
+                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
-                // var options: string = "deviceId: " + this.id +
-                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                            let cacheData = {
+                                deviceId: this.deviceId,
+                                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                otherNum: this.otherbettle, otherType: this.BeetleType,
+                                img:this.imageData
+                            };
+                            let maintenanceCache: any;
+                            maintenanceCache = localStorage.getItem('maintenanceCache');
+                            if (maintenanceCache == null) {
+                                maintenanceCache = [];
+                            } else {
+                                maintenanceCache = JSON.parse(maintenanceCache);
+                            }
+                            maintenanceCache.push(cacheData);
+                            //localStorage安全保存数据
+                            // try{
+                            //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // } 
+
+                            localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                            //this.navCtrl.pop();
+                            // confirm.dismiss()
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                        })
+                    .catch((error) => {//发送失败(文件不存在等)
+                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                    otherNum: this.otherbettle, otherType: this.BeetleType
+                                }
+                            })
+                            .subscribe(res => {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                this.base.showAlert('提示', '提交成功', () => { });
+                                let cacheData = {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                    otherNum: this.otherbettle, otherType: this.BeetleType
+                                };
+                                console.log("cacheData");
+                                console.log(cacheData);
+
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, (msg) => {
+
+                                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                                this.base.showAlert('提示', '提交失败', () => { });
+                                let cacheData = {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                    otherNum: this.otherbettle, otherType: this.BeetleType
+                                };
+                                console.log("cacheData");
+                                console.log(cacheData);
+
+                                let maintenanceCache: any;
+                                maintenanceCache = localStorage.getItem('maintenanceCache');
+                                if (maintenanceCache == null) {
+                                    maintenanceCache = [];
+                                } else {
+                                    maintenanceCache = JSON.parse(maintenanceCache);
+                                }
+                                maintenanceCache.push(cacheData);
+                                // try{
+                                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                                // }catch(oException){
+                                //     if(oException.name == 'QuotaExceededError'){
+                                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                                //         //console.log('已经超出本地存储限定大小！');
+                                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                                //       // localStorage.clear();
+                                //       // localStorage.setItem(key,value);
+                                //     }
+                                // }   
+                                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                                console.log("Hello");
+
+                                //this.navCtrl.pop();
+                                // confirm.dismiss();
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            });
+                    });
+                } else {
+
+                    // var options: string = "deviceId: " + this.id +
+                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
 
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
-                this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                    {
-                        headers: {token: localStorage['token']}, params:{
-                            deviceId: this.deviceId,
-                            longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                            maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                            drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                            otherNum: this.otherbettle, otherType: this.BeetleType
-                        }
-                    })
-                    .subscribe(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        this.base.showAlert('提示', '提交成功', () => { });
-                        let cacheData = {
-                            deviceId: this.deviceId,
-                            longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                            maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                            drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                            otherNum: this.otherbettle, otherType: this.BeetleType
-                        };
-                        console.log("cacheData");
-                        console.log(cacheData);
-                        
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
-                    }, (msg) => {
-
-                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                        this.base.showAlert('提示', '提交失败', () => { });
-                        let cacheData = {
-                            deviceId: this.deviceId,
-                            longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                            maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                            drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                            otherNum: this.otherbettle, otherType: this.BeetleType
-                        };
+                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                        {
+                            headers: {token: localStorage['token']}, params:{
+                                deviceId: this.deviceId,
+                                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                otherNum: this.otherbettle, otherType: this.BeetleType
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId,
+                                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                otherNum: this.otherbettle, otherType: this.BeetleType
+                            };
                             console.log("cacheData");
                             console.log(cacheData);
-
-                        let maintenanceCache: any;
-                        maintenanceCache = localStorage.getItem('maintenanceCache');
-                        if (maintenanceCache == null) {
-                            maintenanceCache = [];
-                        } else {
-                            maintenanceCache = JSON.parse(maintenanceCache);
-                        }
-                        maintenanceCache.push(cacheData);
-                        // try{
-                        //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                        // }catch(oException){
-                        //     if(oException.name == 'QuotaExceededError'){
-                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
-                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                        //       // localStorage.clear();
-                        //       // localStorage.setItem(key,value);
-                        //     }
-                        // }   
-                        localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                        console.log("Hello");
-
-                        //this.navCtrl.pop();
-                        // confirm.dismiss();
+                            
                             Base.popTo(this.navCtrl, 'switchProjectPage');
-                    });
+                        }, (msg) => {
 
+                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                            this.base.showAlert('提示', '提交失败', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId,
+                                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                otherNum: this.otherbettle, otherType: this.BeetleType
+                            };
+                                console.log("cacheData");
+                                console.log(cacheData);
+
+                            let maintenanceCache: any;
+                            maintenanceCache = localStorage.getItem('maintenanceCache');
+                            if (maintenanceCache == null) {
+                                maintenanceCache = [];
+                            } else {
+                                maintenanceCache = JSON.parse(maintenanceCache);
+                            }
+                            maintenanceCache.push(cacheData);
+                            // try{
+                            //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // }   
+                            localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                            console.log("Hello");
+
+                            //this.navCtrl.pop();
+                            // confirm.dismiss();
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                        });
+
+                }
             }
         }
 
