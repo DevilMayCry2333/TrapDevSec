@@ -796,7 +796,8 @@ var TrapPage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)
@@ -1540,7 +1541,8 @@ var DryPage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)
@@ -2025,7 +2027,8 @@ var EnemyPage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)
@@ -2459,7 +2462,8 @@ var DeadtreePage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)
@@ -2960,7 +2964,8 @@ var TrackPage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.base.showAlert(this.photosum, "", function () { });
         this.camera.getPicture(options).then(function (imageData) {
@@ -3672,7 +3677,8 @@ var MaintenancePage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)

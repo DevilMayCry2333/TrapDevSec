@@ -315,7 +315,8 @@ export class TrackPage {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.base.showAlert(this.photosum, "", () => { });
         this.camera.getPicture(options).then((imageData) => {
