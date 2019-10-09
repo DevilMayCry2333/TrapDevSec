@@ -307,152 +307,168 @@ export class DeadtreePage {
 
     submit() {
         this.have_submit = true;
-        if (this.imageData != null) {
-            let options: FileUploadOptions = {};
-            options.fileKey = "image";
-            var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
-            options.params = {
-                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                killMethodsValue: this.killMethodsValue, remarks: this.remarks
-            };
-            options.headers = { token: localStorage['token'] };
-            console.log("options");
-            console.log(options);
-
-            //创建文件对象
-            const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
-
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
-            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
-                .then((res) => {
-                    console.log(res);
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-
-                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-
-                    this.base.showAlert('提示', '提交成功', () => { });
-                    Base.popTo(this.navCtrl, 'DetailPage');
-                }, (error) => {//发送失败(网络出错等)
-                    this.base.showAlert('提示', '提交失败', () => { });
-                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-
-                    let cacheData = {
-                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                        accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                        killMethodsValue: this.killMethodsValue, remarks: this.remarks,
-                        img: this.imageData
-                    };
-                    let deadCache: any;
-                    deadCache = localStorage.getItem('deadCache');
-                    if (deadCache == null) {
-                        deadCache = [];
-                    } else {
-                        deadCache = JSON.parse(deadCache);
-                    }
-                    deadCache.push(cacheData);
-                    //localStorage安全保存数据
-                    // try{
-                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                    // }catch(oException){
-                    //     if(oException.name == 'QuotaExceededError'){
-                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                    //         //console.log('已经超出本地存储限定大小！');
-                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                    //       // localStorage.clear();
-                    //       // localStorage.setItem(key,value);
-                    //     }
-                    // } 
-
-                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                    //this.navCtrl.pop();
-                    // confirm.dismiss()
-                    Base.popTo(this.navCtrl, 'DetailPage');
-                })
-            //.catch((error) => {//发送失败(文件不存在等)
-            // alert("出错" + error);
-            //alert('失败');
-            //console.log(error);
-            //});
+        if (!this.diameter){
+            this.diameter = 0;
+        }
+        if (!this.height){
+            this.height = 0;
+        }
+        if (!this.volume){
+            this.volume = 0;
+        }
+        if (!this.killMethodsValue){
+            this.killMethodsValue = "0";
+        }
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy) {
+            this.base.showAlert("定位信息不准", "请重试久一些", () => { });
         } else {
+            if (this.imageData != null) {
+                let options: FileUploadOptions = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
 
-            // var options: string = "deviceId: " + this.id +
-            //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-            //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-            //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                //创建文件对象
+                const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
-            this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
-                {
-                    headers: { token: localStorage['token'] }, params: {
-                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                        accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                        killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                    }
-                })
-                .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    this.base.showAlert('提示', '提交成功', () => { });
-                    let cacheData = {
-                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                        accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                        killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                    };
-                    console.log("cacheData");
-                    console.log(cacheData);
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
+                    .then((res) => {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
 
-                    // Base.popTo(this.navCtrl, 'DetailPage');
-                }, (msg) => {
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        this.base.showAlert('提示', '提交成功', () => { });
+                        Base.popTo(this.navCtrl, 'DetailPage');
+                    }, (error) => {//发送失败(网络出错等)
+                        this.base.showAlert('提示', '提交失败', () => { });
+                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
-                    this.base.showAlert('提示', '提交失败', () => { });
-                    let cacheData = {
-                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                        accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                        killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                    };
-                    console.log("cacheData");
-                    console.log(cacheData);
+                        let cacheData = {
+                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                            accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                            killMethodsValue: this.killMethodsValue, remarks: this.remarks,
+                            img: this.imageData
+                        };
+                        let deadCache: any;
+                        deadCache = localStorage.getItem('deadCache');
+                        if (deadCache == null) {
+                            deadCache = [];
+                        } else {
+                            deadCache = JSON.parse(deadCache);
+                        }
+                        deadCache.push(cacheData);
+                        //localStorage安全保存数据
+                        // try{
+                        //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // } 
 
-                    let deadCache: any;
-                    deadCache = localStorage.getItem('deadCache');
-                    if (deadCache == null) {
-                        deadCache = [];
-                    } else {
-                        deadCache = JSON.parse(deadCache);
-                    }
-                    deadCache.push(cacheData);
-                    // try{
-                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                    // }catch(oException){
-                    //     if(oException.name == 'QuotaExceededError'){
-                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                    //         //console.log('已经超出本地存储限定大小！');
-                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                    //       // localStorage.clear();
-                    //       // localStorage.setItem(key,value);
-                    //     }
-                    // }   
-                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                    console.log("Hello");
+                        localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        //this.navCtrl.pop();
+                        // confirm.dismiss()
+                        Base.popTo(this.navCtrl, 'DetailPage');
+                    })
+                //.catch((error) => {//发送失败(文件不存在等)
+                // alert("出错" + error);
+                //alert('失败');
+                //console.log(error);
+                //});
+            } else {
 
-                    //this.navCtrl.pop();
-                    // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
-                });
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
+
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
+                this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                    {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                        }
+                    })
+                    .subscribe(res => {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        this.base.showAlert('提示', '提交成功', () => { });
+                        let cacheData = {
+                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                            accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+
+                        // Base.popTo(this.navCtrl, 'DetailPage');
+                    }, (msg) => {
+
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                        this.base.showAlert('提示', '提交失败', () => { });
+                        let cacheData = {
+                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                            accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+
+                        let deadCache: any;
+                        deadCache = localStorage.getItem('deadCache');
+                        if (deadCache == null) {
+                            deadCache = [];
+                        } else {
+                            deadCache = JSON.parse(deadCache);
+                        }
+                        deadCache.push(cacheData);
+                        // try{
+                        //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // }   
+                        localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        console.log("Hello");
+
+                        //this.navCtrl.pop();
+                        // confirm.dismiss();
+                        // Base.popTo(this.navCtrl, 'DetailPage');
+                    });
+
+            }
         }
 
     }
