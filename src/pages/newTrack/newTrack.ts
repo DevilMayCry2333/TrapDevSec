@@ -143,50 +143,137 @@ export class TrackPage {
     }
     submit() {
         this.have_submit = true;
-        console.log(this.longtitudeData.toString());
-        console.log(this.imageData);
-        if (this.imageData != null) {
-            let options: FileUploadOptions = {};
-            options.fileKey = "image";
-            var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
-            options.params = {
-                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                current: "1", recordTime: JSON.stringify(this.recordTime)
-            };
-            options.headers = { token: localStorage['token'] };
-            console.log("options");
-            console.log(options);
+        if (!this.lineName){
+            this.lineName = "0";
+        }
+        if (!this.workContent){
+            this.workContent = "0";
+        }
+        if (!this.lateIntravl){
+            this.lateIntravl = "10";
+        }
+
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy) {
+            this.base.showAlert("定位信息不准", "请重试久一些", () => { });
+        } else {
+            if (this.imageData != null) {
+                let options: FileUploadOptions = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    current: "1", recordTime: JSON.stringify(this.recordTime)
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
 
 
-            //创建文件对象
-            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                //创建文件对象
+                const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddTrack', options)
-                    .then((res) => {
-                        console.log(res);
+                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddTrack', options)
+                        .then((res) => {
+                            console.log(res);
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+
+                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            // Base.popTo(this.navCtrl, 'DetailPage');
+                        }, (error) => {//发送失败(网络出错等)
+                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+
+                            let cacheData = {
+                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                                lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                current: "1",
+                                img: this.imageData, recordTime: JSON.stringify(this.recordTime)
+                            };
+                            let TrackCache: any;
+                            TrackCache = localStorage.getItem('TrackCache');
+                            if (TrackCache == null) {
+                                TrackCache = [];
+                            } else {
+                                TrackCache = JSON.parse(TrackCache);
+                            }
+                            TrackCache.push(cacheData);
+                            //localStorage安全保存数据
+                            // try{
+                            //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // } 
+
+                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            //this.navCtrl.pop();
+                            // confirm.dismiss()
+                            // Base.popTo(this.navCtrl, 'DetailPage');
+                        })
+                //.catch((error) => {//发送失败(文件不存在等)
+                // alert("出错" + error);
+                //alert('失败');
+                //console.log(error);
+                //});
+            } else {
+
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+
+
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
+                this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
+                    {
+                        headers: { token: localStorage['token'] }, params: {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                            current: "1", recordTime: JSON.stringify(this.recordTime)
+                        }
+                    })
+                    .subscribe(res => {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
-
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => { });
-                        // Base.popTo(this.navCtrl, 'DetailPage');
-                    }, (error) => {//发送失败(网络出错等)
-                        this.base.showAlert('提示', '提交失败', () => { });
-                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-
                         let cacheData = {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                            current: "1",
-                            img: this.imageData, recordTime: JSON.stringify(this.recordTime)
+                            current: "1", recordTime: JSON.stringify(this.recordTime)
                         };
+                        console.log("cacheData");
+                        console.log(cacheData);
+
+                        // Base.popTo(this.navCtrl, 'DetailPage');
+                    }, (msg) => {
+
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                        this.base.showAlert('提示', '提交失败', () => { });
+                        let cacheData = {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                            current: "1", recordTime: JSON.stringify(this.recordTime)
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+
                         let TrackCache: any;
                         TrackCache = localStorage.getItem('TrackCache');
                         if (TrackCache == null) {
@@ -195,7 +282,6 @@ export class TrackPage {
                             TrackCache = JSON.parse(TrackCache);
                         }
                         TrackCache.push(cacheData);
-                        //localStorage安全保存数据
                         // try{
                         //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         // }catch(oException){
@@ -206,90 +292,16 @@ export class TrackPage {
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
-                        // } 
-
+                        // }   
                         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        console.log("Hello");
+
                         //this.navCtrl.pop();
-                        // confirm.dismiss()
+                        // confirm.dismiss();
                         // Base.popTo(this.navCtrl, 'DetailPage');
-                    })
-            //.catch((error) => {//发送失败(文件不存在等)
-            // alert("出错" + error);
-            //alert('失败');
-            //console.log(error);
-            //});
-        } else {
+                    });
 
-            // var options: string = "deviceId: " + this.id +
-            //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-            //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-            //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-
-
-            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
-            this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
-                {
-                    headers: { token: localStorage['token'] }, params: {
-                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1", recordTime: JSON.stringify(this.recordTime)
-                    }
-                })
-                .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    this.base.showAlert('提示', '提交成功', () => { });
-                    let cacheData = {
-                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1", recordTime: JSON.stringify(this.recordTime)
-                    };
-                    console.log("cacheData");
-                    console.log(cacheData);
-
-                    // Base.popTo(this.navCtrl, 'DetailPage');
-                }, (msg) => {
-
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                    this.base.showAlert('提示', '提交失败', () => { });
-                    let cacheData = {
-                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1", recordTime: JSON.stringify(this.recordTime)
-                    };
-                    console.log("cacheData");
-                    console.log(cacheData);
-
-                    let TrackCache: any;
-                    TrackCache = localStorage.getItem('TrackCache');
-                    if (TrackCache == null) {
-                        TrackCache = [];
-                    } else {
-                        TrackCache = JSON.parse(TrackCache);
-                    }
-                    TrackCache.push(cacheData);
-                    // try{
-                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                    // }catch(oException){
-                    //     if(oException.name == 'QuotaExceededError'){
-                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                    //         //console.log('已经超出本地存储限定大小！');
-                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                    //       // localStorage.clear();
-                    //       // localStorage.setItem(key,value);
-                    //     }
-                    // }   
-                    localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                    console.log("Hello");
-
-                    //this.navCtrl.pop();
-                    // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
-                });
-
+            }
         }
 
     }
