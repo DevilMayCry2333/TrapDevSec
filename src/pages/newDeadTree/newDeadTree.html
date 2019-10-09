@@ -47,12 +47,12 @@
             </ion-item>
             <ion-item>
                 <ion-label>桩径:</ion-label>
-                <ion-input [(ngModel)]="diameter"></ion-input>
+                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>树高:</ion-label>
-                <ion-input [(ngModel)]="height"></ion-input>
+                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>
             </ion-item>
 
             <ion-item>

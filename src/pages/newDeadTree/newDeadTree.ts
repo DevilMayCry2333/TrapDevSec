@@ -20,11 +20,11 @@ export class DeadtreePage {
     longtitude: string;
     latitude: string;
     altitude: string;
-    diameter:number;
-    height:number;
+    diameter = 0;
+    height = 0;
     have_submit:boolean;
     accuracy: string;
-    volume: number;
+    volume = 0;
     killMethodsValue:string
     killMethods:any[];
     imageData:null
