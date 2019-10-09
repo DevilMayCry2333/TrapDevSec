@@ -50,17 +50,17 @@
 
             <ion-item>
                 <ion-label>树木状态：</ion-label>
-                <ion-select [(ngModel)]="woodStatusValue">
+                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>注剂数量:</ion-label>
-                <ion-input [(ngModel)]="injectNum" (ionChange)="injectNumInput()"></ion-input>
+                <ion-input [(ngModel)]="injectNum"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>工作内容</ion-label>
-                <ion-select [(ngModel)]="workContentValue">
+                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>

@@ -29,7 +29,7 @@ export class DeadtreePage {
     killMethods:any[];
     imageData:null
     location_ready:boolean
-    remarks:"1"
+    remarks = ""
     subscription:Subscription
     users: any[] = [
         {
@@ -118,10 +118,10 @@ export class DeadtreePage {
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('deadCache');
                         }, (error) => {//发送失败(网络出错等)
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         })
                 } else {
                     console.log(element);
@@ -136,10 +136,10 @@ export class DeadtreePage {
                         .subscribe(res => {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('deadCache');
                         }, (msg) => {
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         });
                 }
             });
@@ -183,7 +183,8 @@ export class DeadtreePage {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then((imageData) => {
             // this.submit(imageData)
@@ -307,20 +308,36 @@ export class DeadtreePage {
 
     submit() {
         this.have_submit = true;
-        if (!this.diameter){
+        let num1 = 0;
+        if (this.volume < 0 || this.volume == NaN) {
             this.diameter = 0;
-        }
-        if (!this.height){
             this.height = 0;
-        }
-        if (!this.volume){
             this.volume = 0;
+
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        if (!this.killMethodsValue){
-            this.killMethodsValue = "0";
+        if (!this.volume) {
+            this.diameter = 0;
+            this.height = 0;
+            this.volume = 0;
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy) {
-            this.base.showAlert("定位信息不准", "请重试久一些", () => { });
+        num1 = this.volume;
+        
+        // if (!this.diameter){
+        //     this.diameter = 0;
+        // }
+        // if (!this.height){
+        //     this.height = 0;
+        // }
+        // if (!this.volume){
+        //     this.volume = 0;
+        // }
+        // if (!this.killMethodsValue){
+        //     this.killMethodsValue = "0";
+        // }
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+            this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
         } else {
             if (this.imageData != null) {
                 let options: FileUploadOptions = {};
@@ -391,11 +408,70 @@ export class DeadtreePage {
                         // confirm.dismiss()
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                     })
-                //.catch((error) => {//发送失败(文件不存在等)
-                // alert("出错" + error);
-                //alert('失败');
-                //console.log(error);
-                //});
+                .catch((error) => {//发送失败(文件不存在等)
+
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            this.base.showAlert('提示', '提交成功', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        }, (msg) => {
+
+                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                            this.base.showAlert('提示', '提交失败', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+
+                            let deadCache: any;
+                            deadCache = localStorage.getItem('deadCache');
+                            if (deadCache == null) {
+                                deadCache = [];
+                            } else {
+                                deadCache = JSON.parse(deadCache);
+                            }
+                            deadCache.push(cacheData);
+                            // try{
+                            //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // }   
+                            localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                            console.log("Hello");
+
+                            //this.navCtrl.pop();
+                            // confirm.dismiss();
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        });     
+                });
             } else {
 
                 // var options: string = "deviceId: " + this.id +

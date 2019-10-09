@@ -47,14 +47,14 @@
 
             <ion-item>
                 <ion-label>天敌类型:</ion-label>
-                <ion-select [(ngModel)]="predatorsTypeValue">
+                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
                 <ion-label>释放数量:</ion-label>
-                <ion-input [(ngModel)]="releaseNum" (ionChange)="releaseNumInput()"></ion-input>
+                <ion-input [(ngModel)]="releaseNum"></ion-input>
             </ion-item>
 
             <ion-item>

@@ -30,7 +30,7 @@ export class EnemyPage {
     releaseNum: string
     enemyType:any[]
     location_ready:boolean
-    remarks: "1"
+    remarks = ""
     users: any[] = [
         {
             id: 1,
@@ -130,10 +130,10 @@ export class EnemyPage {
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('enemyCache');
                         }, (error) => {//发送失败(网络出错等)
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         })
                 } else {
                     console.log(element);
@@ -203,7 +203,8 @@ export class EnemyPage {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then((imageData) => {
             // this.submit(imageData)
@@ -311,15 +312,32 @@ export class EnemyPage {
         this.navCtrl.push(ScanPage, { callBack: this.callBack });
     }
     submit() {
-        if (!this.predatorsTypeValue){
-            this.predatorsTypeValue = "0";
+        let num1 = 0;
+        if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        if (!this.releaseNum){
-            this.releaseNum = "0";
+        if (!this.releaseNum) {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
         }
+        num1 = parseInt(this.releaseNum);
+        this.releaseNum = '' + num1;
+        if (this.releaseNum == 'NaN') {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+
+        // if (!this.predatorsTypeValue){
+        //     this.predatorsTypeValue = "0";
+        // }
+        // if (!this.releaseNum){
+        //     this.releaseNum = "0";
+        // }
         this.have_submit = true;
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy) {
-            this.base.showAlert("定位信息不准", "请重试久一些", () => { });
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+            this.base.showAlert("提示", "输入数量为空或不合法", () => { });
+
         } else {
             if (this.imageData != null) {
                 let options: FileUploadOptions = {};
@@ -387,12 +405,67 @@ export class EnemyPage {
                         //this.navCtrl.pop();
                         // confirm.dismiss()
                             Base.popTo(this.navCtrl, 'switchProjectPage');
-                    })
-                //.catch((error) => {//发送失败(文件不存在等)
-                // alert("出错" + error);
-                //alert('失败');
-                //console.log(error);
-                //});
+                    }).catch((error) => {
+                        return new Promise((resolve, reject) => {
+                            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                                    }
+                                })
+                                .subscribe(res => {
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                    this.base.showAlert('提示', '提交成功', () => { });
+                                    let cacheData = {
+                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                                    };
+                                    console.log("cacheData");
+                                    console.log(cacheData);
+
+                                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                                }, (msg) => {
+
+                                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    let cacheData = {
+                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                                    };
+                                    console.log("cacheData");
+                                    console.log(cacheData);
+
+                                    let enemyCache: any;
+                                    enemyCache = localStorage.getItem('enemyCache');
+                                    if (enemyCache == null) {
+                                        enemyCache = [];
+                                    } else {
+                                        enemyCache = JSON.parse(enemyCache);
+                                    }
+                                    enemyCache.push(cacheData);
+                                    // try{
+                                    //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                                    // }catch(oException){
+                                    //     if(oException.name == 'QuotaExceededError'){
+                                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                                    //         //console.log('已经超出本地存储限定大小！');
+                                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                                    //       // localStorage.clear();
+                                    //       // localStorage.setItem(key,value);
+                                    //     }
+                                    // }   
+                                    localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                                    console.log("Hello");
+                                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                                });
+
+                        })
+
+                });
             } else {
 
                 // var options: string = "deviceId: " + this.id +

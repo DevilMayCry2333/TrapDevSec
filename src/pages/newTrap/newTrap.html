@@ -45,27 +45,27 @@
             </ion-item>
             <ion-item>
                 <ion-label>松墨天牛</ion-label>
-                <ion-input [(ngModel)]="newbettle" (ionChange)="newBettleInput()"></ion-input>
+                <ion-input [(ngModel)]="newbettle"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>其他天牛</ion-label>
-                <ion-input [(ngModel)]="otherbettle" (ionChange)="otherBettleInput()"></ion-input>
+                <ion-input [(ngModel)]="otherbettle"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>类型</ion-label>
-                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认">
+                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>药剂类型</ion-label>
-                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认">
+                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>工作内容</ion-label>
-                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认">
+                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
