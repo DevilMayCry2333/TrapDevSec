@@ -25,7 +25,7 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://localhost:8081/";
+        this.BASE_URL = "http://106.15.90.78:8081/";
         // BASE_URL = "http://192.168.1.6:8081/"
         this.transitionOptions = {
             direction: 'left',
@@ -997,7 +997,7 @@ var TrapPage = /** @class */ (function () {
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                     _this.base.showAlert('提示', '提交成功', function () { });
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -1033,7 +1033,7 @@ var TrapPage = /** @class */ (function () {
                     localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -1070,7 +1070,7 @@ var TrapPage = /** @class */ (function () {
                     };
                     console.log("cacheData");
                     console.log(cacheData);
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
                     _this.base.showAlert('提示', '提交失败', function () { });
@@ -1107,7 +1107,7 @@ var TrapPage = /** @class */ (function () {
                     console.log("Hello");
                     //this.navCtrl.pop();
                     // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
             }
         }
@@ -1600,7 +1600,7 @@ var DryPage = /** @class */ (function () {
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                     _this.base.showAlert('提示', '提交成功', function () { });
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -1634,7 +1634,7 @@ var DryPage = /** @class */ (function () {
                     localStorage.setItem('DryCache', JSON.stringify(DryCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -1667,7 +1667,7 @@ var DryPage = /** @class */ (function () {
                     };
                     console.log("cacheData");
                     console.log(cacheData);
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
                     _this.base.showAlert('提示', '提交失败', function () { });
@@ -1702,7 +1702,7 @@ var DryPage = /** @class */ (function () {
                     console.log("Hello");
                     //this.navCtrl.pop();
                     // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
             }
         }
@@ -2081,7 +2081,7 @@ var EnemyPage = /** @class */ (function () {
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                     _this.base.showAlert('提示', '提交成功', function () { });
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -2114,7 +2114,7 @@ var EnemyPage = /** @class */ (function () {
                     localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -2145,7 +2145,7 @@ var EnemyPage = /** @class */ (function () {
                     };
                     console.log("cacheData");
                     console.log(cacheData);
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
                     _this.base.showAlert('提示', '提交失败', function () { });
@@ -2177,9 +2177,7 @@ var EnemyPage = /** @class */ (function () {
                     // }   
                     localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                     console.log("Hello");
-                    //this.navCtrl.pop();
-                    // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
             }
         }
@@ -2535,7 +2533,7 @@ var DeadtreePage = /** @class */ (function () {
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                     _this.base.showAlert('提示', '提交成功', function () { });
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -2569,7 +2567,7 @@ var DeadtreePage = /** @class */ (function () {
                     localStorage.setItem('deadCache', JSON.stringify(deadCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
-                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -2602,7 +2600,7 @@ var DeadtreePage = /** @class */ (function () {
                     };
                     console.log("cacheData");
                     console.log(cacheData);
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
                     _this.base.showAlert('提示', '提交失败', function () { });
@@ -2637,7 +2635,7 @@ var DeadtreePage = /** @class */ (function () {
                     console.log("Hello");
                     //this.navCtrl.pop();
                     // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
             }
         }
@@ -2845,7 +2843,7 @@ var TrackPage = /** @class */ (function () {
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                     _this.base.showAlert('提示', '提交成功', function () { });
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -2879,7 +2877,7 @@ var TrackPage = /** @class */ (function () {
                     localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                     //this.navCtrl.pop();
                     // confirm.dismiss()
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -2912,7 +2910,7 @@ var TrackPage = /** @class */ (function () {
                     };
                     console.log("cacheData");
                     console.log(cacheData);
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
                     _this.base.showAlert('提示', '提交失败', function () { });
@@ -2947,7 +2945,7 @@ var TrackPage = /** @class */ (function () {
                     console.log("Hello");
                     //this.navCtrl.pop();
                     // confirm.dismiss();
-                    // Base.popTo(this.navCtrl, 'DetailPage');
+                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 });
             }
         }
