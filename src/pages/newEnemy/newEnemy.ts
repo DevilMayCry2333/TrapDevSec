@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
 
+
 @Component({
     selector: 'app-home',
     templateUrl: 'newEnemy.html'
@@ -351,7 +352,7 @@ export class EnemyPage {
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                         this.base.showAlert('提示', '提交成功', () => { });
-                        Base.popTo(this.navCtrl, 'DetailPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (error) => {//发送失败(网络出错等)
                         this.base.showAlert('提示', '提交失败', () => { });
                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -385,7 +386,7 @@ export class EnemyPage {
                         localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                         //this.navCtrl.pop();
                         // confirm.dismiss()
-                        Base.popTo(this.navCtrl, 'DetailPage');
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
                     })
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -421,7 +422,7 @@ export class EnemyPage {
                         console.log("cacheData");
                         console.log(cacheData);
 
-                        // Base.popTo(this.navCtrl, 'DetailPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
 
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
@@ -455,10 +456,7 @@ export class EnemyPage {
                         // }   
                         localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                         console.log("Hello");
-
-                        //this.navCtrl.pop();
-                        // confirm.dismiss();
-                        // Base.popTo(this.navCtrl, 'DetailPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     });
 
             }

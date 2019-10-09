@@ -362,7 +362,7 @@ export class DryPage {
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                         this.base.showAlert('提示', '提交成功', () => { });
-                        Base.popTo(this.navCtrl, 'DetailPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (error) => {//发送失败(网络出错等)
                         this.base.showAlert('提示', '提交失败', () => { });
                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
@@ -397,7 +397,7 @@ export class DryPage {
                         localStorage.setItem('DryCache', JSON.stringify(DryCache));
                         //this.navCtrl.pop();
                         // confirm.dismiss()
-                        Base.popTo(this.navCtrl, 'DetailPage');
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
                     })
                 //.catch((error) => {//发送失败(文件不存在等)
                 // alert("出错" + error);
@@ -435,7 +435,7 @@ export class DryPage {
                         console.log("cacheData");
                         console.log(cacheData);
 
-                        // Base.popTo(this.navCtrl, 'DetailPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
 
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
@@ -473,7 +473,7 @@ export class DryPage {
 
                         //this.navCtrl.pop();
                         // confirm.dismiss();
-                        // Base.popTo(this.navCtrl, 'DetailPage');
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
                     });
 
             }
