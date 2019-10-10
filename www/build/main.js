@@ -429,9 +429,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var switchProjectPage = /** @class */ (function () {
-    function switchProjectPage(navCtl, httpClient, base) {
+    function switchProjectPage(navCtl, alertCtrl, httpClient, base) {
         this.navCtl = navCtl;
+        this.alertCtrl = alertCtrl;
         this.httpClient = httpClient;
         this.base = base;
     }
@@ -458,8 +460,28 @@ var switchProjectPage = /** @class */ (function () {
         this.navCtl.push(__WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__["a" /* DeadtreePage */]);
     };
     switchProjectPage.prototype.exitClick = function () {
-        localStorage.removeItem("token");
-        this.navCtl.push(__WEBPACK_IMPORTED_MODULE_8__newhome_newhome__["a" /* NewHomePage */]);
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: "警告!!",
+            subTitle: "是否要退出系统???????",
+            buttons: [
+                {
+                    text: '确认', handler: function () {
+                        localStorage.removeItem("token");
+                        _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_8__newhome_newhome__["a" /* NewHomePage */]);
+                        console.log("ok");
+                    }
+                },
+                {
+                    text: '取消', handler: function () {
+                        console.log("cancel");
+                    }
+                }
+            ]
+        });
+        alert.present();
+        // localStorage.removeItem("token");
+        // this.navCtl.push(NewHomePage);
     };
     switchProjectPage.prototype.enemyClick = function () {
         this.navCtl.push(__WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__["a" /* EnemyPage */]);
@@ -471,7 +493,9 @@ var switchProjectPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            Ionic Blank\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请选择功能</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button ion-button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n            \n            <br />\n            <button ion-button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n            <br />\n            <br />\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="exitClick()" color="danger">退出按钮</button>\n\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_9__common_base_js__["a" /* Base */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_9__common_base_js__["a" /* Base */]])
     ], switchProjectPage);
     return switchProjectPage;
 }());
