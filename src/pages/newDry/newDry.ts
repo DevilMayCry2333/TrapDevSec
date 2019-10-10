@@ -320,17 +320,21 @@ export class DryPage {
     submit() {
         this.have_submit = true;
         let num1 = 0;
+        console.log(this.injectNum);
         if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         if (!this.injectNum) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         num1 = parseInt(this.injectNum);
         this.injectNum = '' + num1;
         if (this.injectNum == 'NaN') {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }

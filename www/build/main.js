@@ -1016,10 +1016,10 @@ var TrapPage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }, function (error) {
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                         var cacheData = {
                             deviceId: _this.deviceId,
@@ -1069,7 +1069,7 @@ var TrapPage = /** @class */ (function () {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                            _this.base.showAlert('提示', '提交成功', function () { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             var cacheData = {
                                 deviceId: _this.deviceId,
                                 longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
@@ -1082,7 +1082,7 @@ var TrapPage = /** @class */ (function () {
                             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                         }, function (msg) {
                             // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                            _this.base.showAlert('提示', '提交失败', function () { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                             var cacheData = {
                                 deviceId: _this.deviceId,
                                 longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
@@ -1139,7 +1139,7 @@ var TrapPage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         var cacheData = {
                             deviceId: _this.deviceId,
                             longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
@@ -1152,7 +1152,7 @@ var TrapPage = /** @class */ (function () {
                         __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }, function (msg) {
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                         var cacheData = {
                             deviceId: _this.deviceId,
                             longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
@@ -1567,10 +1567,10 @@ var DryPage = /** @class */ (function () {
                         .subscribe(function (res) {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         localStorage.removeItem('DryCache');
                     }, function (msg) {
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                     });
                 }
             });
@@ -1644,17 +1644,21 @@ var DryPage = /** @class */ (function () {
         var _this = this;
         this.have_submit = true;
         var num1 = 0;
+        console.log(this.injectNum);
         if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         if (!this.injectNum) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         num1 = parseInt(this.injectNum);
         this.injectNum = '' + num1;
         if (this.injectNum == 'NaN') {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
@@ -1696,10 +1700,10 @@ var DryPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
@@ -1745,7 +1749,7 @@ var DryPage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         var cacheData = {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
@@ -1756,7 +1760,7 @@ var DryPage = /** @class */ (function () {
                         __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }, function (msg) {
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                         var cacheData = {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
@@ -1809,7 +1813,7 @@ var DryPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
@@ -1820,7 +1824,7 @@ var DryPage = /** @class */ (function () {
                     __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
@@ -1885,16 +1889,10 @@ var DryPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            注干剂检测\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理</h3>\n            <ion-item>\n                <ion-label>设备ID：</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                \n            </ion-item>\n            <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n            <button ion-button (click)="scan()">扫码</button>\n\n            <ion-item>\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button ion-button size="large" expand="block" (click)="bindNewId()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树木状态：</ion-label>\n                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>注剂数量:</ion-label>\n                <ion-input [(ngModel)]="injectNum"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作内容</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button ion-button size="large" expand="full" (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button ion-button size="large" expand="full" (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button ion-button size="large" expand="block" (click)="NavToMap()">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object])
     ], DryPage);
     return DryPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=newDry.js.map
@@ -2126,10 +2124,10 @@ var EnemyPage = /** @class */ (function () {
                         .subscribe(function (res) {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         localStorage.removeItem('enemyCache');
                     }, function (msg) {
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                     });
                 }
             });
@@ -2247,10 +2245,10 @@ var EnemyPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
@@ -2294,7 +2292,7 @@ var EnemyPage = /** @class */ (function () {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                            _this.base.showAlert('提示', '提交成功', function () { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             var cacheData = {
                                 deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                                 accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
@@ -2304,7 +2302,7 @@ var EnemyPage = /** @class */ (function () {
                             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                         }, function (msg) {
                             // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                            _this.base.showAlert('提示', '提交失败', function () { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                             var cacheData = {
                                 deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                                 accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
@@ -2354,7 +2352,7 @@ var EnemyPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
@@ -2364,7 +2362,7 @@ var EnemyPage = /** @class */ (function () {
                     __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
@@ -3074,10 +3072,10 @@ var TrackPage = /** @class */ (function () {
                         .subscribe(function (res) {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         localStorage.removeItem('TrackCache');
                     }, function (msg) {
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                     });
                 }
             });
@@ -3131,10 +3129,10 @@ var TrackPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (error) {
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                     var cacheData = {
                         longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
@@ -3180,7 +3178,7 @@ var TrackPage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        _this.base.showAlert('提示', '提交成功', function () { });
+                        // this.base.showAlert('提示', '提交成功', () => { });
                         var cacheData = {
                             longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                             lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
@@ -3191,7 +3189,7 @@ var TrackPage = /** @class */ (function () {
                         __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }, function (msg) {
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.showAlert('提示', '提交失败', () => { });
                         var cacheData = {
                             longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                             lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
@@ -3244,7 +3242,7 @@ var TrackPage = /** @class */ (function () {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
+                    // this.base.showAlert('提示', '提交成功', () => { });
                     var cacheData = {
                         longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                         lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
@@ -3255,7 +3253,7 @@ var TrackPage = /** @class */ (function () {
                     __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.showAlert('提示', '提交失败', () => { });
                     var cacheData = {
                         longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                         lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
