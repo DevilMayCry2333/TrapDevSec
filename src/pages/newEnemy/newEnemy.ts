@@ -10,7 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
-
+import { EnemyQueryPage} from '../enemy-query/enemy-query';
 
 @Component({
     selector: 'app-home',
@@ -147,10 +147,10 @@ export class EnemyPage {
                         .subscribe(res => {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('enemyCache');
                         }, (msg) => {
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         });
                 }
             });
@@ -184,6 +184,19 @@ export class EnemyPage {
         this.base.showAlert("成功", "", () => { });
     }
     
+    NavToQuery(){
+        // localStorage.setItem("queryEnemyID",this.deviceId);
+        if (this.deviceId) {
+            localStorage['queryEnemyID'] = this.deviceId;
+            this.navCtrl.push(EnemyQueryPage);
+        }else{
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        }
+        // localStorage["queryEnemyID"] = this.deviceId.toString();
+        
+
+        
+    }
     enemyClick() {
         console.log("enemy");
     }

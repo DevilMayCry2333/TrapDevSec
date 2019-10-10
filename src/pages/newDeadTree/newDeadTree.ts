@@ -10,6 +10,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
+import { DeadTreesQueryPage} from '../dead-trees-query/dead-trees-query';
+
 @Component({
     selector: 'app-home',
     templateUrl: 'newDeadTree.html'
@@ -20,11 +22,11 @@ export class DeadtreePage {
     longtitude: string;
     latitude: string;
     altitude: string;
-    diameter:number;
-    height:number;
+    diameter = 0;
+    height = 0;
     have_submit:boolean;
     accuracy: string;
-    volume: number;
+    volume = 0;
     killMethodsValue:string
     killMethods:any[];
     imageData:null
@@ -174,7 +176,15 @@ export class DeadtreePage {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
     }
-    
+    NavToQuery(){
+        if (this.deviceId) {
+            localStorage["DeadMotherDeviceId"] = this.deviceId;
+            this.navCtrl.push(DeadTreesQueryPage);
+        } else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        }
+
+    }
     takePhoto() {
         const options: CameraOptions = {
             quality: 10,

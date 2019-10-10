@@ -47,12 +47,12 @@
             </ion-item>
             <ion-item>
                 <ion-label>桩径:</ion-label>
-                <ion-input [(ngModel)]="diameter"></ion-input>
+                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>树高:</ion-label>
-                <ion-input [(ngModel)]="height"></ion-input>
+                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -87,5 +87,10 @@
     <button size="large" expand="block" ion-button (click)="NavToMap()">
         <ion-label>地图查看</ion-label>
     </button>
+
+    <button size="large" expand="block" ion-button (click)="NavToQuery()">
+        <ion-label>查询</ion-label>
+    </button>
+
 
 </ion-content>

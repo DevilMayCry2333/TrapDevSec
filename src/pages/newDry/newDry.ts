@@ -10,7 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
-
+import { InjectQueryPage} from '../inject-query/inject-query';
 @Component({
     selector: 'app-home',
     templateUrl: 'newDry.html'
@@ -142,10 +142,10 @@ export class DryPage {
                         .subscribe(res => {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('DryCache');
                         }, (msg) => {
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         });
                 }
             });
@@ -311,6 +311,15 @@ export class DryPage {
         });
     };
     
+    NavToQuery(){
+        if(this.deviceId){
+            localStorage["InjectDeviceId"] = this.deviceId;
+            this.navCtrl.push(InjectQueryPage);
+        }else{
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        }
+
+    }
     scan() {
         console.log("scan");
         console.log(localStorage['username']);
@@ -320,17 +329,21 @@ export class DryPage {
     submit() {
         this.have_submit = true;
         let num1 = 0;
+        console.log(this.injectNum);
         if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         if (!this.injectNum) {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         num1 = parseInt(this.injectNum);
         this.injectNum = '' + num1;
         if (this.injectNum == 'NaN') {
+            console.log("injectNum不合法");
             this.injectNum = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }

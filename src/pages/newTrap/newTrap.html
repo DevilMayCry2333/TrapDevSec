@@ -45,11 +45,11 @@
             </ion-item>
             <ion-item>
                 <ion-label>松墨天牛</ion-label>
-                <ion-input [(ngModel)]="newbettle"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>其他天牛</ion-label>
-                <ion-input [(ngModel)]="otherbettle"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>类型</ion-label>
@@ -76,6 +76,8 @@
             <button ion-button (click)="takePhoto()">拍照</button>
             <button ion-button (click)="submit()">提交</button>
             <button ion-button (click)="NavToMap()">地图查看</button>
+            <button ion-button (click)="NavToQuery()">查询</button>
+
         </ion-card-content>
     </ion-card>
 

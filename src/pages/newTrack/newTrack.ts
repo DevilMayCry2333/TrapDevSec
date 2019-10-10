@@ -124,10 +124,10 @@ export class TrackPage {
                         .subscribe(res => {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            // this.base.showAlert('提示', '提交成功', () => { });
                             localStorage.removeItem('TrackCache');
                         }, (msg) => {
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            // this.base.showAlert('提示', '提交失败', () => { });
                         });
                 }
             });
