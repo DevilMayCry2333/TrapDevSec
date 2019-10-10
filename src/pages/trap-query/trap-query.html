@@ -15,4 +15,31 @@
 
 <ion-content padding>
   <h1>测试</h1>
+  <div style="width: 100%">
+    <table border="1" style="table-layout:fixed" width="100%">
+      <thead>
+        <th>批次</th>
+        <th>经度</th>
+        <th>纬度</th>
+        <th>数量</th>
+        <th>工作内容</th>
+        <th>药剂类型</th>
+        <th>日期</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataList">
+          <th>{{item.batch}}</th>
+          <th>{{item.longitude}}</th>
+          <th>{{item.latitude}}</th>
+          <th>{{item.num}}</th>
+          <th>{{item.workingContent}}</th>
+          <th>{{item.drug}}</th>
+          <th>{{item.date}}</th>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  
+
 </ion-content>

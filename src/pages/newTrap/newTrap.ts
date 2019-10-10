@@ -10,6 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
+import { TrapQueryPage} from '../trap-query/trap-query';
 @Component({
     selector: 'app-home',
     templateUrl: 'newTrap.html',
@@ -58,6 +59,17 @@ export class TrapPage {
     deviceBind(){
         //这里还没有实现，先弹框
         this.base.showAlert("成功","",()=>{});
+    }
+
+    NavToQuery(){
+        if(this.deviceId){
+            localStorage["TrapDeviceId"] = this.deviceId;
+            this.navCtrl.push(TrapQueryPage);
+        }else{
+            this.base.showAlert("提示","请先扫码或输入数字的设备ID!!!",()=>{});
+            
+        }
+
     }
 
     bindNewId() {

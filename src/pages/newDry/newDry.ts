@@ -10,7 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
-
+import { InjectQueryPage} from '../inject-query/inject-query';
 @Component({
     selector: 'app-home',
     templateUrl: 'newDry.html'
@@ -311,6 +311,15 @@ export class DryPage {
         });
     };
     
+    NavToQuery(){
+        if(this.deviceId){
+            localStorage["InjectDeviceId"] = this.deviceId;
+            this.navCtrl.push(InjectQueryPage);
+        }else{
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        }
+
+    }
     scan() {
         console.log("scan");
         console.log(localStorage['username']);

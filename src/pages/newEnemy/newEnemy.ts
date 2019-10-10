@@ -185,7 +185,16 @@ export class EnemyPage {
     }
     
     NavToQuery(){
-        this.navCtrl.push(EnemyQueryPage);
+        // localStorage.setItem("queryEnemyID",this.deviceId);
+        if (this.deviceId) {
+            localStorage['queryEnemyID'] = this.deviceId;
+            this.navCtrl.push(EnemyQueryPage);
+        }else{
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        }
+        // localStorage["queryEnemyID"] = this.deviceId.toString();
+        
+
         
     }
     enemyClick() {
