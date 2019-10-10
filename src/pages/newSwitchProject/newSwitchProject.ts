@@ -8,6 +8,7 @@ import { TrackPage} from '../newTrack/newTrack';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { NewHomePage} from "../newhome/newhome";
 import { Base } from '../../common/base.js'
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'app-switchProject',
@@ -15,7 +16,9 @@ import { Base } from '../../common/base.js'
 })
 export class switchProjectPage {
 
-    constructor(private navCtl: NavController, private httpClient: HttpClient, private base: Base) { }
+    constructor(private navCtl: NavController, 
+        private alertCtrl: AlertController,
+        private httpClient: HttpClient, private base: Base) { }
 
     ionViewDidLoad(){
         this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {},
@@ -43,8 +46,29 @@ export class switchProjectPage {
         this.navCtl.push(DeadtreePage);
     }
     exitClick(){
-        localStorage.removeItem("token");
-        this.navCtl.push(NewHomePage);
+        const alert = this.alertCtrl.create({
+            title: "警告!!",
+            subTitle: "是否要退出系统???????",
+            buttons: [
+                {
+                    text: '确认', handler: () => {
+                    localStorage.removeItem("token");
+                    this.navCtl.push(NewHomePage);
+                        console.log("ok");
+                    }
+                },
+                {
+                    text: '取消', handler: () => {
+                        console.log("cancel");
+                    }
+                }
+
+        ]
+        });
+        alert.present();
+
+        // localStorage.removeItem("token");
+        // this.navCtl.push(NewHomePage);
     }
     enemyClick(){
         this.navCtl.push(EnemyPage);
