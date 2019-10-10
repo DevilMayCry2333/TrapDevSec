@@ -186,10 +186,10 @@ export class TrackPage {
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                            // this.base.showAlert('提示', '提交成功', () => { });
+                            this.base.showAlert('提示', '提交成功', () => { });
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (error) => {//发送失败(网络出错等)
-                            // this.base.showAlert('提示', '提交失败', () => { });
+                            this.base.showAlert('提示', '提交失败', () => { });
                             // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                             let cacheData = {
@@ -237,7 +237,7 @@ export class TrackPage {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                            // this.base.showAlert('提示', '提交成功', () => { });
+                            this.base.showAlert('提示', '提交成功', () => { });
                             let cacheData = {
                                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                                 lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
@@ -251,7 +251,7 @@ export class TrackPage {
 
                             // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                            // this.base.showAlert('提示', '提交失败', () => { });
+                            this.base.showAlert('提示', '提交失败', () => { });
                             let cacheData = {
                                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                                 lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
@@ -310,7 +310,7 @@ export class TrackPage {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        // this.base.showAlert('提示', '提交成功', () => { });
+                        this.base.showAlert('提示', '提交成功', () => { });
                         let cacheData = {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
@@ -324,7 +324,7 @@ export class TrackPage {
 
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                        // this.base.showAlert('提示', '提交失败', () => { });
+                        this.base.showAlert('提示', '提交失败', () => { });
                         let cacheData = {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
