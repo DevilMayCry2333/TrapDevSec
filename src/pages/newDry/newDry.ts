@@ -231,10 +231,12 @@ export class DryPage {
                 console.log(allDevice[0]);
 
                 var flag = 0;
+                console.log(params.id.charAt(8) === "2");
+
                 allDevice.forEach(element => {
                     console.log("element");
-                    console.log(element);
-                    if (element.scanId == params.id)
+                    // console.log(element);
+                    if (element.scanId == params.id && params.id.charAt(8)=='2')
                         flag = 1;
                 });
                 if (flag == 1) {

@@ -275,10 +275,11 @@ export class TrapPage {
                 console.log(allDevice[0]);
 
                 var flag = 0;
+                console.log(params.id.charAt(8) == '1');
                 allDevice.forEach(element => {
                     console.log("element");
-                    console.log(element);
-                    if(element.scanId == params.id)
+                    // console.log(element);
+                    if (element.scanId == params.id && params.id.charAt(8) == '1')
                         flag=1;
                 });
                 if(flag==1){

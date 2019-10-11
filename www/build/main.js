@@ -581,10 +581,11 @@ var TrapPage = /** @class */ (function () {
                     console.log("Array");
                     console.log(allDevice[0]);
                     var flag = 0;
+                    console.log(params.id.charAt(8) == '1');
                     allDevice.forEach(function (element) {
                         console.log("element");
-                        console.log(element);
-                        if (element.scanId == params.id)
+                        // console.log(element);
+                        if (element.scanId == params.id && params.id.charAt(8) == '1')
                             flag = 1;
                     });
                     if (flag == 1) {
@@ -1393,10 +1394,11 @@ var DryPage = /** @class */ (function () {
                     console.log("Array");
                     console.log(allDevice[0]);
                     var flag = 0;
+                    console.log(params.id.charAt(8) === "2");
                     allDevice.forEach(function (element) {
                         console.log("element");
-                        console.log(element);
-                        if (element.scanId == params.id)
+                        // console.log(element);
+                        if (element.scanId == params.id && params.id.charAt(8) == '2')
                             flag = 1;
                     });
                     if (flag == 1) {
@@ -2036,7 +2038,7 @@ var EnemyPage = /** @class */ (function () {
                     allDevice.forEach(function (element) {
                         console.log("element");
                         console.log(element);
-                        if (element.scanId == params.id)
+                        if (element.scanId == params.id && params.id.charAt(8) == '3')
                             flag = 1;
                     });
                     if (flag == 1) {
@@ -2651,7 +2653,7 @@ var DeadtreePage = /** @class */ (function () {
                         console.log(element);
                         console.log(element.scanId);
                         console.log(params.id);
-                        if (element.scanId == params.id) {
+                        if (element.scanId == params.id && params.id.charAt(8) == '4') {
                             flag = 1;
                         }
                     });
@@ -6326,8 +6328,8 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.90.78:8081/";
-        // BASE_URL = "http://192.168.2.109:8081/"
+        // BASE_URL = "http://106.15.90.78:8081/"
+        this.BASE_URL = "http://192.168.2.109:8081/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
@@ -6435,10 +6437,9 @@ var Base = /** @class */ (function () {
     };
     Base = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
     ], Base);
     return Base;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=base.js.js.map
