@@ -56,11 +56,6 @@ export class TrapPage {
         }
     ];
 
-    deviceBind(){
-        //这里还没有实现，先弹框
-        this.base.showAlert("成功","",()=>{});
-    }
-
     NavToQuery(){
         if(this.deviceId){
             localStorage["TrapDeviceId"] = this.deviceId;
@@ -84,6 +79,21 @@ export class TrapPage {
             },
                 res => {
                     console.log(res);
+                    console.log("失败");
+                    var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
+                    let BindIdCache: any;
+                    BindIdCache = localStorage.getItem('trapBind');
+
+                    if (BindIdCache == null) {
+                        BindIdCache = [];
+                    } else {
+                        BindIdCache = JSON.parse(BindIdCache);
+                    }
+                    BindIdCache.push(transferParam);
+
+                    localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+
+
                 })
     }
 
@@ -114,6 +124,37 @@ export class TrapPage {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         console.log(localStorage["maintenanceCache"]);
+        var i = 0;
+
+        console.log(localStorage["trapBind"]);
+        var tmpStorage2 = [];
+        tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+
+        console.log(tmpStorage2.length);
+        if (localStorage["trapBind"]){
+            // localStorage.removeItem("trapBind");
+            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+            tmpStorage2.forEach(element => {
+                this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                    {
+                        headers: { token: localStorage['token'] },
+                        params: new HttpParams({ fromObject: { scanId: element.deviceId, serial: element.deviceSerial } })
+                    })
+                    .subscribe(res => {
+                        console.log(res);
+                        i++;
+                        this.base.showAlert("成功绑定了", "", () => { });
+                    },
+                        res => {
+
+                        })
+
+                })
+
+            if (tmpStorage2.length == i){
+                localStorage.removeItem("trapBind");
+            }
+        }
 
         if (localStorage["maintenanceCache"]){
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
