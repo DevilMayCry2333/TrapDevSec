@@ -43,6 +43,8 @@ import { DeadTreesQueryPage} from '../pages/dead-trees-query/dead-trees-query';
 import { InjectQueryPage} from '../pages/inject-query/inject-query';
 import { EnemyQueryPage} from '../pages/enemy-query/enemy-query';
 import { TrackQueryPage} from '../pages/track-query/track-query';
+import { Base64 } from '@ionic-native/base64';
+
 
 class MyErrorHandler implements ErrorHandler {
   constructor(
@@ -141,6 +143,7 @@ class MyErrorHandler implements ErrorHandler {
     CoordinateConvertor,
     NativePageTransitions,
     Diagnostic,
+    Base64,
     Camera,
     File,
     FileTransfer,
