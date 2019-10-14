@@ -24,6 +24,8 @@ export class TrapPage {
     injectTypeValue:string
     WorkContentValue:string
     altitude: string
+    isDisabled = false;
+
     accuracy: string
     have_submit:boolean
     imageData: null
@@ -127,11 +129,14 @@ export class TrapPage {
         var i = 0;
 
         console.log(localStorage["trapBind"]);
-        var tmpStorage2 = [];
-        tmpStorage2 = JSON.parse(localStorage["trapBind"]);
 
-        console.log(tmpStorage2.length);
         if (localStorage["trapBind"]){
+            var tmpStorage2 = [];
+
+            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+
+            console.log(tmpStorage2.length);
+            
             // localStorage.removeItem("trapBind");
             tmpStorage2 = JSON.parse(localStorage["trapBind"]);
             tmpStorage2.forEach(element => {
@@ -320,7 +325,7 @@ export class TrapPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     // console.log(element);
-                    if (element.scanId == params.id && params.id.charAt(8) == '1')
+                    if ((element.scanId == params.id && params.id.charAt(8) == '1') || params.id.charAt(8) == '6')
                         flag=1;
                 });
                 if(flag==1){
@@ -407,6 +412,8 @@ export class TrapPage {
     }
     
     submit(){
+        this.isDisabled = true;
+
         this.have_submit = true;
         console.log(this.injectTypeValue);
         console.log(this.WorkContentValue);

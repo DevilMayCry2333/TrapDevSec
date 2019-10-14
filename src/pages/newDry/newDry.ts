@@ -236,7 +236,7 @@ export class DryPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     // console.log(element);
-                    if (element.scanId == params.id && params.id.charAt(8)=='2')
+                    if ((element.scanId == params.id && params.id.charAt(8) == '2') || params.id.charAt(8) == '7')
                         flag = 1;
                 });
                 if (flag == 1) {

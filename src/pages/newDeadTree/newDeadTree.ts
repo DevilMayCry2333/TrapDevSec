@@ -233,7 +233,7 @@ export class DeadtreePage {
                     console.log(element);
                     console.log(element.scanId);
                     console.log(params.id);
-                    if (element.scanId == params.id && params.id.charAt(8) == '4'){
+                    if ((element.scanId == params.id && params.id.charAt(8) == '4') || params.id.charAt(8) == '9'){
                         flag = 1;
                     }
                 });
