@@ -261,25 +261,28 @@ export class TrapPage {
                         })
                         .catch((error) => {
                             //发送失败(文件不存在等)
-                            this.base.showAlert("图片提交成功","提交成功",()=>{});
+                            this.base.showAlert("图片不存在!", "图片不存在", () => { });
                             console.log(error);
-                            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                                {
-                                    headers: { token: localStorage['token'] }, params: {
-                                        deviceId: element.deviceId,
-                                        longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                        otherNum: element.otherNum, otherType: element.otherType
-                                    }
-                                })
-                                .subscribe(res => {
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
-                                    // this.base.showAlert('提示', '提交成功', () => { });
-                                    localStorage.removeItem('maintenanceCache');
-                                }, (msg) => {
-                                    // this.base.showAlert('提示', '提交失败', () => { });
+
+                            return new Promise((resolve, reject) => {
+                                this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                                    {
+                                        headers: { token: localStorage['token'] }, params: {
+                                            deviceId: element.deviceId,
+                                            longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                            otherNum: element.otherNum, otherType: element.otherType
+                                        }
+                                    })
+                                .toPromise().then(res => {
+                                    console.log(res);
+
+                                    this.base.showAlert("图片提交成功", "提交成功", () => { });
+                                    },msg=>{
+                                        console.log(msg);
+                                    })
+
                                 });
                         });
 
