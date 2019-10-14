@@ -70,17 +70,43 @@ export class TrapPage {
     }
 
     bindNewId() {
+
+        // this.base.showAlert("提交失败", "提交失败", () => { });
+        // console.log(msg);
+        // console.log("失败");
+        // var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+        // let BindIdCache: any;
+        // BindIdCache = localStorage.getItem('trapBind');
+
+        // if (BindIdCache == null) {
+        //     BindIdCache = [];
+        // } else {
+        //     BindIdCache = JSON.parse(BindIdCache);
+        // }
+        // BindIdCache.push(transferParam);
+
+        // localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+
         this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {
-                headers: { token: localStorage['token'] },
-                params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+                headers: { token: localStorage['token'] }, params: {
+                    scanId: this.deviceId,serial:this.deviceSerial
+                }
             })
             .subscribe(res => {
-                console.log(res);
-                this.base.showAlert("成功", "", () => { });
-            },
-                res => {
-                    console.log(res);
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                this.base.showAlert('提示', '提交成功', () => { });
+                console.log("cacheData");
+
+                Base.popTo(this.navCtrl, 'switchProjectPage');
+            }, (msg) => {
+
+                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                    this.base.showAlert("提交失败","提交失败",()=>{});
+                    console.log(msg);
                     console.log("失败");
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
@@ -94,9 +120,27 @@ export class TrapPage {
                     BindIdCache.push(transferParam);
 
                     localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+            });
 
 
-                })
+
+        // this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+        //     {
+        //         headers: { token: localStorage['token'] },
+        //         params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+        //     })
+        //     .subscribe(res => {
+        //         console.log(res);
+        //         this.base.showAlert("成功", "", () => { });
+        //     },(msg) => {
+        //         console.log("===提交失败====");
+
+        //             console.log(msg);
+
+
+
+
+        //         })
     }
 
     takePhoto() {
@@ -126,45 +170,56 @@ export class TrapPage {
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         console.log(localStorage["maintenanceCache"]);
-        var i = 0;
-
+        console.log("=====绑定缓存=====");
         console.log(localStorage["trapBind"]);
-
+        
+        var i = 0;
         if (localStorage["trapBind"]){
             var tmpStorage2 = [];
 
             tmpStorage2 = JSON.parse(localStorage["trapBind"]);
 
             console.log(tmpStorage2.length);
-            
             // localStorage.removeItem("trapBind");
-            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+
+            console.log(tmpStorage2);
+
             tmpStorage2.forEach(element => {
+
+                console.log("===开始===");
+
+                console.log(element.scanId);
+                console.log(element.serial);
+
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
                         headers: { token: localStorage['token'] },
-                        params: new HttpParams({ fromObject: { scanId: element.deviceId, serial: element.deviceSerial } })
+                        params: new HttpParams({ fromObject: { scanId: element.scanId, serial: element.serial } })
                     })
                     .subscribe(res => {
                         console.log(res);
                         i++;
                         this.base.showAlert("成功绑定了", "", () => { });
+                        if (tmpStorage2.length == i) {
+                            localStorage.removeItem("trapBind");
+                            this.base.showAlert("清理了缓存", "", () => { });
+                        }
                     },
-                        res => {
+                        msg => {
 
                         })
 
                 })
 
-            if (tmpStorage2.length == i){
-                localStorage.removeItem("trapBind");
-            }
+
         }
 
         if (localStorage["maintenanceCache"]){
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
             tmpStorage.forEach(element => {
                 console.log(element);
+                console.log("====图片路径====");
+                
                 if(element.img!=null){
                     let options: FileUploadOptions = {};
                     options.fileKey = "image";
@@ -204,6 +259,30 @@ export class TrapPage {
                         }, (error) => {//发送失败(网络出错等)
                             // this.base.showAlert('提示', '提交失败', () => { });
                         })
+                        .catch((error) => {
+                            //发送失败(文件不存在等)
+                            this.base.showAlert("图片提交成功","提交成功",()=>{});
+                            console.log(error);
+                            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        deviceId: element.deviceId,
+                                        longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                        otherNum: element.otherNum, otherType: element.otherType
+                                    }
+                                })
+                                .subscribe(res => {
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    // this.base.showAlert('提示', '提交成功', () => { });
+                                    localStorage.removeItem('maintenanceCache');
+                                }, (msg) => {
+                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                });
+                        });
+
                 }else{
                     console.log(element);
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
@@ -540,75 +619,7 @@ export class TrapPage {
                             // confirm.dismiss()
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                         })
-                    .catch((error) => {//发送失败(文件不存在等)
-                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                            {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: this.deviceId,
-                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                    otherNum: this.otherbettle, otherType: this.BeetleType
-                                }
-                            })
-                            .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                                this.base.showAlert('提示', '提交成功', () => { });
-                                let cacheData = {
-                                    deviceId: this.deviceId,
-                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                    otherNum: this.otherbettle, otherType: this.BeetleType
-                                };
-                                console.log("cacheData");
-                                console.log(cacheData);
 
-                                Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, (msg) => {
-
-                                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                                this.base.showAlert('提示', '提交失败', () => { });
-                                let cacheData = {
-                                    deviceId: this.deviceId,
-                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                    otherNum: this.otherbettle, otherType: this.BeetleType
-                                };
-                                console.log("cacheData");
-                                console.log(cacheData);
-
-                                let maintenanceCache: any;
-                                maintenanceCache = localStorage.getItem('maintenanceCache');
-                                if (maintenanceCache == null) {
-                                    maintenanceCache = [];
-                                } else {
-                                    maintenanceCache = JSON.parse(maintenanceCache);
-                                }
-                                maintenanceCache.push(cacheData);
-                                // try{
-                                //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                                // }catch(oException){
-                                //     if(oException.name == 'QuotaExceededError'){
-                                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                //         //console.log('已经超出本地存储限定大小！');
-                                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                                //       // localStorage.clear();
-                                //       // localStorage.setItem(key,value);
-                                //     }
-                                // }   
-                                localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                                console.log("Hello");
-
-                                //this.navCtrl.pop();
-                                // confirm.dismiss();
-                                Base.popTo(this.navCtrl, 'switchProjectPage');
-                            });
-                    });
                 } else {
 
                     // var options: string = "deviceId: " + this.id +

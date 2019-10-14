@@ -181,10 +181,10 @@ export class TrackPage {
                                         console.log(JSON.parse(JSON.stringify(res)).message);
                                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                        this.base.showAlert('提示', '提交成功', () => { });
+                                        // this.base.showAlert('提示', '提交成功', () => { });
                                         // Base.popTo(this.navCtrl, 'switchProjectPage');
                                     }, (error) => {//发送失败(网络出错等)
-                                        this.base.showAlert('提示', '提交失败', () => { });
+                                        // this.base.showAlert('提示', '提交失败', () => { });
                                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                     })
                                     .catch((error) => {//发送失败(文件不存在等)
@@ -200,10 +200,10 @@ export class TrackPage {
                                     console.log(JSON.parse(JSON.stringify(res)).message);
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                    this.base.showAlert('提示', '提交成功', () => { });
+                                    // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
-                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
@@ -219,10 +219,10 @@ export class TrackPage {
                                     console.log(JSON.parse(JSON.stringify(res)).message);
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                    this.base.showAlert('提示', '提交成功', () => { });
+                                    // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
-                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
@@ -237,10 +237,10 @@ export class TrackPage {
                                     console.log(JSON.parse(JSON.stringify(res)).message);
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                    this.base.showAlert('提示', '提交成功', () => { });
+                                    // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
-                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
@@ -255,10 +255,10 @@ export class TrackPage {
                                     console.log(JSON.parse(JSON.stringify(res)).message);
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                    this.base.showAlert('提示', '提交成功', () => { });
+                                    // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
-                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
@@ -285,7 +285,7 @@ export class TrackPage {
                             .subscribe(res => {
                                 console.log(JSON.stringify(res));
                                 console.log(JSON.parse(JSON.stringify(res)).message);
-                                this.base.showAlert('提示', '缓存提交成功', () => { });
+                                // this.base.showAlert('提示', '缓存提交成功', () => { });
                                 localStorage.removeItem('TrackCache');
                             }, (msg) => {
                                 // this.base.showAlert('提示', '提交失败', () => { });
@@ -432,7 +432,6 @@ export class TrackPage {
                         });
             }
         }
-
     }
 
     takePhoto() {

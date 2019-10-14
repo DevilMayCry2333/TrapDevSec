@@ -72,20 +72,86 @@ export class DryPage {
     bindNewId() {
         this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
             {
-                headers: { token: localStorage['token'] },
-                params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+                headers: { token: localStorage['token'] }, params: {
+                    scanId: this.deviceId, serial: this.deviceSerial
+                }
             })
             .subscribe(res => {
-                console.log(res);
-                this.base.showAlert("成功", "", () => { });
-            },
-                res => {
-                    console.log(res);
-                })
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                this.base.showAlert('提示', '提交成功', () => { });
+                console.log("cacheData");
+
+                Base.popTo(this.navCtrl, 'switchProjectPage');
+            }, (msg) => {
+
+                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                this.base.showAlert("提交失败", "提交失败", () => { });
+                console.log(msg);
+                console.log("失败");
+                var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+                let BindIdCache: any;
+                BindIdCache = localStorage.getItem('trapBind');
+
+                if (BindIdCache == null) {
+                    BindIdCache = [];
+                } else {
+                    BindIdCache = JSON.parse(BindIdCache);
+                }
+                BindIdCache.push(transferParam);
+
+                localStorage.setItem("dryBind", JSON.stringify(BindIdCache));
+            });
+
     }
 
 
     ionViewDidLoad() {
+
+        if (localStorage["dryBind"]) {
+            var tmpStorage2 = [];
+
+            tmpStorage2 = JSON.parse(localStorage["dryBind"]);
+
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+
+            console.log(tmpStorage2);
+            var i = 0;
+
+            tmpStorage2.forEach(element => {
+
+                console.log("===开始===");
+
+                console.log(element.scanId);
+                console.log(element.serial);
+
+                this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                    {
+                        headers: { token: localStorage['token'] },
+                        params: new HttpParams({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                    })
+                    .subscribe(res => {
+                        console.log(res);
+                        i++;
+                        this.base.showAlert("成功绑定了", "", () => { });
+                        if (tmpStorage2.length == i) {
+                            localStorage.removeItem("dryBind");
+                            this.base.showAlert("清理了缓存", "", () => { });
+                        }
+                    },
+                        msg => {
+
+                        })
+
+            })
+
+
+        }
+
+
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         if (localStorage["DryCache"]) {
