@@ -156,6 +156,7 @@ export class DryPage {
         console.log(localStorage['device']);
         if (localStorage["DryCache"]) {
             var tmpStorage = JSON.parse(localStorage["DryCache"]);
+            var i = 0;
             tmpStorage.forEach(element => {
                 console.log(element);
                 if (element.img != null) {
@@ -187,12 +188,32 @@ export class DryPage {
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-
+                            i++;
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('DryCache');
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('DryCache');
                         }, (error) => {//发送失败(网络出错等)
+                            console.log(error);
+                                this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
+                                    {
+                                        headers: { token: localStorage['token'] }, params: {
+                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                            accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                                            workingContent: element.workingContent
+                                        }
+                                    })
+                                    .subscribe(res => {
+                                        i++;
+                                        console.log(JSON.stringify(res));
+                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                        // this.base.showAlert('提示', '提交成功', () => { });
+                                        if(i>=tmpStorage.length)
+                                            localStorage.removeItem('DryCache');
+                                    }, (msg) => {
+                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                    });
                             // this.base.showAlert('提示', '提交失败', () => { });
                         })
                 } else {
@@ -206,10 +227,12 @@ export class DryPage {
                             }
                         })
                         .subscribe(res => {
+                            i++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('DryCache');
+                            if(i>=tmpStorage.length)
+                                localStorage.removeItem('DryCache');
                         }, (msg) => {
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });

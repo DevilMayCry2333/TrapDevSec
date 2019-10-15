@@ -34,6 +34,14 @@ export class TrackPage {
     photoplib3: any;
     photoplib4: any;
     photoplib5: any;
+
+    picNotExsit1 = false;
+    picNotExsit2 = false;
+    picNotExsit3 = false;
+    picNotExsit4 = false;
+    picNotExsit5 = false;
+
+
     
     hasPic = false;
 
@@ -126,11 +134,10 @@ export class TrackPage {
             if (localStorage["TrackCache5"]){
                 this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
             }
-            var j = -1;
+            var j = 0;
 
 
             tmpStorage.forEach(element => {
-                j = j + 1;
 
                 this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
                     {
@@ -184,11 +191,12 @@ export class TrackPage {
                                         // this.base.showAlert('提示', '提交成功', () => { });
                                         // Base.popTo(this.navCtrl, 'switchProjectPage');
                                     }, (error) => {//发送失败(网络出错等)
+                                        this.picNotExsit1 = true;
                                         // this.base.showAlert('提示', '提交失败', () => { });
                                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                     })
                                     .catch((error) => {//发送失败(文件不存在等)
-
+                                        this.picNotExsit1 = true;
                                     });
 
                         }else if(i==2){
@@ -203,11 +211,12 @@ export class TrackPage {
                                     // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
+                                        this.picNotExsit2 = true;
                                     // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
-
+                                    this.picNotExsit2 = true;
                                 });
 
                         }else if(i==3){
@@ -222,11 +231,12 @@ export class TrackPage {
                                     // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
+                                    this.picNotExsit3 = true;
                                     // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
-
+                                    this.picNotExsit3 = true;
                                 });
                         }else if(i==4){
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -240,11 +250,12 @@ export class TrackPage {
                                     // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
+                                    this.picNotExsit4 = true;
                                     // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
-
+                                    this.picNotExsit4 = true;
                                 });
                         }else if(i==5){
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -258,11 +269,31 @@ export class TrackPage {
                                     // this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
                                 }, (error) => {//发送失败(网络出错等)
+                                        this.picNotExsit5 = true;
                                     // this.base.showAlert('提示', '提交失败', () => { });
                                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                 })
                                 .catch((error) => {//发送失败(文件不存在等)
+                                    this.picNotExsit5 = true;
+                                });
 
+                        }
+                        if(this.picNotExsit1 || this.picNotExsit2 || this.picNotExsit3 || this.picNotExsit4 || this.picNotExsit5){
+                            this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                        lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                        current: "1", recordTime: JSON.stringify(element.recordTime)
+                                    }
+                                })
+                                .subscribe(res => {
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    // this.base.showAlert('提示', '提交成功', () => { });
+                                    localStorage.removeItem('TrackCache');
+                                }, (msg) => {
+                                    // this.base.showAlert('提示', '提交失败', () => { });
                                 });
 
                         }
@@ -283,10 +314,12 @@ export class TrackPage {
                                 }
                             })
                             .subscribe(res => {
+                                j++;
                                 console.log(JSON.stringify(res));
                                 console.log(JSON.parse(JSON.stringify(res)).message);
                                 // this.base.showAlert('提示', '缓存提交成功', () => { });
-                                localStorage.removeItem('TrackCache');
+                                if(j>=tmpStorage.length)
+                                    localStorage.removeItem('TrackCache');
                             }, (msg) => {
                                 // this.base.showAlert('提示', '提交失败', () => { });
                             });
@@ -309,7 +342,9 @@ export class TrackPage {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('TrackCache');
+                            j++;
+                            if(j>=tmpStorage.length)
+                                localStorage.removeItem('TrackCache');
                         }, (msg) => {
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });

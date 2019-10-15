@@ -216,6 +216,7 @@ export class TrapPage {
 
         if (localStorage["maintenanceCache"]){
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+            var i = 0;
             tmpStorage.forEach(element => {
                 console.log(element);
                 console.log("====图片路径====");
@@ -248,6 +249,9 @@ export class TrapPage {
 
                     fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
+                            i++;
+                            console.log("======进入文件上传=====");
+
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
@@ -255,11 +259,41 @@ export class TrapPage {
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('maintenanceCache');
+                            if(i>=tmpStorage.length)
+                                localStorage.removeItem('maintenanceCache');
                         }, (error) => {//发送失败(网络出错等)
+                            console.log("******进入Error******");
+                            console.log(error);
+
+                                return new Promise((resolve, reject) => {
+                                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                                        {
+                                            headers: { token: localStorage['token'] }, params: {
+                                                deviceId: element.deviceId,
+                                                longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                                maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                                drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                                otherNum: element.otherNum, otherType: element.otherType
+                                            }
+                                        })
+                                        .toPromise().then(res => {
+                                            console.log(res);
+                                            i++;
+                                            // this.base.showAlert("对不起，图片被你删掉了", "但是其他数据传上来了", () => { });
+                                            if(i>=tmpStorage.length)
+                                                localStorage.removeItem('maintenanceCache');
+                                        }, msg => {
+                                            console.log(msg);
+                                        })
+
+                                });
+
                             // this.base.showAlert('提示', '提交失败', () => { });
                         })
+                        //这个好像不起什么作用，但是为了以防万一还是留着吧
                         .catch((error) => {
+                            console.log("******进入cache*******");
+
                             //发送失败(文件不存在等)
                             this.base.showAlert("图片不存在!", "图片不存在", () => { });
                             console.log(error);
@@ -276,8 +310,11 @@ export class TrapPage {
                                         }
                                     })
                                 .toPromise().then(res => {
-                                    console.log(res);
+                                    i++;
 
+                                    console.log(res);
+                                    if (i >= tmpStorage.length)
+                                        localStorage.removeItem('maintenanceCache');
                                     this.base.showAlert("图片提交成功", "提交成功", () => { });
                                     },msg=>{
                                         console.log(msg);
@@ -287,6 +324,7 @@ export class TrapPage {
                         });
 
                 }else{
+                    console.log("=====Element图片为空=====");
                     console.log(element);
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
@@ -299,10 +337,12 @@ export class TrapPage {
                             }
                         })
                         .subscribe(res => {
+                            i++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('maintenanceCache');
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('maintenanceCache');
                         }, (msg) => {
                                 // this.base.showAlert('提示', '提交失败', () => { });
                         });

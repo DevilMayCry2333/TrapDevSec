@@ -152,6 +152,7 @@ export class DeadtreePage {
         //deadCache
         if (localStorage["deadCache"]) {
             var tmpStorage = JSON.parse(localStorage["deadCache"]);
+            var i = 0;
             tmpStorage.forEach(element => {
                 console.log(element);
                 if (element.img != null) {
@@ -180,6 +181,8 @@ export class DeadtreePage {
 
                     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddDeadtrees', options)
                         .then((res) => {
+                            
+
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
@@ -187,8 +190,29 @@ export class DeadtreePage {
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('deadCache');
+                            i++;
+                            if(i>=tmpStorage.length)
+                                localStorage.removeItem('deadCache');
                         }, (error) => {//发送失败(网络出错等)
+                                this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                                    {
+                                        headers: { token: localStorage['token'] }, params: {
+                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                            killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                                        }
+                                    })
+                                    .subscribe(res => {
+                                        console.log(JSON.stringify(res));
+                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                        // this.base.showAlert('提示', '提交成功', () => { });
+                                        i++;
+                                        if (i >= tmpStorage.length)
+                                            localStorage.removeItem('deadCache');
+                                    }, (msg) => {
+                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                    });
+
                             // this.base.showAlert('提示', '提交失败', () => { });
                         })
                 } else {
@@ -205,7 +229,9 @@ export class DeadtreePage {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('deadCache');
+                            i++;
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('deadCache');
                         }, (msg) => {
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });

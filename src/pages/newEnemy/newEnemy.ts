@@ -160,6 +160,7 @@ export class EnemyPage {
 
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        var i = 0;
         if (localStorage["enemyCache"]) {
             var tmpStorage = JSON.parse(localStorage["enemyCache"]);
             tmpStorage.forEach(element => {
@@ -189,6 +190,7 @@ export class EnemyPage {
 
                     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddEnemy', options)
                         .then((res) => {
+                            i++;
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
@@ -196,9 +198,30 @@ export class EnemyPage {
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('enemyCache');
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('enemyCache');
                         }, (error) => {//发送失败(网络出错等)
                             // this.base.showAlert('提示', '提交失败', () => { });
+
+                                this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+                                    {
+                                        headers: { token: localStorage['token'] }, params: {
+                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                            accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                                        }
+                                    })
+                                    .subscribe(res => {
+                                        i++;
+                                        console.log(JSON.stringify(res));
+                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                        // this.base.showAlert('提示', '提交成功', () => { });
+                                        if (i >= tmpStorage.length)
+                                            localStorage.removeItem('enemyCache');
+                                    }, (msg) => {
+                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                    });
+
+
                         })
                 } else {
                     console.log(element);
@@ -210,10 +233,12 @@ export class EnemyPage {
                             }
                         })
                         .subscribe(res => {
+                            i++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            localStorage.removeItem('enemyCache');
+                            if(i>=tmpStorage.length)
+                                localStorage.removeItem('enemyCache');
                         }, (msg) => {
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });

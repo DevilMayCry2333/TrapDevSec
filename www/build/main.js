@@ -781,6 +781,7 @@ var TrapPage = /** @class */ (function () {
         }
         if (localStorage["maintenanceCache"]) {
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+            var i = 0;
             tmpStorage.forEach(function (element) {
                 console.log(element);
                 console.log("====图片路径====");
@@ -807,16 +808,42 @@ var TrapPage = /** @class */ (function () {
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                     fileTransfer.upload(element.img, _this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then(function (res) {
+                        i++;
+                        console.log("======进入文件上传=====");
                         console.log(res);
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('maintenanceCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('maintenanceCache');
                     }, function (error) {
+                        console.log("******进入Error******");
+                        console.log(error);
+                        return new Promise(function (resolve, reject) {
+                            _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId,
+                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                    otherNum: element.otherNum, otherType: element.otherType
+                                }
+                            })
+                                .toPromise().then(function (res) {
+                                console.log(res);
+                                i++;
+                                // this.base.showAlert("对不起，图片被你删掉了", "但是其他数据传上来了", () => { });
+                                if (i >= tmpStorage.length)
+                                    localStorage.removeItem('maintenanceCache');
+                            }, function (msg) {
+                                console.log(msg);
+                            });
+                        });
                         // this.base.showAlert('提示', '提交失败', () => { });
                     })
                         .catch(function (error) {
+                        console.log("******进入cache*******");
                         //发送失败(文件不存在等)
                         _this.base.showAlert("图片不存在!", "图片不存在", function () { });
                         console.log(error);
@@ -831,7 +858,10 @@ var TrapPage = /** @class */ (function () {
                                 }
                             })
                                 .toPromise().then(function (res) {
+                                i++;
                                 console.log(res);
+                                if (i >= tmpStorage.length)
+                                    localStorage.removeItem('maintenanceCache');
                                 _this.base.showAlert("图片提交成功", "提交成功", function () { });
                             }, function (msg) {
                                 console.log(msg);
@@ -840,6 +870,7 @@ var TrapPage = /** @class */ (function () {
                     });
                 }
                 else {
+                    console.log("=====Element图片为空=====");
                     console.log(element);
                     _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
                         headers: { token: localStorage['token'] }, params: {
@@ -851,10 +882,12 @@ var TrapPage = /** @class */ (function () {
                         }
                     })
                         .subscribe(function (res) {
+                        i++;
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('maintenanceCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('maintenanceCache');
                     }, function (msg) {
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
@@ -1570,6 +1603,7 @@ var DryPage = /** @class */ (function () {
         console.log(localStorage['device']);
         if (localStorage["DryCache"]) {
             var tmpStorage = JSON.parse(localStorage["DryCache"]);
+            var i = 0;
             tmpStorage.forEach(function (element) {
                 console.log(element);
                 if (element.img != null) {
@@ -1596,10 +1630,30 @@ var DryPage = /** @class */ (function () {
                         console.log(res);
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
+                        i++;
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('DryCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('DryCache');
                     }, function (error) {
+                        console.log(error);
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddInjectData', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                                workingContent: element.workingContent
+                            }
+                        })
+                            .subscribe(function (res) {
+                            i++;
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('DryCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
                 }
@@ -1613,10 +1667,12 @@ var DryPage = /** @class */ (function () {
                         }
                     })
                         .subscribe(function (res) {
+                        i++;
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('DryCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('DryCache');
                     }, function (msg) {
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
@@ -2264,6 +2320,7 @@ var EnemyPage = /** @class */ (function () {
         }
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
+        var i = 0;
         if (localStorage["enemyCache"]) {
             var tmpStorage = JSON.parse(localStorage["enemyCache"]);
             tmpStorage.forEach(function (element) {
@@ -2288,14 +2345,32 @@ var EnemyPage = /** @class */ (function () {
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                     fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddEnemy', options)
                         .then(function (res) {
+                        i++;
                         console.log(res);
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('enemyCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('enemyCache');
                     }, function (error) {
                         // this.base.showAlert('提示', '提交失败', () => { });
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddEnemy', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                            }
+                        })
+                            .subscribe(function (res) {
+                            i++;
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('enemyCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
                     });
                 }
                 else {
@@ -2307,10 +2382,12 @@ var EnemyPage = /** @class */ (function () {
                         }
                     })
                         .subscribe(function (res) {
+                        i++;
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('enemyCache');
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('enemyCache');
                     }, function (msg) {
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
@@ -2915,6 +2992,7 @@ var DeadtreePage = /** @class */ (function () {
         //deadCache
         if (localStorage["deadCache"]) {
             var tmpStorage = JSON.parse(localStorage["deadCache"]);
+            var i = 0;
             tmpStorage.forEach(function (element) {
                 console.log(element);
                 if (element.img != null) {
@@ -2943,8 +3021,27 @@ var DeadtreePage = /** @class */ (function () {
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('deadCache');
+                        i++;
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('deadCache');
                     }, function (error) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                            }
+                        })
+                            .subscribe(function (res) {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            i++;
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('deadCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
                 }
@@ -2961,7 +3058,9 @@ var DeadtreePage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('deadCache');
+                        i++;
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('deadCache');
                     }, function (msg) {
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
@@ -3408,6 +3507,11 @@ var TrackPage = /** @class */ (function () {
         this.base64 = base64;
         this.loadingCtrl = loadingCtrl;
         this.recordTime = {};
+        this.picNotExsit1 = false;
+        this.picNotExsit2 = false;
+        this.picNotExsit3 = false;
+        this.picNotExsit4 = false;
+        this.picNotExsit5 = false;
         this.hasPic = false;
         this.isStopRecord = false;
         this.flag = 0;
@@ -3465,9 +3569,8 @@ var TrackPage = /** @class */ (function () {
             if (localStorage["TrackCache5"]) {
                 this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
             }
-            var j = -1;
+            var j = 0;
             tmpStorage.forEach(function (element) {
-                j = j + 1;
                 _this.httpClient.post(_this.base.BASE_URL + 'app/addLineName', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         linename: element.lineName,
@@ -3509,10 +3612,12 @@ var TrackPage = /** @class */ (function () {
                                 // this.base.showAlert('提示', '提交成功', () => { });
                                 // Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, function (error) {
+                                _this.picNotExsit1 = true;
                                 // this.base.showAlert('提示', '提交失败', () => { });
                                 // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                             })
                                 .catch(function (error) {
+                                _this.picNotExsit1 = true;
                             });
                         }
                         else if (i == 2) {
@@ -3526,10 +3631,12 @@ var TrackPage = /** @class */ (function () {
                                 // this.base.showAlert('提示', '提交成功', () => { });
                                 // Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, function (error) {
+                                _this.picNotExsit2 = true;
                                 // this.base.showAlert('提示', '提交失败', () => { });
                                 // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                             })
                                 .catch(function (error) {
+                                _this.picNotExsit2 = true;
                             });
                         }
                         else if (i == 3) {
@@ -3543,10 +3650,12 @@ var TrackPage = /** @class */ (function () {
                                 // this.base.showAlert('提示', '提交成功', () => { });
                                 // Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, function (error) {
+                                _this.picNotExsit3 = true;
                                 // this.base.showAlert('提示', '提交失败', () => { });
                                 // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                             })
                                 .catch(function (error) {
+                                _this.picNotExsit3 = true;
                             });
                         }
                         else if (i == 4) {
@@ -3560,10 +3669,12 @@ var TrackPage = /** @class */ (function () {
                                 // this.base.showAlert('提示', '提交成功', () => { });
                                 // Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, function (error) {
+                                _this.picNotExsit4 = true;
                                 // this.base.showAlert('提示', '提交失败', () => { });
                                 // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                             })
                                 .catch(function (error) {
+                                _this.picNotExsit4 = true;
                             });
                         }
                         else if (i == 5) {
@@ -3577,10 +3688,29 @@ var TrackPage = /** @class */ (function () {
                                 // this.base.showAlert('提示', '提交成功', () => { });
                                 // Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, function (error) {
+                                _this.picNotExsit5 = true;
                                 // this.base.showAlert('提示', '提交失败', () => { });
                                 // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                             })
                                 .catch(function (error) {
+                                _this.picNotExsit5 = true;
+                            });
+                        }
+                        if (_this.picNotExsit1 || _this.picNotExsit2 || _this.picNotExsit3 || _this.picNotExsit4 || _this.picNotExsit5) {
+                            _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                    lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                    current: "1", recordTime: JSON.stringify(element.recordTime)
+                                }
+                            })
+                                .subscribe(function (res) {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                localStorage.removeItem('TrackCache');
+                            }, function (msg) {
+                                // this.base.showAlert('提示', '提交失败', () => { });
                             });
                         }
                     }
@@ -3595,10 +3725,12 @@ var TrackPage = /** @class */ (function () {
                             }
                         })
                             .subscribe(function (res) {
+                            j++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '缓存提交成功', () => { });
-                            localStorage.removeItem('TrackCache');
+                            if (j >= tmpStorage.length)
+                                localStorage.removeItem('TrackCache');
                         }, function (msg) {
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });
@@ -3618,7 +3750,9 @@ var TrackPage = /** @class */ (function () {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.showAlert('提示', '提交成功', () => { });
-                        localStorage.removeItem('TrackCache');
+                        j++;
+                        if (j >= tmpStorage.length)
+                            localStorage.removeItem('TrackCache');
                     }, function (msg) {
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
