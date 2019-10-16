@@ -6637,7 +6637,7 @@ var AboutPage = /** @class */ (function () {
                 map.centerAndZoom(center, 11);
         });
         this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', { headers: { token: localStorage['token'] },
-            params: { searchText: "", limit: "2000", page: "1" } }).subscribe(function (res) {
+            params: { searchText: "", limit: "2000", page: "1", isMap: "false" } }).subscribe(function (res) {
             for (var i = 0; i < res['data'].length; i++) {
                 if (res['data'][i].longitude && res['data'][i].latitude) {
                     if (i == 0)
@@ -6749,7 +6749,7 @@ var Base = /** @class */ (function () {
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
         this.BASE_URL = "http://106.15.90.78:8081/";
-        // BASE_URL = "http://192.168.199.199:8081/"
+        // BASE_URL = "http://192.168.2.109:8081/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,

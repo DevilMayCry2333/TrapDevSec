@@ -244,7 +244,7 @@ export class AboutPage {
           map.centerAndZoom(center, 11);
       })
     this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {headers: {token:localStorage['token']},
-      params: {searchText:"", limit:"2000", page:"1"}}).subscribe(res=>{
+      params: {searchText:"", limit:"2000", page:"1",isMap:"false"}}).subscribe(res=>{
 
       for (var i = 0; i < res['data'].length; i++) {
         if (res['data'][i].longitude && res['data'][i].latitude) {
