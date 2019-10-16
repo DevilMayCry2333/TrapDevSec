@@ -1,12 +1,12 @@
-import { Component, ElementRef, ViewChild, Inject} from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Geolocation } from "@ionic-native/geolocation";
 import { Subscription } from "rxjs/Subscription";
 
-import {TabsPage} from "../tabs/tabs";
-import {Base} from "../../common/base.js";
-import {CoordinateConvertor} from "../../common/coordinate-convertor";
+import { TabsPage } from "../tabs/tabs";
+import { Base } from "../../common/base.js";
+import { CoordinateConvertor } from "../../common/coordinate-convertor";
 import { AlertController } from 'ionic-angular';
 import { File } from "@ionic-native/file";
 import { ChangeDetectorRef } from '@angular/core';
@@ -91,8 +91,8 @@ export class AboutPage {
 
         // 不是可以在这里直接判断海拔是不是null吗。。。。
         if (data.coords.altitude == null) {
-              this.altitude = '-10000';
-              sessionStorage['altitude'] = '-10000';
+          this.altitude = '-10000';
+          sessionStorage['altitude'] = '-10000';
           //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
 
         }
@@ -134,14 +134,14 @@ export class AboutPage {
   }
 
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
     var point = new BMap.Point(116.331398, 39.897445);
     map.centerAndZoom(point, 12);
     var i: number = 1;
     var that = this;
     function addMarker(point, index) {  // 创建图标对象   
-      var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+      var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
         // 指定定位位置。   
         // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
         // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
@@ -161,56 +161,68 @@ export class AboutPage {
       this.locate();
 
       // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
-        
-      if (this.latitude && this.longitude){
-        // const alert = this.alerts.create({
-        //   title: '数据',
-        //   enableBackdropDismiss: false,
-        //   buttons: [
-        //     {
-        //       text: this.latitude + ',' + this.longitude + ',' + this.altitude,
-        //       handler: () => {
-        //       }
-        //     }
-        //   ]
-        // });
-        // alert.present();
+
+      if (this.latitude && this.longitude) {
+        const alert = this.alerts.create({
+          title: '数据',
+          enableBackdropDismiss: false,
+          buttons: [
+            {
+              text: this.latitude + ',' + this.longitude + ',' + this.altitude,
+              handler: () => {
+              }
+            }
+          ]
+        });
+        alert.present();
         setTimeout(() => {
-            var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+          var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+          console.log("point1=>");
+          console.log(point);
+
+          console.log(this.latitude);
+          console.log(this.longitude);
+          console.log(this.altitude);
 
 
-            var point2 = new BMap.Point(point[1], point[0]);
-            
-              var mk = new BMap.Marker(point2);
-              map.addOverlay(mk);
-              map.panTo(point2);
-              console.log(point2);
-          // this.base.showAlert("提示", point2.lat.toString() + point2.lng.toString(), () => { });
-          // alert('您的位置：' + point2.lng + ',' + point2.lat);
+          var point2 = new BMap.Point(point[1], point[0]);
+          console.log("point2=>");
+          console.log(point2);
+
+          var mk = new BMap.Marker(point2);
+          map.addOverlay(mk);
+          map.panTo(point2);
+          // alert('您的位置：' + point.lng + ',' + point.lat);
 
 
 
 
-              map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+          map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
 
 
-              addMarker(point2, i);
+          addMarker(point2, i);
 
-            append += this.latitude + ',' + this.longitude + ',' + this.altitude;
+          append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
 
-            // this.base.logger(append,"about_ionViewDidLoad.txt");
+          that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+            console.log(success);
+            // success
+          }, function (error) {
+            console.log(error);
+            // error
+          });
 
-            i++;
-      },5000)
-    }
+          i++;
+        }, 5000)
+      }
     }, 30000);
   }
   ionViewDidEnter() {
     var myPoint = [];
-    let map = this.map = new BMap.Map(this.map_container2.nativeElement, {enableMapClick: true});//创建地图实例
+    let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
     var point = new BMap.Point(116.331398, 39.897445);
     map.centerAndZoom(point, 12);
- 
+
     // setInterval("this.myLocation()",5000);
     // this.myLocation();
     map.centerAndZoom('中国', 5);
@@ -224,11 +236,10 @@ export class AboutPage {
     map.enableScrollWheelZoom(true);//启动滚轮放大缩小，默认禁用
     map.enableContinuousZoom(true);//连续缩放效果，默认禁用
 
+    this.locate();
 
 
-
-
-    this.httpClient.get(this.base.BASE_URL + 'auth_api/user', {headers: {token: localStorage['token']}})
+    this.httpClient.get(this.base.BASE_URL + 'auth_api/user', { headers: { token: localStorage['token'] } })
       .subscribe(data => {
         // console.log(d);
         var center = '';
@@ -243,12 +254,14 @@ export class AboutPage {
         if (center)
           map.centerAndZoom(center, 11);
       })
-    this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {headers: {token:localStorage['token']},
-      params: {searchText:"", limit:"2000", page:"1",isMap:"false"}}).subscribe(res=>{
+    this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {
+      headers: { token: localStorage['token'] },
+      params: { searchText: "", limit: "2000", page: "1",isMap:"false" }
+    }).subscribe(res => {
 
       for (var i = 0; i < res['data'].length; i++) {
         if (res['data'][i].longitude && res['data'][i].latitude) {
-          if(i==0)
+          if (i == 0)
             console.log(res['data'][i].latitude);
 
           var point = this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
@@ -257,19 +270,13 @@ export class AboutPage {
           // this.addMarker(point);
         }
       }
-        this.addMarker()
+      this.addMarker()
     })
 
 
 
-
-
-    var a = setInterval(() => {
-      this.locate();
-    }, 1000)
-
     function addMarker(point, index) {  // 创建图标对象   
-      var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+      var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
         // 指定定位位置。   
         // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
         // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
@@ -285,44 +292,38 @@ export class AboutPage {
       map.addOverlay(marker);
     }
 
-    console.log(this.altitude);
-    
-    var text: string = this.latitude + ',' + this.longitude + ',' + this.altitude;
-    // this.base.logger(text, "about_ionViewDidEnter.txt");
+    setTimeout(() => {
+      point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+      console.log("Point1进来");
+      console.log(point);
 
-    if (Number(this.altitude)!=-10000 && this.altitude!="" && this.altitude) {
-      clearInterval(a);
-      setTimeout(() => {
-        point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-        console.log("Point1进来");
-        console.log(point);
-
-        var point2 = new BMap.Point(point[1], point[0]);
-        // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-        console.log("进来的");
-        console.log(point2);
+      var point2 = new BMap.Point(point[1], point[0]);
+      // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+      console.log("进来的");
+      console.log(point2);
 
 
-        var mk = new BMap.Marker(point2);
-        map.addOverlay(mk);
-        map.panTo(point2);
-        console.log(point2);
-        // this.base.showAlert("提示",point2.lat.toString() + point2.lng.toString(),()=>{});
-        // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+      var mk = new BMap.Marker(point2);
+      map.addOverlay(mk);
+      map.panTo(point2);
+      // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
 
 
 
-        map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+      map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
 
 
-        addMarker(point2, 0);
+      addMarker(point2, 0);
+      // }
+      this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
+        console.log(success);
+        // success
+      }, function (error) {
+        console.log(error);
+        // error
+      });
 
-
-       
-
-      }, 1000)
-
-    }
+    }, 5000)
     // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
 
 
@@ -339,7 +340,7 @@ export class AboutPage {
 
     }
 
-    var markerClusterer = new BMap.PointCollection(markers,options);
+    var markerClusterer = new BMap.PointCollection(markers, options);
     // var marker = new BMap.Marker(point);
     this.map.addOverlay(markerClusterer);
   }

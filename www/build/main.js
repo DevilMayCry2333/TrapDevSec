@@ -6557,7 +6557,7 @@ var AboutPage = /** @class */ (function () {
         var i = 1;
         var that = this;
         function addMarker(point, index) {
-            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+            var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
                 // 指定定位位置。   
                 // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
                 // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
@@ -6577,31 +6577,42 @@ var AboutPage = /** @class */ (function () {
             _this.locate();
             // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
             if (_this.latitude && _this.longitude) {
-                // const alert = this.alerts.create({
-                //   title: '数据',
-                //   enableBackdropDismiss: false,
-                //   buttons: [
-                //     {
-                //       text: this.latitude + ',' + this.longitude + ',' + this.altitude,
-                //       handler: () => {
-                //       }
-                //     }
-                //   ]
-                // });
-                // alert.present();
+                var alert_1 = _this.alerts.create({
+                    title: '数据',
+                    enableBackdropDismiss: false,
+                    buttons: [
+                        {
+                            text: _this.latitude + ',' + _this.longitude + ',' + _this.altitude,
+                            handler: function () {
+                            }
+                        }
+                    ]
+                });
+                alert_1.present();
                 setTimeout(function () {
                     var point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
+                    console.log("point1=>");
+                    console.log(point);
+                    console.log(_this.latitude);
+                    console.log(_this.longitude);
+                    console.log(_this.altitude);
                     var point2 = new BMap.Point(point[1], point[0]);
+                    console.log("point2=>");
+                    console.log(point2);
                     var mk = new BMap.Marker(point2);
                     map.addOverlay(mk);
                     map.panTo(point2);
-                    console.log(point2);
-                    // this.base.showAlert("提示", point2.lat.toString() + point2.lng.toString(), () => { });
-                    // alert('您的位置：' + point2.lng + ',' + point2.lat);
+                    // alert('您的位置：' + point.lng + ',' + point.lat);
                     map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
                     addMarker(point2, i);
-                    append += _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
-                    // this.base.logger(append,"about_ionViewDidLoad.txt");
+                    append += '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']';
+                    that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+                        console.log(success);
+                        // success
+                    }, function (error) {
+                        console.log(error);
+                        // error
+                    });
                     i++;
                 }, 5000);
             }
@@ -6621,6 +6632,7 @@ var AboutPage = /** @class */ (function () {
         map.addControl(new BMap.NavigationControl());
         map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
         map.enableContinuousZoom(true); //连续缩放效果，默认禁用
+        this.locate();
         this.httpClient.get(this.base.BASE_URL + 'auth_api/user', { headers: { token: localStorage['token'] } })
             .subscribe(function (data) {
             // console.log(d);
@@ -6636,8 +6648,10 @@ var AboutPage = /** @class */ (function () {
             if (center)
                 map.centerAndZoom(center, 11);
         });
-        this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', { headers: { token: localStorage['token'] },
-            params: { searchText: "", limit: "2000", page: "1", isMap: "false" } }).subscribe(function (res) {
+        this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {
+            headers: { token: localStorage['token'] },
+            params: { searchText: "", limit: "2000", page: "1", isMap: "false" }
+        }).subscribe(function (res) {
             for (var i = 0; i < res['data'].length; i++) {
                 if (res['data'][i].longitude && res['data'][i].latitude) {
                     if (i == 0)
@@ -6650,11 +6664,8 @@ var AboutPage = /** @class */ (function () {
             }
             _this.addMarker();
         });
-        var a = setInterval(function () {
-            _this.locate();
-        }, 1000);
         function addMarker(point, index) {
-            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
+            var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
                 // 指定定位位置。   
                 // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
                 // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
@@ -6669,29 +6680,29 @@ var AboutPage = /** @class */ (function () {
             var marker = new BMap.Marker(point, { icon: myIcon });
             map.addOverlay(marker);
         }
-        console.log(this.altitude);
-        var text = this.latitude + ',' + this.longitude + ',' + this.altitude;
-        // this.base.logger(text, "about_ionViewDidEnter.txt");
-        if (Number(this.altitude) != -10000 && this.altitude != "" && this.altitude) {
-            clearInterval(a);
-            setTimeout(function () {
-                point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-                console.log("Point1进来");
-                console.log(point);
-                var point2 = new BMap.Point(point[1], point[0]);
-                // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-                console.log("进来的");
-                console.log(point2);
-                var mk = new BMap.Marker(point2);
-                map.addOverlay(mk);
-                map.panTo(point2);
-                console.log(point2);
-                // this.base.showAlert("提示",point2.lat.toString() + point2.lng.toString(),()=>{});
-                // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-                map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-                addMarker(point2, 0);
-            }, 1000);
-        }
+        setTimeout(function () {
+            point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
+            console.log("Point1进来");
+            console.log(point);
+            var point2 = new BMap.Point(point[1], point[0]);
+            // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+            console.log("进来的");
+            console.log(point2);
+            var mk = new BMap.Marker(point2);
+            map.addOverlay(mk);
+            map.panTo(point2);
+            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+            map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+            addMarker(point2, 0);
+            // }
+            _this.file.writeFile(_this.file.externalDataDirectory, "new_location2.txt", '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']', { replace: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        }, 5000);
         // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
     };
     AboutPage.prototype.addMarker = function () {
@@ -6749,7 +6760,7 @@ var Base = /** @class */ (function () {
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
         this.BASE_URL = "http://106.15.90.78:8081/";
-        // BASE_URL = "http://192.168.2.109:8081/"
+        // BASE_URL = "http://192.168.31.254:8081/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
