@@ -38,6 +38,11 @@ import { DryPage} from '../pages/newDry/newDry';
 import { DeadtreePage} from '../pages/newDeadTree/newDeadTree';
 import { EnemyPage} from '../pages/newEnemy/newEnemy';
 import { TrackPage} from '../pages/newTrack/newTrack';
+import { TrapQueryPage} from '../pages/trap-query/trap-query';
+import { DeadTreesQueryPage} from '../pages/dead-trees-query/dead-trees-query';
+import { InjectQueryPage} from '../pages/inject-query/inject-query';
+import { EnemyQueryPage} from '../pages/enemy-query/enemy-query';
+import { TrackQueryPage} from '../pages/track-query/track-query';
 
 class MyErrorHandler implements ErrorHandler {
   constructor(
@@ -60,6 +65,12 @@ class MyErrorHandler implements ErrorHandler {
     ContactPage,
     HomePage,
     TabsPage,
+    TrapQueryPage,
+    DeadTreesQueryPage,
+    InjectQueryPage,
+    EnemyQueryPage,
+    TrackQueryPage,
+
     ScanPage,
     NewHomePage,
     DryPage,
@@ -98,6 +109,12 @@ class MyErrorHandler implements ErrorHandler {
     ScanPage,
     NewHomePage,
     DryPage,
+    TrapQueryPage,
+    DeadTreesQueryPage,
+    InjectQueryPage,
+    EnemyQueryPage,
+    TrackQueryPage,
+    
     DeadtreePage,
     EnemyPage,
     TrackPage,
