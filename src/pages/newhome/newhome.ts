@@ -15,7 +15,7 @@ export class NewHomePage {
     login() {
         console.log(this.username);
         console.log(this.password);
-        this.httpClient.post("http://192.168.31.254:8081/" + 'login', {},
+        this.httpClient.post("http://106.15.90.78:8081/" + 'login', {},
             { params: new HttpParams({ fromObject: { username: this.username, password: this.password } }) })
             .subscribe(res => {
                 console.log(res);
@@ -29,6 +29,8 @@ export class NewHomePage {
             },
                 res => {
                     console.log(res);
+                    
+
                 })
 
     }

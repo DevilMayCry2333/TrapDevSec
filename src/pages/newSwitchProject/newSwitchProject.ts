@@ -6,17 +6,21 @@ import { EnemyPage} from '../newEnemy/newEnemy';
 import { DeadtreePage} from '../newDeadTree/newDeadTree';
 import { TrackPage} from '../newTrack/newTrack';
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { NewHomePage} from "../newhome/newhome";
+import { Base } from '../../common/base.js'
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'app-switchProject',
     templateUrl: 'newSwitchProject.html',
 })
 export class switchProjectPage {
+    alertCtrl: any;
 
     constructor(private navCtl: NavController, private httpClient: HttpClient) { }
 
     ionViewDidLoad(){
-        this.httpClient.post("http://192.168.31.254:8081/app/" + 'getMyDevice', {},
+        this.httpClient.post("http://106.15.90.78:8081/app/" + 'getMyDevice', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -46,5 +50,29 @@ export class switchProjectPage {
     trackClick(){
         this.navCtl.push(TrackPage);
     }
+    exitClick(){
+        const alert = this.alertCtrl.create({
+            title: "警告!!",
+            subTitle: "是否要退出系统?",
+            buttons: [
+                {
+                    text: '确认', handler: () => {
+                    localStorage.removeItem("token");
+                    this.navCtl.push(NewHomePage);
+                        console.log("ok");
+                    }
+                },
+                {
+                    text: '取消', handler: () => {
+                        console.log("cancel");
+                    }
+                }
 
+        ]
+        });
+        alert.present();
+
+        // localStorage.removeItem("token");
+        // this.navCtl.push(NewHomePage);
+    }
 }
