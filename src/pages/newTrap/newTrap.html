@@ -102,11 +102,15 @@
                 <ion-input [(ngModel)]="remarks"></ion-input>
             </ion-item>
             <button ion-button (click)="takePhoto()">拍照</button>
+<<<<<<< HEAD
             <button ion-button (click)="submit()">提交</button>
 <<<<<<< HEAD
             <button ion-button>地图查看</button>
             <button ion-button (click)="NavToQuery()">查询</button>
 =======
+=======
+            <button ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>
+>>>>>>> e0d0072824f54179ad25a253cc017128741ae87e
             <button ion-button (click)="NavToMap()">地图查看</button>
             <button ion-button (click)="NavToQuery()">查询</button>
 
