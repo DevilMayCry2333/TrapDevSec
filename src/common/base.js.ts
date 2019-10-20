@@ -8,7 +8,7 @@ import { File } from "@ionic-native/file";
 export class Base {
   // BASE_URL = "http://39.108.184.47:8081/"
   BASE_URL = "http://106.15.90.78:8081/"
-  // BASE_URL = "http://192.168.2.109:8081/"
+  // BASE_URL = "http://192.168.31.254:8081/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,
@@ -19,7 +19,7 @@ export class Base {
     fixedPixelsTop: 0,
     fixedPixelsBottom: 60
   };
-  constructor(private alertCtrl: AlertController, private file: File) {
+  constructor(private alertCtrl: AlertController,private file:File) {
 
   }
 
