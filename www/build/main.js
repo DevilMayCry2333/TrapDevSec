@@ -6549,13 +6549,21 @@ var AboutPage = /** @class */ (function () {
             // alert();
         });
     };
-    AboutPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
+    AboutPage.prototype.IamHere = function () {
+        var map = this.map;
         var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+        // setInterval("this.myLocation()",5000);
+        // this.myLocation();
+        map.centerAndZoom('中国', 5);
+        map.addControl(new BMap.MapTypeControl());
+        var sizeMap = new BMap.Size(10, 80); //显示位置
+        map.addControl(new BMap.NavigationControl());
         map.centerAndZoom(point, 12);
         var i = 1;
         var that = this;
+        map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
+        map.enableContinuousZoom(true); //连续缩放效果，默认禁用
         function addMarker(point, index) {
             var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
                 // 指定定位位置。   
@@ -6572,51 +6580,72 @@ var AboutPage = /** @class */ (function () {
             var marker = new BMap.Marker(point, { icon: myIcon });
             map.addOverlay(marker);
         }
-        var append = '';
-        setInterval(function () {
-            _this.locate();
-            // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
-            if (_this.latitude && _this.longitude) {
-                var alert_1 = _this.alerts.create({
-                    title: '数据',
-                    enableBackdropDismiss: false,
-                    buttons: [
-                        {
-                            text: _this.latitude + ',' + _this.longitude + ',' + _this.altitude,
-                            handler: function () {
-                            }
-                        }
-                    ]
-                });
-                alert_1.present();
-                setTimeout(function () {
-                    var point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-                    console.log("point1=>");
-                    console.log(point);
-                    console.log(_this.latitude);
-                    console.log(_this.longitude);
-                    console.log(_this.altitude);
-                    var point2 = new BMap.Point(point[1], point[0]);
-                    console.log("point2=>");
-                    console.log(point2);
-                    var mk = new BMap.Marker(point2);
-                    map.addOverlay(mk);
-                    map.panTo(point2);
-                    // alert('您的位置：' + point.lng + ',' + point.lat);
-                    map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-                    addMarker(point2, i);
-                    append += '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']';
-                    that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
-                        console.log(success);
-                        // success
-                    }, function (error) {
-                        console.log(error);
-                        // error
-                    });
-                    i++;
-                }, 5000);
-            }
-        }, 30000);
+        point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+        console.log("Point1进来");
+        console.log(point);
+        var point2 = new BMap.Point(point[1], point[0]);
+        // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+        console.log("进来的");
+        console.log(point2);
+        var mk = new BMap.Marker(point2);
+        map.addOverlay(mk);
+        map.panTo(point2);
+        // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+        map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+        addMarker(point2, 0);
+        // }
+        // this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
+        //   console.log(success);
+        //   // success
+        // }, function (error) {
+        //   console.log(error);
+        //   // error
+        // });
+        // let append = '';
+        // setInterval(() => {
+        //   this.locate();
+        //   // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
+        //   if (this.latitude && this.longitude) {
+        //     const alert = this.alerts.create({
+        //       title: '数据',
+        //       enableBackdropDismiss: false,
+        //       buttons: [
+        //         {
+        //           text: this.latitude + ',' + this.longitude + ',' + this.altitude,
+        //           handler: () => {
+        //           }
+        //         }
+        //       ]
+        //     });
+        //     alert.present();
+        //     setTimeout(() => {
+        //       var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+        //       console.log("point1=>");
+        //       console.log(point);
+        //       console.log(this.latitude);
+        //       console.log(this.longitude);
+        //       console.log(this.altitude);
+        //       var point2 = new BMap.Point(point[1], point[0]);
+        //       console.log("point2=>");
+        //       console.log(point2);
+        //       var mk = new BMap.Marker(point2);
+        //       map.addOverlay(mk);
+        //       map.panTo(point2);
+        //       // alert('您的位置：' + point.lng + ',' + point.lat);
+        //       map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+        //       addMarker(point2, i);
+        //       append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
+        //       that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+        //         console.log(success);
+        //         // success
+        //       }, function (error) {
+        //         console.log(error);
+        //         // error
+        //       });
+        //       i++;
+        //     }, 5000)
+        //   }
+        // }, 30000);
     };
     AboutPage.prototype.ionViewDidEnter = function () {
         var _this = this;
@@ -6681,27 +6710,6 @@ var AboutPage = /** @class */ (function () {
             map.addOverlay(marker);
         }
         setTimeout(function () {
-            point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-            console.log("Point1进来");
-            console.log(point);
-            var point2 = new BMap.Point(point[1], point[0]);
-            // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-            console.log("进来的");
-            console.log(point2);
-            var mk = new BMap.Marker(point2);
-            map.addOverlay(mk);
-            map.panTo(point2);
-            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-            map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-            addMarker(point2, 0);
-            // }
-            _this.file.writeFile(_this.file.externalDataDirectory, "new_location2.txt", '[' + _this.latitude + ',' + _this.longitude + ',' + _this.altitude + ']', { replace: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
         }, 5000);
         // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
     };
@@ -6717,17 +6725,17 @@ var AboutPage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('map2'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
     ], AboutPage.prototype, "map_container2", void 0);
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n  <button ion-button (click)="IamHere()">我在这</button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/
         }),
         __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _j || Object])
     ], AboutPage);
     return AboutPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=about.js.map
@@ -6868,9 +6876,10 @@ var Base = /** @class */ (function () {
     };
     Base = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]) === "function" && _b || Object])
     ], Base);
     return Base;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=base.js.js.map

@@ -134,12 +134,27 @@ export class AboutPage {
   }
 
 
-  ionViewDidLoad() {
-    let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
+  IamHere() {
+    let map = this.map;
+    
     var point = new BMap.Point(116.331398, 39.897445);
+    map.centerAndZoom(point, 12);
+
+    // setInterval("this.myLocation()",5000);
+    // this.myLocation();
+    map.centerAndZoom('中国', 5);
+
+    map.addControl(new BMap.MapTypeControl());
+
+    let sizeMap = new BMap.Size(10, 80);//显示位置
+    map.addControl(new BMap.NavigationControl());
+
     map.centerAndZoom(point, 12);
     var i: number = 1;
     var that = this;
+    map.enableScrollWheelZoom(true);//启动滚轮放大缩小，默认禁用
+    map.enableContinuousZoom(true);//连续缩放效果，默认禁用
+
     function addMarker(point, index) {  // 创建图标对象   
       var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
         // 指定定位位置。   
@@ -156,67 +171,98 @@ export class AboutPage {
       var marker = new BMap.Marker(point, { icon: myIcon });
       map.addOverlay(marker);
     }
-    let append = '';
-    setInterval(() => {
-      this.locate();
 
-      // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
+    point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+    console.log("Point1进来");
+    console.log(point);
 
-      if (this.latitude && this.longitude) {
-        const alert = this.alerts.create({
-          title: '数据',
-          enableBackdropDismiss: false,
-          buttons: [
-            {
-              text: this.latitude + ',' + this.longitude + ',' + this.altitude,
-              handler: () => {
-              }
-            }
-          ]
-        });
-        alert.present();
-        setTimeout(() => {
-          var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-          console.log("point1=>");
-          console.log(point);
-
-          console.log(this.latitude);
-          console.log(this.longitude);
-          console.log(this.altitude);
+    var point2 = new BMap.Point(point[1], point[0]);
+    // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+    console.log("进来的");
+    console.log(point2);
 
 
-          var point2 = new BMap.Point(point[1], point[0]);
-          console.log("point2=>");
-          console.log(point2);
-
-          var mk = new BMap.Marker(point2);
-          map.addOverlay(mk);
-          map.panTo(point2);
-          // alert('您的位置：' + point.lng + ',' + point.lat);
+    var mk = new BMap.Marker(point2);
+    map.addOverlay(mk);
+    map.panTo(point2);
+    // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
 
 
 
+    map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
 
-          map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+
+    addMarker(point2, 0);
+    // }
+    // this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
+    //   console.log(success);
+    //   // success
+    // }, function (error) {
+    //   console.log(error);
+    //   // error
+    // });
+
+    // let append = '';
+    // setInterval(() => {
+    //   this.locate();
+    //   // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
+
+    //   if (this.latitude && this.longitude) {
+    //     const alert = this.alerts.create({
+    //       title: '数据',
+    //       enableBackdropDismiss: false,
+    //       buttons: [
+    //         {
+    //           text: this.latitude + ',' + this.longitude + ',' + this.altitude,
+    //           handler: () => {
+    //           }
+    //         }
+    //       ]
+    //     });
+    //     alert.present();
+    //     setTimeout(() => {
+    //       var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+    //       console.log("point1=>");
+    //       console.log(point);
+
+    //       console.log(this.latitude);
+    //       console.log(this.longitude);
+    //       console.log(this.altitude);
 
 
-          addMarker(point2, i);
+    //       var point2 = new BMap.Point(point[1], point[0]);
+    //       console.log("point2=>");
+    //       console.log(point2);
 
-          append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
+    //       var mk = new BMap.Marker(point2);
+    //       map.addOverlay(mk);
+    //       map.panTo(point2);
+    //       // alert('您的位置：' + point.lng + ',' + point.lat);
 
-          that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
-            console.log(success);
-            // success
-          }, function (error) {
-            console.log(error);
-            // error
-          });
 
-          i++;
-        }, 5000)
-      }
-    }, 30000);
+
+
+    //       map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+
+
+    //       addMarker(point2, i);
+
+    //       append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
+
+    //       that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+    //         console.log(success);
+    //         // success
+    //       }, function (error) {
+    //         console.log(error);
+    //         // error
+    //       });
+
+    //       i++;
+    //     }, 5000)
+    //   }
+    // }, 30000);
   }
+
   ionViewDidEnter() {
     var myPoint = [];
     let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
@@ -293,35 +339,6 @@ export class AboutPage {
     }
 
     setTimeout(() => {
-      point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-      console.log("Point1进来");
-      console.log(point);
-
-      var point2 = new BMap.Point(point[1], point[0]);
-      // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-      console.log("进来的");
-      console.log(point2);
-
-
-      var mk = new BMap.Marker(point2);
-      map.addOverlay(mk);
-      map.panTo(point2);
-      // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-
-
-
-      map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
-
-
-      addMarker(point2, 0);
-      // }
-      this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
-        console.log(success);
-        // success
-      }, function (error) {
-        console.log(error);
-        // error
-      });
 
     }, 5000)
     // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
