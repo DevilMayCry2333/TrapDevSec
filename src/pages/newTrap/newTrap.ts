@@ -10,8 +10,12 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
+<<<<<<< HEAD
 
 
+=======
+import { TrapQueryPage} from '../trap-query/trap-query';
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
 @Component({
     selector: 'app-trap',
     templateUrl: 'newTrap.html',
@@ -21,14 +25,18 @@ export class TrapPage {
     deviceSerial: string
     longtitude: string
     latitude: string
-    BeetleType: string
-    injectTypeValue: string
-    WorkContentValue: string
+    BeetleType:string
+    injectTypeValue:string
+    WorkContentValue:string
     altitude: string
     accuracy: string
     have_submit:boolean
     imageData: null
+<<<<<<< HEAD
     remarks: ""
+=======
+    remarks= ""
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
     newbettle: string
     otherbettleType:any[]
     injectType:any[]
@@ -57,16 +65,35 @@ export class TrapPage {
         }
     ];
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
     deviceBind(){
         //这里还没有实现，先弹框
         this.base.showAlert("成功","",()=>{});
     }
 
+<<<<<<< HEAD
 
 
     bindNewId() {
         this.httpClient.post("http://106.15.90.78:8081/" + 'app/bindId', {},
+=======
+    NavToQuery(){
+        if(this.deviceId){
+            localStorage["TrapDeviceId"] = this.deviceId;
+            this.navCtrl.push(TrapQueryPage);
+        }else{
+            this.base.showAlert("提示","请先扫码或输入数字的设备ID!!!",()=>{});
+            
+        }
+
+    }
+
+    bindNewId() {
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
@@ -138,7 +165,11 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
+<<<<<<< HEAD
                     fileTransfer.upload(element.img, "http://106.15.90.78:8081/" + 'auth_api/maintenance', options)
+=======
+                    fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                         .then((res) => {
                             console.log(res);
                             console.log(JSON.stringify(res));
@@ -153,7 +184,11 @@ export class TrapPage {
                         })
                 }else{
                     console.log(element);
+<<<<<<< HEAD
                     this.httpClient.post("http://106.15.90.78:8081/" + 'auth_api/maintenance', {},
+=======
+                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId,
@@ -181,7 +216,11 @@ export class TrapPage {
             console.log(this.otherbettleType);
         }
 
+<<<<<<< HEAD
         this.httpClient.post("http://106.15.90.78:8081/" + 'app/getBeetle', {},
+=======
+        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             { headers: { token: localStorage['token'] }, 
             params: new HttpParams({ fromObject: { username: localStorage['username']} }) })
             .subscribe(res => {
@@ -202,7 +241,11 @@ export class TrapPage {
             console.log(this.injectType);
         }
 
+<<<<<<< HEAD
         this.httpClient.post("http://106.15.90.78:8081/" + 'app/getInject', {},
+=======
+        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -226,7 +269,11 @@ export class TrapPage {
             console.log(this.workContent);
         }
 
+<<<<<<< HEAD
         this.httpClient.post("http://106.15.90.78:8081/" + 'app/getWorkContent', {},
+=======
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { username: localStorage['username'] } })
@@ -436,7 +483,11 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
+<<<<<<< HEAD
                     fileTransfer.upload(this.imageData, "http://106.15.90.78:8081/" + 'auth_api/maintenance', options)
+=======
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                         .then((res) => {
                             console.log(res);
                             console.log(JSON.stringify(res));
@@ -485,7 +536,11 @@ export class TrapPage {
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                         })
                     .catch((error) => {//发送失败(文件不存在等)
+<<<<<<< HEAD
                         this.httpClient.post("http://106.15.90.78:8081/" + 'auth_api/maintenance', {},
+=======
+                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                             {
                                 headers: { token: localStorage['token'] }, params: {
                                     deviceId: this.deviceId,
@@ -563,7 +618,11 @@ export class TrapPage {
 
                     // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
+<<<<<<< HEAD
                     this.httpClient.post("http://106.15.90.78:8081/" + 'auth_api/maintenance', {},
+=======
+                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                         {
                             headers: {token: localStorage['token']}, params:{
                                 deviceId: this.deviceId,

@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-navbar>
         <ion-title>
             诱捕器管理
         </ion-title>
-    </ion-toolbar>
+    </ion-navbar>
 </ion-header>
 
 <ion-content id="trap">
@@ -22,7 +22,12 @@
                 <ion-label>设备编号:</ion-label>
                 <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>
             </ion-item>
+<<<<<<< HEAD
             <button id="bangding" ion-button style="Float:left;" (click)="bindNewId()">绑定</button>
+=======
+             <button ion-button (click)="bindNewId()">绑定</button>
+
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
         </ion-card-content>
     </ion-card>
 
@@ -47,6 +52,7 @@
                 <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>
             </ion-item>
             <ion-item>
+<<<<<<< HEAD
                 <ion-label>松墨天牛:</ion-label>
                 <ion-input  type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>
             </ion-item>
@@ -56,18 +62,37 @@
             </ion-item>
             <ion-item>
                 <ion-label>类型:</ion-label>
+=======
+                <ion-label>松墨天牛</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>其他天牛</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>类型</ion-label>
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                 <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
+<<<<<<< HEAD
                 <ion-label>药剂类型:</ion-label>
+=======
+                <ion-label>药剂类型</ion-label>
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                 <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
+<<<<<<< HEAD
                 <ion-label>工作内容:</ion-label>
+=======
+                <ion-label>工作内容</ion-label>
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
                 <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>
                 </ion-select>
@@ -78,8 +103,14 @@
             </ion-item>
             <button ion-button (click)="takePhoto()">拍照</button>
             <button ion-button (click)="submit()">提交</button>
+<<<<<<< HEAD
             <button ion-button>地图查看</button>
             <button ion-button (click)="NavToQuery()">查询</button>
+=======
+            <button ion-button (click)="NavToMap()">地图查看</button>
+            <button ion-button (click)="NavToQuery()">查询</button>
+
+>>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
         </ion-card-content>
     </ion-card>
 

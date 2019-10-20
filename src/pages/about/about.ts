@@ -184,7 +184,9 @@ export class AboutPage {
               var mk = new BMap.Marker(point2);
               map.addOverlay(mk);
               map.panTo(point2);
-              // alert('您的位置：' + point.lng + ',' + point.lat);
+              console.log(point2);
+          // this.base.showAlert("提示", point2.lat.toString() + point2.lng.toString(), () => { });
+          // alert('您的位置：' + point2.lng + ',' + point2.lat);
 
 
 
@@ -196,7 +198,7 @@ export class AboutPage {
 
             append += this.latitude + ',' + this.longitude + ',' + this.altitude;
 
-            this.base.logger(append,"about_ionViewDidLoad.txt");
+            // this.base.logger(append,"about_ionViewDidLoad.txt");
 
             i++;
       },5000)
@@ -226,7 +228,7 @@ export class AboutPage {
 
 
 
-    this.httpClient.get('http://39.108.184.47:8081/auth_api/user', {headers: {token: localStorage['token']}})
+    this.httpClient.get(this.base.BASE_URL + 'auth_api/user', {headers: {token: localStorage['token']}})
       .subscribe(data => {
         // console.log(d);
         var center = '';
@@ -286,7 +288,7 @@ export class AboutPage {
     console.log(this.altitude);
     
     var text: string = this.latitude + ',' + this.longitude + ',' + this.altitude;
-    this.base.logger(text, "about_ionViewDidEnter.txt");
+    // this.base.logger(text, "about_ionViewDidEnter.txt");
 
     if (Number(this.altitude)!=-10000 && this.altitude!="" && this.altitude) {
       clearInterval(a);
@@ -304,6 +306,8 @@ export class AboutPage {
         var mk = new BMap.Marker(point2);
         map.addOverlay(mk);
         map.panTo(point2);
+        console.log(point2);
+        // this.base.showAlert("提示",point2.lat.toString() + point2.lng.toString(),()=>{});
         // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
 
 
