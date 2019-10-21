@@ -76,5 +76,4 @@ export class switchProjectPage {
     trackClick(){
         this.navCtl.push(TrackPage);
     }
-
 }

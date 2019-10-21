@@ -7,7 +7,7 @@ webpackJsonp([0],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -57,7 +57,7 @@ var NewHomePage = /** @class */ (function () {
     };
     NewHomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            请登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请先登录系统!</ion-card-title>\n\n        </ion-card-header>\n        <ion-item>\n            <ion-label>用户名</ion-label>\n            <ion-input [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label>密码</ion-label>\n            <ion-input type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button ion-button (click)="login()">登录</button>\n\n        <ion-card-content>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n                用户登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content style="background-color: #B8D3CA;" >\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n\n<div id="new_login">\n    <ion-card>\n\n        <ion-card-header id="title" style=text-align:center>\n            <ion-card-title>松材线虫病防控工程管理系统</ion-card-title>\n\n        </ion-card-header>\n        <ion-item id="one">\n            <ion-label >用户名:</ion-label>\n            <ion-input id="UN" [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item id="two" >\n            <ion-label >密　码:</ion-label>\n            <ion-input id="PW" type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button id="denglu" class="button button-large button-positive" (click)="login()">登　　录</button>\n\n    </ion-card>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]])
@@ -75,11 +75,11 @@ var NewHomePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(224);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -239,7 +239,7 @@ var LocatePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(111);
@@ -401,12 +401,12 @@ webpackEmptyAsyncContext.id = 166;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return switchProjectPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newTrap_newTrap__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newDry_newDry__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newTrack_newTrack__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newDry_newDry__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newTrack_newTrack__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__newhome_newhome__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_base_js__ = __webpack_require__(8);
@@ -491,7 +491,7 @@ var switchProjectPage = /** @class */ (function () {
     };
     switchProjectPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            Ionic Blank\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请选择功能</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button ion-button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n            \n            <br />\n            <button ion-button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n            <br />\n            <br />\n            <br />\n            <button ion-button shape="round" fill="outline" (click)="exitClick()" color="danger">退出按钮</button>\n\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
+            selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            项目管理\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content  style="background-color: #B8D3CA;">\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n  \n<div id="select">\n    <ion-card>\n        <ion-card-header id="title" style=text-align:center >\n            <ion-card-title>项　　目　　管　　理</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button id="one" ion-button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            \n            <button id="two" ion-button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n           \n            <button id="three" ion-button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n          \n            <button id="four" ion-button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n           \n            <button id="five" ion-button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n            <br />\n            <br />\n            <button id="six" class="button button-outline "  (click)="exitClick()" >退出按钮</button>\n        </ion-card-content>\n    </ion-card>\n</div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
@@ -511,7 +511,7 @@ var switchProjectPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrapPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
@@ -519,8 +519,7 @@ var switchProjectPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__trap_query_trap_query__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__trap_query_trap_query__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -542,9 +541,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var TrapPage = /** @class */ (function () {
-    function TrapPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, file) {
+    function TrapPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.qrScanner = qrScanner;
@@ -554,9 +552,7 @@ var TrapPage = /** @class */ (function () {
         this.httpClient = httpClient;
         this.camera = camera;
         this.fileTransfer = fileTransfer;
-        this.file = file;
         this.isDisabled = false;
-        this.remarks = "";
         // 是否定位成功
         this.location_ready = false;
         this.users = [
@@ -659,6 +655,10 @@ var TrapPage = /** @class */ (function () {
             });
         };
     }
+    TrapPage.prototype.deviceBind = function () {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", function () { });
+    };
     TrapPage.prototype.NavToQuery = function () {
         if (this.deviceId) {
             localStorage["TrapDeviceId"] = this.deviceId;
@@ -669,41 +669,49 @@ var TrapPage = /** @class */ (function () {
         }
     };
     TrapPage.prototype.bindNewId = function () {
+        // this.base.showAlert("提交失败", "提交失败", () => { });
+        // console.log(msg);
+        // console.log("失败");
+        // var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+        // let BindIdCache: any;
+        // BindIdCache = localStorage.getItem('trapBind');
         var _this = this;
-        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
-            this.base.showAlert("提示", "请先输入设备ID和设备编号!", function () { });
-        }
-        else {
-            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
-                }
-            })
-                .subscribe(function (res) {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                console.log("cacheData");
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert("提交失败", "提交失败", function () { });
-                console.log(msg);
-                console.log("失败");
-                var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
-                var BindIdCache;
-                BindIdCache = localStorage.getItem('trapBind');
-                if (BindIdCache == null) {
-                    BindIdCache = [];
-                }
-                else {
-                    BindIdCache = JSON.parse(BindIdCache);
-                }
-                BindIdCache.push(transferParam);
-                localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
-            });
-        }
+        // if (BindIdCache == null) {
+        //     BindIdCache = [];
+        // } else {
+        //     BindIdCache = JSON.parse(BindIdCache);
+        // }
+        // BindIdCache.push(transferParam);
+        // localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+        });
         // this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
         //     {
         //         headers: { token: localStorage['token'] },
@@ -805,8 +813,6 @@ var TrapPage = /** @class */ (function () {
                         .then(function (res) {
                         i++;
                         console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
                         console.log(res);
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
@@ -1071,6 +1077,32 @@ var TrapPage = /** @class */ (function () {
                         //this.navCtrl.pop();
                         // confirm.dismiss()
                         __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    })
+                        .catch(function (error) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: _this.deviceId,
+                                longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                                drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                                otherNum: _this.otherbettle, otherType: _this.BeetleType
+                            }
+                        })
+                            .subscribe(function (res) {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            _this.base.showAlert('提示', '提交成功', function () { });
+                            var cacheData = {
+                                deviceId: _this.deviceId,
+                                longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                                drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                                otherNum: _this.otherbettle, otherType: _this.BeetleType
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+                        });
                     });
                 }
                 else {
@@ -1194,7 +1226,7 @@ var TrapPage = /** @class */ (function () {
     };
     TrapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理</h3>\n            <ion-item>\n                <ion-label>设备ID</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n             \n            </ion-item>\n               <button ion-button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n            </ion-item>\n             <button ion-button (click)="bindNewId()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>松墨天牛</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>其他天牛</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>类型</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>药剂类型</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作内容</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n            <button ion-button (click)="takePhoto()">拍照</button>\n            <button ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            <button ion-button (click)="NavToMap()">地图查看</button>\n            <button ion-button (click)="NavToQuery()">查询</button>\n\n        </ion-card-content>\n    </ion-card>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
+            selector: 'app-trap',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content >\n                <h2 id=trapezoid >设　备　管　理</h2>\n                <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one" >\n                    <ion-label>设备ID：</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             \n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two" >\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="songmo">\n                <ion-label>松墨天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item id="qita">\n                <ion-label>其他天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item id="type">\n                <ion-label>类型:</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="injectType">\n                <ion-label>药剂类型:</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n            <div id="photoANDsubmit"> \n                <button id="paizhao" ion-button (click)="takePhoto()">拍照</button>\n                <button id="tijiao" ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            </div>\n            <div id="mapANDquery"> \n                <button id="ditu" ion-button (click)="NavToMap()">地图查看</button>\n                <button id="chaxun" ion-button (click)="NavToQuery()">查询</button>\n            </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
@@ -1203,8 +1235,7 @@ var TrapPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
             __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__["a" /* File */]])
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]])
     ], TrapPage);
     return TrapPage;
 }());
@@ -1213,7 +1244,7 @@ var TrapPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 212:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1304,13 +1335,13 @@ var CoordinateConvertor = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 213:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrapQueryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1380,14 +1411,14 @@ var TrapQueryPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 214:
+/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
@@ -1395,7 +1426,7 @@ var TrapQueryPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__inject_query_inject_query__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__inject_query_inject_query__ = __webpack_require__(214);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1538,40 +1569,35 @@ var DryPage = /** @class */ (function () {
     };
     DryPage.prototype.bindNewId = function () {
         var _this = this;
-        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
-            this.base.showAlert("提示", "请先输入设备ID和设备编号!", function () { });
-        }
-        else {
-            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
-                }
-            })
-                .subscribe(function (res) {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                console.log("cacheData");
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert("提交失败", "提交失败", function () { });
-                console.log(msg);
-                console.log("失败");
-                var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
-                var BindIdCache;
-                BindIdCache = localStorage.getItem('trapBind');
-                if (BindIdCache == null) {
-                    BindIdCache = [];
-                }
-                else {
-                    BindIdCache = JSON.parse(BindIdCache);
-                }
-                BindIdCache.push(transferParam);
-                localStorage.setItem("dryBind", JSON.stringify(BindIdCache));
-            });
-        }
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("dryBind", JSON.stringify(BindIdCache));
+        });
     };
     DryPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -2003,7 +2029,7 @@ var DryPage = /** @class */ (function () {
     };
     DryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            注干剂检测\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理</h3>\n            <ion-item>\n                <ion-label>设备ID：</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                \n            </ion-item>\n            <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n            <button ion-button (click)="scan()">扫码</button>\n\n            <ion-item>\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button ion-button size="large" expand="block" (click)="bindNewId()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树木状态：</ion-label>\n                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>注剂数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作内容</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button ion-button size="large" expand="full" (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button ion-button size="large" expand="full" (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button ion-button size="large" expand="block" (click)="NavToMap()">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n        <button ion-button size="large" expand="block" (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            注干剂检测\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content id="dry">\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理</h2>\n            <hr id="line1" />\n        <div id="ID">\n            <ion-item id="one">\n                <ion-label>设备ID：</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n            </ion-item>\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n        </div>\n        <div id="NUM">\n            <ion-item id="two">\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n        </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n             </div>\n             \n            <ion-item id="status">\n                <ion-label>树木状态：</ion-label>\n                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="number">\n                <ion-label>注剂数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks"> \n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -2021,13 +2047,13 @@ var DryPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 215:
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InjectQueryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2095,14 +2121,14 @@ var InjectQueryPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 216:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnemyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
@@ -2110,7 +2136,7 @@ var InjectQueryPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__enemy_query_enemy_query__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__enemy_query_enemy_query__ = __webpack_require__(216);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2262,40 +2288,35 @@ var EnemyPage = /** @class */ (function () {
     };
     EnemyPage.prototype.bindNewId = function () {
         var _this = this;
-        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
-            this.base.showAlert("提示", "请先输入设备ID和设备编号!", function () { });
-        }
-        else {
-            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
-                }
-            })
-                .subscribe(function (res) {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                console.log("cacheData");
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert("提交失败", "提交失败", function () { });
-                console.log(msg);
-                console.log("失败");
-                var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
-                var BindIdCache;
-                BindIdCache = localStorage.getItem('trapBind');
-                if (BindIdCache == null) {
-                    BindIdCache = [];
-                }
-                else {
-                    BindIdCache = JSON.parse(BindIdCache);
-                }
-                BindIdCache.push(transferParam);
-                localStorage.setItem("eneBind", JSON.stringify(BindIdCache));
-            });
-        }
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("eneBind", JSON.stringify(BindIdCache));
+        });
     };
     EnemyPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -2679,7 +2700,7 @@ var EnemyPage = /** @class */ (function () {
     };
     EnemyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n            </ion-item>\n            <button ion-button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button ion-button size="large" expand="block" (click)="bindNewId()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>释放数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button ion-button size="large" expand="full" (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button ion-button size="large" expand="full" (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button ion-button size="large" expand="block" (click)="NavToMap()">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n    <button ion-button size="large" expand="block" (click)="NavToQuery()">\n        <ion-label>查询数据</ion-label>\n    </button>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="enemytype">\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="number">\n                <ion-label>释放数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button  (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询数据</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -2697,13 +2718,13 @@ var EnemyPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 217:
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnemyQueryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2777,14 +2798,14 @@ var EnemyQueryPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 218:
+/***/ 217:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeadtreePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
@@ -2792,7 +2813,7 @@ var EnemyQueryPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dead_trees_query_dead_trees_query__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dead_trees_query_dead_trees_query__ = __webpack_require__(218);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2936,40 +2957,35 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage.prototype.bindNewId = function () {
         var _this = this;
-        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
-            this.base.showAlert("提示", "请先输入设备ID和设备编号!", function () { });
-        }
-        else {
-            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
-                }
-            })
-                .subscribe(function (res) {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                console.log("cacheData");
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert("提交失败", "提交失败", function () { });
-                console.log(msg);
-                console.log("失败");
-                var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
-                var BindIdCache;
-                BindIdCache = localStorage.getItem('trapBind');
-                if (BindIdCache == null) {
-                    BindIdCache = [];
-                }
-                else {
-                    BindIdCache = JSON.parse(BindIdCache);
-                }
-                BindIdCache.push(transferParam);
-                localStorage.setItem("deadBind", JSON.stringify(BindIdCache));
-            });
-        }
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("deadBind", JSON.stringify(BindIdCache));
+        });
     };
     DeadtreePage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -3379,7 +3395,7 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树采伐\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <!-- <ion-icon name="qr-scanner"></ion-icon> -->\n\n            </ion-item>\n            <button ion-button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button size="large" expand="block" ion-button (click)="bindNewId()">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>桩径:</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树高:</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>材积:</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item>\n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button size="large" expand="full" ion-button (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button size="large" expand="block" ion-button (click)="NavToMap()">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n    <button size="large" expand="block" ion-button (click)="NavToQuery()">\n        <ion-label>查询</ion-label>\n    </button>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树采伐\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径:</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高:</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积:</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -3397,13 +3413,13 @@ var DeadtreePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 219:
+/***/ 218:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeadTreesQueryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3471,21 +3487,21 @@ var DeadTreesQueryPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 220:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrackPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__ = __webpack_require__(220);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3520,8 +3536,6 @@ var TrackPage = /** @class */ (function () {
         this.base64 = base64;
         this.loadingCtrl = loadingCtrl;
         this.recordTime = {};
-        this.startRecordIsClick = false;
-        this.endRecordIsClick = false;
         this.picNotExsit1 = false;
         this.picNotExsit2 = false;
         this.picNotExsit3 = false;
@@ -3556,6 +3570,11 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        var loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+            duration: 15000
+        });
+        loader.present();
         console.log(localStorage["TrackCache"]);
         console.log(localStorage["TrackCache1"]);
         console.log(localStorage["TrackCache2"]);
@@ -3563,11 +3582,6 @@ var TrackPage = /** @class */ (function () {
         console.log(localStorage["TrackCache4"]);
         console.log(localStorage["TrackCache5"]);
         if (localStorage["TrackCache"]) {
-            var loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-                duration: 15000
-            });
-            loader.present();
             var tmpStorage = JSON.parse(localStorage["TrackCache"]);
             if (localStorage["TrackCache1"]) {
                 this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
@@ -3784,8 +3798,8 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.submit = function () {
         var _this = this;
-        if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", function () { });
+        if (this.isStopRecord == false) {
+            this.base.showAlert("你还没有停止录制!", "你还没有停止录制", function () { });
         }
         else {
             this.have_submit = true;
@@ -3886,99 +3900,94 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.takePhoto = function () {
         var _this = this;
-        if (this.startRecordIsClick == false) {
-            this.base.showAlert("请先输入线路名称并点开始录制!", "请先输入线路名称并点开始录制", function () { });
-        }
-        else {
-            this.photosum += 1;
-            this.hasPic = true;
-            var options = {
-                quality: 10,
-                destinationType: this.camera.DestinationType.FILE_URI,
-                sourceType: 1,
-                encodingType: this.camera.EncodingType.JPEG,
-                mediaType: this.camera.MediaType.PICTURE,
-                allowEdit: false,
-                correctOrientation: true,
-                saveToPhotoAlbum: true
+        this.photosum += 1;
+        this.hasPic = true;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.base.showAlert(this.photosum, "", function () { });
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+            var options = {};
+            options.fileKey = "image";
+            var time = Date.parse(Date());
+            options.fileName = time + ".jpg";
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.httpMethod = "POST";
+            options.params = {
+                lineName: _this.lineName,
+                current: _this.photosum
             };
-            this.base.showAlert(this.photosum, "", function () { });
-            this.camera.getPicture(options).then(function (imageData) {
-                // this.submit(imageData)
-                // this.navCtrl.popToRoot()
-                _this.imageData = imageData;
-                var options = {};
-                options.fileKey = "image";
-                var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
+            options.headers = { token: localStorage['token'] };
+            console.log("options");
+            console.log(options);
+            console.log(_this.photosum);
+            console.log(_this.imageData);
+            console.log("======imageData====");
+            console.log(imageData);
+            console.log(_this.imageData);
+            //创建文件对象
+            var fileTransfer = _this.fileTransfer.create();
+            fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto', options)
+                .then(function (res) {
+                console.log(res);
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.showAlert('提示', '提交成功', function () { });
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+            }, function (error) {
+                _this.base.showAlert('提示', '提交失败', function () { });
+                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                var cacheData = {
                     lineName: _this.lineName,
-                    current: _this.photosum
+                    current: _this.current,
+                    img: _this.imageData,
                 };
-                options.headers = { token: localStorage['token'] };
-                console.log("options");
-                console.log(options);
-                console.log(_this.photosum);
-                console.log(_this.imageData);
-                console.log("======imageData====");
-                console.log(imageData);
-                console.log(_this.imageData);
-                //创建文件对象
-                var fileTransfer = _this.fileTransfer.create();
-                fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto', options)
-                    .then(function (res) {
-                    console.log(res);
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
-                    // Base.popTo(this.navCtrl, 'switchProjectPage');
-                }, function (error) {
-                    _this.base.showAlert('提示', '提交失败', function () { });
-                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                    var cacheData = {
-                        lineName: _this.lineName,
-                        current: _this.current,
-                        img: _this.imageData,
-                    };
-                    var TrackCache;
-                    TrackCache = localStorage.getItem('TrackCache' + _this.current);
-                    if (TrackCache == null) {
-                        TrackCache = [];
-                    }
-                    else {
-                        TrackCache = JSON.parse(TrackCache);
-                    }
-                    TrackCache.push(cacheData);
-                    //localStorage安全保存数据
-                    // try{
-                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                    // }catch(oException){
-                    //     if(oException.name == 'QuotaExceededError'){
-                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                    //         //console.log('已经超出本地存储限定大小！');
-                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                    //       // localStorage.clear();
-                    //       // localStorage.setItem(key,value);
-                    //     }
-                    // } 
-                    localStorage.setItem('TrackCache' + _this.photosum.toString(), JSON.stringify(TrackCache));
-                    //this.navCtrl.pop();
-                    // confirm.dismiss()
-                    // Base.popTo(this.navCtrl, 'switchProjectPage');
-                })
-                    .catch(function (error) {
-                });
-            }, function (err) {
-                // Handle error
-                // this.navCtrl.popToRoot()
-            }).catch(function (error) {
-                console.log(error);
+                var TrackCache;
+                TrackCache = localStorage.getItem('TrackCache' + _this.current);
+                if (TrackCache == null) {
+                    TrackCache = [];
+                }
+                else {
+                    TrackCache = JSON.parse(TrackCache);
+                }
+                TrackCache.push(cacheData);
+                //localStorage安全保存数据
+                // try{
+                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                // }catch(oException){
+                //     if(oException.name == 'QuotaExceededError'){
+                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                //         //console.log('已经超出本地存储限定大小！');
+                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                //       // localStorage.clear();
+                //       // localStorage.setItem(key,value);
+                //     }
+                // } 
+                localStorage.setItem('TrackCache' + _this.photosum.toString(), JSON.stringify(TrackCache));
+                //this.navCtrl.pop();
+                // confirm.dismiss()
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+            })
+                .catch(function (error) {
             });
-        }
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
     };
     TrackPage.prototype.LateInput = function () {
         var num1 = 0;
@@ -3996,19 +4005,18 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.startRecord = function () {
         var _this = this;
+        this.lineNameDis = true;
+        this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                linename: this.lineName,
+            }
+        }).subscribe(function (res) {
+            console.log(res);
+        });
         if (!this.lateIntravl) {
             this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", function () { });
         }
         else {
-            this.lineNameDis = true;
-            this.startRecordIsClick = true;
-            this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    linename: this.lineName,
-                }
-            }).subscribe(function (res) {
-                console.log(res);
-            });
             this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
             console.log(this.recordTime.startTime);
             var options = {
@@ -4079,21 +4087,14 @@ var TrackPage = /** @class */ (function () {
         }
     };
     TrackPage.prototype.stopRecord = function () {
-        if (this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有开始录制!", "你还没有开始录制", function () { });
-        }
-        else {
-            this.base.showAlert("停止录制成功!", "停止录制成功", function () { });
-            this.isStopRecord = true;
-            this.endRecordIsClick = true;
-            clearInterval(this.myIntravl);
-            this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
-            console.log(this.recordTime.endTime);
-        }
+        this.isStopRecord = true;
+        clearInterval(this.myIntravl);
+        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+        console.log(this.recordTime.endTime);
     };
     TrackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>定位信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>延时设置:(秒)</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n\n    <button size="large" expand="full" ion-button (click)="startRecord()">\n        <ion-label>开始录制</ion-label>\n        <ion-icon name="videocam"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="stopRecord()">\n        <ion-label>停止录制</ion-label>\n        <ion-icon name="square"></ion-icon>\n    </button>\n\n\n    <button size="large" expand="full" ion-button (click)="takePhoto()">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full" ion-button (click)="submit()">\n        <ion-label>提交</ion-label>\n    </button>\n\n\n    <button size="large" expand="block" ion-button (click)="NavToMap()">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n    <!-- <ion-content padding>\n\n\n        <div padding-top>\n            <button ion-button block color="light" (click)="getPicture()">选择照片</button>\n        </div>\n        <div id="test-div" [innerHtml]="data"></div>\n        <div padding-top>\n            <button type="button" ion-button block (click)="saveAvatar()">保 存</button>\n        </div>\n    </ion-content> -->\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置:(秒)</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
@@ -4113,27 +4114,27 @@ var TrackPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 222:
+/***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(230);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4415,12 +4416,12 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 223:
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceForestFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(223);
 
 /**
  * Generated class for the DeviceForestFillPage page.
@@ -4498,7 +4499,7 @@ var DeviceForestFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 224:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4599,18 +4600,18 @@ var PhotoUploadPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 225:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4925,17 +4926,17 @@ var MaintenancePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 226:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CachePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5416,20 +5417,20 @@ var CachePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 227:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(228);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5523,6 +5524,7 @@ var LoginPage = /** @class */ (function () {
             _this.nativePageTransitions.slide(_this.base.transitionOptions);
             _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
             sessionStorage['isLogin'] = true;
+            _this.base.showAlert('提示', '数量输入为空或不合法', function () { });
         }, function (res) {
             _this.base.showConfirmAlert('提示', '登录失败', function () {
             }, function () { });
@@ -5561,14 +5563,14 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 228:
+/***/ 227:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(221);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5599,12 +5601,12 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 231:
+/***/ 230:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceDataPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
@@ -5726,13 +5728,13 @@ var DeviceDataPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 232:
+/***/ 231:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 
 
@@ -5743,54 +5745,53 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 253:
+/***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_newhome_newhome__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_newSwitchProject_newSwitchProject__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_newTrap_newTrap__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_newDeadTree_newDeadTree__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_newEnemy_newEnemy__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_newTrack_newTrack__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_trap_query_trap_query__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_dead_trees_query_dead_trees_query__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__pages_inject_query_inject_query__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__pages_enemy_query_enemy_query__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__pages_track_query_track_query__ = __webpack_require__(311);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_base64__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__ionic_native_app_availability__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_newDeadTree_newDeadTree__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_newEnemy_newEnemy__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_newTrack_newTrack__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_trap_query_trap_query__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_dead_trees_query_dead_trees_query__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__pages_inject_query_inject_query__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__pages_enemy_query_enemy_query__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__pages_track_query_track_query__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_base64__ = __webpack_require__(220);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5803,7 +5804,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-
 
 
 
@@ -5952,7 +5952,6 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15__common_base_js__["a" /* Base */],
                 __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__["a" /* CoordinateConvertor */],
                 __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__["a" /* NativePageTransitions */],
-                __WEBPACK_IMPORTED_MODULE_42__ionic_native_app_availability__["a" /* AppAvailability */],
                 __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__["a" /* Diagnostic */],
                 __WEBPACK_IMPORTED_MODULE_41__ionic_native_base64__["a" /* Base64 */],
                 __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__["a" /* Camera */],
@@ -5969,13 +5968,13 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 295:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_newhome_newhome__ = __webpack_require__(110);
@@ -6015,13 +6014,13 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 308:
+/***/ 307:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6050,12 +6049,12 @@ var ContactPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 309:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceBeetleFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(222);
 
 /**
  * Generated class for the DeviceBeetleFillPage page.
@@ -6127,13 +6126,13 @@ var DeviceBeetleFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 311:
+/***/ 310:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrackQueryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6178,7 +6177,7 @@ var TrackQueryPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScanPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(60);
@@ -6461,13 +6460,12 @@ var ScanPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_app_availability__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_coordinate_convertor__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6489,12 +6487,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-
-
 // declare var BMapLib;
 var markers = [];
 var AboutPage = /** @class */ (function () {
-    function AboutPage(navCtrl, httpClient, base, coordinateConvertor, alerts, file, geolocation, changeDetectorRef, appAvailability, platform) {
+    function AboutPage(navCtrl, httpClient, base, coordinateConvertor, alerts, file, geolocation, changeDetectorRef) {
         this.navCtrl = navCtrl;
         this.httpClient = httpClient;
         this.base = base;
@@ -6503,8 +6499,6 @@ var AboutPage = /** @class */ (function () {
         this.file = file;
         this.geolocation = geolocation;
         this.changeDetectorRef = changeDetectorRef;
-        this.appAvailability = appAvailability;
-        this.platform = platform;
         // 是否定位成功
         this.location_ready = false;
         //username = '';
@@ -6530,45 +6524,6 @@ var AboutPage = /** @class */ (function () {
         //
         // map.centerAndZoom('中国', 5);
     }
-    AboutPage.prototype.openBaiduMap = function () {
-        var _this = this;
-        var app;
-        if (this.platform.is('ios')) {
-            app = 'baidumap://';
-        }
-        else if (this.platform.is('android')) {
-            app = 'com.baidu.BaiduMap';
-        }
-        var point = new BMap.Point(116.331398, 39.897445);
-        point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-        console.log(point[0]);
-        console.log(point[1]);
-        this.appAvailability.check(app).then(function (yes) {
-            if (_this.platform.is('ios')) {
-                window.location.href = 'baidumap://map/direction?origin=中关村&destination=五道口&mode=driving&region=北京&src=ios.baidu.openAPIdemo';
-            }
-            else {
-                window.location.href = 'bdapp://map/direction?&origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置';
-            }
-        }, function (no) {
-            console.log(_this.latitude);
-            console.log(_this.longitude);
-            var url = "http://api.map.baidu.com/marker?location=" + point[0] + "," + point[1] + "&title=我的位置&content=百度奎科大厦&output=html&src=webapp.baidu.openAPIdemo";
-            console.log(url);
-            window.open(url);
-        });
-        // appAvailability.check(
-        //   'com.baidu.BaiduMap',
-        //   function() {  // 已下载
-        //     device.platform === 'iOS'?
-        //       window.location.href = 'baidumap://map/direction?origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置':
-        //       window.location.href = 'bdapp://map/direction?&origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置'
-        //   },
-        //   function() { // 未下载
-        //     // 打开浏览器
-        //   }
-        // );
-    };
     AboutPage.prototype.locate = function () {
         var _this = this;
         var options = {
@@ -6807,13 +6762,8 @@ var AboutPage = /** @class */ (function () {
             selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n  <button ion-button (click)="IamHere()">我在这</button>\n  <button ion-button (click)="openBaiduMap()">地图分享</button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/
         }),
         __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__common_coordinate_convertor__["a" /* CoordinateConvertor */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_app_availability__["a" /* AppAvailability */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
     ], AboutPage);
     return AboutPage;
 }());
@@ -6828,8 +6778,8 @@ var AboutPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6965,5 +6915,5 @@ var Base = /** @class */ (function () {
 
 /***/ })
 
-},[232]);
+},[231]);
 //# sourceMappingURL=main.js.map
