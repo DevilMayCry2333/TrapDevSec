@@ -15,18 +15,13 @@ import { AlertController } from 'ionic-angular';
     templateUrl: 'newSwitchProject.html',
 })
 export class switchProjectPage {
-    alertCtrl: any;
 
     constructor(private navCtl: NavController, 
         private alertCtrl: AlertController,
         private httpClient: HttpClient, private base: Base) { }
 
     ionViewDidLoad(){
-<<<<<<< HEAD
-        this.httpClient.post("http://106.15.90.78:8081/app/" + 'getMyDevice', {},
-=======
         this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {},
->>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
@@ -80,30 +75,5 @@ export class switchProjectPage {
     }
     trackClick(){
         this.navCtl.push(TrackPage);
-    }
-    exitClick(){
-        const alert = this.alertCtrl.create({
-            title: "警告!!",
-            subTitle: "是否要退出系统?",
-            buttons: [
-                {
-                    text: '确认', handler: () => {
-                    localStorage.removeItem("token");
-                    this.navCtl.push(NewHomePage);
-                        console.log("ok");
-                    }
-                },
-                {
-                    text: '取消', handler: () => {
-                        console.log("cancel");
-                    }
-                }
-
-        ]
-        });
-        alert.present();
-
-        // localStorage.removeItem("token");
-        // this.navCtl.push(NewHomePage);
     }
 }
