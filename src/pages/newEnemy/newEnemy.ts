@@ -79,41 +79,44 @@ export class EnemyPage {
 
     }
     bindNewId() {
-        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
-            {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
-                }
-            })
-            .subscribe(res => {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                this.base.showAlert('提示', '提交成功', () => { });
-                console.log("cacheData");
+        if(this.deviceId == undefined || this.deviceId=="" || this.deviceSerial == undefined || this.deviceSerial == ""){
+            this.base.showAlert("提示","请先输入设备ID和设备编号!",()=>{})
+        }else{
+            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                {
+                    headers: { token: localStorage['token'] }, params: {
+                        scanId: this.deviceId, serial: this.deviceSerial
+                    }
+                })
+                .subscribe(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    console.log("cacheData");
 
-                Base.popTo(this.navCtrl, 'switchProjectPage');
-            }, (msg) => {
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                }, (msg) => {
 
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                this.base.showAlert("提交失败", "提交失败", () => { });
-                console.log(msg);
-                console.log("失败");
-                var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
-                let BindIdCache: any;
-                BindIdCache = localStorage.getItem('trapBind');
+                    this.base.showAlert("提交失败", "提交失败", () => { });
+                    console.log(msg);
+                    console.log("失败");
+                    var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+                    let BindIdCache: any;
+                    BindIdCache = localStorage.getItem('trapBind');
 
-                if (BindIdCache == null) {
-                    BindIdCache = [];
-                } else {
-                    BindIdCache = JSON.parse(BindIdCache);
-                }
-                BindIdCache.push(transferParam);
+                    if (BindIdCache == null) {
+                        BindIdCache = [];
+                    } else {
+                        BindIdCache = JSON.parse(BindIdCache);
+                    }
+                    BindIdCache.push(transferParam);
 
-                localStorage.setItem("eneBind", JSON.stringify(BindIdCache));
-            });
-
+                    localStorage.setItem("eneBind", JSON.stringify(BindIdCache));
+                });
+        }
     }
     ionViewDidLoad() {
 
