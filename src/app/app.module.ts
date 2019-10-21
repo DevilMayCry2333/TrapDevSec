@@ -44,6 +44,8 @@ import { InjectQueryPage} from '../pages/inject-query/inject-query';
 import { EnemyQueryPage} from '../pages/enemy-query/enemy-query';
 import { TrackQueryPage} from '../pages/track-query/track-query';
 import { Base64 } from '@ionic-native/base64';
+import { AppAvailability } from '@ionic-native/app-availability';
+
 
 
 class MyErrorHandler implements ErrorHandler {
@@ -142,6 +144,7 @@ class MyErrorHandler implements ErrorHandler {
     Base,
     CoordinateConvertor,
     NativePageTransitions,
+    AppAvailability,
     Diagnostic,
     Base64,
     Camera,

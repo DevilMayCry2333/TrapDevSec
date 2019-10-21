@@ -11,6 +11,8 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
 import { TrapQueryPage} from '../trap-query/trap-query';
+import { File } from "@ionic-native/file";
+
 @Component({
     selector: 'app-home',
     templateUrl: 'newTrap.html',
@@ -70,60 +72,45 @@ export class TrapPage {
     }
 
     bindNewId() {
-
-        // this.base.showAlert("提交失败", "提交失败", () => { });
-        // console.log(msg);
-        // console.log("失败");
-        // var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
-        // let BindIdCache: any;
-        // BindIdCache = localStorage.getItem('trapBind');
-
-        // if (BindIdCache == null) {
-        //     BindIdCache = [];
-        // } else {
-        //     BindIdCache = JSON.parse(BindIdCache);
-        // }
-        // BindIdCache.push(transferParam);
-
-        // localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
-
-        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
-            {
-                headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId,serial:this.deviceSerial
-                }
-            })
-            .subscribe(res => {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                this.base.showAlert('提示', '提交成功', () => { });
-                console.log("cacheData");
-
-                Base.popTo(this.navCtrl, 'switchProjectPage');
-            }, (msg) => {
-
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                    this.base.showAlert("提交失败","提交失败",()=>{});
-                    console.log(msg);
-                    console.log("失败");
-                    var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
-                    let BindIdCache: any;
-                    BindIdCache = localStorage.getItem('trapBind');
-
-                    if (BindIdCache == null) {
-                        BindIdCache = [];
-                    } else {
-                        BindIdCache = JSON.parse(BindIdCache);
+        if(this.deviceId == undefined || this.deviceId=="" || this.deviceSerial == undefined || this.deviceSerial == ""){
+            this.base.showAlert("提示","请先输入设备ID和设备编号!",()=>{})
+        }else{
+            this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                {
+                    headers: { token: localStorage['token'] }, params: {
+                        scanId: this.deviceId,serial:this.deviceSerial
                     }
-                    BindIdCache.push(transferParam);
+                })
+                .subscribe(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    console.log("cacheData");
 
-                    localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
-            });
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                }, (msg) => {
 
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
+                        this.base.showAlert("提交失败","提交失败",()=>{});
+                        console.log(msg);
+                        console.log("失败");
+                        var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
+                        let BindIdCache: any;
+                        BindIdCache = localStorage.getItem('trapBind');
 
+                        if (BindIdCache == null) {
+                            BindIdCache = [];
+                        } else {
+                            BindIdCache = JSON.parse(BindIdCache);
+                        }
+                        BindIdCache.push(transferParam);
+
+                        localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+                });
+
+        }
         // this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
         //     {
         //         headers: { token: localStorage['token'] },
@@ -251,7 +238,9 @@ export class TrapPage {
                         .then((res) => {
                             i++;
                             console.log("======进入文件上传=====");
-
+                            console.log("====文件路径=====");
+                            console.log(element.img);
+                            
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
@@ -431,7 +420,8 @@ export class TrapPage {
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
         private camera: Camera,
-        private fileTransfer: FileTransfer) { }
+        private fileTransfer: FileTransfer,
+        private file:File) { }
 
     callBack = (params) => {
         return new Promise((resolve, reject) => {
