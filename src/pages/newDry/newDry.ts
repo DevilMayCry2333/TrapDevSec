@@ -12,7 +12,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-nati
 import { AboutPage } from '../about/about';
 import { InjectQueryPage} from '../inject-query/inject-query';
 @Component({
-    selector: 'app-home',
+    selector: 'app-dry',
     templateUrl: 'newDry.html'
 })
 export class DryPage {

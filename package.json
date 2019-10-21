@@ -99,7 +99,6 @@
       "com-badrit-base64": {}
     },
     "platforms": [
-      "android",
       "ios"
     ]
   }
