@@ -1,16 +1,85 @@
 webpackJsonp([0],{
 
-/***/ 107:
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var NewHomePage = /** @class */ (function () {
+    function NewHomePage(httpClient, navCtl, base) {
+        this.httpClient = httpClient;
+        this.navCtl = navCtl;
+        this.base = base;
+    }
+    NewHomePage.prototype.ionViewDidLoad = function () {
+        if (localStorage['token']) {
+            this.navCtl.push(__WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__["a" /* switchProjectPage */]);
+        }
+    };
+    NewHomePage.prototype.login = function () {
+        var _this = this;
+        console.log(this.username);
+        console.log(this.password);
+        this.httpClient.post(this.base.BASE_URL + 'login', {}, { params: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: this.username, password: this.password } }) })
+            .subscribe(function (res) {
+            console.log(res);
+            console.log(res['token']);
+            localStorage['token'] = res['token'];
+            // 直接把用户名密码存了
+            localStorage['username'] = _this.username;
+            localStorage['password'] = _this.password;
+            sessionStorage['isLogin'] = true;
+            _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__["a" /* switchProjectPage */]);
+        }, function (res) {
+            console.log(res);
+            _this.base.showConfirmAlert('提示', '用户名或者密码错了', function () {
+            }, function () { });
+        });
+    };
+    NewHomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n                用户登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content style="background-color: #B8D3CA;" >\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n\n<div id="new_login">\n    <ion-card>\n\n        <ion-card-header id="title" style=text-align:center>\n            <ion-card-title>松材线虫病防控工程管理系统</ion-card-title>\n\n        </ion-card-header>\n        <ion-item id="one">\n            <ion-label >用户名:</ion-label>\n            <ion-input id="UN" [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item id="two" >\n            <ion-label >密　码:</ion-label>\n            <ion-input id="PW" type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button id="denglu" class="button button-large button-positive" (click)="login()">登　　录</button>\n\n    </ion-card>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]])
+    ], NewHomePage);
+    return NewHomePage;
+}());
+
+//# sourceMappingURL=newhome.js.map
+
+/***/ }),
+
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_page_transitions__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__maintenance_maintenance__ = __webpack_require__(224);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -164,16 +233,16 @@ var LocatePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 109:
+/***/ 112:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__locate_locate__ = __webpack_require__(111);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -292,7 +361,7 @@ var DetailPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 121:
+/***/ 124:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -305,11 +374,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 121;
+webpackEmptyAsyncContext.id = 124;
 
 /***/ }),
 
-/***/ 163:
+/***/ 166:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -322,80 +391,25 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 163;
+webpackEmptyAsyncContext.id = 166;
 
 /***/ }),
 
-/***/ 206:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__ = __webpack_require__(207);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var NewHomePage = /** @class */ (function () {
-    function NewHomePage(httpClient, navCtl) {
-        this.httpClient = httpClient;
-        this.navCtl = navCtl;
-    }
-    NewHomePage.prototype.login = function () {
-        var _this = this;
-        console.log(this.username);
-        console.log(this.password);
-        this.httpClient.post("http://39.108.184.47:8081/" + 'login', {}, { params: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: this.username, password: this.password } }) })
-            .subscribe(function (res) {
-            console.log(res);
-            console.log(res['token']);
-            localStorage['token'] = res['token'];
-            // 直接把用户名密码存了
-            localStorage['username'] = _this.username;
-            localStorage['password'] = _this.password;
-            sessionStorage['isLogin'] = true;
-            _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_3__newSwitchProject_newSwitchProject__["a" /* switchProjectPage */]);
-        }, function (res) {
-            console.log(res);
-        });
-    };
-    NewHomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            请登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请先登录系统!</ion-card-title>\n        </ion-card-header>\n        <ion-item>\n            <ion-label>用户名</ion-label>\n            <ion-input [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label>密码</ion-label>\n            <ion-input type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button (click)="login()">登录</button>\n\n        <ion-card-content>\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
-    ], NewHomePage);
-    return NewHomePage;
-}());
-
-//# sourceMappingURL=newhome.js.map
-
-/***/ }),
-
-/***/ 207:
+/***/ 209:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return switchProjectPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newTrap_newTrap__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newDry_newDry__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newTrack_newTrack__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newTrap_newTrap__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__newDry_newDry__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__newTrack_newTrack__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__newhome_newhome__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -405,6 +419,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
+
 
 
 
@@ -413,9 +431,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var switchProjectPage = /** @class */ (function () {
-    function switchProjectPage(navCtl) {
+    function switchProjectPage(navCtl, alertCtrl, httpClient, base) {
         this.navCtl = navCtl;
+        this.alertCtrl = alertCtrl;
+        this.httpClient = httpClient;
+        this.base = base;
     }
+    switchProjectPage.prototype.ionViewDidLoad = function () {
+        this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            localStorage['device'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+    };
     switchProjectPage.prototype.trapClick = function () {
         console.log("trap");
         this.navCtl.push(__WEBPACK_IMPORTED_MODULE_2__newTrap_newTrap__["a" /* TrapPage */]);
@@ -426,6 +459,30 @@ var switchProjectPage = /** @class */ (function () {
     switchProjectPage.prototype.deadClick = function () {
         this.navCtl.push(__WEBPACK_IMPORTED_MODULE_5__newDeadTree_newDeadTree__["a" /* DeadtreePage */]);
     };
+    switchProjectPage.prototype.exitClick = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: "警告!!",
+            subTitle: "是否要退出系统???????",
+            buttons: [
+                {
+                    text: '确认', handler: function () {
+                        localStorage.removeItem("token");
+                        _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_8__newhome_newhome__["a" /* NewHomePage */]);
+                        console.log("ok");
+                    }
+                },
+                {
+                    text: '取消', handler: function () {
+                        console.log("cancel");
+                    }
+                }
+            ]
+        });
+        alert.present();
+        // localStorage.removeItem("token");
+        // this.navCtl.push(NewHomePage);
+    };
     switchProjectPage.prototype.enemyClick = function () {
         this.navCtl.push(__WEBPACK_IMPORTED_MODULE_4__newEnemy_newEnemy__["a" /* EnemyPage */]);
     };
@@ -434,9 +491,11 @@ var switchProjectPage = /** @class */ (function () {
     };
     switchProjectPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            Ionic Blank\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n    <ion-card>\n        <ion-card-header>\n            <ion-card-title>请选择功能</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            <br />\n            <button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n            <br />\n            <button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n            <br />\n            <button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n            <br />\n            <button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n        </ion-card-content>\n    </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
+            selector: 'app-switchProject',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            项目管理\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content  style="background-color: #B8D3CA;">\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n  \n<div id="select">\n    <ion-card>\n        <ion-card-header id="title" style=text-align:center >\n            <ion-card-title>项　　目　　管　　理</ion-card-title>\n        </ion-card-header>\n\n        <ion-card-content>\n            <button id="one" ion-button shape="round" fill="outline" (click)="trapClick()">诱捕器管理</button>\n            \n            <button id="two" ion-button shape="round" fill="outline" (click)="dryClick()">注干剂监测</button>\n           \n            <button id="three" ion-button shape="round" fill="outline" (click)="deadClick()">枯死树采伐</button>\n          \n            <button id="four" ion-button shape="round" fill="outline" (click)="enemyClick()">天敌防治</button>\n           \n            <button id="five" ion-button shape="round" fill="outline" (click)="trackClick()">轨迹追踪</button>\n            <br />\n            <br />\n            <br />\n            <button id="six" class="button button-outline "  (click)="exitClick()" >退出按钮</button>\n        </ion-card-content>\n    </ion-card>\n</div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newSwitchProject/newSwitchProject.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_9__common_base_js__["a" /* Base */]])
     ], switchProjectPage);
     return switchProjectPage;
 }());
@@ -445,15 +504,22 @@ var switchProjectPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 208:
+/***/ 210:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrapPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__trap_query_trap_query__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -467,10 +533,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
+
+
+
 var TrapPage = /** @class */ (function () {
-    function TrapPage(navCtrl, qrScanner) {
+    function TrapPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.qrScanner = qrScanner;
+        this.base = base;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        this.httpClient = httpClient;
+        this.camera = camera;
+        this.fileTransfer = fileTransfer;
+        this.isDisabled = false;
+        // 是否定位成功
+        this.location_ready = false;
         this.users = [
             {
                 id: 1,
@@ -488,26 +572,670 @@ var TrapPage = /** @class */ (function () {
                 last: 'Rosenburg',
             }
         ];
+        this.callBack = function (params) {
+            return new Promise(function (resolve, reject) {
+                if (params) {
+                    console.log(params.id);
+                    var allDevice = JSON.parse(localStorage["device"]);
+                    console.log(localStorage["device"]);
+                    console.log("Array");
+                    console.log(allDevice[0]);
+                    var flag = 0;
+                    console.log(params.id.charAt(8) == '1');
+                    allDevice.forEach(function (element) {
+                        console.log("element");
+                        // console.log(element);
+                        if ((element.scanId == params.id && params.id.charAt(8) == '1') || params.id.charAt(8) == '6')
+                            flag = 1;
+                    });
+                    if (flag == 1) {
+                        _this.deviceId = params.id;
+                        var options = {
+                            enableHighAccuracy: true,
+                            timeout: 99999999,
+                            maximumAge: 0
+                        };
+                        var that_1 = _this;
+                        var watch = _this.geolocation.watchPosition(options);
+                        _this.subscription = watch.subscribe(function (data) {
+                            // data can be a set of coordinates, or an error (if an error occurred).
+                            if (data['coords']) {
+                                // setTimeout(() => {
+                                _this.latitude = String(data.coords.latitude);
+                                sessionStorage['latitude'] = String(data.coords.latitude);
+                                _this.longtitude = String(data.coords.longitude);
+                                sessionStorage['longitude'] = String(data.coords.longitude);
+                                _this.altitude = String(data.coords.altitude);
+                                sessionStorage['altitude'] = String(data.coords.altitude);
+                                _this.accuracy = String(data.coords.accuracy);
+                                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                                if (data.coords.altitude == null) {
+                                    _this.altitude = '-10000';
+                                    sessionStorage['altitude'] = '-10000';
+                                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                                }
+                                setTimeout(function () {
+                                    //this.location_ready = true;
+                                    _this.location_ready = true;
+                                    that_1.changeDetectorRef.detectChanges();
+                                }, 5000);
+                                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                                that_1.changeDetectorRef.detectChanges();
+                                // },5);
+                                // if(this.altitude==null){
+                                //   this.location_ready = false;
+                                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                                // }
+                            }
+                            // else{
+                            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                            // }
+                        }, function (res) {
+                            // setTimeout(() => {
+                            //    this.base.showAlert('提示','wu',()=>{});
+                            _this.location_ready = false;
+                            that_1.changeDetectorRef.detectChanges();
+                            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                            // },5);
+                            // alert();
+                        });
+                        _this.base.showConfirmAlert("成功", params.id, function () {
+                        }, function () { });
+                    }
+                    else {
+                        _this.base.showConfirmAlert("二维码无效", params.id, function () {
+                        }, function () { });
+                    }
+                }
+                else {
+                }
+            });
+        };
     }
+    TrapPage.prototype.deviceBind = function () {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", function () { });
+    };
+    TrapPage.prototype.NavToQuery = function () {
+        if (this.deviceId) {
+            localStorage["TrapDeviceId"] = this.deviceId;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__trap_query_trap_query__["a" /* TrapQueryPage */]);
+        }
+        else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", function () { });
+        }
+    };
+    TrapPage.prototype.bindNewId = function () {
+        // this.base.showAlert("提交失败", "提交失败", () => { });
+        // console.log(msg);
+        // console.log("失败");
+        // var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+        // let BindIdCache: any;
+        // BindIdCache = localStorage.getItem('trapBind');
+        var _this = this;
+        // if (BindIdCache == null) {
+        //     BindIdCache = [];
+        // } else {
+        //     BindIdCache = JSON.parse(BindIdCache);
+        // }
+        // BindIdCache.push(transferParam);
+        // localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+        });
+        // this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+        //     {
+        //         headers: { token: localStorage['token'] },
+        //         params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
+        //     })
+        //     .subscribe(res => {
+        //         console.log(res);
+        //         this.base.showAlert("成功", "", () => { });
+        //     },(msg) => {
+        //         console.log("===提交失败====");
+        //             console.log(msg);
+        //         })
+    };
+    TrapPage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    TrapPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad LocatePage');
+        console.log(localStorage['device']);
+        console.log(localStorage["maintenanceCache"]);
+        console.log("=====绑定缓存=====");
+        console.log(localStorage["trapBind"]);
+        var i = 0;
+        if (localStorage["trapBind"]) {
+            var tmpStorage2 = [];
+            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+            console.log(tmpStorage2);
+            tmpStorage2.forEach(function (element) {
+                console.log("===开始===");
+                console.log(element.scanId);
+                console.log(element.serial);
+                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                    headers: { token: localStorage['token'] },
+                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                })
+                    .subscribe(function (res) {
+                    console.log(res);
+                    i++;
+                    _this.base.showAlert("成功绑定了", "", function () { });
+                    if (tmpStorage2.length == i) {
+                        localStorage.removeItem("trapBind");
+                        _this.base.showAlert("清理了缓存", "", function () { });
+                    }
+                }, function (msg) {
+                });
+            });
+        }
+        if (localStorage["maintenanceCache"]) {
+            var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+            var i = 0;
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                console.log("====图片路径====");
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId,
+                        longitude: element.longitude, latitude: element.latitude, num: element.num,
+                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                        otherNum: element.otherNum, otherType: element.otherType
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'auth_api/maintenance', options)
+                        .then(function (res) {
+                        i++;
+                        console.log("======进入文件上传=====");
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('maintenanceCache');
+                    }, function (error) {
+                        console.log("******进入Error******");
+                        console.log(error);
+                        return new Promise(function (resolve, reject) {
+                            _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId,
+                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                    otherNum: element.otherNum, otherType: element.otherType
+                                }
+                            })
+                                .toPromise().then(function (res) {
+                                console.log(res);
+                                i++;
+                                // this.base.showAlert("对不起，图片被你删掉了", "但是其他数据传上来了", () => { });
+                                if (i >= tmpStorage.length)
+                                    localStorage.removeItem('maintenanceCache');
+                            }, function (msg) {
+                                console.log(msg);
+                            });
+                        });
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    })
+                        .catch(function (error) {
+                        console.log("******进入cache*******");
+                        //发送失败(文件不存在等)
+                        _this.base.showAlert("图片不存在!", "图片不存在", function () { });
+                        console.log(error);
+                        return new Promise(function (resolve, reject) {
+                            _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId,
+                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                    otherNum: element.otherNum, otherType: element.otherType
+                                }
+                            })
+                                .toPromise().then(function (res) {
+                                i++;
+                                console.log(res);
+                                if (i >= tmpStorage.length)
+                                    localStorage.removeItem('maintenanceCache');
+                                _this.base.showAlert("图片提交成功", "提交成功", function () { });
+                            }, function (msg) {
+                                console.log(msg);
+                            });
+                        });
+                    });
+                }
+                else {
+                    console.log("=====Element图片为空=====");
+                    console.log(element);
+                    _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId,
+                            longitude: element.longitude, latitude: element.latitude, num: element.num,
+                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                            otherNum: element.otherNum, otherType: element.otherType
+                        }
+                    })
+                        .subscribe(function (res) {
+                        i++;
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('maintenanceCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            });
+        }
+        if (localStorage["otherbettleType"]) {
+            console.log(localStorage["otherbettleType"]);
+            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
+            console.log("缓存");
+            console.log(this.otherbettleType);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {}, { headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } }) })
+            .subscribe(function (res) {
+            var c = res;
+            _this.otherbettleType = Array.from(c);
+            console.log(_this.otherbettleType);
+            localStorage['otherbettleType'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+        if (localStorage["TrapinjectType"]) {
+            console.log(localStorage["TrapinjectType"]);
+            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
+            console.log("缓存");
+            console.log(this.injectType);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.injectType = Array.from(c);
+            console.log(_this.injectType);
+            localStorage['TrapinjectType'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+        if (localStorage["TrapWorkContent"]) {
+            console.log(localStorage["TrapWorkContent"]);
+            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
+            console.log("缓存");
+            console.log(this.workContent);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.workContent = Array.from(c);
+            console.log(_this.workContent);
+            console.log(_this.workContent);
+            localStorage['TrapWorkContent'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+    };
+    TrapPage.prototype.NavToMap = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__about_about__["a" /* AboutPage */]);
+    };
     TrapPage.prototype.trapClick = function () {
         console.log("trap");
     };
     TrapPage.prototype.scan = function () {
         console.log("scan");
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__scan_scan__["a" /* ScanPage */]);
+        console.log(localStorage['username']);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
+    };
+    TrapPage.prototype.submit = function () {
+        var _this = this;
+        this.isDisabled = true;
+        this.have_submit = true;
+        console.log(this.injectTypeValue);
+        console.log(this.WorkContentValue);
+        console.log(this.BeetleType);
+        var num1 = 0;
+        if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
+            // this.base.showAlert('提示', '请输入数字', () => { });
+            this.newbettle = "";
+        }
+        if (!this.newbettle) {
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.newbettle);
+        this.newbettle = '' + num1;
+        if (this.newbettle == 'NaN') {
+            this.newbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        var num2 = 0;
+        if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.otherbettle) {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.otherbettle);
+        this.otherbettle = '' + num1;
+        if (this.otherbettle == 'NaN') {
+            this.otherbettle = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        var beizhu = this.remarks.replace(/\s/g, '');
+        var ischeck = /[^\a-\zA-\Z0-9\u4E00-\u9FA5]/;
+        if (ischeck.test(beizhu)) {
+            //this.remark = '';
+            this.base.showAlert('提示', '备注存在不合法字符', function () { });
+        }
+        else {
+            console.log(this.injectTypeValue);
+            console.log(this.WorkContentValue);
+            console.log(this.BeetleType);
+            if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+            }
+            else {
+                if (this.imageData != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }, function (error) {
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                        var cacheData = {
+                            deviceId: _this.deviceId,
+                            longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                            maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                            drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                            otherNum: _this.otherbettle, otherType: _this.BeetleType,
+                            img: _this.imageData
+                        };
+                        var maintenanceCache;
+                        maintenanceCache = localStorage.getItem('maintenanceCache');
+                        if (maintenanceCache == null) {
+                            maintenanceCache = [];
+                        }
+                        else {
+                            maintenanceCache = JSON.parse(maintenanceCache);
+                        }
+                        maintenanceCache.push(cacheData);
+                        //localStorage安全保存数据
+                        // try{
+                        //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // } 
+                        localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        //this.navCtrl.pop();
+                        // confirm.dismiss()
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    })
+                        .catch(function (error) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: _this.deviceId,
+                                longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                                drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                                otherNum: _this.otherbettle, otherType: _this.BeetleType
+                            }
+                        })
+                            .subscribe(function (res) {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            _this.base.showAlert('提示', '提交成功', function () { });
+                            var cacheData = {
+                                deviceId: _this.deviceId,
+                                longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                                maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                                drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                                otherNum: _this.otherbettle, otherType: _this.BeetleType
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+                        });
+                    });
+                }
+                else {
+                    // var options: string = "deviceId: " + this.id +
+                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: this.deviceId,
+                            longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                            maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                            drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                            otherNum: this.otherbettle, otherType: this.BeetleType
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId,
+                            longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                            maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                            drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                            otherNum: _this.otherbettle, otherType: _this.BeetleType
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }, function (msg) {
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId,
+                            longitude: _this.longtitude, latitude: _this.latitude, num: _this.newbettle,
+                            maleNum: "1", femaleNum: "1", altitude: _this.altitude,
+                            drug: _this.injectTypeValue, remark: _this.remarks, workingContent: _this.WorkContentValue,
+                            otherNum: _this.otherbettle, otherType: _this.BeetleType
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        var maintenanceCache;
+                        maintenanceCache = localStorage.getItem('maintenanceCache');
+                        if (maintenanceCache == null) {
+                            maintenanceCache = [];
+                        }
+                        else {
+                            maintenanceCache = JSON.parse(maintenanceCache);
+                        }
+                        maintenanceCache.push(cacheData);
+                        // try{
+                        //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // }   
+                        localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                        console.log("Hello");
+                        //this.navCtrl.pop();
+                        // confirm.dismiss();
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    });
+                }
+            }
+        }
     };
     TrapPage.prototype.deviceIdInput = function () {
         console.log("ok");
         console.log(this.deviceId);
+        var num1 = 0;
+        if (parseInt(this.deviceId) < 0 || parseInt(this.deviceId) == NaN) {
+            this.base.showAlert('提示', '设备ID不合法', function () { });
+        }
+        if (!this.deviceId) {
+            this.base.showAlert('提示', '设备ID不合法', function () { });
+        }
+        num1 = parseInt(this.deviceId);
+        this.deviceId = '' + num1;
+        if (this.deviceId == 'NaN') {
+            this.base.showAlert('提示', '设备ID不合法', function () { });
+        }
+    };
+    TrapPage.prototype.newBettleInput = function () {
+        var num1 = 0;
+        if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        if (!this.newbettle) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        num1 = parseInt(this.newbettle);
+        this.newbettle = '' + num1;
+        if (this.newbettle == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+    };
+    TrapPage.prototype.otherBettleInput = function () {
+        var num1 = 0;
+        if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        if (!this.otherbettle) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        num1 = parseInt(this.otherbettle);
+        this.otherbettle = '' + num1;
+        if (this.otherbettle == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
     };
     TrapPage.prototype.deviceSerialInput = function () {
         console.log(this.deviceSerial);
     };
     TrapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理</h3>\n            <ion-item>\n                <ion-label>设备ID</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n             \n            </ion-item>\n               <button (click)="scan()">扫描</button>\n            <ion-item>\n                <ion-label>设备编号</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <button>绑定</button>\n            </ion-item>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>松墨天牛</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>其他天牛</ion-label>\n                <ion-input [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>类型</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n            <ion-item>\n                <ion-label>药剂类型</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n            <ion-item>\n                <ion-label>工作内容</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
+            selector: 'app-trap',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content >\n                <h2 id=trapezoid >设　备　管　理</h2>\n                <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one" >\n                    <ion-label>设备ID：</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             \n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two" >\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="songmo">\n                <ion-label>松墨天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item id="qita">\n                <ion-label>其他天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item id="type">\n                <ion-label>类型:</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="injectType">\n                <ion-label>药剂类型:</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n            <div id="photoANDsubmit"> \n                <button id="paizhao" ion-button (click)="takePhoto()">拍照</button>\n                <button id="tijiao" ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            </div>\n            <div id="mapANDquery"> \n                <button id="ditu" ion-button (click)="NavToMap()">地图查看</button>\n                <button id="chaxun" ion-button (click)="NavToQuery()">查询</button>\n            </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]])
     ], TrapPage);
     return TrapPage;
 }());
@@ -516,680 +1244,7 @@ var TrapPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 209:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DryPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var DryPage = /** @class */ (function () {
-    function DryPage() {
-        this.users = [
-            {
-                id: 1,
-                first: 'Alice',
-                last: 'Smith',
-            },
-            {
-                id: 2,
-                first: 'Bob',
-                last: 'Davis',
-            },
-            {
-                id: 3,
-                first: 'Charlie',
-                last: 'Rosenburg',
-            }
-        ];
-    }
-    DryPage.prototype.dryClick = function () {
-        console.log("dry");
-    };
-    DryPage.prototype.deviceIdInput = function () {
-        console.log("ok");
-        console.log(this.deviceId);
-    };
-    DryPage.prototype.deviceSerialInput = function () {
-        console.log(this.deviceSerial);
-    };
-    DryPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            注干剂检测\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理</h3>\n            <ion-item>\n                <ion-label>设备ID：</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <ion-icon name="qr-scanner"></ion-icon>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button size="large" expand="block">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树木状态：</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n\n            <ion-item>\n                <ion-label>注剂数量:</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n\n\n\n            <ion-item>\n                <ion-label>工作内容</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button size="large" expand="full">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button size="large" expand="block">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
-        }),
-        __metadata("design:paramtypes", [])
-    ], DryPage);
-    return DryPage;
-}());
-
-//# sourceMappingURL=newDry.js.map
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(44);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var Base = /** @class */ (function () {
-    function Base(alertCtrl, file) {
-        this.alertCtrl = alertCtrl;
-        this.file = file;
-        this.BASE_URL = "http://39.108.184.47:8081/";
-        // BASE_URL = "http://localhost:8081/"
-        this.transitionOptions = {
-            direction: 'left',
-            duration: 200,
-            slowdownfactor: 3,
-            slidePixels: 20,
-            iosdelay: 0,
-            androiddelay: 0,
-            fixedPixelsTop: 0,
-            fixedPixelsBottom: 60
-        };
-    }
-    Base.prototype.showAlert = function (title, content, func) {
-        var alert = this.alertCtrl.create({
-            title: title,
-            subTitle: content,
-            buttons: [{ text: '确认', handler: func }]
-        });
-        alert.present();
-    };
-    Base.prototype.readLogger = function (filename) {
-        this.file.readAsText(this.file.externalDataDirectory, filename).then(function (success) {
-            console.log(success);
-            return success;
-        });
-        return "";
-    };
-    Base.prototype.logger = function (info, storage) {
-        var that = this;
-        this.file.checkFile(this.file.externalDataDirectory, storage).then(function (success) {
-            console.log(success);
-            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
-        }, function (err) {
-            console.log(err);
-            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
-                console.log(success);
-                // success
-            }, function (error) {
-                console.log(error);
-                // error
-            });
-        });
-    };
-    Base.prototype.showPrompt = function (title, myName, func1, func2) {
-        var prompt = this.alertCtrl.create({
-            title: title,
-            inputs: [
-                {
-                    type: 'text',
-                    name: myName,
-                    placeholder: '设备id'
-                }
-            ],
-            buttons: [
-                {
-                    text: '取消',
-                    handler: func2
-                },
-                {
-                    text: '确认',
-                    handler: function (data) {
-                        func1(data);
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    Base.prototype.showConfirmAlert = function (title, content, func1, func2) {
-        var confirm = this.alertCtrl.create({
-            title: title,
-            message: content,
-            buttons: [
-                {
-                    text: '取消',
-                    handler: func2
-                },
-                {
-                    text: '确认',
-                    handler: function () {
-                        func1(confirm);
-                    }
-                }
-            ]
-        });
-        confirm.present();
-    };
-    Base.popTo = function (navCtrl, name) {
-        var views = navCtrl.getViews();
-        var target = -1;
-        for (var i = 0; i < views.length; ++i) {
-            if (views[i].name == name) {
-                target = i;
-                break;
-            }
-        }
-        if (target >= 0) {
-            navCtrl.popTo(navCtrl.getByIndex(target)).then(function () { });
-        }
-    };
-    Base = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
-    ], Base);
-    return Base;
-}());
-
-//# sourceMappingURL=base.js.js.map
-
-/***/ }),
-
-/***/ 210:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnemyPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var EnemyPage = /** @class */ (function () {
-    function EnemyPage() {
-        this.users = [
-            {
-                id: 1,
-                first: 'Alice',
-                last: 'Smith',
-            },
-            {
-                id: 2,
-                first: 'Bob',
-                last: 'Davis',
-            },
-            {
-                id: 3,
-                first: 'Charlie',
-                last: 'Rosenburg',
-            }
-        ];
-    }
-    EnemyPage.prototype.enemyClick = function () {
-        console.log("enemy");
-    };
-    EnemyPage.prototype.deviceIdInput = function () {
-        console.log("ok");
-        console.log(this.deviceId);
-    };
-    EnemyPage.prototype.deviceSerialInput = function () {
-        console.log(this.deviceSerial);
-    };
-    EnemyPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <ion-icon name="qr-scanner"></ion-icon>\n\n            </ion-item>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button size="large" expand="block">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>天敌类型:</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n\n            <ion-item>\n                <ion-label>释放数量:</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button size="large" expand="full">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full">\n        <ion-label>提交</ion-label>\n    </button>\n\n    <button size="large" expand="block">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
-        }),
-        __metadata("design:paramtypes", [])
-    ], EnemyPage);
-    return EnemyPage;
-}());
-
-//# sourceMappingURL=newEnemy.js.map
-
-/***/ }),
-
 /***/ 211:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeadtreePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var DeadtreePage = /** @class */ (function () {
-    function DeadtreePage() {
-        this.users = [
-            {
-                id: 1,
-                first: 'Alice',
-                last: 'Smith',
-            },
-            {
-                id: 2,
-                first: 'Bob',
-                last: 'Davis',
-            },
-            {
-                id: 3,
-                first: 'Charlie',
-                last: 'Rosenburg',
-            }
-        ];
-    }
-    DeadtreePage.prototype.trapClick = function () {
-        console.log('deadtree');
-    };
-    DeadtreePage.prototype.deviceIdInput = function () {
-        console.log('ok');
-        console.log(this.deviceId);
-    };
-    DeadtreePage.prototype.deviceSerialInput = function () {
-        console.log(this.deviceSerial);
-    };
-    DeadtreePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            枯死树采伐\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h3>设备管理:</h3>\n            <ion-item>\n                <ion-label>设备ID:</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                <ion-icon name="qr-scanner"></ion-icon>\n\n            </ion-item>\n            <ion-item>\n                <ion-label>设备编号:</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button size="large" expand="block">绑定</button>\n\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h3>维护信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>桩径:</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>树高:</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>材积:</ion-label>\n                <ion-input [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n\n\n            <ion-item>\n                <ion-label>除害方式:</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <button size="large" expand="full">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full">\n        <ion-label>提交</ion-label>\n    </button>\n\n\n    <button size="large" expand="block">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
-        }),
-        __metadata("design:paramtypes", [])
-    ], DeadtreePage);
-    return DeadtreePage;
-}());
-
-//# sourceMappingURL=newDeadTree.js.map
-
-/***/ }),
-
-/***/ 212:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrackPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var TrackPage = /** @class */ (function () {
-    function TrackPage() {
-        this.users = [
-            {
-                id: 1,
-                first: 'Alice',
-                last: 'Smith',
-            },
-            {
-                id: 2,
-                first: 'Bob',
-                last: 'Davis',
-            },
-            {
-                id: 3,
-                first: 'Charlie',
-                last: 'Rosenburg',
-            }
-        ];
-    }
-    TrackPage.prototype.trapClick = function () {
-        console.log('track');
-    };
-    TrackPage.prototype.deviceIdInput = function () {
-        console.log('ok');
-        console.log(this.deviceId);
-    };
-    TrackPage.prototype.deviceSerialInput = function () {
-        console.log(this.deviceSerial);
-    };
-    TrackPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h3>定位信息</h3>\n            <ion-item>\n                <ion-label>经度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>纬度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>海拔:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>精度:</ion-label>\n                <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>延时设置:</ion-label>\n                <!-- <ion-select [compareWith]="compareWith">\n                    <ion-select-option *ngFor="let user of users">{{user.first + \' \' + user.last}}</ion-select-option>\n                </ion-select> -->\n            </ion-item>\n\n            <ion-item>\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="accuracy"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n\n    <button size="large" expand="full">\n        <ion-label>开始录制</ion-label>\n        <ion-icon name="videocam"></ion-icon>\n    </button>\n\n    <button size="large" expand="full">\n        <ion-label>停止录制</ion-label>\n        <ion-icon name="square"></ion-icon>\n    </button>\n\n\n    <button size="large" expand="full">\n        <ion-label>拍照</ion-label>\n        <ion-icon name="camera"></ion-icon>\n    </button>\n\n    <button size="large" expand="full">\n        <ion-label>提交</ion-label>\n    </button>\n\n\n    <button size="large" expand="block">\n        <ion-label>地图查看</ion-label>\n    </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
-        }),
-        __metadata("design:paramtypes", [])
-    ], TrackPage);
-    return TrackPage;
-}());
-
-//# sourceMappingURL=newTrack.js.map
-
-/***/ }),
-
-/***/ 213:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(44);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-
-
-
-
-
-
-
-// declare var BMapLib;
-var markers = [];
-var AboutPage = /** @class */ (function () {
-    function AboutPage(navCtrl, httpClient, base, coordinateConvertor, alerts, file, geolocation, changeDetectorRef) {
-        this.navCtrl = navCtrl;
-        this.httpClient = httpClient;
-        this.base = base;
-        this.coordinateConvertor = coordinateConvertor;
-        this.alerts = alerts;
-        this.file = file;
-        this.geolocation = geolocation;
-        this.changeDetectorRef = changeDetectorRef;
-        // 是否定位成功
-        this.location_ready = false;
-        //username = '';
-        // 经度
-        this.longitude = '';
-        // 纬度
-        this.latitude = '';
-        // 海拔
-        this.altitude = '';
-        // 精度
-        this.accuracy = '';
-        // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
-        //
-        // // map.centerAndZoom("广州",17); //设置城市设置中心和地图显示级别
-        // let point = new BMap.Point(113.23, 23.16);//坐标可以通过百度地图坐标拾取器获取
-        // map.centerAndZoom(point, 17);//设置中心和地图显示级别
-        //
-        // map.addControl(new BMap.MapTypeControl());
-        // // map.setCurrentCity("广州");
-        //
-        // let sizeMap = new BMap.Size(10, 80);//显示位置
-        // map.addControl(new BMap.NavigationControl());
-        //
-        // map.centerAndZoom('中国', 5);
-    }
-    AboutPage.prototype.locate = function () {
-        var _this = this;
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 99999999,
-            maximumAge: 0
-        };
-        var that = this;
-        var watch = this.geolocation.watchPosition(options);
-        this.subscription = watch.subscribe(function (data) {
-            // data can be a set of coordinates, or an error (if an error occurred).
-            if (data['coords']) {
-                // setTimeout(() => {
-                _this.latitude = String(data.coords.latitude);
-                sessionStorage['latitude'] = String(data.coords.latitude);
-                _this.longitude = String(data.coords.longitude);
-                sessionStorage['longitude'] = String(data.coords.longitude);
-                _this.altitude = String(data.coords.altitude);
-                sessionStorage['altitude'] = String(data.coords.altitude);
-                _this.accuracy = String(data.coords.accuracy);
-                // 不是可以在这里直接判断海拔是不是null吗。。。。
-                if (data.coords.altitude == null) {
-                    _this.altitude = '-10000';
-                    sessionStorage['altitude'] = '-10000';
-                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-                }
-                setTimeout(function () {
-                    //this.location_ready = true;
-                    _this.location_ready = true;
-                    that.changeDetectorRef.detectChanges();
-                }, 5000);
-                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
-                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
-                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
-                // document.getElementById('sumbit_button').removeAttribute('disabled')
-                that.changeDetectorRef.detectChanges();
-                // },5);
-                // if(this.altitude==null){
-                //   this.location_ready = false;
-                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
-                // }
-            }
-            // else{
-            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-            // }
-        }, function (res) {
-            // setTimeout(() => {
-            //    this.base.showAlert('提示','wu',()=>{});
-            _this.location_ready = false;
-            that.changeDetectorRef.detectChanges();
-            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
-            // },5);
-            // alert();
-        });
-    };
-    AboutPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
-        var point = new BMap.Point(116.331398, 39.897445);
-        map.centerAndZoom(point, 12);
-        var i = 1;
-        var that = this;
-        function addMarker(point, index) {
-            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
-                // 指定定位位置。   
-                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                // 图标中央下端的尖角位置。    
-                anchor: new BMap.Size(10, 25),
-                // 设置图片偏移。   
-                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-            });
-            // 创建标注对象并添加到地图   
-            var marker = new BMap.Marker(point, { icon: myIcon });
-            map.addOverlay(marker);
-        }
-        var append = '';
-        setInterval(function () {
-            _this.locate();
-            // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
-            if (_this.latitude && _this.longitude) {
-                // const alert = this.alerts.create({
-                //   title: '数据',
-                //   enableBackdropDismiss: false,
-                //   buttons: [
-                //     {
-                //       text: this.latitude + ',' + this.longitude + ',' + this.altitude,
-                //       handler: () => {
-                //       }
-                //     }
-                //   ]
-                // });
-                // alert.present();
-                setTimeout(function () {
-                    var point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-                    var point2 = new BMap.Point(point[1], point[0]);
-                    var mk = new BMap.Marker(point2);
-                    map.addOverlay(mk);
-                    map.panTo(point2);
-                    // alert('您的位置：' + point.lng + ',' + point.lat);
-                    map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-                    addMarker(point2, i);
-                    append += _this.latitude + ',' + _this.longitude + ',' + _this.altitude;
-                    _this.base.logger(append, "about_ionViewDidLoad.txt");
-                    i++;
-                }, 5000);
-            }
-        }, 30000);
-    };
-    AboutPage.prototype.ionViewDidEnter = function () {
-        var _this = this;
-        var myPoint = [];
-        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
-        var point = new BMap.Point(116.331398, 39.897445);
-        map.centerAndZoom(point, 12);
-        // setInterval("this.myLocation()",5000);
-        // this.myLocation();
-        map.centerAndZoom('中国', 5);
-        map.addControl(new BMap.MapTypeControl());
-        var sizeMap = new BMap.Size(10, 80); //显示位置
-        map.addControl(new BMap.NavigationControl());
-        map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
-        map.enableContinuousZoom(true); //连续缩放效果，默认禁用
-        this.httpClient.get('http://39.108.184.47:8081/auth_api/user', { headers: { token: localStorage['token'] } })
-            .subscribe(function (data) {
-            // console.log(d);
-            var center = '';
-            if (data['town'] != null)
-                center = data['town'] + center;
-            if (data['city'] != null)
-                center = data['city'] + center;
-            if (data['area'] != null)
-                center = data['area'] + center;
-            if (data['province'] != null)
-                center = data['province'] + center;
-            if (center)
-                map.centerAndZoom(center, 11);
-        });
-        this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', { headers: { token: localStorage['token'] },
-            params: { searchText: "", limit: "2000", page: "1" } }).subscribe(function (res) {
-            for (var i = 0; i < res['data'].length; i++) {
-                if (res['data'][i].longitude && res['data'][i].latitude) {
-                    if (i == 0)
-                        console.log(res['data'][i].latitude);
-                    var point = _this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
-                    point = new BMap.Point(point[1], point[0]);
-                    markers.push(point);
-                    // this.addMarker(point);
-                }
-            }
-            _this.addMarker();
-        });
-        var a = setInterval(function () {
-            _this.locate();
-        }, 1000);
-        function addMarker(point, index) {
-            var myIcon = new BMap.Icon("https://youkaiyu.com/myLocation.jpeg", new BMap.Size(23, 25), {
-                // 指定定位位置。   
-                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
-                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
-                // 图标中央下端的尖角位置。    
-                anchor: new BMap.Size(10, 25),
-                // 设置图片偏移。   
-                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
-                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
-                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
-            });
-            // 创建标注对象并添加到地图   
-            var marker = new BMap.Marker(point, { icon: myIcon });
-            map.addOverlay(marker);
-        }
-        console.log(this.altitude);
-        var text = this.latitude + ',' + this.longitude + ',' + this.altitude;
-        this.base.logger(text, "about_ionViewDidEnter.txt");
-        if (Number(this.altitude) != -10000 && this.altitude != "" && this.altitude) {
-            clearInterval(a);
-            setTimeout(function () {
-                point = _this.coordinateConvertor.wgs2bd(Number(_this.latitude), Number(_this.longitude));
-                console.log("Point1进来");
-                console.log(point);
-                var point2 = new BMap.Point(point[1], point[0]);
-                // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-                console.log("进来的");
-                console.log(point2);
-                var mk = new BMap.Marker(point2);
-                map.addOverlay(mk);
-                map.panTo(point2);
-                // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-                map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
-                addMarker(point2, 0);
-            }, 1000);
-        }
-        // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
-    };
-    AboutPage.prototype.addMarker = function () {
-        var options = {
-            size: 15,
-            shape: 2,
-            color: '#d340c3'
-        };
-        var markerClusterer = new BMap.PointCollection(markers, options);
-        // var marker = new BMap.Marker(point);
-        this.map.addOverlay(markerClusterer);
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('map2'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
-    ], AboutPage.prototype, "map_container2", void 0);
-    AboutPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/
-        }),
-        __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
-    ], AboutPage);
-    return AboutPage;
-}());
-
-//# sourceMappingURL=about.js.map
-
-/***/ }),
-
-/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1280,27 +1335,2806 @@ var CoordinateConvertor = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 212:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrapQueryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the TrapQueryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var TrapQueryPage = /** @class */ (function () {
+    function TrapQueryPage(navCtrl, navParams, httpClient, base) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.httpClient = httpClient;
+        this.base = base;
+    }
+    TrapQueryPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad TrapQueryPage');
+        console.log(localStorage["TrapDeviceId"]);
+        this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["TrapDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    TrapQueryPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["TrapDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    TrapQueryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-trap-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/'<!--\n  Generated template for the TrapQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>TrapQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>测试</h1>\n  <div style="width: 100%">\n    <table border="1" style="table-layout:fixed" width="100%">\n      <thead>\n        <th>批次</th>\n        <th>经度</th>\n        <th>纬度</th>\n        <th>数量</th>\n        <th>工作内容</th>\n        <th>药剂类型</th>\n        <th>日期</th>\n      </thead>\n      <tbody>\n        <tr *ngFor="let item of dataList">\n          <th>{{item.batch}}</th>\n          <th>{{item.longitude}}</th>\n          <th>{{item.latitude}}</th>\n          <th>{{item.num}}</th>\n          <th>{{item.workingContent}}</th>\n          <th>{{item.drug}}</th>\n          <th>{{item.date}}</th>\n        </tr>\n      </tbody>\n    </table>\n\n  </div>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
+    ], TrapQueryPage);
+    return TrapQueryPage;
+}());
+
+//# sourceMappingURL=trap-query.js.map
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__inject_query_inject_query__ = __webpack_require__(214);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var DryPage = /** @class */ (function () {
+    function DryPage(qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, navCtrl) {
+        var _this = this;
+        this.qrScanner = qrScanner;
+        this.base = base;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        this.httpClient = httpClient;
+        this.camera = camera;
+        this.fileTransfer = fileTransfer;
+        this.navCtrl = navCtrl;
+        this.remarks = "";
+        this.users = [
+            {
+                id: 1,
+                first: 'Alice',
+                last: 'Smith',
+            },
+            {
+                id: 2,
+                first: 'Bob',
+                last: 'Davis',
+            },
+            {
+                id: 3,
+                first: 'Charlie',
+                last: 'Rosenburg',
+            }
+        ];
+        this.callBack = function (params) {
+            return new Promise(function (resolve, reject) {
+                if (params) {
+                    console.log(params.id);
+                    var allDevice = JSON.parse(localStorage["device"]);
+                    console.log(localStorage["device"]);
+                    console.log("Array");
+                    console.log(allDevice[0]);
+                    var flag = 0;
+                    console.log(params.id.charAt(8) === "2");
+                    allDevice.forEach(function (element) {
+                        console.log("element");
+                        // console.log(element);
+                        if ((element.scanId == params.id && params.id.charAt(8) == '2') || params.id.charAt(8) == '7')
+                            flag = 1;
+                    });
+                    if (flag == 1) {
+                        _this.deviceId = params.id;
+                        var options = {
+                            enableHighAccuracy: true,
+                            timeout: 99999999,
+                            maximumAge: 0
+                        };
+                        var that_1 = _this;
+                        var watch = _this.geolocation.watchPosition(options);
+                        _this.subscription = watch.subscribe(function (data) {
+                            // data can be a set of coordinates, or an error (if an error occurred).
+                            if (data['coords']) {
+                                // setTimeout(() => {
+                                _this.latitude = String(data.coords.latitude);
+                                sessionStorage['latitude'] = String(data.coords.latitude);
+                                _this.longtitude = String(data.coords.longitude);
+                                sessionStorage['longitude'] = String(data.coords.longitude);
+                                _this.altitude = String(data.coords.altitude);
+                                sessionStorage['altitude'] = String(data.coords.altitude);
+                                _this.accuracy = String(data.coords.accuracy);
+                                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                                if (data.coords.altitude == null) {
+                                    _this.altitude = '-10000';
+                                    sessionStorage['altitude'] = '-10000';
+                                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                                }
+                                setTimeout(function () {
+                                    //this.location_ready = true;
+                                    _this.location_ready = true;
+                                    that_1.changeDetectorRef.detectChanges();
+                                }, 5000);
+                                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                                that_1.changeDetectorRef.detectChanges();
+                                // },5);
+                                // if(this.altitude==null){
+                                //   this.location_ready = false;
+                                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                                // }
+                            }
+                            // else{
+                            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                            // }
+                        }, function (res) {
+                            // setTimeout(() => {
+                            //    this.base.showAlert('提示','wu',()=>{});
+                            _this.location_ready = false;
+                            that_1.changeDetectorRef.detectChanges();
+                            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                            // },5);
+                            // alert();
+                        });
+                        _this.base.showConfirmAlert("成功", params.id, function () {
+                        }, function () { });
+                    }
+                    else {
+                        _this.base.showConfirmAlert("二维码无效", params.id, function () {
+                        }, function () { });
+                    }
+                }
+                else {
+                }
+            });
+        };
+    }
+    DryPage.prototype.deviceBind = function () {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", function () { });
+    };
+    DryPage.prototype.NavToMap = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__about_about__["a" /* AboutPage */]);
+    };
+    DryPage.prototype.bindNewId = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("dryBind", JSON.stringify(BindIdCache));
+        });
+    };
+    DryPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        if (localStorage["dryBind"]) {
+            var tmpStorage2 = [];
+            tmpStorage2 = JSON.parse(localStorage["dryBind"]);
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+            console.log(tmpStorage2);
+            var i = 0;
+            tmpStorage2.forEach(function (element) {
+                console.log("===开始===");
+                console.log(element.scanId);
+                console.log(element.serial);
+                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                    headers: { token: localStorage['token'] },
+                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                })
+                    .subscribe(function (res) {
+                    console.log(res);
+                    i++;
+                    _this.base.showAlert("成功绑定了", "", function () { });
+                    if (tmpStorage2.length == i) {
+                        localStorage.removeItem("dryBind");
+                        _this.base.showAlert("清理了缓存", "", function () { });
+                    }
+                }, function (msg) {
+                });
+            });
+        }
+        console.log('ionViewDidLoad LocatePage');
+        console.log(localStorage['device']);
+        if (localStorage["DryCache"]) {
+            var tmpStorage = JSON.parse(localStorage["DryCache"]);
+            var i = 0;
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                        workingContent: element.workingContent
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddInjectData', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        i++;
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('DryCache');
+                    }, function (error) {
+                        console.log(error);
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddInjectData', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                                workingContent: element.workingContent
+                            }
+                        })
+                            .subscribe(function (res) {
+                            i++;
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('DryCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddInjectData', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                            workingContent: element.workingContent
+                        }
+                    })
+                        .subscribe(function (res) {
+                        i++;
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('DryCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            });
+        }
+        if (localStorage["InjectWoodStatus"]) {
+            console.log(localStorage["InjectWoodStatus"]);
+            this.woodStatus = JSON.parse(localStorage["InjectWoodStatus"]);
+            console.log("缓存");
+            console.log(this.woodStatus);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getWoodStatus', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.woodStatus = Array.from(c);
+            console.log(_this.woodStatus);
+            localStorage['InjectWoodStatus'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+        if (localStorage["InjectWorkContent"]) {
+            console.log(localStorage["InjectWorkContent"]);
+            this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
+            console.log("缓存");
+            console.log(this.workContent);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getWorkingContent', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.workContent = Array.from(c);
+            console.log(_this.workContent);
+            localStorage['InjectWorkContent'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+    };
+    DryPage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    DryPage.prototype.NavToQuery = function () {
+        if (this.deviceId) {
+            localStorage["InjectDeviceId"] = this.deviceId;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__inject_query_inject_query__["a" /* InjectQueryPage */]);
+        }
+        else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", function () { });
+        }
+    };
+    DryPage.prototype.scan = function () {
+        console.log("scan");
+        console.log(localStorage['username']);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
+    };
+    DryPage.prototype.submit = function () {
+        var _this = this;
+        this.have_submit = true;
+        var num1 = 0;
+        console.log(this.injectNum);
+        if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            console.log("injectNum不合法");
+            this.injectNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.injectNum) {
+            console.log("injectNum不合法");
+            this.injectNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.injectNum);
+        this.injectNum = '' + num1;
+        if (this.injectNum == 'NaN') {
+            console.log("injectNum不合法");
+            this.injectNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        // if (!this.woodStatusValue){
+        //     this.woodStatusValue = "0";
+        // }
+        // if (!this.injectNum){
+        //     this.injectNum = "0";
+        // }
+        // if (!this.workContentValue){
+        //     this.workContentValue = "0";
+        // }
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+            this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+        }
+        else {
+            if (this.imageData != null) {
+                var options = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
+                //创建文件对象
+                var fileTransfer = this.fileTransfer.create();
+                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
+                    .then(function (res) {
+                    console.log(res);
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (error) {
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                        workingContent: _this.workContentValue,
+                        img: _this.imageData
+                    };
+                    var DryCache;
+                    DryCache = localStorage.getItem('DryCache');
+                    if (DryCache == null) {
+                        DryCache = [];
+                    }
+                    else {
+                        DryCache = JSON.parse(DryCache);
+                    }
+                    DryCache.push(cacheData);
+                    //localStorage安全保存数据
+                    // try{
+                    //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // } 
+                    localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    //this.navCtrl.pop();
+                    // confirm.dismiss()
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                })
+                    .catch(function (error) {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddInjectData', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                            workingContent: _this.workContentValue
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                            workingContent: _this.workContentValue
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }, function (msg) {
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                            workingContent: _this.workContentValue
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        var DryCache;
+                        DryCache = localStorage.getItem('DryCache');
+                        if (DryCache == null) {
+                            DryCache = [];
+                        }
+                        else {
+                            DryCache = JSON.parse(DryCache);
+                        }
+                        DryCache.push(cacheData);
+                        // try{
+                        //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // }   
+                        localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                        console.log("Hello");
+                        //this.navCtrl.pop();
+                        // confirm.dismiss();
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    });
+                });
+            }
+            else {
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                        workingContent: this.workContentValue
+                    }
+                })
+                    .subscribe(function (res) {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                        workingContent: _this.workContentValue
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (msg) {
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
+                        workingContent: _this.workContentValue
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    var DryCache;
+                    DryCache = localStorage.getItem('DryCache');
+                    if (DryCache == null) {
+                        DryCache = [];
+                    }
+                    else {
+                        DryCache = JSON.parse(DryCache);
+                    }
+                    DryCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    console.log("Hello");
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                });
+            }
+        }
+    };
+    DryPage.prototype.dryClick = function () {
+        console.log("dry");
+    };
+    DryPage.prototype.deviceIdInput = function () {
+        console.log("ok");
+        console.log(this.deviceId);
+    };
+    DryPage.prototype.deviceSerialInput = function () {
+        console.log(this.deviceSerial);
+    };
+    DryPage.prototype.injectNumInput = function () {
+        var num1 = 0;
+        if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        if (!this.injectNum) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        num1 = parseInt(this.injectNum);
+        this.injectNum = '' + num1;
+        if (this.injectNum == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+    };
+    DryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-dry',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            注干剂检测\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content id="dry">\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理</h2>\n            <hr id="line1" />\n        <div id="ID">\n            <ion-item id="one">\n                <ion-label>设备ID：</ion-label>\n                <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n            </ion-item>\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n        </div>\n        <div id="NUM">\n            <ion-item id="two">\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n        </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n             </div>\n             \n            <ion-item id="status">\n                <ion-label>树木状态：</ion-label>\n                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="number">\n                <ion-label>注剂数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks"> \n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+    ], DryPage);
+    return DryPage;
+}());
+
+//# sourceMappingURL=newDry.js.map
+
+/***/ }),
+
+/***/ 214:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InjectQueryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the InjectQueryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var InjectQueryPage = /** @class */ (function () {
+    function InjectQueryPage(navCtrl, navParams, httpClient, base) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.httpClient = httpClient;
+        this.base = base;
+    }
+    InjectQueryPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad InjectQueryPage');
+        this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["InjectDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    InjectQueryPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["InjectDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    InjectQueryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-inject-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/'<!--\n  Generated template for the InjectQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>InjectQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>测试</h1>\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>工作内容</th>\n            <th>树木状态</th>\n            <th>维护日期</th>\n            <th>批次</th>\n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.workContent}}</th>\n              <th>{{item.woodStatus}}</th>\n              <th>{{item.submitDate}}</th>\n              <th>{{item.batch}}</th>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
+    ], InjectQueryPage);
+    return InjectQueryPage;
+}());
+
+//# sourceMappingURL=inject-query.js.map
+
+/***/ }),
+
 /***/ 215:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnemyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__enemy_query_enemy_query__ = __webpack_require__(216);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var EnemyPage = /** @class */ (function () {
+    function EnemyPage(qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, navCtrl) {
+        var _this = this;
+        this.qrScanner = qrScanner;
+        this.base = base;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        this.httpClient = httpClient;
+        this.camera = camera;
+        this.fileTransfer = fileTransfer;
+        this.navCtrl = navCtrl;
+        this.remarks = "";
+        this.users = [
+            {
+                id: 1,
+                first: 'Alice',
+                last: 'Smith',
+            },
+            {
+                id: 2,
+                first: 'Bob',
+                last: 'Davis',
+            },
+            {
+                id: 3,
+                first: 'Charlie',
+                last: 'Rosenburg',
+            }
+        ];
+        this.callBack = function (params) {
+            return new Promise(function (resolve, reject) {
+                if (params) {
+                    console.log(params.id);
+                    var allDevice = JSON.parse(localStorage["device"]);
+                    console.log(localStorage["device"]);
+                    console.log("Array");
+                    console.log(allDevice[0]);
+                    var flag = 0;
+                    allDevice.forEach(function (element) {
+                        console.log("element");
+                        console.log(element);
+                        if ((element.scanId == params.id && params.id.charAt(8) == '3') || params.id.charAt(8) == '8')
+                            flag = 1;
+                    });
+                    if (flag == 1) {
+                        _this.deviceId = params.id;
+                        var options = {
+                            enableHighAccuracy: true,
+                            timeout: 99999999,
+                            maximumAge: 0
+                        };
+                        var that_1 = _this;
+                        var watch = _this.geolocation.watchPosition(options);
+                        _this.subscription = watch.subscribe(function (data) {
+                            // data can be a set of coordinates, or an error (if an error occurred).
+                            if (data['coords']) {
+                                // setTimeout(() => {
+                                _this.latitude = String(data.coords.latitude);
+                                sessionStorage['latitude'] = String(data.coords.latitude);
+                                _this.longtitude = String(data.coords.longitude);
+                                sessionStorage['longitude'] = String(data.coords.longitude);
+                                _this.altitude = String(data.coords.altitude);
+                                sessionStorage['altitude'] = String(data.coords.altitude);
+                                _this.accuracy = String(data.coords.accuracy);
+                                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                                if (data.coords.altitude == null) {
+                                    _this.altitude = '-10000';
+                                    sessionStorage['altitude'] = '-10000';
+                                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                                }
+                                setTimeout(function () {
+                                    //this.location_ready = true;
+                                    _this.location_ready = true;
+                                    that_1.changeDetectorRef.detectChanges();
+                                }, 5000);
+                                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                                that_1.changeDetectorRef.detectChanges();
+                                // },5);
+                                // if(this.altitude==null){
+                                //   this.location_ready = false;
+                                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                                // }
+                            }
+                            // else{
+                            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                            // }
+                        }, function (res) {
+                            // setTimeout(() => {
+                            //    this.base.showAlert('提示','wu',()=>{});
+                            _this.location_ready = false;
+                            that_1.changeDetectorRef.detectChanges();
+                            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                            // },5);
+                            // alert();
+                        });
+                        _this.base.showConfirmAlert("成功", params.id, function () {
+                        }, function () { });
+                    }
+                    else {
+                        _this.base.showConfirmAlert("二维码无效", params.id, function () {
+                        }, function () { });
+                    }
+                }
+                else {
+                }
+            });
+        };
+    }
+    EnemyPage.prototype.NavToMap = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__about_about__["a" /* AboutPage */]);
+    };
+    EnemyPage.prototype.releaseNumInput = function () {
+        var num1 = 0;
+        if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        if (!this.releaseNum) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        num1 = parseInt(this.releaseNum);
+        this.releaseNum = '' + num1;
+        if (this.releaseNum == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+    };
+    EnemyPage.prototype.bindNewId = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("eneBind", JSON.stringify(BindIdCache));
+        });
+    };
+    EnemyPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        if (localStorage["eneBind"]) {
+            var tmpStorage2 = [];
+            tmpStorage2 = JSON.parse(localStorage["eneBind"]);
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+            console.log(tmpStorage2);
+            var i = 0;
+            tmpStorage2.forEach(function (element) {
+                console.log("===开始===");
+                console.log(element.scanId);
+                console.log(element.serial);
+                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                    headers: { token: localStorage['token'] },
+                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                })
+                    .subscribe(function (res) {
+                    console.log(res);
+                    i++;
+                    _this.base.showAlert("成功绑定了", "", function () { });
+                    if (tmpStorage2.length == i) {
+                        localStorage.removeItem("eneBind");
+                        _this.base.showAlert("清理了缓存", "", function () { });
+                    }
+                }, function (msg) {
+                });
+            });
+        }
+        console.log('ionViewDidLoad LocatePage');
+        console.log(localStorage['device']);
+        var i = 0;
+        if (localStorage["enemyCache"]) {
+            var tmpStorage = JSON.parse(localStorage["enemyCache"]);
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddEnemy', options)
+                        .then(function (res) {
+                        i++;
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('enemyCache');
+                    }, function (error) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddEnemy', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                            }
+                        })
+                            .subscribe(function (res) {
+                            i++;
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('enemyCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddEnemy', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                        }
+                    })
+                        .subscribe(function (res) {
+                        i++;
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('enemyCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            });
+        }
+        if (localStorage["EnemyType"]) {
+            console.log(localStorage["EnemyType"]);
+            this.enemyType = JSON.parse(localStorage["EnemyType"]);
+            console.log("缓存");
+            console.log(this.enemyType);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getEnemyType', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.enemyType = Array.from(c);
+            console.log(_this.enemyType);
+            localStorage['EnemyType'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+    };
+    EnemyPage.prototype.deviceBind = function () {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", function () { });
+    };
+    EnemyPage.prototype.NavToQuery = function () {
+        // localStorage.setItem("queryEnemyID",this.deviceId);
+        if (this.deviceId) {
+            localStorage['queryEnemyID'] = this.deviceId;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__enemy_query_enemy_query__["a" /* EnemyQueryPage */]);
+        }
+        else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", function () { });
+        }
+        // localStorage["queryEnemyID"] = this.deviceId.toString();
+    };
+    EnemyPage.prototype.enemyClick = function () {
+        console.log("enemy");
+    };
+    EnemyPage.prototype.deviceIdInput = function () {
+        console.log("ok");
+        console.log(this.deviceId);
+    };
+    EnemyPage.prototype.deviceSerialInput = function () {
+        console.log(this.deviceSerial);
+    };
+    EnemyPage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    EnemyPage.prototype.scan = function () {
+        console.log("scan");
+        console.log(localStorage['username']);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
+    };
+    EnemyPage.prototype.submit = function () {
+        var _this = this;
+        var num1 = 0;
+        if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.releaseNum) {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = parseInt(this.releaseNum);
+        this.releaseNum = '' + num1;
+        if (this.releaseNum == 'NaN') {
+            this.releaseNum = "";
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        // if (!this.predatorsTypeValue){
+        //     this.predatorsTypeValue = "0";
+        // }
+        // if (!this.releaseNum){
+        //     this.releaseNum = "0";
+        // }
+        this.have_submit = true;
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+            this.base.showAlert("提示", "输入数量为空或不合法", function () { });
+        }
+        else {
+            if (this.imageData != null) {
+                var options = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
+                //创建文件对象
+                var fileTransfer = this.fileTransfer.create();
+                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
+                    .then(function (res) {
+                    console.log(res);
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (error) {
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks,
+                        img: _this.imageData
+                    };
+                    var enemyCache;
+                    enemyCache = localStorage.getItem('enemyCache');
+                    if (enemyCache == null) {
+                        enemyCache = [];
+                    }
+                    else {
+                        enemyCache = JSON.parse(enemyCache);
+                    }
+                    enemyCache.push(cacheData);
+                    //localStorage安全保存数据
+                    // try{
+                    //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // } 
+                    localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                    //this.navCtrl.pop();
+                    // confirm.dismiss()
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }).catch(function (error) {
+                    return new Promise(function (resolve, reject) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddEnemy', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                                accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                            }
+                        })
+                            .subscribe(function (res) {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            _this.base.showAlert('提示', '提交成功', function () { });
+                            var cacheData = {
+                                deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                                accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+                            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                        }, function (msg) {
+                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                            _this.base.showAlert('提示', '提交失败', function () { });
+                            var cacheData = {
+                                deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                                accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+                            var enemyCache;
+                            enemyCache = localStorage.getItem('enemyCache');
+                            if (enemyCache == null) {
+                                enemyCache = [];
+                            }
+                            else {
+                                enemyCache = JSON.parse(enemyCache);
+                            }
+                            enemyCache.push(cacheData);
+                            // try{
+                            //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // }   
+                            localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                            console.log("Hello");
+                            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                        });
+                    });
+                });
+            }
+            else {
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                    }
+                })
+                    .subscribe(function (res) {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (msg) {
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    var enemyCache;
+                    enemyCache = localStorage.getItem('enemyCache');
+                    if (enemyCache == null) {
+                        enemyCache = [];
+                    }
+                    else {
+                        enemyCache = JSON.parse(enemyCache);
+                    }
+                    enemyCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                    console.log("Hello");
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                });
+            }
+        }
+    };
+    EnemyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-enemy',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="enemytype">\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="number">\n                <ion-label>释放数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button  (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询数据</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+    ], EnemyPage);
+    return EnemyPage;
+}());
+
+//# sourceMappingURL=newEnemy.js.map
+
+/***/ }),
+
+/***/ 216:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnemyQueryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the EnemyQueryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var EnemyQueryPage = /** @class */ (function () {
+    function EnemyQueryPage(navCtrl, navParams, httpClient, base) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.httpClient = httpClient;
+        this.base = base;
+        console.log(localStorage['queryEnemyID']);
+        // this.dataList = localStorage["queryEnemyID"];
+        //   console.log(this.dataList);
+    }
+    EnemyQueryPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log(localStorage['queryEnemyID']);
+        this.httpClient.post(this.base.BASE_URL + 'app/queryById', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["queryEnemyID"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+        console.log('ionViewDidLoad EnemyQueryPage');
+    };
+    EnemyQueryPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        console.log(localStorage['queryEnemyID']);
+        console.log(localStorage['queryEnemyID']);
+        this.httpClient.post(this.base.BASE_URL + 'app/queryById', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["queryEnemyID"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    EnemyQueryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-enemy-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/'<!--\n  Generated template for the EnemyQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>EnemyQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>数据内容</h1>\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>维护日期</th>\n          <th>天敌类型</th>\n          <th>释放数量</th>\n          <th>批次</th>\n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.submitDate}}</th>\n            <th>{{item.predatorstype}}</th>\n            <th>{{item.releaseNum}}</th>\n            <th>{{item.batch}}</th>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
+    ], EnemyQueryPage);
+    return EnemyQueryPage;
+}());
+
+//# sourceMappingURL=enemy-query.js.map
+
+/***/ }),
+
+/***/ 217:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeadtreePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dead_trees_query_dead_trees_query__ = __webpack_require__(218);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var DeadtreePage = /** @class */ (function () {
+    function DeadtreePage(qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, navCtrl) {
+        var _this = this;
+        this.qrScanner = qrScanner;
+        this.base = base;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        this.httpClient = httpClient;
+        this.camera = camera;
+        this.fileTransfer = fileTransfer;
+        this.navCtrl = navCtrl;
+        this.diameter = 0;
+        this.height = 0;
+        this.volume = 0;
+        this.remarks = "";
+        this.users = [
+            {
+                id: 1,
+                first: 'Alice',
+                last: 'Smith',
+            },
+            {
+                id: 2,
+                first: 'Bob',
+                last: 'Davis',
+            },
+            {
+                id: 3,
+                first: 'Charlie',
+                last: 'Rosenburg',
+            }
+        ];
+        this.callBack = function (params) {
+            return new Promise(function (resolve, reject) {
+                if (params) {
+                    console.log(params.id);
+                    var allDevice = JSON.parse(localStorage["device"]);
+                    console.log(localStorage["device"]);
+                    console.log("Array");
+                    console.log(allDevice[0]);
+                    var flag = 0;
+                    allDevice.forEach(function (element) {
+                        console.log("element");
+                        console.log(element);
+                        console.log(element.scanId);
+                        console.log(params.id);
+                        if ((element.scanId == params.id && params.id.charAt(8) == '4') || params.id.charAt(8) == '9') {
+                            flag = 1;
+                        }
+                    });
+                    if (flag == 1) {
+                        _this.deviceId = params.id;
+                        var options = {
+                            enableHighAccuracy: true,
+                            timeout: 99999999,
+                            maximumAge: 0
+                        };
+                        var that_1 = _this;
+                        var watch = _this.geolocation.watchPosition(options);
+                        _this.subscription = watch.subscribe(function (data) {
+                            // data can be a set of coordinates, or an error (if an error occurred).
+                            if (data['coords']) {
+                                // setTimeout(() => {
+                                _this.latitude = String(data.coords.latitude);
+                                sessionStorage['latitude'] = String(data.coords.latitude);
+                                _this.longtitude = String(data.coords.longitude);
+                                sessionStorage['longitude'] = String(data.coords.longitude);
+                                _this.altitude = String(data.coords.altitude);
+                                sessionStorage['altitude'] = String(data.coords.altitude);
+                                _this.accuracy = String(data.coords.accuracy);
+                                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                                if (data.coords.altitude == null) {
+                                    _this.altitude = '-10000';
+                                    sessionStorage['altitude'] = '-10000';
+                                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                                }
+                                setTimeout(function () {
+                                    //this.location_ready = true;
+                                    _this.location_ready = true;
+                                    that_1.changeDetectorRef.detectChanges();
+                                }, 5000);
+                                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                                that_1.changeDetectorRef.detectChanges();
+                                // },5);
+                                // if(this.altitude==null){
+                                //   this.location_ready = false;
+                                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                                // }
+                            }
+                            // else{
+                            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                            // }
+                        }, function (res) {
+                            // setTimeout(() => {
+                            //    this.base.showAlert('提示','wu',()=>{});
+                            _this.location_ready = false;
+                            that_1.changeDetectorRef.detectChanges();
+                            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                            // },5);
+                            // alert();
+                        });
+                        _this.base.showConfirmAlert("成功", params.id, function () {
+                        }, function () { });
+                    }
+                    else {
+                        _this.base.showConfirmAlert("二维码无效", params.id, function () {
+                        }, function () { });
+                    }
+                }
+                else {
+                }
+            });
+        };
+    }
+    DeadtreePage.prototype.NavToMap = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__about_about__["a" /* AboutPage */]);
+    };
+    DeadtreePage.prototype.bindNewId = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: this.deviceId, serial: this.deviceSerial
+            }
+        })
+            .subscribe(function (res) {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            _this.base.showAlert('提示', '提交成功', function () { });
+            console.log("cacheData");
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+        }, function (msg) {
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+            _this.base.showAlert("提交失败", "提交失败", function () { });
+            console.log(msg);
+            console.log("失败");
+            var transferParam = { scanId: _this.deviceId, serial: _this.deviceSerial };
+            var BindIdCache;
+            BindIdCache = localStorage.getItem('trapBind');
+            if (BindIdCache == null) {
+                BindIdCache = [];
+            }
+            else {
+                BindIdCache = JSON.parse(BindIdCache);
+            }
+            BindIdCache.push(transferParam);
+            localStorage.setItem("deadBind", JSON.stringify(BindIdCache));
+        });
+    };
+    DeadtreePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        if (localStorage["deadBind"]) {
+            var tmpStorage2 = [];
+            tmpStorage2 = JSON.parse(localStorage["deadBind"]);
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+            console.log(tmpStorage2);
+            var i = 0;
+            tmpStorage2.forEach(function (element) {
+                console.log("===开始===");
+                console.log(element.scanId);
+                console.log(element.serial);
+                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                    headers: { token: localStorage['token'] },
+                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                })
+                    .subscribe(function (res) {
+                    console.log(res);
+                    i++;
+                    _this.base.showAlert("成功绑定了", "", function () { });
+                    if (tmpStorage2.length == i) {
+                        localStorage.removeItem("deadBind");
+                        _this.base.showAlert("清理了缓存", "", function () { });
+                    }
+                }, function (msg) {
+                });
+            });
+        }
+        console.log('ionViewDidLoad LocatePage');
+        console.log(localStorage['device']);
+        //deadCache
+        if (localStorage["deadCache"]) {
+            var tmpStorage = JSON.parse(localStorage["deadCache"]);
+            var i = 0;
+            tmpStorage.forEach(function (element) {
+                console.log(element);
+                if (element.img != null) {
+                    var options = {};
+                    options.fileKey = "image";
+                    var time = Date.parse(Date());
+                    options.fileName = time + ".jpg";
+                    options.mimeType = "image/jpeg";
+                    options.chunkedMode = false;
+                    options.httpMethod = "POST";
+                    options.params = {
+                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                        killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                    };
+                    options.headers = { token: localStorage['token'] };
+                    console.log("options");
+                    console.log(options);
+                    //创建文件对象
+                    var fileTransfer = _this.fileTransfer.create();
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'app/AddDeadtrees', options)
+                        .then(function (res) {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        i++;
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('deadCache');
+                    }, function (error) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                            }
+                        })
+                            .subscribe(function (res) {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            i++;
+                            if (i >= tmpStorage.length)
+                                localStorage.removeItem('deadCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                            killMethodsValue: element.killMethodsValue, remarks: element.remarks
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        i++;
+                        if (i >= tmpStorage.length)
+                            localStorage.removeItem('deadCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            });
+        }
+        if (localStorage["deadKill"]) {
+            console.log(localStorage["deadKill"]);
+            this.killMethods = JSON.parse(localStorage["deadKill"]);
+            console.log("缓存");
+            console.log(this.killMethods);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.killMethods = Array.from(c);
+            console.log("subb", res);
+            console.log(_this.killMethods);
+            localStorage['deadKill'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
+    };
+    DeadtreePage.prototype.NavToQuery = function () {
+        if (this.deviceId) {
+            localStorage["DeadMotherDeviceId"] = this.deviceId;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */]);
+        }
+        else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", function () { });
+        }
+    };
+    DeadtreePage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    DeadtreePage.prototype.diameterInput = function () {
+        console.log(this.diameter);
+        var tmp = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
+        this.volume = tmp;
+        console.log(this.volume.toString());
+    };
+    DeadtreePage.prototype.heightInput = function () {
+        console.log(this.height);
+        var tmp = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
+        this.volume = tmp;
+    };
+    DeadtreePage.prototype.scan = function () {
+        console.log("scan");
+        console.log(localStorage['username']);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
+    };
+    DeadtreePage.prototype.submit = function () {
+        var _this = this;
+        this.have_submit = true;
+        var num1 = 0;
+        if (this.volume < 0 || this.volume == NaN) {
+            this.diameter = 0;
+            this.height = 0;
+            this.volume = 0;
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        if (!this.volume) {
+            this.diameter = 0;
+            this.height = 0;
+            this.volume = 0;
+            // this.base.showAlert('提示', '请输入数字', () => { });
+        }
+        num1 = this.volume;
+        // if (!this.diameter){
+        //     this.diameter = 0;
+        // }
+        // if (!this.height){
+        //     this.height = 0;
+        // }
+        // if (!this.volume){
+        //     this.volume = 0;
+        // }
+        // if (!this.killMethodsValue){
+        //     this.killMethodsValue = "0";
+        // }
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+            this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+        }
+        else {
+            if (this.imageData != null) {
+                var options = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
+                //创建文件对象
+                var fileTransfer = this.fileTransfer.create();
+                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
+                    .then(function (res) {
+                    console.log(res);
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (error) {
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks,
+                        img: _this.imageData
+                    };
+                    var deadCache;
+                    deadCache = localStorage.getItem('deadCache');
+                    if (deadCache == null) {
+                        deadCache = [];
+                    }
+                    else {
+                        deadCache = JSON.parse(deadCache);
+                    }
+                    deadCache.push(cacheData);
+                    //localStorage安全保存数据
+                    // try{
+                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // } 
+                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                    //this.navCtrl.pop();
+                    // confirm.dismiss()
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                })
+                    .catch(function (error) {
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
+                            killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        _this.base.showAlert('提示', '提交成功', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                            killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }, function (msg) {
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        _this.base.showAlert('提示', '提交失败', function () { });
+                        var cacheData = {
+                            deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                            accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                            killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                        };
+                        console.log("cacheData");
+                        console.log(cacheData);
+                        var deadCache;
+                        deadCache = localStorage.getItem('deadCache');
+                        if (deadCache == null) {
+                            deadCache = [];
+                        }
+                        else {
+                            deadCache = JSON.parse(deadCache);
+                        }
+                        deadCache.push(cacheData);
+                        // try{
+                        //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // }   
+                        localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                        console.log("Hello");
+                        //this.navCtrl.pop();
+                        // confirm.dismiss();
+                        __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    });
+                });
+            }
+            else {
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                        killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                    }
+                })
+                    .subscribe(function (res) {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (msg) {
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    var deadCache;
+                    deadCache = localStorage.getItem('deadCache');
+                    if (deadCache == null) {
+                        deadCache = [];
+                    }
+                    else {
+                        deadCache = JSON.parse(deadCache);
+                    }
+                    deadCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                    console.log("Hello");
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                });
+            }
+        }
+    };
+    DeadtreePage.prototype.trapClick = function () {
+        console.log('deadtree');
+    };
+    DeadtreePage.prototype.deviceIdInput = function () {
+        console.log('ok');
+        console.log(this.deviceId);
+    };
+    DeadtreePage.prototype.deviceSerialInput = function () {
+        console.log(this.deviceSerial);
+    };
+    DeadtreePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树采伐\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径:</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高:</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积:</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
+    ], DeadtreePage);
+    return DeadtreePage;
+}());
+
+//# sourceMappingURL=newDeadTree.js.map
+
+/***/ }),
+
+/***/ 218:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeadTreesQueryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the DeadTreesQueryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var DeadTreesQueryPage = /** @class */ (function () {
+    function DeadTreesQueryPage(navCtrl, navParams, httpClient, base) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.httpClient = httpClient;
+        this.base = base;
+    }
+    DeadTreesQueryPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad DeadTreesQueryPage');
+        this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["DeadMotherDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    DeadTreesQueryPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                scanId: localStorage["DeadMotherDeviceId"]
+            }
+        })
+            .subscribe(function (res) {
+            console.log(res);
+            _this.dataList = res;
+        });
+    };
+    DeadTreesQueryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-dead-trees-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/'<!--\n  Generated template for the DeadTreesQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>DeadTreesQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>维护日期</th>\n            <th>除害方式</th>\n            <th>批次</th>\n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.submitDate}}</th>\n              <th>{{item.killmethod}}</th>\n              <th>{{item.batch}}</th>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      \n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
+    ], DeadTreesQueryPage);
+    return DeadTreesQueryPage;
+}());
+
+//# sourceMappingURL=dead-trees-query.js.map
+
+/***/ }),
+
+/***/ 219:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrackPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__ = __webpack_require__(220);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var TrackPage = /** @class */ (function () {
+    function TrackPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, base64, loadingCtrl) {
+        this.navCtrl = navCtrl;
+        this.qrScanner = qrScanner;
+        this.base = base;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        this.httpClient = httpClient;
+        this.camera = camera;
+        this.fileTransfer = fileTransfer;
+        this.base64 = base64;
+        this.loadingCtrl = loadingCtrl;
+        this.recordTime = {};
+        this.picNotExsit1 = false;
+        this.picNotExsit2 = false;
+        this.picNotExsit3 = false;
+        this.picNotExsit4 = false;
+        this.picNotExsit5 = false;
+        this.hasPic = false;
+        this.isStopRecord = false;
+        this.flag = 0;
+        this.lineNameDis = false;
+        this.remarks = "";
+        this.users = [
+            {
+                id: 1,
+                first: 'Alice',
+                last: 'Smith',
+            },
+            {
+                id: 2,
+                first: 'Bob',
+                last: 'Davis',
+            },
+            {
+                id: 3,
+                first: 'Charlie',
+                last: 'Rosenburg',
+            }
+        ];
+        this.photosum = 0;
+    }
+    TrackPage.prototype.NavToMap = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__about_about__["a" /* AboutPage */]);
+    };
+    TrackPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        var loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+            duration: 15000
+        });
+        loader.present();
+        console.log(localStorage["TrackCache"]);
+        console.log(localStorage["TrackCache1"]);
+        console.log(localStorage["TrackCache2"]);
+        console.log(localStorage["TrackCache3"]);
+        console.log(localStorage["TrackCache4"]);
+        console.log(localStorage["TrackCache5"]);
+        if (localStorage["TrackCache"]) {
+            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+            if (localStorage["TrackCache1"]) {
+                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
+            }
+            if (localStorage["TrackCache2"]) {
+                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
+            }
+            if (localStorage["TrackCache3"]) {
+                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
+            }
+            if (localStorage["TrackCache4"]) {
+                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
+            }
+            if (localStorage["TrackCache5"]) {
+                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
+            }
+            var j = 0;
+            tmpStorage.forEach(function (element) {
+                _this.httpClient.post(_this.base.BASE_URL + 'app/addLineName', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        linename: element.lineName,
+                    }
+                }).subscribe(function (res) {
+                    console.log(res);
+                });
+                console.log(element);
+                if (element.hasPic == true) {
+                    for (var i = 1; i <= element.photoSum; i++) {
+                        console.log("====当前第几条数据====");
+                        console.log(j);
+                        console.log("=====当前第几张照片====");
+                        console.log(i);
+                        var options = {};
+                        options.fileKey = "image";
+                        var time = Date.parse(Date());
+                        options.fileName = time + ".jpg";
+                        options.mimeType = "image/jpeg";
+                        options.chunkedMode = false;
+                        options.httpMethod = "POST";
+                        options.params = {
+                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                            lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                            current: i, recordTime: JSON.parse(element.recordTime)
+                        };
+                        options.headers = { token: localStorage['token'] };
+                        console.log("options");
+                        console.log(options);
+                        if (i == 1) {
+                            //创建文件对象
+                            var fileTransfer = _this.fileTransfer.create();
+                            fileTransfer.upload(_this.photoplib1[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then(function (res) {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, function (error) {
+                                _this.picNotExsit1 = true;
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            })
+                                .catch(function (error) {
+                                _this.picNotExsit1 = true;
+                            });
+                        }
+                        else if (i == 2) {
+                            var fileTransfer = _this.fileTransfer.create();
+                            fileTransfer.upload(_this.photoplib2[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then(function (res) {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, function (error) {
+                                _this.picNotExsit2 = true;
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            })
+                                .catch(function (error) {
+                                _this.picNotExsit2 = true;
+                            });
+                        }
+                        else if (i == 3) {
+                            var fileTransfer = _this.fileTransfer.create();
+                            fileTransfer.upload(_this.photoplib3[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then(function (res) {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, function (error) {
+                                _this.picNotExsit3 = true;
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            })
+                                .catch(function (error) {
+                                _this.picNotExsit3 = true;
+                            });
+                        }
+                        else if (i == 4) {
+                            var fileTransfer = _this.fileTransfer.create();
+                            fileTransfer.upload(_this.photoplib4[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then(function (res) {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, function (error) {
+                                _this.picNotExsit4 = true;
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            })
+                                .catch(function (error) {
+                                _this.picNotExsit4 = true;
+                            });
+                        }
+                        else if (i == 5) {
+                            var fileTransfer = _this.fileTransfer.create();
+                            fileTransfer.upload(_this.photoplib5[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then(function (res) {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, function (error) {
+                                _this.picNotExsit5 = true;
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            })
+                                .catch(function (error) {
+                                _this.picNotExsit5 = true;
+                            });
+                        }
+                        if (_this.picNotExsit1 || _this.picNotExsit2 || _this.picNotExsit3 || _this.picNotExsit4 || _this.picNotExsit5) {
+                            _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                    lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                    current: "1", recordTime: JSON.stringify(element.recordTime)
+                                }
+                            })
+                                .subscribe(function (res) {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                localStorage.removeItem('TrackCache');
+                            }, function (msg) {
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                            });
+                        }
+                    }
+                    setTimeout(function () {
+                        console.log(JSON.stringify(element.recordTime));
+                        console.log(element.recordTime.toString());
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                current: "5", recordTime: element.recordTime.toString()
+                            }
+                        })
+                            .subscribe(function (res) {
+                            j++;
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '缓存提交成功', () => { });
+                            if (j >= tmpStorage.length)
+                                localStorage.removeItem('TrackCache');
+                        }, function (msg) {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                    }, 10000);
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                }
+                else {
+                    console.log(element);
+                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                            lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                            current: "1", recordTime: JSON.stringify(element.recordTime)
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        j++;
+                        if (j >= tmpStorage.length)
+                            localStorage.removeItem('TrackCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            });
+        }
+    };
+    TrackPage.prototype.deviceBind = function () {
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功", "", function () { });
+    };
+    TrackPage.prototype.trapClick = function () {
+        console.log('track');
+    };
+    TrackPage.prototype.submit = function () {
+        var _this = this;
+        if (this.isStopRecord == false) {
+            this.base.showAlert("你还没有停止录制!", "你还没有停止录制", function () { });
+        }
+        else {
+            this.have_submit = true;
+            this.base.showAlert(this.flag, this.flag, function () { });
+            console.log("======PATH======");
+            console.log(this.imageData);
+            var myImage = this.imageData;
+            // if (!this.lineName){
+            //     this.lineName = "0";
+            // }
+            // if (!this.workContent){
+            //     this.workContent = "0";
+            // }
+            // if (!this.lateIntravl){
+            //     this.lateIntravl = "10";
+            // }
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+            }
+            else {
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                        current: "1", recordTime: JSON.stringify(this.recordTime)
+                    }
+                })
+                    .subscribe(function (res) {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    _this.base.showAlert('提示', '提交成功', function () { });
+                    if (_this.hasPic == true) {
+                        var cacheData = {
+                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                            lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum
+                        };
+                    }
+                    else {
+                        var cacheData = {
+                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                            lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: false, photoSum: 0
+                        };
+                    }
+                    console.log("cacheData");
+                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (msg) {
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    _this.base.showAlert('提示', '提交失败', function () { });
+                    if (_this.hasPic == true) {
+                        var cacheData = {
+                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                            lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum
+                        };
+                        var TrackCache = void 0;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        }
+                        else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        console.log("Hello");
+                        __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }
+                    else {
+                        var cacheData = {
+                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                            lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: false, photoSum: 0
+                        };
+                        var TrackCache = void 0;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        }
+                        else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        console.log("Hello");
+                        __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                    }
+                });
+            }
+        }
+    };
+    TrackPage.prototype.takePhoto = function () {
+        var _this = this;
+        this.photosum += 1;
+        this.hasPic = true;
+        var options = {
+            quality: 10,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            sourceType: 1,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true,
+            saveToPhotoAlbum: true
+        };
+        this.base.showAlert(this.photosum, "", function () { });
+        this.camera.getPicture(options).then(function (imageData) {
+            // this.submit(imageData)
+            // this.navCtrl.popToRoot()
+            _this.imageData = imageData;
+            var options = {};
+            options.fileKey = "image";
+            var time = Date.parse(Date());
+            options.fileName = time + ".jpg";
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.httpMethod = "POST";
+            options.params = {
+                lineName: _this.lineName,
+                current: _this.photosum
+            };
+            options.headers = { token: localStorage['token'] };
+            console.log("options");
+            console.log(options);
+            console.log(_this.photosum);
+            console.log(_this.imageData);
+            console.log("======imageData====");
+            console.log(imageData);
+            console.log(_this.imageData);
+            //创建文件对象
+            var fileTransfer = _this.fileTransfer.create();
+            fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto', options)
+                .then(function (res) {
+                console.log(res);
+                console.log(JSON.stringify(res));
+                console.log(JSON.parse(JSON.stringify(res)).message);
+                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                _this.base.showAlert('提示', '提交成功', function () { });
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+            }, function (error) {
+                _this.base.showAlert('提示', '提交失败', function () { });
+                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                var cacheData = {
+                    lineName: _this.lineName,
+                    current: _this.current,
+                    img: _this.imageData,
+                };
+                var TrackCache;
+                TrackCache = localStorage.getItem('TrackCache' + _this.current);
+                if (TrackCache == null) {
+                    TrackCache = [];
+                }
+                else {
+                    TrackCache = JSON.parse(TrackCache);
+                }
+                TrackCache.push(cacheData);
+                //localStorage安全保存数据
+                // try{
+                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                // }catch(oException){
+                //     if(oException.name == 'QuotaExceededError'){
+                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                //         //console.log('已经超出本地存储限定大小！');
+                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                //       // localStorage.clear();
+                //       // localStorage.setItem(key,value);
+                //     }
+                // } 
+                localStorage.setItem('TrackCache' + _this.photosum.toString(), JSON.stringify(TrackCache));
+                //this.navCtrl.pop();
+                // confirm.dismiss()
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+            })
+                .catch(function (error) {
+            });
+        }, function (err) {
+            // Handle error
+            // this.navCtrl.popToRoot()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+    TrackPage.prototype.LateInput = function () {
+        var num1 = 0;
+        if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        if (!this.lateIntravl) {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+        num1 = parseInt(this.lateIntravl);
+        this.lateIntravl = '' + num1;
+        if (this.lateIntravl == 'NaN') {
+            this.base.showAlert('提示', '请输入数字', function () { });
+        }
+    };
+    TrackPage.prototype.startRecord = function () {
+        var _this = this;
+        this.lineNameDis = true;
+        this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {}, {
+            headers: { token: localStorage['token'] }, params: {
+                linename: this.lineName,
+            }
+        }).subscribe(function (res) {
+            console.log(res);
+        });
+        if (!this.lateIntravl) {
+            this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", function () { });
+        }
+        else {
+            this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+            console.log(this.recordTime.startTime);
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 99999999,
+                maximumAge: 0
+            };
+            var that_1 = this;
+            var watch = this.geolocation.watchPosition(options);
+            var longtitudeData_1 = [];
+            var latitudeData_1 = [];
+            var altitudeData_1 = [];
+            var accuracyData_1 = [];
+            this.myIntravl = setInterval(function () {
+                // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
+                // this.location_ready = true;
+                longtitudeData_1.push(_this.longtitude);
+                latitudeData_1.push(_this.latitude);
+                altitudeData_1.push(_this.altitude);
+                accuracyData_1.push(_this.accuracy);
+                _this.longtitudeData = longtitudeData_1;
+                _this.latitudeData = latitudeData_1;
+                _this.altitudeData = altitudeData_1;
+                _this.accuracyData = accuracyData_1;
+                console.log(_this.longtitude + "," + _this.latitude + "," + _this.altitude);
+            }, Number(this.lateIntravl) * 1000);
+            this.subscription = watch.subscribe(function (data) {
+                // data can be a set of coordinates, or an error (if an error occurred).
+                if (data['coords']) {
+                    // this.changeDetectorRef.detectChanges();
+                    // setTimeout(() => {
+                    _this.latitude = String(data.coords.latitude);
+                    sessionStorage['latitude'] = String(data.coords.latitude);
+                    _this.longtitude = String(data.coords.longitude);
+                    sessionStorage['longitude'] = String(data.coords.longitude);
+                    _this.altitude = String(data.coords.altitude);
+                    sessionStorage['altitude'] = String(data.coords.altitude);
+                    _this.accuracy = String(data.coords.accuracy);
+                    // 不是可以在这里直接判断海拔是不是null吗。。。。
+                    if (data.coords.altitude == null) {
+                        _this.altitude = '-10000';
+                        sessionStorage['altitude'] = '-10000';
+                        //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                    }
+                    // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                    // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                    // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                    // document.getElementById('sumbit_button').removeAttribute('disabled')
+                    that_1.changeDetectorRef.detectChanges();
+                    // },5);
+                    // if(this.altitude==null){
+                    //   this.location_ready = false;
+                    //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                    // }
+                }
+                // else{
+                //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                // }
+            }, function (res) {
+                // setTimeout(() => {
+                //    this.base.showAlert('提示','wu',()=>{});
+                _this.location_ready = false;
+                that_1.changeDetectorRef.detectChanges();
+                // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                // },5);
+                // alert();
+            });
+        }
+    };
+    TrackPage.prototype.stopRecord = function () {
+        this.isStopRecord = true;
+        clearInterval(this.myIntravl);
+        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+        console.log(this.recordTime.endTime);
+    };
+    TrackPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-track',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置:(秒)</ion-label>\n                <ion-input [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__["a" /* Base64 */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]])
+    ], TrackPage);
+    return TrackPage;
+}());
+
+//# sourceMappingURL=newTrack.js.map
+
+/***/ }),
+
+/***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__device_beetle_fill_device_beetle_fill__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__device_forest_fill_device_forest_fill__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__locate_locate__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__cache_cache__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__photo_upload_photo_upload__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__detail_detail__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__device_data_device_data__ = __webpack_require__(230);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1582,12 +4416,12 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 216:
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceForestFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__photo_upload_photo_upload__ = __webpack_require__(223);
 
 /**
  * Generated class for the DeviceForestFillPage page.
@@ -1665,7 +4499,7 @@ var DeviceForestFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 217:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1766,18 +4600,18 @@ var PhotoUploadPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 218:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1864,7 +4698,8 @@ var MaintenancePage = /** @class */ (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: false,
-            correctOrientation: true
+            correctOrientation: true,
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (imageData) {
             // this.submit(imageData)
@@ -2091,17 +4926,17 @@ var MaintenancePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 220:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CachePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2582,20 +5417,20 @@ var CachePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 221:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_page_transitions__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__detail_detail__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(228);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2689,6 +5524,7 @@ var LoginPage = /** @class */ (function () {
             _this.nativePageTransitions.slide(_this.base.transitionOptions);
             _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
             sessionStorage['isLogin'] = true;
+            _this.base.showAlert('提示', '数量输入为空或不合法', function () { });
         }, function (res) {
             _this.base.showConfirmAlert('提示', '登录失败', function () {
             }, function () { });
@@ -2727,14 +5563,14 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 222:
+/***/ 227:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(221);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2765,15 +5601,15 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 225:
+/***/ 230:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceDataPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2892,13 +5728,13 @@ var DeviceDataPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 226:
+/***/ 231:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 
 
@@ -2909,47 +5745,53 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 247:
+/***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_newhome_newhome__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_newSwitchProject_newSwitchProject__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_newTrap_newTrap__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_newDeadTree_newDeadTree__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_newEnemy_newEnemy__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_newTrack_newTrack__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_about_about__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_locate_locate__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_cache_cache__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_maintenance_maintenance__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_detail_detail__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_device_data_device_data__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_app_version__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_in_app_browser__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_newhome_newhome__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_newSwitchProject_newSwitchProject__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_newTrap_newTrap__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_newDeadTree_newDeadTree__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_newEnemy_newEnemy__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_newTrack_newTrack__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_trap_query_trap_query__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_dead_trees_query_dead_trees_query__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__pages_inject_query_inject_query__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__pages_enemy_query_enemy_query__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__pages_track_query_track_query__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_base64__ = __webpack_require__(220);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2999,6 +5841,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+
+
+
+
+
+
 var MyErrorHandler = /** @class */ (function () {
     function MyErrorHandler(alerts, splashScreen, base) {
         this.alerts = alerts;
@@ -3008,7 +5856,7 @@ var MyErrorHandler = /** @class */ (function () {
     MyErrorHandler.prototype.handleError = function (err) {
         // do something with the error
         console.log(err);
-        this.base.logger(JSON.stringify(err), "error.txt");
+        // this.base.logger(JSON.stringify(err),"error.txt");
     };
     MyErrorHandler = __decorate([
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */])),
@@ -3030,6 +5878,11 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
                 __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */],
+                __WEBPACK_IMPORTED_MODULE_36__pages_trap_query_trap_query__["a" /* TrapQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_37__pages_dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_38__pages_inject_query_inject_query__["a" /* InjectQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_39__pages_enemy_query_enemy_query__["a" /* EnemyQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_40__pages_track_query_track_query__["a" /* TrackQueryPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__["a" /* ScanPage */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_newhome_newhome__["a" /* NewHomePage */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__["a" /* DryPage */],
@@ -3069,6 +5922,11 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_11__pages_scan_scan__["a" /* ScanPage */],
                 __WEBPACK_IMPORTED_MODULE_29__pages_newhome_newhome__["a" /* NewHomePage */],
                 __WEBPACK_IMPORTED_MODULE_32__pages_newDry_newDry__["a" /* DryPage */],
+                __WEBPACK_IMPORTED_MODULE_36__pages_trap_query_trap_query__["a" /* TrapQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_37__pages_dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_38__pages_inject_query_inject_query__["a" /* InjectQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_39__pages_enemy_query_enemy_query__["a" /* EnemyQueryPage */],
+                __WEBPACK_IMPORTED_MODULE_40__pages_track_query_track_query__["a" /* TrackQueryPage */],
                 __WEBPACK_IMPORTED_MODULE_33__pages_newDeadTree_newDeadTree__["a" /* DeadtreePage */],
                 __WEBPACK_IMPORTED_MODULE_34__pages_newEnemy_newEnemy__["a" /* EnemyPage */],
                 __WEBPACK_IMPORTED_MODULE_35__pages_newTrack_newTrack__["a" /* TrackPage */],
@@ -3095,6 +5953,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_17__common_coordinate_convertor__["a" /* CoordinateConvertor */],
                 __WEBPACK_IMPORTED_MODULE_18__ionic_native_native_page_transitions__["a" /* NativePageTransitions */],
                 __WEBPACK_IMPORTED_MODULE_24__ionic_native_diagnostic__["a" /* Diagnostic */],
+                __WEBPACK_IMPORTED_MODULE_41__ionic_native_base64__["a" /* Base64 */],
                 __WEBPACK_IMPORTED_MODULE_22__ionic_native_camera__["a" /* Camera */],
                 __WEBPACK_IMPORTED_MODULE_20__ionic_native_file__["a" /* File */],
                 __WEBPACK_IMPORTED_MODULE_21__ionic_native_file_transfer__["a" /* FileTransfer */],
@@ -3109,16 +5968,16 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 289:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_newhome_newhome__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_newhome_newhome__ = __webpack_require__(110);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3155,13 +6014,13 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 302:
+/***/ 307:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3190,12 +6049,12 @@ var ContactPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 303:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeviceBeetleFillPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__device_forest_fill_device_forest_fill__ = __webpack_require__(222);
 
 /**
  * Generated class for the DeviceBeetleFillPage page.
@@ -3267,17 +6126,62 @@ var DeviceBeetleFillPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 55:
+/***/ 310:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrackQueryPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the TrackQueryPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var TrackQueryPage = /** @class */ (function () {
+    function TrackQueryPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    TrackQueryPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad TrackQueryPage');
+    };
+    TrackQueryPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-track-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/track-query/track-query.html"*/'<!--\n  Generated template for the TrackQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>TrackQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>测试</h1>\n        <div style="width: 100%">\n          <table border="1" style="table-layout:fixed" width="100%">\n            <thead>\n              <th>工作内容</th>\n              <th>树木状态</th>\n              <th>释放数量</th>\n            </thead>\n            <tbody>\n              <tr *ngFor="let item of dataList">\n                <th>{{item.id}}</th>\n                <th>{{item.num}}</th>\n                <th>{{item.count}}</th>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n        \n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/track-query/track-query.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], TrackQueryPage);
+    return TrackQueryPage;
+}());
+
+//# sourceMappingURL=track-query.js.map
+
+/***/ }),
+
+/***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScanPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_qr_scanner__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_page_transitions__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_base_js__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3326,19 +6230,19 @@ var ScanPage = /** @class */ (function () {
                     // alert(text)
                     // alert(text);
                     var geshi = true;
-                    if (text.length != 12) {
-                        geshi = false;
-                    }
-                    if (geshi) {
-                        var shuzi = "1234567890";
-                        for (var i = 0; i < text.length; i++) {
-                            var c = text.charAt(i);
-                            // indexof返回的是数字。。。。。。之前怎么可以的
-                            if (shuzi.indexOf(c) < 0) {
-                                geshi = false;
-                            }
-                        }
-                    }
+                    // if(text.length!=15){
+                    //   geshi=false;
+                    // }
+                    // if(geshi){
+                    //     let shuzi="1234567890";
+                    //     for(let i=0;i<text.length;i++){
+                    //         let c=text.charAt(i);
+                    //         // indexof返回的是数字。。。。。。之前怎么可以的
+                    //         if(shuzi.indexOf(c) < 0){
+                    //           geshi=false;
+                    //         }
+                    //     }
+                    // }
                     if (geshi) {
                         // let id = text.split('id:')[1];
                         var id_1 = text;
@@ -3439,10 +6343,10 @@ var ScanPage = /** @class */ (function () {
             myid = data[name];
             // this.base.showAlert('提示',myid,()=>{});
             var geshi = true;
-            if (myid.length != 12) {
-                geshi = false;
-                //  this.base.showAlert('提示',myid.length,()=>{});
-            }
+            // if(myid.length!=15){
+            //   geshi=false;
+            // //  this.base.showAlert('提示',myid.length,()=>{});
+            // }
             if (geshi) {
                 // this.base.showAlert('提示','b',()=>{});
                 var shuzi = "1234567890";
@@ -3548,7 +6452,468 @@ var ScanPage = /** @class */ (function () {
 
 //# sourceMappingURL=scan.js.map
 
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_base_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(50);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+
+
+
+
+// declare var BMapLib;
+var markers = [];
+var AboutPage = /** @class */ (function () {
+    function AboutPage(navCtrl, httpClient, base, coordinateConvertor, alerts, file, geolocation, changeDetectorRef) {
+        this.navCtrl = navCtrl;
+        this.httpClient = httpClient;
+        this.base = base;
+        this.coordinateConvertor = coordinateConvertor;
+        this.alerts = alerts;
+        this.file = file;
+        this.geolocation = geolocation;
+        this.changeDetectorRef = changeDetectorRef;
+        // 是否定位成功
+        this.location_ready = false;
+        //username = '';
+        // 经度
+        this.longitude = '';
+        // 纬度
+        this.latitude = '';
+        // 海拔
+        this.altitude = '';
+        // 精度
+        this.accuracy = '';
+        // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
+        //
+        // // map.centerAndZoom("广州",17); //设置城市设置中心和地图显示级别
+        // let point = new BMap.Point(113.23, 23.16);//坐标可以通过百度地图坐标拾取器获取
+        // map.centerAndZoom(point, 17);//设置中心和地图显示级别
+        //
+        // map.addControl(new BMap.MapTypeControl());
+        // // map.setCurrentCity("广州");
+        //
+        // let sizeMap = new BMap.Size(10, 80);//显示位置
+        // map.addControl(new BMap.NavigationControl());
+        //
+        // map.centerAndZoom('中国', 5);
+    }
+    AboutPage.prototype.locate = function () {
+        var _this = this;
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 99999999,
+            maximumAge: 0
+        };
+        var that = this;
+        var watch = this.geolocation.watchPosition(options);
+        this.subscription = watch.subscribe(function (data) {
+            // data can be a set of coordinates, or an error (if an error occurred).
+            if (data['coords']) {
+                // setTimeout(() => {
+                _this.latitude = String(data.coords.latitude);
+                sessionStorage['latitude'] = String(data.coords.latitude);
+                _this.longitude = String(data.coords.longitude);
+                sessionStorage['longitude'] = String(data.coords.longitude);
+                _this.altitude = String(data.coords.altitude);
+                sessionStorage['altitude'] = String(data.coords.altitude);
+                _this.accuracy = String(data.coords.accuracy);
+                // 不是可以在这里直接判断海拔是不是null吗。。。。
+                if (data.coords.altitude == null) {
+                    _this.altitude = '-10000';
+                    sessionStorage['altitude'] = '-10000';
+                    //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                }
+                setTimeout(function () {
+                    //this.location_ready = true;
+                    _this.location_ready = true;
+                    that.changeDetectorRef.detectChanges();
+                }, 5000);
+                // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                // document.getElementById('sumbit_button').removeAttribute('disabled')
+                that.changeDetectorRef.detectChanges();
+                // },5);
+                // if(this.altitude==null){
+                //   this.location_ready = false;
+                //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                // }
+            }
+            // else{
+            //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+            // }
+        }, function (res) {
+            // setTimeout(() => {
+            //    this.base.showAlert('提示','wu',()=>{});
+            _this.location_ready = false;
+            that.changeDetectorRef.detectChanges();
+            // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+            // },5);
+            // alert();
+        });
+    };
+    AboutPage.prototype.IamHere = function () {
+        var map = this.map;
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+        // setInterval("this.myLocation()",5000);
+        // this.myLocation();
+        map.centerAndZoom('中国', 5);
+        map.addControl(new BMap.MapTypeControl());
+        var sizeMap = new BMap.Size(10, 80); //显示位置
+        map.addControl(new BMap.NavigationControl());
+        map.centerAndZoom(point, 12);
+        var i = 1;
+        var that = this;
+        map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
+        map.enableContinuousZoom(true); //连续缩放效果，默认禁用
+        function addMarker(point, index) {
+            var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
+                // 指定定位位置。   
+                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                // 图标中央下端的尖角位置。    
+                anchor: new BMap.Size(10, 25),
+                // 设置图片偏移。   
+                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+            });
+            // 创建标注对象并添加到地图   
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+        }
+        point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+        console.log("Point1进来");
+        console.log(point);
+        var point2 = new BMap.Point(point[1], point[0]);
+        // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
+        console.log("进来的");
+        console.log(point2);
+        var mk = new BMap.Marker(point2);
+        map.addOverlay(mk);
+        map.panTo(point2);
+        // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+        map.centerAndZoom(point2, 15); // 编写自定义函数，创建标注   
+        addMarker(point2, 0);
+        // }
+        // this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
+        //   console.log(success);
+        //   // success
+        // }, function (error) {
+        //   console.log(error);
+        //   // error
+        // });
+        // let append = '';
+        // setInterval(() => {
+        //   this.locate();
+        //   // if (this.altitude != '-10000' && !this.altitude && this.altitude!="")
+        //   if (this.latitude && this.longitude) {
+        //     const alert = this.alerts.create({
+        //       title: '数据',
+        //       enableBackdropDismiss: false,
+        //       buttons: [
+        //         {
+        //           text: this.latitude + ',' + this.longitude + ',' + this.altitude,
+        //           handler: () => {
+        //           }
+        //         }
+        //       ]
+        //     });
+        //     alert.present();
+        //     setTimeout(() => {
+        //       var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+        //       console.log("point1=>");
+        //       console.log(point);
+        //       console.log(this.latitude);
+        //       console.log(this.longitude);
+        //       console.log(this.altitude);
+        //       var point2 = new BMap.Point(point[1], point[0]);
+        //       console.log("point2=>");
+        //       console.log(point2);
+        //       var mk = new BMap.Marker(point2);
+        //       map.addOverlay(mk);
+        //       map.panTo(point2);
+        //       // alert('您的位置：' + point.lng + ',' + point.lat);
+        //       map.centerAndZoom(point2, 15);  // 编写自定义函数，创建标注   
+        //       addMarker(point2, i);
+        //       append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
+        //       that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
+        //         console.log(success);
+        //         // success
+        //       }, function (error) {
+        //         console.log(error);
+        //         // error
+        //       });
+        //       i++;
+        //     }, 5000)
+        //   }
+        // }, 30000);
+    };
+    AboutPage.prototype.ionViewDidEnter = function () {
+        var _this = this;
+        var myPoint = [];
+        var map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true }); //创建地图实例
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+        // setInterval("this.myLocation()",5000);
+        // this.myLocation();
+        map.centerAndZoom('中国', 5);
+        map.addControl(new BMap.MapTypeControl());
+        var sizeMap = new BMap.Size(10, 80); //显示位置
+        map.addControl(new BMap.NavigationControl());
+        map.enableScrollWheelZoom(true); //启动滚轮放大缩小，默认禁用
+        map.enableContinuousZoom(true); //连续缩放效果，默认禁用
+        this.locate();
+        this.httpClient.get(this.base.BASE_URL + 'auth_api/user', { headers: { token: localStorage['token'] } })
+            .subscribe(function (data) {
+            // console.log(d);
+            var center = '';
+            if (data['town'] != null)
+                center = data['town'] + center;
+            if (data['city'] != null)
+                center = data['city'] + center;
+            if (data['area'] != null)
+                center = data['area'] + center;
+            if (data['province'] != null)
+                center = data['province'] + center;
+            if (center)
+                map.centerAndZoom(center, 11);
+        });
+        this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {
+            headers: { token: localStorage['token'] },
+            params: { searchText: "", limit: "2000", page: "1", isMap: "false" }
+        }).subscribe(function (res) {
+            for (var i = 0; i < res['data'].length; i++) {
+                if (res['data'][i].longitude && res['data'][i].latitude) {
+                    if (i == 0)
+                        console.log(res['data'][i].latitude);
+                    var point = _this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
+                    point = new BMap.Point(point[1], point[0]);
+                    markers.push(point);
+                    // this.addMarker(point);
+                }
+            }
+            _this.addMarker();
+        });
+        function addMarker(point, index) {
+            var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
+                // 指定定位位置。   
+                // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+                // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+                // 图标中央下端的尖角位置。    
+                anchor: new BMap.Size(10, 25),
+                // 设置图片偏移。   
+                // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+                // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+                imageOffset: new BMap.Size(0, 0 - index * 25) // 设置图片偏移    
+            });
+            // 创建标注对象并添加到地图   
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+        }
+        setTimeout(function () {
+        }, 5000);
+        // if (this.altitude != '-10000' && !this.altitude && this.altitude != "") {
+    };
+    AboutPage.prototype.addMarker = function () {
+        var options = {
+            size: 15,
+            shape: 2,
+            color: '#d340c3'
+        };
+        var markerClusterer = new BMap.PointCollection(markers, options);
+        // var marker = new BMap.Marker(point);
+        this.map.addOverlay(markerClusterer);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('map2'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+    ], AboutPage.prototype, "map_container2", void 0);
+    AboutPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-about',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      地图\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map2 id="map_container2"></div>\n  <button id="here" ion-button (click)="IamHere()">我在这</button>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/about/about.html"*/
+        }),
+        __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_5__common_coordinate_convertor__["a" /* CoordinateConvertor */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]])
+    ], AboutPage);
+    return AboutPage;
+}());
+
+//# sourceMappingURL=about.js.map
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Base; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__ = __webpack_require__(50);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Base = /** @class */ (function () {
+    function Base(alertCtrl, file) {
+        this.alertCtrl = alertCtrl;
+        this.file = file;
+        // BASE_URL = "http://39.108.184.47:8081/"
+        this.BASE_URL = "http://106.15.90.78:8081/";
+        // BASE_URL = "http://192.168.31.254:8081/"
+        this.transitionOptions = {
+            direction: 'left',
+            duration: 200,
+            slowdownfactor: 3,
+            slidePixels: 20,
+            iosdelay: 0,
+            androiddelay: 0,
+            fixedPixelsTop: 0,
+            fixedPixelsBottom: 60
+        };
+    }
+    Base.prototype.showAlert = function (title, content, func) {
+        var alert = this.alertCtrl.create({
+            title: title,
+            subTitle: content,
+            buttons: [{ text: '确认', handler: func }]
+        });
+        alert.present();
+    };
+    Base.prototype.readLogger = function (filename) {
+        this.file.readAsText(this.file.externalDataDirectory, filename).then(function (success) {
+            console.log(success);
+            return success;
+        });
+        return "";
+    };
+    Base.prototype.logger = function (info, storage) {
+        var that = this;
+        this.file.checkFile(this.file.externalDataDirectory, storage).then(function (success) {
+            console.log(success);
+            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        }, function (err) {
+            console.log(err);
+            that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+                console.log(success);
+                // success
+            }, function (error) {
+                console.log(error);
+                // error
+            });
+        });
+    };
+    Base.prototype.showPrompt = function (title, myName, func1, func2) {
+        var prompt = this.alertCtrl.create({
+            title: title,
+            inputs: [
+                {
+                    type: 'text',
+                    name: myName,
+                    placeholder: '设备id'
+                }
+            ],
+            buttons: [
+                {
+                    text: '取消',
+                    handler: func2
+                },
+                {
+                    text: '确认',
+                    handler: function (data) {
+                        func1(data);
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    Base.prototype.showConfirmAlert = function (title, content, func1, func2) {
+        var confirm = this.alertCtrl.create({
+            title: title,
+            message: content,
+            buttons: [
+                {
+                    text: '取消',
+                    handler: func2
+                },
+                {
+                    text: '确认',
+                    handler: function () {
+                        func1(confirm);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    Base.popTo = function (navCtrl, name) {
+        var views = navCtrl.getViews();
+        var target = -1;
+        for (var i = 0; i < views.length; ++i) {
+            if (views[i].name == name) {
+                target = i;
+                break;
+            }
+        }
+        if (target >= 0) {
+            navCtrl.popTo(navCtrl.getByIndex(target)).then(function () { });
+        }
+    };
+    Base = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_file__["a" /* File */]])
+    ], Base);
+    return Base;
+}());
+
+//# sourceMappingURL=base.js.js.map
+
 /***/ })
 
-},[226]);
+},[231]);
 //# sourceMappingURL=main.js.map

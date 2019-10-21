@@ -38,6 +38,13 @@ import { DryPage} from '../pages/newDry/newDry';
 import { DeadtreePage} from '../pages/newDeadTree/newDeadTree';
 import { EnemyPage} from '../pages/newEnemy/newEnemy';
 import { TrackPage} from '../pages/newTrack/newTrack';
+import { TrapQueryPage} from '../pages/trap-query/trap-query';
+import { DeadTreesQueryPage} from '../pages/dead-trees-query/dead-trees-query';
+import { InjectQueryPage} from '../pages/inject-query/inject-query';
+import { EnemyQueryPage} from '../pages/enemy-query/enemy-query';
+import { TrackQueryPage} from '../pages/track-query/track-query';
+import { Base64 } from '@ionic-native/base64';
+
 
 class MyErrorHandler implements ErrorHandler {
   constructor(
@@ -49,7 +56,7 @@ class MyErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     // do something with the error
     console.log(err);
-    this.base.logger(JSON.stringify(err),"error.txt");
+    // this.base.logger(JSON.stringify(err),"error.txt");
   }
 }
 
@@ -60,6 +67,12 @@ class MyErrorHandler implements ErrorHandler {
     ContactPage,
     HomePage,
     TabsPage,
+    TrapQueryPage,
+    DeadTreesQueryPage,
+    InjectQueryPage,
+    EnemyQueryPage,
+    TrackQueryPage,
+
     ScanPage,
     NewHomePage,
     DryPage,
@@ -98,6 +111,12 @@ class MyErrorHandler implements ErrorHandler {
     ScanPage,
     NewHomePage,
     DryPage,
+    TrapQueryPage,
+    DeadTreesQueryPage,
+    InjectQueryPage,
+    EnemyQueryPage,
+    TrackQueryPage,
+    
     DeadtreePage,
     EnemyPage,
     TrackPage,
@@ -124,6 +143,7 @@ class MyErrorHandler implements ErrorHandler {
     CoordinateConvertor,
     NativePageTransitions,
     Diagnostic,
+    Base64,
     Camera,
     File,
     FileTransfer,

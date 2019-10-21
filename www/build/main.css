@@ -25689,10 +25689,976 @@ ion-navbar.toolbar {
 
 page-about #map_container2 {
   width: 100%;
-  height: 100%;
+  height: 90%;
   overflow: hidden;
   margin: 0;
   font-family: "微软雅黑";
+}
+
+page-about #here {
+  background-color: #1D7155;
+}
+
+app-deadtree #device {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-deadtree #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+app-deadtree #ID {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-deadtree #one {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-deadtree #saomiao {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  padding: 0;
+}
+
+app-deadtree #NUM {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-deadtree #two {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-deadtree #bangding {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  border: none;
+}
+
+app-deadtree #info {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-deadtree #line2 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1;
+}
+
+app-deadtree #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+app-deadtree #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #meter {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #height {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #volume {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #killmethods {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-deadtree #photoANDsubmit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-deadtree #mapANDquery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-deadtree #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-deadtree #tijiao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-deadtree #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-deadtree #chaxun {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-dry #device {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-dry #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+app-dry #ID {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-dry #NUM {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-dry #one {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-dry #saomiao {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  padding: 0;
+}
+
+app-dry #two {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-dry #bangding {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  border: none;
+}
+
+app-dry #info {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-dry #line2 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1;
+}
+
+app-dry #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+app-dry #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-dry #status {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-dry #number {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-dry #workcontent {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-dry #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-dry #photoANDsubmit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-dry #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-dry #tijiao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-dry #mapANDquery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-dry #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-dry #chaxun {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-enemy #device {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-enemy #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+app-enemy #ID {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-enemy #one {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-enemy #saomiao {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  padding: 0;
+}
+
+app-enemy #NUM {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-enemy #two {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-enemy #bangding {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  border: none;
+}
+
+app-enemy #info {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-enemy #line2 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1;
+}
+
+app-enemy #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+app-enemy #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-enemy #enemytype {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-enemy #number {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-enemy #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-enemy #photoANDsubmit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-enemy #mapANDquery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-enemy #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-enemy #tijiao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-enemy #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-enemy #chaxun {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-switchProject #title {
+  font-size: 250%;
+  font-weight: 900;
+  margin: 5%;
+}
+
+app-switchProject #select {
+  background-color: lightgrey;
+  border: 15px solid #1D7155;
+  margin: 15% 5%;
+}
+
+app-switchProject #one {
+  background-color: #1D7155;
+  width: 80%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 0 10%;
+  text-align: center;
+}
+
+app-switchProject #two {
+  background-color: #1D7155;
+  width: 80%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 5% 10%;
+  text-align: center;
+}
+
+app-switchProject #three {
+  background-color: #1D7155;
+  width: 80%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 0 10%;
+  text-align: center;
+}
+
+app-switchProject #four {
+  background-color: #1D7155;
+  width: 80%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 5% 10%;
+  text-align: center;
+}
+
+app-switchProject #five {
+  background-color: #1D7155;
+  width: 80%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 0 10%;
+  text-align: center;
+}
+
+app-switchProject #six {
+  background-color: #dee9e5;
+  width: 80%;
+  color: #1D7155;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 5% 10%;
+  text-align: center;
+}
+
+app-track #track {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-track #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+app-track #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+app-track #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-track #linename {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-track #workcontent {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-track #delay {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-track #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-track #startANDend {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-track #start {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-track #end {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-track #photoANDmap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-track #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-track #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-track #tijiao {
+  background-color: #1D7155;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-trap #trapezoid {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-trap #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+app-trap #ID {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-trap #one {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-trap #saomiao {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  padding: 0;
+}
+
+app-trap #NUM {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+app-trap #two {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+app-trap #bangding {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  border: none;
+}
+
+app-trap #info {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+app-trap #line2 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1;
+}
+
+app-trap #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+app-trap #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #songmo {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #qita {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #type {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #injectType {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #workcontent {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+app-trap #photoANDsubmit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-trap #mapANDquery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+app-trap #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-trap #tijiao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-trap #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+app-trap #chaxun {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+app-home #title {
+  font-size: 250%;
+  font-weight: 900;
+}
+
+app-home #new_login {
+  background-color: lightgrey;
+  border: 15px solid #1D7155;
+  margin: 10%;
+  margin-top: 20%;
+}
+
+app-home #denglu {
+  background-color: #1D7155;
+  width: 50%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 10% 25%;
+  text-align: center;
+}
+
+app-home #one {
+  margin-top: 5%;
+}
+
+app-home #two {
+  margin-top: 5%;
+}
+
+app-home #UN {
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 10%;
+}
+
+app-home #PW {
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 10%;
 }
 
 page-scan .qrscanner {
