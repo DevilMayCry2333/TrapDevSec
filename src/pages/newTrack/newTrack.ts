@@ -29,6 +29,8 @@ export class TrackPage {
     recordTime: any = {};
     photosum:number;
     imageData:any;
+    startRecordIsClick = false;
+    endRecordIsClick = false;
     photoplib1:any;
     photoplib2:any;
     photoplib3: any;
@@ -103,12 +105,6 @@ export class TrackPage {
 
     ionViewDidLoad(){
 
-        const loader = this.loadingCtrl.create({
-            content: "缓存数据正在提交，请勿退出",
-            duration: 15000
-        });
-        loader.present();
-
         console.log(localStorage["TrackCache"]);
         console.log(localStorage["TrackCache1"]);
         console.log(localStorage["TrackCache2"]);
@@ -117,6 +113,11 @@ export class TrackPage {
         console.log(localStorage["TrackCache5"]);
 
         if (localStorage["TrackCache"]) {
+            const loader = this.loadingCtrl.create({
+                content: "缓存数据正在提交，请勿退出",
+                duration: 15000
+            });
+            loader.present();
             var tmpStorage = JSON.parse(localStorage["TrackCache"]);
 
             if (localStorage["TrackCache1"]){
@@ -153,7 +154,6 @@ export class TrackPage {
                 console.log(element);
 
                 if (element.hasPic ==true ) {
-
 
                     for(var i = 1; i <= element.photoSum; i++){
 
@@ -360,11 +360,10 @@ export class TrackPage {
         console.log('track');
     }
     submit() {
-        if(this.isStopRecord == false){
-            this.base.showAlert("你还没有停止录制!","你还没有停止录制",()=>{});
+        if(this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false){
+            this.base.showAlert("你还没有完成一个录制循环!","你还没有完成一个录制循环",()=>{});
         }else{
             this.have_submit = true;
-
             this.base.showAlert(this.flag,this.flag,()=>{});
 
             console.log("======PATH======");
@@ -470,113 +469,118 @@ export class TrackPage {
     }
 
     takePhoto() {
-        this.photosum += 1;
-        this.hasPic = true;
+        if(this.startRecordIsClick == false){
+            this.base.showAlert("请先输入线路名称并点开始录制!","请先输入线路名称并点开始录制",()=>{});
+        }else{
+            this.photosum += 1;
+            this.hasPic = true;
 
-        const options: CameraOptions = {
-            quality: 10,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            sourceType: 1,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            allowEdit: false,
-            correctOrientation: true,
-            saveToPhotoAlbum: true
-        };
-
-        this.base.showAlert(this.photosum, "", () => { });
-
-        this.camera.getPicture(options).then((imageData) => {
-            // this.submit(imageData)
-            // this.navCtrl.popToRoot()
-            this.imageData = imageData;
-
-            let options: FileUploadOptions = {};
-            options.fileKey = "image";
-            var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
-            options.params = {
-                lineName: this.lineName,
-                current: this.photosum
+            const options: CameraOptions = {
+                quality: 10,
+                destinationType: this.camera.DestinationType.FILE_URI,
+                sourceType: 1,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                allowEdit: false,
+                correctOrientation: true,
+                saveToPhotoAlbum: true
             };
-            options.headers = { token: localStorage['token'] };
-            console.log("options");
-            console.log(options);
 
-            console.log(this.photosum);
-            console.log(this.imageData);
+            this.base.showAlert(this.photosum, "", () => { });
 
-            console.log("======imageData====");
-            console.log(imageData);
-            console.log(this.imageData);
+            this.camera.getPicture(options).then((imageData) => {
+                // this.submit(imageData)
+                // this.navCtrl.popToRoot()
+                this.imageData = imageData;
+
+                let options: FileUploadOptions = {};
+                options.fileKey = "image";
+                var time = Date.parse(Date());
+                options.fileName = time + ".jpg";
+                options.mimeType = "image/jpeg";
+                options.chunkedMode = false;
+                options.httpMethod = "POST";
+                options.params = {
+                    lineName: this.lineName,
+                    current: this.photosum
+                };
+                options.headers = { token: localStorage['token'] };
+                console.log("options");
+                console.log(options);
+
+                console.log(this.photosum);
+                console.log(this.imageData);
+
+                console.log("======imageData====");
+                console.log(imageData);
+                console.log(this.imageData);
 
 
 
 
 
-            //创建文件对象
-            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                //创建文件对象
+                const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
-                            .then((res) => {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
+                                .then((res) => {
+                                    console.log(res);
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, (error) => {//发送失败(网络出错等)
-                                this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-
-                                let cacheData = {
-                                    lineName: this.lineName,
-                                    current: this.current,
-                                    img: this.imageData,
-                                };
-                                let TrackCache: any;
-
-                                    TrackCache = localStorage.getItem('TrackCache' + this.current);
-                                if (TrackCache == null) {
-                                    TrackCache = [];
-                                } else {
-                                    TrackCache = JSON.parse(TrackCache);
-                                }
-                                TrackCache.push(cacheData);
-                                //localStorage安全保存数据
-                                // try{
-                                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                                // }catch(oException){
-                                //     if(oException.name == 'QuotaExceededError'){
-                                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                //         //console.log('已经超出本地存储限定大小！');
-                                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                                //       // localStorage.clear();
-                                //       // localStorage.setItem(key,value);
-                                //     }
-                                // } 
-                                localStorage.setItem('TrackCache' + this.photosum.toString(), JSON.stringify(TrackCache));
-                                //this.navCtrl.pop();
-                                // confirm.dismiss()
+                                    this.base.showAlert('提示', '提交成功', () => { });
                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            })
-                    .catch((error) => {//发送失败(文件不存在等)
-                        
-                    });
+                                }, (error) => {//发送失败(网络出错等)
+                                    this.base.showAlert('提示', '提交失败', () => { });
+                                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+
+                                    let cacheData = {
+                                        lineName: this.lineName,
+                                        current: this.current,
+                                        img: this.imageData,
+                                    };
+                                    let TrackCache: any;
+
+                                        TrackCache = localStorage.getItem('TrackCache' + this.current);
+                                    if (TrackCache == null) {
+                                        TrackCache = [];
+                                    } else {
+                                        TrackCache = JSON.parse(TrackCache);
+                                    }
+                                    TrackCache.push(cacheData);
+                                    //localStorage安全保存数据
+                                    // try{
+                                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                                    // }catch(oException){
+                                    //     if(oException.name == 'QuotaExceededError'){
+                                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                                    //         //console.log('已经超出本地存储限定大小！');
+                                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                                    //       // localStorage.clear();
+                                    //       // localStorage.setItem(key,value);
+                                    //     }
+                                    // } 
+                                    localStorage.setItem('TrackCache' + this.photosum.toString(), JSON.stringify(TrackCache));
+                                    //this.navCtrl.pop();
+                                    // confirm.dismiss()
+                                        // Base.popTo(this.navCtrl, 'switchProjectPage');
+                                })
+                        .catch((error) => {//发送失败(文件不存在等)
+                            
+                        });
 
 
-       
+        
 
-        }, (err) => {
-            // Handle error
-            // this.navCtrl.popToRoot()
-        }).catch((error) => {
-            console.log(error)
-        });
+            }, (err) => {
+                // Handle error
+                // this.navCtrl.popToRoot()
+            }).catch((error) => {
+                console.log(error)
+            });
+        }
+
 
     }
     LateInput(){
@@ -594,21 +598,21 @@ export class TrackPage {
         }
     }
     startRecord(){
-        this.lineNameDis = true;
-
-        this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
-            {
-                headers: { token: localStorage['token'] }, params: {
-                    linename: this.lineName,
-                }
-            }).subscribe(res=>{
-                console.log(res);
-
-            })
-
         if (!this.lateIntravl){
             this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
         }else{
+            this.lineNameDis = true;
+            this.startRecordIsClick = true;
+            this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
+                {
+                    headers: { token: localStorage['token'] }, params: {
+                        linename: this.lineName,
+                    }
+                }).subscribe(res=>{
+                    console.log(res);
+
+                })
+
             this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
             console.log(this.recordTime.startTime);
 
@@ -688,14 +692,16 @@ export class TrackPage {
         }
     }
     stopRecord(){
-
-        this.isStopRecord = true;
-
-        clearInterval(this.myIntravl);
-        this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
-        console.log(this.recordTime.endTime);
-
-
+        if(this.startRecordIsClick == false){
+            this.base.showAlert("你还没有开始录制!","你还没有开始录制",()=>{});
+        }else{
+            this.base.showAlert("停止录制成功!","停止录制成功",()=>{});
+            this.isStopRecord = true;
+            this.endRecordIsClick = true;
+            clearInterval(this.myIntravl);
+            this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+            console.log(this.recordTime.endTime);
+        }
 
     }
 

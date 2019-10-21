@@ -3,18 +3,21 @@ import { NavController } from 'ionic-angular';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Geolocation } from "@ionic-native/geolocation";
 import { Subscription } from "rxjs/Subscription";
-
+import { AppAvailability } from '@ionic-native/app-availability';
 import { TabsPage } from "../tabs/tabs";
 import { Base } from "../../common/base.js";
 import { CoordinateConvertor } from "../../common/coordinate-convertor";
 import { AlertController } from 'ionic-angular';
 import { File } from "@ionic-native/file";
 import { ChangeDetectorRef } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 
 
 // import * as MarkerClusterer from "../../../node_modules/@types/markerclustererplus/index";
 declare var BMap;
+// declare let appAvailability: any;
+declare var device;
 declare var BMap_Symbol_SHAPE_POINT;
 // declare var BMapLib;
 var markers = [];
@@ -50,7 +53,12 @@ export class AboutPage {
 
 
   constructor(public navCtrl: NavController, private httpClient: HttpClient, private base: Base,
-    private coordinateConvertor: CoordinateConvertor, @Inject(AlertController) private alerts: AlertController, private file: File, private geolocation: Geolocation, private changeDetectorRef: ChangeDetectorRef) {
+    private coordinateConvertor: CoordinateConvertor, 
+    @Inject(AlertController) private alerts: AlertController, 
+    private file: File, private geolocation: Geolocation, 
+    private changeDetectorRef: ChangeDetectorRef,
+    private appAvailability:AppAvailability,
+    private platform: Platform) {
 
     // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
     //
@@ -66,6 +74,52 @@ export class AboutPage {
     //
     // map.centerAndZoom('中国', 5);
   }
+
+openBaiduMap() {
+  let app;
+
+  if (this.platform.is('ios')) {
+    app = 'baidumap://';
+  } else if (this.platform.is('android')) {
+    app = 'com.baidu.BaiduMap';
+  }
+
+  var point = new BMap.Point(116.331398, 39.897445);
+  point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
+  console.log(point[0]);
+  console.log(point[1]);
+  
+  
+  this.appAvailability.check(app).then(
+    (yes: boolean) => {
+      if (this.platform.is('ios')) {
+        window.location.href = 'baidumap://map/direction?origin=中关村&destination=五道口&mode=driving&region=北京&src=ios.baidu.openAPIdemo'
+      }else{
+        window.location.href = 'bdapp://map/direction?&origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置'
+      }
+    },
+    (no: boolean) => {
+      console.log(this.latitude);
+      console.log(this.longitude);
+      
+      var url:string = "http://api.map.baidu.com/marker?location=" + point[0] + "," + point[1] + "&title=我的位置&content=百度奎科大厦&output=html&src=webapp.baidu.openAPIdemo";
+      console.log(url);
+      window.open(url);
+    }
+  )
+  // appAvailability.check(
+  //   'com.baidu.BaiduMap',
+  //   function() {  // 已下载
+  //     device.platform === 'iOS'?
+  //       window.location.href = 'baidumap://map/direction?origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置':
+  //       window.location.href = 'bdapp://map/direction?&origin=latlng:116.291226,39.965221|name:世纪城&destination=latlng:39.9761,116.3282|name:钓点位置'
+  //   },
+  //   function() { // 未下载
+  //     // 打开浏览器
+
+  //   }
+  // );
+}
 
   locate() {
     let options = {
