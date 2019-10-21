@@ -13,7 +13,7 @@ import { AboutPage } from '../about/about';
 import { EnemyQueryPage} from '../enemy-query/enemy-query';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-enemy',
     templateUrl: 'newEnemy.html'
 })
 export class EnemyPage {

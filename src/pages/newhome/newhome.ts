@@ -25,11 +25,7 @@ export class NewHomePage {
     login() {
         console.log(this.username);
         console.log(this.password);
-<<<<<<< HEAD
-        this.httpClient.post("http://106.15.90.78:8081/" + 'login', {},
-=======
         this.httpClient.post(this.base.BASE_URL + 'login', {},
->>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
             { params: new HttpParams({ fromObject: { username: this.username, password: this.password } }) })
             .subscribe(res => {
                 console.log(res);
@@ -43,13 +39,9 @@ export class NewHomePage {
             },
                 res => {
                     console.log(res);
-<<<<<<< HEAD
-                    
-=======
                     this.base.showConfirmAlert('提示', '用户名或者密码错了', () => {
                         
                     }, () => { });
->>>>>>> 60b61d179c92d69136233d71fd6096761bf21c96
 
                 })
 
