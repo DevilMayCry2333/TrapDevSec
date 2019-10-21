@@ -13,7 +13,7 @@ import { AboutPage } from '../about/about';
 import { DeadTreesQueryPage} from '../dead-trees-query/dead-trees-query';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-deadtree',
     templateUrl: 'newDeadTree.html'
 })
 export class DeadtreePage {

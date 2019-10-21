@@ -6,6 +6,7 @@ www/
 platforms/
 plugins/
 node_modules/
+.sourcemaps/
 
 
 # Log file

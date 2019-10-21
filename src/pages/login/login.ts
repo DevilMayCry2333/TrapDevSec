@@ -84,6 +84,7 @@ export class LoginPage {
           this.nativePageTransitions.slide(this.base.transitionOptions);
           this.navCtrl.setRoot(TabsPage);
           sessionStorage['isLogin'] = true
+          this.base.showAlert('提示', '数量输入为空或不合法', ()=>{});
         },
         res => {
           this.base.showConfirmAlert('提示', '登录失败', ()=>{

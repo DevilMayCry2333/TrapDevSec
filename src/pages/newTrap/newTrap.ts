@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { QRScanner } from '@ionic-native/qr-scanner';
 import { NavController } from 'ionic-angular';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ScanPage} from '../scan/scan'
@@ -14,7 +14,7 @@ import { TrapQueryPage} from '../trap-query/trap-query';
 import { File } from "@ionic-native/file";
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-trap',
     templateUrl: 'newTrap.html',
 })
 export class TrapPage {
@@ -31,7 +31,9 @@ export class TrapPage {
     accuracy: string
     have_submit:boolean
     imageData: null
-    remarks= ""
+
+    remarks: ""
+
     newbettle: string
     otherbettleType:any[]
     injectType:any[]
@@ -59,6 +61,12 @@ export class TrapPage {
             last: 'Rosenburg',
         }
     ];
+
+
+    deviceBind(){
+        //这里还没有实现，先弹框
+        this.base.showAlert("成功","",()=>{});
+    }
 
     NavToQuery(){
         if(this.deviceId){
@@ -651,6 +659,33 @@ export class TrapPage {
                             //this.navCtrl.pop();
                             // confirm.dismiss()
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
+                        })
+                    .catch((error) => {//发送失败(文件不存在等)
+                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                    otherNum: this.otherbettle, otherType: this.BeetleType
+                                }
+                            })
+                            .subscribe(res => {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                this.base.showAlert('提示', '提交成功', () => { });
+                                let cacheData = {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                                    otherNum: this.otherbettle, otherType: this.BeetleType
+                                };
+                                console.log("cacheData");
+                                console.log(cacheData);
+                            })
                         })
 
                 } else {

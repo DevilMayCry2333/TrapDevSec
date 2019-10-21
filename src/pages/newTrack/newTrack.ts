@@ -15,7 +15,7 @@ import { LoadingController } from 'ionic-angular';
 
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-track',
     templateUrl: 'newTrack.html'
 })
 export class TrackPage {
