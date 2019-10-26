@@ -1,8 +1,8 @@
 # Compiled class file
 *.class
 .idea/
-www/
-.sourcemaps/
+/www/
+/.sourcemaps/
 platforms/
 plugins/
 node_modules/
