@@ -9,6 +9,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { NewHomePage} from "../newhome/newhome";
 import { Base } from '../../common/base.js'
 import { AlertController } from 'ionic-angular';
+import {NewMedicinePage} from '../new-medicine/new-medicine'
 
 @Component({
     selector: 'app-switchProject',
@@ -37,6 +38,7 @@ export class switchProjectPage {
 
     trapClick() {
         console.log("trap");
+        // this.navCtl.push(NewMedicinePage);
         this.navCtl.push(TrapPage);
     }
     dryClick(){
@@ -45,10 +47,16 @@ export class switchProjectPage {
     deadClick(){
         this.navCtl.push(DeadtreePage);
     }
+
+    medicineClick() {
+        //console.log("trap");         //控制台输出
+        this.navCtl.push(NewMedicinePage);
+        //this.navCtl.push(TrapPage);
+    }
     exitClick(){
         const alert = this.alertCtrl.create({
             title: "警告!!",
-            subTitle: "是否要退出系统???????",
+            subTitle: "是否要退出系统?",
             buttons: [
                 {
                     text: '确认', handler: () => {
