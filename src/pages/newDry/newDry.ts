@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { NavController } from 'ionic-angular';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { ScanPage } from '../scan/scan'
-import { Base } from '../../common/base.js'
+import { ScanPage } from '../scan/scan';
+import { Base } from '../../common/base.js';
 import { Subscription } from "rxjs/Subscription";
 import { Geolocation } from "@ionic-native/geolocation";
 import { ChangeDetectorRef } from '@angular/core';

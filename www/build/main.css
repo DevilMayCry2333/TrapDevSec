@@ -25721,6 +25721,190 @@ page-about #share {
   background-color: #1D7155;
 }
 
+page-new-medicine #device {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+page-new-medicine #line1 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1px;
+}
+
+page-new-medicine #ID {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-new-medicine #NUM {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-new-medicine #one {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #saomiao {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  padding: 0;
+}
+
+page-new-medicine #two {
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 3%;
+  width: 75%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #bangding {
+  background-color: #1D7155;
+  width: 20%;
+  margin-left: 3%;
+  border: none;
+}
+
+page-new-medicine #info {
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  height: 0;
+  width: 200px;
+  line-height: 30px;
+  padding-left: 20px;
+  border-width: 50px 60px 30px 0px;
+  border-style: none solid solid;
+  border-color: transparent transparent #1D7155;
+  border-bottom-color: #1D7155;
+}
+
+page-new-medicine #line2 {
+  margin-top: 0;
+  background: #1D7155;
+  height: 1;
+}
+
+page-new-medicine #jingwei {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1D7155;
+}
+
+page-new-medicine #haiba {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #medicinename {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #medicinenumber {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #controlarea {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #workcontent {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #remarks {
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2%;
+  border-color: #1D7155;
+}
+
+page-new-medicine #photoANDsubmit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+page-new-medicine #paizhao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+page-new-medicine #tijiao {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
+page-new-medicine #mapANDquery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+page-new-medicine #ditu {
+  background-color: #1D7155;
+  width: 45%;
+  margin-right: 5%;
+}
+
+page-new-medicine #chaxun {
+  background-color: #1D7155;
+  width: 45%;
+  margin-left: 5%;
+}
+
 app-deadtree #device {
   font-size: 16px;
   display: block;
@@ -26255,18 +26439,27 @@ app-enemy #chaxun {
 app-switchProject #title {
   font-size: 250%;
   font-weight: 900;
-  margin: 5%;
+  margin: 3%;
 }
 
 app-switchProject #select {
   background-color: lightgrey;
   border: 15px solid #1D7155;
-  margin: 0,5%;
+  padding: 100% lightgrey;
+  height: 100%;
+  width: 100%;
+}
+
+app-switchProject #card {
+  height: 90%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 app-switchProject #one {
   background-color: #1D7155;
   width: 80%;
+  height: 50%;
   color: white;
   font-size: 120%;
   font-weight: bold;
@@ -26278,6 +26471,7 @@ app-switchProject #one {
 app-switchProject #two {
   background-color: #1D7155;
   width: 80%;
+  height: 50%;
   color: white;
   font-size: 120%;
   font-weight: bold;
@@ -26289,28 +26483,31 @@ app-switchProject #two {
 app-switchProject #three {
   background-color: #1D7155;
   width: 80%;
+  height: 50%;
   color: white;
   font-size: 120%;
   font-weight: bold;
   padding: 14px 20px;
   margin: 0 10%;
+  text-align: center;
+}
+
+app-switchProject #seven {
+  background-color: #1D7155;
+  width: 80%;
+  height: 50%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 5% 10%;
   text-align: center;
 }
 
 app-switchProject #four {
   background-color: #1D7155;
   width: 80%;
-  color: white;
-  font-size: 120%;
-  font-weight: bold;
-  padding: 14px 20px;
-  margin: 5% 10%;
-  text-align: center;
-}
-
-app-switchProject #five {
-  background-color: #1D7155;
-  width: 80%;
+  height: 50%;
   color: white;
   font-size: 120%;
   font-weight: bold;
@@ -26319,14 +26516,27 @@ app-switchProject #five {
   text-align: center;
 }
 
-app-switchProject #six {
-  background-color: #dee9e5;
+app-switchProject #five {
+  background-color: #1D7155;
   width: 80%;
-  color: #1D7155;
+  height: 50%;
+  color: white;
   font-size: 120%;
   font-weight: bold;
   padding: 14px 20px;
   margin: 5% 10%;
+  text-align: center;
+}
+
+app-switchProject #six {
+  background-color: #dee9e5;
+  width: 80%;
+  height: 50%;
+  color: #1D7155;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 2%  10%;
   text-align: center;
 }
 
@@ -26648,7 +26858,8 @@ app-home #title {
 app-home #new_login {
   background-color: lightgrey;
   border: 15px solid #1D7155;
-  margin: 20% 5%;
+  padding: 100% lightgrey;
+  margin: 20% 3%;
 }
 
 app-home #denglu {
@@ -26658,28 +26869,28 @@ app-home #denglu {
   font-size: 120%;
   font-weight: bold;
   padding: 14px 20px;
-  margin: 10% 25%;
+  margin: 15% 20% 25% 25%;
   text-align: center;
 }
 
 app-home #one {
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 app-home #two {
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 app-home #UN {
   border-style: solid;
   border-width: 1px;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 app-home #PW {
   border-style: solid;
   border-width: 1px;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 page-scan .qrscanner {

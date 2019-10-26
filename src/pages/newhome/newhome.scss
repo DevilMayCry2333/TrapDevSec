@@ -7,8 +7,8 @@ app-home{
     #new_login{
         background-color: lightgrey;
         border: 15px solid #1D7155;
-        //padding: 100% lightgrey;
-        margin: 20% 5%;
+        padding: 100% lightgrey;
+        margin: 20% 3%;
     }
     #denglu{
         background-color:  #1D7155;     //按钮背景颜色
@@ -17,25 +17,25 @@ app-home{
         font-size:120%;      //字体大小
         font-weight:bold;   //字体加粗
         padding: 14px 20px;    //内容区域大小
-        margin: 10% 25%;        //上下和左右边距
+        margin: 15% 20% 25% 25%;        //上下和左右边距
         text-align: center;     //文字内容居中
     }
     #one{
-        margin-top:5%;
+        margin-top:10%;
         
     }
     #two{
-        margin-top:5%;
+        margin-top:10%;
     }
     #UN{
         border-style:solid;
         border-width:1px;
-        margin-right:10%;
+        margin-right:5%;
     }
     #PW{
         border-style:solid;
         border-width:1px;
-        margin-right:10%;
+        margin-right:5%;
     }
 
 
