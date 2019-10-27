@@ -46,7 +46,7 @@ import { TrackQueryPage} from '../pages/track-query/track-query';
 import { Base64 } from '@ionic-native/base64';
 import { AppAvailability } from '@ionic-native/app-availability';
 import {NewMedicinePage} from '../pages/new-medicine/new-medicine';
-
+import {MedicineQueryPage} from '../pages/medicine-query/medicine-query'
 
 
 class MyErrorHandler implements ErrorHandler {
@@ -76,6 +76,7 @@ class MyErrorHandler implements ErrorHandler {
     EnemyQueryPage,
     TrackQueryPage,
     NewMedicinePage,
+    MedicineQueryPage,
 
     ScanPage,
     NewHomePage,
@@ -121,6 +122,7 @@ class MyErrorHandler implements ErrorHandler {
     EnemyQueryPage,
     TrackQueryPage,
     NewMedicinePage,
+    MedicineQueryPage,
     
     DeadtreePage,
     EnemyPage,
