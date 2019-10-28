@@ -11,5 +11,25 @@
 </ion-header>
 
 <ion-content padding>
-
+    <h1>数据内容</h1>
+    <div style="width: 100%">
+      <table border="1" style="table-layout:fixed" width="100%">
+        <thead>
+          <th>批次</th>
+          <th>药剂类型</th>
+          <th>药剂质量</th>
+          <th>防治面积</th>
+          <th>工作内容</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataList">
+            <th>{{item.batch}}</th>
+            <th>{{item.medicineName}}</th>
+            <th>{{item.medicineQua}}</th>
+            <th>{{item.areaFz}}</th>
+            <th>{{item.workContent}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </ion-content>

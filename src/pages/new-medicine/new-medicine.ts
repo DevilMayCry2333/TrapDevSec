@@ -276,7 +276,7 @@ ionViewDidLoad() {
                 console.log(res);
             })
 
-    //药剂数量不需要后端获取
+    //药剂质量不需要后端获取
 
 
 
