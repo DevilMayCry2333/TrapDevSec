@@ -35,6 +35,7 @@ export class NewMedicinePage {
     imageData:""
     accuracy: string
     medicinename:any[]
+    medicinenameValue:String
     medicinenumber:string
     controlarea:string
     have_submit:boolean
@@ -181,7 +182,7 @@ ionViewDidLoad() {
                 options.params = {
                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                     accuracy: element.accuracy, medicinename: element.medicinename, medicinenumber: element.medicinenumber, remarks: element.remarks,
-                    medicineWorkContent: element.medicineWorkContent
+                    medicineWorkContent: element.medicineWorkContent,controlarea:element.controlarea
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -212,7 +213,7 @@ ionViewDidLoad() {
                                     headers: { token: localStorage['token'] }, params: {
                                       deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                                       accuracy: element.accuracy, medicinename: element.medicinename, medicinenumber: element.medicinenumber, remarks: element.remarks,
-                                      medicineWorkContent: element.medicineWorkContent
+                                      medicineWorkContent: element.medicineWorkContent,controlarea:element.controlarea
                                     }
                                 })
                                 .subscribe(res => {
@@ -234,7 +235,7 @@ ionViewDidLoad() {
                         headers: { token: localStorage['token'] }, params: {
                           deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                           accuracy: element.accuracy, medicinename: element.medicinename, medicinenumber: element.medicinenumber, remarks: element.remarks,
-                          medicineWorkContent: element.medicineWorkContent
+                          medicineWorkContent: element.medicineWorkContent,controlarea:element.controlarea
                         }
                     })
                     .subscribe(res => {
@@ -275,7 +276,7 @@ ionViewDidLoad() {
                 console.log(res);
             })
 
-    //药剂数量不需要后端获取
+    //药剂质量不需要后端获取
 
 
 
@@ -338,12 +339,12 @@ callBack = (params) => {
             console.log(allDevice[0]);
 
             var flag = 0;
-            console.log(params.id.charAt(8) === "2");
+            console.log(params.id.charAt(8) === "5");
 
             allDevice.forEach(element => {
                 console.log("element");
                 // console.log(element);
-                if ((element.scanId == params.id && params.id.charAt(8) == '2') || params.id.charAt(8) == '7')
+                if ((element.scanId == params.id && params.id.charAt(8) == '5') || params.id.charAt(8) == '0')
                     flag = 1;
             });
             if (flag == 1) {
@@ -481,7 +482,7 @@ submit() {
             options.params = {
               deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
               accuracy: this.accuracy, medicinename: this.medicinename, medicinenumber: this.medicinenumber, remarks: this.remarks,
-              medicineWorkContent: this.medicineworkContent
+              medicineWorkContent: this.medicineworkContent,controlarea:this.controlarea
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -510,7 +511,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue,
+                        workingContent: this.workContentValue,controlarea:this.controlarea,
                         img: this.imageData
                     };
                     let medicineCache: any;
@@ -545,7 +546,7 @@ submit() {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,controlarea:this.controlarea
                         }
                     })
                     .subscribe(res => {
@@ -556,7 +557,7 @@ submit() {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,controlarea:this.controlarea
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -570,7 +571,7 @@ submit() {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,controlarea:this.controlarea
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -618,7 +619,7 @@ submit() {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue
+                        workingContent: this.workContentValue,controlarea:this.controlarea
                     }
                 })
                 .subscribe(res => {
@@ -629,7 +630,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue
+                        workingContent: this.workContentValue,controlarea:this.controlarea
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -643,7 +644,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue
+                        workingContent: this.workContentValue,controlarea:this.controlarea
                     };
                     console.log("cacheData");
                     console.log(cacheData);
