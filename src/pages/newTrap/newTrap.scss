@@ -32,10 +32,21 @@ app-trap{
     }
 
     #saomiao{
-        background-color:#1D7155;
-        width: 20%;
-        margin-left:3%;
-        padding:0;
+        // background-color:#1D7155;
+        // width: 20%;
+        // margin-left:3%;
+        // padding:0;
+
+        background-color:  #1D7155;     //按钮背景颜色
+        width: 80%;       //按钮大小
+        height:50%; 
+        color: white;     //字体颜色
+        font-size:120%;      //字体大小
+        font-weight:bold;   //字体加粗
+        padding: 14px 20px;    //内容区域大小
+        margin-left:10%;        //左右边距
+        margin-right:10%; 
+        text-align: center;     //文字内容居中
     }
 
     #NUM{
@@ -50,10 +61,20 @@ app-trap{
         border-color:#1D7155;
     }
     #bangding{  
-        background-color:#1D7155;
-        width: 20%;
-        margin-left:3%;
-        border: none;
+        // background-color:#1D7155;
+        // width: 20%;
+        // margin-left:3%;
+        // border: none;
+
+        background-color:  #1D7155;     //按钮背景颜色
+        width: 80%;       //按钮大小
+        height:50%; 
+        color: white;     //字体颜色
+        font-size:120%;      //字体大小
+        font-weight:bold;   //字体加粗
+        padding: 14px 20px;    //内容区域大小
+        margin: 5% 10%;        //上下和左右边距
+        text-align: center;     //文字内容居中
     }
 
   

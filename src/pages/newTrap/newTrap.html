@@ -16,15 +16,17 @@
                     <ion-label>设备ID：</ion-label>
                     <ion-input [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             
                 </ion-item>
-                <button id="saomiao" ion-button (click)="scan()">扫描</button>
             </div>
+                <button id="saomiao" ion-button shape="round" fill="outline" (click)="scan()">扫描</button>
+            
             <div id="NUM">
                 <ion-item id="two" >
                     <ion-label>设备编号:</ion-label>
                     <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>
                 </ion-item>
-                <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>
             </div>
+                <button id="bangding" ion-button shape="round" fill="outline" (click)="bindNewId()">绑定</button>
+            
         </ion-card-content>
     </ion-card>
 
