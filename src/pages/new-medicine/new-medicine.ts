@@ -235,7 +235,7 @@ ionViewDidLoad() {
                         headers: { token: localStorage['token'] }, params: {
                           deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                           accuracy: element.accuracy, medicinename: element.medicinename, medicinenumber: element.medicinenumber, remarks: element.remarks,
-                          medicineWorkContent: element.medicineWorkContent,controlarea:element.controlarea
+                            medicineWorkContent: element.medicineWorkContent, controlarea: element.controlarea
                         }
                     })
                     .subscribe(res => {
@@ -467,7 +467,7 @@ submit() {
     // if (!this.workContentValue){
     //     this.workContentValue = "0";
     // }
-    if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinename || !this.medicinenumber || !this.medicineworkContent || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN') {
+    if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.medicinenumber || !this.medicineworkContent || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN') {
         this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
         
     } else {
@@ -481,7 +481,7 @@ submit() {
             options.httpMethod = "POST";
             options.params = {
               deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-              accuracy: this.accuracy, medicinename: this.medicinename, medicinenumber: this.medicinenumber, remarks: this.remarks,
+                accuracy: this.accuracy, medicinename: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
               medicineWorkContent: this.medicineworkContent,controlarea:this.controlarea
             };
             options.headers = { token: localStorage['token'] };
@@ -511,7 +511,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue,controlarea:this.controlarea,
+                        workingContent: this.workContentValue, controlarea: this.controlarea, medicinename: this.medicinenameValue,
                         img: this.imageData
                     };
                     let medicineCache: any;
@@ -617,8 +617,11 @@ submit() {
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, 
+                        altitude: this.altitude,
+                        accuracy: this.accuracy, WoodStatus: this.woodStatusValue, 
+                        medicinenumber: this.medicinenumber, remarks: this.remarks,
+                        medicinename: this.medicinenameValue.toString(),
                         workingContent: this.workContentValue,controlarea:this.controlarea
                     }
                 })
@@ -630,7 +633,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue,controlarea:this.controlarea
+                        workingContent: this.workContentValue, controlarea: this.controlarea, medicinename: this.medicinenameValue,
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -644,7 +647,7 @@ submit() {
                     let cacheData = {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        workingContent: this.workContentValue,controlarea:this.controlarea
+                        workingContent: this.workContentValue, controlarea: this.controlarea, medicinename: this.medicinenameValue,
                     };
                     console.log("cacheData");
                     console.log(cacheData);
