@@ -22,10 +22,15 @@ export class DeadtreePage {
     longtitude: string;
     latitude: string;
     altitude: string;
+    accuracy: string;
+    // longtitude=1.1234567;
+    // latitude=1.1234567;
+    // altitude=1.1234567;
+    // accuracy=1.1234567;
     diameter = 0;
     height = 0;
     have_submit:boolean;
-    accuracy: string;
+    
     volume = 0;
     killMethodsValue:string
     killMethods:any[];

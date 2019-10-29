@@ -562,8 +562,8 @@ export class TrapPage {
             this.otherbettle = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        num1 = parseInt(this.otherbettle);
-        this.otherbettle = '' + num1;
+        num2 = parseInt(this.otherbettle);
+        this.otherbettle = '' + num2;
         if (this.otherbettle == 'NaN') {
             this.otherbettle = "";
             // this.base.showAlert('提示', '请输入数字', () => { });
