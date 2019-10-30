@@ -52,17 +52,7 @@ app-switchProject{
         margin: 0 10%;        //上下和左右边距
         text-align: center;     //文字内容居中
     }
-    #seven{
-        background-color:  #1D7155;     //按钮背景颜色
-        width: 80%;       //按钮大小
-        height:50%; 
-        color: white;     //字体颜色
-        font-size:120%;      //字体大小
-        font-weight:bold;   //字体加粗
-        padding: 14px 20px;    //内容区域大小
-        margin: 5% 10%;        //上下和左右边距
-        text-align: center;     //文字内容居中
-    }
+    
     #four{
         background-color:  #1D7155;     //按钮背景颜色
         width: 80%;       //按钮大小
@@ -71,7 +61,7 @@ app-switchProject{
         font-size:120%;      //字体大小
         font-weight:bold;   //字体加粗
         padding: 14px 20px;    //内容区域大小
-        margin: 0 10%;        //上下和左右边距
+        margin: 5% 10%;        //上下和左右边距
         text-align: center;     //文字内容居中
     }
     #five{
@@ -82,10 +72,21 @@ app-switchProject{
         font-size:120%;      //字体大小
         font-weight:bold;   //字体加粗
         padding: 14px 20px;    //内容区域大小
-        margin: 5% 10%;        //上下和左右边距
+        margin: 0% 10%;        //上下和左右边距
         text-align: center;     //文字内容居中
     }
     #six{
+        background-color:  #1D7155;     //按钮背景颜色
+        width: 80%;       //按钮大小
+        height:50%; 
+        color: white;     //字体颜色
+        font-size:120%;      //字体大小
+        font-weight:bold;   //字体加粗
+        padding: 14px 20px;    //内容区域大小
+        margin: 5% 10%;        //上下和左右边距
+        text-align: center;     //文字内容居中
+    }
+    #seven{
         background-color:  #dee9e5;
         width: 80%;       //按钮大小
         height:50%; 
