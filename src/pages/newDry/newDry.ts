@@ -468,7 +468,7 @@ export class DryPage {
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude:this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks:this.remarks,
-                    workingContent:this.workContentValue
+                    workingContent:this.workContentValue,myDate:new Date()
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -478,7 +478,7 @@ export class DryPage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                this.base.logger(JSON.stringify(options), "Img_newDryPar.txt");
 
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
@@ -597,8 +597,15 @@ export class DryPage {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
+                var options: FileUploadOptions = {};
+                options.params={
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue,myDate:new Date()
+                };
 
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+
+                this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
 
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                     {

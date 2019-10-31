@@ -458,7 +458,8 @@ export class DeadtreePage {
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks,
+                    myDate:new Date()
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -468,7 +469,7 @@ export class DeadtreePage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                this.base.logger(JSON.stringify(options), "Img_newDeadTreePar.txt");
 
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
                     .then((res) => {
@@ -586,9 +587,17 @@ export class DeadtreePage {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                var options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, 
+                    diameter: this.diameter.toString(), 
+                    height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue, 
+                    remarks: this.remarks,myDate:new Date()
+                };
 
-
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
 
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                     {

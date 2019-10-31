@@ -503,9 +503,12 @@ submit() {
             options.chunkedMode = false;
             options.httpMethod = "POST";
             options.params = {
-              deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-              accuracy: this.accuracy, medicinename: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-              workContentValue: this.workContentValue,controlarea:this.controlarea
+              deviceId: this.deviceId, longitude: this.longtitude, 
+              latitude: this.latitude, altitude: this.altitude,
+              accuracy: this.accuracy, medicinename: this.medicinenameValue, 
+              medicinenumber: this.medicinenumber, remarks: this.remarks,
+                workContentValue: this.workContentValue, 
+                controlarea: this.controlarea, myDate: new Date()
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -515,7 +518,7 @@ submit() {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
 
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
                 .then((res) => {
@@ -634,8 +637,16 @@ submit() {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-
-            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+            var options: FileUploadOptions = {};
+            options.params = {
+                deviceId: this.deviceId, longitude: this.longtitude, 
+                latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, medicinename: this.medicinenameValue, 
+                medicinenumber: this.medicinenumber, remarks: this.remarks,
+                workContentValue: this.workContentValue, 
+                controlarea: this.controlarea,myDate:new Date()
+            };
+            this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
 
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                 {

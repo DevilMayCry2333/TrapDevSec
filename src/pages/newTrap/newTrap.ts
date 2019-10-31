@@ -599,7 +599,8 @@ export class TrapPage {
                         longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
                         maleNum: "1", femaleNum: "1", altitude: this.altitude,
                         drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                        otherNum: this.otherbettle, otherType: this.BeetleType
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        myDate:new Date(),
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -610,7 +611,7 @@ export class TrapPage {
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    this.base.logger(JSON.stringify(options), "Img_newTrapPar.txt");
 
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
@@ -689,14 +690,17 @@ export class TrapPage {
                         })
 
                 } else {
+                    var options: FileUploadOptions = {};
+                     options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        myDate: new Date()
+                    };
 
-                    // var options: string = "deviceId: " + this.id +
-                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-
-
-                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                    this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
 
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
