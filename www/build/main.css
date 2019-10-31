@@ -26473,18 +26473,6 @@ app-switchProject #three {
   text-align: center;
 }
 
-app-switchProject #seven {
-  background-color: #1D7155;
-  width: 80%;
-  height: 50%;
-  color: white;
-  font-size: 120%;
-  font-weight: bold;
-  padding: 14px 20px;
-  margin: 5% 10%;
-  text-align: center;
-}
-
 app-switchProject #four {
   background-color: #1D7155;
   width: 80%;
@@ -26493,7 +26481,7 @@ app-switchProject #four {
   font-size: 120%;
   font-weight: bold;
   padding: 14px 20px;
-  margin: 0 10%;
+  margin: 5% 10%;
   text-align: center;
 }
 
@@ -26505,11 +26493,23 @@ app-switchProject #five {
   font-size: 120%;
   font-weight: bold;
   padding: 14px 20px;
-  margin: 5% 10%;
+  margin: 0% 10%;
   text-align: center;
 }
 
 app-switchProject #six {
+  background-color: #1D7155;
+  width: 80%;
+  height: 50%;
+  color: white;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 14px 20px;
+  margin: 5% 10%;
+  text-align: center;
+}
+
+app-switchProject #seven {
   background-color: #dee9e5;
   width: 80%;
   height: 50%;
