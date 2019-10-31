@@ -1018,27 +1018,28 @@ var TrapPage = /** @class */ (function () {
             }
             else {
                 if (this.imageData != null) {
-                    var options = {};
-                    options.fileKey = "image";
+                    var options_1 = {};
+                    options_1.fileKey = "image";
                     var time = Date.parse(Date());
-                    options.fileName = time + ".jpg";
-                    options.mimeType = "image/jpeg";
-                    options.chunkedMode = false;
-                    options.httpMethod = "POST";
-                    options.params = {
+                    options_1.fileName = time + ".jpg";
+                    options_1.mimeType = "image/jpeg";
+                    options_1.chunkedMode = false;
+                    options_1.httpMethod = "POST";
+                    options_1.params = {
                         deviceId: this.deviceId,
                         longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
                         maleNum: "1", femaleNum: "1", altitude: this.altitude,
                         drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                        otherNum: this.otherbettle, otherType: this.BeetleType
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        myDate: new Date(),
                     };
-                    options.headers = { token: localStorage['token'] };
+                    options_1.headers = { token: localStorage['token'] };
                     console.log("options");
-                    console.log(options);
+                    console.log(options_1);
                     //创建文件对象
                     var fileTransfer = this.fileTransfer.create();
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+                    this.base.logger(JSON.stringify(options_1), "Img_newTrapPar.txt");
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
                         .then(function (res) {
                         console.log(res);
                         console.log(JSON.stringify(res));
@@ -1111,11 +1112,16 @@ var TrapPage = /** @class */ (function () {
                     });
                 }
                 else {
-                    // var options: string = "deviceId: " + this.id +
-                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                    var options = {};
+                    options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        myDate: new Date()
+                    };
+                    this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId,
@@ -1829,25 +1835,25 @@ var DryPage = /** @class */ (function () {
         }
         else {
             if (this.imageData != null) {
-                var options = {};
-                options.fileKey = "image";
+                var options_1 = {};
+                options_1.fileKey = "image";
                 var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
+                options_1.fileName = time + ".jpg";
+                options_1.mimeType = "image/jpeg";
+                options_1.chunkedMode = false;
+                options_1.httpMethod = "POST";
+                options_1.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                    workingContent: this.workContentValue
+                    workingContent: this.workContentValue, myDate: new Date()
                 };
-                options.headers = { token: localStorage['token'] };
+                options_1.headers = { token: localStorage['token'] };
                 console.log("options");
-                console.log(options);
+                console.log(options_1);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
+                this.base.logger(JSON.stringify(options_1), "Img_newDryPar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options_1)
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -1954,7 +1960,13 @@ var DryPage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -2540,24 +2552,27 @@ var EnemyPage = /** @class */ (function () {
         }
         else {
             if (this.imageData != null) {
-                var options = {};
-                options.fileKey = "image";
+                var options_1 = {};
+                options_1.fileKey = "image";
                 var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
+                options_1.fileName = time + ".jpg";
+                options_1.mimeType = "image/jpeg";
+                options_1.chunkedMode = false;
+                options_1.httpMethod = "POST";
+                options_1.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                    accuracy: this.accuracy,
+                    predatorsTypeValue: this.predatorsTypeValue,
+                    releaseNum: this.releaseNum, remarks: this.remarks,
+                    myDate: new Date()
                 };
-                options.headers = { token: localStorage['token'] };
+                options_1.headers = { token: localStorage['token'] };
                 console.log("options");
-                console.log(options);
+                console.log(options_1);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
+                this.base.logger(JSON.stringify(options_1), "Img_newEnemyPar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options_1)
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -2659,7 +2674,13 @@ var EnemyPage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue,
+                    releaseNum: this.releaseNum, remarks: this.remarks, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -3223,25 +3244,26 @@ var DeadtreePage = /** @class */ (function () {
         }
         else {
             if (this.imageData != null) {
-                var options = {};
-                options.fileKey = "image";
+                var options_1 = {};
+                options_1.fileKey = "image";
                 var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
+                options_1.fileName = time + ".jpg";
+                options_1.mimeType = "image/jpeg";
+                options_1.chunkedMode = false;
+                options_1.httpMethod = "POST";
+                options_1.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks,
+                    myDate: new Date()
                 };
-                options.headers = { token: localStorage['token'] };
+                options_1.headers = { token: localStorage['token'] };
                 console.log("options");
-                console.log(options);
+                console.log(options_1);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
+                this.base.logger(JSON.stringify(options_1), "Img_newDeadTreePar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options_1)
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -3348,7 +3370,16 @@ var DeadtreePage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy,
+                    diameter: this.diameter.toString(),
+                    height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue,
+                    remarks: this.remarks, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -3852,6 +3883,13 @@ var TrackPage = /** @class */ (function () {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                var options = {};
+                options.params = {
+                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                 this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -4595,25 +4633,28 @@ var NewMedicinePage = /** @class */ (function () {
         }
         else {
             if (this.imageData != null) {
-                var options = {};
-                options.fileKey = "image";
+                var options_1 = {};
+                options_1.fileKey = "image";
                 var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, medicinename: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
-                    workContentValue: this.workContentValue, controlarea: this.controlarea
+                options_1.fileName = time + ".jpg";
+                options_1.mimeType = "image/jpeg";
+                options_1.chunkedMode = false;
+                options_1.httpMethod = "POST";
+                options_1.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude,
+                    latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, medicinename: this.medicinenameValue,
+                    medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    workContentValue: this.workContentValue,
+                    controlarea: this.controlarea, myDate: new Date()
                 };
-                options.headers = { token: localStorage['token'] };
+                options_1.headers = { token: localStorage['token'] };
                 console.log("options");
-                console.log(options);
+                console.log(options_1);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
+                this.base.logger(JSON.stringify(options_1), "Img_MedicinePar.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options_1)
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -4720,7 +4761,16 @@ var NewMedicinePage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude,
+                    latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, medicinename: this.medicinenameValue,
+                    medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    workContentValue: this.workContentValue,
+                    controlarea: this.controlarea, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
                 this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
@@ -7661,9 +7711,9 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.90.78:8081/";
+        // BASE_URL = "http://106.15.90.78:8081/"
         //  BASE_URL = "http://127.0.0.1:8081/"
-        // BASE_URL = "http://192.168.199.128:8081/"
+        this.BASE_URL = "http://192.168.199.175:8081/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,

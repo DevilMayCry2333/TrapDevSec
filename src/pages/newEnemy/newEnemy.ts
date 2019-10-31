@@ -455,7 +455,10 @@ export class EnemyPage {
                 options.httpMethod = "POST";
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks:this.remarks
+                    accuracy: this.accuracy, 
+                    predatorsTypeValue: this.predatorsTypeValue, 
+                    releaseNum: this.releaseNum, remarks:this.remarks,
+                    myDate:new Date()
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -465,7 +468,7 @@ export class EnemyPage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                this.base.logger(JSON.stringify(options), "Img_newEnemyPar.txt");
 
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
@@ -578,9 +581,14 @@ export class EnemyPage {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                var options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue:this.predatorsTypeValue, 
+                    releaseNum: this.releaseNum, remarks: this.remarks,myDate:new Date()
+                };
 
-
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
 
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                     {
