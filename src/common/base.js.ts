@@ -34,7 +34,7 @@ export class Base {
   }
 
   readLogger(filename):string{
-    this.file.readAsText(this.file.externalDataDirectory,filename).then(function (success){
+    this.file.readAsText(this.file.syncedDataDirectory,filename).then(function (success){
       console.log(success);
       return success;
     });
@@ -43,9 +43,9 @@ export class Base {
   
   logger(info:string,storage:string){
     var that = this;
-    this.file.checkFile(this.file.externalDataDirectory,storage).then(function (success){
+    this.file.checkFile(this.file.syncedDataDirectory,storage).then(function (success){
       console.log(success);
-      that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
+      that.file.writeFile(that.file.syncedDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
         console.log(success);
         // success
       }, function (error) {
@@ -54,7 +54,7 @@ export class Base {
       });
     },function(err){
       console.log(err);
-        that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
+        that.file.writeFile(that.file.syncedDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
           console.log(success);
           // success
         }, function (error) {
