@@ -76,7 +76,7 @@ export class DryPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -479,7 +479,10 @@ export class DryPage {
 
 
                 this.base.logger(JSON.stringify(options), "Img_newDryPar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
                         console.log(res);
@@ -606,7 +609,10 @@ export class DryPage {
 
 
                 this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

@@ -399,7 +399,10 @@ export class TrackPage {
                     current: "1", recordTime: JSON.stringify(this.recordTime),myDate:new Date()
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                    this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                    return;
+                }
                     this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {

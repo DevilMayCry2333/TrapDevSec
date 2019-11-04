@@ -94,7 +94,7 @@ export class NewMedicinePage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
           {
               headers: { token: localStorage['token'] }, params: {
-                  scanId: this.deviceId, serial: this.deviceSerial
+                  scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
               }
           })
           .subscribe(res => {
@@ -519,7 +519,11 @@ submit() {
 
 
             this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
-
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                return;
+            }
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
                 .then((res) => {
                     console.log(res);
@@ -647,7 +651,11 @@ submit() {
                 controlarea: this.controlarea,myDate:new Date()
             };
             this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
-
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                return;
+            }
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                 {
                     headers: { token: localStorage['token'] }, params: {

@@ -85,7 +85,7 @@ export class EnemyPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -469,7 +469,9 @@ export class EnemyPage {
 
 
                 this.base.logger(JSON.stringify(options), "Img_newEnemyPar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", () => { });
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
                         console.log(res);
@@ -589,7 +591,10 @@ export class EnemyPage {
                 };
 
                 this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", () => { });
 
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

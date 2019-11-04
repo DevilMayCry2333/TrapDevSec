@@ -78,7 +78,7 @@ export class DeadtreePage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -470,7 +470,10 @@ export class DeadtreePage {
 
 
                 this.base.logger(JSON.stringify(options), "Img_newDeadTreePar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
                     .then((res) => {
                         console.log(res);
@@ -598,7 +601,10 @@ export class DeadtreePage {
                 };
 
                 this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
-
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

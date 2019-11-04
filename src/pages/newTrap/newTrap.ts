@@ -86,7 +86,8 @@ export class TrapPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId,serial:this.deviceSerial
+                        scanId: this.deviceId,serial:this.deviceSerial,
+                        username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -613,6 +614,11 @@ export class TrapPage {
 
                     this.base.logger(JSON.stringify(options), "Img_newTrapPar.txt");
 
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        return;
+                    }
+
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
                             console.log(res);
@@ -701,7 +707,10 @@ export class TrapPage {
                     };
 
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
-
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        return;
+                    }
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
                             headers: {token: localStorage['token']}, params:{

@@ -687,7 +687,8 @@ var TrapPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial,
+                    username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -1039,6 +1040,10 @@ var TrapPage = /** @class */ (function () {
                     //创建文件对象
                     var fileTransfer = this.fileTransfer.create();
                     this.base.logger(JSON.stringify(options_1), "Img_newTrapPar.txt");
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                        return;
+                    }
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
                         .then(function (res) {
                         console.log(res);
@@ -1122,6 +1127,10 @@ var TrapPage = /** @class */ (function () {
                         myDate: new Date()
                     };
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                        return;
+                    }
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId,
@@ -1587,7 +1596,7 @@ var DryPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -1853,6 +1862,10 @@ var DryPage = /** @class */ (function () {
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
                 this.base.logger(JSON.stringify(options_1), "Img_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options_1)
                     .then(function (res) {
                     console.log(res);
@@ -1967,6 +1980,10 @@ var DryPage = /** @class */ (function () {
                     workingContent: this.workContentValue, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -2317,7 +2334,7 @@ var EnemyPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -2572,6 +2589,9 @@ var EnemyPage = /** @class */ (function () {
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
                 this.base.logger(JSON.stringify(options_1), "Img_newEnemyPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", function () { });
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options_1)
                     .then(function (res) {
                     console.log(res);
@@ -2681,6 +2701,9 @@ var EnemyPage = /** @class */ (function () {
                     releaseNum: this.releaseNum, remarks: this.remarks, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", function () { });
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -3004,7 +3027,7 @@ var DeadtreePage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -3263,6 +3286,10 @@ var DeadtreePage = /** @class */ (function () {
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
                 this.base.logger(JSON.stringify(options_1), "Img_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options_1)
                     .then(function (res) {
                     console.log(res);
@@ -3380,6 +3407,10 @@ var DeadtreePage = /** @class */ (function () {
                     remarks: this.remarks, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -3890,6 +3921,10 @@ var TrackPage = /** @class */ (function () {
                     current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                    this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -4362,7 +4397,7 @@ var NewMedicinePage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -4654,6 +4689,11 @@ var NewMedicinePage = /** @class */ (function () {
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
                 this.base.logger(JSON.stringify(options_1), "Img_MedicinePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options_1)
                     .then(function (res) {
                     console.log(res);
@@ -4771,6 +4811,11 @@ var NewMedicinePage = /** @class */ (function () {
                     controlarea: this.controlarea, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
@@ -7711,9 +7756,9 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.200.245:8081/";
+        // BASE_URL = "http://106.15.200.245:8081/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        //BASE_URL = "http://192.168.199.128:8081/"
+        this.BASE_URL = "http://192.168.31.254:8081/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
