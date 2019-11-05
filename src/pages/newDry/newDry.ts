@@ -20,6 +20,8 @@ export class DryPage {
     deviceSerial: ""
     longtitude: string
     woodStatusValue:string
+    chestDiameter:string
+    injectName:string
     workContentValue:string
     latitude: string
     subscription: Subscription;
@@ -175,7 +177,7 @@ export class DryPage {
                     options.params = {
                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                         accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                        workingContent: element.workingContent
+                        workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectName
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -206,7 +208,7 @@ export class DryPage {
                                         headers: { token: localStorage['token'] }, params: {
                                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                                             accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                                            workingContent: element.workingContent
+                                            workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectName
                                         }
                                     })
                                     .subscribe(res => {
@@ -228,7 +230,7 @@ export class DryPage {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                                 accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                                workingContent: element.workingContent
+                                workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectName
                             }
                         })
                         .subscribe(res => {
@@ -412,7 +414,7 @@ export class DryPage {
             localStorage["InjectDeviceId"] = this.deviceId;
             this.navCtrl.push(InjectQueryPage);
         }else{
-            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!", () => { });
         }
 
     }
@@ -453,7 +455,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue|| !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
             this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
             
         } else {
@@ -468,7 +470,7 @@ export class DryPage {
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude:this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks:this.remarks,
-                    workingContent:this.workContentValue
+                    workingContent:this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -497,7 +499,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue,
+                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName,
                             img: this.imageData
                         };
                         let DryCache: any;
@@ -532,7 +534,7 @@ export class DryPage {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue
+                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                             }
                         })
                         .subscribe(res => {
@@ -543,7 +545,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue
+                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -557,7 +559,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue
+                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -605,7 +607,7 @@ export class DryPage {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                         }
                     })
                     .subscribe(res => {
@@ -616,7 +618,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -630,7 +632,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue
+                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -661,7 +663,6 @@ export class DryPage {
                         // confirm.dismiss();
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                     });
-
             }
     }
 

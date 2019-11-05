@@ -8,7 +8,7 @@ app-home{
         background-color: lightgrey;
         border: 15px solid #1D7155;
         padding: 100% lightgrey;
-        margin: 20% 3%;
+        margin: 16% 0;
     }
     #denglu{
         background-color:  #1D7155;     //按钮背景颜色
@@ -38,5 +38,8 @@ app-home{
         margin-right:5%;
     }
 
+    #banquan{
+        text-align:center;  
 
+    }
 }

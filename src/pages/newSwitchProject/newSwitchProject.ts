@@ -55,8 +55,8 @@ export class switchProjectPage {
     }
     exitClick(){
         const alert = this.alertCtrl.create({
-            title: "警告!!",
-            subTitle: "是否要退出系统?",
+            title: "警告!",
+            subTitle: "是否要退出系统？",
             buttons: [
                 {
                     text: '确认', handler: () => {
