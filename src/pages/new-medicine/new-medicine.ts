@@ -185,7 +185,7 @@ ionViewDidLoad() {
                 options.httpMethod = "POST";
                 options.params = {
                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                    accuracy: element.accuracy, medicinename: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
+                    accuracy: element.accuracy, medicinenameValue: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
                     workContentValue: element.workContentValue,controlarea:element.controlarea
                 };
                 options.headers = { token: localStorage['token'] };
@@ -216,7 +216,7 @@ ionViewDidLoad() {
                                 {
                                     headers: { token: localStorage['token'] }, params: {
                                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                        accuracy: element.accuracy,medicinename: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
+                                        accuracy: element.accuracy,medicinenameValue: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
                                         workContentValue: element.workContentValue,controlarea:element.controlarea
                                     }
                                 })
@@ -238,7 +238,7 @@ ionViewDidLoad() {
                     {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                            accuracy: element.accuracy, medicinename: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
+                            accuracy: element.accuracy, medicinenameValue: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
                             workContentValue: element.workContentValue,controlarea:element.controlarea
                         }
                     })
@@ -503,12 +503,9 @@ submit() {
             options.chunkedMode = false;
             options.httpMethod = "POST";
             options.params = {
-              deviceId: this.deviceId, longitude: this.longtitude, 
-              latitude: this.latitude, altitude: this.altitude,
-              accuracy: this.accuracy, medicinename: this.medicinenameValue, 
-              medicinenumber: this.medicinenumber, remarks: this.remarks,
-                workContentValue: this.workContentValue, 
-                controlarea: this.controlarea, myDate: new Date()
+              deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+              accuracy: this.accuracy, medicinenameValue: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
+              workContentValue: this.workContentValue,controlarea:this.controlarea
             };
             options.headers = { token: localStorage['token'] };
             console.log("options");
@@ -518,7 +515,7 @@ submit() {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-            this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
+            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
                 .then((res) => {
@@ -571,7 +568,7 @@ submit() {
                     {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), altitude: this.altitude.toString(),
-                            accuracy: this.accuracy.toString(), medicinename: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber, remarks: this.remarks,
+                            accuracy: this.accuracy.toString(), medicinenameValue: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber, remarks: this.remarks,
                             workContentValue: this.workContentValue,controlarea:this.controlarea
                         }
                     })
@@ -637,16 +634,8 @@ submit() {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-            var options: FileUploadOptions = {};
-            options.params = {
-                deviceId: this.deviceId, longitude: this.longtitude, 
-                latitude: this.latitude, altitude: this.altitude,
-                accuracy: this.accuracy, medicinename: this.medicinenameValue, 
-                medicinenumber: this.medicinenumber, remarks: this.remarks,
-                workContentValue: this.workContentValue, 
-                controlarea: this.controlarea,myDate:new Date()
-            };
-            this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
+
+            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
 
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                 {
@@ -655,7 +644,7 @@ submit() {
                         altitude: this.altitude.toString(),
                         accuracy: this.accuracy.toString(), 
                         medicinenumber: this.medicinenumber, remarks: this.remarks,
-                        medicinename: this.medicinenameValue.toString(),
+                        medicinenameValue: this.medicinenameValue.toString(),
                         workContentValue: this.workContentValue,controlarea:this.controlarea
                     }
                 })
