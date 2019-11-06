@@ -60,6 +60,16 @@
                     <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
+            <ion-item id="chestDiameter">
+                <ion-label>胸径(cm):</ion-label>
+                <ion-input [(ngModel)]="chestDiameter" (ionChange)="diameterInput()"></ion-input>
+            </ion-item>
+            <ion-item id="injectName">
+                <ion-label>注剂类型：</ion-label>
+                <ion-select [(ngModel)]="injectName" cancelText="取消" okText="确定">
+                    <ion-option *ngFor="let user of injectName" value="{{user.id}}">{{user.name}}</ion-option>
+                </ion-select>
+            </ion-item>
             <ion-item id="number">
                 <ion-label>注剂数量:</ion-label>
                 <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>

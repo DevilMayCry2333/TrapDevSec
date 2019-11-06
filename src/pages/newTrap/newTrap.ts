@@ -600,8 +600,7 @@ export class TrapPage {
                         longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
                         maleNum: "1", femaleNum: "1", altitude: this.altitude,
                         drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                        otherNum: this.otherbettle, otherType: this.BeetleType,
-                        myDate:new Date(),
+                        otherNum: this.otherbettle, otherType: this.BeetleType
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -612,7 +611,7 @@ export class TrapPage {
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                    this.base.logger(JSON.stringify(options), "Img_newTrapPar.txt");
+                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
                         this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
@@ -696,16 +695,14 @@ export class TrapPage {
                         })
 
                 } else {
-                    var options: FileUploadOptions = {};
-                     options.params = {
+                    let options: FileUploadOptions = {};
+                    options.params = {
                         deviceId: this.deviceId,
                         longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
                         maleNum: "1", femaleNum: "1", altitude: this.altitude,
                         drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                        otherNum: this.otherbettle, otherType: this.BeetleType,
-                        myDate: new Date()
+                        otherNum: this.otherbettle, otherType: this.BeetleType
                     };
-
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
                         this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });

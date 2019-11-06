@@ -455,10 +455,7 @@ export class EnemyPage {
                 options.httpMethod = "POST";
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, 
-                    predatorsTypeValue: this.predatorsTypeValue, 
-                    releaseNum: this.releaseNum, remarks:this.remarks,
-                    myDate:new Date()
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks:this.remarks
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -583,13 +580,12 @@ export class EnemyPage {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                var options: FileUploadOptions = {};
+
+                let options: FileUploadOptions = {};
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue:this.predatorsTypeValue, 
-                    releaseNum: this.releaseNum, remarks: this.remarks,myDate:new Date()
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
                 };
-
                 this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
                     this.base.showAlert("提示", "输入数量为空或不合法", () => { });

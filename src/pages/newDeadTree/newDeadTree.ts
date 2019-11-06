@@ -458,8 +458,7 @@ export class DeadtreePage {
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks,
-                    myDate:new Date()
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -585,20 +584,16 @@ export class DeadtreePage {
                         });     
                 });
             } else {
-
+                let options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                };
                 // var options: string = "deviceId: " + this.id +
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                var options: FileUploadOptions = {};
-                options.params = {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, 
-                    diameter: this.diameter.toString(), 
-                    height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, 
-                    remarks: this.remarks,myDate:new Date()
-                };
 
                 this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
