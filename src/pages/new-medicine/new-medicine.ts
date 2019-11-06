@@ -94,7 +94,7 @@ export class NewMedicinePage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
           {
               headers: { token: localStorage['token'] }, params: {
-                  scanId: this.deviceId, serial: this.deviceSerial
+                  scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
               }
           })
           .subscribe(res => {
@@ -515,8 +515,12 @@ submit() {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
+            this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                return;
+            }
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
                 .then((res) => {
                     console.log(res);
@@ -634,9 +638,21 @@ submit() {
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-
-            // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+            var options: FileUploadOptions = {};
+            options.params = {
+                deviceId: this.deviceId, longitude: this.longtitude, 
+                latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, medicinename: this.medicinenameValue, 
+                medicinenumber: this.medicinenumber, remarks: this.remarks,
+                workContentValue: this.workContentValue, 
+                controlarea: this.controlarea,myDate:new Date()
+            };
+            this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                return;
+            }
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
