@@ -78,7 +78,7 @@ export class DryPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -480,8 +480,11 @@ export class DryPage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
+                this.base.logger(JSON.stringify(options), "Img_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
                         console.log(res);
@@ -599,9 +602,17 @@ export class DryPage {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+                let options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectName
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

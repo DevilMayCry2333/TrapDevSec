@@ -687,7 +687,8 @@ var TrapPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial,
+                    username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -1038,8 +1039,17 @@ var TrapPage = /** @class */ (function () {
                     console.log(options);
                     //创建文件对象
                     var fileTransfer = this.fileTransfer.create();
+<<<<<<< HEAD
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
+=======
+                    this.base.logger(JSON.stringify(options_1), "Img_newTrapPar.txt");
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                        return;
+                    }
+                    fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options_1)
+>>>>>>> joker
                         .then(function (res) {
                         console.log(res);
                         console.log(JSON.stringify(res));
@@ -1112,11 +1122,28 @@ var TrapPage = /** @class */ (function () {
                     });
                 }
                 else {
+<<<<<<< HEAD
                     // var options: string = "deviceId: " + this.id +
                     //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                     //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                     //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
                     // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+=======
+                    var options = {};
+                    options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType,
+                        myDate: new Date()
+                    };
+                    this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                        return;
+                    }
+>>>>>>> joker
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId,
@@ -1582,7 +1609,7 @@ var DryPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -1847,8 +1874,17 @@ var DryPage = /** @class */ (function () {
                 console.log(options);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
+<<<<<<< HEAD
                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
+=======
+                this.base.logger(JSON.stringify(options_1), "Img_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options_1)
+>>>>>>> joker
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -1955,7 +1991,21 @@ var DryPage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+<<<<<<< HEAD
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+=======
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+>>>>>>> joker
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -2306,7 +2356,7 @@ var EnemyPage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -2557,8 +2607,16 @@ var EnemyPage = /** @class */ (function () {
                 console.log(options);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
+<<<<<<< HEAD
                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
+=======
+                this.base.logger(JSON.stringify(options_1), "Img_newEnemyPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", function () { });
+                }
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options_1)
+>>>>>>> joker
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -2660,7 +2718,20 @@ var EnemyPage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+<<<<<<< HEAD
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+=======
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue,
+                    releaseNum: this.releaseNum, remarks: this.remarks, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "输入数量为空或不合法", function () { });
+                }
+>>>>>>> joker
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -2984,7 +3055,7 @@ var DeadtreePage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -3241,8 +3312,17 @@ var DeadtreePage = /** @class */ (function () {
                 console.log(options);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
+<<<<<<< HEAD
                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
+=======
+                this.base.logger(JSON.stringify(options_1), "Img_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options_1)
+>>>>>>> joker
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -3349,7 +3429,24 @@ var DeadtreePage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+<<<<<<< HEAD
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+=======
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy,
+                    diameter: this.diameter.toString(),
+                    height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue,
+                    remarks: this.remarks, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+>>>>>>> joker
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
@@ -3853,6 +3950,20 @@ var TrackPage = /** @class */ (function () {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+<<<<<<< HEAD
+=======
+                var options = {};
+                options.params = {
+                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "newTrackPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                    this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", function () { });
+                    return;
+                }
+>>>>>>> joker
                 this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -4325,7 +4436,7 @@ var NewMedicinePage = /** @class */ (function () {
         else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    scanId: this.deviceId, serial: this.deviceSerial
+                    scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                 }
             })
                 .subscribe(function (res) {
@@ -4613,8 +4724,18 @@ var NewMedicinePage = /** @class */ (function () {
                 console.log(options);
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
+<<<<<<< HEAD
                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
+=======
+                this.base.logger(JSON.stringify(options_1), "Img_MedicinePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options_1)
+>>>>>>> joker
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -4721,7 +4842,25 @@ var NewMedicinePage = /** @class */ (function () {
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+<<<<<<< HEAD
                 // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+=======
+                var options = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude,
+                    latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, medicinename: this.medicinenameValue,
+                    medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    workContentValue: this.workContentValue,
+                    controlarea: this.controlarea, myDate: new Date()
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
+                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
+                    return;
+                }
+>>>>>>> joker
                 this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {}, {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
@@ -7662,9 +7801,15 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
+<<<<<<< HEAD
         // BASE_URL = "http://106.15.90.78:8081/"
         this.BASE_URL = "http://127.0.0.1:8081/";
         //BASE_URL = "http://192.168.199.128:8081/"
+=======
+        // BASE_URL = "http://106.15.200.245:8081/"
+        // BASE_URL = "http://127.0.0.1:8081/"
+        this.BASE_URL = "http://192.168.31.254:8081/";
+>>>>>>> joker
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
