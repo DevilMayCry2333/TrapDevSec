@@ -51,20 +51,34 @@ export class NewHomePage {
                             this.deviceId = res[0].id;
                             console.log(this.deviceId);
                             if(this.deviceId.charAt(8)=='1'){
-                                localStorage["TrapDeviceId"] = this.deviceId;
-                                this.navCtl.push(TrapQueryPage);
+                                localStorage["TrapDeviceId"] = this.scanId;
+                                console.log(localStorage["TrapDeviceId"]);
+                                
+                                // setTimeout(()=>{
+                                    this.navCtl.push(TrapQueryPage);
+                                // },100)
+                         
                             }else if(this.deviceId.charAt(8)=='2'){
-                                localStorage["InjectDeviceId"] = this.deviceId;
+                                localStorage["InjectDeviceId"] = this.scanId;
+                                console.log(localStorage["TrapDeviceId"]);
+                                // setTimeout(() => {
                                 this.navCtl.push(InjectQueryPage);
+                                // },100)
                             }else if(this.deviceId.charAt(8)=='3'){
-                                localStorage['queryEnemyID'] = this.deviceId;
+                                localStorage['queryEnemyID'] = this.scanId;
+                                // setTimeout(() => {
                                 this.navCtl.push(EnemyQueryPage);
+                                // },100)
                             }else if(this.deviceId.charAt(8)=='4'){
-                                localStorage["DeadMotherDeviceId"] = this.deviceId;
+                                localStorage["DeadMotherDeviceId"] = this.scanId;
+                                // setTimeout(() => {
                                 this.navCtl.push(DeadTreesQueryPage);
+                                // }, 100)
                             } else if(this.deviceId.charAt(8) == '5'){
-                                localStorage["MedicineDeviceId"] = this.deviceId;
+                                localStorage["MedicineDeviceId"] = this.scanId;
+                                // setTimeout(() => {
                                 this.navCtl.push(MedicineQueryPage);
+                                // },100)
                             }
                         },res => {
 
