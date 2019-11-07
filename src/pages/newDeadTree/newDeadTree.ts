@@ -78,7 +78,7 @@ export class DeadtreePage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -331,7 +331,7 @@ export class DeadtreePage {
                     console.log(element);
                     console.log(element.scanId);
                     console.log(params.id);
-                    if ((element.scanId == params.id && params.id.charAt(8) == '4') || params.id.charAt(8) == '9'){
+                    if ((element.scanId == params.id && element.id.charAt(8) == '4')){
                         flag = 1;
                     }
                 });
@@ -468,8 +468,11 @@ export class DeadtreePage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
+                this.base.logger(JSON.stringify(options), "Img_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtrees', options)
                     .then((res) => {
                         console.log(res);
@@ -581,15 +584,22 @@ export class DeadtreePage {
                         });     
                 });
             } else {
-
+                let options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                };
                 // var options: string = "deviceId: " + this.id +
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+                this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

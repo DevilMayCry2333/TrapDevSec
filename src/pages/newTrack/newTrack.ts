@@ -392,7 +392,17 @@ export class TrackPage {
 
 
                     // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+                var options: FileUploadOptions = {};
+                options.params = {
+                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    current: "1", recordTime: JSON.stringify(this.recordTime),myDate:new Date()
+                };
+                this.base.logger(JSON.stringify(options), "newTrackPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                    this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                    return;
+                }
                     this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
