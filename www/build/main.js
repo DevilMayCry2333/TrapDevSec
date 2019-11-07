@@ -55,24 +55,36 @@ var NewHomePage = /** @class */ (function () {
                         _this.deviceId = res[0].id;
                         console.log(_this.deviceId);
                         if (_this.deviceId.charAt(8) == '1') {
-                            localStorage["TrapDeviceId"] = _this.deviceId;
+                            localStorage["TrapDeviceId"] = _this.scanId;
+                            console.log(localStorage["TrapDeviceId"]);
+                            // setTimeout(()=>{
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_6__trap_query_trap_query__["a" /* TrapQueryPage */]);
+                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '2') {
-                            localStorage["InjectDeviceId"] = _this.deviceId;
+                            localStorage["InjectDeviceId"] = _this.scanId;
+                            console.log(localStorage["TrapDeviceId"]);
+                            // setTimeout(() => {
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_7__inject_query_inject_query__["a" /* InjectQueryPage */]);
+                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '3') {
-                            localStorage['queryEnemyID'] = _this.deviceId;
+                            localStorage['queryEnemyID'] = _this.scanId;
+                            // setTimeout(() => {
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_8__enemy_query_enemy_query__["a" /* EnemyQueryPage */]);
+                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '4') {
-                            localStorage["DeadMotherDeviceId"] = _this.deviceId;
+                            localStorage["DeadMotherDeviceId"] = _this.scanId;
+                            // setTimeout(() => {
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_9__dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */]);
+                            // }, 100)
                         }
                         else if (_this.deviceId.charAt(8) == '5') {
-                            localStorage["MedicineDeviceId"] = _this.deviceId;
+                            localStorage["MedicineDeviceId"] = _this.scanId;
+                            // setTimeout(() => {
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_10__medicine_query_medicine_query__["a" /* MedicineQueryPage */]);
+                            // },100)
                         }
                     }, function (res) {
                     });
@@ -166,7 +178,7 @@ var TrapQueryPage = /** @class */ (function () {
         console.log('ionViewDidLoad TrapQueryPage');
         console.log(localStorage["TrapDeviceId"]);
         this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["TrapDeviceId"]
             }
         })
@@ -178,7 +190,7 @@ var TrapQueryPage = /** @class */ (function () {
     TrapQueryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["TrapDeviceId"]
             }
         })
@@ -241,8 +253,8 @@ var InjectQueryPage = /** @class */ (function () {
         var _this = this;
         console.log('ionViewDidLoad InjectQueryPage');
         this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
-                scanId: localStorage["InjectDeviceId"]
+            params: {
+                id: localStorage["InjectDeviceId"]
             }
         })
             .subscribe(function (res) {
@@ -253,8 +265,8 @@ var InjectQueryPage = /** @class */ (function () {
     InjectQueryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
-                scanId: localStorage["InjectDeviceId"]
+            params: {
+                id: localStorage["InjectDeviceId"]
             }
         })
             .subscribe(function (res) {
@@ -318,7 +330,7 @@ var EnemyQueryPage = /** @class */ (function () {
         var _this = this;
         console.log(localStorage['queryEnemyID']);
         this.httpClient.post(this.base.BASE_URL + 'app/queryById', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["queryEnemyID"]
             }
         })
@@ -333,7 +345,7 @@ var EnemyQueryPage = /** @class */ (function () {
         console.log(localStorage['queryEnemyID']);
         console.log(localStorage['queryEnemyID']);
         this.httpClient.post(this.base.BASE_URL + 'app/queryById', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["queryEnemyID"]
             }
         })
@@ -395,7 +407,7 @@ var DeadTreesQueryPage = /** @class */ (function () {
         var _this = this;
         console.log('ionViewDidLoad DeadTreesQueryPage');
         this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["DeadMotherDeviceId"]
             }
         })
@@ -407,7 +419,7 @@ var DeadTreesQueryPage = /** @class */ (function () {
     DeadTreesQueryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["DeadMotherDeviceId"]
             }
         })
@@ -470,7 +482,7 @@ var MedicineQueryPage = /** @class */ (function () {
         console.log('ionViewDidLoad MedicineQueryPage');
         console.log(localStorage["MedicineDeviceId"]);
         this.httpClient.post(this.base.BASE_URL + 'app/MedicineWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["MedicineDeviceId"]
             }
         })
@@ -482,7 +494,7 @@ var MedicineQueryPage = /** @class */ (function () {
     MedicineQueryPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.httpClient.post(this.base.BASE_URL + 'app/MedicineWorker', {}, {
-            headers: { token: localStorage['token'] }, params: {
+            params: {
                 scanId: localStorage["MedicineDeviceId"]
             }
         })
@@ -2110,6 +2122,24 @@ var DryPage = /** @class */ (function () {
         }, function (res) {
             console.log(res);
         });
+        if (localStorage["InjectName"]) {
+            console.log(localStorage["InjectName"]);
+            this.injectName = JSON.parse(localStorage["InjectName"]);
+            console.log("缓存");
+            console.log(this.injectName);
+        }
+        this.httpClient.post(this.base.BASE_URL + 'app/getInjectName', {}, {
+            headers: { token: localStorage['token'] },
+            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
+        })
+            .subscribe(function (res) {
+            var c = res;
+            _this.injectName = Array.from(c).toString();
+            console.log(_this.injectName);
+            localStorage['InjectName'] = JSON.stringify(res);
+        }, function (res) {
+            console.log(res);
+        });
         if (localStorage["InjectWorkContent"]) {
             console.log(localStorage["InjectWorkContent"]);
             this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
@@ -2197,7 +2227,7 @@ var DryPage = /** @class */ (function () {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
             this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
         }
         else {
@@ -2272,7 +2302,7 @@ var DryPage = /** @class */ (function () {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectName
+                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                         }
                     })
                         .subscribe(function (res) {
@@ -2283,7 +2313,7 @@ var DryPage = /** @class */ (function () {
                         var cacheData = {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectName
+                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -2346,7 +2376,7 @@ var DryPage = /** @class */ (function () {
                     headers: { token: localStorage['token'] }, params: {
                         deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                         accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                        workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectName
+                        workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                     }
                 })
                     .subscribe(function (res) {
@@ -7800,9 +7830,9 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        // BASE_URL = "http://106.15.200.245:8081/"
+        this.BASE_URL = "http://106.15.90.78:8081/";
         // BASE_URL = "http://127.0.0.1:8081/"
-        this.BASE_URL = "http://192.168.31.254:8081/";
+        // BASE_URL = "http://192.168.31.254:8081/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
