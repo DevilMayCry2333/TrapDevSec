@@ -348,7 +348,7 @@ callBack = (params) => {
             allDevice.forEach(element => {
                 console.log("element");
                 // console.log(element);
-                if ((element.scanId == params.id && params.id.charAt(8) == '5') || params.id.charAt(8) == '0')
+                if ((element.scanId == params.id && element.id.charAt(8) == '5'))
                     flag = 1;
             });
             if (flag == 1) {
