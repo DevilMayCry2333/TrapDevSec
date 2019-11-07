@@ -25,7 +25,7 @@ export class DeadTreesQueryPage {
     console.log('ionViewDidLoad DeadTreesQueryPage');
     this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["DeadMotherDeviceId"]
         }
       })
@@ -39,7 +39,7 @@ export class DeadTreesQueryPage {
   ionViewWillEnter(){
     this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["DeadMotherDeviceId"]
         }
       })
