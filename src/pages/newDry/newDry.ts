@@ -269,6 +269,31 @@ export class DryPage {
                     console.log(res);
                 })
 
+                
+        if (localStorage["InjectName"]) {
+            console.log(localStorage["InjectName"]);
+            this.injectName = JSON.parse(localStorage["InjectName"]);
+            console.log("缓存");
+            console.log(this.injectName);
+        }
+        
+        this.httpClient.post(this.base.BASE_URL + 'app/getInjectName', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
+            })
+            .subscribe(res => {
+                var c: any = res;
+                this.injectName = Array.from(c).toString();
+                console.log(this.injectName);
+                localStorage['InjectName'] = JSON.stringify(res);
+        
+            },
+                res => {
+                   console.log(res);
+                })
+        
+
         if (localStorage["InjectWorkContent"]) {
             console.log(localStorage["InjectWorkContent"]);
             this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
@@ -455,7 +480,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue|| !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue  || !this.workContentValue|| !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
             this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
             
         } else {
