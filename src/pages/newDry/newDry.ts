@@ -18,10 +18,14 @@ import { InjectQueryPage} from '../inject-query/inject-query';
 export class DryPage {
     deviceId: ""
     deviceSerial: ""
-    longtitude: string
+    longtitude:string
     woodStatusValue:string
     chestDiameter:string
-    injectName:string
+    injectName = [{
+        id:"1",
+        name:"测试"
+    }]
+    injectNameValue:string
     workContentValue:string
     latitude: string
     subscription: Subscription;
@@ -78,7 +82,7 @@ export class DryPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId, serial: this.deviceSerial
+                        scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -269,6 +273,31 @@ export class DryPage {
                     console.log(res);
                 })
 
+                
+        if (localStorage["InjectName"]) {
+            console.log(localStorage["InjectName"]);
+            this.injectName = JSON.parse(localStorage["InjectName"]);
+            console.log("缓存");
+            console.log(this.injectName);
+        }
+        
+        this.httpClient.post(this.base.BASE_URL + 'app/getInjectName', {},
+            {
+                headers: { token: localStorage['token'] },
+                params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
+            })
+            .subscribe(res => {
+                var c: any = res;
+                this.injectName = Array.from(c).toString();
+                console.log(this.injectName);
+                localStorage['InjectName'] = JSON.stringify(res);
+        
+            },
+                res => {
+                   console.log(res);
+                })
+        
+
         if (localStorage["InjectWorkContent"]) {
             console.log(localStorage["InjectWorkContent"]);
             this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
@@ -332,7 +361,7 @@ export class DryPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     // console.log(element);
-                    if ((element.scanId == params.id && params.id.charAt(8) == '2') || params.id.charAt(8) == '7')
+                    if ((element.scanId == params.id && element.id.charAt(8) == '2') || params.id.charAt(8) == '7')
                         flag = 1;
                 });
                 if (flag == 1) {
@@ -455,7 +484,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue|| !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue  || !this.workContentValue|| !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
             this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
             
         } else {
@@ -480,8 +509,11 @@ export class DryPage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
+                this.base.logger(JSON.stringify(options), "Img_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
                         console.log(res);
@@ -534,7 +566,7 @@ export class DryPage {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             }
                         })
                         .subscribe(res => {
@@ -545,7 +577,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -599,15 +631,23 @@ export class DryPage {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+                let options: FileUploadOptions = {};
+                options.params = {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectName
+                };
+                this.base.logger(JSON.stringify(options), "NoImg_newDryPar.txt");
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
+                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    return;
+                }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                     {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                         }
                     })
                     .subscribe(res => {

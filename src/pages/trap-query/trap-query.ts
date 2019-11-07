@@ -28,7 +28,7 @@ export class TrapQueryPage {
 
     this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["TrapDeviceId"]
         }
       })
@@ -42,7 +42,7 @@ export class TrapQueryPage {
   ionViewWillEnter(){
     this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["TrapDeviceId"]
         }
       })

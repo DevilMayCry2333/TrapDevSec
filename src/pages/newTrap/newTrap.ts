@@ -86,7 +86,8 @@ export class TrapPage {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId,serial:this.deviceSerial
+                        scanId: this.deviceId,serial:this.deviceSerial,
+                        username: localStorage['username']
                     }
                 })
                 .subscribe(res => {
@@ -445,7 +446,7 @@ export class TrapPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     // console.log(element);
-                    if ((element.scanId == params.id && params.id.charAt(8) == '1') || params.id.charAt(8) == '6')
+                    if ((element.scanId == params.id && element.id.charAt(8) == '1'))
                         flag=1;
                 });
                 if(flag==1){
@@ -612,6 +613,11 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        return;
+                    }
+
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
                             console.log(res);
@@ -689,15 +695,19 @@ export class TrapPage {
                         })
 
                 } else {
-
-                    // var options: string = "deviceId: " + this.id +
-                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-
-
-                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-
+                    let options: FileUploadOptions = {};
+                    options.params = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        return;
+                    }
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
                             headers: {token: localStorage['token']}, params:{

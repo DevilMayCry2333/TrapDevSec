@@ -25,8 +25,8 @@ export class InjectQueryPage {
     console.log('ionViewDidLoad InjectQueryPage');
     this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
-          scanId: localStorage["InjectDeviceId"]
+        params: {
+          id: localStorage["InjectDeviceId"]
         }
       })
       .subscribe(res => {
@@ -39,8 +39,8 @@ export class InjectQueryPage {
   ionViewWillEnter(){
     this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
-          scanId: localStorage["InjectDeviceId"]
+         params: {
+          id: localStorage["InjectDeviceId"]
         }
       })
       .subscribe(res => {

@@ -170,14 +170,14 @@ export class ScanPage {
             // }
             if(geshi){
              // this.base.showAlert('提示','b',()=>{});
-                let shuzi="1234567890";
-                for(let i=0;i<myid.length;i++){
-                    let c=myid.charAt(i);
-                    // indexof返回的是数字。。。。。。之前怎么可以的
-                    if(shuzi.indexOf(c) < 0){
-                      geshi=false;
-                    }
-                }
+                // let shuzi="1234567890";
+                // for(let i=0;i<myid.length;i++){
+                //     let c=myid.charAt(i);
+                //     // indexof返回的是数字。。。。。。之前怎么可以的
+                //     if(shuzi.indexOf(c) < 0){
+                //       geshi=false;
+                //     }
+                // }
             }
 
             if (geshi) {
