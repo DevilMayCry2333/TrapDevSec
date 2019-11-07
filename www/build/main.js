@@ -55,36 +55,24 @@ var NewHomePage = /** @class */ (function () {
                         _this.deviceId = res[0].id;
                         console.log(_this.deviceId);
                         if (_this.deviceId.charAt(8) == '1') {
-                            localStorage["TrapDeviceId"] = _this.scanId;
-                            console.log(localStorage["TrapDeviceId"]);
-                            // setTimeout(()=>{
+                            localStorage["TrapDeviceId"] = _this.deviceId;
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_6__trap_query_trap_query__["a" /* TrapQueryPage */]);
-                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '2') {
-                            localStorage["InjectDeviceId"] = _this.scanId;
-                            console.log(localStorage["TrapDeviceId"]);
-                            // setTimeout(() => {
+                            localStorage["InjectDeviceId"] = _this.deviceId;
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_7__inject_query_inject_query__["a" /* InjectQueryPage */]);
-                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '3') {
-                            localStorage['queryEnemyID'] = _this.scanId;
-                            // setTimeout(() => {
+                            localStorage['queryEnemyID'] = _this.deviceId;
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_8__enemy_query_enemy_query__["a" /* EnemyQueryPage */]);
-                            // },100)
                         }
                         else if (_this.deviceId.charAt(8) == '4') {
-                            localStorage["DeadMotherDeviceId"] = _this.scanId;
-                            // setTimeout(() => {
+                            localStorage["DeadMotherDeviceId"] = _this.deviceId;
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_9__dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */]);
-                            // }, 100)
                         }
                         else if (_this.deviceId.charAt(8) == '5') {
-                            localStorage["MedicineDeviceId"] = _this.scanId;
-                            // setTimeout(() => {
+                            localStorage["MedicineDeviceId"] = _this.deviceId;
                             _this.navCtl.push(__WEBPACK_IMPORTED_MODULE_10__medicine_query_medicine_query__["a" /* MedicineQueryPage */]);
-                            // },100)
                         }
                     }, function (res) {
                     });
@@ -128,10 +116,10 @@ var NewHomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-home',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n                用户登录\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content style="background-color: #B8D3CA;" >\n    <!-- <div class="ion-padding">\n    The world is your oyster.\n    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>\n  </div> -->\n\n<div id="new_login">\n    <ion-card>\n\n        <ion-card-header id="title" style=text-align:center>\n            <ion-card-title>松材线虫病防控工程管理系统</ion-card-title>\n\n        </ion-card-header>\n        <ion-item id="one">\n            <ion-label >用户名:</ion-label>\n            <ion-input id="UN" [(ngModel)]="username"></ion-input>\n        </ion-item>\n        <ion-item id="two" >\n            <ion-label >密　码:</ion-label>\n            <ion-input id="PW" type="password" [(ngModel)]="password"></ion-input>\n        </ion-item>\n        <button id="denglu" class="button button-large button-positive" (click)="login()">登　　录</button>\n        <button id="saomiao" ion-button shape="round" fill="outline" (click)="scan()">扫描</button>\n        <div id="banquan">福建农林大学，福建辰康农林科技有限公司</div>\n    </ion-card>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newhome/newhome.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]])
     ], NewHomePage);
     return NewHomePage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=newhome.js.map
