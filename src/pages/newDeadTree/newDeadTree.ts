@@ -331,7 +331,7 @@ export class DeadtreePage {
                     console.log(element);
                     console.log(element.scanId);
                     console.log(params.id);
-                    if ((element.scanId == params.id && params.id.charAt(8) == '4') || params.id.charAt(8) == '9'){
+                    if ((element.scanId == params.id && element.id.charAt(8) == '4')){
                         flag = 1;
                     }
                 });
