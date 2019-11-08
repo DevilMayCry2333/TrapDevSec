@@ -278,7 +278,7 @@ export class DryPage {
             console.log(this.injectName);
         }
         
-        this.httpClient.post(this.base.BASE_URL + 'app/getInjectName', {},
+        this.httpClient.post(this.base.BASE_URL + 'app/getInjectname', {},
             {
                 headers: { token: localStorage['token'] },
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
