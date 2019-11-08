@@ -12,12 +12,27 @@ app-home{
     }
     #denglu{
         background-color:  #1D7155;     //按钮背景颜色
-        width: 50%;       //按钮大小
+        width: 60%;       //按钮大小
         color: white;     //字体颜色
         font-size:120%;      //字体大小
         font-weight:bold;   //字体加粗
         padding: 14px 20px;    //内容区域大小
-        margin: 15% 20% 25% 25%;        //上下和左右边距
+        margin-top: 10%;
+        margin-left: 20%;
+      //  margin: 10% 0% 20% 20%;        //上下和左右边距
+        text-align: center;     //文字内容居中
+    }
+    #chakan{
+        background-color:  #1D7155;     //按钮背景颜色
+        width: 60%;       //按钮大小
+        color: white;     //字体颜色
+        font-size:120%;      //字体大小
+        font-weight:bold;   //字体加粗
+        padding: 14px 20px;    //内容区域大小
+       // margin: 0% 0% 20% 20%;        //上下和左右边距
+        margin-top: 5%;
+        margin-bottom: 15%;
+        margin-left: 20%;
         text-align: center;     //文字内容居中
     }
     #one{
@@ -38,12 +53,12 @@ app-home{
         margin-right:5%;
     }
 
-    #saomiao {
-        background-color: #1D7155;
-        width: 20%;
-        margin-left: 3%;
-        padding: 0;
-    }
+    // #saomiao {
+    //     background-color: #1D7155;
+    //     width: 20%;
+    //     margin-left: 3%;
+    //     padding: 0;
+    // }
 
     #banquan{
         text-align:center;  
