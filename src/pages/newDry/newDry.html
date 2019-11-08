@@ -66,7 +66,7 @@
             </ion-item>
             <ion-item id="injectName">
                 <ion-label>注剂类型：</ion-label>
-                <ion-select [(ngModel)]="injectName" cancelText="取消" okText="确定">
+                <ion-select [(ngModel)]="injectNameValue" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of injectName" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>

@@ -18,10 +18,14 @@ import { InjectQueryPage} from '../inject-query/inject-query';
 export class DryPage {
     deviceId: ""
     deviceSerial: ""
-    longtitude: string
+    longtitude:string
     woodStatusValue:string
     chestDiameter:string
-    injectName:string
+    injectName = [{
+        id:"1",
+        name:"测试"
+    }]
+    injectNameValue:string
     workContentValue:string
     latitude: string
     subscription: Subscription;
@@ -357,7 +361,7 @@ export class DryPage {
                 allDevice.forEach(element => {
                     console.log("element");
                     // console.log(element);
-                    if ((element.scanId == params.id && element.id.charAt(8) == '2'))
+                    if ((element.scanId == params.id && element.id.charAt(8) == '2') || params.id.charAt(8) == '7')
                         flag = 1;
                 });
                 if (flag == 1) {
@@ -562,7 +566,7 @@ export class DryPage {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             }
                         })
                         .subscribe(res => {
@@ -573,7 +577,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -643,7 +647,7 @@ export class DryPage {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                         }
                     })
                     .subscribe(res => {

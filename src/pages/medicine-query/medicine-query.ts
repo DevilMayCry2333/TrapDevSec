@@ -25,7 +25,7 @@ export class MedicineQueryPage {
 
     this.httpClient.post(this.base.BASE_URL + 'app/MedicineWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+         params: {
           scanId: localStorage["MedicineDeviceId"]
         }
       })
@@ -37,7 +37,7 @@ export class MedicineQueryPage {
   ionViewWillEnter(){
     this.httpClient.post(this.base.BASE_URL + 'app/MedicineWorker', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["MedicineDeviceId"]
         }
       })

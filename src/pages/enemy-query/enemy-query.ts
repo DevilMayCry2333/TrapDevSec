@@ -28,7 +28,7 @@ export class EnemyQueryPage {
     console.log(localStorage['queryEnemyID']);
     this.httpClient.post(this.base.BASE_URL + 'app/queryById', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["queryEnemyID"]
         }
       })
@@ -47,7 +47,7 @@ export class EnemyQueryPage {
     console.log(localStorage['queryEnemyID']);
     this.httpClient.post(this.base.BASE_URL + 'app/queryById', {},
       {
-        headers: { token: localStorage['token'] }, params: {
+        params: {
           scanId: localStorage["queryEnemyID"]
         }
       })
