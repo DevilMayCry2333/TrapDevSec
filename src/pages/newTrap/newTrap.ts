@@ -68,6 +68,90 @@ export class TrapPage {
         this.base.showAlert("成功","",()=>{});
     }
 
+    test(){
+        for(var i = 0 ; i < 250; i++){
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000000001).toString();
+            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+            this.newbettle = "2";
+            this.altitude = "14";
+            this.injectTypeValue = "1";
+            this.WorkContentValue = "1";
+            this.otherbettle = "7";
+            this.BeetleType = "1";
+            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    }
+                })
+                .subscribe(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    // this.base.showAlert('提示', '提交成功', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                }, (msg) => {
+
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                    // this.base.showAlert('提示', '提交失败', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+
+                    let maintenanceCache: any;
+                    maintenanceCache = localStorage.getItem('maintenanceCache');
+                    if (maintenanceCache == null) {
+                        maintenanceCache = [];
+                    } else {
+                        maintenanceCache = JSON.parse(maintenanceCache);
+                    }
+                    maintenanceCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+                    console.log("Hello");
+
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                });
+
+        }
+
+
+    }
+
     NavToQuery(){
         if(this.deviceId){
             localStorage["TrapDeviceId"] = this.deviceId;

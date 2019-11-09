@@ -21,10 +21,7 @@ export class DryPage {
     longtitude:string
     woodStatusValue:string
     chestDiameter:string
-    injectName = [{
-        id:"1",
-        name:"测试"
-    }]
+    injectName:string
     injectNameValue:string
     workContentValue:string
     latitude: string
