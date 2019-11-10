@@ -16,8 +16,8 @@ import { InjectQueryPage} from '../inject-query/inject-query';
     templateUrl: 'newDry.html'
 })
 export class DryPage {
-    deviceId: ""
-    deviceSerial: ""
+    deviceId:string
+    deviceSerial: string
     longtitude:string
     woodStatusValue:string
     chestDiameter:string
@@ -27,13 +27,13 @@ export class DryPage {
     latitude: string
     subscription: Subscription;
     altitude: string
-    imageData:""
+    imageData:string
     accuracy: string
     woodStatus:any[]
     injectNum:string
     have_submit:boolean
     workContent:any[]
-    remarks = ""
+    remarks:string
     location_ready:boolean
     users: any[] = [
         {
@@ -69,6 +69,82 @@ export class DryPage {
         this.base.showAlert("成功", "", () => { });
     }
     
+    test(){
+        for(var i = 0 ; i < 100; i++){
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000001301).toString();
+            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+            this.woodStatusValue = "1";
+            this.accuracy = "22"
+            this.altitude = "14";
+            this.remarks = "0";
+            this.injectNum = "50"
+            this.workContentValue = "2";
+            this.chestDiameter = "7";
+            this.injectNameValue = "8";
+        this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
+        {
+            headers: { token: localStorage['token'] }, params: {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
+            }
+        })
+        .subscribe(res => {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            this.base.showAlert('提示', '提交成功', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+            };
+            console.log("cacheData");
+            console.log(cacheData);
+
+            Base.popTo(this.navCtrl, 'switchProjectPage');
+        }, (msg) => {
+
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+            this.base.showAlert('提示', '提交失败', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
+                workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectName
+            };
+            console.log("cacheData");
+            console.log(cacheData);
+
+            let DryCache: any;
+            DryCache = localStorage.getItem('DryCache');
+            if (DryCache == null) {
+                DryCache = [];
+            } else {
+                DryCache = JSON.parse(DryCache);
+            }
+            DryCache.push(cacheData);
+            // try{
+            //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+            // }catch(oException){
+            //     if(oException.name == 'QuotaExceededError'){
+            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+            //         //console.log('已经超出本地存储限定大小！');
+            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+            //       // localStorage.clear();
+            //       // localStorage.setItem(key,value);
+            //     }
+            // }   
+            localStorage.setItem('DryCache', JSON.stringify(DryCache));
+            console.log("Hello");
+
+            //this.navCtrl.pop();
+            // confirm.dismiss();
+                Base.popTo(this.navCtrl, 'switchProjectPage');
+        });
+    }
+    }
     NavToMap() {
         this.navCtrl.push(AboutPage);
     }
