@@ -272,10 +272,88 @@ export class EnemyPage {
 
     }
 
+
+
     deviceBind() {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
     }
+
+
+
+    test(){
+        for(var i = 0 ; i < 250; i++){
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000000501).toString();
+            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+            this.accuracy = "22"
+            this.altitude = "14";
+            this.remarks = "0";
+            this.predatorsTypeValue = "1"
+            this.releaseNum = "20"
+            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+            {
+                headers: { token: localStorage['token'] }, params: {
+                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                }
+            })
+        .subscribe(res => {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            this.base.showAlert('提示', '提交成功', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+            };
+            console.log("cacheData");
+            console.log(cacheData);
+
+            Base.popTo(this.navCtrl, 'switchProjectPage');
+        }, (msg) => {
+
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+            this.base.showAlert('提示', '提交失败', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+            };
+            console.log("cacheData");
+            console.log(cacheData);
+
+            let DryCache: any;
+            DryCache = localStorage.getItem('DryCache');
+            if (DryCache == null) {
+                DryCache = [];
+            } else {
+                DryCache = JSON.parse(DryCache);
+            }
+            DryCache.push(cacheData);
+            // try{
+            //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+            // }catch(oException){
+            //     if(oException.name == 'QuotaExceededError'){
+            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+            //         //console.log('已经超出本地存储限定大小！');
+            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+            //       // localStorage.clear();
+            //       // localStorage.setItem(key,value);
+            //     }
+            // }   
+            localStorage.setItem('DryCache', JSON.stringify(DryCache));
+            console.log("Hello");
+
+            //this.navCtrl.pop();
+            // confirm.dismiss();
+                Base.popTo(this.navCtrl, 'switchProjectPage');
+        });
+    }
+    }
+
+
+    
     
     NavToQuery(){
         // localStorage.setItem("queryEnemyID",this.deviceId);
