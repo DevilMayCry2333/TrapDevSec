@@ -28,11 +28,10 @@ export class switchProjectPage {
                 params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
             })
             .subscribe(res => {
-                console.log(res);
                 localStorage['device'] = JSON.stringify(res);
             },
                 res => {
-                    console.log(res);
+                    
                 })
     }
 
