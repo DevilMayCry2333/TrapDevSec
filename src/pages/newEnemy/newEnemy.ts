@@ -283,7 +283,7 @@ export class EnemyPage {
 
     test(){
         for(var i = 0 ; i < 250; i++){
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000501).toString();
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000001651).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22"

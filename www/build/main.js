@@ -2033,8 +2033,8 @@ var DryPage = /** @class */ (function () {
     };
     DryPage.prototype.test = function () {
         var _this = this;
-        for (var i = 0; i < 250; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000251).toString();
+        for (var i = 0; i < 100; i++) {
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000001301).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.woodStatusValue = "1";
@@ -2950,7 +2950,7 @@ var EnemyPage = /** @class */ (function () {
     EnemyPage.prototype.test = function () {
         var _this = this;
         for (var i = 0; i < 250; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000501).toString();
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000001651).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22";
@@ -3904,7 +3904,7 @@ var DeadtreePage = /** @class */ (function () {
     DeadtreePage.prototype.test = function () {
         var _this = this;
         for (var i = 0; i < 250; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000701).toString();
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000002347).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22";
@@ -4527,6 +4527,8 @@ var TrackPage = /** @class */ (function () {
             this.base.showAlert('提示', '请输入数字', function () { });
         }
     };
+    TrackPage.prototype.test = function () {
+    };
     TrackPage.prototype.startRecord = function () {
         var _this = this;
         if (!this.lateIntravl) {
@@ -4624,20 +4626,12 @@ var TrackPage = /** @class */ (function () {
             console.log(this.recordTime.endTime);
         }
     };
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     TrackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-track',template:/*ion-inline-start:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\newTrack\newTrack.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            轨迹追踪\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <h2 id=track>定　位　信　息</h2>\n\n            <hr id="line1" />\n\n            <div id="jingwei">\n\n                <ion-item>\n\n                    <ion-label>经度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>纬度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n\n                </ion-item>\n\n            </div>\n\n            <div id="haiba">\n\n                <ion-item>\n\n                    <ion-label>海拔:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>精度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n\n                </ion-item>\n\n            </div>\n\n\n\n            <ion-item id="linename">\n\n                <ion-label>线路名称:</ion-label>\n\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item id="workcontent">\n\n                <ion-label>工作内容:</ion-label>\n\n                <ion-input [(ngModel)]="workContent"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item id="delay">\n\n                <ion-label>延时设置(秒)：</ion-label>\n\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item id="remarks">\n\n                <ion-label>备注:</ion-label>\n\n                <ion-input [(ngModel)]="remarks"></ion-input>\n\n            </ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div id="startANDend">\n\n        <button  id="start" ion-button (click)="startRecord()">\n\n            <ion-label>开始录制</ion-label>\n\n        </button>\n\n        <button  id="end" ion-button (click)="stopRecord()">\n\n            <ion-label>停止录制</ion-label>\n\n        </button>\n\n    </div>\n\n\n\n    <div id="photoANDmap">\n\n        <button id="paizhao" ion-button (click)="takePhoto()">\n\n            <ion-label>拍照</ion-label>\n\n        </button>\n\n        <button id="ditu"  ion-button (click)="NavToMap()">\n\n            <ion-label>地图查看</ion-label>\n\n        </button>\n\n    </div>\n\n\n\n\n\n        <button  id="tijiao" ion-button (click)="submit()">\n\n            <ion-label>提交</ion-label>\n\n        </button>\n\n  \n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\newTrack\newTrack.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__["a" /* Base64 */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__["a" /* Base64 */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__ionic_native_base64__["a" /* Base64 */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]) === "function" && _k || Object])
     ], TrackPage);
     return TrackPage;
 }());
@@ -5306,18 +5300,23 @@ var NewMedicinePage = /** @class */ (function () {
     NewMedicinePage.prototype.test = function () {
         var _this = this;
         for (var i = 0; i < 250; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000501).toString();
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000002651).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22";
             this.altitude = "14";
             this.remarks = "0";
-            this.predatorsTypeValue = "1";
-            this.releaseNum = "20";
-            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {}, {
+            this.medicinenumber = "20";
+            this.medicinenameValue = "3";
+            this.workContentValue = "2";
+            this.controlarea = "5";
+            this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {}, {
                 headers: { token: localStorage['token'] }, params: {
-                    deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), altitude: this.altitude.toString(),
-                    accuracy: this.accuracy.toString(), medicinenameValue: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
+                    altitude: this.altitude.toString(),
+                    accuracy: this.accuracy.toString(),
+                    medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    medicinenameValue: this.medicinenameValue.toString(),
                     workContentValue: this.workContentValue, controlarea: this.controlarea
                 }
             })
@@ -5328,7 +5327,8 @@ var NewMedicinePage = /** @class */ (function () {
                 _this.base.showAlert('提示', '提交成功', function () { });
                 var cacheData = {
                     deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                    accuracy: _this.accuracy, medicinenameValue: _this.medicinenameValue, medicinenumber: _this.medicinenumber, remarks: _this.remarks,
+                    workContentValue: _this.workContentValue, controlarea: _this.controlarea
                 };
                 console.log("cacheData");
                 console.log(cacheData);
@@ -5338,21 +5338,22 @@ var NewMedicinePage = /** @class */ (function () {
                 _this.base.showAlert('提示', '提交失败', function () { });
                 var cacheData = {
                     deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, predatorsTypeValue: _this.predatorsTypeValue, releaseNum: _this.releaseNum, remarks: _this.remarks
+                    accuracy: _this.accuracy, medicinenameValue: _this.medicinenameValue, medicinenumber: _this.medicinenumber, remarks: _this.remarks,
+                    workContentValue: _this.workContentValue, controlarea: _this.controlarea
                 };
                 console.log("cacheData");
                 console.log(cacheData);
-                var DryCache;
-                DryCache = localStorage.getItem('DryCache');
-                if (DryCache == null) {
-                    DryCache = [];
+                var medicineCache;
+                medicineCache = localStorage.getItem('medicineCache');
+                if (medicineCache == null) {
+                    medicineCache = [];
                 }
                 else {
-                    DryCache = JSON.parse(DryCache);
+                    medicineCache = JSON.parse(medicineCache);
                 }
-                DryCache.push(cacheData);
+                medicineCache.push(cacheData);
                 // try{
-                //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                //   localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
@@ -5362,7 +5363,7 @@ var NewMedicinePage = /** @class */ (function () {
                 //       // localStorage.setItem(key,value);
                 //     }
                 // }   
-                localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
                 console.log("Hello");
                 //this.navCtrl.pop();
                 // confirm.dismiss();
@@ -5403,7 +5404,7 @@ var NewMedicinePage = /** @class */ (function () {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     NewMedicinePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new-medicine',template:/*ion-inline-start:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\new-medicine\new-medicine.html"*/'<!--\n\n  Generated template for the NewMedicinePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>药剂防治管理</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content >\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <h2 id="device">设　备　管　理</h2>\n\n            <hr id="line1" />\n\n        <div id="ID">\n\n            <ion-item id="one">\n\n                <ion-label>设备ID：</ion-label>\n\n                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n\n            </ion-item>\n\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n\n        </div>\n\n        <div id="NUM">\n\n            <ion-item id="two">\n\n                <ion-label>设备编号：</ion-label>\n\n                <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n\n                <ion-icon name="search"></ion-icon>\n\n            </ion-item>\n\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n\n        </div>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <h2 id="info">维　护　信　息</h2>\n\n            <hr id="line2" />\n\n            <div id="jingwei">\n\n                <ion-item>\n\n                    <ion-label>经度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>纬度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n\n                </ion-item>\n\n            </div>\n\n            <div id="haiba">\n\n                <ion-item>\n\n                    <ion-label>海拔:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>精度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n\n                </ion-item>\n\n             </div>\n\n             \n\n          <!-- 药剂名称 -->\n\n            <ion-item id="medicinename">\n\n                <ion-label>药剂名称：</ion-label>\n\n                <ion-select [(ngModel)]="medicinenameValue" cancelText="取消" okText="确定">\n\n                    <ion-option *ngFor="let user of medicinename" value="{{user.id}}">{{user.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n\n\n            <!-- 药剂数量 -->\n\n            <ion-item id="medicinenumber">\n\n                <ion-label>药剂质量(kg)：</ion-label>\n\n                <ion-input type="number"  [(ngModel)]="medicinenumber"></ion-input>\n\n            </ion-item>\n\n\n\n            <!-- 防治面积 -->\n\n            <ion-item id="controlarea">\n\n                <ion-label>防治面积(m²):</ion-label>\n\n                <ion-input type="number"  [(ngModel)]="controlarea"></ion-input>\n\n            </ion-item>\n\n\n\n\n\n            <ion-item id="workcontent">\n\n                <ion-label>工作内容:</ion-label>\n\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n\n                    <ion-option *ngFor="let user of medicineworkContent">{{user.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item id="remarks"> \n\n                <ion-label>备注:</ion-label>\n\n                <ion-input [(ngModel)]="remarks"></ion-input>\n\n            </ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div id="photoANDsubmit">\n\n        <button id="paizhao" ion-button (click)="takePhoto()">\n\n            <ion-label>拍照</ion-label>\n\n        </button>\n\n\n\n        <button id="tijiao" ion-button  (click)="submit()">\n\n            <ion-label>提交</ion-label>\n\n        </button>\n\n    </div>\n\n    <div id="mapANDquery">\n\n        <button id="ditu" ion-button  (click)="NavToMap()">\n\n            <ion-label>地图查看</ion-label>\n\n        </button>\n\n\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n\n            <ion-label>查询</ion-label>\n\n        </button>\n\n    </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\new-medicine\new-medicine.html"*/,
+            selector: 'page-new-medicine',template:/*ion-inline-start:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\new-medicine\new-medicine.html"*/'<!--\n\n  Generated template for the NewMedicinePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>药剂防治管理</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content >\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <h2 id="device">设　备　管　理</h2>\n\n            <hr id="line1" />\n\n        <div id="ID">\n\n            <ion-item id="one">\n\n                <ion-label>设备ID：</ion-label>\n\n                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n\n            </ion-item>\n\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n\n        </div>\n\n        <div id="NUM">\n\n            <ion-item id="two">\n\n                <ion-label>设备编号：</ion-label>\n\n                <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n\n                <ion-icon name="search"></ion-icon>\n\n            </ion-item>\n\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n\n        </div>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <h2 id="info">维　护　信　息</h2>\n\n            <hr id="line2" />\n\n            <div id="jingwei">\n\n                <ion-item>\n\n                    <ion-label>经度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>纬度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n\n                </ion-item>\n\n            </div>\n\n            <div id="haiba">\n\n                <ion-item>\n\n                    <ion-label>海拔:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>精度:</ion-label>\n\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n\n                </ion-item>\n\n             </div>\n\n             \n\n          <!-- 药剂名称 -->\n\n            <ion-item id="medicinename">\n\n                <ion-label>药剂名称：</ion-label>\n\n                <ion-select [(ngModel)]="medicinenameValue" cancelText="取消" okText="确定">\n\n                    <ion-option *ngFor="let user of medicinename" value="{{user.id}}">{{user.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n\n\n            <!-- 药剂数量 -->\n\n            <ion-item id="medicinenumber">\n\n                <ion-label>药剂质量(kg)：</ion-label>\n\n                <ion-input type="number"  [(ngModel)]="medicinenumber"></ion-input>\n\n            </ion-item>\n\n\n\n            <!-- 防治面积 -->\n\n            <ion-item id="controlarea">\n\n                <ion-label>防治面积(m²):</ion-label>\n\n                <ion-input type="number"  [(ngModel)]="controlarea"></ion-input>\n\n            </ion-item>\n\n\n\n\n\n            <ion-item id="workcontent">\n\n                <ion-label>工作内容:</ion-label>\n\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n\n                    <ion-option *ngFor="let user of medicineworkContent">{{user.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item id="remarks"> \n\n                <ion-label>备注:</ion-label>\n\n                <ion-input [(ngModel)]="remarks"></ion-input>\n\n            </ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div id="photoANDsubmit">\n\n        <button id="paizhao" ion-button (click)="takePhoto()">\n\n            <ion-label>拍照</ion-label>\n\n        </button>\n\n\n\n        <button id="tijiao" ion-button  (click)="submit()">\n\n            <ion-label>提交</ion-label>\n\n        </button>\n\n    </div>\n\n    <div id="mapANDquery">\n\n        <button id="ditu" ion-button  (click)="NavToMap()">\n\n            <ion-label>地图查看</ion-label>\n\n        </button>\n\n\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n\n            <ion-label>查询</ion-label>\n\n        </button>\n\n\n\n        <button id="chaxun" ion-button  (click)="test()">\n\n            <ion-label>测试1000条</ion-label>\n\n        </button>\n\n    </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\86159\Desktop\Code\TrapDevSec\TrapDevSec\src\pages\new-medicine\new-medicine.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object])
     ], NewMedicinePage);

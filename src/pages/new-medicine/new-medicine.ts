@@ -24,16 +24,16 @@ import { MedicineQueryPage } from '../medicine-query/medicine-query';
 })
 
 export class NewMedicinePage {
-    deviceId: ''
-    deviceSerial: String
+    deviceId:string
+    deviceSerial: string
     // longtitude= "1.789456"
     // latitude="2.154548"
     // altitude="1.564465"
     // accuracy="0.999999"
-    longtitude:String
-    latitude:String  
-    altitude:String
-    accuracy:String
+    longtitude:string
+    latitude:string  
+    altitude:string
+    accuracy:string
     // woodStatusValue:string       
     medicinename:any[]
     medicinenameValue:String     //
@@ -43,8 +43,8 @@ export class NewMedicinePage {
     workContentValue:string      //
     have_submit:boolean
     subscription: Subscription;
-    remarks:String
-    imageData:''
+    remarks:string
+    imageData:""
     location_ready:boolean
     users: any[] = [
         {
@@ -737,72 +737,80 @@ deviceSerialInput() {
 
 test(){
     for(var i = 0 ; i < 250; i++){
-        this.deviceId = Math.ceil(Math.random() * 250 + 100000000501).toString();
+        this.deviceId = Math.ceil(Math.random() * 250 + 100000002651).toString();
         this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
         this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
         this.accuracy = "22"
         this.altitude = "14";
         this.remarks = "0";
-        this.predatorsTypeValue = "1"
-        this.releaseNum = "20"
-        this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+        this.medicinenumber = "20"
+        this.medicinenameValue = "3"
+        this.workContentValue = "2"
+        this.controlarea = "5"
+        this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
         {
             headers: { token: localStorage['token'] }, params: {
-                deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), altitude: this.altitude.toString(),
-                            accuracy: this.accuracy.toString(), medicinenameValue: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber, remarks: this.remarks,
-                            workContentValue: this.workContentValue,controlarea:this.controlarea
+                deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), 
+                altitude: this.altitude.toString(),
+                accuracy: this.accuracy.toString(), 
+                medicinenumber: this.medicinenumber, remarks: this.remarks,
+                medicinenameValue: this.medicinenameValue.toString(),
+                workContentValue: this.workContentValue,controlarea:this.controlarea
             }
         })
-    .subscribe(res => {
-        console.log(JSON.stringify(res));
-        console.log(JSON.parse(JSON.stringify(res)).message);
-        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-        this.base.showAlert('提示', '提交成功', () => { });
-        let cacheData = {
-            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-            accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-        };
-        console.log("cacheData");
-        console.log(cacheData);
+        .subscribe(res => {
+            console.log(JSON.stringify(res));
+            console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+            this.base.showAlert('提示', '提交成功', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy,medicinenameValue: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
+                workContentValue: this.workContentValue,controlarea:this.controlarea
+            };
+            console.log("cacheData");
+            console.log(cacheData);
 
-        Base.popTo(this.navCtrl, 'switchProjectPage');
-    }, (msg) => {
-
-        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-        this.base.showAlert('提示', '提交失败', () => { });
-        let cacheData = {
-            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-        };
-        console.log("cacheData");
-        console.log(cacheData);
-
-        let DryCache: any;
-        DryCache = localStorage.getItem('DryCache');
-        if (DryCache == null) {
-            DryCache = [];
-        } else {
-            DryCache = JSON.parse(DryCache);
-        }
-        DryCache.push(cacheData);
-        // try{
-        //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
-        // }catch(oException){
-        //     if(oException.name == 'QuotaExceededError'){
-        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-        //         //console.log('已经超出本地存储限定大小！');
-        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-        //       // localStorage.clear();
-        //       // localStorage.setItem(key,value);
-        //     }
-        // }   
-        localStorage.setItem('DryCache', JSON.stringify(DryCache));
-        console.log("Hello");
-
-        //this.navCtrl.pop();
-        // confirm.dismiss();
             Base.popTo(this.navCtrl, 'switchProjectPage');
+        }, (msg) => {
+
+            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+            this.base.showAlert('提示', '提交失败', () => { });
+            let cacheData = {
+                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                accuracy: this.accuracy,medicinenameValue: this.medicinenameValue, medicinenumber: this.medicinenumber, remarks: this.remarks,
+                workContentValue: this.workContentValue,controlarea:this.controlarea
+            };
+            console.log("cacheData");
+            console.log(cacheData);
+
+            let medicineCache: any;
+            medicineCache = localStorage.getItem('medicineCache');
+            if (medicineCache == null) {
+                medicineCache = [];
+            } else {
+                medicineCache = JSON.parse(medicineCache);
+            }
+            medicineCache.push(cacheData);
+            // try{
+            //   localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
+            // }catch(oException){
+            //     if(oException.name == 'QuotaExceededError'){
+            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+            //         //console.log('已经超出本地存储限定大小！');
+            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+            //       // localStorage.clear();
+            //       // localStorage.setItem(key,value);
+            //     }
+            // }   
+            localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
+            console.log("Hello");
+
+            //this.navCtrl.pop();
+            // confirm.dismiss();
+                Base.popTo(this.navCtrl, 'switchProjectPage');
+    
     });
 }
 }

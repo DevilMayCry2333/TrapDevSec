@@ -607,6 +607,9 @@ export class TrackPage {
             this.base.showAlert('提示', '请输入数字', () => { });
         }
     }
+    test(){
+        
+    }
     startRecord(){
         if (!this.lateIntravl){
             this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});

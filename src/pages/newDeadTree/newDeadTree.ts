@@ -673,7 +673,7 @@ export class DeadtreePage {
 
     test(){
         for(var i = 0 ; i < 250; i++){
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000701).toString();
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000002347).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22"
