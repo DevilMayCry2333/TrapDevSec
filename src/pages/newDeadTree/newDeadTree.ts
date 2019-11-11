@@ -206,6 +206,8 @@ export class DeadtreePage {
                         console.log("AddDeviceId");
                         //在这里传值到后端去吧
                         //其实已经好了。。批次只有1.。。。。。。。
+                        //如果一定要批次对应的话，应该只要批量传列表deviceId一次，然后前端
+                        //传当前是第几次,设定好延时。。
                         console.log(res);
                         this.batch = res;
                     })
