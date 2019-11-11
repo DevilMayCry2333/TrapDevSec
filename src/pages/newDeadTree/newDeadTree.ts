@@ -412,12 +412,6 @@ export class DeadtreePage {
             //创建文件对象
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-
-            // this.base.logger(JSON.stringify(options), "Img_newDeadTreePar.txt");
-            // if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
-            //     this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
-            //     return;
-            // }
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                 .then((res) => {
                     console.log(res);
@@ -609,7 +603,7 @@ export class DeadtreePage {
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
-                // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+                this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
                     this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
                     return;
