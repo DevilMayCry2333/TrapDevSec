@@ -62,7 +62,7 @@
             <ion-item id="medicinename">
                 <ion-label>药剂名称：</ion-label>
                 <ion-select [(ngModel)]="medicinenameValue" cancelText="取消" okText="确定">
-                    <ion-option *ngFor="let user of medicinename" value="{{user.id}}">{{user.name}}</ion-option>
+                    <ion-option *ngFor="let user of medicinename" value="{{user.name}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
 
@@ -82,7 +82,8 @@
             <ion-item id="workcontent">
                 <ion-label>工作内容:</ion-label>
                 <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >
-                    <ion-option *ngFor="let user of medicineworkContent">{{user.name}}</ion-option>
+                    <ion-option *ngFor="let user of medicineworkContent" value="{{user.name}}">{{user.name}}
+                    </ion-option>
                 </ion-select>
             </ion-item>
             <ion-item id="remarks"> 
