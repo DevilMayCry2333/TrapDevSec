@@ -62,7 +62,7 @@
             </ion-item>
             <ion-item id="chestDiameter">
                 <ion-label>胸径(cm):</ion-label>
-                <ion-input [(ngModel)]="chestDiameter" (ionChange)="diameterInput()"></ion-input>
+                <ion-input [(ngModel)]="chestDiameter"></ion-input>
             </ion-item>
             <ion-item id="injectName">
                 <ion-label>注剂类型：</ion-label>
@@ -77,7 +77,7 @@
             <ion-item id="workcontent">
                 <ion-label>工作内容:</ion-label>
                 <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >
-                    <ion-option *ngFor="let user of workContent">{{user.name}}</ion-option>
+                    <ion-option *ngFor="let user of workContent" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item id="remarks"> 

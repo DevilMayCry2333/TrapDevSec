@@ -36,7 +36,7 @@ export class NewMedicinePage {
     accuracy:string
     // woodStatusValue:string       
     medicinename:any[]
-    medicinenameValue:String     //
+    medicinenameValue:string     //
     medicinenumber:string
     controlarea:string
     medicineworkContent:any[]
