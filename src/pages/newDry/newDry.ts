@@ -75,10 +75,10 @@ export class DryPage {
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.woodStatusValue = "1";
-            this.accuracy = "22"
+            this.accuracy = "22";
             this.altitude = "14";
             this.remarks = "0";
-            this.injectNum = "50"
+            this.injectNum = "50";
             this.workContentValue = "2";
             this.chestDiameter = "7";
             this.injectNameValue = "8";

@@ -2605,10 +2605,16 @@ var DryPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-dry',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            注干剂管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content id="dry">\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理</h2>\n            <hr id="line1" />\n        <div id="ID">\n            <ion-item id="one">\n                <ion-label>设备ID：</ion-label>\n                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n            </ion-item>\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n        </div>\n        <div id="NUM">\n            <ion-item id="two">\n                <ion-label>设备编号：</ion-label>\n                <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n        </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n             </div>\n             \n            <ion-item id="status">\n                <ion-label>树木状态：</ion-label>\n                <ion-select [(ngModel)]="woodStatusValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of woodStatus" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="chestDiameter">\n                <ion-label>胸径(cm):</ion-label>\n                <ion-input [(ngModel)]="chestDiameter"></ion-input>\n            </ion-item>\n            <ion-item id="injectName">\n                <ion-label>注剂类型：</ion-label>\n                <ion-select [(ngModel)]="injectNameValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectName" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="number">\n                <ion-label>注剂数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of workContent" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks"> \n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDry/newDry.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
+            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]])
     ], DryPage);
     return DryPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=newDry.js.map
@@ -3344,10 +3350,10 @@ var DeadtreePage = /** @class */ (function () {
         this.fileTransfer = fileTransfer;
         this.navCtrl = navCtrl;
         this.loadingCtrl = loadingCtrl;
-        // longtitude=1.1234567;
-        // latitude=1.1234567;
-        // altitude=1.1234567;
-        // accuracy=1.1234567;
+        this.longtitude = "1.1234567";
+        this.latitude = "1.1234567";
+        this.altitude = "1.1234567";
+        this.accuracy = "1.1234567";
         this.diameter = 0;
         this.height = 0;
         this.picNotExist = false;
@@ -3561,10 +3567,10 @@ var DeadtreePage = /** @class */ (function () {
                     console.log(res);
                     _this.batch = res;
                 });
-                _this.base.showAlert(element.hasPic, "hasPic状态", function () { });
+                // this.base.showAlert(element.hasPic, "hasPic状态", () => { });
                 console.log(element.hasPic);
                 if (element.hasPic == true) {
-                    _this.base.showAlert("有照片", "", function () { });
+                    // this.base.showAlert("有照片", "", () => { });
                     console.log(element);
                     console.log(element.photoSum);
                     for (var j = 1; j <= element.photoSum; j++) {
@@ -3886,8 +3892,8 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage.prototype.test = function () {
         var _this = this;
-        for (var i = 0; i < 250; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000002347).toString();
+        for (var i = 0; i < 100; i++) {
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000000701).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.accuracy = "22";
@@ -3897,62 +3903,73 @@ var DeadtreePage = /** @class */ (function () {
             this.killMethodsValue = "4";
             this.diameter = 5;
             this.volume = 20;
-            this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                }
-            })
-                .subscribe(function (res) {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                var cacheData = {
-                    deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
-                    killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
-                };
-                console.log("cacheData");
-                console.log(cacheData);
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert('提示', '提交失败', function () { });
-                var cacheData = {
-                    deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
-                    killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
-                };
-                console.log("cacheData");
-                console.log(cacheData);
-                var DryCache;
-                DryCache = localStorage.getItem('DryCache');
-                if (DryCache == null) {
-                    DryCache = [];
-                }
-                else {
-                    DryCache = JSON.parse(DryCache);
-                }
-                DryCache.push(cacheData);
-                // try{
-                //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                // }catch(oException){
-                //     if(oException.name == 'QuotaExceededError'){
-                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                //         //console.log('已经超出本地存储限定大小！');
-                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                //       // localStorage.clear();
-                //       // localStorage.setItem(key,value);
-                //     }
-                // }   
-                localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                console.log("Hello");
-                //this.navCtrl.pop();
-                // confirm.dismiss();
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            });
+            setTimeout(function () {
+                _this.httpClient.post(_this.base.BASE_URL + 'app/addDeviceId', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: _this.deviceId
+                    }
+                }).subscribe(function (res) {
+                    _this.batch = res;
+                });
+            }, (1) * 100);
+            setTimeout(function () {
+                _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                    headers: { token: localStorage['token'] }, params: {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                    }
+                })
+                    .subscribe(function (res) {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    // this.base.showAlert('提示', '提交成功', () => { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                }, function (msg) {
+                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    // this.base.showAlert('提示', '提交失败', () => { });
+                    var cacheData = {
+                        deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                        accuracy: _this.accuracy, diameter: _this.diameter.toString(), height: _this.height.toString(), volume: _this.volume.toString(),
+                        killMethodsValue: _this.killMethodsValue, remarks: _this.remarks
+                    };
+                    console.log("cacheData");
+                    console.log(cacheData);
+                    var DryCache;
+                    DryCache = localStorage.getItem('DryCache');
+                    if (DryCache == null) {
+                        DryCache = [];
+                    }
+                    else {
+                        DryCache = JSON.parse(DryCache);
+                    }
+                    DryCache.push(cacheData);
+                    // try{
+                    //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    // }catch(oException){
+                    //     if(oException.name == 'QuotaExceededError'){
+                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                    //         //console.log('已经超出本地存储限定大小！');
+                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                    //       // localStorage.clear();
+                    //       // localStorage.setItem(key,value);
+                    //     }
+                    // }   
+                    localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                    console.log("Hello");
+                    //this.navCtrl.pop();
+                    // confirm.dismiss();
+                    __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                });
+            }, (2) * 100);
         }
     };
     DeadtreePage.prototype.deviceIdInput = function () {
@@ -3964,19 +3981,12 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button> -->\n        <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
+            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button>\n        <!-- <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button> -->\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]) === "function" && _j || Object])
     ], DeadtreePage);
     return DeadtreePage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=newDeadTree.js.map
@@ -8164,7 +8174,7 @@ var Base = /** @class */ (function () {
         // BASE_URL = "http://39.108.184.47:8081/"
         // BASE_URL = "http://106.15.200.245:8081/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        this.BASE_URL = "http://192.168.31.5:50000/";
+        this.BASE_URL = "http://192.168.199.199:50000/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,

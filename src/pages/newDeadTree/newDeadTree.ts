@@ -21,16 +21,16 @@ import { LoadingController } from 'ionic-angular';
 export class DeadtreePage {
     deviceId: string;
     deviceSerial: string;
-    longtitude: string;
-    latitude: string;
-    altitude: string;
+    // longtitude: string;
+    // latitude: string;
+    // altitude: string;
     batch:any;
-    accuracy: string;
+    // accuracy: string;
     currentImg:any;
-    // longtitude=1.1234567;
-    // latitude=1.1234567;
-    // altitude=1.1234567;
-    // accuracy=1.1234567;
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
     diameter = 0;
     height = 0;
     picNotExist = false;
@@ -121,8 +121,6 @@ export class DeadtreePage {
                     localStorage.setItem("deadBind", JSON.stringify(BindIdCache));
                 });
         }
-
-
     }
 
     test2(){
@@ -212,11 +210,11 @@ export class DeadtreePage {
                         this.batch = res;
                     })
 
-                this.base.showAlert(element.hasPic, "hasPic状态", () => { });
+                // this.base.showAlert(element.hasPic, "hasPic状态", () => { });
                 console.log(element.hasPic);
 
                 if (element.hasPic == true) {
-                    this.base.showAlert("有照片", "", () => { });
+                    // this.base.showAlert("有照片", "", () => { });
                     console.log(element);
                     console.log(element.photoSum);
 
@@ -664,78 +662,94 @@ export class DeadtreePage {
     }
 
     test(){
-        for(var i = 0 ; i < 250; i++){
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000002347).toString();
-            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
-            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
-            this.accuracy = "22"
-            this.altitude = "14";
-            this.remarks = "0";
-            this.height = 20
-            this.killMethodsValue = "4"
-            this.diameter = 5
-            this.volume = 20
-        this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
-        {
-            headers: { token: localStorage['token'] }, params: {
-                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
-            }
-        })
-        .subscribe(res => {
-            console.log(JSON.stringify(res));
-            console.log(JSON.parse(JSON.stringify(res)).message);
-            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-            this.base.showAlert('提示', '提交成功', () => { });
-            let cacheData = {
-                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                killMethodsValue: this.killMethodsValue, remarks: this.remarks
-            };
-            console.log("cacheData");
-            console.log(cacheData);
+        for(var i = 0 ; i < 100; i++){
+                this.deviceId = Math.ceil(Math.random() * 100 + 100000000701).toString();
+                this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+                this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+                this.accuracy = "22";
+                this.altitude = "14";
+                this.remarks = "0";
+                this.height = 20
+                this.killMethodsValue = "4"
+                this.diameter = 5
+                this.volume = 20
 
-            Base.popTo(this.navCtrl, 'switchProjectPage');
-        }, (msg) => {
+                setTimeout(()=> {
 
-            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: this.deviceId
+                            }
+                        }).subscribe(res => {
+                            this.batch = res;
 
-            this.base.showAlert('提示', '提交失败', () => { });
-            let cacheData = {
-                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
-            };
-            console.log("cacheData");
-            console.log(cacheData);
+                        })
 
-            let DryCache: any;
-            DryCache = localStorage.getItem('DryCache');
-            if (DryCache == null) {
-                DryCache = [];
-            } else {
-                DryCache = JSON.parse(DryCache);
-            }
-            DryCache.push(cacheData);
-            // try{
-            //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
-            // }catch(oException){
-            //     if(oException.name == 'QuotaExceededError'){
-            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-            //         //console.log('已经超出本地存储限定大小！');
-            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-            //       // localStorage.clear();
-            //       // localStorage.setItem(key,value);
-            //     }
-            // }   
-            localStorage.setItem('DryCache', JSON.stringify(DryCache));
-            console.log("Hello");
+                }, (1) * 100);
+                setTimeout(()=>{
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
 
-            //this.navCtrl.pop();
-            // confirm.dismiss();
-                Base.popTo(this.navCtrl, 'switchProjectPage');
-        });
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        }, (msg) => {
+
+                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
+
+                            let DryCache: any;
+                            DryCache = localStorage.getItem('DryCache');
+                            if (DryCache == null) {
+                                DryCache = [];
+                            } else {
+                                DryCache = JSON.parse(DryCache);
+                            }
+                            DryCache.push(cacheData);
+                            // try{
+                            //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                            // }catch(oException){
+                            //     if(oException.name == 'QuotaExceededError'){
+                            //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                            //         //console.log('已经超出本地存储限定大小！');
+                            //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                            //       // localStorage.clear();
+                            //       // localStorage.setItem(key,value);
+                            //     }
+                            // }   
+                            localStorage.setItem('DryCache', JSON.stringify(DryCache));
+                            console.log("Hello");
+
+                            //this.navCtrl.pop();
+                            // confirm.dismiss();
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        });
+                },(2)*100)
     }
     }
     deviceIdInput() {
