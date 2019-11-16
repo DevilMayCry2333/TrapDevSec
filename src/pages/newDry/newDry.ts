@@ -68,7 +68,10 @@ export class DryPage {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
     }
-    
+    test2(){
+        localStorage.removeItem("DryCache");
+        localStorage.removeItem("dryBind");
+    }
     test(){
         for(var i = 0 ; i < 100; i++){
             this.deviceId = Math.ceil(Math.random() * 100 + 100000001301).toString();
