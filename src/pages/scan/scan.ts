@@ -49,19 +49,19 @@ export class ScanPage {
             // alert(text)
             // alert(text);
             let geshi=true;
-            if(text.length!=12){
-              geshi=false;
-            }
-            if(geshi){
-                let shuzi="1234567890";
-                for(let i=0;i<text.length;i++){
-                    let c=text.charAt(i);
-                    // indexof返回的是数字。。。。。。之前怎么可以的
-                    if(shuzi.indexOf(c) < 0){
-                      geshi=false;
-                    }
-                }
-            }
+            // if(text.length!=15){
+            //   geshi=false;
+            // }
+            // if(geshi){
+            //     let shuzi="1234567890";
+            //     for(let i=0;i<text.length;i++){
+            //         let c=text.charAt(i);
+            //         // indexof返回的是数字。。。。。。之前怎么可以的
+            //         if(shuzi.indexOf(c) < 0){
+            //           geshi=false;
+            //         }
+            //     }
+            // }
 
             if (geshi) {
               // let id = text.split('id:')[1];
@@ -164,20 +164,20 @@ export class ScanPage {
      // this.base.showAlert('提示',myid,()=>{});
       
       let geshi=true;
-            if(myid.length!=12){
-              geshi=false;
-            //  this.base.showAlert('提示',myid.length,()=>{});
-            }
+            // if(myid.length!=15){
+            //   geshi=false;
+            // //  this.base.showAlert('提示',myid.length,()=>{});
+            // }
             if(geshi){
              // this.base.showAlert('提示','b',()=>{});
-                let shuzi="1234567890";
-                for(let i=0;i<myid.length;i++){
-                    let c=myid.charAt(i);
-                    // indexof返回的是数字。。。。。。之前怎么可以的
-                    if(shuzi.indexOf(c) < 0){
-                      geshi=false;
-                    }
-                }
+                // let shuzi="1234567890";
+                // for(let i=0;i<myid.length;i++){
+                //     let c=myid.charAt(i);
+                //     // indexof返回的是数字。。。。。。之前怎么可以的
+                //     if(shuzi.indexOf(c) < 0){
+                //       geshi=false;
+                //     }
+                // }
             }
 
             if (geshi) {
