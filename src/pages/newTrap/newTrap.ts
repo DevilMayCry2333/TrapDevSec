@@ -328,7 +328,6 @@ export class TrapPage {
 
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
                     fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
                             i++;

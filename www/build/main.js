@@ -3366,6 +3366,9 @@ var DeadtreePage = /** @class */ (function () {
         this.accuracy = "1.1234567";
         this.diameter = 0;
         this.height = 0;
+        this.observers = [];
+        this.observers2HasPic = [];
+        this.observers2NoPic = [];
         this.picNotExist = false;
         this.hasPic = false;
         this.photosum = 0;
@@ -3518,6 +3521,134 @@ var DeadtreePage = /** @class */ (function () {
         localStorage.removeItem("deadPhotoCache2");
         localStorage.removeItem("deadPhotoCache3");
     };
+    DeadtreePage.prototype.sleep = function (tmpStorage, i) {
+    };
+    DeadtreePage.prototype.awaitF = function (tmpStorage) {
+        var _this = this;
+        for (var i = 0; i < tmpStorage.length; i++) {
+            (function (i) {
+                console.log("promise内部");
+                _this.base.showAlert(i, "第几个", function () { });
+                var that = _this;
+                var element = tmpStorage[i];
+                console.log(i);
+                console.log(element);
+                if (element.hasPic == true) {
+                    // this.base.showAlert("有照片", "", () => { });
+                    console.log(element);
+                    console.log(element.photoSum);
+                    var observer = that.httpClient.post(that.base.BASE_URL + 'app/addDeviceId', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId
+                        }
+                    }).subscribe(function (res) {
+                        console.log(res);
+                        for (var j = 1; j <= element.photoSum; j = j + 1) {
+                            (function (j) {
+                                var currentImg;
+                                if (j == 1) {
+                                    currentImg = that.photolib1;
+                                }
+                                else if (j == 2) {
+                                    currentImg = that.photolib2;
+                                }
+                                else if (j == 3) {
+                                    currentImg = that.photolib3;
+                                }
+                                that.j = j;
+                                //j是当前的图片库
+                                var imgPath = currentImg[that.i].img.split("/");
+                                console.log(imgPath[imgPath.length - 1]);
+                                var options = {};
+                                options.fileKey = "image";
+                                var time = Date.parse(Date());
+                                options.fileName = time + ".jpg";
+                                options.mimeType = "image/jpeg";
+                                options.chunkedMode = false;
+                                options.httpMethod = "POST";
+                                options.params = {
+                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch
+                                };
+                                options.headers = { token: localStorage['token'] };
+                                console.log("options");
+                                console.log(options);
+                                var fileTransfer = that.fileTransfer.create();
+                                var observer = fileTransfer.upload(currentImg[that.i].img, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                    .then(function (res) {
+                                    console.log(res);
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                }, function (error) {
+                                    that.picNotExist = true;
+                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                }).catch(function (error) {
+                                    that.picNotExist = true;
+                                });
+                                that.observers.push(observer);
+                                if (that.picNotExist) {
+                                    that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                                        headers: { token: localStorage['token'] }, params: {
+                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                                        }
+                                    })
+                                        .subscribe(function (res) {
+                                        console.log(JSON.stringify(res));
+                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                    }, function (msg) {
+                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                    });
+                                }
+                            })(j);
+                        }
+                        Promise.all(that.observers).then(function (res) {
+                            console.log(res);
+                            that.base.showAlert("全部成功了", "", function () { });
+                            that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                                }
+                            })
+                                .subscribe(function (res) {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                // that.i++;
+                                // if (that.i >= tmpStorage.length)
+                                //     localStorage.removeItem('deadCache');
+                            }, function (msg) {
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                            });
+                        });
+                    });
+                }
+                else {
+                    var obsernoPic = that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                        headers: { token: localStorage['token'] }, params: {
+                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                        }
+                    })
+                        .subscribe(function (res) {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.showAlert('提示', '提交成功', () => { });
+                        // that.i++;
+                        // if (that.i >= tmpStorage.length)
+                        //     localStorage.removeItem('deadCache');
+                    }, function (msg) {
+                        // this.base.showAlert('提示', '提交失败', () => { });
+                    });
+                }
+            })(i);
+        }
+    };
     DeadtreePage.prototype.ionViewDidLoad = function () {
         var _this = this;
         var that = this;
@@ -3563,153 +3694,13 @@ var DeadtreePage = /** @class */ (function () {
                 this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
             }
             this.i = 0;
-            tmpStorage.forEach(function (element) {
-                _this.httpClient.post(_this.base.BASE_URL + 'app/addDeviceId', {}, {
-                    headers: { token: localStorage['token'] }, params: {
-                        deviceId: element.deviceId
-                    }
-                }).subscribe(function (res) {
-                    console.log("AddDeviceId");
-                    //在这里传值到后端去吧
-                    //其实已经好了。。批次只有1.。。。。。。。
-                    //如果一定要批次对应的话，应该只要批量传列表deviceId一次，然后前端
-                    //传当前是第几次,设定好延时。。
-                    console.log(res);
-                    _this.batch = res;
-                });
-                // this.base.showAlert(element.hasPic, "hasPic状态", () => { });
-                console.log(element.hasPic);
-                if (element.hasPic == true) {
-                    // this.base.showAlert("有照片", "", () => { });
-                    console.log(element);
-                    console.log(element.photoSum);
-                    for (var j = 1; j <= element.photoSum; j++) {
-                        (function (j) {
-                            setTimeout(function () {
-                                console.log(j);
-                                var options = {};
-                                options.fileKey = "image";
-                                var time = Date.parse(Date());
-                                options.fileName = time + ".jpg";
-                                options.mimeType = "image/jpeg";
-                                options.chunkedMode = false;
-                                options.httpMethod = "POST";
-                                options.params = {
-                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch
-                                };
-                                options.headers = { token: localStorage['token'] };
-                                console.log("options");
-                                console.log(options);
-                                //创建文件对象
-                                var fileTransfer = that.fileTransfer.create();
-                                if (j == 1) {
-                                    that.currentImg = that.photolib1;
-                                }
-                                else if (j == 2) {
-                                    that.currentImg = that.photolib2;
-                                }
-                                else if (j == 3) {
-                                    that.currentImg = that.photolib3;
-                                }
-                                that.base.showAlert("有照片", that.currentImg[that.i].img, function () { });
-                                console.log(that.i);
-                                console.log(that.currentImg[that.i].img);
-                                console.log(that.currentImg[that.i].img);
-                                that.file.listDir(that.file.externalCacheDirectory, ".").then(function (par) {
-                                    console.log("名字");
-                                    console.log(par);
-                                    console.log(par[0].name);
-                                    var imgPath = that.currentImg[that.i].img.split("/");
-                                    console.log(imgPath[imgPath.length - 1]);
-                                    that.file.readAsDataURL(that.file.externalCacheDirectory, imgPath[imgPath.length - 1]).then(function (base64) {
-                                        console.log(base64);
-                                    }, function (err) {
-                                        console.log(err);
-                                    }).catch(function (msg) {
-                                        console.log(msg);
-                                    });
-                                }, function (err) {
-                                    console.log(err);
-                                }).catch(function (msg) {
-                                    console.log(msg);
-                                });
-                                // that.base64.encodeFile(that.currentImg[that.i].img).then((base64File: string) => {
-                                //     console.log(base64File);
-                                // }, (err) => {
-                                //     console.log(err);
-                                // });
-                                // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                                // fileTransfer.upload(that.currentImg[that.i].img, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                                //     .then((res) => {
-                                //         console.log(res);
-                                //         console.log(JSON.stringify(res));
-                                //         console.log(JSON.parse(JSON.stringify(res)).message);
-                                //     }, (error) => {//发送失败(网络出错等)
-                                //             that.picNotExist = true;
-                                //         // this.base.showAlert('提示', '提交失败', () => { });
-                                //     }).catch((error) => {
-                                //         that.picNotExist = true;
-                                //     })
-                                if (that.picNotExist) {
-                                    that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                                        }
-                                    })
-                                        .subscribe(function (res) {
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
-                                    }, function (msg) {
-                                        // this.base.showAlert('提示', '提交失败', () => { });
-                                    });
-                                }
-                            }, (j + 1) * 1000);
-                        })(j);
-                    }
-                    setTimeout(function () {
-                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                            headers: { token: localStorage['token'] }, params: {
-                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                            }
-                        })
-                            .subscribe(function (res) {
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                            _this.i++;
-                            if (_this.i >= tmpStorage.length)
-                                localStorage.removeItem('deadCache');
-                        }, function (msg) {
-                            // this.base.showAlert('提示', '提交失败', () => { });
-                        });
-                    }, 10000);
-                }
-                else {
-                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                        }
-                    })
-                        .subscribe(function (res) {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        _this.i++;
-                        if (_this.i >= tmpStorage.length)
-                            localStorage.removeItem('deadCache');
-                    }, function (msg) {
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    });
-                }
-            });
+            //i是一条一条的记录
+            console.log(tmpStorage);
+            this.awaitF(tmpStorage);
+            // for(var i = 0 ; i < tmpStorage.length ; i++){
+            //     ((i)=>{
+            //     })(i)
+            // }
         }
         if (localStorage["deadKill"]) {
             console.log(localStorage["deadKill"]);
@@ -3991,7 +3982,7 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试第一步</ion-label>\n        </button> -->\n\n        <button id="chaxun" ion-button (click)="test3()">\n            <ion-label>测试第二步</ion-label>\n        </button>\n\n        <!-- <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button> -->\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
+            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试第一步</ion-label>\n        </button> -->\n\n        <!-- <button id="chaxun" ion-button (click)="test3()">\n            <ion-label>测试第二步</ion-label>\n        </button> -->\n\n        <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -8191,9 +8182,9 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.200.245:50000/";
+        // BASE_URL = "http://106.15.200.245:50000/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        // BASE_URL = "http://127.0.0.1:50000/"
+        this.BASE_URL = "http://192.168.199.199:50000/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
