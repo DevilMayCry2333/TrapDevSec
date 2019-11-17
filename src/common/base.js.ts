@@ -9,7 +9,7 @@ export class Base {
   // BASE_URL = "http://39.108.184.47:8081/"
   BASE_URL = "http://106.15.200.245:50000/"
     // BASE_URL = "http://127.0.0.1:8081/"
-  // BASE_URL = "http://192.168.199.199:50000/"
+  // BASE_URL = "http://127.0.0.1:50000/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,
@@ -63,6 +63,22 @@ export class Base {
         });
 
     });
+  }
+
+  convertToBase64(path,osVal){
+    if(osVal == 1){
+      this.file.readAsDataURL(this.file.tempDirectory,path).then((imageBase64)=>{
+        console.log(imageBase64);
+        
+        return imageBase64;
+      })
+    }else{
+      this.file.readAsDataURL(this.file.externalDataDirectory, path).then((imageBase64) => {
+        console.log(imageBase64);
+        return imageBase64;
+      })
+    }
+
   }
   
   showPrompt(title, myName,func1, func2) {

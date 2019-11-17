@@ -12,7 +12,8 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-nati
 import { AboutPage } from '../about/about';
 import { DeadTreesQueryPage} from '../dead-trees-query/dead-trees-query';
 import { LoadingController } from 'ionic-angular';
-
+import { Base64 } from '@ionic-native/base64';
+import { File } from "@ionic-native/file";
 
 @Component({
     selector: 'app-deadtree',
@@ -21,16 +22,16 @@ import { LoadingController } from 'ionic-angular';
 export class DeadtreePage {
     deviceId: string;
     deviceSerial: string;
-    longtitude: string;
-    latitude: string;
-    altitude: string;
-    batch:any;
-    accuracy: string;
+    // longtitude: string;
+    // latitude: string;
+    // altitude: string;
+    // accuracy: string;
+    batch: any;
     currentImg:any;
-    // longtitude="1.1234567";
-    // latitude="1.1234567";
-    // altitude="1.1234567";
-    // accuracy="1.1234567";
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
     diameter = 0;
     height = 0;
     picNotExist = false;
@@ -75,7 +76,9 @@ export class DeadtreePage {
         private camera: Camera,
         private fileTransfer: FileTransfer,
         public navCtrl: NavController,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        private base64: Base64,
+        private file: File
     ) { }
 
     NavToMap() {
@@ -219,7 +222,6 @@ export class DeadtreePage {
                     console.log(element.photoSum);
 
                     for (var j = 1; j <= element.photoSum; j++) {
-
                         (function (j) {
                             setTimeout(function () {
                                 console.log(j);
@@ -252,21 +254,51 @@ export class DeadtreePage {
                                 that.base.showAlert("有照片", that.currentImg[that.i].img, () => { });
                                 console.log(that.i);
                                 console.log(that.currentImg[that.i].img);
+                                console.log(that.currentImg[that.i].img);
+                                that.file.listDir(that.file.externalCacheDirectory,".").then(
+                                    (par)=>{
+                                        console.log("名字");
+                                        console.log(par);
+                                        console.log(par[0].name);
+                                        var imgPath = that.currentImg[that.i].img.split("/");
+                                        console.log(imgPath[imgPath.length - 1]);
+                                    
+                                        that.file.readAsDataURL(that.file.externalCacheDirectory, imgPath[imgPath.length - 1]).then((base64) => {
+                                            console.log(base64);
+                                        }, (err) => {
+                                            console.log(err);
+
+                                        }).catch((msg) => {
+                                            console.log(msg);
+
+                                        })
+                                },(err)=>{
+                                    console.log(err);
+                                    
+                                }).catch((msg)=>{
+                                    console.log(msg);
+                                })
+
+                                // that.base64.encodeFile(that.currentImg[that.i].img).then((base64File: string) => {
+                                //     console.log(base64File);
+                                // }, (err) => {
+                                //     console.log(err);
+                                // });
 
                                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
-                                fileTransfer.upload(that.currentImg[that.i].img, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                                    .then((res) => {
-                                        console.log(res);
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                // fileTransfer.upload(that.currentImg[that.i].img, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                //     .then((res) => {
+                                //         console.log(res);
+                                //         console.log(JSON.stringify(res));
+                                //         console.log(JSON.parse(JSON.stringify(res)).message);
 
-                                    }, (error) => {//发送失败(网络出错等)
-                                            that.picNotExist = true;
-                                        // this.base.showAlert('提示', '提交失败', () => { });
-                                    }).catch((error) => {
-                                        that.picNotExist = true;
-                                    })
+                                //     }, (error) => {//发送失败(网络出错等)
+                                //             that.picNotExist = true;
+                                //         // this.base.showAlert('提示', '提交失败', () => { });
+                                //     }).catch((error) => {
+                                //         that.picNotExist = true;
+                                //     })
 
                                 if (that.picNotExist) {
                                     that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
@@ -662,93 +694,68 @@ export class DeadtreePage {
     }
 
     test3(){
-        for(var i = 0 ; i < 100 ; i++){
-            this.deviceId = (i + 100000000701).toString();
-            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
-            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
-            this.accuracy = "22";
-            this.altitude = "14";
-            this.remarks = "0";
-            this.height = 20
-            this.killMethodsValue = "4"
-            this.diameter = 5
-            this.volume = 20
-                this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
-                    {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                        }
-                    })
-                    .subscribe(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                        };
-                        console.log("cacheData");
-                        console.log(cacheData);
+        
+        for (var i = 0; i < 10000 ; i++){
+            (function (i) {
+                setTimeout(function () {
+                    this.deviceId = (i + 100000120000).toString();
+                    this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+                    this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+                    this.accuracy = "22";
+                    this.altitude = "14";
+                    this.remarks = "0";
+                    this.height = 20
+                    this.killMethodsValue = "4"
+                    this.diameter = 5
+                    this.volume = 20
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            let cacheData = {
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks
+                            };
+                            console.log("cacheData");
+                            console.log(cacheData);
 
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
-                    }, (msg) => {
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        }, (msg) => {
 
-                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        }); 
+                }, 100);
+            })(i)
 
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                        let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks
-                        };
-                        console.log("cacheData");
-                        console.log(cacheData);
-
-                        let DryCache: any;
-                        DryCache = localStorage.getItem('DryCache');
-                        if (DryCache == null) {
-                            DryCache = [];
-                        } else {
-                            DryCache = JSON.parse(DryCache);
-                        }
-                        DryCache.push(cacheData);
-                        // try{
-                        //   localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                        // }catch(oException){
-                        //     if(oException.name == 'QuotaExceededError'){
-                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
-                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                        //       // localStorage.clear();
-                        //       // localStorage.setItem(key,value);
-                        //     }
-                        // }   
-                        localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                        console.log("Hello");
-
-                        //this.navCtrl.pop();
-                        // confirm.dismiss();
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
-                    });          
+         
         }
     }
 
     test(){
-            for(var i = 0 ; i < 100; i++){
-                    this.deviceId = (i+ 100000000701).toString();
-                        this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
-                            {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: this.deviceId
-                                }
-                            }).subscribe(res => {
-                                this.batch = res;
+        for (var i = 0; i < 10000; i++){
+            (function (i) {
+                setTimeout(function () {
+                    this.deviceId = (i + 100000120000).toString();
+                    this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: this.deviceId
+                            }
+                        }).subscribe(res => {
+                            this.batch = res;
+                        })
+                }, 100);
+            })(i)
 
-                            })
         }
     }
     deviceIdInput() {
