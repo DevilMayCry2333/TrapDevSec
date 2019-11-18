@@ -74,7 +74,7 @@ export class DryPage {
     }
     test(){
         for(var i = 0 ; i < 100; i++){
-            this.deviceId = Math.ceil(Math.random() * 100 + 100000001301).toString();
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000003401).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.woodStatusValue = "1";

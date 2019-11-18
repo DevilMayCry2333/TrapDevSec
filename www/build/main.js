@@ -1118,10 +1118,8 @@ var TrapPage = /** @class */ (function () {
     };
     TrapPage.prototype.test = function () {
         var _this = this;
-        localStorage.removeItem('maintenanceCache');
-        //一秒3500,4000报错
-        for (var i = 0; i < 3500; i++) {
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000000).toString();
+        for (var i = 0; i < 250; i++) {
+            this.deviceId = Math.ceil(Math.random() * 250 + 100000003151).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.newbettle = "2";
@@ -1765,19 +1763,12 @@ var TrapPage = /** @class */ (function () {
     TrapPage.prototype.deviceSerialInput = function () {
         console.log(this.deviceSerial);
     };
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     TrapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-trap',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content >\n                <h2 id=trapezoid >设　备　管　理</h2>\n                <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one" >\n                    <ion-label>设备ID：</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             \n                </ion-item>\n                <button id="saomiao" ion-button shape="round" fill="outline" (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two" >\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button shape="round" fill="outline" (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="songmo">\n                <ion-label>松墨天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item id="qita">\n                <ion-label>其他天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item id="type">\n                <ion-label>类型:</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="injectType">\n                <ion-label>药剂类型:</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n            <div id="photoANDsubmit"> \n                <button id="paizhao" ion-button (click)="takePhoto()">拍照</button>\n                <button id="tijiao" ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            </div>\n            <div id="mapANDquery"> \n                <button id="ditu" ion-button (click)="NavToMap()">地图查看</button>\n                <button id="chaxun" ion-button (click)="NavToQuery()">查询</button>\n                <!-- <button id="chaxun" ion-button (click)="test()">测试产生1000条数据</button> -->\n            </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
-            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__["a" /* File */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__["a" /* File */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__["a" /* File */]) === "function" && _j || Object])
     ], TrapPage);
     return TrapPage;
 }());
@@ -2036,7 +2027,7 @@ var DryPage = /** @class */ (function () {
     DryPage.prototype.test = function () {
         var _this = this;
         for (var i = 0; i < 100; i++) {
-            this.deviceId = Math.ceil(Math.random() * 100 + 100000001301).toString();
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000003401).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.woodStatusValue = "1";
@@ -2044,7 +2035,7 @@ var DryPage = /** @class */ (function () {
             this.altitude = "14";
             this.remarks = "0";
             this.injectNum = "50";
-            this.workContentValue = "2";
+            this.workContentValue = "3";
             this.chestDiameter = "7";
             this.injectNameValue = "8";
             this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {}, {
@@ -3877,6 +3868,24 @@ var DeadtreePage = /** @class */ (function () {
                 this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
                 return;
             }
+        }
+    };
+    DeadtreePage.prototype.trapClick = function () {
+        console.log('deadtree');
+    };
+    DeadtreePage.prototype.test = function () {
+        var _this = this;
+        for (var i = 0; i < 100; i++) {
+            this.deviceId = Math.ceil(Math.random() * 100 + 100000003401).toString();
+            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+            this.accuracy = "22";
+            this.altitude = "14";
+            this.remarks = "0";
+            this.height = 20;
+            this.killMethodsValue = "4";
+            this.diameter = 5;
+            this.volume = 20;
             this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
