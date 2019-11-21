@@ -58,7 +58,6 @@ export class DeadtreePage {
     base642:any;
     base643:any;
     i:any;
-    j:any;
     volume = 0;
     killMethodsValue:string;
     killMethods:any[];
@@ -380,11 +379,51 @@ export class DeadtreePage {
             
             this.sleep(tmpStorage);
 
-            // for(var i = 0 ; i < tmpStorage.length ; i++){
-            //     ((i)=>{
+                    }
+                    setTimeout(() => {
+                        this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                                }
+                            })
+                            .subscribe(res => {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.showAlert('提示', '提交成功', () => { });
+                                this.i++;
+                                if (this.i >= tmpStorage.length)
+                                    localStorage.removeItem('deadCache');
+                            }, (msg) => {
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                            });
 
-            //     })(i)
-            // }
+                    }, 10000)
+
+                } else {
+                    this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                        {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                            }
+                        })
+                        .subscribe(res => {
+                            console.log(JSON.stringify(res));
+                            console.log(JSON.parse(JSON.stringify(res)).message);
+                            // this.base.showAlert('提示', '提交成功', () => { });
+                            this.i++;
+                            if (this.i >= tmpStorage.length)
+                                localStorage.removeItem('deadCache');
+                        }, (msg) => {
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                }
+
+            });
         }
 
         if (localStorage["deadKill"]) {
@@ -409,6 +448,7 @@ export class DeadtreePage {
                 res => {
                     // console.log(res);
                 })
+
     }
 
     NavToQuery(){
