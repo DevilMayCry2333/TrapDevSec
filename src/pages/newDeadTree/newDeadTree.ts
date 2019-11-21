@@ -60,12 +60,14 @@ export class DeadtreePage {
     i:any;
     j:any;
     volume = 0;
-    killMethodsValue:string
+    killMethodsValue:string;
     killMethods:any[];
     imageData:null
     location_ready:boolean
     remarks = ""
     subscription:Subscription
+    threePhotos = false;
+    canSubmit = true;
     users: any[] = [
         {
             id: 1,
@@ -149,6 +151,15 @@ export class DeadtreePage {
         localStorage.removeItem("deadPhotoCache2");
         localStorage.removeItem("deadPhotoCache3");
     }
+
+    // buttonChange(){
+    //     this.threePhotos = false;
+    //     this.canSubmit = true;
+    //     if(this.photosum == 3){
+    //         this.threePhotos = true;
+    //         this.canSubmit = false;
+    //     }
+    // }
 
     sleep(tmpStorage){
         //试试看可不可以用的
@@ -303,6 +314,8 @@ export class DeadtreePage {
         
     // }
     async ionViewDidLoad(){
+        this.threePhotos = false;
+        this.canSubmit = true;
         var that = this;
         if (localStorage["deadBind"]) {
 
@@ -425,6 +438,10 @@ export class DeadtreePage {
             // this.navCtrl.popToRoot()
             this.imageData = imageData;
             this.photosum = this.photosum + 1;
+            if(this.photosum == 3){
+                this.threePhotos = true;
+                this.canSubmit = false;
+            }
             let options: FileUploadOptions = {};
             options.fileKey = "image";
             var time = Date.parse(Date());
