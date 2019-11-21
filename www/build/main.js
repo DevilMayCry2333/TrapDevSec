@@ -3331,6 +3331,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -3360,11 +3395,13 @@ var DeadtreePage = /** @class */ (function () {
         this.loadingCtrl = loadingCtrl;
         this.base64 = base64;
         this.file = file;
+        this.currentNum = 0;
         this.longtitude = "1.1234567";
         this.latitude = "1.1234567";
         this.altitude = "1.1234567";
         this.accuracy = "1.1234567";
         this.diameter = 0;
+        this.hasClear = false;
         this.height = 0;
         this.observers = [];
         this.picture = [];
@@ -3373,6 +3410,7 @@ var DeadtreePage = /** @class */ (function () {
         this.picNotExist = false;
         this.hasPic = false;
         this.photosum = 0;
+        this.isComplete = false;
         this.volume = 0;
         this.remarks = "";
         this.users = [
@@ -3534,25 +3572,17 @@ var DeadtreePage = /** @class */ (function () {
         }
     };
     DeadtreePage.prototype.awaitF = function (tmpStorage) {
+        var _this = this;
+        var loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+        });
+        loader.present();
         var that = this;
         for (var i = 0; i < tmpStorage.length; i++) {
-            // ((i)=>{
-            // console.log("promise内部");
-            // that.base.showAlert(i, "第几个", () => { });
             var element = tmpStorage[i];
-            // console.log(i);
-            // console.log(element);
             if (element.hasPic == true) {
-                // this.base.showAlert("有照片", "", () => { });
-                // console.log(element);
-                // console.log(element.photoSum);
                 for (var j = 1; j <= element.photoSum; j = j + 1) {
                     (function (i, j) {
-                        // console.log("第几张照片");      
-                        that.j = j;
-                        // console.log(j);
-                        // console.log(that.j);
-                        //j是当前的图片库
                         var options = {};
                         options.fileKey = "image";
                         var time = Date.parse(Date());
@@ -3563,7 +3593,8 @@ var DeadtreePage = /** @class */ (function () {
                         options.params = {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                             accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch
+                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch,
+                            allLength: tmpStorage.length, curRow: i
                         };
                         options.headers = { token: localStorage['token'] };
                         // console.log("options");
@@ -3588,61 +3619,61 @@ var DeadtreePage = /** @class */ (function () {
                             that.currentImg = that.photolib3;
                         }
                         console.log(uploadAddress);
-                        var observer = fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                            .then(function (res) {
-                            that.picture.push(res.response);
-                            console.log(res);
-                            // console.log(res.response);
-                            // that.base.showAlert(j+"#"+that.j+"#"+i+"#"+that.i,"第几张.j",()=>{});
-                            // that.base.showAlert(element.photoSum + "当前i:" + i + "#" + j, "一条有几张闭包内", () => { });
-                            // console.log(j);
-                            that.observers.push(observer);
-                            if (j >= element.photoSum) {
-                                // console.log(that.observers);
-                                Promise.all(that.observers).then(function (res) {
-                                    // console.log("promise");
-                                    // console.log(res);
-                                    for (var ii = 0; ii < that.picture.length; ii++) {
-                                        if (ii == 0) {
-                                            that.currentPic1 = that.picture[ii];
-                                        }
-                                        else if (ii == 1) {
-                                            that.currentPic2 = that.picture[ii];
-                                        }
-                                        else if (ii == 2) {
-                                            that.currentPic3 = that.picture[ii];
-                                        }
-                                    }
-                                    // that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees2', {},
-                                    //     {
-                                    //         headers: { token: localStorage['token'] }, params: {
-                                    //             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                    //             accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                    //             killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch,
-                                    //             pic1: that.currentPic1.toString(), pic2: that.currentPic2.toString(), pic3: that.currentPic3.toString()
-                                    //         }
-                                    //     })
-                                    //     .subscribe(res => {
-                                    //         // that.base.showAlert("全部成功了", "", () => { });
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
-                                    //         // this.base.showAlert('提示', '提交成功', () => { });
-                                    //         if (i >= tmpStorage.length)
-                                    //             localStorage.removeItem('deadCache');
-                                    //     }, (msg) => {
-                                    //         // this.base.showAlert('提示', '提交失败', () => { });
-                                    //     });
-                                });
-                            }
-                        }, function (error) {
-                            that.picNotExist = true;
-                            // this.base.showAlert('提示', '提交失败', () => { });
-                        }).catch(function (error) {
-                            that.picNotExist = true;
+                        var observer = new Promise(function (resolve, reject) {
+                            fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                .then(function (res) {
+                                console.log("文件传输中,当前i:=>" + i);
+                                console.log(_this.currentNum);
+                                console.log(tmpStorage.length);
+                                // that.picture.push(res.response["imgId"]);
+                                console.log(res);
+                                console.log(JSON.parse(res.response));
+                                console.log(JSON.parse(res.response).isComp);
+                                if (JSON.parse(res.response).isComp == true) {
+                                    _this.isComplete = true;
+                                }
+                                else {
+                                    _this.isComplete = false;
+                                }
+                                console.log("传输中isComp" + _this.isComplete);
+                                resolve('ok');
+                            }, function (error) {
+                                that.picNotExist = true;
+                                reject('error');
+                                // this.base.showAlert('提示', '提交失败', () => { });
+                            }).catch(function (error) {
+                                that.picNotExist = true;
+                                reject('error');
+                            });
                         });
+                        that.observers.push(observer);
+                        // console.log(that.observers);
                     })(i, j);
                 }
                 if (that.picNotExist) {
+                    var obs = new Promise(function (resolve, reject) {
+                        that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                            headers: { token: localStorage['token'] }, params: {
+                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                            }
+                        })
+                            .subscribe(function (res) {
+                            resolve('ok');
+                            // that.base.showAlert("全部成功了", "", () => { });
+                            // console.log(JSON.stringify(res));
+                            // console.log(JSON.parse(JSON.stringify(res)).message);
+                        }, function (msg) {
+                            reject('error');
+                            // this.base.showAlert('提示', '提交失败', () => { });
+                        });
+                    });
+                    that.observers.push(obs);
+                }
+            }
+            else {
+                var obsernoPic = new Promise(function (resolve, reject) {
                     that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -3651,111 +3682,98 @@ var DeadtreePage = /** @class */ (function () {
                         }
                     })
                         .subscribe(function (res) {
-                        // that.base.showAlert("全部成功了", "", () => { });
-                        // console.log(JSON.stringify(res));
-                        // console.log(JSON.parse(JSON.stringify(res)).message);
+                        resolve('ok');
                     }, function (msg) {
-                        // this.base.showAlert('提示', '提交失败', () => { });
+                        reject('error');
                     });
-                }
-            }
-            else {
-                var obsernoPic = that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                    headers: { token: localStorage['token'] }, params: {
-                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                        killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                    }
-                })
-                    .subscribe(function (res) {
-                    // that.base.showAlert("全部成功了", "", () => { });
-                    // console.log(JSON.stringify(res));
-                    // console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.showAlert('提示', '提交成功', () => { });
-                    // that.i++;
-                    // if (that.i >= tmpStorage.length)
-                    //     localStorage.removeItem('deadCache');
-                }, function (msg) {
-                    // this.base.showAlert('提示', '提交失败', () => { });
                 });
+                that.observers.push(obsernoPic);
             }
             // })(i)
         }
+        Promise.all(that.observers).then(function (resolve) {
+            console.log(resolve);
+            loader.dismiss();
+            localStorage.removeItem('deadCache');
+        }, function (reject) {
+            console.log(reject);
+            loader.dismiss();
+        });
     };
     // awaitF(){
     // }
     DeadtreePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        var that = this;
-        if (localStorage["deadBind"]) {
-            var tmpStorage2 = [];
-            tmpStorage2 = JSON.parse(localStorage["deadBind"]);
-            var i = 0;
-            tmpStorage2.forEach(function (element) {
-                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var that, tmpStorage2, i, tmpStorage, n;
+            return __generator(this, function (_a) {
+                that = this;
+                if (localStorage["deadBind"]) {
+                    tmpStorage2 = [];
+                    tmpStorage2 = JSON.parse(localStorage["deadBind"]);
+                    i = 0;
+                    tmpStorage2.forEach(function (element) {
+                        _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                            headers: { token: localStorage['token'] },
+                            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                        })
+                            .subscribe(function (res) {
+                            i++;
+                            _this.base.showAlert("成功绑定了", "", function () { });
+                            if (tmpStorage2.length == i) {
+                                localStorage.removeItem("deadBind");
+                                _this.base.showAlert("清理了缓存", "", function () { });
+                            }
+                        }, function (msg) {
+                        });
+                    });
+                }
+                //deadCache
+                if (localStorage["deadCache"]) {
+                    tmpStorage = JSON.parse(localStorage["deadCache"]);
+                    // console.log("照片缓存");
+                    // console.log(localStorage["deadPhotoCache1"]);
+                    // console.log(localStorage["deadPhotoCache2"]);
+                    // console.log(localStorage["deadPhotoCache3"]);
+                    if (localStorage["deadPhotoCache1"]) {
+                        this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
+                    }
+                    if (localStorage["deadPhotoCache2"]) {
+                        this.photolib2 = JSON.parse(localStorage["deadPhotoCache2"]);
+                    }
+                    if (localStorage["deadPhotoCache3"]) {
+                        this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
+                    }
+                    this.i = 0;
+                    n = this.awaitF(tmpStorage);
+                    console.log(n);
+                    this.sleep(tmpStorage);
+                    // for(var i = 0 ; i < tmpStorage.length ; i++){
+                    //     ((i)=>{
+                    //     })(i)
+                    // }
+                }
+                if (localStorage["deadKill"]) {
+                    // console.log(localStorage["deadKill"]);
+                    this.killMethods = JSON.parse(localStorage["deadKill"]);
+                    // console.log("缓存");
+                    // console.log(this.killMethods);
+                }
+                this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {}, {
                     headers: { token: localStorage['token'] },
-                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
                 })
                     .subscribe(function (res) {
-                    i++;
-                    _this.base.showAlert("成功绑定了", "", function () { });
-                    if (tmpStorage2.length == i) {
-                        localStorage.removeItem("deadBind");
-                        _this.base.showAlert("清理了缓存", "", function () { });
-                    }
-                }, function (msg) {
+                    var c = res;
+                    _this.killMethods = Array.from(c);
+                    // console.log("subb", res);
+                    // console.log(this.killMethods);
+                    localStorage['deadKill'] = JSON.stringify(res);
+                }, function (res) {
+                    // console.log(res);
                 });
+                return [2 /*return*/];
             });
-        }
-        //deadCache
-        if (localStorage["deadCache"]) {
-            var loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-                duration: 15000
-            });
-            loader.present();
-            var tmpStorage = JSON.parse(localStorage["deadCache"]);
-            // console.log("照片缓存");
-            // console.log(localStorage["deadPhotoCache1"]);
-            // console.log(localStorage["deadPhotoCache2"]);
-            // console.log(localStorage["deadPhotoCache3"]);
-            if (localStorage["deadPhotoCache1"]) {
-                this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
-            }
-            if (localStorage["deadPhotoCache2"]) {
-                this.photolib2 = JSON.parse(localStorage["deadPhotoCache2"]);
-            }
-            if (localStorage["deadPhotoCache3"]) {
-                this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
-            }
-            this.i = 0;
-            //i是一条一条的记录
-            // console.log(tmpStorage);
-            this.awaitF(tmpStorage);
-            this.sleep(tmpStorage);
-            // for(var i = 0 ; i < tmpStorage.length ; i++){
-            //     ((i)=>{
-            //     })(i)
-            // }
-        }
-        if (localStorage["deadKill"]) {
-            // console.log(localStorage["deadKill"]);
-            this.killMethods = JSON.parse(localStorage["deadKill"]);
-            // console.log("缓存");
-            // console.log(this.killMethods);
-        }
-        this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {}, {
-            headers: { token: localStorage['token'] },
-            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { worker: localStorage['username'] } })
-        })
-            .subscribe(function (res) {
-            var c = res;
-            _this.killMethods = Array.from(c);
-            // console.log("subb", res);
-            // console.log(this.killMethods);
-            localStorage['deadKill'] = JSON.stringify(res);
-        }, function (res) {
-            // console.log(res);
         });
     };
     DeadtreePage.prototype.NavToQuery = function () {
@@ -3908,7 +3926,7 @@ var DeadtreePage = /** @class */ (function () {
             //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
             //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
             //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-            this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+            // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
                 this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
                 return;
@@ -8233,7 +8251,7 @@ var Base = /** @class */ (function () {
         this.BASE_URL = "http://106.15.200.245:50000/";
         // BASE_URL = "http://106.15.90.78:50000/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        // BASE_URL = "http://192.168.199.199:50000/"
+        // BASE_URL = "http://192.168.31.254:50000/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
