@@ -65,7 +65,7 @@
     </div>
 
     <div id="photoANDmap">
-        <button id="paizhao" ion-button (click)="takePhoto()">
+        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="fivePhotos">
             <ion-label>拍照</ion-label>
         </button>
         <button id="ditu"  ion-button (click)="NavToMap()">
@@ -74,7 +74,7 @@
     </div>
 
 
-        <button  id="tijiao" ion-button (click)="submit()">
+        <button  id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">
             <ion-label>提交</ion-label>
         </button>
   

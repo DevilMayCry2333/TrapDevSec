@@ -27,7 +27,14 @@ export class TrackPage {
     latitude: string;
     location_ready:boolean;
     recordTime: any = {};
+    observers=[];
     photosum:number;
+    photolib1:any;
+    photolib2:any;
+    photolib3:any;
+    currentImg:any;
+    currentNum = 0;
+    isComplete = false;
     imageData:any;
     startRecordIsClick = false;
     endRecordIsClick = false;
@@ -43,8 +50,6 @@ export class TrackPage {
     picNotExsit4 = false;
     picNotExsit5 = false;
 
-
-    
     hasPic = false;
 
     current:number;
@@ -56,7 +61,7 @@ export class TrackPage {
     lineNameDis = false;
 
     ImageToBase:any[];
-
+    picNotExist = false;
     have_submit:boolean;
     altitude: string;
     accuracy: string;
@@ -66,6 +71,8 @@ export class TrackPage {
     workContent:string;
     lateIntravl:string;
     remarks = "";
+    fivePhotos = false;
+    canSubmit = true;
     users: any[] = [
         {
             id: 1,
@@ -103,7 +110,154 @@ export class TrackPage {
         this.navCtrl.push(AboutPage);
     }
 
+//照片异步问题
+    awaitF(tmpStorage) {
+        const loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+        });
+        loader.present();
+        var that = this;
+        for ( var i = 0; i < tmpStorage.length; i++) {
+                var element = tmpStorage[i];
+                if (element.hasPic == true) {
+                            for (var j = 1; j <= element.photoSum; j = j + 1) {
+                                ((i,j)=>{
+                                    let options: FileUploadOptions = {};
+                                    options.fileKey = "image";
+                                    var time = Date.parse(Date());
+                                    options.fileName = time + ".jpg";
+                                    options.mimeType = "image/jpeg";
+                                    options.chunkedMode = false;
+                                    options.httpMethod = "POST";
+                                    options.params = {
+                                        longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
+                                        accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
+                                        remarks: element.remarks, current: j, recordTime:JSON.parse(element.recordTime),
+                                        allLength: tmpStorage.length, curRow: i
+                                    };
+                                    options.headers = { token: localStorage['token'] };
+                                    // console.log("options");
+                                    // console.log(options);
+                                    const fileTransfer: FileTransferObject = that.fileTransfer.create();
+                                    // console.log("===当前照片====");
+                                    // console.log(that.currentImg);
+
+                                    // console.log(i);
+
+                                    // console.log(that.currentImg[that.i].img);
+                                    // console.log(that.currentImg[i].img);
+                                    var uploadAddress;
+                                    if (j == 1) {
+                                        uploadAddress = element.pic1;
+                                        that.currentImg = that.photolib1;
+                                    } else if (j == 2) {
+                                        uploadAddress = element.pic2;
+                                        that.currentImg = that.photolib2;
+                                    } else if (j == 3) {
+                                        uploadAddress = element.pic3;
+                                        that.currentImg = that.photolib3;
+                                    }else if (j == 4) {
+                                        uploadAddress = element.pic4;
+                                        that.currentImg = that.photolib3;
+                                    }else if (j == 5) {
+                                        uploadAddress = element.pic5;
+                                        that.currentImg = that.photolib3;
+                                    }
+                                    console.log(uploadAddress);
+                                    let observer = new Promise((resolve, reject) => {
+                                        fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddPhoto2', options)
+                                            .then((res) => {
+                                                console.log("文件传输中,当前i:=>" + i);
+                                                console.log(this.currentNum);
+                                                console.log(tmpStorage.length);
+                                                // that.picture.push(res.response["imgId"]);
+                                                console.log(res);
+                                                console.log(JSON.parse(res.response));
+                                                console.log(JSON.parse(res.response).isComp);
+                                                if (JSON.parse(res.response).isComp == true) {
+                                                    this.isComplete = true;
+                                                } else {
+                                                    this.isComplete = false;
+                                                }
+                                                console.log("传输中isComp" + this.isComplete);
+                                                resolve('ok');
+                                            }, (error) => {//发送失败(网络出错等)
+                                                that.picNotExist = true;
+                                                reject('error');
+                                                // this.base.showAlert('提示', '提交失败', () => { });
+                                            }).catch((error) => {
+                                                that.picNotExist = true;
+                                                reject('error');
+                                            })
+                                    })
+
+                                    that.observers.push(observer);
+                                        // console.log(that.observers);
+                                })(i,j)
+                            }
+                    if (that.picNotExist) {
+                        let obs = new Promise((resolve,reject)=>{
+                            that.httpClient.post(that.base.BASE_URL + 'app/AddTrack', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
+                                        accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
+                                        remarks: element.remarks, current: j.toString(), recordTime:JSON.parse(element.recordTime),
+                                    }
+                                })
+                                .subscribe(res => {
+                                    resolve('ok');
+                                    // that.base.showAlert("全部成功了", "", () => { });
+                                    // console.log(JSON.stringify(res));
+                                    // console.log(JSON.parse(JSON.stringify(res)).message);
+                                }, (msg) => {
+                                    reject('error');
+                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                });
+                        })
+
+                        that.observers.push(obs);
+                    }
+                } else {
+                    let obsernoPic = new Promise((resolve,reject)=>{
+                        that.httpClient.post(that.base.BASE_URL + 'app/AddTrack', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
+                                        accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
+                                        remarks: element.remarks, current: j.toString(), recordTime:JSON.parse(element.recordTime),
+                                }
+                            })
+                            .subscribe(res => {
+                                resolve('ok');
+                            }, (msg) => {
+                                reject('error');
+                            });
+                    })
+                    that.observers.push(obsernoPic);
+                }
+
+            // })(i)
+        }
+        Promise.all(that.observers).then((resolve)=>{
+            console.log(resolve);
+            loader.dismiss();
+            localStorage.removeItem('deadCache');
+        },(reject)=>{
+            console.log(reject);
+            loader.dismiss();
+        })
+
+
+
+
+    }
+
+
+
     ionViewDidLoad(){
+        this.fivePhotos = false;
+        this.canSubmit = true;
 
         console.log(localStorage["TrackCache"]);
         console.log(localStorage["TrackCache1"]);
@@ -171,7 +325,7 @@ export class TrackPage {
                         options.httpMethod = "POST";
                         options.params = {
                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                            lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                            accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                             current: i, recordTime: JSON.parse(element.recordTime)
                         };
                         options.headers = { token: localStorage['token'] };
@@ -240,7 +394,7 @@ export class TrackPage {
                                 });
                         }else if(i==4){
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                            fileTransfer.upload(this.photoplib4[j].img, this.base.BASE_URL + 'app/AddPhoto', options)
+                            fileTransfer.upload(this.photoplib4[j].img, this.base.BASE_URL + 'app/AddPhoto2', options)
                                 .then((res) => {
                                     console.log(res);
                                     console.log(JSON.stringify(res));
@@ -259,7 +413,7 @@ export class TrackPage {
                                 });
                         }else if(i==5){
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                            fileTransfer.upload(this.photoplib5[j].img, this.base.BASE_URL + 'app/AddPhoto', options)
+                            fileTransfer.upload(this.photoplib5[j].img, this.base.BASE_URL + 'app/AddPhoto2', options)
                                 .then((res) => {
                                     console.log(res);
                                     console.log(JSON.stringify(res));
@@ -283,7 +437,7 @@ export class TrackPage {
                                 {
                                     headers: { token: localStorage['token'] }, params: {
                                         longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                        lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                        accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                                         current: "1", recordTime: JSON.stringify(element.recordTime)
                                     }
                                 })
@@ -309,7 +463,7 @@ export class TrackPage {
                             {
                                 headers: { token: localStorage['token'] }, params: {
                                     longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                    lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                    accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                                     current: "5", recordTime: element.recordTime.toString()
                                 }
                             })
@@ -334,7 +488,7 @@ export class TrackPage {
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                                 current: "1", recordTime: JSON.stringify(element.recordTime)
                             }
                         })
@@ -382,7 +536,7 @@ export class TrackPage {
             // }
 
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
             } else {
 
                     // var options: string = "deviceId: " + this.id +
@@ -395,19 +549,19 @@ export class TrackPage {
                 var options: FileUploadOptions = {};
                 options.params = {
                     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                     current: "1", recordTime: JSON.stringify(this.recordTime),myDate:new Date()
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                    this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                    this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
                     return;
                 }
                     this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
                                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                                 current: "1", recordTime: JSON.stringify(this.recordTime)
                             }
                         })
@@ -419,7 +573,7 @@ export class TrackPage {
                             if(this.hasPic==true){
                                 let cacheData = {
                                     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                    accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                                     current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum:this.photosum
                                 };
                             }else{
@@ -441,7 +595,7 @@ export class TrackPage {
                                 if (this.hasPic == true) {
                                     let cacheData = {
                                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                        accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                                         current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum:this.photosum
                                     };
                                     let TrackCache: any;
@@ -458,7 +612,7 @@ export class TrackPage {
                                 } else {
                                     let cacheData = {
                                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                        lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                        accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
                                         current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: false, photoSum: 0
                                     };
                                     let TrackCache: any;
@@ -480,7 +634,7 @@ export class TrackPage {
 
     takePhoto() {
         if(this.startRecordIsClick == false){
-            this.base.showAlert("请先输入线路名称并点开始录制!","请先输入线路名称并点开始录制",()=>{});
+            this.base.showAlert("请先输入线路名称并点击开始录制!","请先输入线路名称并点击开始录制",()=>{});
         }else{
             this.photosum += 1;
             this.hasPic = true;
@@ -502,6 +656,10 @@ export class TrackPage {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
                 this.imageData = imageData;
+                if(this.photosum == 5){
+                    this.fivePhotos = true;
+                    this.canSubmit = false;
+                }
 
                 let options: FileUploadOptions = {};
                 options.fileKey = "image";
@@ -532,7 +690,7 @@ export class TrackPage {
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto2', options)
                                 .then((res) => {
                                     console.log(res);
                                     console.log(JSON.stringify(res));

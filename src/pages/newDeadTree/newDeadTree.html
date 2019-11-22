@@ -81,11 +81,11 @@
         </ion-card-content>
     </ion-card>
     <div id="photoANDsubmit">
-        <button id="paizhao" ion-button (click)="takePhoto()" :disabled="threePhotos">
+        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="threePhotos">
             <ion-label>拍照</ion-label>
         </button>
 
-        <button id="tijiao" ion-button (click)="submit()" :disabled="canSubmit">
+        <button id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">
             <ion-label>提交</ion-label>
         </button>
     </div>
