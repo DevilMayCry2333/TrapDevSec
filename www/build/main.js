@@ -3582,170 +3582,189 @@ var DeadtreePage = /** @class */ (function () {
         }
     };
     DeadtreePage.prototype.awaitF = function (tmpStorage) {
-        var _this = this;
-        console.log(tmpStorage);
-        var loader = this.loadingCtrl.create({
-            content: "缓存数据正在提交，请勿退出",
-        });
-        loader.present();
-        var that = this;
-        for (var i = 0; i < tmpStorage.length; i++) {
-            (function (i) { return __awaiter(_this, void 0, void 0, function () {
-                var _this = this;
-                var element, j, obs, obsernoPic;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            console.log("外层的i" + i);
-                            element = tmpStorage[i];
-                            if (!(element.hasPic == true)) return [3 /*break*/, 7];
-                            j = 1;
-                            _a.label = 1;
-                        case 1:
-                            if (!(j <= element.photoSum)) return [3 /*break*/, 4];
-                            return [4 /*yield*/, (function (i, j) { return __awaiter(_this, void 0, void 0, function () {
-                                    var _this = this;
-                                    var options, time, fileTransfer, uploadAddress, observer;
-                                    return __generator(this, function (_a) {
-                                        switch (_a.label) {
-                                            case 0:
-                                                console.log("asynci" + i);
-                                                options = {};
-                                                options.fileKey = "image";
-                                                time = Date.parse(Date());
-                                                options.fileName = time + ".jpg";
-                                                options.mimeType = "image/jpeg";
-                                                options.chunkedMode = false;
-                                                options.httpMethod = "POST";
-                                                options.params = {
-                                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch,
-                                                    allLength: tmpStorage.length, curRow: i
-                                                };
-                                                options.headers = { token: localStorage['token'] };
-                                                fileTransfer = that.fileTransfer.create();
-                                                if (j == 1) {
-                                                    uploadAddress = element.pic1;
-                                                    that.currentImg = that.photolib1;
-                                                }
-                                                else if (j == 2) {
-                                                    uploadAddress = element.pic2;
-                                                    that.currentImg = that.photolib2;
-                                                }
-                                                else if (j == 3) {
-                                                    uploadAddress = element.pic3;
-                                                    that.currentImg = that.photolib3;
-                                                }
-                                                console.log(uploadAddress);
-                                                return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                                        fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                                                            .then(function (res) {
-                                                            console.log("文件传输中,当前i:=>" + i);
-                                                            console.log(_this.currentNum);
-                                                            console.log(tmpStorage.length);
-                                                            // that.picture.push(res.response["imgId"]);
-                                                            console.log(res);
-                                                            console.log(JSON.parse(res.response));
-                                                            console.log(JSON.parse(res.response).isComp);
-                                                            if (JSON.parse(res.response).isComp == true) {
-                                                                _this.isComplete = true;
-                                                            }
-                                                            else {
-                                                                _this.isComplete = false;
-                                                            }
-                                                            console.log("传输中isComp" + _this.isComplete);
-                                                            resolve('ok');
-                                                        }).catch(function (error) {
-                                                            console.log(error);
-                                                            that.picNotExist = true;
-                                                            reject('error');
-                                                        });
-                                                    }).catch(function (reason) {
-                                                        console.log(reason);
-                                                    })];
-                                            case 1:
-                                                observer = _a.sent();
-                                                console.log("await" + j);
-                                                that.observers.push(observer);
-                                                return [2 /*return*/];
-                                        }
-                                    });
-                                }); })(i, j)
-                                // })(j)
-                            ];
-                        case 2:
-                            _a.sent();
-                            _a.label = 3;
-                        case 3:
-                            j = j + 1;
-                            return [3 /*break*/, 1];
-                        case 4:
-                            if (!that.picNotExist) return [3 /*break*/, 6];
-                            return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                    that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                                        }
-                                    })
-                                        .subscribe(function (res) {
-                                        resolve('ok');
-                                        // that.base.showAlert("全部成功了", "", () => { });
-                                        // console.log(JSON.stringify(res));
-                                        // console.log(JSON.parse(JSON.stringify(res)).message);
-                                    }, function (msg) {
-                                        reject('error');
-                                        // this.base.showAlert('提示', '提交失败', () => { });
-                                    });
-                                }).catch(function (reason) {
-                                    console.log(reason);
-                                })];
-                        case 5:
-                            obs = _a.sent();
-                            that.observers.push(obs);
-                            _a.label = 6;
-                        case 6: return [3 /*break*/, 9];
-                        case 7: return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                                    headers: { token: localStorage['token'] }, params: {
-                                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                        killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var loader, that, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log(tmpStorage);
+                        loader = this.loadingCtrl.create({
+                            content: "缓存数据正在提交，请勿退出",
+                        });
+                        loader.present();
+                        that = this;
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < tmpStorage.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, (function (i) { return __awaiter(_this, void 0, void 0, function () {
+                                var _this = this;
+                                var element, j, obs, obsernoPic;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            console.log("外层的i" + i);
+                                            element = tmpStorage[i];
+                                            if (!(element.hasPic == true)) return [3 /*break*/, 7];
+                                            j = 1;
+                                            _a.label = 1;
+                                        case 1:
+                                            if (!(j <= element.photoSum)) return [3 /*break*/, 4];
+                                            return [4 /*yield*/, (function (i, j) { return __awaiter(_this, void 0, void 0, function () {
+                                                    var _this = this;
+                                                    var options, time, fileTransfer, uploadAddress, observer;
+                                                    return __generator(this, function (_a) {
+                                                        switch (_a.label) {
+                                                            case 0:
+                                                                console.log("asynci" + i);
+                                                                options = {};
+                                                                options.fileKey = "image";
+                                                                time = Date.parse(Date());
+                                                                options.fileName = time + ".jpg";
+                                                                options.mimeType = "image/jpeg";
+                                                                options.chunkedMode = false;
+                                                                options.httpMethod = "POST";
+                                                                options.params = {
+                                                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                                                    accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                                                    killMethodsValue: element.killMethodsValue, remarks: element.remarks, current: j, batch: element.batch,
+                                                                    allLength: tmpStorage.length, curRow: i
+                                                                };
+                                                                options.headers = { token: localStorage['token'] };
+                                                                fileTransfer = that.fileTransfer.create();
+                                                                if (j == 1) {
+                                                                    uploadAddress = element.pic1;
+                                                                    that.currentImg = that.photolib1;
+                                                                }
+                                                                else if (j == 2) {
+                                                                    uploadAddress = element.pic2;
+                                                                    that.currentImg = that.photolib2;
+                                                                }
+                                                                else if (j == 3) {
+                                                                    uploadAddress = element.pic3;
+                                                                    that.currentImg = that.photolib3;
+                                                                }
+                                                                console.log(uploadAddress);
+                                                                return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                                        fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                                                            .then(function (res) {
+                                                                            console.log("文件传输中,当前i:=>" + i);
+                                                                            console.log(_this.currentNum);
+                                                                            console.log(tmpStorage.length);
+                                                                            // that.picture.push(res.response["imgId"]);
+                                                                            console.log(res);
+                                                                            console.log(JSON.parse(res.response));
+                                                                            console.log(JSON.parse(res.response).isComp);
+                                                                            if (JSON.parse(res.response).isComp == true) {
+                                                                                _this.isComplete = true;
+                                                                            }
+                                                                            else {
+                                                                                _this.isComplete = false;
+                                                                            }
+                                                                            console.log("传输中isComp" + _this.isComplete);
+                                                                            resolve('ok');
+                                                                        }).catch(function (error) {
+                                                                            console.log(error);
+                                                                            that.picNotExist = true;
+                                                                            reject('error');
+                                                                        });
+                                                                    }).catch(function (reason) {
+                                                                        console.log(reason);
+                                                                    })];
+                                                            case 1:
+                                                                observer = _a.sent();
+                                                                console.log("await" + j);
+                                                                that.observers.push(observer);
+                                                                return [2 /*return*/];
+                                                        }
+                                                    });
+                                                }); })(i, j)
+                                                // })(j)
+                                            ];
+                                        case 2:
+                                            _a.sent();
+                                            _a.label = 3;
+                                        case 3:
+                                            j = j + 1;
+                                            return [3 /*break*/, 1];
+                                        case 4:
+                                            if (!that.picNotExist) return [3 /*break*/, 6];
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                                                        headers: { token: localStorage['token'] }, params: {
+                                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                                            accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                                            killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                                                        }
+                                                    })
+                                                        .subscribe(function (res) {
+                                                        resolve('ok');
+                                                        // that.base.showAlert("全部成功了", "", () => { });
+                                                        // console.log(JSON.stringify(res));
+                                                        // console.log(JSON.parse(JSON.stringify(res)).message);
+                                                    }, function (msg) {
+                                                        reject('error');
+                                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                                    });
+                                                }).catch(function (reason) {
+                                                    console.log(reason);
+                                                })];
+                                        case 5:
+                                            obs = _a.sent();
+                                            that.observers.push(obs);
+                                            _a.label = 6;
+                                        case 6: return [3 /*break*/, 9];
+                                        case 7: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {}, {
+                                                    headers: { token: localStorage['token'] }, params: {
+                                                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                                        killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
+                                                    }
+                                                })
+                                                    .subscribe(function (res) {
+                                                    resolve('ok');
+                                                }, function (msg) {
+                                                    reject('error');
+                                                });
+                                            }).catch(function (reason) {
+                                                console.log(reason);
+                                            })];
+                                        case 8:
+                                            obsernoPic = _a.sent();
+                                            that.observers.push(obsernoPic);
+                                            _a.label = 9;
+                                        case 9: return [2 /*return*/];
                                     }
-                                })
-                                    .subscribe(function (res) {
-                                    resolve('ok');
-                                }, function (msg) {
-                                    reject('error');
                                 });
-                            }).catch(function (reason) {
-                                console.log(reason);
-                            })];
-                        case 8:
-                            obsernoPic = _a.sent();
-                            that.observers.push(obsernoPic);
-                            _a.label = 9;
-                        case 9:
-                            if (i >= tmpStorage.length - 1) {
-                                Promise.all(that.observers).then(function (resolve) {
-                                    console.log(resolve);
-                                    loader.dismiss();
-                                    // localStorage.removeItem('deadCache');
-                                }, function (reject) {
-                                    console.log(reject);
-                                    loader.dismiss();
-                                }).catch(function (reason) {
-                                    console.log(reason);
-                                });
+                            }); })(i)
+                            // })(i)
+                        ];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4:
+                        Promise.all(that.observers).then(function (resolve) {
+                            console.log(resolve);
+                            loader.dismiss();
+                            if (_this.isComplete) {
+                                console.log("*****清除缓存了******");
+                                localStorage.removeItem('deadCache');
                             }
-                            return [2 /*return*/];
-                    }
-                });
-            }); })(i);
-            // })(i)
-        }
+                        }, function (reject) {
+                            console.log(reject);
+                            loader.dismiss();
+                        }).catch(function (reason) {
+                            console.log(reason);
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     // awaitF(){
     // }

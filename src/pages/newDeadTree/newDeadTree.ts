@@ -172,7 +172,7 @@ export class DeadtreePage {
         }
     }
 
-    awaitF(tmpStorage) {
+    async awaitF(tmpStorage) {
         console.log(tmpStorage);
         const loader = this.loadingCtrl.create({
             content: "缓存数据正在提交，请勿退出",
@@ -180,7 +180,7 @@ export class DeadtreePage {
         loader.present();
         var that = this;
         for ( var i = 0; i < tmpStorage.length; i++) {
-            (async (i)=>{
+            await (async (i)=>{
                 console.log("外层的i" + i);
                 
                 var element = tmpStorage[i];
@@ -257,6 +257,7 @@ export class DeadtreePage {
                                     // })(j)
                             }
                     if (that.picNotExist) {
+                        //这个接口还要再改造下，判断是否全部传完了
                         let obs = await new Promise((resolve,reject)=>{
                             that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
                                 {
@@ -282,6 +283,7 @@ export class DeadtreePage {
                         that.observers.push(obs);
                     }
                 } else {
+                    //这个接口还要再改造下，判断是否全部传完了
                     let obsernoPic = await new Promise((resolve,reject)=>{
                         that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
                             {
@@ -301,24 +303,24 @@ export class DeadtreePage {
                     })
                     that.observers.push(obsernoPic);
                 }
-                if(i>=tmpStorage.length - 1){
-                    Promise.all(that.observers).then((resolve) => {
-                        console.log(resolve);
-                        loader.dismiss();
-                        // localStorage.removeItem('deadCache');
-                    }, (reject) => {
-                        console.log(reject);
-                        loader.dismiss();
-                    }).catch((reason) => {
-                        console.log(reason);
-                    })
-                }
             })(i)
             // })(i)
         }
 
-
-
+            
+            Promise.all(that.observers).then((resolve) => {
+                console.log(resolve);
+                loader.dismiss();
+                if (this.isComplete) {
+                    console.log("*****清除缓存了******");
+                    localStorage.removeItem('deadCache');
+                }
+            }, (reject) => {
+                console.log(reject);
+                loader.dismiss();
+            }).catch((reason) => {
+                console.log(reason);
+            })
 
     }
 
