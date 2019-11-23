@@ -475,7 +475,7 @@ export class DeadtreePage {
 
             //创建文件对象
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
-            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
+            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                 .then((res) => {
                     // console.log(res);
                     // console.log(JSON.stringify(res));
