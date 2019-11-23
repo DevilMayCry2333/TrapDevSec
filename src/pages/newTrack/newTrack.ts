@@ -400,8 +400,8 @@ export class TrackPage {
                         }
 
                         console.log("cacheData");
-
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
+                        //这一行
+                       // Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
 
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
@@ -424,7 +424,8 @@ export class TrackPage {
                             TrackCache.push(cacheData);
                             localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                             console.log("Hello");
-                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                            //还有这一行
+                            //Base.popTo(this.navCtrl, 'switchProjectPage');
                         } else {
                             let cacheData = {
                                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -441,6 +442,7 @@ export class TrackPage {
                             TrackCache.push(cacheData);
                             localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                             console.log("Hello");
+                            //还有这一行
                             //Base.popTo(this.navCtrl, 'switchProjectPage');
                         }
                     });
