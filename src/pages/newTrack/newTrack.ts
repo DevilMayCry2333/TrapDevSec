@@ -332,7 +332,7 @@ export class TrackPage {
             this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", () => { });
         } else {
             // this.have_submit = true;
-            this.canSubmit=true;
+            this.canSubmit = true;
             this.base.showAlert(this.flag, this.flag, () => { });
 
             console.log("======PATH======");
@@ -441,7 +441,7 @@ export class TrackPage {
                             TrackCache.push(cacheData);
                             localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                             console.log("Hello");
-                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                            //Base.popTo(this.navCtrl, 'switchProjectPage');
                         }
                     });
             }
