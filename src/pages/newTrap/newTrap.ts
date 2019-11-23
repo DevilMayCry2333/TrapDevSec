@@ -12,6 +12,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-nati
 import { AboutPage } from '../about/about';
 import { TrapQueryPage} from '../trap-query/trap-query';
 import { File } from "@ionic-native/file";
+import { LoadingController } from 'ionic-angular';
 
 @Component({
     selector: 'app-trap',
@@ -27,17 +28,20 @@ export class TrapPage {
     WorkContentValue:string
     altitude: string
     isDisabled = false;
+    picNotExist = false;
 
     accuracy: string
     have_submit:boolean
     imageData: null
 
-    remarks: ""
+    remarks = ''
 
     newbettle: string
     otherbettleType:any[]
     injectType:any[]
     workContent:any[]
+    observers = [];
+    isComplete = false;
     // 定位订阅
     subscription: Subscription;
     // 是否定位成功
@@ -248,12 +252,35 @@ export class TrapPage {
         });
     }
 
-    ionViewDidLoad() {
+    async ionViewDidLoad() {
         console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['device']);
+        console.log(localStorage['otherbettleType'])
+        console.log(localStorage['TrapWorkContent'])
+        console.log(localStorage['TrapinjectType'])
         console.log(localStorage["maintenanceCache"]);
-        console.log("=====绑定缓存=====");
-        console.log(localStorage["trapBind"]);
+        // localStorage.removeItem('maintenanceCache');
+
+        if (localStorage["TrapWorkContent"]) {
+            console.log(localStorage["TrapWorkContent"]);
+            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
+            console.log("缓存");
+            console.log(this.workContent);
+        }
+
+        if (localStorage["otherbettleType"]) {
+            console.log(localStorage["otherbettleType"]);
+            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
+            console.log("缓存");
+            console.log(this.otherbettleType);
+        }
+
+        if (localStorage["TrapinjectType"]) {
+            console.log(localStorage["TrapinjectType"]);
+            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
+            console.log("缓存");
+            console.log(this.injectType);
+        }
+
         
         var i = 0;
         if (localStorage["trapBind"]){
@@ -267,7 +294,6 @@ export class TrapPage {
             console.log(tmpStorage2);
 
             tmpStorage2.forEach(element => {
-
                 console.log("===开始===");
 
                 console.log(element.scanId);
@@ -295,13 +321,19 @@ export class TrapPage {
 
 
         }
-
+        var that = this;
         if (localStorage["maintenanceCache"]){
+            const loader = this.loadingCtrl.create({
+                content: "缓存数据正在提交，请勿退出",
+            });
+            loader.present();
             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
-            var i = 0;
-            tmpStorage.forEach(element => {
-                console.log(element);
-                console.log("====图片路径====");
+            // tmpStorage.forEach(element => {
+                for(var i = 0 ; i < tmpStorage.length ; i++){
+                     await (async (i)=>{
+                    var element = tmpStorage[i];
+                    console.log(element);
+                    console.log("====图片路径====");
                 
                 if(element.img!=null){
                     let options: FileUploadOptions = {};
@@ -316,7 +348,7 @@ export class TrapPage {
                         longitude: element.longitude, latitude: element.latitude, num: element.num,
                         maleNum: "1", femaleNum: "1", altitude: element.altitude,
                         drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                        otherNum: element.otherNum, otherType: element.otherType
+                        otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -328,117 +360,124 @@ export class TrapPage {
 
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    let observer = await new Promise((resolve,reject)=>{
+                        fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
+                            .then((res) => {
+                                console.log("======进入文件上传=====");
+                                console.log("====文件路径=====");
+                                console.log(element.img);
 
-                    fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
-                        .then((res) => {
-                            i++;
-                            console.log("======进入文件上传=====");
-                            console.log("====文件路径=====");
-                            console.log(element.img);
-                            
-                            console.log(res);
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
+                                console.log(res);
+                                if (JSON.parse(res.response).isComp == true) {
+                                    this.isComplete = true;
+                                } else {
+                                    this.isComplete = false;
+                                }
 
-                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                resolve('ok');
 
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                            if(i>=tmpStorage.length)
-                                localStorage.removeItem('maintenanceCache');
-                        }, (error) => {//发送失败(网络出错等)
-                            console.log("******进入Error******");
-                            console.log(error);
+                            })
+                            .catch((error) => {
+                                console.log("******进入cache*******");
+                                that.picNotExist = true;
+                                //发送失败(文件不存在等)
+                                // this.base.showAlert("图片不存在!", "图片不存在", () => { });
+                                console.log(error);
+                                reject('error');
+                            });
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                    that.observers.push(observer);
 
-                                return new Promise((resolve, reject) => {
-                                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                                        {
-                                            headers: { token: localStorage['token'] }, params: {
-                                                deviceId: element.deviceId,
-                                                longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                                maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                                drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                                otherNum: element.otherNum, otherType: element.otherType
-                                            }
-                                        })
-                                        .toPromise().then(res => {
-                                            console.log(res);
-                                            i++;
-                                            // this.base.showAlert("对不起，图片被你删掉了", "但是其他数据传上来了", () => { });
-                                            if(i>=tmpStorage.length)
-                                                localStorage.removeItem('maintenanceCache');
-                                        }, msg => {
-                                            console.log(msg);
-                                        })
-
-                                });
-
-                            // this.base.showAlert('提示', '提交失败', () => { });
-                        })
-                        //这个好像不起什么作用，但是为了以防万一还是留着吧
-                        .catch((error) => {
-                            console.log("******进入cache*******");
-
-                            //发送失败(文件不存在等)
-                            this.base.showAlert("图片不存在!", "图片不存在", () => { });
-                            console.log(error);
-
-                            return new Promise((resolve, reject) => {
-                                this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                                    {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            deviceId: element.deviceId,
-                                            longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                            otherNum: element.otherNum, otherType: element.otherType
-                                        }
-                                    })
+                    if(that.picNotExist){
+                        let obs = await new Promise((resolve, reject) => {
+                            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        deviceId: element.deviceId,
+                                        longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                        otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                                    }
+                                })
                                 .toPromise().then(res => {
-                                    i++;
+                                    console.log(JSON.parse(JSON.stringify(res)));
+                                    if (JSON.parse(JSON.stringify(res)).isComp == true){
+                                        this.isComplete = true;
+                                    }else{
+                                        this.isComplete = false;
+                                    }
+                                    this.base.showAlert("无图片提交成功", "提交成功", () => { });
+                                    resolve('ok');
+                                }, msg => {
+                                    console.log(msg);
+                                    reject('error');
+                                })
 
-                                    console.log(res);
-                                    if (i >= tmpStorage.length)
-                                        localStorage.removeItem('maintenanceCache');
-                                    this.base.showAlert("图片提交成功", "提交成功", () => { });
-                                    },msg=>{
-                                        console.log(msg);
-                                    })
-
-                                });
+                        }).catch((error) => {
+                            console.log(error);
                         });
+                        that.observers.push(obs);
+                    }
+
 
                 }else{
-                    console.log("=====Element图片为空=====");
-                    console.log(element);
-                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                        {
-                            headers: { token: localStorage['token'] }, params: {
-                                deviceId: element.deviceId,
-                                longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                otherNum: element.otherNum, otherType: element.otherType
-                            }
-                        })
-                        .subscribe(res => {
-                            i++;
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                            if (i >= tmpStorage.length)
-                                localStorage.removeItem('maintenanceCache');
-                        }, (msg) => {
+                   let obs =  await new Promise((resolve,reject)=>{
+                        console.log("=====Element图片为空=====");
+                        console.log(element);
+                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId,
+                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                    otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                                }
+                            })
+                            .subscribe(res => {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                                    this.isComplete = true;
+                                } else {
+                                    this.isComplete = false;
+                                }
+                                resolve('ok');
+                            }, (msg) => {
+                                console.log(msg);
+                                reject('error');
                                 // this.base.showAlert('提示', '提交失败', () => { });
-                        });
+                            });
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                    that.observers.push(obs);
+
                 }
-            });
+            // });
+                })(i)
+            }
+
+            Promise.all(that.observers).then((resolve) => {
+                console.log(resolve);
+                loader.dismiss();
+                    console.log("*****清除缓存了******");
+                if (that.isComplete){
+                    localStorage.removeItem('maintenanceCache');
+                }
+            }, (reject) => {
+                console.log(reject);
+                loader.dismiss();
+            }).catch((reason) => {
+                console.log(reason);
+                loader.dismiss();
+            })
+
         }
-        if (localStorage["otherbettleType"]) {
-            console.log(localStorage["otherbettleType"]);
-            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
-            console.log("缓存");
-            console.log(this.otherbettleType);
-        }
+
 
         this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {},
             { headers: { token: localStorage['token'] }, 
@@ -454,12 +493,7 @@ export class TrapPage {
                     console.log(res);
                 })
 
-        if (localStorage["TrapinjectType"]) {
-            console.log(localStorage["TrapinjectType"]);
-            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
-            console.log("缓存");
-            console.log(this.injectType);
-        }
+
 
         this.httpClient.post(this.base.BASE_URL + 'app/getInject', {},
             {
@@ -478,12 +512,7 @@ export class TrapPage {
                     console.log(res);
                 })
 
-        if (localStorage["TrapWorkContent"]) {
-            console.log(localStorage["TrapWorkContent"]);
-            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
-            console.log("缓存");
-            console.log(this.workContent);
-        }
+
 
         this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {},
             {
@@ -516,6 +545,7 @@ export class TrapPage {
         private httpClient: HttpClient,
         private camera: Camera,
         private fileTransfer: FileTransfer,
+        public loadingCtrl: LoadingController,
         private file:File) { }
 
     callBack = (params) => {
@@ -618,6 +648,9 @@ export class TrapPage {
         this.navCtrl.push(ScanPage,{callBack:this.callBack});
     }
     
+    test2(){
+        localStorage.removeItem('maintenanceCache');
+    }
     submit(){
         this.isDisabled = true;
 
