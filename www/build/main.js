@@ -984,6 +984,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
 
 
 
@@ -998,7 +1034,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var TrapPage = /** @class */ (function () {
-    function TrapPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, file) {
+    function TrapPage(navCtrl, qrScanner, base, geolocation, changeDetectorRef, httpClient, camera, fileTransfer, loadingCtrl, file) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.qrScanner = qrScanner;
@@ -1008,8 +1044,13 @@ var TrapPage = /** @class */ (function () {
         this.httpClient = httpClient;
         this.camera = camera;
         this.fileTransfer = fileTransfer;
+        this.loadingCtrl = loadingCtrl;
         this.file = file;
         this.isDisabled = false;
+        this.picNotExist = false;
+        this.remarks = '';
+        this.observers = [];
+        this.isComplete = false;
         // 是否定位成功
         this.location_ready = false;
         this.users = [
@@ -1276,208 +1317,263 @@ var TrapPage = /** @class */ (function () {
         });
     };
     TrapPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['device']);
-        console.log(localStorage["maintenanceCache"]);
-        console.log("=====绑定缓存=====");
-        console.log(localStorage["trapBind"]);
-        var i = 0;
-        if (localStorage["trapBind"]) {
-            var tmpStorage2 = [];
-            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
-            console.log(tmpStorage2.length);
-            // localStorage.removeItem("trapBind");
-            console.log(tmpStorage2);
-            tmpStorage2.forEach(function (element) {
-                console.log("===开始===");
-                console.log(element.scanId);
-                console.log(element.serial);
-                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
-                    headers: { token: localStorage['token'] },
-                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
-                })
-                    .subscribe(function (res) {
-                    console.log(res);
-                    i++;
-                    _this.base.showAlert("成功绑定了", "", function () { });
-                    if (tmpStorage2.length == i) {
-                        localStorage.removeItem("trapBind");
-                        _this.base.showAlert("清理了缓存", "", function () { });
-                    }
-                }, function (msg) {
-                });
-            });
-        }
-        if (localStorage["maintenanceCache"]) {
-            var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
-            var i = 0;
-            tmpStorage.forEach(function (element) {
-                console.log(element);
-                console.log("====图片路径====");
-                if (element.img != null) {
-                    var options = {};
-                    options.fileKey = "image";
-                    var time = Date.parse(Date());
-                    options.fileName = time + ".jpg";
-                    options.mimeType = "image/jpeg";
-                    options.chunkedMode = false;
-                    options.httpMethod = "POST";
-                    options.params = {
-                        deviceId: element.deviceId,
-                        longitude: element.longitude, latitude: element.latitude, num: element.num,
-                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                        otherNum: element.otherNum, otherType: element.otherType
-                    };
-                    options.headers = { token: localStorage['token'] };
-                    console.log("options");
-                    console.log(options);
-                    //创建文件对象
-                    var fileTransfer = _this.fileTransfer.create();
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                    fileTransfer.upload(element.img, _this.base.BASE_URL + 'auth_api/maintenance', options)
-                        .then(function (res) {
-                        i++;
-                        console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        if (i >= tmpStorage.length)
-                            localStorage.removeItem('maintenanceCache');
-                    }, function (error) {
-                        console.log("******进入Error******");
-                        console.log(error);
-                        return new Promise(function (resolve, reject) {
-                            _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: element.deviceId,
-                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                    otherNum: element.otherNum, otherType: element.otherType
-                                }
-                            })
-                                .toPromise().then(function (res) {
-                                console.log(res);
-                                i++;
-                                // this.base.showAlert("对不起，图片被你删掉了", "但是其他数据传上来了", () => { });
-                                if (i >= tmpStorage.length)
-                                    localStorage.removeItem('maintenanceCache');
-                            }, function (msg) {
-                                console.log(msg);
-                            });
-                        });
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    })
-                        .catch(function (error) {
-                        console.log("******进入cache*******");
-                        //发送失败(文件不存在等)
-                        _this.base.showAlert("图片不存在!", "图片不存在", function () { });
-                        console.log(error);
-                        return new Promise(function (resolve, reject) {
-                            _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: element.deviceId,
-                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                    otherNum: element.otherNum, otherType: element.otherType
-                                }
-                            })
-                                .toPromise().then(function (res) {
-                                i++;
-                                console.log(res);
-                                if (i >= tmpStorage.length)
-                                    localStorage.removeItem('maintenanceCache');
-                                _this.base.showAlert("图片提交成功", "提交成功", function () { });
-                            }, function (msg) {
-                                console.log(msg);
-                            });
-                        });
-                    });
-                }
-                else {
-                    console.log("=====Element图片为空=====");
-                    console.log(element);
-                    _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: element.deviceId,
-                            longitude: element.longitude, latitude: element.latitude, num: element.num,
-                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                            otherNum: element.otherNum, otherType: element.otherType
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var i, tmpStorage2, that, loader_1, tmpStorage, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log('ionViewDidLoad LocatePage');
+                        console.log(localStorage['otherbettleType']);
+                        console.log(localStorage['TrapWorkContent']);
+                        console.log(localStorage['TrapinjectType']);
+                        console.log(localStorage["maintenanceCache"]);
+                        // localStorage.removeItem('maintenanceCache');
+                        if (localStorage["TrapWorkContent"]) {
+                            console.log(localStorage["TrapWorkContent"]);
+                            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
+                            console.log("缓存");
+                            console.log(this.workContent);
                         }
-                    })
-                        .subscribe(function (res) {
+                        if (localStorage["otherbettleType"]) {
+                            console.log(localStorage["otherbettleType"]);
+                            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
+                            console.log("缓存");
+                            console.log(this.otherbettleType);
+                        }
+                        if (localStorage["TrapinjectType"]) {
+                            console.log(localStorage["TrapinjectType"]);
+                            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
+                            console.log("缓存");
+                            console.log(this.injectType);
+                        }
+                        i = 0;
+                        if (localStorage["trapBind"]) {
+                            tmpStorage2 = [];
+                            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+                            console.log(tmpStorage2.length);
+                            // localStorage.removeItem("trapBind");
+                            console.log(tmpStorage2);
+                            tmpStorage2.forEach(function (element) {
+                                console.log("===开始===");
+                                console.log(element.scanId);
+                                console.log(element.serial);
+                                _this.httpClient.post(_this.base.BASE_URL + 'app/bindId', {}, {
+                                    headers: { token: localStorage['token'] },
+                                    params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                                })
+                                    .subscribe(function (res) {
+                                    console.log(res);
+                                    i++;
+                                    _this.base.showAlert("成功绑定了", "", function () { });
+                                    if (tmpStorage2.length == i) {
+                                        localStorage.removeItem("trapBind");
+                                        _this.base.showAlert("清理了缓存", "", function () { });
+                                    }
+                                }, function (msg) {
+                                });
+                            });
+                        }
+                        that = this;
+                        if (!localStorage["maintenanceCache"]) return [3 /*break*/, 5];
+                        loader_1 = this.loadingCtrl.create({
+                            content: "缓存数据正在提交，请勿退出",
+                        });
+                        loader_1.present();
+                        tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < tmpStorage.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, (function (i) { return __awaiter(_this, void 0, void 0, function () {
+                                var _this = this;
+                                var element, options_1, time, fileTransfer_1, observer, obs, obs;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            element = tmpStorage[i];
+                                            console.log(element);
+                                            console.log("====图片路径====");
+                                            if (!(element.img != null)) return [3 /*break*/, 4];
+                                            options_1 = {};
+                                            options_1.fileKey = "image";
+                                            time = Date.parse(Date());
+                                            options_1.fileName = time + ".jpg";
+                                            options_1.mimeType = "image/jpeg";
+                                            options_1.chunkedMode = false;
+                                            options_1.httpMethod = "POST";
+                                            options_1.params = {
+                                                deviceId: element.deviceId,
+                                                longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                                maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                                drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                                otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i
+                                            };
+                                            options_1.headers = { token: localStorage['token'] };
+                                            console.log("options");
+                                            console.log(options_1);
+                                            fileTransfer_1 = this.fileTransfer.create();
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    fileTransfer_1.upload(element.img, _this.base.BASE_URL + 'auth_api/maintenance', options_1)
+                                                        .then(function (res) {
+                                                        console.log("======进入文件上传=====");
+                                                        console.log("====文件路径=====");
+                                                        console.log(element.img);
+                                                        console.log(res);
+                                                        if (JSON.parse(res.response).isComp == true) {
+                                                            _this.isComplete = true;
+                                                        }
+                                                        else {
+                                                            _this.isComplete = false;
+                                                        }
+                                                        resolve('ok');
+                                                    })
+                                                        .catch(function (error) {
+                                                        console.log("******进入cache*******");
+                                                        that.picNotExist = true;
+                                                        //发送失败(文件不存在等)
+                                                        // this.base.showAlert("图片不存在!", "图片不存在", () => { });
+                                                        console.log(error);
+                                                        reject('error');
+                                                    });
+                                                }).catch(function (error) {
+                                                    console.log(error);
+                                                })];
+                                        case 1:
+                                            observer = _a.sent();
+                                            that.observers.push(observer);
+                                            if (!that.picNotExist) return [3 /*break*/, 3];
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                                                        headers: { token: localStorage['token'] }, params: {
+                                                            deviceId: element.deviceId,
+                                                            longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                                            otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                                                        }
+                                                    })
+                                                        .toPromise().then(function (res) {
+                                                        console.log(JSON.parse(JSON.stringify(res)));
+                                                        if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                                                            _this.isComplete = true;
+                                                        }
+                                                        else {
+                                                            _this.isComplete = false;
+                                                        }
+                                                        _this.base.showAlert("无图片提交成功", "提交成功", function () { });
+                                                        resolve('ok');
+                                                    }, function (msg) {
+                                                        console.log(msg);
+                                                        reject('error');
+                                                    });
+                                                }).catch(function (error) {
+                                                    console.log(error);
+                                                })];
+                                        case 2:
+                                            obs = _a.sent();
+                                            that.observers.push(obs);
+                                            _a.label = 3;
+                                        case 3: return [3 /*break*/, 6];
+                                        case 4: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                console.log("=====Element图片为空=====");
+                                                console.log(element);
+                                                _this.httpClient.post(_this.base.BASE_URL + 'auth_api/maintenance', {}, {
+                                                    headers: { token: localStorage['token'] }, params: {
+                                                        deviceId: element.deviceId,
+                                                        longitude: element.longitude, latitude: element.latitude, num: element.num,
+                                                        maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                                                        drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                                                        otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                                                    }
+                                                })
+                                                    .subscribe(function (res) {
+                                                    console.log(JSON.stringify(res));
+                                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                                    if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                                                        _this.isComplete = true;
+                                                    }
+                                                    else {
+                                                        _this.isComplete = false;
+                                                    }
+                                                    resolve('ok');
+                                                }, function (msg) {
+                                                    console.log(msg);
+                                                    reject('error');
+                                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                                });
+                                            }).catch(function (error) {
+                                                console.log(error);
+                                            })];
+                                        case 5:
+                                            obs = _a.sent();
+                                            that.observers.push(obs);
+                                            _a.label = 6;
+                                        case 6: return [2 /*return*/];
+                                    }
+                                });
+                            }); })(i)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
                         i++;
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        if (i >= tmpStorage.length)
-                            localStorage.removeItem('maintenanceCache');
-                    }, function (msg) {
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    });
+                        return [3 /*break*/, 1];
+                    case 4:
+                        Promise.all(that.observers).then(function (resolve) {
+                            console.log(resolve);
+                            loader_1.dismiss();
+                            console.log("*****清除缓存了******");
+                            if (that.isComplete) {
+                                localStorage.removeItem('maintenanceCache');
+                            }
+                        }, function (reject) {
+                            console.log(reject);
+                            loader_1.dismiss();
+                        }).catch(function (reason) {
+                            console.log(reason);
+                            loader_1.dismiss();
+                        });
+                        _a.label = 5;
+                    case 5:
+                        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {}, { headers: { token: localStorage['token'] },
+                            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } }) })
+                            .subscribe(function (res) {
+                            var c = res;
+                            _this.otherbettleType = Array.from(c);
+                            console.log(_this.otherbettleType);
+                            localStorage['otherbettleType'] = JSON.stringify(res);
+                        }, function (res) {
+                            console.log(res);
+                        });
+                        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {}, {
+                            headers: { token: localStorage['token'] },
+                            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
+                        })
+                            .subscribe(function (res) {
+                            var c = res;
+                            _this.injectType = Array.from(c);
+                            console.log(_this.injectType);
+                            localStorage['TrapinjectType'] = JSON.stringify(res);
+                        }, function (res) {
+                            console.log(res);
+                        });
+                        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {}, {
+                            headers: { token: localStorage['token'] },
+                            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
+                        })
+                            .subscribe(function (res) {
+                            var c = res;
+                            _this.workContent = Array.from(c);
+                            console.log(_this.workContent);
+                            console.log(_this.workContent);
+                            localStorage['TrapWorkContent'] = JSON.stringify(res);
+                        }, function (res) {
+                            console.log(res);
+                        });
+                        return [2 /*return*/];
                 }
             });
-        }
-        if (localStorage["otherbettleType"]) {
-            console.log(localStorage["otherbettleType"]);
-            this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
-            console.log("缓存");
-            console.log(this.otherbettleType);
-        }
-        this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {}, { headers: { token: localStorage['token'] },
-            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } }) })
-            .subscribe(function (res) {
-            var c = res;
-            _this.otherbettleType = Array.from(c);
-            console.log(_this.otherbettleType);
-            localStorage['otherbettleType'] = JSON.stringify(res);
-        }, function (res) {
-            console.log(res);
-        });
-        if (localStorage["TrapinjectType"]) {
-            console.log(localStorage["TrapinjectType"]);
-            this.injectType = JSON.parse(localStorage["TrapinjectType"]);
-            console.log("缓存");
-            console.log(this.injectType);
-        }
-        this.httpClient.post(this.base.BASE_URL + 'app/getInject', {}, {
-            headers: { token: localStorage['token'] },
-            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
-        })
-            .subscribe(function (res) {
-            var c = res;
-            _this.injectType = Array.from(c);
-            console.log(_this.injectType);
-            localStorage['TrapinjectType'] = JSON.stringify(res);
-        }, function (res) {
-            console.log(res);
-        });
-        if (localStorage["TrapWorkContent"]) {
-            console.log(localStorage["TrapWorkContent"]);
-            this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
-            console.log("缓存");
-            console.log(this.workContent);
-        }
-        this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {}, {
-            headers: { token: localStorage['token'] },
-            params: new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]({ fromObject: { username: localStorage['username'] } })
-        })
-            .subscribe(function (res) {
-            var c = res;
-            _this.workContent = Array.from(c);
-            console.log(_this.workContent);
-            console.log(_this.workContent);
-            localStorage['TrapWorkContent'] = JSON.stringify(res);
-        }, function (res) {
-            console.log(res);
         });
     };
     TrapPage.prototype.NavToMap = function () {
@@ -1490,6 +1586,9 @@ var TrapPage = /** @class */ (function () {
         console.log("scan");
         console.log(localStorage['username']);
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
+    };
+    TrapPage.prototype.test2 = function () {
+        localStorage.removeItem('maintenanceCache');
     };
     TrapPage.prototype.submit = function () {
         var _this = this;
@@ -1767,7 +1866,7 @@ var TrapPage = /** @class */ (function () {
     };
     TrapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-trap',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content >\n                <h2 id=trapezoid >设　备　管　理</h2>\n                <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one" >\n                    <ion-label>设备ID：</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             \n                </ion-item>\n                <button id="saomiao" ion-button shape="round" fill="outline" (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two" >\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button shape="round" fill="outline" (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="songmo">\n                <ion-label>松墨天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item id="qita">\n                <ion-label>其他天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item id="type">\n                <ion-label>类型:</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="injectType">\n                <ion-label>药剂类型:</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n            <div id="photoANDsubmit"> \n                <button id="paizhao" ion-button (click)="takePhoto()">拍照</button>\n                <button id="tijiao" ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            </div>\n            <div id="mapANDquery"> \n                <button id="ditu" ion-button (click)="NavToMap()">地图查看</button>\n                <button id="chaxun" ion-button (click)="NavToQuery()">查询</button>\n                <!-- <button id="chaxun" ion-button (click)="test()">测试产生1000条数据</button> -->\n            </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
+            selector: 'app-trap',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            诱捕器管理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content >\n                <h2 id=trapezoid >设　备　管　理</h2>\n                <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one" >\n                    <ion-label>设备ID：</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>             \n                </ion-item>\n                <button id="saomiao" ion-button shape="round" fill="outline" (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two" >\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button shape="round" fill="outline" (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="songmo">\n                <ion-label>松墨天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>\n            </ion-item>\n            <ion-item id="qita">\n                <ion-label>其他天牛:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>\n            </ion-item>\n            <ion-item id="type">\n                <ion-label>类型:</ion-label>\n                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="injectType">\n                <ion-label>药剂类型:</ion-label>\n                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n            <div id="photoANDsubmit"> \n                <button id="paizhao" ion-button (click)="takePhoto()">拍照</button>\n                <button id="tijiao" ion-button ([disabled])="isDisabled" (click)="submit()">提交</button>\n            </div>\n            <div id="mapANDquery"> \n                <button id="ditu" ion-button (click)="NavToMap()">地图查看</button>\n                <button id="chaxun" ion-button (click)="NavToQuery()">查询</button>\n                <button id="chaxun" ion-button (click)="test2()">清除缓存</button>\n                <!-- <button id="chaxun" ion-button (click)="test()">测试产生1000条数据</button> -->\n            </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrap/newTrap.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
@@ -1777,6 +1876,7 @@ var TrapPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_11__ionic_native_file__["a" /* File */]])
     ], TrapPage);
     return TrapPage;
@@ -4617,7 +4717,6 @@ var TrackPage = /** @class */ (function () {
             this.base.showAlert("请先输入线路名称并点击开始录制!", "请先输入线路名称并点击开始录制", function () { });
         }
         else {
-            this.photosum += 1;
             this.hasPic = true;
             var options = {
                 quality: 10,
@@ -4634,6 +4733,7 @@ var TrackPage = /** @class */ (function () {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
                 _this.imageData = imageData;
+                _this.photosum += 1;
                 if (_this.photosum == 5) {
                     _this.fivePhotos = true;
                     _this.canSubmit = false;

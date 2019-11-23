@@ -453,7 +453,6 @@ export class TrackPage {
         if(this.startRecordIsClick == false){
             this.base.showAlert("请先输入线路名称并点击开始录制!","请先输入线路名称并点击开始录制",()=>{});
         }else{
-            this.photosum += 1;
             this.hasPic = true;
 
             const options: CameraOptions = {
@@ -473,6 +472,7 @@ export class TrackPage {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
                 this.imageData = imageData;
+                this.photosum += 1;
                 if(this.photosum == 5){
                     this.fivePhotos = true;
                     this.canSubmit = false;
