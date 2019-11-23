@@ -172,17 +172,23 @@ export class DeadtreePage {
         }
     }
 
-    awaitF(tmpStorage) {
+    async awaitF(tmpStorage) {
+        console.log(tmpStorage);
         const loader = this.loadingCtrl.create({
             content: "缓存数据正在提交，请勿退出",
         });
         loader.present();
         var that = this;
         for ( var i = 0; i < tmpStorage.length; i++) {
+            await (async (i)=>{
+                console.log("外层的i" + i);
+                
                 var element = tmpStorage[i];
                 if (element.hasPic == true) {
                             for (var j = 1; j <= element.photoSum; j = j + 1) {
-                                ((i,j)=>{
+                                 await (async (i,j)=>{
+                                    console.log("asynci" + i);
+                                    // (async (j)=>{
                                     let options: FileUploadOptions = {};
                                     options.fileKey = "image";
                                     var time = Date.parse(Date());
@@ -219,7 +225,7 @@ export class DeadtreePage {
                                         that.currentImg = that.photolib3;
                                     }
                                     console.log(uploadAddress);
-                                    let observer = new Promise((resolve, reject) => {
+                                    let observer = await new Promise((resolve, reject) => {
                                         fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                                             .then((res) => {
                                                 console.log("文件传输中,当前i:=>" + i);
@@ -236,22 +242,23 @@ export class DeadtreePage {
                                                 }
                                                 console.log("传输中isComp" + this.isComplete);
                                                 resolve('ok');
-                                            }, (error) => {//发送失败(网络出错等)
-                                                that.picNotExist = true;
-                                                reject('error');
-                                                // this.base.showAlert('提示', '提交失败', () => { });
                                             }).catch((error) => {
+                                                console.log(error);
                                                 that.picNotExist = true;
                                                 reject('error');
                                             })
+                                    }).catch((reason)=>{
+                                        console.log(reason);
                                     })
-
+                                    console.log("await" + j);
                                     that.observers.push(observer);
                                         // console.log(that.observers);
                                 })(i,j)
+                                    // })(j)
                             }
                     if (that.picNotExist) {
-                        let obs = new Promise((resolve,reject)=>{
+                        //这个接口还要再改造下，判断是否全部传完了
+                        let obs = await new Promise((resolve,reject)=>{
                             that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
                                 {
                                     headers: { token: localStorage['token'] }, params: {
@@ -269,12 +276,15 @@ export class DeadtreePage {
                                     reject('error');
                                     // this.base.showAlert('提示', '提交失败', () => { });
                                 });
+                        }).catch((reason)=>{
+                            console.log(reason);
                         })
 
                         that.observers.push(obs);
                     }
                 } else {
-                    let obsernoPic = new Promise((resolve,reject)=>{
+                    //这个接口还要再改造下，判断是否全部传完了
+                    let obsernoPic = await new Promise((resolve,reject)=>{
                         that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
                             {
                                 headers: { token: localStorage['token'] }, params: {
@@ -288,23 +298,29 @@ export class DeadtreePage {
                             }, (msg) => {
                                 reject('error');
                             });
+                    }).catch((reason)=>{
+                        console.log(reason);
                     })
                     that.observers.push(obsernoPic);
                 }
-
+            })(i)
             // })(i)
         }
-        Promise.all(that.observers).then((resolve)=>{
-            console.log(resolve);
-            loader.dismiss();
-            localStorage.removeItem('deadCache');
-        },(reject)=>{
-            console.log(reject);
-            loader.dismiss();
-        })
 
-
-
+            
+            Promise.all(that.observers).then((resolve) => {
+                console.log(resolve);
+                loader.dismiss();
+                if (this.isComplete) {
+                    console.log("*****清除缓存了******");
+                    localStorage.removeItem('deadCache');
+                }
+            }, (reject) => {
+                console.log(reject);
+                loader.dismiss();
+            }).catch((reason) => {
+                console.log(reason);
+            })
 
     }
 
