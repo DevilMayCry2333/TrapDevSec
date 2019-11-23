@@ -4261,6 +4261,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -4327,365 +4362,233 @@ var TrackPage = /** @class */ (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__about_about__["a" /* AboutPage */]);
     };
     //照片异步问题
-    TrackPage.prototype.awaitF = function (tmpStorage) {
-        var _this = this;
-        var loader = this.loadingCtrl.create({
-            content: "缓存数据正在提交，请勿退出",
-        });
-        loader.present();
-        var that = this;
-        for (var i = 0; i < tmpStorage.length; i++) {
-            var element = tmpStorage[i];
-            if (element.hasPic == true) {
-                for (var j = 1; j <= element.photoSum; j = j + 1) {
-                    (function (i, j) {
-                        var options = {};
-                        options.fileKey = "image";
-                        var time = Date.parse(Date());
-                        options.fileName = time + ".jpg";
-                        options.mimeType = "image/jpeg";
-                        options.chunkedMode = false;
-                        options.httpMethod = "POST";
-                        options.params = {
-                            longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
-                            accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
-                            remarks: element.remarks, current: j, recordTime: JSON.parse(element.recordTime),
-                            allLength: tmpStorage.length, curRow: i
-                        };
-                        options.headers = { token: localStorage['token'] };
-                        // console.log("options");
-                        // console.log(options);
-                        var fileTransfer = that.fileTransfer.create();
-                        // console.log("===当前照片====");
-                        // console.log(that.currentImg);
-                        // console.log(i);
-                        // console.log(that.currentImg[that.i].img);
-                        // console.log(that.currentImg[i].img);
-                        var uploadAddress;
-                        if (j == 1) {
-                            uploadAddress = element.pic1;
-                            that.currentImg = that.photolib1;
-                        }
-                        else if (j == 2) {
-                            uploadAddress = element.pic2;
-                            that.currentImg = that.photolib2;
-                        }
-                        else if (j == 3) {
-                            uploadAddress = element.pic3;
-                            that.currentImg = that.photolib3;
-                        }
-                        else if (j == 4) {
-                            uploadAddress = element.pic4;
-                            that.currentImg = that.photolib3;
-                        }
-                        else if (j == 5) {
-                            uploadAddress = element.pic5;
-                            that.currentImg = that.photolib3;
-                        }
-                        console.log(uploadAddress);
-                        var observer = new Promise(function (resolve, reject) {
-                            fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddPhoto2', options)
-                                .then(function (res) {
-                                console.log("文件传输中,当前i:=>" + i);
-                                console.log(_this.currentNum);
-                                console.log(tmpStorage.length);
-                                // that.picture.push(res.response["imgId"]);
-                                console.log(res);
-                                console.log(JSON.parse(res.response));
-                                console.log(JSON.parse(res.response).isComp);
-                                if (JSON.parse(res.response).isComp == true) {
-                                    _this.isComplete = true;
-                                }
-                                else {
-                                    _this.isComplete = false;
-                                }
-                                console.log("传输中isComp" + _this.isComplete);
-                                resolve('ok');
-                            }, function (error) {
-                                that.picNotExist = true;
-                                reject('error');
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                            }).catch(function (error) {
-                                that.picNotExist = true;
-                                reject('error');
-                            });
-                        });
-                        that.observers.push(observer);
-                        // console.log(that.observers);
-                    })(i, j);
-                }
-                if (that.picNotExist) {
-                    var obs = new Promise(function (resolve, reject) {
-                        that.httpClient.post(that.base.BASE_URL + 'app/AddTrack', {}, {
-                            headers: { token: localStorage['token'] }, params: {
-                                longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
-                                accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
-                                remarks: element.remarks, current: j.toString(), recordTime: JSON.parse(element.recordTime),
-                            }
-                        })
-                            .subscribe(function (res) {
-                            resolve('ok');
-                            // that.base.showAlert("全部成功了", "", () => { });
-                            // console.log(JSON.stringify(res));
-                            // console.log(JSON.parse(JSON.stringify(res)).message);
-                        }, function (msg) {
-                            reject('error');
-                            // this.base.showAlert('提示', '提交失败', () => { });
-                        });
-                    });
-                    that.observers.push(obs);
-                }
-            }
-            else {
-                var obsernoPic = new Promise(function (resolve, reject) {
-                    that.httpClient.post(that.base.BASE_URL + 'app/AddTrack', {}, {
-                        headers: { token: localStorage['token'] }, params: {
-                            longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
-                            accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl,
-                            remarks: element.remarks, current: j.toString(), recordTime: JSON.parse(element.recordTime),
-                        }
-                    })
-                        .subscribe(function (res) {
-                        resolve('ok');
-                    }, function (msg) {
-                        reject('error');
-                    });
-                });
-                that.observers.push(obsernoPic);
-            }
-            // })(i)
-        }
-        Promise.all(that.observers).then(function (resolve) {
-            console.log(resolve);
-            loader.dismiss();
-            localStorage.removeItem('deadCache');
-        }, function (reject) {
-            console.log(reject);
-            loader.dismiss();
-        });
-    };
     TrackPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.fivePhotos = false;
-        this.canSubmit = true;
-        console.log(localStorage["TrackCache"]);
-        console.log(localStorage["TrackCache1"]);
-        console.log(localStorage["TrackCache2"]);
-        console.log(localStorage["TrackCache3"]);
-        console.log(localStorage["TrackCache4"]);
-        console.log(localStorage["TrackCache5"]);
-        if (localStorage["TrackCache"]) {
-            var loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-                duration: 15000
-            });
-            loader.present();
-            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
-            if (localStorage["TrackCache1"]) {
-                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
-            }
-            if (localStorage["TrackCache2"]) {
-                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
-            }
-            if (localStorage["TrackCache3"]) {
-                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
-            }
-            if (localStorage["TrackCache4"]) {
-                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
-            }
-            if (localStorage["TrackCache5"]) {
-                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
-            }
-            var j = 0;
-            tmpStorage.forEach(function (element) {
-                _this.httpClient.post(_this.base.BASE_URL + 'app/addLineName', {}, {
-                    headers: { token: localStorage['token'] }, params: {
-                        linename: element.lineName,
-                    }
-                }).subscribe(function (res) {
-                    console.log(res);
-                });
-                console.log(element);
-                if (element.hasPic == true) {
-                    for (var i = 1; i <= element.photoSum; i++) {
-                        console.log("====当前第几条数据====");
-                        console.log(j);
-                        console.log("=====当前第几张照片====");
-                        console.log(i);
-                        var options = {};
-                        options.fileKey = "image";
-                        var time = Date.parse(Date());
-                        options.fileName = time + ".jpg";
-                        options.mimeType = "image/jpeg";
-                        options.chunkedMode = false;
-                        options.httpMethod = "POST";
-                        options.params = {
-                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                            accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                            current: i, recordTime: JSON.parse(element.recordTime)
-                        };
-                        options.headers = { token: localStorage['token'] };
-                        console.log("options");
-                        console.log(options);
-                        if (i == 1) {
-                            //创建文件对象
-                            var fileTransfer = _this.fileTransfer.create();
-                            fileTransfer.upload(_this.photoplib1[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
-                                .then(function (res) {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, function (error) {
-                                _this.picNotExsit1 = true;
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                            })
-                                .catch(function (error) {
-                                _this.picNotExsit1 = true;
-                            });
-                        }
-                        else if (i == 2) {
-                            var fileTransfer = _this.fileTransfer.create();
-                            fileTransfer.upload(_this.photoplib2[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
-                                .then(function (res) {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, function (error) {
-                                _this.picNotExsit2 = true;
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                            })
-                                .catch(function (error) {
-                                _this.picNotExsit2 = true;
-                            });
-                        }
-                        else if (i == 3) {
-                            var fileTransfer = _this.fileTransfer.create();
-                            fileTransfer.upload(_this.photoplib3[j].img, _this.base.BASE_URL + 'app/AddPhoto', options)
-                                .then(function (res) {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, function (error) {
-                                _this.picNotExsit3 = true;
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                            })
-                                .catch(function (error) {
-                                _this.picNotExsit3 = true;
-                            });
-                        }
-                        else if (i == 4) {
-                            var fileTransfer = _this.fileTransfer.create();
-                            fileTransfer.upload(_this.photoplib4[j].img, _this.base.BASE_URL + 'app/AddPhoto2', options)
-                                .then(function (res) {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, function (error) {
-                                _this.picNotExsit4 = true;
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                            })
-                                .catch(function (error) {
-                                _this.picNotExsit4 = true;
-                            });
-                        }
-                        else if (i == 5) {
-                            var fileTransfer = _this.fileTransfer.create();
-                            fileTransfer.upload(_this.photoplib5[j].img, _this.base.BASE_URL + 'app/AddPhoto2', options)
-                                .then(function (res) {
-                                console.log(res);
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                // Base.popTo(this.navCtrl, 'switchProjectPage');
-                            }, function (error) {
-                                _this.picNotExsit5 = true;
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                            })
-                                .catch(function (error) {
-                                _this.picNotExsit5 = true;
-                            });
-                        }
-                        if (_this.picNotExsit1 || _this.picNotExsit2 || _this.picNotExsit3 || _this.picNotExsit4 || _this.picNotExsit5) {
-                            _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
-                                headers: { token: localStorage['token'] }, params: {
-                                    longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                    accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                    current: "1", recordTime: JSON.stringify(element.recordTime)
-                                }
-                            })
-                                .subscribe(function (res) {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                                localStorage.removeItem('TrackCache');
-                            }, function (msg) {
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                            });
-                        }
-                    }
-                    setTimeout(function () {
-                        console.log(JSON.stringify(element.recordTime));
-                        console.log(element.recordTime.toString());
-                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
-                            headers: { token: localStorage['token'] }, params: {
-                                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                current: "5", recordTime: element.recordTime.toString()
-                            }
-                        })
-                            .subscribe(function (res) {
-                            j++;
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
-                            // this.base.showAlert('提示', '缓存提交成功', () => { });
-                            if (j >= tmpStorage.length)
-                                localStorage.removeItem('TrackCache');
-                        }, function (msg) {
-                            // this.base.showAlert('提示', '提交失败', () => { });
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var that, loader_1, tmpStorage, j;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        that = this;
+                        this.fivePhotos = false;
+                        this.canSubmit = true;
+                        console.log(localStorage["TrackCache"]);
+                        console.log(localStorage["TrackCache1"]);
+                        console.log(localStorage["TrackCache2"]);
+                        console.log(localStorage["TrackCache3"]);
+                        console.log(localStorage["TrackCache4"]);
+                        console.log(localStorage["TrackCache5"]);
+                        if (!localStorage["TrackCache"]) return [3 /*break*/, 5];
+                        loader_1 = this.loadingCtrl.create({
+                            content: "缓存数据正在提交，请勿退出",
                         });
-                    }, 10000);
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                }
-                else {
-                    console.log(element);
-                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack', {}, {
-                        headers: { token: localStorage['token'] }, params: {
-                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                            accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                            current: "1", recordTime: JSON.stringify(element.recordTime)
-                        }
-                    })
-                        .subscribe(function (res) {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.showAlert('提示', '提交成功', () => { });
+                        loader_1.present();
+                        tmpStorage = JSON.parse(localStorage["TrackCache"]);
+                        j = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(j < tmpStorage.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, (function (j) { return __awaiter(_this, void 0, void 0, function () {
+                                var _this = this;
+                                var element, i, obs;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            element = tmpStorage[j];
+                                            console.log(element);
+                                            if (!(element.hasPic == true)) return [3 /*break*/, 5];
+                                            i = 1;
+                                            _a.label = 1;
+                                        case 1:
+                                            if (!(i <= element.photoSum)) return [3 /*break*/, 4];
+                                            return [4 /*yield*/, (function (i, j) { return __awaiter(_this, void 0, void 0, function () {
+                                                    var _this = this;
+                                                    var options, time, uploadAddress, fileTransfer, observer, obs;
+                                                    return __generator(this, function (_a) {
+                                                        switch (_a.label) {
+                                                            case 0:
+                                                                if (localStorage["TrackCache1"]) {
+                                                                    this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
+                                                                }
+                                                                if (localStorage["TrackCache2"]) {
+                                                                    this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
+                                                                }
+                                                                if (localStorage["TrackCache3"]) {
+                                                                    this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
+                                                                }
+                                                                if (localStorage["TrackCache4"]) {
+                                                                    this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
+                                                                }
+                                                                if (localStorage["TrackCache5"]) {
+                                                                    this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
+                                                                }
+                                                                console.log("====当前第几条数据====");
+                                                                console.log(j);
+                                                                console.log("=====当前第几张照片====");
+                                                                console.log(i);
+                                                                options = {};
+                                                                options.fileKey = "image";
+                                                                time = Date.parse(Date());
+                                                                options.fileName = time + ".jpg";
+                                                                options.mimeType = "image/jpeg";
+                                                                options.chunkedMode = false;
+                                                                options.httpMethod = "POST";
+                                                                options.params = {
+                                                                    longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                                                    accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                                                    current: i, recordTime: element.recordTime,
+                                                                    allLength: tmpStorage.length, curRow: j
+                                                                };
+                                                                options.headers = { token: localStorage['token'] };
+                                                                console.log("options");
+                                                                console.log(options);
+                                                                if (i == 1) {
+                                                                    uploadAddress = element.pic1;
+                                                                }
+                                                                else if (i == 2) {
+                                                                    uploadAddress = element.pic2;
+                                                                }
+                                                                else if (i == 3) {
+                                                                    uploadAddress = element.pic3;
+                                                                }
+                                                                else if (i == 4) {
+                                                                    uploadAddress = element.pic4;
+                                                                }
+                                                                else if (i == 5) {
+                                                                    uploadAddress = element.pic5;
+                                                                }
+                                                                console.log(uploadAddress);
+                                                                fileTransfer = this.fileTransfer.create();
+                                                                return [4 /*yield*/, new Promise(function (resovle, reject) {
+                                                                        fileTransfer.upload(uploadAddress, _this.base.BASE_URL + 'app/AddPhoto2', options)
+                                                                            .then(function (res) {
+                                                                            console.log(res);
+                                                                            if (JSON.parse(res.response).isComp == true) {
+                                                                                _this.isComplete = true;
+                                                                            }
+                                                                            else {
+                                                                                _this.isComplete = false;
+                                                                            }
+                                                                            console.log("传输中isComp" + _this.isComplete);
+                                                                            resovle('ok');
+                                                                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                                                            // this.base.showAlert('提示', '提交成功', () => { });
+                                                                            // Base.popTo(this.navCtrl, 'switchProjectPage');
+                                                                        }, function (error) {
+                                                                            _this.picNotExsit1 = true;
+                                                                            console.log(error);
+                                                                            reject('error');
+                                                                            // this.base.showAlert('提示', '提交失败', () => { });
+                                                                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                                                                        })
+                                                                            .catch(function (error) {
+                                                                            _this.picNotExsit1 = true;
+                                                                            console.log(error);
+                                                                            reject('error');
+                                                                        });
+                                                                    }).catch(function (err) {
+                                                                        console.log(err);
+                                                                    })];
+                                                            case 1:
+                                                                observer = _a.sent();
+                                                                this.observers.push(observer);
+                                                                if (!this.picNotExsit1) return [3 /*break*/, 3];
+                                                                return [4 /*yield*/, new Promise(function (resovle, reject) {
+                                                                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack2', {}, {
+                                                                            headers: { token: localStorage['token'] }, params: {
+                                                                                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                                                                accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                                                                current: "1", recordTime: element.recordTime
+                                                                            }
+                                                                        })
+                                                                            .subscribe(function (res) {
+                                                                            console.log(JSON.stringify(res));
+                                                                            console.log(JSON.parse(JSON.stringify(res)).message);
+                                                                            resovle('ok');
+                                                                        }, function (msg) {
+                                                                            console.log(msg);
+                                                                            reject('error');
+                                                                        });
+                                                                    }).catch(function (err) {
+                                                                        console.log(err);
+                                                                    })];
+                                                            case 2:
+                                                                obs = _a.sent();
+                                                                this.observers.push(obs);
+                                                                _a.label = 3;
+                                                            case 3: return [2 /*return*/];
+                                                        }
+                                                    });
+                                                }); })(i, j)];
+                                        case 2:
+                                            _a.sent();
+                                            _a.label = 3;
+                                        case 3:
+                                            i++;
+                                            return [3 /*break*/, 1];
+                                        case 4: return [3 /*break*/, 7];
+                                        case 5:
+                                            console.log(element);
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    _this.httpClient.post(_this.base.BASE_URL + 'app/AddTrack2', {}, {
+                                                        headers: { token: localStorage['token'] }, params: {
+                                                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                                            accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                                            current: "1", recordTime: element.recordTime
+                                                        }
+                                                    })
+                                                        .subscribe(function (res) {
+                                                        console.log(JSON.stringify(res));
+                                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                                        resolve('ok');
+                                                        // this.base.showAlert('提示', '提交成功', () => { });
+                                                    }, function (msg) {
+                                                        console.log(msg);
+                                                        reject('error');
+                                                        // this.base.showAlert('提示', '提交失败', () => { });
+                                                    });
+                                                }).catch(function (err) {
+                                                    console.log(err);
+                                                })];
+                                        case 6:
+                                            obs = _a.sent();
+                                            this.observers.push(obs);
+                                            _a.label = 7;
+                                        case 7: return [2 /*return*/];
+                                    }
+                                });
+                            }); })(j)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
                         j++;
-                        if (j >= tmpStorage.length)
-                            localStorage.removeItem('TrackCache');
-                    }, function (msg) {
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    });
+                        return [3 /*break*/, 1];
+                    case 4:
+                        Promise.all(this.observers).then(function (resolve) {
+                            console.log(resolve);
+                            loader_1.dismiss();
+                            if (_this.isComplete) {
+                                console.log("*****清除缓存了******");
+                                localStorage.removeItem('TrackCache');
+                                localStorage.removeItem('TrackCache1');
+                                localStorage.removeItem('TrackCache2');
+                                localStorage.removeItem('TrackCache3');
+                                localStorage.removeItem('TrackCache4');
+                                localStorage.removeItem('TrackCache5');
+                            }
+                        }, function (reject) {
+                            console.log(reject);
+                            loader_1.dismiss();
+                        }).catch(function (reason) {
+                            console.log(reason);
+                            loader_1.dismiss();
+                        });
+                        _a.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
-        }
+        });
     };
     TrackPage.prototype.deviceBind = function () {
         //这里还没有实现，先弹框
