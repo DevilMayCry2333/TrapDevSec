@@ -20,29 +20,35 @@ import { LoadingController } from 'ionic-angular';
 })
 export class TrackPage {
     longtitude: string;
-    longtitudeData:Array<string>;
-    latitudeData:Array<string>;
-    altitudeData:Array<string>;
+    longtitudeData: Array<string>;
+    latitudeData: Array<string>;
+    altitudeData: Array<string>;
     accuracyData: Array<string>;
     latitude: string;
-    location_ready:boolean;
+    location_ready: boolean;
     recordTime: any = {};
-    observers=[];
-    photosum:number;
-    photolib1:any;
-    photolib2:any;
-    photolib3:any;
-    currentImg:any;
+    observers = [];
+    photosum: number;
+    photolib1: any;
+    photolib2: any;
+    photolib3: any;
+    currentImg: any;
     currentNum = 0;
     isComplete = false;
-    imageData:any;
+    imageData: any;
     startRecordIsClick = false;
     endRecordIsClick = false;
-    photoplib1:any;
-    photoplib2:any;
+    photoplib1: any;
+    photoplib2: any;
     photoplib3: any;
     photoplib4: any;
     photoplib5: any;
+
+    cachePhoto1: any;
+    cachePhoto2: any;
+    cachePhoto3: any;
+    cachePhoto4: any;
+    cachePhoto5: any;
 
     picNotExsit1 = false;
     picNotExsit2 = false;
@@ -52,7 +58,7 @@ export class TrackPage {
 
     hasPic = false;
 
-    current:number;
+    current: number;
 
     isStopRecord = false;
 
@@ -60,16 +66,16 @@ export class TrackPage {
 
     lineNameDis = false;
 
-    ImageToBase:any[];
+    ImageToBase: any[];
     picNotExist = false;
-    have_submit:boolean;
+    have_submit: boolean;
     altitude: string;
     accuracy: string;
-    myIntravl:any;
-    subscription:Subscription;
-    lineName:string;
-    workContent:string;
-    lateIntravl:string;
+    myIntravl: any;
+    subscription: Subscription;
+    lineName: string;
+    workContent: string;
+    lateIntravl: string;
     remarks = "";
     fivePhotos = false;
     canSubmit = true;
@@ -102,15 +108,16 @@ export class TrackPage {
         private fileTransfer: FileTransfer,
         private base64: Base64,
         public loadingCtrl: LoadingController
-        ) {
-            this.photosum = 0;
-        }
+    ) {
+        this.photosum = 0;
+    }
 
     NavToMap() {
         this.navCtrl.push(AboutPage);
     }
 
-//照片异步问题
+    //照片异步问题
+
     async ionViewDidLoad() {
         // localStorage.removeItem('TrackCache');
         // localStorage.removeItem('TrackCache1');
@@ -315,7 +322,6 @@ export class TrackPage {
             })
         }
     }
-    
     deviceBind() {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
@@ -324,15 +330,15 @@ export class TrackPage {
         console.log('track');
     }
     submit() {
-        if(this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false){
-            this.base.showAlert("你还没有完成一个录制循环!","你还没有完成一个录制循环",()=>{});
-        }else{
+        if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
+            this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", () => { });
+        } else {
             this.have_submit = true;
-            this.base.showAlert(this.flag,this.flag,()=>{});
+            this.base.showAlert(this.flag, this.flag, () => { });
 
             console.log("======PATH======");
             console.log(this.imageData);
-            var myImage:string = this.imageData;
+            var myImage: string = this.imageData;
 
 
             // if (!this.lineName){
@@ -349,103 +355,105 @@ export class TrackPage {
                 this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
             } else {
 
-                    // var options: string = "deviceId: " + this.id +
-                    //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                    //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                    //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                // var options: string = "deviceId: " + this.id +
+                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
 
-                    // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
                 var options: FileUploadOptions = {};
                 options.params = {
                     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                    accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                    current: "1", recordTime: JSON.stringify(this.recordTime),myDate:new Date()
+                    accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                    current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
                     this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
                     return;
                 }
-                    this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
-                        {
-                            headers: { token: localStorage['token'] }, params: {
+                this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
+                    {
+                        headers: { token: localStorage['token'] }, params: {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                            current: "1", recordTime: JSON.stringify(this.recordTime)
+                        }
+                    })
+                    .subscribe(res => {
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        this.base.showAlert('提示', '提交成功', () => { });
+                        if (this.hasPic == true) {
+                            let cacheData = {
                                 longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                current: "1", recordTime: JSON.stringify(this.recordTime)
-                            }
-                        })
-                        .subscribe(res => {
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
-                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                            this.base.showAlert('提示', '提交成功', () => { });
-                            if(this.hasPic==true){
-                                let cacheData = {
-                                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                    accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                    current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum:this.photosum
-                                };
-                            }else{
-                                let cacheData = {
-                                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                    lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                    current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: false, photoSum:0
-                                };  
-                            }
+                                accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum: this.photosum
+                            };
+                        } else {
+                            let cacheData = {
+                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                                lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: false, photoSum: 0
+                            };
+                        }
 
-                            console.log("cacheData");
+                        console.log("cacheData");
 
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
+                    }, (msg) => {
+
+                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                        this.base.showAlert('提示', '提交失败', () => { });
+                        if (this.hasPic == true) {
+                            let cacheData = {
+                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                                accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum: this.photosum, pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3,
+                                pic4: this.cachePhoto4, pic5: this.cachePhoto5
+                            };
+                            let TrackCache: any;
+                            TrackCache = localStorage.getItem('TrackCache');
+                            if (TrackCache == null) {
+                                TrackCache = [];
+                            } else {
+                                TrackCache = JSON.parse(TrackCache);
+                            }
+                            TrackCache.push(cacheData);
+                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            console.log("Hello");
                             Base.popTo(this.navCtrl, 'switchProjectPage');
-                        }, (msg) => {
-
-                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                            this.base.showAlert('提示', '提交失败', () => { });
-                                if (this.hasPic == true) {
-                                    let cacheData = {
-                                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                        accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                        current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: true, photoSum:this.photosum
-                                    };
-                                    let TrackCache: any;
-                                    TrackCache = localStorage.getItem('TrackCache');
-                                    if (TrackCache == null) {
-                                        TrackCache = [];
-                                    } else {
-                                        TrackCache = JSON.parse(TrackCache);
-                                    }
-                                    TrackCache.push(cacheData);
-                                    localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                                    console.log("Hello");
-                                    Base.popTo(this.navCtrl, 'switchProjectPage');
-                                } else {
-                                    let cacheData = {
-                                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                        accuracyData: this.accuracyData.toString(),lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                        current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: false, photoSum: 0
-                                    };
-                                    let TrackCache: any;
-                                    TrackCache = localStorage.getItem('TrackCache');
-                                    if (TrackCache == null) {
-                                        TrackCache = [];
-                                    } else {
-                                        TrackCache = JSON.parse(TrackCache);
-                                    }
-                                    TrackCache.push(cacheData);
-                                    localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                                    console.log("Hello");
-                                    Base.popTo(this.navCtrl, 'switchProjectPage');
-                                }
-                        });
+                        } else {
+                            let cacheData = {
+                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                                accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                current: "1", recordTime: JSON.stringify(this.recordTime), hasPic: false, photoSum: 0
+                            };
+                            let TrackCache: any;
+                            TrackCache = localStorage.getItem('TrackCache');
+                            if (TrackCache == null) {
+                                TrackCache = [];
+                            } else {
+                                TrackCache = JSON.parse(TrackCache);
+                            }
+                            TrackCache.push(cacheData);
+                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            console.log("Hello");
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        }
+                    });
             }
         }
     }
 
     takePhoto() {
-        if(this.startRecordIsClick == false){
-            this.base.showAlert("请先输入线路名称并点击开始录制!","请先输入线路名称并点击开始录制",()=>{});
-        }else{
+        if (this.startRecordIsClick == false) {
+            this.base.showAlert("请先输入线路名称并点击开始录制!", "请先输入线路名称并点击开始录制", () => { });
+        } else {
+            this.photosum += 1;
             this.hasPic = true;
 
             const options: CameraOptions = {
@@ -465,8 +473,7 @@ export class TrackPage {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
                 this.imageData = imageData;
-                this.photosum += 1;
-                if(this.photosum == 5){
+                if (this.photosum == 5) {
                     this.fivePhotos = true;
                     this.canSubmit = false;
                 }
@@ -500,56 +507,67 @@ export class TrackPage {
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto2', options)
-                                .then((res) => {
-                                    console.log(res);
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
-                                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
+                    .then((res) => {
+                        console.log(res);
+                        console.log(JSON.stringify(res));
+                        console.log(JSON.parse(JSON.stringify(res)).message);
+                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                                    this.base.showAlert('提示', '提交成功', () => { });
-                                    // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                }, (error) => {//发送失败(网络出错等)
-                                    this.base.showAlert('提示', '提交失败', () => { });
-                                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                        this.base.showAlert('提示', '提交成功', () => { });
+                        // Base.popTo(this.navCtrl, 'switchProjectPage');
+                    }, (error) => {//发送失败(网络出错等)
+                        this.base.showAlert('提示', '提交失败', () => { });
+                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                        if (this.photosum == 1) {
+                            this.cachePhoto1 = this.imageData;
+                        } else if (this.photosum == 2) {
+                            this.cachePhoto2 = this.imageData;
+                        } else if (this.photosum == 3) {
+                            this.cachePhoto3 = this.imageData;
+                        } else if (this.photosum == 4) {
+                            this.cachePhoto4 = this.imageData;
+                        } else if (this.photosum == 5) {
+                            this.cachePhoto5 = this.imageData;
+                        }
 
-                                    let cacheData = {
-                                        lineName: this.lineName,
-                                        current: this.current,
-                                        img: this.imageData,
-                                    };
-                                    let TrackCache: any;
+                        let cacheData = {
+                            lineName: this.lineName,
+                            current: this.current,
+                            img: this.imageData,
+                        };
+                        let TrackCache: any;
 
-                                        TrackCache = localStorage.getItem('TrackCache' + this.current);
-                                    if (TrackCache == null) {
-                                        TrackCache = [];
-                                    } else {
-                                        TrackCache = JSON.parse(TrackCache);
-                                    }
-                                    TrackCache.push(cacheData);
-                                    //localStorage安全保存数据
-                                    // try{
-                                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                                    // }catch(oException){
-                                    //     if(oException.name == 'QuotaExceededError'){
-                                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                    //         //console.log('已经超出本地存储限定大小！');
-                                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                                    //       // localStorage.clear();
-                                    //       // localStorage.setItem(key,value);
-                                    //     }
-                                    // } 
-                                    localStorage.setItem('TrackCache' + this.photosum.toString(), JSON.stringify(TrackCache));
-                                    //this.navCtrl.pop();
-                                    // confirm.dismiss()
-                                        // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                })
-                        .catch((error) => {//发送失败(文件不存在等)
-                            
-                        });
+                        TrackCache = localStorage.getItem('TrackCache' + this.current);
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        } else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);
+                        //localStorage安全保存数据
+                        // try{
+                        //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        // }catch(oException){
+                        //     if(oException.name == 'QuotaExceededError'){
+                        //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                        //         //console.log('已经超出本地存储限定大小！');
+                        //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                        //       // localStorage.clear();
+                        //       // localStorage.setItem(key,value);
+                        //     }
+                        // } 
+                        localStorage.setItem('TrackCache' + this.photosum.toString(), JSON.stringify(TrackCache));
+                        //this.navCtrl.pop();
+                        // confirm.dismiss()
+                        // Base.popTo(this.navCtrl, 'switchProjectPage');
+                    })
+                    .catch((error) => {//发送失败(文件不存在等)
+
+                    });
 
 
-        
+
 
             }, (err) => {
                 // Handle error
@@ -561,7 +579,7 @@ export class TrackPage {
 
 
     }
-    LateInput(){
+    LateInput() {
         let num1 = 0;
         if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN) {
             this.base.showAlert('提示', '请输入数字', () => { });
@@ -575,13 +593,18 @@ export class TrackPage {
             this.base.showAlert('提示', '请输入数字', () => { });
         }
     }
-    test(){
-        
+    test() {
+        localStorage.removeItem('TrackCache');
+        localStorage.removeItem('TrackCache1');
+        localStorage.removeItem('TrackCache2');
+        localStorage.removeItem('TrackCache3');
+        localStorage.removeItem('TrackCache4');
+        localStorage.removeItem('TrackCache5');
     }
-    startRecord(){
-        if (!this.lateIntravl){
-            this.base.showAlert("请先输入延时间隔!","请先输入延时间隔!",()=>{});
-        }else{
+    startRecord() {
+        if (!this.lateIntravl) {
+            this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", () => { });
+        } else {
             this.lineNameDis = true;
             this.startRecordIsClick = true;
             this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
@@ -589,7 +612,7 @@ export class TrackPage {
                     headers: { token: localStorage['token'] }, params: {
                         linename: this.lineName,
                     }
-                }).subscribe(res=>{
+                }).subscribe(res => {
                     console.log(res);
 
                 })
@@ -609,7 +632,7 @@ export class TrackPage {
             let altitudeData: Array<string> = [];
             let accuracyData: Array<string> = [];
 
-            this.myIntravl = setInterval(()=>{
+            this.myIntravl = setInterval(() => {
                 // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
                 // this.location_ready = true;
                 longtitudeData.push(this.longtitude);
@@ -621,12 +644,12 @@ export class TrackPage {
                 this.altitudeData = altitudeData;
                 this.accuracyData = accuracyData;
                 console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
-            },Number(this.lateIntravl)*1000);
+            }, Number(this.lateIntravl) * 1000);
 
             this.subscription = watch.subscribe((data) => {
                 // data can be a set of coordinates, or an error (if an error occurred).
                 if (data['coords']) {
-                            // this.changeDetectorRef.detectChanges();
+                    // this.changeDetectorRef.detectChanges();
                     // setTimeout(() => {
                     this.latitude = String(data.coords.latitude);
                     sessionStorage['latitude'] = String(data.coords.latitude);
@@ -672,11 +695,11 @@ export class TrackPage {
             });
         }
     }
-    stopRecord(){
-        if(this.startRecordIsClick == false){
-            this.base.showAlert("你还没有开始录制!","你还没有开始录制",()=>{});
-        }else{
-            this.base.showAlert("停止录制成功!","停止录制成功",()=>{});
+    stopRecord() {
+        if (this.startRecordIsClick == false) {
+            this.base.showAlert("你还没有开始录制!", "你还没有开始录制", () => { });
+        } else {
+            this.base.showAlert("停止录制成功!", "停止录制成功", () => { });
             this.isStopRecord = true;
             this.endRecordIsClick = true;
             clearInterval(this.myIntravl);

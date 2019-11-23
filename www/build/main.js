@@ -4672,7 +4672,8 @@ var TrackPage = /** @class */ (function () {
                         var cacheData = {
                             longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
                             accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum
+                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum, pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3,
+                            pic4: _this.cachePhoto4, pic5: _this.cachePhoto5
                         };
                         var TrackCache = void 0;
                         TrackCache = localStorage.getItem('TrackCache');
@@ -4716,6 +4717,7 @@ var TrackPage = /** @class */ (function () {
             this.base.showAlert("请先输入线路名称并点击开始录制!", "请先输入线路名称并点击开始录制", function () { });
         }
         else {
+            this.photosum += 1;
             this.hasPic = true;
             var options = {
                 quality: 10,
@@ -4732,7 +4734,6 @@ var TrackPage = /** @class */ (function () {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
                 _this.imageData = imageData;
-                _this.photosum += 1;
                 if (_this.photosum == 5) {
                     _this.fivePhotos = true;
                     _this.canSubmit = false;
@@ -4758,7 +4759,7 @@ var TrackPage = /** @class */ (function () {
                 console.log(_this.imageData);
                 //创建文件对象
                 var fileTransfer = _this.fileTransfer.create();
-                fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto2', options)
+                fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto', options)
                     .then(function (res) {
                     console.log(res);
                     console.log(JSON.stringify(res));
@@ -4769,6 +4770,21 @@ var TrackPage = /** @class */ (function () {
                 }, function (error) {
                     _this.base.showAlert('提示', '提交失败', function () { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                    if (_this.photosum == 1) {
+                        _this.cachePhoto1 = _this.imageData;
+                    }
+                    else if (_this.photosum == 2) {
+                        _this.cachePhoto2 = _this.imageData;
+                    }
+                    else if (_this.photosum == 3) {
+                        _this.cachePhoto3 = _this.imageData;
+                    }
+                    else if (_this.photosum == 4) {
+                        _this.cachePhoto4 = _this.imageData;
+                    }
+                    else if (_this.photosum == 5) {
+                        _this.cachePhoto5 = _this.imageData;
+                    }
                     var cacheData = {
                         lineName: _this.lineName,
                         current: _this.current,
@@ -4825,6 +4841,12 @@ var TrackPage = /** @class */ (function () {
         }
     };
     TrackPage.prototype.test = function () {
+        localStorage.removeItem('TrackCache');
+        localStorage.removeItem('TrackCache1');
+        localStorage.removeItem('TrackCache2');
+        localStorage.removeItem('TrackCache3');
+        localStorage.removeItem('TrackCache4');
+        localStorage.removeItem('TrackCache5');
     };
     TrackPage.prototype.startRecord = function () {
         var _this = this;
@@ -4925,7 +4947,7 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-track',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置(秒)：</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="fivePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
+            selector: 'app-track',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置(秒)：</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="fivePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n  \n        <button ion-button (click)="test()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
@@ -8469,10 +8491,10 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.200.245:50000/";
+        // BASE_URL = "http://106.15.200.245:50000/"
         // BASE_URL = "http://106.15.90.78:50000/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        // BASE_URL = "http://192.168.31.254:50000/"
+        this.BASE_URL = "http://192.168.31.5:50000/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
