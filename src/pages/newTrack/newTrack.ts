@@ -68,7 +68,7 @@ export class TrackPage {
 
     ImageToBase: any[];
     picNotExist = false;
-    have_submit: boolean;
+    // have_submit: boolean;
     altitude: string;
     accuracy: string;
     myIntravl: any;
@@ -331,7 +331,8 @@ export class TrackPage {
         if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
             this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", () => { });
         } else {
-            this.have_submit = true;
+            // this.have_submit = true;
+            this.canSubmit=true;
             this.base.showAlert(this.flag, this.flag, () => { });
 
             console.log("======PATH======");
