@@ -16,19 +16,26 @@ import { InjectQueryPage} from '../inject-query/inject-query';
     templateUrl: 'newDry.html'
 })
 export class DryPage {
+    // longtitude="1.1234567";
+    // latitude="1.1234567";
+    // altitude="1.1234567";
+    // accuracy="1.1234567";
     deviceId:string
     deviceSerial: string
     longtitude:string
+    accuracy: string
+    latitude: string
+    altitude: string
     woodStatusValue:string
     chestDiameter:string
     injectName:string
     injectNameValue:string
     workContentValue:string
-    latitude: string
+
     subscription: Subscription;
-    altitude: string
+
     imageData:string
-    accuracy: string
+
     woodStatus:any[]
     injectNum:string
     have_submit:boolean
@@ -609,7 +616,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectName:this.injectNameValue,
+                            workingContent: this.workContentValue,chestDiameter:this.chestDiameter,injectNameValue:this.injectNameValue,
                             img: this.imageData
                         };
                         let DryCache: any;
@@ -655,7 +662,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -669,7 +676,7 @@ export class DryPage {
                             let cacheData = {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                             };
                             console.log("cacheData");
                             console.log(cacheData);
@@ -736,7 +743,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -750,7 +757,7 @@ export class DryPage {
                         let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
                         };
                         console.log("cacheData");
                         console.log(cacheData);

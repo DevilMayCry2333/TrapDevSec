@@ -477,6 +477,7 @@ export class TrackPage {
             this.camera.getPicture(options).then((imageData) => {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
+                this.photosum = this.photosum + 1;
                 this.imageData = imageData;
                 if (this.photosum == 5) {
                     this.fivePhotos = true;
