@@ -427,10 +427,13 @@ export class DeadtreePage {
             localStorage["DeadMotherDeviceId"] = this.deviceId;
             this.navCtrl.push(DeadTreesQueryPage);
         } else {
-            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!", () => { });
         }
 
     }
+
+
+
     takePhoto() {
         this.hasPic = true;
 
@@ -475,6 +478,7 @@ export class DeadtreePage {
 
             //创建文件对象
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
+            //此处整合进submit()
             fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
                 .then((res) => {
                     // console.log(res);
@@ -530,6 +534,9 @@ export class DeadtreePage {
         var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
         this.volume = tmp;
     }
+
+
+  
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
@@ -550,7 +557,7 @@ export class DeadtreePage {
                     };
                     let that = this
                     let watch = this.geolocation.watchPosition(options);
-
+   //此处整合进submit()
                     this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
@@ -623,6 +630,7 @@ export class DeadtreePage {
             }
         });
     };
+
     scan() {
         // console.log("scan");
         // console.log(localStorage['username']);
@@ -630,7 +638,8 @@ export class DeadtreePage {
     }
 
     submit() {
-        this.have_submit = true;
+        // this.have_submit = true;
+        this.canSubmit = true;
         let num1 = 0;
         if (this.volume < 0 || this.volume == NaN) {
             this.diameter = 0;
@@ -660,7 +669,8 @@ export class DeadtreePage {
         //     this.killMethodsValue = "0";
         // }
         if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
-            this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+            this.base.showAlert("提示", "数量输入为空或者不合法！", () => { });
+            this.canSubmit = false;
         } else {
                 let options: FileUploadOptions = {};
                 options.params = {
@@ -675,9 +685,11 @@ export class DeadtreePage {
 
                 // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
-                    this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
+                    this.base.showAlert("提示", "数量输入为空或者不合法！", () => { });
+                    this.canSubmit = false;
                     return;
                 }
+
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                     {
                         headers: { token: localStorage['token'] }, params: {

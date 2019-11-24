@@ -328,8 +328,10 @@ export class TrackPage {
         console.log('track');
     }
     submit() {
+        //this.canSubmit = true;
         if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", () => { });
+            this.base.showAlert("提示", "你还没有完成一个录制循环", () => { });
+            this.canSubmit = false;
         } else {
             // this.have_submit = true;
             this.canSubmit = true;
@@ -351,7 +353,8 @@ export class TrackPage {
             // }
 
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
+                this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", () => { });
+                this.canSubmit = false;
             } else {
 
                 // var options: string = "deviceId: " + this.id +
@@ -369,7 +372,8 @@ export class TrackPage {
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                    this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
+                    this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", () => { });
+                    this.canSubmit = false;
                     return;
                 }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
@@ -452,9 +456,9 @@ export class TrackPage {
 
     takePhoto() {
         if (this.startRecordIsClick == false) {
-            this.base.showAlert("请先输入线路名称并点击开始录制!", "请先输入线路名称并点击开始录制", () => { });
+            this.base.showAlert("提示", "请先输入线路名称、工作内容、延时设置，并点击开始录制", () => { });
         } else {
-            this.photosum += 1;
+            //this.photosum += 1;
             this.hasPic = true;
 
             const options: CameraOptions = {
@@ -604,7 +608,7 @@ export class TrackPage {
     }
     startRecord() {
         if (!this.lateIntravl) {
-            this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", () => { });
+            this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => { });
         } else {
             this.lineNameDis = true;
             this.startRecordIsClick = true;
@@ -698,9 +702,9 @@ export class TrackPage {
     }
     stopRecord() {
         if (this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有开始录制!", "你还没有开始录制", () => { });
+            this.base.showAlert("提示", "你还没有开始录制", () => { });
         } else {
-            this.base.showAlert("停止录制成功!", "停止录制成功", () => { });
+            this.base.showAlert("提示", "停止录制成功", () => { });
             this.isStopRecord = true;
             this.endRecordIsClick = true;
             clearInterval(this.myIntravl);
