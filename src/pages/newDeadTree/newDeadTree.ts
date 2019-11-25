@@ -456,66 +456,68 @@ export class DeadtreePage {
                 this.threePhotos = true;
                 this.canSubmit = false;
             }
-            let options: FileUploadOptions = {};
-            options.fileKey = "image";
-            var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
+
+            //注释掉
+            // let options: FileUploadOptions = {};
+            // options.fileKey = "image";
+            // var time = Date.parse(Date());
+            // options.fileName = time + ".jpg";
+            // options.mimeType = "image/jpeg";
+            // options.chunkedMode = false;
+            // options.httpMethod = "POST";
             // options.params = {
             //     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
             //     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
             //     killMethodsValue: this.killMethodsValue, remarks: this.remarks
             // };
-            options.params = {
-                deviceId: this.deviceId, current:this.photosum
-            };
+            // options.params = {
+            //     deviceId: this.deviceId, current:this.photosum
+            // };
 
-            options.headers = { token: localStorage['token'] };
+            // options.headers = { token: localStorage['token'] };
             // console.log("options");
             // console.log(options);
 
-            //创建文件对象
-            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+            //上传文件对象
+            // const fileTransfer: FileTransferObject = this.fileTransfer.create();
             //此处整合进submit()
-            fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
-                .then((res) => {
+            // fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
+            //     .then((res) => {
                     // console.log(res);
                     // console.log(JSON.stringify(res));
                     // console.log(JSON.parse(JSON.stringify(res)).message);
 
                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                    this.base.showAlert('提示', '提交成功', () => { });
-                }, (error) => {//发送失败(网络出错等)
-                    this.base.showAlert('提示', '提交失败', () => { });
+                //     this.base.showAlert('提示', '提交成功', () => { });
+                // }, (error) => {//发送失败(网络出错等)
+                //     this.base.showAlert('提示', '提交失败', () => { });
                     // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                        if (this.photosum == 1) {
-                            this.cachePhoto1 = this.imageData;
-                        } else if (this.photosum == 2) {
-                            this.cachePhoto2 = this.imageData;
-                        } else if (this.photosum == 3) {
-                            this.cachePhoto3 = this.imageData;
-                        }
-                    let cacheData = {
-                        deviceId: this.deviceId,
-                        photoSum:this.photosum,
-                        img: this.imageData
-                    };
+                //         if (this.photosum == 1) {
+                //             this.cachePhoto1 = this.imageData;
+                //         } else if (this.photosum == 2) {
+                //             this.cachePhoto2 = this.imageData;
+                //         } else if (this.photosum == 3) {
+                //             this.cachePhoto3 = this.imageData;
+                //         }
+                //     let cacheData = {
+                //         deviceId: this.deviceId,
+                //         photoSum:this.photosum,
+                //         img: this.imageData
+                //     };
                     
-                    let deadCache: any;
-                        deadCache = localStorage.getItem('deadPhotoCache' + this.photosum);
-                    if (deadCache == null) {
-                        deadCache = [];
-                    } else {
-                        deadCache = JSON.parse(deadCache);
-                    }
-                    deadCache.push(cacheData);
-                        localStorage.setItem('deadPhotoCache' + this.photosum.toString(), JSON.stringify(deadCache));
-                    //this.navCtrl.pop();
-                    // confirm.dismiss()
-                })            
+                //     let deadCache: any;
+                //         deadCache = localStorage.getItem('deadPhotoCache' + this.photosum);
+                //     if (deadCache == null) {
+                //         deadCache = [];
+                //     } else {
+                //         deadCache = JSON.parse(deadCache);
+                //     }
+                //     deadCache.push(cacheData);
+                //         localStorage.setItem('deadPhotoCache' + this.photosum.toString(), JSON.stringify(deadCache));
+                //     this.navCtrl.pop();
+                //     confirm.dismiss()
+                // })            
         }, (err) => {
             // Handle error
             // this.navCtrl.popToRoot()
@@ -557,15 +559,16 @@ export class DeadtreePage {
                     };
                     let that = this
                     let watch = this.geolocation.watchPosition(options);
-   //此处整合进submit()
-                    this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
-                        {
-                            headers: { token: localStorage['token'] }, params: {
-                                deviceId: this.deviceId
-                            }
-                        }).subscribe(res => {
-                            this.batch = res;
-                        })
+
+                    //此处整合进submit()
+                    // this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
+                    //     {
+                    //         headers: { token: localStorage['token'] }, params: {
+                    //             deviceId: this.deviceId
+                    //         }
+                    //     }).subscribe(res => {
+                    //         this.batch = res;
+                    //     })
 
                     this.subscription = watch.subscribe((data) => {
                         // data can be a set of coordinates, or an error (if an error occurred).
@@ -689,7 +692,8 @@ export class DeadtreePage {
                     this.canSubmit = false;
                     return;
                 }
-
+                
+                //以下注释掉
                 this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
                     {
                         headers: { token: localStorage['token'] }, params: {
