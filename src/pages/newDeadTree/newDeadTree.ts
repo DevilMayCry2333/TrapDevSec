@@ -503,23 +503,22 @@ export class DeadtreePage {
                         } else if (this.photosum == 3) {
                             this.cachePhoto3 = this.imageData;
                         }
-                    let cacheData = {
-                        deviceId: this.deviceId,
-                        photoSum:this.photosum,
-                        img: this.imageData
-                    };
+                    // let cacheData = {
+                    //     deviceId: this.deviceId,
+                    //     photoSum:this.photosum,
+                    //     img: this.imageData
+                    // };
                     
-                    let deadCache: any;
-                        deadCache = localStorage.getItem('deadPhotoCache' + this.photosum);
-                    if (deadCache == null) {
-                        deadCache = [];
-                    } else {
-                        deadCache = JSON.parse(deadCache);
-                    }
-                    deadCache.push(cacheData);
-                        localStorage.setItem('deadPhotoCache' + this.photosum.toString(), JSON.stringify(deadCache));
-                    // this.navCtrl.pop();
-                    // confirm.dismiss()
+                    // let deadCache: any;
+                    //     deadCache = localStorage.getItem('deadPhotoCache' + this.photosum);
+                    // if (deadCache == null) {
+                    //     deadCache = [];
+                    // } else {
+                    //     deadCache = JSON.parse(deadCache);
+                    // }
+                    // deadCache.push(cacheData);
+                    //     localStorage.setItem('deadPhotoCache' + this.photosum.toString(), JSON.stringify(deadCache));
+
                 // })            
         }, (err) => {
             // Handle error
@@ -681,12 +680,6 @@ export class DeadtreePage {
             this.base.showAlert("提示", "数量输入为空或者不合法！", () => { });
             this.canSubmit = false;
         } else {
-                let options: FileUploadOptions = {};
-                options.params = {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic, batch: this.batch
-                };
                 // var options: string = "deviceId: " + this.id +
                 //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
                 //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
@@ -711,18 +704,19 @@ export class DeadtreePage {
                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                            accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
                            killMethodsValue: this.killMethodsValue, remarks: this.remarks, current: j, batch: this.batch,
+                           allLength: "1", curRow: "1"
                        };
                        options.headers = { token: localStorage['token'] };
                        const fileTransfer: FileTransferObject = this.fileTransfer.create();
                        var uploadAddress: string;
                        if (j == 1) {
-                           uploadAddress = this.pic1;
+                           uploadAddress = this.cachePhoto1;
                            //this.currentImg = this.photolib1;
                        } else if (j == 2) {
-                          uploadAddress = this.pic2;
+                           uploadAddress = this.cachePhoto2;
                           // this.currentImg = this.photolib2;
                        } else if (j == 3) {
-                          uploadAddress = this.pic3;
+                           uploadAddress = this.cachePhoto3;
                           // this.currentImg = this.photolib3;
                        }
                     
@@ -749,51 +743,18 @@ export class DeadtreePage {
                 Promise.all(this.observers).then((resolve) => {
                     console.log(resolve);
                     loader.dismiss();
-                    if (this.isComplete) {
-                        console.log("*****清除缓存了******");
-                        localStorage.removeItem('deadCache');
-                    }
+                    this.base.showAlert('提示', '提交成功', () => { });
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (reject) => {
                     console.log(reject);
-                    loader.dismiss();
-                }).catch((reason) => {
-                    console.log(reason);
-                })
-
-                this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
-                    {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic.toString(), batch: this.batch
-                        }
-                    })
-                    .subscribe(res => {
-                        // console.log(JSON.stringify(res));
-                        // console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        this.base.showAlert('提示', '提交成功', () => { });
-                        let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                            killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic, batch: this.batch
-                        };
-                        // console.log("cacheData");
-                        // console.log(cacheData);
-
-                        Base.popTo(this.navCtrl, 'switchProjectPage');
-                    }, (msg) => {
-
-                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                        this.base.showAlert('提示', '提交失败', () => { });
-                        let cacheData = {
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
                             killMethodsValue: this.killMethodsValue, 
                             remarks: this.remarks, hasPic: this.hasPic, 
                             photoSum: this.photosum, batch: this.batch,
-                            pic1:this.cachePhoto1,pic2:this.cachePhoto2,pic3:this.cachePhoto3
+                            pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, allLength: 1, curRow: 1
                         };
                         // console.log("cacheData");
                         // console.log(cacheData);
@@ -808,9 +769,62 @@ export class DeadtreePage {
                         deadCache.push(cacheData);   
                         localStorage.setItem('deadCache', JSON.stringify(deadCache));
                             Base.popTo(this.navCtrl, 'switchProjectPage');
-                    });
+                    loader.dismiss();
+                }).catch((reason) => {
+                    console.log(reason);
+                })
 
-}
+                // this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
+                //     {
+                //         headers: { token: localStorage['token'] }, params: {
+                //             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                //             accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                //             killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic.toString(), batch: this.batch
+                //         }
+                //     })
+                //     .subscribe(res => {
+                //         // console.log(JSON.stringify(res));
+                //         // console.log(JSON.parse(JSON.stringify(res)).message);
+                //         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                //         this.base.showAlert('提示', '提交成功', () => { });
+                //         let cacheData = {
+                //             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                //             accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                //             killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic, batch: this.batch
+                //         };
+                //         // console.log("cacheData");
+                //         // console.log(cacheData);
+
+                //         Base.popTo(this.navCtrl, 'switchProjectPage');
+                //     }, (msg) => {
+
+                //         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                //         this.base.showAlert('提示', '提交失败', () => { });
+                //         let cacheData = {
+                //             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                //             accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                //             killMethodsValue: this.killMethodsValue, 
+                //             remarks: this.remarks, hasPic: this.hasPic, 
+                //             photoSum: this.photosum, batch: this.batch,
+                //             pic1:this.cachePhoto1,pic2:this.cachePhoto2,pic3:this.cachePhoto3
+                //         };
+                //         // console.log("cacheData");
+                //         // console.log(cacheData);
+
+                //         let deadCache: any;
+                //         deadCache = localStorage.getItem('deadCache');
+                //         if (deadCache == null) {
+                //             deadCache = [];
+                //         } else {
+                //             deadCache = JSON.parse(deadCache);
+                //         }
+                //         deadCache.push(cacheData);   
+                //         localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                //             Base.popTo(this.navCtrl, 'switchProjectPage');
+                //     });
+
+    }
 
 }
 
