@@ -53,6 +53,7 @@ export class DeadtreePage {
     cachePhoto1:any;
     cachePhoto2: any;
     isComplete = false;
+    submitFail = false;
     cachePhoto3: any;
     base641:any;
     base642:any;
@@ -743,16 +744,17 @@ export class DeadtreePage {
                 Promise.all(this.observers).then((resolve) => {
                     console.log(resolve);
                     loader.dismiss();
-                    this.base.showAlert('提示', '提交成功', () => { });
-                    Base.popTo(this.navCtrl, 'switchProjectPage');
-                }, (reject) => {
-                    console.log(reject);
-                    this.base.showAlert('提示', '提交失败', () => { });
-                    let cacheData = {
+                    for(var i = 0 ; i < resolve.length; i++){
+                        if(resolve[i]==undefined||resolve[i]==""){
+                            this.submitFail = true;
+                        }
+                    }
+                    if(this.submitFail){
+                        let cacheData = {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                            killMethodsValue: this.killMethodsValue, 
-                            remarks: this.remarks, hasPic: this.hasPic, 
+                            killMethodsValue: this.killMethodsValue,
+                            remarks: this.remarks, hasPic: this.hasPic,
                             photoSum: this.photosum, batch: this.batch,
                             pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, allLength: 1, curRow: 1
                         };
@@ -766,12 +768,46 @@ export class DeadtreePage {
                         } else {
                             deadCache = JSON.parse(deadCache);
                         }
-                        deadCache.push(cacheData);   
+                        deadCache.push(cacheData);
                         localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        this.base.showAlert('提示', '提交失败', () => { });
+                    }else{
+                        this.base.showAlert('提示', '提交成功', () => { });
+                    }
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                }, (reject) => {
+                    console.log(reject);
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
                     loader.dismiss();
                 }).catch((reason) => {
                     console.log(reason);
+
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    let cacheData = {
+                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                        accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                        killMethodsValue: this.killMethodsValue,
+                        remarks: this.remarks, hasPic: this.hasPic,
+                        photoSum: this.photosum, batch: this.batch,
+                        pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, allLength: 1, curRow: 1
+                    };
+                    // console.log("cacheData");
+                    // console.log(cacheData);
+
+                    let deadCache: any;
+                    deadCache = localStorage.getItem('deadCache');
+                    if (deadCache == null) {
+                        deadCache = [];
+                    } else {
+                        deadCache = JSON.parse(deadCache);
+                    }
+                    deadCache.push(cacheData);
+                    localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                    loader.dismiss();
+
+
                 })
 
                 // this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {},
