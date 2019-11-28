@@ -7,26 +7,32 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>DeadTreesQuery</ion-title>
+    <ion-title>查询</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <h1>数据内容</h1>
+    <!-- <h1>数据内容</h1> -->
       <div style="width: 100%">
         <table border="1" style="table-layout:fixed" width="100%">
           <thead>
-            <th>维护日期</th>
-            <th>除害方式</th>
-            <th>批次</th>
+            <th>日期</th>
+            <th>桩径(cm)</th>
+            <th>树高(m)</th>
+            <th>材积(m³)</th>
+            <th>处理方式</th>
+            
           </thead>
           <tbody>
             <tr *ngFor="let item of dataList">
               <th>{{item.submitDate}}</th>
+              <th>{{item.wooddiameter}}</th>
+              <th>{{item.woodheight}}</th>
+              <th>{{item.woodvolume}}</th>
               <th>{{item.killmethod}}</th>
-              <th>{{item.batch}}</th>
+              
             </tr>
           </tbody>
         </table>

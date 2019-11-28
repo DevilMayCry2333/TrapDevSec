@@ -7,28 +7,30 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EnemyQuery</ion-title>
+    <ion-title>天敌防治数据查询</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h1>数据内容</h1>
+  <!-- <h1>数据内容</h1> -->
     <div style="width: 100%">
       <table border="1" style="table-layout:fixed" width="100%">
         <thead>
-          <th>维护日期</th>
+          <th>日期</th>
+          <th>批次</th>
           <th>天敌类型</th>
           <th>释放数量</th>
-          <th>批次</th>
+          
         </thead>
         <tbody>
           <tr *ngFor="let item of dataList">
             <th>{{item.submitDate}}</th>
+            <th>{{item.batch}}</th>
             <th>{{item.predatorstype}}</th>
             <th>{{item.releaseNum}}</th>
-            <th>{{item.batch}}</th>
+            
           </tr>
         </tbody>
       </table>
