@@ -35,6 +35,7 @@ export class TrackPage {
     currentImg: any;
     currentNum = 0;
     isComplete = false;
+    submitFail = false;
     imageData: any;
     startRecordIsClick = false;
     endRecordIsClick = false;
@@ -96,6 +97,7 @@ export class TrackPage {
             last: 'Rosenburg',
         }
     ];
+
 
     constructor(
         public navCtrl: NavController,
@@ -435,10 +437,42 @@ export class TrackPage {
                 Promise.all(this.observers).then((resolve) => {
                     console.log(resolve);
                     loader.dismiss();
-                    this.base.showAlert('提示', '提交成功', () => { });
+                    for(var i = 0 ; i < resolve.length; i++){
+                        if(resolve[i]==undefined||resolve[i]==""){
+                            this.submitFail = true;
+                        }
+                    }
+                    if(this.submitFail){
+                        let cacheData = {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
+                            photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
+                            pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1
+                        };
+                        // console.log("cacheData");
+                        // console.log(cacheData);
+
+                        let TrackCache: any;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        } else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        this.base.showAlert('提示', '提交失败', () => { });
+                    }else{
+                        this.base.showAlert('提示', '提交成功', () => { });
+                    }
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (reject) => {
                     console.log(reject);
+                    this.base.showAlert('提示', '提交失败', () => { });
+                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                    loader.dismiss();
+                }).catch((reason) => {
+                    console.log(reason);
                     this.base.showAlert('提示', '提交失败', () => { });
                     let cacheData = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
@@ -458,10 +492,8 @@ export class TrackPage {
                         }
                         TrackCache.push(cacheData);   
                         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                            Base.popTo(this.navCtrl, 'switchProjectPage');
-                    loader.dismiss();
-                }).catch((reason) => {
-                    console.log(reason);
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
+                        loader.dismiss();
                 })
 
 
