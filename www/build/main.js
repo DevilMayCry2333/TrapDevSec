@@ -2151,7 +2151,7 @@ var DryPage = /** @class */ (function () {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectNameValue: this.injectNameValue
+                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
                 }
             })
                 .subscribe(function (res) {
@@ -2162,7 +2162,7 @@ var DryPage = /** @class */ (function () {
                 var cacheData = {
                     deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                     accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                    workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectName
+                    workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
                 };
                 console.log("cacheData");
                 console.log(cacheData);
@@ -2173,7 +2173,7 @@ var DryPage = /** @class */ (function () {
                 var cacheData = {
                     deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                     accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                    workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectName
+                    workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
                 };
                 console.log("cacheData");
                 console.log(cacheData);
@@ -2292,7 +2292,7 @@ var DryPage = /** @class */ (function () {
                     options.params = {
                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                         accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                        workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectName
+                        workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectNameValue
                     };
                     options.headers = { token: localStorage['token'] };
                     console.log("options");
@@ -2316,7 +2316,7 @@ var DryPage = /** @class */ (function () {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                                 accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                                workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectName
+                                workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectNameValue
                             }
                         })
                             .subscribe(function (res) {
@@ -2338,7 +2338,7 @@ var DryPage = /** @class */ (function () {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
                             accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                            workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectName
+                            workingContent: element.workingContent, chestDiameter: element.chestDiameter, injectName: element.injectNameValue
                         }
                     })
                         .subscribe(function (res) {
@@ -2477,7 +2477,7 @@ var DryPage = /** @class */ (function () {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectName || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
             this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
         }
         else {
@@ -2492,7 +2492,7 @@ var DryPage = /** @class */ (function () {
                 options.params = {
                     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                     accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectName
+                    workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
                 };
                 options.headers = { token: localStorage['token'] };
                 console.log("options");
@@ -2518,7 +2518,7 @@ var DryPage = /** @class */ (function () {
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectName,
+                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue,
                         img: _this.imageData
                     };
                     var DryCache;
@@ -2563,7 +2563,7 @@ var DryPage = /** @class */ (function () {
                         var cacheData = {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
+                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -2574,7 +2574,7 @@ var DryPage = /** @class */ (function () {
                         var cacheData = {
                             deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                             accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
+                            workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -2637,7 +2637,7 @@ var DryPage = /** @class */ (function () {
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
+                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -2648,7 +2648,7 @@ var DryPage = /** @class */ (function () {
                     var cacheData = {
                         deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
                         accuracy: _this.accuracy, WoodStatus: _this.woodStatusValue, injectNum: _this.injectNum, remarks: _this.remarks,
-                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectName: _this.injectNameValue
+                        workingContent: _this.workContentValue, chestDiameter: _this.chestDiameter, injectNameValue: _this.injectNameValue
                     };
                     console.log("cacheData");
                     console.log(cacheData);
@@ -3511,6 +3511,7 @@ var DeadtreePage = /** @class */ (function () {
         this.hasPic = false;
         this.photosum = 0;
         this.isComplete = false;
+        this.submitFail = false;
         this.volume = 0;
         this.remarks = "";
         this.threePhotos = false;
@@ -3551,13 +3552,15 @@ var DeadtreePage = /** @class */ (function () {
                         };
                         var that_1 = _this;
                         var watch = _this.geolocation.watchPosition(options);
-                        _this.httpClient.post(_this.base.BASE_URL + 'app/addDeviceId', {}, {
-                            headers: { token: localStorage['token'] }, params: {
-                                deviceId: _this.deviceId
-                            }
-                        }).subscribe(function (res) {
-                            _this.batch = res;
-                        });
+                        //此处整合进submit()
+                        // this.httpClient.post(this.base.BASE_URL + 'app/addDeviceId', {},
+                        //     {
+                        //         headers: { token: localStorage['token'] }, params: {
+                        //             deviceId: this.deviceId
+                        //         }
+                        //     }).subscribe(res => {
+                        //         this.batch = res;
+                        //     })
                         _this.subscription = watch.subscribe(function (data) {
                             // data can be a set of coordinates, or an error (if an error occurred).
                             if (data['coords']) {
@@ -3946,7 +3949,7 @@ var DeadtreePage = /** @class */ (function () {
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__dead_trees_query_dead_trees_query__["a" /* DeadTreesQueryPage */]);
         }
         else {
-            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", function () { });
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!", function () { });
         }
     };
     DeadtreePage.prototype.takePhoto = function () {
@@ -3971,63 +3974,62 @@ var DeadtreePage = /** @class */ (function () {
                 _this.threePhotos = true;
                 _this.canSubmit = false;
             }
-            var options = {};
-            options.fileKey = "image";
-            var time = Date.parse(Date());
-            options.fileName = time + ".jpg";
-            options.mimeType = "image/jpeg";
-            options.chunkedMode = false;
-            options.httpMethod = "POST";
+            //注释掉
+            // let options: FileUploadOptions = {};
+            // options.fileKey = "image";
+            // var time = Date.parse(Date());
+            // options.fileName = time + ".jpg";
+            // options.mimeType = "image/jpeg";
+            // options.chunkedMode = false;
+            // options.httpMethod = "POST";
             // options.params = {
             //     deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
             //     accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
             //     killMethodsValue: this.killMethodsValue, remarks: this.remarks
             // };
-            options.params = {
-                deviceId: _this.deviceId, current: _this.photosum
-            };
-            options.headers = { token: localStorage['token'] };
+            // options.params = {
+            //     deviceId: this.deviceId, current:this.photosum
+            // };
+            // options.headers = { token: localStorage['token'] };
             // console.log("options");
             // console.log(options);
-            //创建文件对象
-            var fileTransfer = _this.fileTransfer.create();
-            fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
-                .then(function (res) {
-                // console.log(res);
-                // console.log(JSON.stringify(res));
-                // console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-            }, function (error) {
-                _this.base.showAlert('提示', '提交失败', function () { });
-                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                if (_this.photosum == 1) {
-                    _this.cachePhoto1 = _this.imageData;
-                }
-                else if (_this.photosum == 2) {
-                    _this.cachePhoto2 = _this.imageData;
-                }
-                else if (_this.photosum == 3) {
-                    _this.cachePhoto3 = _this.imageData;
-                }
-                var cacheData = {
-                    deviceId: _this.deviceId,
-                    photoSum: _this.photosum,
-                    img: _this.imageData
-                };
-                var deadCache;
-                deadCache = localStorage.getItem('deadPhotoCache' + _this.photosum);
-                if (deadCache == null) {
-                    deadCache = [];
-                }
-                else {
-                    deadCache = JSON.parse(deadCache);
-                }
-                deadCache.push(cacheData);
-                localStorage.setItem('deadPhotoCache' + _this.photosum.toString(), JSON.stringify(deadCache));
-                //this.navCtrl.pop();
-                // confirm.dismiss()
-            });
+            //上传文件对象
+            // const fileTransfer: FileTransferObject = this.fileTransfer.create();
+            //此处整合进submit()
+            // fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
+            //     .then((res) => {
+            // console.log(res);
+            // console.log(JSON.stringify(res));
+            // console.log(JSON.parse(JSON.stringify(res)).message);
+            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+            //     this.base.showAlert('提示', '提交成功', () => { });
+            // }, (error) => {//发送失败(网络出错等)
+            //     this.base.showAlert('提示', '提交失败', () => { });
+            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+            if (_this.photosum == 1) {
+                _this.cachePhoto1 = _this.imageData;
+            }
+            else if (_this.photosum == 2) {
+                _this.cachePhoto2 = _this.imageData;
+            }
+            else if (_this.photosum == 3) {
+                _this.cachePhoto3 = _this.imageData;
+            }
+            // let cacheData = {
+            //     deviceId: this.deviceId,
+            //     photoSum:this.photosum,
+            //     img: this.imageData
+            // };
+            // let deadCache: any;
+            //     deadCache = localStorage.getItem('deadPhotoCache' + this.photosum);
+            // if (deadCache == null) {
+            //     deadCache = [];
+            // } else {
+            //     deadCache = JSON.parse(deadCache);
+            // }
+            // deadCache.push(cacheData);
+            //     localStorage.setItem('deadPhotoCache' + this.photosum.toString(), JSON.stringify(deadCache));
+            // })            
         }, function (err) {
             // Handle error
             // this.navCtrl.popToRoot()
@@ -4052,99 +4054,186 @@ var DeadtreePage = /** @class */ (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__scan_scan__["a" /* ScanPage */], { callBack: this.callBack });
     };
     DeadtreePage.prototype.submit = function () {
-        var _this = this;
-        this.have_submit = true;
-        var num1 = 0;
-        if (this.volume < 0 || this.volume == NaN) {
-            this.diameter = 0;
-            this.height = 0;
-            this.volume = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        if (!this.volume) {
-            this.diameter = 0;
-            this.height = 0;
-            this.volume = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num1 = this.volume;
-        // if (!this.diameter){
-        //     this.diameter = 0;
-        // }
-        // if (!this.height){
-        //     this.height = 0;
-        // }
-        // if (!this.volume){
-        //     this.volume = 0;
-        // }
-        // if (!this.killMethodsValue){
-        //     this.killMethodsValue = "0";
-        // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
-            this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
-        }
-        else {
-            var options = {};
-            options.params = {
-                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic, batch: this.batch
-            };
-            // var options: string = "deviceId: " + this.id +
-            //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-            //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-            //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-            // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
-            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
-                this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
-                return;
-            }
-            this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtrees', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
-                    killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic.toString(), batch: this.batch
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var loader, num1, j;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        loader = this.loadingCtrl.create({
+                            content: "缓存数据正在提交，请勿退出",
+                        });
+                        // this.have_submit = true;
+                        this.canSubmit = true;
+                        num1 = 0;
+                        if (this.volume < 0 || this.volume == NaN) {
+                            this.diameter = 0;
+                            this.height = 0;
+                            this.volume = 0;
+                            // this.base.showAlert('提示', '请输入数字', () => { });
+                        }
+                        if (!this.volume) {
+                            this.diameter = 0;
+                            this.height = 0;
+                            this.volume = 0;
+                            // this.base.showAlert('提示', '请输入数字', () => { });
+                        }
+                        num1 = this.volume;
+                        if (!(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume)) return [3 /*break*/, 1];
+                        this.base.showAlert("提示", "数量输入为空或者不合法！", function () { });
+                        this.canSubmit = false;
+                        return [3 /*break*/, 6];
+                    case 1:
+                        // var options: string = "deviceId: " + this.id +
+                        //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                        //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                        //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                        // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
+                        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                            this.base.showAlert("提示", "数量输入为空或者不合法！", function () { });
+                            this.canSubmit = false;
+                            return [2 /*return*/];
+                        }
+                        j = 1;
+                        _a.label = 2;
+                    case 2:
+                        if (!(j <= this.photosum)) return [3 /*break*/, 5];
+                        return [4 /*yield*/, (function (j) { return __awaiter(_this, void 0, void 0, function () {
+                                var _this = this;
+                                var options, time, fileTransfer, uploadAddress, observer;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            options = {};
+                                            options.fileKey = "image";
+                                            time = Date.parse(Date());
+                                            options.fileName = time + ".jpg";
+                                            options.mimeType = "image/jpeg";
+                                            options.chunkedMode = false;
+                                            options.httpMethod = "POST";
+                                            options.params = {
+                                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                                accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                                                killMethodsValue: this.killMethodsValue, remarks: this.remarks, current: j, batch: this.batch,
+                                                allLength: "1", curRow: "1"
+                                            };
+                                            options.headers = { token: localStorage['token'] };
+                                            fileTransfer = this.fileTransfer.create();
+                                            if (j == 1) {
+                                                uploadAddress = this.cachePhoto1;
+                                                //this.currentImg = this.photolib1;
+                                            }
+                                            else if (j == 2) {
+                                                uploadAddress = this.cachePhoto2;
+                                                // this.currentImg = this.photolib2;
+                                            }
+                                            else if (j == 3) {
+                                                uploadAddress = this.cachePhoto3;
+                                                // this.currentImg = this.photolib3;
+                                            }
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    fileTransfer.upload(uploadAddress, _this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                                        .then(function (res) {
+                                                        if (JSON.parse(res.response).isComp == true) {
+                                                            _this.isComplete = true;
+                                                        }
+                                                        else {
+                                                            _this.isComplete = false;
+                                                        }
+                                                        resolve('ok');
+                                                    }).catch(function (error) {
+                                                        _this.picNotExist = true;
+                                                        reject('error');
+                                                    });
+                                                }).catch(function (reason) {
+                                                    console.log(reason);
+                                                })];
+                                        case 1:
+                                            observer = _a.sent();
+                                            console.log("await" + j);
+                                            this.observers.push(observer);
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); })(j)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        j = j + 1;
+                        return [3 /*break*/, 2];
+                    case 5:
+                        Promise.all(this.observers).then(function (resolve) {
+                            console.log(resolve);
+                            loader.dismiss();
+                            for (var i = 0; i < resolve.length; i++) {
+                                if (resolve[i] == undefined || resolve[i] == "") {
+                                    _this.submitFail = true;
+                                }
+                            }
+                            if (_this.submitFail) {
+                                var cacheData = {
+                                    deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                                    accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                                    killMethodsValue: _this.killMethodsValue,
+                                    remarks: _this.remarks, hasPic: _this.hasPic,
+                                    photoSum: _this.photosum, batch: _this.batch,
+                                    pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, allLength: 1, curRow: 1
+                                };
+                                // console.log("cacheData");
+                                // console.log(cacheData);
+                                var deadCache = void 0;
+                                deadCache = localStorage.getItem('deadCache');
+                                if (deadCache == null) {
+                                    deadCache = [];
+                                }
+                                else {
+                                    deadCache = JSON.parse(deadCache);
+                                }
+                                deadCache.push(cacheData);
+                                localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                                _this.base.showAlert('提示', '提交失败', function () { });
+                            }
+                            else {
+                                _this.base.showAlert('提示', '提交成功', function () { });
+                            }
+                            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                        }, function (reject) {
+                            console.log(reject);
+                            _this.base.showAlert('提示', '提交失败', function () { });
+                            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                            loader.dismiss();
+                        }).catch(function (reason) {
+                            console.log(reason);
+                            _this.base.showAlert('提示', '提交失败', function () { });
+                            var cacheData = {
+                                deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
+                                accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
+                                killMethodsValue: _this.killMethodsValue,
+                                remarks: _this.remarks, hasPic: _this.hasPic,
+                                photoSum: _this.photosum, batch: _this.batch,
+                                pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, allLength: 1, curRow: 1
+                            };
+                            // console.log("cacheData");
+                            // console.log(cacheData);
+                            var deadCache;
+                            deadCache = localStorage.getItem('deadCache');
+                            if (deadCache == null) {
+                                deadCache = [];
+                            }
+                            else {
+                                deadCache = JSON.parse(deadCache);
+                            }
+                            deadCache.push(cacheData);
+                            localStorage.setItem('deadCache', JSON.stringify(deadCache));
+                            __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                            loader.dismiss();
+                        });
+                        _a.label = 6;
+                    case 6: return [2 /*return*/];
                 }
-            })
-                .subscribe(function (res) {
-                // console.log(JSON.stringify(res));
-                // console.log(JSON.parse(JSON.stringify(res)).message);
-                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                _this.base.showAlert('提示', '提交成功', function () { });
-                var cacheData = {
-                    deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
-                    killMethodsValue: _this.killMethodsValue, remarks: _this.remarks, hasPic: _this.hasPic, batch: _this.batch
-                };
-                // console.log("cacheData");
-                // console.log(cacheData);
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-            }, function (msg) {
-                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                _this.base.showAlert('提示', '提交失败', function () { });
-                var cacheData = {
-                    deviceId: _this.deviceId, longitude: _this.longtitude, latitude: _this.latitude, altitude: _this.altitude,
-                    accuracy: _this.accuracy, diameter: _this.diameter, height: _this.height, volume: _this.volume,
-                    killMethodsValue: _this.killMethodsValue,
-                    remarks: _this.remarks, hasPic: _this.hasPic,
-                    photoSum: _this.photosum, batch: _this.batch,
-                    pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3
-                };
-                // console.log("cacheData");
-                // console.log(cacheData);
-                var deadCache;
-                deadCache = localStorage.getItem('deadCache');
-                if (deadCache == null) {
-                    deadCache = [];
-                }
-                else {
-                    deadCache = JSON.parse(deadCache);
-                }
-                deadCache.push(cacheData);
-                localStorage.setItem('deadCache', JSON.stringify(deadCache));
-                __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
             });
-        }
+        });
     };
     DeadtreePage.prototype.trapClick = function () {
         // console.log('deadtree');
@@ -4598,11 +4687,14 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.submit = function () {
         var _this = this;
+        //this.canSubmit = true;
         if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有完成一个录制循环!", "你还没有完成一个录制循环", function () { });
+            this.base.showAlert("提示", "你还没有完成一个录制循环", function () { });
+            this.canSubmit = false;
         }
         else {
-            this.have_submit = true;
+            // this.have_submit = true;
+            this.canSubmit = true;
             this.base.showAlert(this.flag, this.flag, function () { });
             console.log("======PATH======");
             console.log(this.imageData);
@@ -4617,7 +4709,8 @@ var TrackPage = /** @class */ (function () {
             //     this.lateIntravl = "10";
             // }
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                this.base.showAlert("定位信息不准", "或者是数据没有填完整", function () { });
+                this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
+                this.canSubmit = false;
             }
             else {
                 // var options: string = "deviceId: " + this.id +
@@ -4633,7 +4726,8 @@ var TrackPage = /** @class */ (function () {
                 };
                 this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                    this.base.showAlert("定位信息不准", "或者是数据没有填完整", function () { });
+                    this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
+                    this.canSubmit = false;
                     return;
                 }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
@@ -4663,6 +4757,7 @@ var TrackPage = /** @class */ (function () {
                         };
                     }
                     console.log("cacheData");
+                    //这一行
                     __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                 }, function (msg) {
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
@@ -4685,6 +4780,7 @@ var TrackPage = /** @class */ (function () {
                         TrackCache.push(cacheData);
                         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         console.log("Hello");
+                        //还有这一行
                         __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }
                     else {
@@ -4704,6 +4800,7 @@ var TrackPage = /** @class */ (function () {
                         TrackCache.push(cacheData);
                         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         console.log("Hello");
+                        //还有这一行
                         __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                     }
                 });
@@ -4713,10 +4810,10 @@ var TrackPage = /** @class */ (function () {
     TrackPage.prototype.takePhoto = function () {
         var _this = this;
         if (this.startRecordIsClick == false) {
-            this.base.showAlert("请先输入线路名称并点击开始录制!", "请先输入线路名称并点击开始录制", function () { });
+            this.base.showAlert("提示", "请先输入线路名称、工作内容、延时设置，并点击开始录制", function () { });
         }
         else {
-            this.photosum += 1;
+            //this.photosum += 1;
             this.hasPic = true;
             var options = {
                 quality: 10,
@@ -4732,6 +4829,7 @@ var TrackPage = /** @class */ (function () {
             this.camera.getPicture(options).then(function (imageData) {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
+                _this.photosum = _this.photosum + 1;
                 _this.imageData = imageData;
                 if (_this.photosum == 5) {
                     _this.fivePhotos = true;
@@ -4850,7 +4948,7 @@ var TrackPage = /** @class */ (function () {
     TrackPage.prototype.startRecord = function () {
         var _this = this;
         if (!this.lateIntravl) {
-            this.base.showAlert("请先输入延时间隔!", "请先输入延时间隔!", function () { });
+            this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", function () { });
         }
         else {
             this.lineNameDis = true;
@@ -4933,10 +5031,10 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage.prototype.stopRecord = function () {
         if (this.startRecordIsClick == false) {
-            this.base.showAlert("你还没有开始录制!", "你还没有开始录制", function () { });
+            this.base.showAlert("提示", "你还没有开始录制", function () { });
         }
         else {
-            this.base.showAlert("停止录制成功!", "停止录制成功", function () { });
+            this.base.showAlert("提示", "停止录制成功", function () { });
             this.isStopRecord = true;
             this.endRecordIsClick = true;
             clearInterval(this.myIntravl);
@@ -8490,10 +8588,10 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.200.245:50000/";
+        // BASE_URL = "http://106.15.200.245:50000/"
         // BASE_URL = "http://106.15.90.78:50000/"
         // BASE_URL = "http://127.0.0.1:8081/"
-        // BASE_URL = "http://192.168.31.5:50000/"
+        this.BASE_URL = "http://192.168.31.254:50000/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
