@@ -97,6 +97,11 @@ export class TrackPage {
             last: 'Rosenburg',
         }
     ];
+    pic1: string;
+    pic2: string;
+    pic3: string;
+    pic4: string;
+    pic5: string;
 
 
     constructor(
@@ -198,9 +203,9 @@ export class TrackPage {
                         }else if(i==3){
                             uploadAddress = this.photoplib3;
                         }else if(i==4){
-                            uploadAddress = this.photoplib3;
-                        }else if(i==5){
                             uploadAddress = this.photoplib4;
+                        }else if(i==5){
+                            uploadAddress = this.photoplib5;
                         }
                             console.log(uploadAddress);
                         
@@ -232,7 +237,6 @@ export class TrackPage {
                                         .catch((error) => {//发送失败(文件不存在等)
                                             this.picNotExsit1 = true;
                                             console.log(error);
-                                            
                                             reject('error');
                                         });
                                 }).catch((err)=>{
@@ -257,7 +261,6 @@ export class TrackPage {
                                         resovle('ok');
                                     }, (msg) => {
                                         console.log(msg);
-                                        
                                         reject('error');
                                     });
                             }).catch((err)=>{
@@ -397,6 +400,7 @@ export class TrackPage {
                        options.headers = { token: localStorage['token'] };
                        const fileTransfer: FileTransferObject = this.fileTransfer.create();
                        var uploadAddress: string;
+                       
                        if (j == 1) {
                            uploadAddress = this.cachePhoto1;
                            //this.currentImg = this.photolib1;

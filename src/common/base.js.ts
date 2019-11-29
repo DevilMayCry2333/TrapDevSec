@@ -9,8 +9,8 @@ export class Base {
   // BASE_URL = "http://39.108.184.47:8081/"
   // BASE_URL = "http://106.15.200.245:50000/"
   // BASE_URL = "http://106.15.90.78:50000/"
-    BASE_URL = "http://127.0.0.1:50000/"
-  // BASE_URL = "http://192.168.31.254:50000/"
+    //BASE_URL = "http://127.0.0.1:50000/"
+   BASE_URL = "http://192.168.199.173:50000/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,
