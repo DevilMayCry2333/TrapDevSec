@@ -192,15 +192,15 @@ export class TrackPage {
                         console.log(options);
                         var uploadAddress;
                         if(i==1){
-                            uploadAddress = element.pic1;
+                            uploadAddress = this.cachePhoto1;     //改了这里
                         }else if(i==2){
-                            uploadAddress = element.pic2;
+                            uploadAddress = this.cachePhoto1;
                         }else if(i==3){
-                            uploadAddress = element.pic3;
+                            uploadAddress = this.cachePhoto1;
                         }else if(i==4){
-                            uploadAddress = element.pic4;
+                            uploadAddress = this.cachePhoto1;
                         }else if(i==5){
-                            uploadAddress = element.pic5;
+                            uploadAddress = this.cachePhoto1;
                         }
                             console.log(uploadAddress);
                         
