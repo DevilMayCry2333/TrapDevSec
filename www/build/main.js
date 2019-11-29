@@ -201,7 +201,7 @@ var TrapQueryPage = /** @class */ (function () {
     };
     TrapQueryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-trap-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/'<!--\n  Generated template for the TrapQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>TrapQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>数据内容</h1>\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>批次</th>\n          <th>经度</th>\n          <th>纬度</th>\n          <th>数量</th>\n          <th>工作内容</th>\n          <th>药剂类型</th>\n          <th>日期</th>\n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.batch}}</th>\n            <th>{{item.longitude}}</th>\n            <th>{{item.latitude}}</th>\n            <th>{{item.num}}</th>\n            <th>{{item.workingContent}}</th>\n            <th>{{item.drug}}</th>\n            <th>{{item.date}}</th>\n          </tr>\n        </tbody>\n      </table>\n\n    </div>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/,
+            selector: 'page-trap-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/'<!--\n  Generated template for the TrapQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>诱捕器管理数据查询</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <!-- <h1>数据内容</h1> -->\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>日期</th>\n          <th>批次</th>\n          <th>松墨天牛(只)</th>\n          <th>其他天牛(只)</th>\n          <th>类型</th>\n          <th>药剂类型</th>\n          <th>工作内容</th>        \n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.date}}</th>\n            <th>{{item.batch}}</th>\n            <th>{{item.num}}</th>\n            <th>{{item.otherNum}}</th>\n            <th>{{item.otherBeetleFront}}</th>\n            <th>{{item.drug}}</th>\n            <th>{{item.workContentFront}}</th>\n            \n            \n          </tr>\n        </tbody>\n      </table>\n\n    </div>\n  \n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/trap-query/trap-query.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */],
@@ -276,7 +276,7 @@ var InjectQueryPage = /** @class */ (function () {
     };
     InjectQueryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-inject-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/'<!--\n  Generated template for the InjectQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>InjectQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>数据内容</h1>\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>工作内容</th>\n            <th>树木状态</th>\n            <th>维护日期</th>\n            <th>批次</th>\n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.workContent}}</th>\n              <th>{{item.woodStatus}}</th>\n              <th>{{item.submitDate}}</th>\n              <th>{{item.batch}}</th>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/,
+            selector: 'page-inject-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/'<!--\n  Generated template for the InjectQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>注干剂管理数据查询</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <!-- <h1>数据内容</h1> -->\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>日期</th>\n            <th>批次</th>\n            <th>树木状态</th>\n            <th>胸径(cm)</th>\n            <th>注剂类型</th>\n            <th>注剂数量</th>\n            <th>工作内容</th>\n            \n            \n            \n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.submitDate}}</th>\n              <th>{{item.batch}}</th>\n              <th>{{item.woodStatusFront}}</th>\n              <th>{{item.chestDiameter}}</th>\n              <th>{{item.injectNameFront}}</th>\n              <th>{{item.injectionNum}}</th>\n              <th>{{item.workContentFront}}</th>\n\n              \n\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/inject-query/inject-query.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
@@ -356,7 +356,7 @@ var EnemyQueryPage = /** @class */ (function () {
     };
     EnemyQueryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-enemy-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/'<!--\n  Generated template for the EnemyQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>EnemyQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>数据内容</h1>\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>维护日期</th>\n          <th>天敌类型</th>\n          <th>释放数量</th>\n          <th>批次</th>\n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.submitDate}}</th>\n            <th>{{item.predatorstype}}</th>\n            <th>{{item.releaseNum}}</th>\n            <th>{{item.batch}}</th>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/,
+            selector: 'page-enemy-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/'<!--\n  Generated template for the EnemyQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>天敌防治数据查询</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <!-- <h1>数据内容</h1> -->\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>日期</th>\n          <th>批次</th>\n          <th>天敌类型</th>\n          <th>释放数量</th>\n          \n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.submitDate}}</th>\n            <th>{{item.batch}}</th>\n            <th>{{item.predatorstype}}</th>\n            <th>{{item.releaseNum}}</th>\n            \n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/enemy-query/enemy-query.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
@@ -430,7 +430,7 @@ var DeadTreesQueryPage = /** @class */ (function () {
     };
     DeadTreesQueryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-dead-trees-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/'<!--\n  Generated template for the DeadTreesQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>DeadTreesQuery</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <h1>数据内容</h1>\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>维护日期</th>\n            <th>除害方式</th>\n            <th>批次</th>\n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.submitDate}}</th>\n              <th>{{item.killmethod}}</th>\n              <th>{{item.batch}}</th>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      \n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/,
+            selector: 'page-dead-trees-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/'<!--\n  Generated template for the DeadTreesQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>枯死树清理数据查询</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <h1>数据内容</h1> -->\n      <div style="width: 100%">\n        <table border="1" style="table-layout:fixed" width="100%">\n          <thead>\n            <th>日期</th>\n            <th>桩径(cm)</th>\n            <th>树高(m)</th>\n            <th>材积(m³)</th>\n            <th>处理方式</th>\n            \n          </thead>\n          <tbody>\n            <tr *ngFor="let item of dataList">\n              <th>{{item.submitDate}}</th>\n              <th>{{item.wooddiameter}}</th>\n              <th>{{item.woodheight}}</th>\n              <th>{{item.woodvolume}}</th>\n              <th>{{item.killmethod}}</th>\n              \n            </tr>\n          </tbody>\n        </table>\n      </div>\n      \n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/dead-trees-query/dead-trees-query.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
@@ -505,7 +505,7 @@ var MedicineQueryPage = /** @class */ (function () {
     };
     MedicineQueryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-medicine-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/medicine-query/medicine-query.html"*/'<!--\n  Generated template for the MedicineQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>medicine-query</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h1>数据内容</h1>\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>批次</th>\n          <th>药剂类型</th>\n          <th>药剂质量</th>\n          <th>防治面积</th>\n          <th>工作内容</th>\n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.batch}}</th>\n            <th>{{item.medicineName}}</th>\n            <th>{{item.medicineQua}}</th>\n            <th>{{item.areaFz}}</th>\n            <th>{{item.workContent}}</th>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/medicine-query/medicine-query.html"*/,
+            selector: 'page-medicine-query',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/medicine-query/medicine-query.html"*/'<!--\n  Generated template for the MedicineQueryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>药剂防治管理数据查询</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <!-- <h1>数据内容</h1> -->\n    <div style="width: 100%">\n      <table border="1" style="table-layout:fixed" width="100%">\n        <thead>\n          <th>日期</th>\n          <th>批次</th>\n          <th>药剂名称</th>\n          <th>药剂质量(kg)</th>\n          <th>防治面积(m²)</th>\n          <th>工作内容</th>\n        </thead>\n        <tbody>\n          <tr *ngFor="let item of dataList">\n            <th>{{item.submitDate}}</th>\n            <th>{{item.batch}}</th>\n            <th>{{item.medicineName}}</th>\n            <th>{{item.medicineQua}}</th>\n            <th>{{item.areaFz}}</th>\n            <th>{{item.workContent}}</th>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/medicine-query/medicine-query.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__common_base_js__["a" /* Base */]])
@@ -3386,7 +3386,7 @@ var EnemyPage = /** @class */ (function () {
     };
     EnemyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-enemy',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="enemytype">\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="number">\n                <ion-label>释放数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button  (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询数据</ion-label>\n        </button>\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button> -->\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
+            selector: 'app-enemy',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            天敌防治\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label>设备编号:</ion-label>\n                    <ion-input [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="enemytype">\n                <ion-label>天敌类型:</ion-label>\n                <ion-select [(ngModel)]="predatorsTypeValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of enemyType">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="number">\n                <ion-label>释放数量:</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="releaseNum"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button  (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button> -->\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newEnemy/newEnemy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -4305,7 +4305,7 @@ var DeadtreePage = /** @class */ (function () {
     };
     DeadtreePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>除害方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="threePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试第一步</ion-label>\n        </button> -->\n\n        <!-- <button id="chaxun" ion-button (click)="test3()">\n            <ion-label>测试第二步</ion-label>\n        </button> -->\n\n        <!-- <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button> -->\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
+            selector: 'app-deadtree',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            枯死树清理\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理:</h2>\n            <hr id="line1" />\n            <div id="ID">\n                <ion-item id="one">\n                    <ion-label>设备ID:</ion-label>\n                    <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n                </ion-item>\n                <button id="saomiao" ion-button (click)="scan()">扫描</button>\n            </div>\n            <div id="NUM">\n                <ion-item id="two">\n                    <ion-label >设备编号:</ion-label>\n                    <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                </ion-item>\n                <button id="bangding" ion-button (click)="bindNewId()">绑定</button>\n            </div>\n        </ion-card-content>\n    </ion-card>\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n            <ion-item id="meter">\n                <ion-label>桩径(cm):</ion-label>\n                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="height">\n                <ion-label>树高(m):</ion-label>\n                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="volume">\n                <ion-label>材积(m³):</ion-label>\n                <ion-input [(ngModel)]="volume" disabled="true"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="killmethods"> \n                <ion-label>处理方式:</ion-label>\n                <ion-select [(ngModel)]="killMethodsValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of killMethods">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="threePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试第一步</ion-label>\n        </button> -->\n\n        <!-- <button id="chaxun" ion-button (click)="test3()">\n            <ion-label>测试第二步</ion-label>\n        </button> -->\n\n        <!-- <button ion-button (click)="test2()">\n            <ion-label>清除缓存</ion-label>\n        </button> -->\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newDeadTree/newDeadTree.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -4413,6 +4413,7 @@ var TrackPage = /** @class */ (function () {
         this.observers = [];
         this.currentNum = 0;
         this.isComplete = false;
+        this.submitFail = false;
         this.startRecordIsClick = false;
         this.endRecordIsClick = false;
         this.picNotExsit1 = false;
@@ -4531,7 +4532,7 @@ var TrackPage = /** @class */ (function () {
                                                                 console.log("options");
                                                                 console.log(options);
                                                                 if (i == 1) {
-                                                                    uploadAddress = element.pic1;
+                                                                    uploadAddress = element.pic1; //改了这里
                                                                 }
                                                                 else if (i == 2) {
                                                                     uploadAddress = element.pic2;
@@ -4563,7 +4564,7 @@ var TrackPage = /** @class */ (function () {
                                                                             // this.base.showAlert('提示', '提交成功', () => { });
                                                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
                                                                         }, function (error) {
-                                                                            _this.picNotExsit1 = true;
+                                                                            // this.picNotExsit1 = true;
                                                                             console.log(error);
                                                                             reject('error');
                                                                             // this.base.showAlert('提示', '提交失败', () => { });
@@ -4686,126 +4687,191 @@ var TrackPage = /** @class */ (function () {
         console.log('track');
     };
     TrackPage.prototype.submit = function () {
-        var _this = this;
-        //this.canSubmit = true;
-        if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
-            this.base.showAlert("提示", "你还没有完成一个录制循环", function () { });
-            this.canSubmit = false;
-        }
-        else {
-            // this.have_submit = true;
-            this.canSubmit = true;
-            this.base.showAlert(this.flag, this.flag, function () { });
-            console.log("======PATH======");
-            console.log(this.imageData);
-            var myImage = this.imageData;
-            // if (!this.lineName){
-            //     this.lineName = "0";
-            // }
-            // if (!this.workContent){
-            //     this.workContent = "0";
-            // }
-            // if (!this.lateIntravl){
-            //     this.lateIntravl = "10";
-            // }
-            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
-                this.canSubmit = false;
-            }
-            else {
-                // var options: string = "deviceId: " + this.id +
-                //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
-                //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
-                //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
-                // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
-                var options = {};
-                options.params = {
-                    longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                    accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                    current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
-                };
-                this.base.logger(JSON.stringify(options), "newTrackPar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                    this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
-                    this.canSubmit = false;
-                    return;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var loader, myImage, j;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        loader = this.loadingCtrl.create({
+                            content: "缓存数据正在提交，请勿退出",
+                        });
+                        if (!(this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false)) return [3 /*break*/, 1];
+                        this.base.showAlert("提示", "你还没有完成一个录制循环", function () { });
+                        this.canSubmit = false;
+                        return [3 /*break*/, 7];
+                    case 1:
+                        // this.have_submit = true;
+                        this.canSubmit = true;
+                        this.base.showAlert(this.flag, this.flag, function () { });
+                        console.log("======PATH======");
+                        console.log(this.imageData);
+                        myImage = this.imageData;
+                        if (!(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl)) return [3 /*break*/, 2];
+                        this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
+                        this.canSubmit = false;
+                        return [3 /*break*/, 7];
+                    case 2:
+                        // var options: string = "deviceId: " + this.id +
+                        //     "longitude:" + this.longitude + "latitude:" + this.latitude + "num:" + this.num +
+                        //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
+                        //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
+                        // this.base.logger(options, "NonImg_maintenance_submit_function_fileTransferPar.txt");
+                        // var options: FileUploadOptions = {};
+                        // options.params = {
+                        //     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                        //     accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                        //     current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
+                        // };
+                        // this.base.logger(JSON.stringify(options), "newTrackPar.txt");
+                        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                            this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
+                            this.canSubmit = false;
+                            return [2 /*return*/];
+                        }
+                        j = 1;
+                        _a.label = 3;
+                    case 3:
+                        if (!(j <= this.photosum)) return [3 /*break*/, 6];
+                        return [4 /*yield*/, (function (j) { return __awaiter(_this, void 0, void 0, function () {
+                                var _this = this;
+                                var options, time, fileTransfer, uploadAddress, observer;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            options = {};
+                                            options.fileKey = "image";
+                                            time = Date.parse(Date());
+                                            options.fileName = time + ".jpg";
+                                            options.mimeType = "image/jpeg";
+                                            options.chunkedMode = false;
+                                            options.httpMethod = "POST";
+                                            options.params = {
+                                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                                                accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                                                current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic: "true"
+                                            };
+                                            options.headers = { token: localStorage['token'] };
+                                            fileTransfer = this.fileTransfer.create();
+                                            if (j == 1) {
+                                                uploadAddress = this.cachePhoto1;
+                                                //this.currentImg = this.photolib1;
+                                            }
+                                            else if (j == 2) {
+                                                uploadAddress = this.cachePhoto2;
+                                                // this.currentImg = this.photolib2;
+                                            }
+                                            else if (j == 3) {
+                                                uploadAddress = this.cachePhoto3;
+                                                // this.currentImg = this.photolib3;
+                                            }
+                                            else if (j == 4) {
+                                                uploadAddress = this.cachePhoto4;
+                                            }
+                                            else if (j == 5) {
+                                                uploadAddress = this.cachePhoto5;
+                                            }
+                                            return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                                    fileTransfer.upload(uploadAddress, _this.base.BASE_URL + 'app/AddPhoto2', options)
+                                                        .then(function (res) {
+                                                        if (JSON.parse(res.response).isComp == true) {
+                                                            _this.isComplete = true;
+                                                        }
+                                                        else {
+                                                            _this.isComplete = false;
+                                                        }
+                                                        resolve('ok');
+                                                    }).catch(function (error) {
+                                                        _this.picNotExist = true;
+                                                        reject('error');
+                                                    });
+                                                }).catch(function (reason) {
+                                                    console.log(reason);
+                                                })];
+                                        case 1:
+                                            observer = _a.sent();
+                                            console.log("await" + j);
+                                            this.observers.push(observer);
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); })(j)];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        j = j + 1;
+                        return [3 /*break*/, 3];
+                    case 6:
+                        Promise.all(this.observers).then(function (resolve) {
+                            console.log(resolve);
+                            loader.dismiss();
+                            for (var i = 0; i < resolve.length; i++) {
+                                if (resolve[i] == undefined || resolve[i] == "") {
+                                    _this.submitFail = true;
+                                }
+                            }
+                            if (_this.submitFail) {
+                                var cacheData = {
+                                    longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                                    accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                                    photoSum: _this.photosum, recordTime: JSON.stringify(_this.recordTime),
+                                    pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, pic4: _this.cachePhoto4, pic5: _this.cachePhoto5, allLength: 1, curRow: 1,
+                                    hasPic: _this.hasPic
+                                };
+                                // console.log("cacheData");
+                                // console.log(cacheData);
+                                var TrackCache = void 0;
+                                TrackCache = localStorage.getItem('TrackCache');
+                                if (TrackCache == null) {
+                                    TrackCache = [];
+                                }
+                                else {
+                                    TrackCache = JSON.parse(TrackCache);
+                                }
+                                TrackCache.push(cacheData);
+                                localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                                _this.base.showAlert('提示', '提交失败', function () { });
+                            }
+                            else {
+                                _this.base.showAlert('提示', '提交成功', function () { });
+                            }
+                            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                        }, function (reject) {
+                            console.log(reject);
+                            _this.base.showAlert('提示', '提交失败', function () { });
+                            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                            loader.dismiss();
+                        }).catch(function (reason) {
+                            console.log(reason);
+                            _this.base.showAlert('提示', '提交失败', function () { });
+                            var cacheData = {
+                                longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                                accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                                photoSum: _this.photosum, recordTime: JSON.stringify(_this.recordTime),
+                                pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, pic4: _this.cachePhoto4, pic5: _this.cachePhoto5, allLength: 1, curRow: 1,
+                                hasPic: _this.hasPic
+                            };
+                            // console.log("cacheData");
+                            // console.log(cacheData);
+                            var TrackCache;
+                            TrackCache = localStorage.getItem('TrackCache');
+                            if (TrackCache == null) {
+                                TrackCache = [];
+                            }
+                            else {
+                                TrackCache = JSON.parse(TrackCache);
+                            }
+                            TrackCache.push(cacheData);
+                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
+                            loader.dismiss();
+                        });
+                        _a.label = 7;
+                    case 7: return [2 /*return*/];
                 }
-                this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {}, {
-                    headers: { token: localStorage['token'] }, params: {
-                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                        accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: "1", recordTime: JSON.stringify(this.recordTime)
-                    }
-                })
-                    .subscribe(function (res) {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
-                    if (_this.hasPic == true) {
-                        var cacheData = {
-                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                            accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum
-                        };
-                    }
-                    else {
-                        var cacheData = {
-                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                            lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: false, photoSum: 0
-                        };
-                    }
-                    console.log("cacheData");
-                    //这一行
-                    __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-                }, function (msg) {
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-                    _this.base.showAlert('提示', '提交失败', function () { });
-                    if (_this.hasPic == true) {
-                        var cacheData = {
-                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                            accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: true, photoSum: _this.photosum, pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3,
-                            pic4: _this.cachePhoto4, pic5: _this.cachePhoto5
-                        };
-                        var TrackCache = void 0;
-                        TrackCache = localStorage.getItem('TrackCache');
-                        if (TrackCache == null) {
-                            TrackCache = [];
-                        }
-                        else {
-                            TrackCache = JSON.parse(TrackCache);
-                        }
-                        TrackCache.push(cacheData);
-                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                        console.log("Hello");
-                        //还有这一行
-                        __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-                    }
-                    else {
-                        var cacheData = {
-                            longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                            accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                            current: "1", recordTime: JSON.stringify(_this.recordTime), hasPic: false, photoSum: 0
-                        };
-                        var TrackCache = void 0;
-                        TrackCache = localStorage.getItem('TrackCache');
-                        if (TrackCache == null) {
-                            TrackCache = [];
-                        }
-                        else {
-                            TrackCache = JSON.parse(TrackCache);
-                        }
-                        TrackCache.push(cacheData);
-                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                        console.log("Hello");
-                        //还有这一行
-                        __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-                    }
-                });
-            }
-        }
+            });
+        });
     };
     TrackPage.prototype.takePhoto = function () {
         var _this = this;
@@ -4825,7 +4891,7 @@ var TrackPage = /** @class */ (function () {
                 correctOrientation: true,
                 saveToPhotoAlbum: true
             };
-            this.base.showAlert(this.photosum, "", function () { });
+            //this.base.showAlert(this.photosum, "", () => { });
             this.camera.getPicture(options).then(function (imageData) {
                 // this.submit(imageData)
                 // this.navCtrl.popToRoot()
@@ -4835,86 +4901,85 @@ var TrackPage = /** @class */ (function () {
                     _this.fivePhotos = true;
                     _this.canSubmit = false;
                 }
-                var options = {};
-                options.fileKey = "image";
-                var time = Date.parse(Date());
-                options.fileName = time + ".jpg";
-                options.mimeType = "image/jpeg";
-                options.chunkedMode = false;
-                options.httpMethod = "POST";
-                options.params = {
-                    lineName: _this.lineName,
-                    current: _this.photosum
-                };
-                options.headers = { token: localStorage['token'] };
-                console.log("options");
-                console.log(options);
-                console.log(_this.photosum);
-                console.log(_this.imageData);
-                console.log("======imageData====");
-                console.log(imageData);
-                console.log(_this.imageData);
+                // let options: FileUploadOptions = {};
+                // options.fileKey = "image";
+                // var time = Date.parse(Date());
+                // options.fileName = time + ".jpg";
+                // options.mimeType = "image/jpeg";
+                // options.chunkedMode = false;
+                // options.httpMethod = "POST";
+                // options.params = {
+                //     lineName: this.lineName,
+                //     current: this.photosum
+                // };
+                // options.headers = { token: localStorage['token'] };
+                // console.log("options");
+                // console.log(options);
+                // console.log(this.photosum);
+                // console.log(this.imageData);
+                // console.log("======imageData====");
+                // console.log(imageData);
+                // console.log(this.imageData);
                 //创建文件对象
-                var fileTransfer = _this.fileTransfer.create();
-                fileTransfer.upload(_this.imageData, _this.base.BASE_URL + 'app/AddPhoto', options)
-                    .then(function (res) {
-                    console.log(res);
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
-                    // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-                    _this.base.showAlert('提示', '提交成功', function () { });
-                    // Base.popTo(this.navCtrl, 'switchProjectPage');
-                }, function (error) {
-                    _this.base.showAlert('提示', '提交失败', function () { });
-                    // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                    if (_this.photosum == 1) {
-                        _this.cachePhoto1 = _this.imageData;
-                    }
-                    else if (_this.photosum == 2) {
-                        _this.cachePhoto2 = _this.imageData;
-                    }
-                    else if (_this.photosum == 3) {
-                        _this.cachePhoto3 = _this.imageData;
-                    }
-                    else if (_this.photosum == 4) {
-                        _this.cachePhoto4 = _this.imageData;
-                    }
-                    else if (_this.photosum == 5) {
-                        _this.cachePhoto5 = _this.imageData;
-                    }
-                    var cacheData = {
-                        lineName: _this.lineName,
-                        current: _this.current,
-                        img: _this.imageData,
-                    };
-                    var TrackCache;
-                    TrackCache = localStorage.getItem('TrackCache' + _this.current);
-                    if (TrackCache == null) {
-                        TrackCache = [];
-                    }
-                    else {
-                        TrackCache = JSON.parse(TrackCache);
-                    }
-                    TrackCache.push(cacheData);
-                    //localStorage安全保存数据
-                    // try{
-                    //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                    // }catch(oException){
-                    //     if(oException.name == 'QuotaExceededError'){
-                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                    //         //console.log('已经超出本地存储限定大小！');
-                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                    //       // localStorage.clear();
-                    //       // localStorage.setItem(key,value);
-                    //     }
-                    // } 
-                    localStorage.setItem('TrackCache' + _this.photosum.toString(), JSON.stringify(TrackCache));
-                    //this.navCtrl.pop();
-                    // confirm.dismiss()
-                    // Base.popTo(this.navCtrl, 'switchProjectPage');
-                })
-                    .catch(function (error) {
-                });
+                // const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                // fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
+                //     .then((res) => {
+                //         console.log(res);
+                //         console.log(JSON.stringify(res));
+                //         console.log(JSON.parse(JSON.stringify(res)).message);
+                // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                // this.base.showAlert('提示', '提交成功', () => { });
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                // }, (error) => {//发送失败(网络出错等)
+                //     this.base.showAlert('提示', '提交失败', () => { });
+                // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                if (_this.photosum == 1) {
+                    _this.cachePhoto1 = _this.imageData;
+                }
+                else if (_this.photosum == 2) {
+                    _this.cachePhoto2 = _this.imageData;
+                }
+                else if (_this.photosum == 3) {
+                    _this.cachePhoto3 = _this.imageData;
+                }
+                else if (_this.photosum == 4) {
+                    _this.cachePhoto4 = _this.imageData;
+                }
+                else if (_this.photosum == 5) {
+                    _this.cachePhoto5 = _this.imageData;
+                }
+                // let cacheData = {
+                //     lineName: this.lineName,
+                //     current: this.current,
+                //     img: this.imageData,
+                // };
+                // let TrackCache: any;
+                // TrackCache = localStorage.getItem('TrackCache' + this.current);
+                // if (TrackCache == null) {
+                //     TrackCache = [];
+                // } else {
+                //     TrackCache = JSON.parse(TrackCache);
+                // }
+                // TrackCache.push(cacheData);
+                //localStorage安全保存数据
+                // try{
+                //   localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                // }catch(oException){
+                //     if(oException.name == 'QuotaExceededError'){
+                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                //         //console.log('已经超出本地存储限定大小！');
+                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                //       // localStorage.clear();
+                //       // localStorage.setItem(key,value);
+                //     }
+                // } 
+                // localStorage.setItem('TrackCache' + this.photosum.toString(), JSON.stringify(TrackCache));
+                //this.navCtrl.pop();
+                // confirm.dismiss()
+                // Base.popTo(this.navCtrl, 'switchProjectPage');
+                // })
+                // .catch((error) => {//发送失败(文件不存在等)
+                // });
             }, function (err) {
                 // Handle error
                 // this.navCtrl.popToRoot()
@@ -4953,13 +5018,15 @@ var TrackPage = /** @class */ (function () {
         else {
             this.lineNameDis = true;
             this.startRecordIsClick = true;
-            this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {}, {
-                headers: { token: localStorage['token'] }, params: {
-                    linename: this.lineName,
-                }
-            }).subscribe(function (res) {
-                console.log(res);
-            });
+            //此处整合进submit
+            // this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
+            //     {
+            //         headers: { token: localStorage['token'] }, params: {
+            //             linename: this.lineName,
+            //         }
+            //     }).subscribe(res => {
+            //         console.log(res);
+            //     })
             this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
             console.log(this.recordTime.startTime);
             var options = {
@@ -5044,7 +5111,7 @@ var TrackPage = /** @class */ (function () {
     };
     TrackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-track',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置(秒)：</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="fivePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n\n        <button ion-button (click)="test()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n  \n        <button ion-button (click)="test()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
+            selector: 'app-track',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            轨迹追踪\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id=track>定　位　信　息</h2>\n            <hr id="line1" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n            </div>\n\n            <ion-item id="linename">\n                <ion-label>线路名称:</ion-label>\n                <ion-input [(disabled)]="lineNameDis" [(ngModel)]="lineName"></ion-input>\n            </ion-item>\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-input [(ngModel)]="workContent"></ion-input>\n            </ion-item>\n\n            <ion-item id="delay">\n                <ion-label>延时设置(秒)：</ion-label>\n                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="lateIntravl" (ionChange)="LateInput()"></ion-input>\n            </ion-item>\n\n            <ion-item id="remarks">\n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="startANDend">\n        <button  id="start" ion-button (click)="startRecord()">\n            <ion-label>开始录制</ion-label>\n        </button>\n        <button  id="end" ion-button (click)="stopRecord()">\n            <ion-label>停止录制</ion-label>\n        </button>\n    </div>\n\n    <div id="photoANDmap">\n        <button id="paizhao" ion-button (click)="takePhoto()" [disabled]="fivePhotos">\n            <ion-label>拍照</ion-label>\n        </button>\n        <button id="ditu"  ion-button (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n    </div>\n\n\n        <button  id="tijiao" ion-button (click)="submit()" [disabled]="canSubmit">\n            <ion-label>提交</ion-label>\n        </button>\n\n        <button ion-button (click)="test()">\n            <ion-label>清除缓存</ion-label>\n        </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/newTrack/newTrack.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
@@ -5827,7 +5894,7 @@ var NewMedicinePage = /** @class */ (function () {
     };
     NewMedicinePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new-medicine',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/new-medicine/new-medicine.html"*/'<!--\n  Generated template for the NewMedicinePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>药剂防治管理</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理</h2>\n            <hr id="line1" />\n        <div id="ID">\n            <ion-item id="one">\n                <ion-label>设备ID：</ion-label>\n                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n            </ion-item>\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n        </div>\n        <div id="NUM">\n            <ion-item id="two">\n                <ion-label>设备编号：</ion-label>\n                <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n        </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n             </div>\n             \n          <!-- 药剂名称 -->\n            <ion-item id="medicinename">\n                <ion-label>药剂名称：</ion-label>\n                <ion-select [(ngModel)]="medicinenameValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of medicinename" value="{{user.name}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <!-- 药剂数量 -->\n            <ion-item id="medicinenumber">\n                <ion-label>药剂质量(kg)：</ion-label>\n                <ion-input type="number"  [(ngModel)]="medicinenumber"></ion-input>\n            </ion-item>\n\n            <!-- 防治面积 -->\n            <ion-item id="controlarea">\n                <ion-label>防治面积(m²):</ion-label>\n                <ion-input type="number"  [(ngModel)]="controlarea"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of medicineworkContent" value="{{user.name}}">{{user.name}}\n                    </ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks"> \n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button>\n    </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/new-medicine/new-medicine.html"*/,
+            selector: 'page-new-medicine',template:/*ion-inline-start:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/new-medicine/new-medicine.html"*/'<!--\n  Generated template for the NewMedicinePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>药剂防治管理</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n    <ion-card>\n        <ion-card-content>\n            <h2 id="device">设　备　管　理</h2>\n            <hr id="line1" />\n        <div id="ID">\n            <ion-item id="one">\n                <ion-label>设备ID：</ion-label>\n                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>\n            </ion-item>\n            <button id="saomiao" ion-button (click)="scan()">扫码</button>\n        </div>\n        <div id="NUM">\n            <ion-item id="two">\n                <ion-label>设备编号：</ion-label>\n                <ion-input  [(ngModel)]="deviceSerial" (ionChange)="deviceSerialInput()"></ion-input>\n                <ion-icon name="search"></ion-icon>\n            </ion-item>\n            <button id="bangding" ion-button  (click)="bindNewId()">绑定</button>\n        </div>\n        </ion-card-content>\n    </ion-card>\n\n    <ion-card>\n        <ion-card-content>\n            <h2 id="info">维　护　信　息</h2>\n            <hr id="line2" />\n            <div id="jingwei">\n                <ion-item>\n                    <ion-label>经度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="longtitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>纬度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="latitude"></ion-input>\n                </ion-item>\n            </div>\n            <div id="haiba">\n                <ion-item>\n                    <ion-label>海拔:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="altitude"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>精度:</ion-label>\n                    <ion-input style="font-size: 86%; margin-left:-10%;" disabled="true" [(ngModel)]="accuracy"></ion-input>\n                </ion-item>\n             </div>\n             \n          <!-- 药剂名称 -->\n            <ion-item id="medicinename">\n                <ion-label>药剂名称：</ion-label>\n                <ion-select [(ngModel)]="medicinenameValue" cancelText="取消" okText="确定">\n                    <ion-option *ngFor="let user of medicinename" value="{{user.name}}">{{user.name}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <!-- 药剂数量 -->\n            <ion-item id="medicinenumber">\n                <ion-label>药剂质量(kg)：</ion-label>\n                <ion-input type="number"  [(ngModel)]="medicinenumber"></ion-input>\n            </ion-item>\n\n            <!-- 防治面积 -->\n            <ion-item id="controlarea">\n                <ion-label>防治面积(m²):</ion-label>\n                <ion-input type="number"  [(ngModel)]="controlarea"></ion-input>\n            </ion-item>\n\n\n            <ion-item id="workcontent">\n                <ion-label>工作内容:</ion-label>\n                <ion-select [(ngModel)]="workContentValue" cancelText="取消" okText="确定" >\n                    <ion-option *ngFor="let user of medicineworkContent" value="{{user.name}}">{{user.name}}\n                    </ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item id="remarks"> \n                <ion-label>备注:</ion-label>\n                <ion-input [(ngModel)]="remarks"></ion-input>\n            </ion-item>\n        </ion-card-content>\n    </ion-card>\n\n    <div id="photoANDsubmit">\n        <button id="paizhao" ion-button (click)="takePhoto()">\n            <ion-label>拍照</ion-label>\n        </button>\n\n        <button id="tijiao" ion-button  (click)="submit()">\n            <ion-label>提交</ion-label>\n        </button>\n    </div>\n    <div id="mapANDquery">\n        <button id="ditu" ion-button  (click)="NavToMap()">\n            <ion-label>地图查看</ion-label>\n        </button>\n\n        <button id="chaxun" ion-button  (click)="NavToQuery()">\n            <ion-label>查询</ion-label>\n        </button>\n\n        <!-- <button id="chaxun" ion-button  (click)="test()">\n            <ion-label>测试1000条</ion-label>\n        </button> -->\n    </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/youkaiyu/Desktop/诱捕器项目/TrapAndroidFrontEnd的副本/src/pages/new-medicine/new-medicine.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_qr_scanner__["a" /* QRScanner */],
             __WEBPACK_IMPORTED_MODULE_5__common_base_js__["a" /* Base */],
@@ -8590,7 +8657,7 @@ var Base = /** @class */ (function () {
         // BASE_URL = "http://39.108.184.47:8081/"
         // BASE_URL = "http://106.15.200.245:50000/"
         // BASE_URL = "http://106.15.90.78:50000/"
-        // BASE_URL = "http://127.0.0.1:8081/"
+        //BASE_URL = "http://127.0.0.1:50000/"
         this.BASE_URL = "http://192.168.31.254:50000/";
         this.transitionOptions = {
             direction: 'left',

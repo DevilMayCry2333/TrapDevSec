@@ -395,7 +395,7 @@ export class TrackPage {
                        options.params = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: j,  recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1"
+                           current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
                        };
                        options.headers = { token: localStorage['token'] };
                        const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -451,7 +451,8 @@ export class TrackPage {
                             longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                             accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
                             photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
-                            pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1
+                            pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
+                            hasPic:this.hasPic
                         };
                         // console.log("cacheData");
                         // console.log(cacheData);
@@ -482,7 +483,8 @@ export class TrackPage {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
                         photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
-                        pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1
+                        pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
+                        hasPic: this.hasPic
                         };
                         // console.log("cacheData");
                         // console.log(cacheData);
