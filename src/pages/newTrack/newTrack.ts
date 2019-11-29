@@ -228,7 +228,7 @@ export class TrackPage {
                                             // this.base.showAlert('提示', '提交成功', () => { });
                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
                                         }, (error) => {//发送失败(网络出错等)
-                                            this.picNotExsit1 = true;
+                                            // this.picNotExsit1 = true;
                                                 console.log(error);
                                             reject('error');
                                             // this.base.showAlert('提示', '提交失败', () => { });
