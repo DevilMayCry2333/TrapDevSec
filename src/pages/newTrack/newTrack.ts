@@ -228,16 +228,18 @@ export class TrackPage {
                                             // this.base.showAlert('提示', '提交成功', () => { });
                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
                                         }, (error) => {//发送失败(网络出错等)
-                                            // this.picNotExsit1 = true;
+                                            this.picNotExsit1 = true;
                                                 console.log(error);
-                                            reject('error');
+                                            // reject('error');
+                                                resovle('ok');
                                             // this.base.showAlert('提示', '提交失败', () => { });
                                             // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
                                         })
                                         .catch((error) => {//发送失败(文件不存在等)
                                             this.picNotExsit1 = true;
                                             console.log(error);
-                                            reject('error');
+                                            resovle('ok');
+                                            // reject('error');
                                         });
                                 }).catch((err)=>{
                                     console.log(err);
@@ -245,9 +247,9 @@ export class TrackPage {
                                 this.observers.push(observer);
 
 
-                        if(this.picNotExsit1){
+                            if (this.picNotExsit1 && i >= element.photoSum){
                             let obs = await new Promise((resovle,reject)=>{
-                                this.httpClient.post(this.base.BASE_URL + 'app/AddTrack2', {},
+                                this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
                                     {
                                         headers: { token: localStorage['token'] }, params: {
                                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
@@ -275,7 +277,7 @@ export class TrackPage {
                 } else {
                     console.log(element);
                     let obs = await new Promise((resolve,reject)=>{
-                        this.httpClient.post(this.base.BASE_URL + 'app/AddTrack2', {},
+                        this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
                             {
                                 headers: { token: localStorage['token'] }, params: {
                                     longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),

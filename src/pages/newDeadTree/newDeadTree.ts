@@ -26,7 +26,7 @@ export class DeadtreePage {
     // latitude: string;
     // altitude: string;
     // accuracy: string;
-    batch: any;
+    batch = "1";
     currentImg:any;
     currentNum = 0;
     longtitude="1.1234567";
@@ -247,49 +247,60 @@ export class DeadtreePage {
                                                 console.log("传输中isComp" + this.isComplete);
                                                 resolve('ok');
                                             }).catch((error) => {
+                                                console.log("进入catch");
+                                                
                                                 console.log(error);
                                                 that.picNotExist = true;
-                                                reject('error');
+                                                // reject('error');
+                                                resolve('ok');
                                             })
                                     }).catch((reason)=>{
                                         console.log(reason);
                                     })
                                     console.log("await" + j);
                                     that.observers.push(observer);
+                                     console.log("照片是否存在");
+                                    console.log(that.picNotExist);
+                                     if (that.picNotExist && j >= element.photoSum) {
+                                         //这个接口还要再改造下，判断是否全部传完了
+                                         let obs = new Promise((resolve, reject) => {
+                                             that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
+                                                 {
+                                                     headers: { token: localStorage['token'] }, params: {
+                                                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                                         accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
+                                                         killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch,
+                                                         current:'1', allLength: '1', curRow:'1'
+                                                     }
+                                                 })
+                                                 .subscribe(res => {
+                                                     console.log("进入then");
+                                                     console.log(res);
+                                                     
+                                                     
+                                                     resolve('ok');
+                                                     // that.base.showAlert("全部成功了", "", () => { });
+                                                     // console.log(JSON.stringify(res));
+                                                     // console.log(JSON.parse(JSON.stringify(res)).message);
+                                                 }, (msg) => {
+                                                     console.log("进入error");
+                                                     console.log(msg);
+                                                     reject('error');
+                                                     // this.base.showAlert('提示', '提交失败', () => { });
+                                                 });
+                                         }).catch((reason) => {
+                                             console.log(reason);
+                                         })
+                                     }
+
                                         // console.log(that.observers);
                                 })(i,j)
                                     // })(j)
                             }
-                    if (that.picNotExist) {
-                        //这个接口还要再改造下，判断是否全部传完了
-                        let obs = await new Promise((resolve,reject)=>{
-                            that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
-                                {
-                                    headers: { token: localStorage['token'] }, params: {
-                                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                        accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                        killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch
-                                    }
-                                })
-                                .subscribe(res => {
-                                    resolve('ok');
-                                    // that.base.showAlert("全部成功了", "", () => { });
-                                    // console.log(JSON.stringify(res));
-                                    // console.log(JSON.parse(JSON.stringify(res)).message);
-                                }, (msg) => {
-                                    reject('error');
-                                    // this.base.showAlert('提示', '提交失败', () => { });
-                                });
-                        }).catch((reason)=>{
-                            console.log(reason);
-                        })
-
-                        that.observers.push(obs);
-                    }
                 } else {
                     //这个接口还要再改造下，判断是否全部传完了
                     let obsernoPic = await new Promise((resolve,reject)=>{
-                        that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtrees', {},
+                        that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
                             {
                                 headers: { token: localStorage['token'] }, params: {
                                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -738,7 +749,7 @@ export class DeadtreePage {
                            console.log(reason);
                        })
                        console.log("await" + j);
-                       this.observers.push(observer);     
+                       this.observers.push(observer); 
                    })(j)
                }
                 Promise.all(this.observers).then((resolve) => {
