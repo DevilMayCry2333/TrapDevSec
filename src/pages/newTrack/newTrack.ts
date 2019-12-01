@@ -208,12 +208,13 @@ export class TrackPage {
                             uploadAddress = element.pic5;
                         }
                             console.log(uploadAddress);
-                        
                                 //创建文件对象
                                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
                                 let observer = await new Promise((resovle,reject)=>{
                                     fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
                                         .then((res) => {
+                                            console.log("进入then");
+                                            
                                             console.log(res);
                                             if (JSON.parse(res.response).isComp == true) {
                                                 this.isComplete = true;
@@ -227,15 +228,8 @@ export class TrackPage {
 
                                             // this.base.showAlert('提示', '提交成功', () => { });
                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                        }, (error) => {//发送失败(网络出错等)
-                                            this.picNotExsit1 = true;
-                                                console.log(error);
-                                            // reject('error');
-                                                resovle('ok');
-                                            // this.base.showAlert('提示', '提交失败', () => { });
-                                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                                        })
-                                        .catch((error) => {//发送失败(文件不存在等)
+                                        }).catch((error) => {//发送失败(文件不存在等)
+                                            console.log("进入error");
                                             this.picNotExsit1 = true;
                                             console.log(error);
                                             resovle('ok');
@@ -245,10 +239,10 @@ export class TrackPage {
                                     console.log(err);
                                 })
                                 this.observers.push(observer);
-
-
+                                console.log(i);
+        
                             if (this.picNotExsit1 && i >= element.photoSum){
-                            let obs = await new Promise((resovle,reject)=>{
+                            let obs = new Promise((resovle,reject)=>{
                                 this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
                                     {
                                         headers: { token: localStorage['token'] }, params: {
@@ -258,17 +252,18 @@ export class TrackPage {
                                         }
                                     })
                                     .subscribe(res => {
+                                        console.log("进入ok");
                                         console.log(JSON.stringify(res));
                                         console.log(JSON.parse(JSON.stringify(res)).message);
                                         resovle('ok');
                                     }, (msg) => {
+                                            console.log("进入fail");
                                         console.log(msg);
                                         reject('error');
                                     });
                             }).catch((err)=>{
                                 console.log(err);
                             })
-                            this.observers.push(obs);
                         }
 
                         })(i,j)

@@ -4557,10 +4557,12 @@ var TrackPage = /** @class */ (function () {
                                                                     uploadAddress = element.pic5;
                                                                 }
                                                                 console.log(uploadAddress);
+                                                                this.picNotExsit1 = false;
                                                                 fileTransfer = this.fileTransfer.create();
                                                                 return [4 /*yield*/, new Promise(function (resovle, reject) {
                                                                         fileTransfer.upload(uploadAddress, _this.base.BASE_URL + 'app/AddPhoto2', options)
                                                                             .then(function (res) {
+                                                                            console.log("进入then");
                                                                             console.log(res);
                                                                             if (JSON.parse(res.response).isComp == true) {
                                                                                 _this.isComplete = true;
@@ -4573,15 +4575,8 @@ var TrackPage = /** @class */ (function () {
                                                                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                                                                             // this.base.showAlert('提示', '提交成功', () => { });
                                                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                                                        }, function (error) {
-                                                                            _this.picNotExsit1 = true;
-                                                                            console.log(error);
-                                                                            // reject('error');
-                                                                            resovle('ok');
-                                                                            // this.base.showAlert('提示', '提交失败', () => { });
-                                                                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
-                                                                        })
-                                                                            .catch(function (error) {
+                                                                        }).catch(function (error) {
+                                                                            console.log("进入error");
                                                                             _this.picNotExsit1 = true;
                                                                             console.log(error);
                                                                             resovle('ok');
@@ -4593,8 +4588,9 @@ var TrackPage = /** @class */ (function () {
                                                             case 1:
                                                                 observer = _a.sent();
                                                                 this.observers.push(observer);
-                                                                if (!(this.picNotExsit1 && i >= element.photoSum)) return [3 /*break*/, 3];
-                                                                return [4 /*yield*/, new Promise(function (resovle, reject) {
+                                                                console.log(i);
+                                                                if (this.picNotExsit1 && i >= 5) {
+                                                                    obs = new Promise(function (resovle, reject) {
                                                                         _this.httpClient.post(_this.base.BASE_URL + 'app/AddPhoto2', {}, {
                                                                             headers: { token: localStorage['token'] }, params: {
                                                                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
@@ -4603,21 +4599,20 @@ var TrackPage = /** @class */ (function () {
                                                                             }
                                                                         })
                                                                             .subscribe(function (res) {
+                                                                            console.log("进入ok");
                                                                             console.log(JSON.stringify(res));
                                                                             console.log(JSON.parse(JSON.stringify(res)).message);
                                                                             resovle('ok');
                                                                         }, function (msg) {
+                                                                            console.log("进入fail");
                                                                             console.log(msg);
                                                                             reject('error');
                                                                         });
                                                                     }).catch(function (err) {
                                                                         console.log(err);
-                                                                    })];
-                                                            case 2:
-                                                                obs = _a.sent();
-                                                                this.observers.push(obs);
-                                                                _a.label = 3;
-                                                            case 3: return [2 /*return*/];
+                                                                    });
+                                                                }
+                                                                return [2 /*return*/];
                                                         }
                                                     });
                                                 }); })(i, j)];
