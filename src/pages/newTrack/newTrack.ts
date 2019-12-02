@@ -266,7 +266,8 @@ export class TrackPage {
                                 console.log("===图片不存在===");
                                 console.log(that.picNotExsit1);
 
-                            if (that.picNotExsit1 && i >= element.photoSum){
+                            // if (that.picNotExsit1 && i >= element.photoSum){
+                            if (that.picNotExsit1 && i ==1 ){
                             let obs = new Promise((resovle,reject)=>{
                                 this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
                                     {
