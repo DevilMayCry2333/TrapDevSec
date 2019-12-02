@@ -4419,6 +4419,10 @@ var TrackPage = /** @class */ (function () {
         this.fileTransfer = fileTransfer;
         this.base64 = base64;
         this.loadingCtrl = loadingCtrl;
+        // longtitude: string;
+        this.longtitude = "1.1234567";
+        this.latitude = "1.1234567";
+        this.altitude = "1.1234567";
         this.recordTime = {};
         this.observers = [];
         this.currentNum = 0;
@@ -4436,6 +4440,9 @@ var TrackPage = /** @class */ (function () {
         this.flag = 0;
         this.lineNameDis = false;
         this.picNotExist = false;
+        // have_submit: boolean;
+        // altitude: string;
+        this.accuracy = "1";
         this.remarks = "";
         this.fivePhotos = false;
         this.canSubmit = true;
@@ -4525,6 +4532,10 @@ var TrackPage = /** @class */ (function () {
                                                                 console.log(j);
                                                                 console.log("=====当前第几张照片====");
                                                                 console.log(i);
+                                                                console.log("三种形态");
+                                                                console.log(element.recordTime);
+                                                                console.log(JSON.stringify(element.recordTime));
+                                                                console.log(JSON.parse(element.recordTime));
                                                                 options = {};
                                                                 options.fileKey = "image";
                                                                 time = Date.parse(Date());
@@ -4558,6 +4569,8 @@ var TrackPage = /** @class */ (function () {
                                                                 }
                                                                 console.log(uploadAddress);
                                                                 this.picNotExsit1 = false;
+                                                                console.log("初始化后值为");
+                                                                console.log(this.picNotExsit1);
                                                                 fileTransfer = this.fileTransfer.create();
                                                                 return [4 /*yield*/, new Promise(function (resovle, reject) {
                                                                         fileTransfer.upload(uploadAddress, _this.base.BASE_URL + 'app/AddPhoto2', options)
@@ -4575,9 +4588,13 @@ var TrackPage = /** @class */ (function () {
                                                                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
                                                                             // this.base.showAlert('提示', '提交成功', () => { });
                                                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                                                        }).catch(function (error) {
+                                                                        }, function (msg) {
                                                                             console.log("进入error");
-                                                                            _this.picNotExsit1 = true;
+                                                                            console.log(msg);
+                                                                            reject('error');
+                                                                        }).catch(function (error) {
+                                                                            console.log("进入catch");
+                                                                            that.picNotExsit1 = true;
                                                                             console.log(error);
                                                                             resovle('ok');
                                                                             // reject('error');
@@ -4588,14 +4605,18 @@ var TrackPage = /** @class */ (function () {
                                                             case 1:
                                                                 observer = _a.sent();
                                                                 this.observers.push(observer);
+                                                                console.log("第几张图片");
                                                                 console.log(i);
-                                                                if (this.picNotExsit1 && i >= 5) {
+                                                                console.log(j);
+                                                                console.log("===图片不存在===");
+                                                                console.log(that.picNotExsit1);
+                                                                if (that.picNotExsit1 && i >= element.photoSum) {
                                                                     obs = new Promise(function (resovle, reject) {
                                                                         _this.httpClient.post(_this.base.BASE_URL + 'app/AddPhoto2', {}, {
                                                                             headers: { token: localStorage['token'] }, params: {
                                                                                 longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                                                                                 accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                                                                current: "1", recordTime: element.recordTime
+                                                                                current: "1", recordTime: element.recordTime.toString()
                                                                             }
                                                                         })
                                                                             .subscribe(function (res) {
@@ -4630,7 +4651,7 @@ var TrackPage = /** @class */ (function () {
                                                         headers: { token: localStorage['token'] }, params: {
                                                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
                                                             accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                                            current: "1", recordTime: element.recordTime
+                                                            current: "1", recordTime: element.recordTime.toString()
                                                         }
                                                     })
                                                         .subscribe(function (res) {
@@ -4696,13 +4717,10 @@ var TrackPage = /** @class */ (function () {
     TrackPage.prototype.submit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var loader, myImage, j;
+            var myImage, j;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        loader = this.loadingCtrl.create({
-                            content: "缓存数据正在提交，请勿退出",
-                        });
                         if (!(this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false)) return [3 /*break*/, 1];
                         this.base.showAlert("提示", "你还没有完成一个录制循环", function () { });
                         this.canSubmit = false;
@@ -4715,8 +4733,6 @@ var TrackPage = /** @class */ (function () {
                         console.log(this.imageData);
                         myImage = this.imageData;
                         if (!(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl)) return [3 /*break*/, 2];
-                        this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
-                        this.canSubmit = false;
                         return [3 /*break*/, 7];
                     case 2:
                         // var options: string = "deviceId: " + this.id +
@@ -4732,9 +4748,9 @@ var TrackPage = /** @class */ (function () {
                         // };
                         // this.base.logger(JSON.stringify(options), "newTrackPar.txt");
                         if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                            this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", function () { });
-                            this.canSubmit = false;
-                            return [2 /*return*/];
+                            // this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", () => { });
+                            // this.canSubmit = false;
+                            // return;
                         }
                         j = 1;
                         _a.label = 3;
@@ -4789,6 +4805,7 @@ var TrackPage = /** @class */ (function () {
                                                         }
                                                         resolve('ok');
                                                     }).catch(function (error) {
+                                                        console.log(error);
                                                         _this.picNotExist = true;
                                                         reject('error');
                                                     });
@@ -4811,68 +4828,74 @@ var TrackPage = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 6:
                         Promise.all(this.observers).then(function (resolve) {
+                            console.log("进入resolve");
                             console.log(resolve);
-                            loader.dismiss();
+                            _this.base.showAlert(resolve[0], "", function () { });
+                            _this.base.showAlert(typeof (resolve[0]), "", function () { });
+                            console.log(resolve[0]);
+                            console.log(typeof (resolve[0]));
                             for (var i = 0; i < resolve.length; i++) {
-                                if (resolve[i] == undefined || resolve[i] == "") {
+                                console.log(typeof (resolve[i]));
+                                console.log(resolve[i]);
+                                if (resolve[i] != "ok") {
                                     _this.submitFail = true;
+                                    var cacheData = {
+                                        longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
+                                        accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
+                                        photoSum: _this.photosum, recordTime: JSON.stringify(_this.recordTime),
+                                        pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, pic4: _this.cachePhoto4, pic5: _this.cachePhoto5, allLength: 1, curRow: 1,
+                                        hasPic: _this.hasPic
+                                    };
+                                    // console.log("cacheData");
+                                    // console.log(cacheData);
+                                    var TrackCache = void 0;
+                                    TrackCache = localStorage.getItem('TrackCache');
+                                    if (TrackCache == null) {
+                                        TrackCache = [];
+                                    }
+                                    else {
+                                        TrackCache = JSON.parse(TrackCache);
+                                    }
+                                    TrackCache.push(cacheData);
+                                    localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                                    _this.base.showAlert('提示', '提交失败', function () { });
+                                    break;
                                 }
                             }
                             if (_this.submitFail) {
-                                var cacheData = {
-                                    longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                                    accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                                    photoSum: _this.photosum, recordTime: JSON.stringify(_this.recordTime),
-                                    pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, pic4: _this.cachePhoto4, pic5: _this.cachePhoto5, allLength: 1, curRow: 1,
-                                    hasPic: _this.hasPic
-                                };
-                                // console.log("cacheData");
-                                // console.log(cacheData);
-                                var TrackCache = void 0;
-                                TrackCache = localStorage.getItem('TrackCache');
-                                if (TrackCache == null) {
-                                    TrackCache = [];
-                                }
-                                else {
-                                    TrackCache = JSON.parse(TrackCache);
-                                }
-                                TrackCache.push(cacheData);
-                                localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                                _this.base.showAlert('提示', '提交失败', function () { });
                             }
                             else {
                                 _this.base.showAlert('提示', '提交成功', function () { });
                             }
                             __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
                         }, function (reject) {
+                            console.log("submitReject");
                             console.log(reject);
                             _this.base.showAlert('提示', '提交失败', function () { });
                             __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-                            loader.dismiss();
                         }).catch(function (reason) {
+                            console.log("submitCatch");
                             console.log(reason);
                             _this.base.showAlert('提示', '提交失败', function () { });
-                            var cacheData = {
-                                longtitudeData: _this.longtitudeData.toString(), latitudeData: _this.latitudeData.toString(), altitudeData: _this.altitudeData.toString(),
-                                accuracyData: _this.accuracyData.toString(), lineName: _this.lineName, workContent: _this.workContent, lateIntravl: _this.lateIntravl.toString(), remarks: _this.remarks,
-                                photoSum: _this.photosum, recordTime: JSON.stringify(_this.recordTime),
-                                pic1: _this.cachePhoto1, pic2: _this.cachePhoto2, pic3: _this.cachePhoto3, pic4: _this.cachePhoto4, pic5: _this.cachePhoto5, allLength: 1, curRow: 1,
-                                hasPic: _this.hasPic
-                            };
-                            // console.log("cacheData");
-                            // console.log(cacheData);
-                            var TrackCache;
-                            TrackCache = localStorage.getItem('TrackCache');
-                            if (TrackCache == null) {
-                                TrackCache = [];
-                            }
-                            else {
-                                TrackCache = JSON.parse(TrackCache);
-                            }
-                            TrackCache.push(cacheData);
-                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                            // let cacheData = {
+                            //     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            //     accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
+                            //     photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
+                            //     pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
+                            //     hasPic: this.hasPic
+                            //     };
+                            //     // console.log("cacheData");
+                            //     // console.log(cacheData);
+                            //     let TrackCache: any;
+                            //     TrackCache = localStorage.getItem('TrackCache');
+                            //     if (TrackCache == null) {
+                            //         TrackCache = [];
+                            //     } else {
+                            //         TrackCache = JSON.parse(TrackCache);
+                            //     }
+                            //     TrackCache.push(cacheData);   
+                            //     localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                             __WEBPACK_IMPORTED_MODULE_4__common_base_js__["a" /* Base */].popTo(_this.navCtrl, 'switchProjectPage');
-                            loader.dismiss();
                         });
                         _a.label = 7;
                     case 7: return [2 /*return*/];
@@ -8662,10 +8685,10 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        this.BASE_URL = "http://106.15.200.245:50000/";
+        // BASE_URL = "http://106.15.200.245:50000/"
         // BASE_URL = "http://106.15.90.78:50000/"
         //BASE_URL = "http://127.0.0.1:50000/"
-        //  BASE_URL = "http://192.168.31.254:50000/"
+        this.BASE_URL = "http://192.168.199.199:50000/";
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
