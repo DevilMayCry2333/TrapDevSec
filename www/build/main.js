@@ -4610,7 +4610,7 @@ var TrackPage = /** @class */ (function () {
                                                                 console.log(j);
                                                                 console.log("===图片不存在===");
                                                                 console.log(that.picNotExsit1);
-                                                                if (that.picNotExsit1 && i >= element.photoSum) {
+                                                                if (that.picNotExsit1 && i <= 1) {
                                                                     obs = new Promise(function (resovle, reject) {
                                                                         _this.httpClient.post(_this.base.BASE_URL + 'app/AddPhoto2', {}, {
                                                                             headers: { token: localStorage['token'] }, params: {
@@ -8685,10 +8685,10 @@ var Base = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.file = file;
         // BASE_URL = "http://39.108.184.47:8081/"
-        // BASE_URL = "http://106.15.200.245:50000/"
+        this.BASE_URL = "http://106.15.200.245:50000/";
         // BASE_URL = "http://106.15.90.78:50000/"
         //BASE_URL = "http://127.0.0.1:50000/"
-        this.BASE_URL = "http://192.168.199.199:50000/";
+        //  BASE_URL = "http://192.168.199.199:50000/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,
