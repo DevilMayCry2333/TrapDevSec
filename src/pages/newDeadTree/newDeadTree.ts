@@ -33,9 +33,10 @@ export class DeadtreePage {
     latitude="1.1234567";
     altitude="1.1234567";
     accuracy="1.1234567";
-    diameter = 0;
     hasClear = false;
+    diameter = 0;
     height = 0;
+    volume = 0;
     observers=[];
     picture=[];
     observers2HasPic=[];
@@ -59,7 +60,6 @@ export class DeadtreePage {
     base642:any;
     base643:any;
     i:any;
-    volume = 0;
     killMethodsValue:string;
     killMethods:any[];
     imageData:null
@@ -688,7 +688,7 @@ export class DeadtreePage {
         // if (!this.killMethodsValue){
         //     this.killMethodsValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy ||!this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN ||!this.volume || this.volume < 0 || this.volume == NaN   ) {
             this.base.showAlert("提示", "数量输入为空或者不合法！", () => { });
             this.canSubmit = false;
         } else {
@@ -698,7 +698,7 @@ export class DeadtreePage {
                 //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
 
                 // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN ||!this.volume || this.volume < 0 || this.volume == NaN  ) {
                     this.base.showAlert("提示", "数量输入为空或者不合法！", () => { });
                     this.canSubmit = false;
                     return;
