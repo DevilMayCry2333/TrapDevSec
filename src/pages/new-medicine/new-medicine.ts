@@ -37,8 +37,8 @@ export class NewMedicinePage {
     // woodStatusValue:string       
     medicinename:any[]
     medicinenameValue:string     //
-    medicinenumber:string
-    controlarea:string
+    medicinenumber= 0;
+    controlarea= 0;
     medicineworkContent:any[]
     workContentValue:string      //
     have_submit:boolean
@@ -444,41 +444,42 @@ submit() {
     this.have_submit = true;
     let num1 = 0;
     console.log(this.medicinenumber);
-    if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+    // if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+        if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
         console.log("medicinenumber不合法");
-        this.medicinenumber = "";
+        this.medicinenumber = 0;
         // this.base.showAlert('提示', '请输入数字', () => { });
     }
     if (!this.medicinenumber) {
         console.log("medicinenumber不合法");
-        this.medicinenumber = "";
+        this.medicinenumber = 0;
         // this.base.showAlert('提示', '请输入数字', () => { });
     }
-    num1 = parseInt(this.medicinenumber);
-    this.medicinenumber = '' + num1;
-    if (this.medicinenumber == 'NaN') {
-        console.log("medicinenumber不合法");
-        this.medicinenumber = "";
-        // this.base.showAlert('提示', '请输入数字', () => { });
-    }
+    num1 = this.medicinenumber;
+    this.medicinenumber = 0 + num1;
+    // if (this.medicinenumber == 'NaN') {
+    //     console.log("medicinenumber不合法");
+    //     this.medicinenumber = "";
+    //     // this.base.showAlert('提示', '请输入数字', () => { });
+    // }
     let num2 = 0;
-    if (parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+    if (this.controlarea < 0 || this.controlarea == NaN) {
         console.log("controlarea不合法");
-        this.controlarea = "";
+        this.controlarea = 0;
         // this.base.showAlert('提示', '请输入数字', () => { });
     }
     if (!this.controlarea) {
         console.log("controlarea不合法");
-        this.controlarea = "";
+        this.controlarea = 0;
         // this.base.showAlert('提示', '请输入数字', () => { });
     }
-    num2 = parseInt(this.controlarea);
-    this.controlarea = '' + num2;
-    if (this.controlarea == 'NaN') {
-        console.log("controlarea不合法");
-        this.controlarea = "";
-        // this.base.showAlert('提示', '请输入数字', () => { });
-    }
+    num2 = this.controlarea;
+    this.controlarea = 0 + num2;
+    // if (this.controlarea == 'NaN') {
+    //     console.log("controlarea不合法");
+    //     this.controlarea = "";
+    //     // this.base.showAlert('提示', '请输入数字', () => { });
+    // }
     
     // if (!this.woodStatusValue){
     //     this.woodStatusValue = "0";
@@ -489,8 +490,7 @@ submit() {
     // if (!this.workContentValue){
     //     this.workContentValue = "0";
     // }
-    if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+    if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN ) {
         this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
         
     } else {
@@ -516,8 +516,7 @@ submit() {
 
 
             this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
-            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN ) {
                 this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
                 return;
             }
@@ -572,8 +571,8 @@ submit() {
                     {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), altitude: this.altitude.toString(),
-                            accuracy: this.accuracy.toString(), medicinenameValue: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber, remarks: this.remarks,
-                            workContentValue: this.workContentValue,controlarea:this.controlarea
+                            accuracy: this.accuracy.toString(), medicinenameValue: this.medicinenameValue.toString(), medicinenumber: this.medicinenumber.toString(), remarks: this.remarks,
+                            workContentValue: this.workContentValue,controlarea:this.controlarea.toString()
                         }
                     })
                     .subscribe(res => {
@@ -648,8 +647,7 @@ submit() {
                 controlarea: this.controlarea,myDate:new Date()
             };
             this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
-            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-                || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+            if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
                 this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
                 return;
             }
@@ -659,9 +657,9 @@ submit() {
                         deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), 
                         altitude: this.altitude.toString(),
                         accuracy: this.accuracy.toString(), 
-                        medicinenumber: this.medicinenumber, remarks: this.remarks,
+                        medicinenumber: this.medicinenumber.toString(), remarks: this.remarks,
                         medicinenameValue: this.medicinenameValue.toString(),
-                        workContentValue: this.workContentValue,controlarea:this.controlarea
+                        workContentValue: this.workContentValue,controlarea:this.controlarea.toString()
                     }
                 })
                 .subscribe(res => {
@@ -743,19 +741,19 @@ test(){
         this.accuracy = "22"
         this.altitude = "14";
         this.remarks = "0";
-        this.medicinenumber = "20"
+        this.medicinenumber = 20
         this.medicinenameValue = "3"
         this.workContentValue = "2"
-        this.controlarea = "5"
+        this.controlarea = 5
         this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
         {
             headers: { token: localStorage['token'] }, params: {
                 deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(), 
                 altitude: this.altitude.toString(),
                 accuracy: this.accuracy.toString(), 
-                medicinenumber: this.medicinenumber, remarks: this.remarks,
+                medicinenumber: this.medicinenumber.toString(), remarks: this.remarks,
                 medicinenameValue: this.medicinenameValue.toString(),
-                workContentValue: this.workContentValue,controlarea:this.controlarea
+                workContentValue: this.workContentValue,controlarea:this.controlarea.toString()
             }
         })
         .subscribe(res => {
@@ -820,32 +818,33 @@ test(){
 //药剂数量
 medicinenumberInput(){
     let num1 = 0;
-    if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+    if (this.medicinenumber < 0 ||this.medicinenumber == NaN) {
         this.base.showAlert('提示', '请输入数字', () => { });
     }
     if (!this.medicinenumber) {
         this.base.showAlert('提示', '请输入数字', () => { });
     }
-    num1 = parseInt(this.medicinenumber);
-    this.medicinenumber = '' + num1;
-    if (this.medicinenumber == 'NaN') {
-        this.base.showAlert('提示', '请输入数字', () => { });
-    }
+    num1 = this.medicinenumber;
+    this.medicinenumber = 0 + num1;
+    // if (this.medicinenumber == 'NaN') {
+    //     this.base.showAlert('提示', '请输入数字', () => { });
+    // }
 }
 // 防治面积
 controlareaInput(){
     let num1 = 0;
-    if (parseInt(this.  controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+    // if (parseInt(this.  controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+    if (this.  controlarea < 0 ||this.controlarea == NaN) {
         this.base.showAlert('提示', '请输入数字', () => { });
     }
     if (!this.controlarea) {
         this.base.showAlert('提示', '请输入数字', () => { });
     }
-    num1 = parseInt(this.controlarea);
-    this.controlarea = '' + num1;
-    if (this.controlarea == 'NaN') {
-        this.base.showAlert('提示', '请输入数字', () => { });
-    }
+    num1 = this.controlarea;
+    this.controlarea = 0 + num1;
+    // if (this.controlarea == 'NaN') {
+    //     this.base.showAlert('提示', '请输入数字', () => { });
+    // }
 }
 
 }
