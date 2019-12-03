@@ -3505,9 +3505,10 @@ var DeadtreePage = /** @class */ (function () {
         this.latitude = "1.1234567";
         this.altitude = "1.1234567";
         this.accuracy = "1.1234567";
-        this.diameter = 0;
         this.hasClear = false;
+        this.diameter = 0;
         this.height = 0;
+        this.volume = 0;
         this.observers = [];
         this.picture = [];
         this.observers2HasPic = [];
@@ -3517,7 +3518,6 @@ var DeadtreePage = /** @class */ (function () {
         this.photosum = 0;
         this.isComplete = false;
         this.submitFail = false;
-        this.volume = 0;
         this.remarks = "";
         this.threePhotos = false;
         this.canSubmit = true;
@@ -3689,19 +3689,21 @@ var DeadtreePage = /** @class */ (function () {
             }
         }
     };
-    DeadtreePage.prototype.awaitF = function (tmpStorage) {
+    DeadtreePage.prototype.awaitF = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var loader, that, i;
+            var loader, that, tmpStorage, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(tmpStorage);
                         loader = this.loadingCtrl.create({
                             content: "缓存数据正在提交，请勿退出",
                         });
                         loader.present();
                         that = this;
+                        tmpStorage = JSON.parse(localStorage["deadCache"]);
+                        this.curTmpSotrage = tmpStorage;
+                        console.log(tmpStorage);
                         i = 0;
                         _a.label = 1;
                     case 1:
@@ -3721,7 +3723,7 @@ var DeadtreePage = /** @class */ (function () {
                                             if (!(j <= element.photoSum)) return [3 /*break*/, 4];
                                             return [4 /*yield*/, (function (i, j) { return __awaiter(_this, void 0, void 0, function () {
                                                     var _this = this;
-                                                    var options, time, fileTransfer, uploadAddress, observer, obs;
+                                                    var options, time, fileTransfer, uploadAddress, observer;
                                                     return __generator(this, function (_a) {
                                                         switch (_a.label) {
                                                             case 0:
@@ -3754,6 +3756,11 @@ var DeadtreePage = /** @class */ (function () {
                                                                     that.currentImg = that.photolib3;
                                                                 }
                                                                 console.log(uploadAddress);
+                                                                that.picNotExist = false;
+                                                                this.j = j;
+                                                                this.i = i;
+                                                                this.curTmpSotrage = tmpStorage;
+                                                                this.curOptions = options.params;
                                                                 return [4 /*yield*/, new Promise(function (resolve, reject) {
                                                                         fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                                                                             .then(function (res) {
@@ -3772,49 +3779,50 @@ var DeadtreePage = /** @class */ (function () {
                                                                             }
                                                                             console.log("传输中isComp" + _this.isComplete);
                                                                             resolve('ok');
-                                                                        }).catch(function (error) {
-                                                                            console.log("进入catch");
-                                                                            console.log(error);
+                                                                        }, function (msg) {
+                                                                            console.log("进入msg");
+                                                                            console.log(msg);
                                                                             that.picNotExist = true;
-                                                                            // reject('error');
+                                                                            if (_this.j <= 1) {
+                                                                                console.log("数据是", that.curOptions);
+                                                                                that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {}, {
+                                                                                    headers: { token: localStorage['token'] }, params: {
+                                                                                        deviceId: that.curOptions.deviceId, longitude: that.curOptions.longitude, latitude: that.curOptions.latitude, altitude: that.curOptions.altitude,
+                                                                                        accuracy: that.curOptions.accuracy, diameter: that.curOptions.diameter, height: that.curOptions.height, volume: that.curOptions.volume,
+                                                                                        killMethodsValue: that.curOptions.killMethodsValue, remarks: that.curOptions.remarks, batch: that.curOptions.batch,
+                                                                                        current: '1', allLength: '1', curRow: '1'
+                                                                                    }
+                                                                                }).toPromise().then(function (res) {
+                                                                                    console.log("进入then");
+                                                                                    console.log(res);
+                                                                                    console.log("===" + that.i);
+                                                                                    if (that.i >= that.curTmpSotrage.length - 1) {
+                                                                                        that.isComplete = true;
+                                                                                    }
+                                                                                    console.log(that.isComplete);
+                                                                                    resolve('ok');
+                                                                                    // that.base.showAlert("全部成功了", "", () => { });
+                                                                                    // console.log(JSON.stringify(res));
+                                                                                    // console.log(JSON.parse(JSON.stringify(res)).message);
+                                                                                }, function (msg) {
+                                                                                    console.log("进入error");
+                                                                                    console.log(msg);
+                                                                                    reject('error');
+                                                                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                                                                });
+                                                                            }
                                                                             resolve('ok');
                                                                         });
-                                                                    }).catch(function (reason) {
-                                                                        console.log(reason);
+                                                                    }).catch(function (err) {
+                                                                        console.log(err);
                                                                     })];
                                                             case 1:
                                                                 observer = _a.sent();
                                                                 console.log("await" + j);
-                                                                that.observers.push(observer);
+                                                                //  if (!that.picNotExist)
+                                                                this.observers.push(observer);
                                                                 console.log("照片是否存在");
                                                                 console.log(that.picNotExist);
-                                                                if (that.picNotExist && j >= element.photoSum) {
-                                                                    obs = new Promise(function (resolve, reject) {
-                                                                        that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {}, {
-                                                                            headers: { token: localStorage['token'] }, params: {
-                                                                                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                                                                accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                                                                killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch,
-                                                                                current: '1', allLength: '1', curRow: '1'
-                                                                            }
-                                                                        })
-                                                                            .subscribe(function (res) {
-                                                                            console.log("进入then");
-                                                                            console.log(res);
-                                                                            resolve('ok');
-                                                                            // that.base.showAlert("全部成功了", "", () => { });
-                                                                            // console.log(JSON.stringify(res));
-                                                                            // console.log(JSON.parse(JSON.stringify(res)).message);
-                                                                        }, function (msg) {
-                                                                            console.log("进入error");
-                                                                            console.log(msg);
-                                                                            reject('error');
-                                                                            // this.base.showAlert('提示', '提交失败', () => { });
-                                                                        });
-                                                                    }).catch(function (reason) {
-                                                                        console.log(reason);
-                                                                    });
-                                                                }
                                                                 return [2 /*return*/];
                                                         }
                                                     });
@@ -3861,10 +3869,12 @@ var DeadtreePage = /** @class */ (function () {
                         i++;
                         return [3 /*break*/, 1];
                     case 4:
-                        Promise.all(that.observers).then(function (resolve) {
+                        Promise.all(this.observers).then(function (resolve) {
                             console.log(resolve);
+                            console.log(that.observers);
                             loader.dismiss();
-                            if (_this.isComplete) {
+                            console.log("结束了嘛", _this.isComplete);
+                            if (that.isComplete) {
                                 console.log("*****清除缓存了******");
                                 localStorage.removeItem('deadCache');
                             }
@@ -3872,6 +3882,7 @@ var DeadtreePage = /** @class */ (function () {
                             console.log(reject);
                             loader.dismiss();
                         }).catch(function (reason) {
+                            loader.dismiss();
                             console.log(reason);
                         });
                         return [2 /*return*/];
@@ -3926,7 +3937,7 @@ var DeadtreePage = /** @class */ (function () {
                         this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
                     }
                     this.i = 0;
-                    n = this.awaitF(tmpStorage);
+                    n = this.awaitF();
                     console.log(n);
                     this.sleep(tmpStorage);
                 }
@@ -4089,7 +4100,7 @@ var DeadtreePage = /** @class */ (function () {
                             // this.base.showAlert('提示', '请输入数字', () => { });
                         }
                         num1 = this.volume;
-                        if (!(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume)) return [3 /*break*/, 1];
+                        if (!(!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN || !this.volume || this.volume < 0 || this.volume == NaN)) return [3 /*break*/, 1];
                         this.base.showAlert("提示", "数量输入为空或者不合法！", function () { });
                         this.canSubmit = false;
                         return [3 /*break*/, 6];
@@ -4099,7 +4110,7 @@ var DeadtreePage = /** @class */ (function () {
                         //     "maleNum:" + this.maleNum + "femaleNum:" + this.femaleNum + "altitude:" + this.altitude +
                         //     "drug:" + this.drug + "remark:" + this.remark + "workingContent:" + this.workingContent + "otherNum:" + this.otherNum + "otherType:" + this.otherType;
                         // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
-                        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.diameter || !this.height || !this.volume || !this.killMethodsValue || this.volume < 0 || this.volume == NaN || !this.volume) {
+                        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN || !this.volume || this.volume < 0 || this.volume == NaN) {
                             this.base.showAlert("提示", "数量输入为空或者不合法！", function () { });
                             this.canSubmit = false;
                             return [2 /*return*/];
@@ -4509,7 +4520,7 @@ var TrackPage = /** @class */ (function () {
                                             if (!(i <= element.photoSum)) return [3 /*break*/, 4];
                                             return [4 /*yield*/, (function (i, j) { return __awaiter(_this, void 0, void 0, function () {
                                                     var _this = this;
-                                                    var options, time, uploadAddress, fileTransfer, observer, obs;
+                                                    var options, time, uploadAddress, fileTransfer, observer;
                                                     return __generator(this, function (_a) {
                                                         switch (_a.label) {
                                                             case 0:
@@ -4569,6 +4580,10 @@ var TrackPage = /** @class */ (function () {
                                                                 }
                                                                 console.log(uploadAddress);
                                                                 this.picNotExsit1 = false;
+                                                                this.i = i;
+                                                                this.j = j;
+                                                                this.curtmpStorage = tmpStorage;
+                                                                this.currOptions = options.params;
                                                                 console.log("初始化后值为");
                                                                 console.log(this.picNotExsit1);
                                                                 fileTransfer = this.fileTransfer.create();
@@ -4591,19 +4606,39 @@ var TrackPage = /** @class */ (function () {
                                                                         }, function (msg) {
                                                                             console.log("进入error");
                                                                             console.log(msg);
-                                                                            reject('error');
-                                                                        }).catch(function (error) {
-                                                                            console.log("进入catch");
                                                                             that.picNotExsit1 = true;
-                                                                            console.log(error);
+                                                                            if (_this.i <= 1) {
+                                                                                console.log(that.currOptions);
+                                                                                _this.httpClient.post(_this.base.BASE_URL + 'app/AddPhoto2', {}, {
+                                                                                    headers: { token: localStorage['token'] }, params: {
+                                                                                        longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
+                                                                                        accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
+                                                                                        current: "1", recordTime: that.currOptions.recordTime.toString()
+                                                                                    }
+                                                                                })
+                                                                                    .toPromise().then(function (res) {
+                                                                                    console.log("进入ok");
+                                                                                    console.log(JSON.stringify(res));
+                                                                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                                                                    if (that.j >= that.curtmpStorage.length - 1)
+                                                                                        that.isComplete = true;
+                                                                                    resovle('ok');
+                                                                                }, function (msg) {
+                                                                                    console.log("进入fail");
+                                                                                    console.log(msg);
+                                                                                    reject('error');
+                                                                                });
+                                                                            }
                                                                             resovle('ok');
-                                                                            // reject('error');
                                                                         });
                                                                     }).catch(function (err) {
                                                                         console.log(err);
-                                                                    })];
+                                                                    })
+                                                                    // if (!that.picNotExsit1)
+                                                                ];
                                                             case 1:
                                                                 observer = _a.sent();
+                                                                // if (!that.picNotExsit1)
                                                                 this.observers.push(observer);
                                                                 console.log("第几张图片");
                                                                 console.log(i);
@@ -4611,27 +4646,6 @@ var TrackPage = /** @class */ (function () {
                                                                 console.log("===图片不存在===");
                                                                 console.log(that.picNotExsit1);
                                                                 if (that.picNotExsit1 && i <= 1) {
-                                                                    obs = new Promise(function (resovle, reject) {
-                                                                        _this.httpClient.post(_this.base.BASE_URL + 'app/AddPhoto2', {}, {
-                                                                            headers: { token: localStorage['token'] }, params: {
-                                                                                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                                                                accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                                                                current: "1", recordTime: element.recordTime.toString()
-                                                                            }
-                                                                        })
-                                                                            .subscribe(function (res) {
-                                                                            console.log("进入ok");
-                                                                            console.log(JSON.stringify(res));
-                                                                            console.log(JSON.parse(JSON.stringify(res)).message);
-                                                                            resovle('ok');
-                                                                        }, function (msg) {
-                                                                            console.log("进入fail");
-                                                                            console.log(msg);
-                                                                            reject('error');
-                                                                        });
-                                                                    }).catch(function (err) {
-                                                                        console.log(err);
-                                                                    });
                                                                 }
                                                                 return [2 /*return*/];
                                                         }
@@ -4683,8 +4697,10 @@ var TrackPage = /** @class */ (function () {
                         return [3 /*break*/, 1];
                     case 4:
                         Promise.all(this.observers).then(function (resolve) {
+                            console.log(_this.observers);
                             console.log(resolve);
                             loader_1.dismiss();
+                            console.log("结束了嘛", _this.isComplete);
                             if (_this.isComplete) {
                                 console.log("*****清除缓存了******");
                                 localStorage.removeItem('TrackCache');
@@ -5215,6 +5231,8 @@ var NewMedicinePage = /** @class */ (function () {
         this.camera = camera;
         this.fileTransfer = fileTransfer;
         this.navCtrl = navCtrl;
+        this.medicinenumber = 0;
+        this.controlarea = 0;
         this.users = [
             {
                 id: 1,
@@ -5551,41 +5569,42 @@ var NewMedicinePage = /** @class */ (function () {
         this.have_submit = true;
         var num1 = 0;
         console.log(this.medicinenumber);
-        if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+        // if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+        if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
             console.log("medicinenumber不合法");
-            this.medicinenumber = "";
+            this.medicinenumber = 0;
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         if (!this.medicinenumber) {
             console.log("medicinenumber不合法");
-            this.medicinenumber = "";
+            this.medicinenumber = 0;
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        num1 = parseInt(this.medicinenumber);
-        this.medicinenumber = '' + num1;
-        if (this.medicinenumber == 'NaN') {
-            console.log("medicinenumber不合法");
-            this.medicinenumber = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
+        num1 = this.medicinenumber;
+        this.medicinenumber = 0 + num1;
+        // if (this.medicinenumber == 'NaN') {
+        //     console.log("medicinenumber不合法");
+        //     this.medicinenumber = "";
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
         var num2 = 0;
-        if (parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+        if (this.controlarea < 0 || this.controlarea == NaN) {
             console.log("controlarea不合法");
-            this.controlarea = "";
+            this.controlarea = 0;
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         if (!this.controlarea) {
             console.log("controlarea不合法");
-            this.controlarea = "";
+            this.controlarea = 0;
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
-        num2 = parseInt(this.controlarea);
-        this.controlarea = '' + num2;
-        if (this.controlarea == 'NaN') {
-            console.log("controlarea不合法");
-            this.controlarea = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
+        num2 = this.controlarea;
+        this.controlarea = 0 + num2;
+        // if (this.controlarea == 'NaN') {
+        //     console.log("controlarea不合法");
+        //     this.controlarea = "";
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
         // if (!this.woodStatusValue){
         //     this.woodStatusValue = "0";
         // }
@@ -5595,8 +5614,7 @@ var NewMedicinePage = /** @class */ (function () {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-            || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
             this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
         }
         else {
@@ -5619,8 +5637,7 @@ var NewMedicinePage = /** @class */ (function () {
                 //创建文件对象
                 var fileTransfer = this.fileTransfer.create();
                 this.base.logger(JSON.stringify(options_1), "Img_MedicinePar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
                     this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
                     return;
                 }
@@ -5671,8 +5688,8 @@ var NewMedicinePage = /** @class */ (function () {
                     _this.httpClient.post(_this.base.BASE_URL + 'app/Addmedicine', {}, {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: _this.deviceId.toString(), longitude: _this.longtitude.toString(), latitude: _this.latitude.toString(), altitude: _this.altitude.toString(),
-                            accuracy: _this.accuracy.toString(), medicinenameValue: _this.medicinenameValue.toString(), medicinenumber: _this.medicinenumber, remarks: _this.remarks,
-                            workContentValue: _this.workContentValue, controlarea: _this.controlarea
+                            accuracy: _this.accuracy.toString(), medicinenameValue: _this.medicinenameValue.toString(), medicinenumber: _this.medicinenumber.toString(), remarks: _this.remarks,
+                            workContentValue: _this.workContentValue, controlarea: _this.controlarea.toString()
                         }
                     })
                         .subscribe(function (res) {
@@ -5741,8 +5758,7 @@ var NewMedicinePage = /** @class */ (function () {
                     controlarea: this.controlarea, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN || !this.medicinenumber || this.medicinenumber == 'NaN'
-                    || !this.controlarea || parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN || !this.controlarea || this.controlarea == 'NaN') {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
                     this.base.showAlert("提示", "数量输入为空或者不合法", function () { });
                     return;
                 }
@@ -5751,9 +5767,9 @@ var NewMedicinePage = /** @class */ (function () {
                         deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
                         altitude: this.altitude.toString(),
                         accuracy: this.accuracy.toString(),
-                        medicinenumber: this.medicinenumber, remarks: this.remarks,
+                        medicinenumber: this.medicinenumber.toString(), remarks: this.remarks,
                         medicinenameValue: this.medicinenameValue.toString(),
-                        workContentValue: this.workContentValue, controlarea: this.controlarea
+                        workContentValue: this.workContentValue, controlarea: this.controlarea.toString()
                     }
                 })
                     .subscribe(function (res) {
@@ -5827,18 +5843,18 @@ var NewMedicinePage = /** @class */ (function () {
             this.accuracy = "22";
             this.altitude = "14";
             this.remarks = "0";
-            this.medicinenumber = "20";
+            this.medicinenumber = 20;
             this.medicinenameValue = "3";
             this.workContentValue = "2";
-            this.controlarea = "5";
+            this.controlarea = 5;
             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {}, {
                 headers: { token: localStorage['token'] }, params: {
                     deviceId: this.deviceId.toString(), longitude: this.longtitude.toString(), latitude: this.latitude.toString(),
                     altitude: this.altitude.toString(),
                     accuracy: this.accuracy.toString(),
-                    medicinenumber: this.medicinenumber, remarks: this.remarks,
+                    medicinenumber: this.medicinenumber.toString(), remarks: this.remarks,
                     medicinenameValue: this.medicinenameValue.toString(),
-                    workContentValue: this.workContentValue, controlarea: this.controlarea
+                    workContentValue: this.workContentValue, controlarea: this.controlarea.toString()
                 }
             })
                 .subscribe(function (res) {
@@ -5895,32 +5911,33 @@ var NewMedicinePage = /** @class */ (function () {
     //药剂数量
     NewMedicinePage.prototype.medicinenumberInput = function () {
         var num1 = 0;
-        if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+        if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
             this.base.showAlert('提示', '请输入数字', function () { });
         }
         if (!this.medicinenumber) {
             this.base.showAlert('提示', '请输入数字', function () { });
         }
-        num1 = parseInt(this.medicinenumber);
-        this.medicinenumber = '' + num1;
-        if (this.medicinenumber == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', function () { });
-        }
+        num1 = this.medicinenumber;
+        this.medicinenumber = 0 + num1;
+        // if (this.medicinenumber == 'NaN') {
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
     };
     // 防治面积
     NewMedicinePage.prototype.controlareaInput = function () {
         var num1 = 0;
-        if (parseInt(this.controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+        // if (parseInt(this.  controlarea) < 0 || parseInt(this.controlarea) == NaN) {
+        if (this.controlarea < 0 || this.controlarea == NaN) {
             this.base.showAlert('提示', '请输入数字', function () { });
         }
         if (!this.controlarea) {
             this.base.showAlert('提示', '请输入数字', function () { });
         }
-        num1 = parseInt(this.controlarea);
-        this.controlarea = '' + num1;
-        if (this.controlarea == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', function () { });
-        }
+        num1 = this.controlarea;
+        this.controlarea = 0 + num1;
+        // if (this.controlarea == 'NaN') {
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
     };
     NewMedicinePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -8688,7 +8705,7 @@ var Base = /** @class */ (function () {
         this.BASE_URL = "http://106.15.200.245:50000/";
         // BASE_URL = "http://106.15.90.78:50000/"
         //BASE_URL = "http://127.0.0.1:50000/"
-        //  BASE_URL = "http://192.168.199.199:50000/"
+        // BASE_URL = "http://192.168.199.199:50000/"
         this.transitionOptions = {
             direction: 'left',
             duration: 200,

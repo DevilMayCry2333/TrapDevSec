@@ -31,6 +31,7 @@ export class TrackPage {
     // latitude: string;
     location_ready: boolean;
     recordTime: any = {};
+    i:any;
     observers = [];
     photosum: number;
     photolib1: any;
@@ -68,6 +69,7 @@ export class TrackPage {
     isStopRecord = false;
 
     flag = 0;
+    j:any;
 
     lineNameDis = false;
 
@@ -106,6 +108,8 @@ export class TrackPage {
     pic3: string;
     pic4: string;
     pic5: string;
+    curtmpStorage:any;
+    currOptions:any;
 
 
     constructor(
@@ -222,6 +226,10 @@ export class TrackPage {
                         }
                             console.log(uploadAddress);
                             this.picNotExsit1 = false;
+                            this.i = i;
+                            this.j = j;
+                            this.curtmpStorage = tmpStorage;
+                            this.currOptions = options.params;
                             console.log("初始化后值为");
                             console.log(this.picNotExsit1);
                                 //创建文件对象
@@ -247,48 +255,46 @@ export class TrackPage {
                                         },(msg)=>{
                                                 console.log("进入error");
                                                 console.log(msg);
-                                                reject('error');
-                                            
-                                        }).catch((error) => {//发送失败(文件不存在等)
-                                            console.log("进入catch");
-                                            that.picNotExsit1 = true;
-                                            console.log(error);
-                                            resovle('ok');
-                                            // reject('error');
-                                        });
+                                                that.picNotExsit1 = true;
+                                                if (this.i <= 1) {
+                                                    console.log(that.currOptions);
+                                                        this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
+                                                            {
+                                                                headers: { token: localStorage['token'] }, params: {
+                                                                    longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
+                                                                    accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
+                                                                    current: "1", recordTime: that.currOptions.recordTime.toString()
+                                                                }
+                                                            })
+                                                            .toPromise().then(res => {
+                                                                console.log("进入ok");
+                                                                console.log(JSON.stringify(res));
+                                                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                                                if (that.j >= that.curtmpStorage.length-1)
+                                                                    that.isComplete = true;
+                                                                resovle('ok');
+                                                            }, (msg) => {
+                                                                console.log("进入fail");
+                                                                console.log(msg);
+                                                                reject('error');
+                                                            });
+                                                }
+                                                resovle('ok');
+                                        })
                                 }).catch((err)=>{
                                     console.log(err);
                                 })
-                                this.observers.push(observer);
+
+                            // if (!that.picNotExsit1)
+                                    this.observers.push(observer);
                                 console.log("第几张图片");
                                 console.log(i);
                                 console.log(j);
                                 console.log("===图片不存在===");
                                 console.log(that.picNotExsit1);
 
-                            if (that.picNotExsit1 && i>=element.photoSum){
-                            let obs = new Promise((resovle,reject)=>{
-                                this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
-                                    {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                            accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                            current: "1", recordTime: element.recordTime.toString()
-                                        }
-                                    })
-                                    .subscribe(res => {
-                                        console.log("进入ok");
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
-                                        resovle('ok');
-                                    }, (msg) => {
-                                            console.log("进入fail");
-                                        console.log(msg);
-                                        reject('error');
-                                    });
-                            }).catch((err)=>{
-                                console.log(err);
-                            })
+                            if (that.picNotExsit1 && i <= 1 ){
+
                         }
 
                         })(i,j)
@@ -327,8 +333,11 @@ export class TrackPage {
                 })(j)
             }
             Promise.all(this.observers).then((resolve) => {
+                console.log(this.observers);
                 console.log(resolve);
                 loader.dismiss();
+                console.log("结束了嘛",this.isComplete);
+                
                 if (this.isComplete) {
                     console.log("*****清除缓存了******");
                     localStorage.removeItem('TrackCache');

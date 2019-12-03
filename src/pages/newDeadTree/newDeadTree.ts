@@ -53,13 +53,16 @@ export class DeadtreePage {
     currentPic3:string;
     cachePhoto1:any;
     cachePhoto2: any;
+    j:any;
+    i:any;
+    curTmpSotrage:any;
+    curOptions:any;
     isComplete = false;
     submitFail = false;
     cachePhoto3: any;
     base641:any;
     base642:any;
     base643:any;
-    i:any;
     killMethodsValue:string;
     killMethods:any[];
     imageData:null
@@ -176,13 +179,15 @@ export class DeadtreePage {
         }
     }
 
-    async awaitF(tmpStorage) {
-        console.log(tmpStorage);
+    async awaitF() {
         const loader = this.loadingCtrl.create({
             content: "缓存数据正在提交，请勿退出",
         });
         loader.present();
         var that = this;
+        var tmpStorage = JSON.parse(localStorage["deadCache"]);
+        this.curTmpSotrage = tmpStorage;
+        console.log(tmpStorage);
         for ( var i = 0; i < tmpStorage.length; i++) {
             await (async (i)=>{
                 console.log("外层的i" + i);
@@ -229,6 +234,11 @@ export class DeadtreePage {
                                         that.currentImg = that.photolib3;
                                     }
                                     console.log(uploadAddress);
+                                     that.picNotExist = false;
+                                     this.j = j;
+                                     this.i = i;
+                                     this.curTmpSotrage = tmpStorage;
+                                     this.curOptions = options.params;
                                     let observer = await new Promise((resolve, reject) => {
                                         fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                                             .then((res) => {
@@ -246,52 +256,52 @@ export class DeadtreePage {
                                                 }
                                                 console.log("传输中isComp" + this.isComplete);
                                                 resolve('ok');
-                                            }).catch((error) => {
-                                                console.log("进入catch");
-                                                
-                                                console.log(error);
-                                                that.picNotExist = true;
-                                                // reject('error');
-                                                resolve('ok');
+                                            },(msg)=>{
+                                                console.log("进入msg");
+                                                    console.log(msg);
+                                                    that.picNotExist = true;
+                                                    if (this.j <= 1) {
+                                                        console.log("数据是", that.curOptions);
+                                                            that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
+                                                                {
+                                                                    headers: { token: localStorage['token'] }, params: {
+                                                                        deviceId: that.curOptions.deviceId, longitude: that.curOptions.longitude, latitude: that.curOptions.latitude, altitude: that.curOptions.altitude,
+                                                                        accuracy: that.curOptions.accuracy, diameter: that.curOptions.diameter, height: that.curOptions.height, volume: that.curOptions.volume,
+                                                                        killMethodsValue: that.curOptions.killMethodsValue, remarks: that.curOptions.remarks, batch: that.curOptions.batch,
+                                                                        current: '1', allLength: '1', curRow: '1'
+                                                                    }
+                                                                }).toPromise().then(res => {
+                                                                    console.log("进入then");
+                                                                    console.log(res);
+                                                                    console.log("==="+ that.i);
+                                                                    
+                                                                    if (that.i >= that.curTmpSotrage.length - 1) {
+                                                                        that.isComplete = true;
+                                                                    }
+                                                                    console.log(that.isComplete);
+                                                                    
+                                                                    resolve('ok');
+                                                                    // that.base.showAlert("全部成功了", "", () => { });
+                                                                    // console.log(JSON.stringify(res));
+                                                                    // console.log(JSON.parse(JSON.stringify(res)).message);
+                                                                }, (msg) => {
+                                                                    console.log("进入error");
+                                                                    console.log(msg);
+                                                                    reject('error');
+                                                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                                                });
+
+                                                    }
+                                                    resolve('ok');
                                             })
-                                    }).catch((reason)=>{
-                                        console.log(reason);
+                                    }).catch((err) => {
+                                        console.log(err);
                                     })
                                     console.log("await" + j);
-                                    that.observers.push(observer);
+                                    //  if (!that.picNotExist)
+                                        this.observers.push(observer);
                                      console.log("照片是否存在");
                                     console.log(that.picNotExist);
-                                     if (that.picNotExist && j >= element.photoSum) {
-                                         //这个接口还要再改造下，判断是否全部传完了
-                                         let obs = new Promise((resolve, reject) => {
-                                             that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
-                                                 {
-                                                     headers: { token: localStorage['token'] }, params: {
-                                                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                                         accuracy: element.accuracy, diameter: element.diameter, height: element.height, volume: element.volume,
-                                                         killMethodsValue: element.killMethodsValue, remarks: element.remarks, batch: element.batch,
-                                                         current:'1', allLength: '1', curRow:'1'
-                                                     }
-                                                 })
-                                                 .subscribe(res => {
-                                                     console.log("进入then");
-                                                     console.log(res);
-                                                     
-                                                     
-                                                     resolve('ok');
-                                                     // that.base.showAlert("全部成功了", "", () => { });
-                                                     // console.log(JSON.stringify(res));
-                                                     // console.log(JSON.parse(JSON.stringify(res)).message);
-                                                 }, (msg) => {
-                                                     console.log("进入error");
-                                                     console.log(msg);
-                                                     reject('error');
-                                                     // this.base.showAlert('提示', '提交失败', () => { });
-                                                 });
-                                         }).catch((reason) => {
-                                             console.log(reason);
-                                         })
-                                     }
 
                                         // console.log(that.observers);
                                 })(i,j)
@@ -323,10 +333,12 @@ export class DeadtreePage {
         }
 
             
-            Promise.all(that.observers).then((resolve) => {
+            Promise.all(this.observers).then((resolve) => {
                 console.log(resolve);
+                console.log(that.observers);
                 loader.dismiss();
-                if (this.isComplete) {
+                console.log("结束了嘛", this.isComplete);
+                if (that.isComplete) {
                     console.log("*****清除缓存了******");
                     localStorage.removeItem('deadCache');
                 }
@@ -334,6 +346,7 @@ export class DeadtreePage {
                 console.log(reject);
                 loader.dismiss();
             }).catch((reason) => {
+                loader.dismiss();
                 console.log(reason);
             })
 
@@ -405,7 +418,7 @@ export class DeadtreePage {
             //i是一条一条的记录
             // console.log(tmpStorage);
             
-            let n = this.awaitF(tmpStorage);
+            let n = this.awaitF();
             console.log(n);
             
             this.sleep(tmpStorage);
