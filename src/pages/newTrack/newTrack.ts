@@ -19,16 +19,19 @@ import { LoadingController } from 'ionic-angular';
     templateUrl: 'newTrack.html'
 })
 export class TrackPage {
-    // longtitude: string;
-    longtitude = "1.1234567";
-    latitude = "1.1234567";
-    altitude = "1.1234567";
+    longtitude: string;
+    latitude: string;
+    altitude: string;
+    accuracy: string;
+    // longtitude = "1.1234567";
+    // latitude = "1.1234567";
+    // altitude = "1.1234567";
 
     longtitudeData: Array<string>;
     latitudeData: Array<string>;
     altitudeData: Array<string>;
     accuracyData: Array<string>;
-    // latitude: string;
+  
     location_ready: boolean;
     recordTime: any = {};
     i:any;
@@ -76,8 +79,6 @@ export class TrackPage {
     ImageToBase: any[];
     picNotExist = false;
     // have_submit: boolean;
-    // altitude: string;
-    accuracy = "1";
     myIntravl: any;
     subscription: Subscription;
     lineName: string;
