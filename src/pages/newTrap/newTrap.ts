@@ -42,6 +42,7 @@ export class TrapPage {
     workContent:any[]
     observers = [];
     isComplete = false;
+    isSubProcessFin = false;
     // 定位订阅
     subscription: Subscription;
     // 是否定位成功
@@ -396,12 +397,19 @@ export class TrapPage {
                                     }else{
                                         this.isComplete = false;
                                     }
+                                    this.isSubProcessFin = true;
                                     this.base.showAlert("提示", "无图片提交成功", () => { });
                                     resolve('ok');
                                 }, msg => {
                                     console.log(msg);
+                                    this.isSubProcessFin = false;
                                     reject('error');
                                 })
+                                if( this.isSubProcessFin == true){
+                                    resolve('ok');
+                                }else{
+                                    reject('error');
+                                }
                                     reject('error');
                             })
                     }).catch((error)=>{
