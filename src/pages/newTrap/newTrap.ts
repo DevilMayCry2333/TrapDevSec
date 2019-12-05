@@ -65,6 +65,7 @@ export class TrapPage {
             last: 'Rosenburg',
         }
     ];
+    curOptions: any;
 
 
     deviceBind(){
@@ -357,7 +358,7 @@ export class TrapPage {
 
                     //创建文件对象
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
+                    this.curOptions = options.params;
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                     let observer = await new Promise((resolve,reject)=>{
@@ -376,23 +377,9 @@ export class TrapPage {
 
                                 resolve('ok');
 
-                            })
-                            .catch((error) => {
-                                console.log("******进入cache*******");
-                                that.picNotExist = true;
-                                //发送失败(文件不存在等)
-                                // this.base.showAlert("图片不存在!", "图片不存在", () => { });
-                                console.log(error);
-                                reject('error');
-                            });
-                    }).catch((error)=>{
-                        console.log(error);
-                    })
-                    that.observers.push(observer);
-
-                    if(that.picNotExist){
-                        let obs = await new Promise((resolve, reject) => {
-                            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                            },async (msg)=>{
+                                console.log("数据是", that.curOptions);
+                                await that.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                                 {
                                     headers: { token: localStorage['token'] }, params: {
                                         deviceId: element.deviceId,
@@ -415,12 +402,44 @@ export class TrapPage {
                                     console.log(msg);
                                     reject('error');
                                 })
+                                    reject('error');
+                            })
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                    that.observers.push(observer);
 
-                        }).catch((error) => {
-                            console.log(error);
-                        });
-                        that.observers.push(obs);
-                    }
+                    // if(that.picNotExist){
+                    //     let obs = await new Promise((resolve, reject) => {
+                    //         this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                    //             {
+                    //                 headers: { token: localStorage['token'] }, params: {
+                    //                     deviceId: element.deviceId,
+                    //                     longitude: element.longitude, latitude: element.latitude, num: element.num,
+                    //                     maleNum: "1", femaleNum: "1", altitude: element.altitude,
+                    //                     drug: element.drug, remark: element.remark, workingContent: element.workingContent,
+                    //                     otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                    //                 }
+                    //             })
+                    //             .toPromise().then(res => {
+                    //                 console.log(JSON.parse(JSON.stringify(res)));
+                    //                 if (JSON.parse(JSON.stringify(res)).isComp == true){
+                    //                     this.isComplete = true;
+                    //                 }else{
+                    //                     this.isComplete = false;
+                    //                 }
+                    //                 this.base.showAlert("提示", "无图片提交成功", () => { });
+                    //                 resolve('ok');
+                    //             }, msg => {
+                    //                 console.log(msg);
+                    //                 reject('error');
+                    //             })
+
+                    //     }).catch((error) => {
+                    //         console.log(error);
+                    //     });
+                    //     that.observers.push(obs);
+                    // }
 
 
                 }else{
