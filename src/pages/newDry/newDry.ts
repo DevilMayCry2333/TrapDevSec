@@ -27,7 +27,7 @@ export class DryPage {
     latitude: string
     altitude: string
     woodStatusValue:string
-    chestDiameter:string
+    chestDiameter:number;
     injectName:string
     injectNameValue:string
     workContentValue:string
@@ -90,14 +90,14 @@ export class DryPage {
             this.remarks = "0";
             this.injectNum = "50";
             this.workContentValue = "2";
-            this.chestDiameter = "7";
+            this.chestDiameter = 7;
             this.injectNameValue = "8";
         this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
         {
             headers: { token: localStorage['token'] }, params: {
                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                workingContent: this.workContentValue, chestDiameter: this.chestDiameter.toString(), injectName: this.injectNameValue
             }
         })
         .subscribe(res => {
@@ -569,7 +569,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue  || !this.workContentValue|| !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| parseInt(this.chestDiameter) < 0 || parseInt(this.chestDiameter) == NaN || !this.chestDiameter || this.chestDiameter == 'NaN') {
+        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue  || !this.workContentValue|| !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN'|| this.chestDiameter < 0 || this.chestDiameter == NaN || !this.chestDiameter ) {
             this.base.showAlert("提示", "数量输入为空或者不合法", () => { });
             
         } else {
@@ -651,7 +651,7 @@ export class DryPage {
                             headers: { token: localStorage['token'] }, params: {
                                 deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                                 accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                                workingContent: this.workContentValue, chestDiameter: this.chestDiameter.toString(), injectName: this.injectNameValue
                             }
                         })
                         .subscribe(res => {
@@ -732,7 +732,7 @@ export class DryPage {
                         headers: { token: localStorage['token'] }, params: {
                             deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
                             accuracy: this.accuracy, WoodStatus: this.woodStatusValue, injectNum: this.injectNum, remarks: this.remarks,
-                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter, injectName: this.injectNameValue
+                            workingContent: this.workContentValue, chestDiameter: this.chestDiameter.toString(), injectName: this.injectNameValue
                         }
                     })
                     .subscribe(res => {

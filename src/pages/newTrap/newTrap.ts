@@ -163,7 +163,7 @@ export class TrapPage {
             localStorage["TrapDeviceId"] = this.deviceId;
             this.navCtrl.push(TrapQueryPage);
         }else{
-            this.base.showAlert("提示","请先扫码或输入数字的设备ID!!!",()=>{});
+            this.base.showAlert("提示","请先扫码或输入数字的设备ID!",()=>{});
             
         }
 
@@ -192,7 +192,7 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                        this.base.showAlert("提交失败","提交失败",()=>{});
+                        this.base.showAlert("提交","提交失败",()=>{});
                         console.log(msg);
                         console.log("失败");
                         var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
@@ -307,10 +307,10 @@ export class TrapPage {
                     .subscribe(res => {
                         console.log(res);
                         i++;
-                        this.base.showAlert("成功绑定了", "", () => { });
+                        this.base.showAlert("提示", "成功绑定了", () => { });
                         if (tmpStorage2.length == i) {
                             localStorage.removeItem("trapBind");
-                            this.base.showAlert("清理了缓存", "", () => { });
+                            this.base.showAlert("提示", "清理了缓存", () => { });
                         }
                     },
                         msg => {
@@ -409,7 +409,7 @@ export class TrapPage {
                                     }else{
                                         this.isComplete = false;
                                     }
-                                    this.base.showAlert("无图片提交成功", "提交成功", () => { });
+                                    this.base.showAlert("提示", "无图片提交成功", () => { });
                                     resolve('ok');
                                 }, msg => {
                                     console.log(msg);
@@ -704,7 +704,7 @@ export class TrapPage {
             console.log(this.WorkContentValue);
             console.log(this.BeetleType);
             if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle){
-                this.base.showAlert("定位信息不准","或者是数据没有填完整哦",()=>{});
+                this.base.showAlert("定位信息不准","或者是数据没有填完整",()=>{});
             }else{
                 if (this.imageData != null) {
                     let options: FileUploadOptions = {};
@@ -733,7 +733,7 @@ export class TrapPage {
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
                         return;
                     }
 
@@ -824,7 +824,7 @@ export class TrapPage {
                     };
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整哦", () => { });
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
                         return;
                     }
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
