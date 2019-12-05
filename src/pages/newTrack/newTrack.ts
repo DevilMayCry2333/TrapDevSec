@@ -52,6 +52,7 @@ export class TrackPage {
     photoplib3: any;
     photoplib4: any;
     photoplib5: any;
+    subProcessFin: any;
 
     cachePhoto1:any;
     cachePhoto2: any;
@@ -253,13 +254,13 @@ export class TrackPage {
 
                                             // this.base.showAlert('提示', '提交成功', () => { });
                                             // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                        },(msg)=>{
+                                        },async (msg)=>{
                                                 console.log("进入error");
                                                 console.log(msg);
                                                 that.picNotExsit1 = true;
                                                 if (this.i <= 1) {
                                                     console.log(that.currOptions);
-                                                        this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
+                                                        await this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
                                                             {
                                                                 headers: { token: localStorage['token'] }, params: {
                                                                     longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
@@ -273,14 +274,21 @@ export class TrackPage {
                                                                 console.log(JSON.parse(JSON.stringify(res)).message);
                                                                 if (that.j >= that.curtmpStorage.length-1)
                                                                     that.isComplete = true;
+                                                                that.subProcessFin = true;
                                                                 resovle('ok');
                                                             }, (msg) => {
                                                                 console.log("进入fail");
                                                                 console.log(msg);
+                                                                that.subProcessFin = false;
                                                                 reject('error');
                                                             });
+                                                            if(that.subProcessFin == true){
+                                                                resovle('ok');
+                                                            }else{
+                                                                reject('error');
+                                                            }
                                                 }
-                                                resovle('ok');
+                                                reject('error');
                                         })
                                 }).catch((err)=>{
                                     console.log(err);

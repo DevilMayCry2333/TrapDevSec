@@ -46,6 +46,7 @@ export class DeadtreePage {
     hasPic = false;
     photosum = 0;
     photolib1:any;
+    subProcessFin:any;
     photolib2:any;
     photolib3:any;
     currentPic1:string;
@@ -256,13 +257,13 @@ export class DeadtreePage {
                                                 }
                                                 console.log("传输中isComp" + this.isComplete);
                                                 resolve('ok');
-                                            },(msg)=>{
+                                            },async (msg)=>{
                                                 console.log("进入msg");
                                                     console.log(msg);
                                                     that.picNotExist = true;
                                                     if (this.j <= 1) {
                                                         console.log("数据是", that.curOptions);
-                                                            that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
+                                                            await that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
                                                                 {
                                                                     headers: { token: localStorage['token'] }, params: {
                                                                         deviceId: that.curOptions.deviceId, longitude: that.curOptions.longitude, latitude: that.curOptions.latitude, altitude: that.curOptions.altitude,
@@ -279,7 +280,7 @@ export class DeadtreePage {
                                                                         that.isComplete = true;
                                                                     }
                                                                     console.log(that.isComplete);
-                                                                    
+                                                                    that.subProcessFin = true;
                                                                     resolve('ok');
                                                                     // that.base.showAlert("全部成功了", "", () => { });
                                                                     // console.log(JSON.stringify(res));
@@ -287,12 +288,17 @@ export class DeadtreePage {
                                                                 }, (msg) => {
                                                                     console.log("进入error");
                                                                     console.log(msg);
+                                                                    that.subProcessFin = false;
                                                                     reject('error');
                                                                     // this.base.showAlert('提示', '提交失败', () => { });
                                                                 });
-
+                                                                if(that.subProcessFin == true){
+                                                                    resolve('ok');
+                                                                }else{
+                                                                    reject('error');
+                                                                }
                                                     }
-                                                    resolve('ok');
+                                                    reject('error');
                                             })
                                     }).catch((err) => {
                                         console.log(err);
