@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
 import { MedicineQueryPage } from '../medicine-query/medicine-query';
+import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the NewMedicinePage page.
  *
@@ -63,6 +64,10 @@ export class NewMedicinePage {
             last: 'Rosenburg',
         }
     ];
+    curOptions: any;
+    observers = [];
+    isComplete = false;
+    isSubProcessFin = false;
 
 
     constructor(
@@ -73,7 +78,8 @@ export class NewMedicinePage {
           private httpClient: HttpClient,
           private camera: Camera,
           private fileTransfer: FileTransfer,
-          public navCtrl: NavController
+          public navCtrl: NavController,
+          public loadingCtrl: LoadingController,
   ) { }
 
 
@@ -128,7 +134,7 @@ export class NewMedicinePage {
   }
 }
 
-ionViewDidLoad() {
+async ionViewDidLoad() {
     // console.log('ionViewDidLoad NewMedicinePage');
     if (localStorage["medicineBind"]) {
       var tmpStorage2 = [];
@@ -170,11 +176,21 @@ ionViewDidLoad() {
     
     console.log('ionViewDidLoad LocatePage');
     console.log(localStorage['device']);
+    var that = this;
     if (localStorage["medicineCache"]) {
+        const loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+        });
+        loader.present();
         var tmpStorage = JSON.parse(localStorage["medicineCache"]);
-        var i = 0;
-        tmpStorage.forEach(element => {
-            console.log(element);
+        //var i = 0;
+        //tmpStorage.forEach(element => {
+            for(var i = 0 ; i < tmpStorage.length ; i++){
+                    await (async (i)=>{
+                        var element = tmpStorage[i];
+                        console.log(element);
+                        console.log("====图片路径====");
+                        console.log(element);
             if (element.img != null) {
                 let options: FileUploadOptions = {};
                 options.fileKey = "image";
@@ -195,24 +211,27 @@ ionViewDidLoad() {
 
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                this.curOptions = options.params;
 
 
                 // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
-                fileTransfer.upload(element.img, this.base.BASE_URL + 'app/Addmedicine', options)
-                    .then((res) => {
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        i++;
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                let observer = await new Promise((resolve,reject)=>{
+                    fileTransfer.upload(element.img, this.base.BASE_URL + 'app/Addmedicine', options)
+                        .then((res) => {
+                                console.log(res);
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                if (JSON.parse(res.response).isComp == true) {
+                                    this.isComplete = true;
+                                } else {
+                                    this.isComplete = false;
+                                }
 
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        if (i >= tmpStorage.length)
-                            localStorage.removeItem('medicineCache');
-                    }, (error) => {//发送失败(网络出错等)
-                        console.log(error);
-                            this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
+                                resolve('ok');
+
+                            },async (msg)=>{
+                                await that.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                                 {
                                     headers: { token: localStorage['token'] }, params: {
                                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
@@ -220,20 +239,63 @@ ionViewDidLoad() {
                                         workContentValue: element.workContentValue,controlarea:element.controlarea
                                     }
                                 })
-                                .subscribe(res => {
-                                    i++;
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
-                                    // this.base.showAlert('提示', '提交成功', () => { });
-                                    if(i>=tmpStorage.length)
-                                        localStorage.removeItem('medicineCache');
-                                }, (msg) => {
-                                    // this.base.showAlert('提示', '提交失败', () => { });
-                                });
-                        // this.base.showAlert('提示', '提交失败', () => { });
+                                .toPromise().then(res => {
+                                    console.log(JSON.parse(JSON.stringify(res)));
+                                    if (JSON.parse(JSON.stringify(res)).isComp == true){
+                                        this.isComplete = true;
+                                    }else{
+                                        this.isComplete = false;
+                                    }
+                                    this.isSubProcessFin = true;
+                                    this.base.showAlert("提示", "无图片提交成功", () => { });
+                                    resolve('ok');
+                                }, msg => {
+                                    console.log(msg);
+                                    this.isSubProcessFin = false;
+                                    reject('error');
+                                })
+                                if( this.isSubProcessFin == true){
+                                    resolve('ok');
+                                }else{
+                                    reject('error');
+                                }
+                                    reject('error');
+                            })
+                    }).catch((error)=>{
+                        console.log(error);
                     })
+                    that.observers.push(observer);
+                    //     i++;
+                    //     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                    //     // this.base.showAlert('提示', '提交成功', () => { });
+                    //     if (i >= tmpStorage.length)
+                    //         localStorage.removeItem('medicineCache');
+                    // }, (error) => {//发送失败(网络出错等)
+                    //     console.log(error);
+                    //         this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
+                    //             {
+                    //                 headers: { token: localStorage['token'] }, params: {
+                    //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                    //                     accuracy: element.accuracy,medicinenameValue: element.medicinenameValue, medicinenumber: element.medicinenumber, remarks: element.remarks,
+                    //                     workContentValue: element.workContentValue,controlarea:element.controlarea
+                    //                 }
+                    //             })
+                    //             .subscribe(res => {
+                    //                 i++;
+                    //                 console.log(JSON.stringify(res));
+                    //                 console.log(JSON.parse(JSON.stringify(res)).message);
+                    //                 // this.base.showAlert('提示', '提交成功', () => { });
+                    //                 if(i>=tmpStorage.length)
+                    //                     localStorage.removeItem('medicineCache');
+                    //             }, (msg) => {
+                    //                 // this.base.showAlert('提示', '提交失败', () => { });
+                    //             });
+                    //     // this.base.showAlert('提示', '提交失败', () => { });
+                    // })
             } else {
                 console.log(element);
+                let obs =  await new Promise((resolve,reject)=>{
                 this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
                     {
                         headers: { token: localStorage['token'] }, params: {
@@ -243,17 +305,47 @@ ionViewDidLoad() {
                         }
                     })
                     .subscribe(res => {
-                        i++;
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        // this.base.showAlert('提示', '提交成功', () => { });
-                        if(i>=tmpStorage.length)
-                            localStorage.removeItem('medicineCache');
+                        // i++;
+                        // console.log(JSON.stringify(res));
+                        // console.log(JSON.parse(JSON.stringify(res)).message);
+                        // // this.base.showAlert('提示', '提交成功', () => { });
+                        // if(i>=tmpStorage.length)
+                        //     localStorage.removeItem('medicineCache');
+                        if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                            this.isComplete = true;
+                        } else {
+                            this.isComplete = false;
+                        }
+                        resolve('ok');
                     }, (msg) => {
+                        console.log(msg);
+                        reject('error');
                         // this.base.showAlert('提示', '提交失败', () => { });
                     });
+                }).catch((error)=>{
+                    console.log(error);
+                })
+                that.observers.push(obs);
+
             }
-        });
+        // });
+            })(i)
+        }
+                    Promise.all(that.observers).then((resolve) => {
+                        console.log(resolve);
+                        loader.dismiss();
+                            console.log("*****清除缓存了******");
+                        if (that.isComplete){
+                            localStorage.removeItem('medicineCache');
+                        }
+                    }, (reject) => {
+                        console.log(reject);
+                        loader.dismiss();
+                    }).catch((reason) => {
+                        console.log(reason);
+                        loader.dismiss();
+                    })
+
     }
 
     // 药剂名称
