@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
 import { EnemyQueryPage} from '../enemy-query/enemy-query';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
     selector: 'app-enemy',
@@ -48,6 +49,10 @@ export class EnemyPage {
             last: 'Rosenburg',
         }
     ];
+    curOptions: any;
+    observers = [];
+    isComplete = false;
+    isSubProcessFin = false;
 
     constructor(
         public qrScanner: QRScanner,
@@ -57,7 +62,8 @@ export class EnemyPage {
         private httpClient: HttpClient,
         private camera: Camera,
         private fileTransfer: FileTransfer,
-        public navCtrl: NavController
+        public navCtrl: NavController,
+        public loadingCtrl: LoadingController,
         ) { }
 
     NavToMap() {
@@ -118,7 +124,7 @@ export class EnemyPage {
                 });
         }
     }
-    ionViewDidLoad() {
+   async ionViewDidLoad() {
 
         if (localStorage["eneBind"]) {
             var tmpStorage2 = [];
@@ -163,10 +169,21 @@ export class EnemyPage {
 
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
-        var i = 0;
+        //var i = 0;
+
+        var that = this;
         if (localStorage["enemyCache"]) {
+            const loader = this.loadingCtrl.create({
+                content: "缓存数据正在提交，请勿退出",
+            });
+            loader.present();
             var tmpStorage = JSON.parse(localStorage["enemyCache"]);
-            tmpStorage.forEach(element => {
+          //  tmpStorage.forEach(element => {
+            for(var i = 0 ; i < tmpStorage.length ; i++){
+                    await (async (i)=>{
+                        var element = tmpStorage[i];
+                        console.log(element);
+                        console.log("====图片路径====");
                 console.log(element);
                 if (element.img != null) {
                     let options: FileUploadOptions = {};
@@ -187,46 +204,93 @@ export class EnemyPage {
 
                     //创建文件对象
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                    this.curOptions = options.params;
 
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-
+                    let observer = await new Promise((resolve,reject)=>{
                     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddEnemy', options)
                         .then((res) => {
-                            i++;
+                            //i++;
                             console.log(res);
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
 
+
+                            if (JSON.parse(res.response).isComp == true) {
+                                this.isComplete = true;
+                            } else {
+                                this.isComplete = false;
+                            }
+
+                            resolve('ok');
+
+                        },async (msg)=>{
+                            await that.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+                            {
+                                headers: { token: localStorage['token'] }, params: {
+                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                    accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                                }
+                            })
+                            .toPromise().then(res => {
+                                console.log(JSON.parse(JSON.stringify(res)));
+                                if (JSON.parse(JSON.stringify(res)).isComp == true){
+                                    this.isComplete = true;
+                                }else{
+                                    this.isComplete = false;
+                                }
+                                this.isSubProcessFin = true;
+                                this.base.showAlert("提示", "无图片提交成功", () => { });
+                                resolve('ok');
+                            }, msg => {
+                                console.log(msg);
+                                this.isSubProcessFin = false;
+                                reject('error');
+                            })
+                            if( this.isSubProcessFin == true){
+                                resolve('ok');
+                            }else{
+                                reject('error');
+                            }
+                                reject('error');
+                        })
+                }).catch((error)=>{
+                    console.log(error);
+                })
+                that.observers.push(observer);
+
+
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            if (i >= tmpStorage.length)
-                                localStorage.removeItem('enemyCache');
-                        }, (error) => {//发送失败(网络出错等)
-                            // this.base.showAlert('提示', '提交失败', () => { });
+                        //     if (i >= tmpStorage.length)
+                        //         localStorage.removeItem('enemyCache');
+                        // }, (error) => {//发送失败(网络出错等)
+                        //     // this.base.showAlert('提示', '提交失败', () => { });
 
-                                this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-                                    {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                            accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
-                                        }
-                                    })
-                                    .subscribe(res => {
-                                        i++;
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
-                                        // this.base.showAlert('提示', '提交成功', () => { });
-                                        if (i >= tmpStorage.length)
-                                            localStorage.removeItem('enemyCache');
-                                    }, (msg) => {
-                                        // this.base.showAlert('提示', '提交失败', () => { });
-                                    });
+                        //         this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+                        //             {
+                        //                 headers: { token: localStorage['token'] }, params: {
+                        //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                        //                     accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+                        //                 }
+                        //             })
+                        //             .subscribe(res => {
+                        //                 i++;
+                        //                 console.log(JSON.stringify(res));
+                        //                 console.log(JSON.parse(JSON.stringify(res)).message);
+                        //                 // this.base.showAlert('提示', '提交成功', () => { });
+                        //                 if (i >= tmpStorage.length)
+                        //                     localStorage.removeItem('enemyCache');
+                        //             }, (msg) => {
+                        //                 // this.base.showAlert('提示', '提交失败', () => { });
+                        //             });
 
 
-                        })
+                        // })
                 } else {
+                    let obs =  await new Promise((resolve,reject)=>{
                     console.log(element);
                     this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                         {
@@ -236,18 +300,75 @@ export class EnemyPage {
                             }
                         })
                         .subscribe(res => {
-                            i++;
+                            //i++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                            if(i>=tmpStorage.length)
-                                localStorage.removeItem('enemyCache');
+                            if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                                this.isComplete = true;
+                            } else {
+                                this.isComplete = false;
+                            }
+                            resolve('ok');
                         }, (msg) => {
+                            console.log(msg);
+                            reject('error');
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });
-                }
-            });
+                }).catch((error)=>{
+                    console.log(error);
+                })
+                that.observers.push(obs);
+
+            }
+        // });
+            })(i)
         }
+
+        Promise.all(that.observers).then((resolve) => {
+            console.log(resolve);
+            loader.dismiss();
+                console.log("*****清除缓存了******");
+            if (that.isComplete){
+                localStorage.removeItem('enemyCache');
+            }
+        }, (reject) => {
+            console.log(reject);
+            loader.dismiss();
+        }).catch((reason) => {
+            console.log(reason);
+            loader.dismiss();
+        })
+
+    }
+                            // this.base.showAlert('提示', '提交成功', () => { });
+            //                 if(i>=tmpStorage.length)
+            //                     localStorage.removeItem('enemyCache');
+            //             }, (msg) => {
+            //                 // this.base.showAlert('提示', '提交失败', () => { });
+            //             });
+            //     }
+            // });
+        //     if (JSON.parse(JSON.stringify(res)).isComp == true) {
+        //                             this.isComplete = true;
+        //                         } else {
+        //                             this.isComplete = false;
+        //                         }
+        //                         resolve('ok');
+        //                     }, (msg) => {
+        //                         console.log(msg);
+        //                         reject('error');
+        //                         // this.base.showAlert('提示', '提交失败', () => { });
+        //                     });
+        //             }).catch((error)=>{
+        //                 console.log(error);
+        //             })
+        //             that.observers.push(obs);
+
+        //         }
+        //     // });
+        //         })(i)
+        //     }
+        // }
         if (localStorage["EnemyType"]) {
             console.log(localStorage["EnemyType"]);
             this.enemyType = JSON.parse(localStorage["EnemyType"]);

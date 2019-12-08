@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
 import { AboutPage } from '../about/about';
 import { InjectQueryPage} from '../inject-query/inject-query';
+import { LoadingController } from 'ionic-angular';
 @Component({
     selector: 'app-dry',
     templateUrl: 'newDry.html'
@@ -35,13 +36,15 @@ export class DryPage {
     subscription: Subscription;
 
     imageData:string
-
+    isComplete = false;
+    isSubProcessFin = false;
     woodStatus:any[]
     injectNum:string
     have_submit:boolean
     workContent:any[]
     remarks:string
     location_ready:boolean
+    observers = [];
     users: any[] = [
         {
             id: 1,
@@ -59,6 +62,7 @@ export class DryPage {
             last: 'Rosenburg',
         }
     ];
+    curOptions: { [s: string]: any; };
 
     constructor(
         public qrScanner: QRScanner,
@@ -68,6 +72,7 @@ export class DryPage {
         private httpClient: HttpClient,
         private camera: Camera,
         private fileTransfer: FileTransfer,
+        public loadingCtrl: LoadingController,
         public navCtrl: NavController
     ) { }
 
@@ -202,11 +207,10 @@ export class DryPage {
     }
 
 
-    ionViewDidLoad() {
+async ionViewDidLoad() {
 
         if (localStorage["dryBind"]) {
             var tmpStorage2 = [];
-
             tmpStorage2 = JSON.parse(localStorage["dryBind"]);
 
             console.log(tmpStorage2.length);
@@ -245,14 +249,23 @@ export class DryPage {
 
         }
 
-
+        var that = this;
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         if (localStorage["DryCache"]) {
+            const loader = this.loadingCtrl.create({
+                content: "缓存数据正在提交，请勿退出",
+            });
+            loader.present();
             var tmpStorage = JSON.parse(localStorage["DryCache"]);
-            var i = 0;
-            tmpStorage.forEach(element => {
-                console.log(element);
+            //var i = 0;
+           // tmpStorage.forEach(async element => {
+            for(var i = 0 ; i < tmpStorage.length ; i++){
+                    await (async (i)=>{
+                        var element = tmpStorage[i];
+                        console.log(element);
+                        console.log("====图片路径====");
+                        
                 if (element.img != null) {
                     let options: FileUploadOptions = {};
                     options.fileKey = "image";
@@ -273,44 +286,99 @@ export class DryPage {
 
                     //创建文件对象
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                    this.curOptions = options.params;
 
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    let observer = await new Promise((resolve,reject)=>{
+                        fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddInjectData', options)
+                            .then((res) => {
+                                console.log("======进入文件上传=====");
+                                console.log("====文件路径=====");
+                                console.log(element.img);
 
-                    fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddInjectData', options)
-                        .then((res) => {
-                            console.log(res);
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
-                            i++;
-                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                                console.log(res);
+                                if (JSON.parse(res.response).isComp == true) {
+                                    this.isComplete = true;
+                                } else {
+                                    this.isComplete = false;
+                                }
 
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                            if (i >= tmpStorage.length)
-                                localStorage.removeItem('DryCache');
-                        }, (error) => {//发送失败(网络出错等)
-                            console.log(error);
-                                this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
-                                    {
-                                        headers: { token: localStorage['token'] }, params: {
-                                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                            accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
-                                            workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectNameValue
-                                        }
-                                    })
-                                    .subscribe(res => {
-                                        i++;
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
-                                        // this.base.showAlert('提示', '提交成功', () => { });
-                                        if(i>=tmpStorage.length)
-                                            localStorage.removeItem('DryCache');
-                                    }, (msg) => {
-                                        // this.base.showAlert('提示', '提交失败', () => { });
-                                    });
-                            // this.base.showAlert('提示', '提交失败', () => { });
-                        })
+                                resolve('ok');
+
+                            },async (msg)=>{
+                                console.log("数据是", that.curOptions);
+                                await that.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                                        accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                                        workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectNameValue
+                                    }
+                                })
+                                .toPromise().then(res => {
+                                    console.log(JSON.parse(JSON.stringify(res)));
+                                    if (JSON.parse(JSON.stringify(res)).isComp == true){
+                                        this.isComplete = true;
+                                    }else{
+                                        this.isComplete = false;
+                                    }
+                                    this.isSubProcessFin = true;
+                                    this.base.showAlert("提示", "缓存删除照片的数据提交成功", () => { });
+                                    resolve('ok');
+                                }, msg => {
+                                    console.log(msg);
+                                    this.isSubProcessFin = false;
+                                    reject('error');
+                                })
+                                if( this.isSubProcessFin == true){
+                                    resolve('ok');
+                                }else{
+                                    reject('error');
+                                }
+                                    reject('error');
+                            })
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                    that.observers.push(observer);
+
+
+                    // fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddInjectData', options)
+                    //     .then((res) => {
+                    //         console.log(res);
+                    //         console.log(JSON.stringify(res));
+                    //         console.log(JSON.parse(JSON.stringify(res)).message);
+                    //         i++;
+                    //         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+                    //         // this.base.showAlert('提示', '提交成功', () => { });
+                    //         if (i >= tmpStorage.length)
+                    //             localStorage.removeItem('DryCache');
+                    //     }, (error) => {//发送失败(网络出错等)
+                    //         console.log(error);
+                    //             this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
+                    //                 {
+                    //                     headers: { token: localStorage['token'] }, params: {
+                    //                         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+                    //                         accuracy: element.accuracy, WoodStatus: element.WoodStatus, injectNum: element.injectNum, remarks: element.remarks,
+                    //                         workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectNameValue
+                    //                     }
+                    //                 })
+                    //                 .subscribe(res => {
+                    //                     i++;
+                    //                     console.log(JSON.stringify(res));
+                    //                     console.log(JSON.parse(JSON.stringify(res)).message);
+                    //                     // this.base.showAlert('提示', '提交成功', () => { });
+                    //                     if(i>=tmpStorage.length)
+                    //                         localStorage.removeItem('DryCache');
+                    //                 }, (msg) => {
+                    //                     // this.base.showAlert('提示', '提交失败', () => { });
+                    //                 });
+                    //         // this.base.showAlert('提示', '提交失败', () => { });
+                    //     })
                 } else {
+                    let obs =  await new Promise((resolve,reject)=>{
                     console.log(element);
                     this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
                         {
@@ -321,18 +389,47 @@ export class DryPage {
                             }
                         })
                         .subscribe(res => {
-                            i++;
+                            //i++;
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.showAlert('提示', '提交成功', () => { });
-                            if(i>=tmpStorage.length)
-                                localStorage.removeItem('DryCache');
+                            // if(i>=tmpStorage.length)
+                            //     localStorage.removeItem('DryCache');
+                            if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                                this.isComplete = true;
+                            } else {
+                                this.isComplete = false;
+                            }
+                            resolve('ok');
                         }, (msg) => {
+                            console.log(msg);
+                            reject('error');
                             // this.base.showAlert('提示', '提交失败', () => { });
                         });
+                    }).catch((error)=>{
+                        console.log(error);
+                    })
+                    that.observers.push(obs);
                 }
-            });
+            })(i)
         }
+        Promise.all(that.observers).then((resolve) => {
+            console.log(resolve);
+            loader.dismiss();
+                console.log("*****清除缓存了******");
+            if (that.isComplete){
+                localStorage.removeItem('DryCache');
+            }
+        }, (reject) => {
+            console.log(reject);
+            loader.dismiss();
+        }).catch((reason) => {
+            console.log(reason);
+            loader.dismiss();
+        })
+
+    }
+
         if (localStorage["InjectWoodStatus"]) {
             console.log(localStorage["InjectWoodStatus"]);
             this.woodStatus = JSON.parse(localStorage["InjectWoodStatus"]);
