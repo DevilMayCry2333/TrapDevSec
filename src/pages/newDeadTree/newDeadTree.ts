@@ -181,7 +181,7 @@ export class DeadtreePage {
         }
     }
 
-    postAdddeadtree(element, httpClient, base, tmpStorage,i){
+    postAdddeadtree(element, httpClient, base, tmpStorage,i,j){
         var that = this;
         console.log(element);
         console.log("====图片路径====");
@@ -204,7 +204,7 @@ export class DeadtreePage {
             //创建文件对象
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
             var uploadAddress;
-            //this.j = j;
+            this.j = j;
             this.i = i;
             if (this.j == 1) {
                 uploadAddress = element.pic1;
@@ -569,7 +569,7 @@ export class DeadtreePage {
                 if(element.hasPic==true){
                     for(var j = 1; j <= element.photoSum; ++j){
                         that.j = j;
-                        await this.postAdddeadtree(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
+                        await this.postAdddeadtree(tmpStorage[i],this.httpClient,this.base,tmpStorage,i,j).then(
                             res=>{
                                 console.log("成功");
                                 console.log(res);
