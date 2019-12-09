@@ -495,7 +495,7 @@ export class DeadtreePage {
 
 
     async ionViewDidLoad(){
-        localStorage.removeItem('deadCache');
+        // localStorage.removeItem('deadCache');
         this.threePhotos = false;
         this.canSubmit = true;
         var that = this;
