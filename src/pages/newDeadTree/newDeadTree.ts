@@ -564,8 +564,8 @@ export class DeadtreePage {
             let tmpDeviceList = [];
             this.curTmpSotrage = tmpStorage;
             console.log(tmpStorage);
-            var element = tmpStorage[i];
             for ( let i = 0; i < tmpStorage.length; ++i) {
+                var element = tmpStorage[i];
                 if(element.hasPic==true){
                     for(var j = 1; j <= element.photoSum; ++j){
                         that.j = j;
