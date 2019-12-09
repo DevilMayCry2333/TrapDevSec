@@ -560,14 +560,14 @@ export class DeadtreePage {
             // let n = this.awaitF();
             // console.log(n);
 
+            let tmpDeviceList = [];
+            this.curTmpSotrage = tmpStorage;
+            console.log(tmpStorage);
             const loader = this.loadingCtrl.create({
                 content: "缓存数据正在提交，请勿退出",
             });
             loader.present();
-            let tmpDeviceList = [];
-            this.curTmpSotrage = tmpStorage;
-            console.log(tmpStorage);
-            for ( let i = 0; i < tmpStorage.length; ++i) {
+            for (var i = 0; i < tmpStorage.length; ++i) {
                 var element = tmpStorage[i];
                 that.curFail = false;
                 if(element.hasPic==true){

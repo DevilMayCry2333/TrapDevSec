@@ -286,14 +286,14 @@ async ionViewDidLoad() {
     console.log(localStorage['device']);
     var that = this;
     if (localStorage["medicineCache"]) {
-        const loader = this.loadingCtrl.create({
-            content: "缓存数据正在提交，请勿退出",
-        });
-        loader.present();
         let tmpDeviceList = [];
         var tmpStorage = JSON.parse(localStorage["medicineCache"]);
         //var i = 0;
         //tmpStorage.forEach(element => {
+            const loader = this.loadingCtrl.create({
+                content: "缓存数据正在提交，请勿退出",
+            });
+            loader.present();
             for(var i = 0 ; i < tmpStorage.length ; i++){
                 await this.postMedicine(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
                     res=>{
