@@ -28,6 +28,8 @@ export class DeadtreePage {
     accuracy: string;
     batch = "1";
     currentImg:any;
+    failI = -1;
+    curFail = false;
     currentNum = 0;
     // longtitude="1.1234567";
     // latitude="1.1234567";
@@ -576,8 +578,11 @@ export class DeadtreePage {
                             },msg=>{
                                 console.log("失败");
                                 console.log(msg);
-                                if(that.j <= 1){
+                                that.curFail = true;
+                                if(that.curFail==true && that.failI!=i){
                                     tmpDeviceList.push(tmpStorage[i]);
+                                }else{
+                                    that.failI = i;
                                 }
                             }
                         ).catch((error)=>{
