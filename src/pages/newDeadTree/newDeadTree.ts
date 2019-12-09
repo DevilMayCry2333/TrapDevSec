@@ -29,7 +29,7 @@ export class DeadtreePage {
     batch = "1";
     currentImg:any;
     failI = -1;
-    curFail = false;
+    curFail:boolean;
     currentNum = 0;
     // longtitude="1.1234567";
     // latitude="1.1234567";
@@ -569,6 +569,7 @@ export class DeadtreePage {
             console.log(tmpStorage);
             for ( let i = 0; i < tmpStorage.length; ++i) {
                 var element = tmpStorage[i];
+                that.curFail = false;
                 if(element.hasPic==true){
                     for(var j = 1; j <= element.photoSum; ++j){
                         that.j = j;
@@ -580,11 +581,11 @@ export class DeadtreePage {
                                 console.log("失败");
                                 console.log(msg);
                                 that.curFail = true;
-                                if(that.curFail==true && that.failI!=i){
+                                console.log(that.curFail);
+                                if(!that.curFail){
                                     tmpDeviceList.push(tmpStorage[i]);
-                                }else{
-                                    that.failI = i;
                                 }
+                                
                             }
                         ).catch((error)=>{
                             console.log(error);
@@ -620,7 +621,7 @@ export class DeadtreePage {
             loader.dismiss();
 
             
-            this.sleep(tmpStorage);
+            // this.sleep(tmpStorage);
 
         }
 
