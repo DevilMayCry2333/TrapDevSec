@@ -580,12 +580,11 @@ export class DeadtreePage {
                             },msg=>{
                                 console.log("失败");
                                 console.log(msg);
-                                that.curFail = true;
                                 console.log(that.curFail);
                                 if(!that.curFail){
                                     tmpDeviceList.push(tmpStorage[i]);
                                 }
-                                
+                                that.curFail = true;
                             }
                         ).catch((error)=>{
                             console.log(error);
