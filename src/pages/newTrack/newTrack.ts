@@ -36,6 +36,9 @@ export class TrackPage {
     recordTime: any = {};
     i:any;
     observers = [];
+    curTmpSotrage:any;
+    curFail:boolean;
+    indexList = [];
     photosum: number;
     photolib1: any;
     photolib2: any;
@@ -44,6 +47,7 @@ export class TrackPage {
     currentNum = 0;
     isComplete = false;
     submitFail = false;
+    curOptions:any;
     imageData: any;
     startRecordIsClick = false;
     endRecordIsClick = false;
@@ -133,6 +137,142 @@ export class TrackPage {
         this.navCtrl.push(AboutPage);
     }
 
+    postTrack(element, httpClient, base, tmpStorage,i,j){
+        var that = this;
+        console.log(element);
+        console.log("====图片路径====");
+        let options: FileUploadOptions = {};
+            options.fileKey = "image";
+            var time = Date.parse(Date());
+            options.fileName = time + ".jpg";
+            options.mimeType = "image/jpeg";
+            options.chunkedMode = false;
+            options.httpMethod = "POST";
+            options.params = {
+                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                current: i, recordTime: element.recordTime,
+                allLength: tmpStorage.length, curRow: j
+            };
+            options.headers = { token: localStorage['token'] };
+            console.log("options");
+            console.log(options);
+            //创建文件对象
+            const fileTransfer: FileTransferObject = this.fileTransfer.create();
+            var uploadAddress;
+            this.j = j;
+            this.i = i;
+            if(i==1){
+                uploadAddress = element.pic1;     //改了这里
+            }else if(i==2){
+                uploadAddress = element.pic2;
+            }else if(i==3){
+                uploadAddress = element.pic3;
+            }else if(i==4){
+                uploadAddress = element.pic4;
+            }else if(i==5){
+                uploadAddress = element.pic5;
+            }
+            console.log(uploadAddress);
+             that.picNotExist = false;
+            
+             this.curTmpSotrage = tmpStorage;
+             this.curOptions = options.params;
+             return new Promise((resolve, reject) => {
+                fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddPhoto2', options)
+                    .then((res) => {
+                        console.log("文件传输中,当前i:=>" + i);
+                        console.log(this.currentNum);
+                        console.log(tmpStorage.length);
+                        // that.picture.push(res.response["imgId"]);
+                        console.log(res);
+                        console.log(JSON.parse(res.response));
+                        console.log(JSON.parse(res.response).isComp);
+                        if (JSON.parse(res.response).isComp == true) {
+                            this.isComplete = true;
+                        } else {
+                            this.isComplete = false;
+                        }
+                        console.log("传输中isComp" + this.isComplete);
+                        resolve('ok');
+                    },async (msg)=>{
+                        console.log("进入msg");
+                            console.log(msg);
+                            that.picNotExist = true;
+                            if (this.j <= 1) {
+                                console.log("数据是", that.curOptions);
+                                    await that.httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
+                                        {
+                                            headers: { token: localStorage['token'] }, params: {
+                                                longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
+                                                accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
+                                                current: "1", recordTime: that.currOptions.recordTime.toString()
+                                            }
+                                        }).toPromise().then(res => {
+                                            console.log("进入then");
+                                            console.log(res);
+                                            console.log("==="+ that.i);
+                                            
+                                            if (that.i >= that.curTmpSotrage.length - 1) {
+                                                that.isComplete = true;
+                                            }else {
+                                                that.isComplete = false;
+                                            }
+                                            console.log(that.isComplete);
+                                            that.subProcessFin = true;
+                                            resolve('ok');
+                                            // that.base.showAlert("全部成功了", "", () => { });
+                                            // console.log(JSON.stringify(res));
+                                            // console.log(JSON.parse(JSON.stringify(res)).message);
+                                        }, (msg) => {
+                                            console.log("进入error");
+                                            console.log(msg);
+                                            that.subProcessFin = false;
+                                            reject('error');
+                                            // this.base.showAlert('提示', '提交失败', () => { });
+                                        });
+                                        if(that.subProcessFin == true){
+                                            resolve('ok');
+                                        }else{
+                                            reject('error');
+                                        }
+                            }
+                            reject('error');
+                    })
+            })
+       // })(i,j)       
+    }
+
+postTrackPlus(element, httpClient, base, tmpStorage,i){
+        var that = this;
+        return new Promise((resolve, reject) => {
+            httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
+                                {
+                                    headers: { token: localStorage['token'] }, params: {
+                                        longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+                                        accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                        current: "1", recordTime: element.recordTime.toString()
+                                    }
+                                }).toPromise().then(res => {
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    if (that.i >= that.curTmpSotrage.length - 1) {
+                                        that.isComplete = true;
+                                    }else {
+                                        that.isComplete = false;
+                                    }
+                                    console.log(that.isComplete);
+                                    that.subProcessFin = true;
+                                    resolve('ok');
+                                }, (msg) => {
+                                    console.log(msg);
+                                    reject('error');
+                                    // this.base.showAlert('提示', '提交失败', () => { });
+                                });
+                        })
+    
+     }
+
     async ionViewDidLoad(){
         // localStorage.removeItem('TrackCache');
         // localStorage.removeItem('TrackCache1');
@@ -152,219 +292,302 @@ export class TrackPage {
         console.log(localStorage["TrackCache5"]);
 
         if (localStorage["TrackCache"]) {
+            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+            if (localStorage["TrackCache1"]) {
+                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
+            }
+            if (localStorage["TrackCache2"]) {
+                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
+            }
+            if (localStorage["TrackCache3"]) {
+                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
+            }
+            if (localStorage["TrackCache4"]) {
+                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
+            }
+            if (localStorage["TrackCache5"]) {
+                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
+            }
+            this.i = 0;
+
+            let tmpDeviceList = [];
+            this.curTmpSotrage = tmpStorage;
+            console.log(tmpStorage);
             const loader = this.loadingCtrl.create({
                 content: "缓存数据正在提交，请勿退出",
             });
             loader.present();
-            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
-
-
-            // tmpStorage.forEach(element => {
-                for(var j = 0 ; j < tmpStorage.length ; j++){
-                    await (async (j)=>{
-                    var element = tmpStorage[j];
-                    console.log(element);
-
-                if (element.hasPic ==true ) {
-
-                    for(var i = 1; i <= element.photoSum; i++){
-                        await (async (i,j)=>{
-                            if (localStorage["TrackCache1"]) {
-                                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
-                            }
-                            if (localStorage["TrackCache2"]) {
-                                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
-                            }
-                            if (localStorage["TrackCache3"]) {
-                                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
-                            }
-                            if (localStorage["TrackCache4"]) {
-                                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
-                            }
-                            if (localStorage["TrackCache5"]) {
-                                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
-                            }
-                        console.log("====当前第几条数据====");
-                        console.log(j);
-                        console.log("=====当前第几张照片====");
-                        console.log(i);
-
-                        console.log("三种形态");
-                            console.log(element.recordTime);
-                            console.log(JSON.stringify(element.recordTime));
-                            console.log(JSON.parse(element.recordTime));
-                            
-                            
-                        
-                        
-
-                        let options: FileUploadOptions = {};
-                        options.fileKey = "image";
-                        var time = Date.parse(Date());
-                        options.fileName = time + ".jpg";
-                        options.mimeType = "image/jpeg";
-                        options.chunkedMode = false;
-                        options.httpMethod = "POST";
-                        options.params = {
-                            longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                            accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                            current: i, recordTime: element.recordTime,
-                            allLength: tmpStorage.length, curRow: j
-                        };
-                        options.headers = { token: localStorage['token'] };
-                        console.log("options");
-                        console.log(options);
-                        var uploadAddress;
-                        if(i==1){
-                            uploadAddress = element.pic1;     //改了这里
-                        }else if(i==2){
-                            uploadAddress = element.pic2;
-                        }else if(i==3){
-                            uploadAddress = element.pic3;
-                        }else if(i==4){
-                            uploadAddress = element.pic4;
-                        }else if(i==5){
-                            uploadAddress = element.pic5;
-                        }
-                            console.log(uploadAddress);
-                            this.picNotExsit1 = false;
-                            this.i = i;
-                            this.j = j;
-                            this.curtmpStorage = tmpStorage;
-                            this.currOptions = options.params;
-                            console.log("初始化后值为");
-                            console.log(this.picNotExsit1);
-                                //创建文件对象
-                                const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                                let observer = await new Promise((resovle,reject)=>{
-                                    fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
-                                        .then((res) => {
-                                            console.log("进入then");
-                                            
-                                            console.log(res);
-                                            if (JSON.parse(res.response).isComp == true) {
-                                                this.isComplete = true;
-                                            } else {
-                                                this.isComplete = false;
-                                            }
-                                            console.log("传输中isComp" + this.isComplete);
-
-                                            resovle('ok');
-                                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-
-                                            // this.base.showAlert('提示', '提交成功', () => { });
-                                            // Base.popTo(this.navCtrl, 'switchProjectPage');
-                                        },async (msg)=>{
-                                                console.log("进入error");
-                                                console.log(msg);
-                                                that.picNotExsit1 = true;
-                                                if (this.i <= 1) {
-                                                    console.log(that.currOptions);
-                                                        await this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
-                                                            {
-                                                                headers: { token: localStorage['token'] }, params: {
-                                                                    longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
-                                                                    accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
-                                                                    current: "1", recordTime: that.currOptions.recordTime.toString()
-                                                                }
-                                                            })
-                                                            .toPromise().then(res => {
-                                                                console.log("进入ok");
-                                                                console.log(JSON.stringify(res));
-                                                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                                                if (that.j >= that.curtmpStorage.length-1)
-                                                                    that.isComplete = true;
-                                                                that.subProcessFin = true;
-                                                                resovle('ok');
-                                                            }, (msg) => {
-                                                                console.log("进入fail");
-                                                                console.log(msg);
-                                                                that.subProcessFin = false;
-                                                                reject('error');
-                                                            });
-                                                            if(that.subProcessFin == true){
-                                                                resovle('ok');
-                                                            }else{
-                                                                reject('error');
-                                                            }
-                                                }
-                                                reject('error');
-                                        })
-                                }).catch((err)=>{
-                                    console.log(err);
-                                })
-
-                            // if (!that.picNotExsit1)
-                                    this.observers.push(observer);
-                                console.log("第几张图片");
-                                console.log(i);
-                                console.log(j);
-                                console.log("===图片不存在===");
-                                console.log(that.picNotExsit1);
-
-                            if (that.picNotExsit1 && i <= 1 ){
-
-                        }
-
-                        })(i,j)
-                    }
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                } else {
-                    console.log(element);
-                    let obs = await new Promise((resolve,reject)=>{
-                        this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
-                            {
-                                headers: { token: localStorage['token'] }, params: {
-                                    longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                    accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
-                                    current: "1", recordTime: element.recordTime.toString()
-                                }
-                            })
-                            .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                resolve('ok');
-                                // this.base.showAlert('提示', '提交成功', () => { });
-                            }, (msg) => {
+            for (var i = 0; i < tmpStorage.length; ++i) {
+                var element = tmpStorage[i];
+                that.curFail = false;
+                if(element.hasPic==true){
+                    for(var j = 1; j <= element.photoSum; ++j){
+                        that.j = j;
+                        await this.postTrack(tmpStorage[i],this.httpClient,this.base,tmpStorage,i,j).then(
+                            res=>{
+                                console.log("成功");
+                                console.log(res);
+                            },msg=>{
+                                console.log("失败");
                                 console.log(msg);
-                                
-                                reject('error');
-                                // this.base.showAlert('提示', '提交失败', () => { });
-                            });
-                    }).catch((err)=>{
-                        console.log(err);
+                                console.log(that.curFail);
+                                if(!that.curFail){
+                                    tmpDeviceList.push(tmpStorage[i]);
+                                }
+                                that.curFail = true;
+                            }
+                        ).catch((error)=>{
+                            console.log(error);
+                        })
+                    }
+                }else{
+                    await this.postTrackPlus(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
+                        res=>{
+                            console.log("成功");
+                            console.log(res);
+                        },msg=>{
+                            console.log("失败");
+                            console.log(msg);
+                            tmpDeviceList.push(tmpStorage[i]);
+                        }
+                    ).catch((error)=>{
+                        console.log(error);
                     })
-                    this.observers.push(obs);
-
                 }
-            // });
-        
-                })(j)
             }
-            Promise.all(this.observers).then((resolve) => {
-                console.log(this.observers);
-                console.log(resolve);
-                loader.dismiss();
-                console.log("结束了嘛",this.isComplete);
-                
-                if (this.isComplete) {
-                    console.log("*****清除缓存了******");
-                    localStorage.removeItem('TrackCache');
-                    localStorage.removeItem('TrackCache1');
-                    localStorage.removeItem('TrackCache2');
-                    localStorage.removeItem('TrackCache3');
-                    localStorage.removeItem('TrackCache4');
-                    localStorage.removeItem('TrackCache5');
-                }
-            }, (reject) => {
-                console.log(reject);
-                loader.dismiss();
-            }).catch((reason) => {
-                console.log(reason);
-                loader.dismiss();
-            })
+            for (let i = 0; i < tmpDeviceList.length; ++i) {
+                this.indexList.push(tmpDeviceList[i]);
+                console.log(tmpDeviceList[i]);
+            }
+            console.log("失败的缓存");
+            console.log(this.indexList);
+            if(this.indexList.length<=0){
+                console.log("清除缓存");
+                localStorage.removeItem('TrackCache');
+            }else{
+                localStorage.setItem('TrackCache', JSON.stringify(this.indexList));
+            }
+            loader.dismiss();
+
+            
+            // this.sleep(tmpStorage);
+
         }
     }
+
+
+
+        //以下注释掉
+        // if (localStorage["TrackCache"]) {
+        //     const loader = this.loadingCtrl.create({
+        //         content: "缓存数据正在提交，请勿退出",
+        //     });
+        //     loader.present();
+        //     var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+
+
+        //     // tmpStorage.forEach(element => {
+        //         for(var j = 0 ; j < tmpStorage.length ; j++){
+        //             await (async (j)=>{
+        //             var element = tmpStorage[j];
+        //             console.log(element);
+
+        //         if (element.hasPic ==true ) {
+
+        //             for(var i = 1; i <= element.photoSum; i++){
+        //                 await (async (i,j)=>{
+        //                     if (localStorage["TrackCache1"]) {
+        //                         this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
+        //                     }
+        //                     if (localStorage["TrackCache2"]) {
+        //                         this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
+        //                     }
+        //                     if (localStorage["TrackCache3"]) {
+        //                         this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
+        //                     }
+        //                     if (localStorage["TrackCache4"]) {
+        //                         this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
+        //                     }
+        //                     if (localStorage["TrackCache5"]) {
+        //                         this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
+        //                     }
+        //                 console.log("====当前第几条数据====");
+        //                 console.log(j);
+        //                 console.log("=====当前第几张照片====");
+        //                 console.log(i);
+
+        //                 console.log("三种形态");
+        //                     console.log(element.recordTime);
+        //                     console.log(JSON.stringify(element.recordTime));
+        //                     console.log(JSON.parse(element.recordTime));
+
+        //                 let options: FileUploadOptions = {};
+        //                 options.fileKey = "image";
+        //                 var time = Date.parse(Date());
+        //                 options.fileName = time + ".jpg";
+        //                 options.mimeType = "image/jpeg";
+        //                 options.chunkedMode = false;
+        //                 options.httpMethod = "POST";
+        //                 options.params = {
+        //                     longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+        //                     accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+        //                     current: i, recordTime: element.recordTime,
+        //                     allLength: tmpStorage.length, curRow: j
+        //                 };
+        //                 options.headers = { token: localStorage['token'] };
+        //                 console.log("options");
+        //                 console.log(options);
+        //                 var uploadAddress;
+        //                 if(i==1){
+        //                     uploadAddress = element.pic1;     //改了这里
+        //                 }else if(i==2){
+        //                     uploadAddress = element.pic2;
+        //                 }else if(i==3){
+        //                     uploadAddress = element.pic3;
+        //                 }else if(i==4){
+        //                     uploadAddress = element.pic4;
+        //                 }else if(i==5){
+        //                     uploadAddress = element.pic5;
+        //                 }
+        //                     console.log(uploadAddress);
+        //                     this.picNotExsit1 = false;
+        //                     this.i = i;
+        //                     this.j = j;
+        //                     this.curtmpStorage = tmpStorage;
+        //                     this.currOptions = options.params;
+        //                     console.log("初始化后值为");
+        //                     console.log(this.picNotExsit1);
+        //                         //创建文件对象
+        //                         const fileTransfer: FileTransferObject = this.fileTransfer.create();
+        //                         let observer = await new Promise((resovle,reject)=>{
+        //                             fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
+        //                                 .then((res) => {
+        //                                     console.log("进入then");
+                                            
+        //                                     console.log(res);
+        //                                     if (JSON.parse(res.response).isComp == true) {
+        //                                         this.isComplete = true;
+        //                                     } else {
+        //                                         this.isComplete = false;
+        //                                     }
+        //                                     console.log("传输中isComp" + this.isComplete);
+
+        //                                     resovle('ok');
+        //                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+
+        //                                     // this.base.showAlert('提示', '提交成功', () => { });
+        //                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
+        //                                 },async (msg)=>{
+        //                                         console.log("进入error");
+        //                                         console.log(msg);
+        //                                         that.picNotExsit1 = true;
+        //                                         if (this.i <= 1) {
+        //                                             console.log(that.currOptions);
+        //                                                 await this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
+        //                                                     {
+        //                                                         headers: { token: localStorage['token'] }, params: {
+        //                                                             longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
+        //                                                             accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
+        //                                                             current: "1", recordTime: that.currOptions.recordTime.toString()
+        //                                                         }
+        //                                                     })
+        //                                                     .toPromise().then(res => {
+        //                                                         console.log("进入ok");
+        //                                                         console.log(JSON.stringify(res));
+        //                                                         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                                                         if (that.j >= that.curtmpStorage.length-1)
+        //                                                             that.isComplete = true;
+        //                                                         that.subProcessFin = true;
+        //                                                         resovle('ok');
+        //                                                     }, (msg) => {
+        //                                                         console.log("进入fail");
+        //                                                         console.log(msg);
+        //                                                         that.subProcessFin = false;
+        //                                                         reject('error');
+        //                                                     });
+        //                                                     if(that.subProcessFin == true){
+        //                                                         resovle('ok');
+        //                                                     }else{
+        //                                                         reject('error');
+        //                                                     }
+        //                                         }
+        //                                         reject('error');
+        //                                 })
+        //                         }).catch((err)=>{
+        //                             console.log(err);
+        //                         })
+
+        //                     // if (!that.picNotExsit1)
+        //                             this.observers.push(observer);
+        //                         console.log("第几张图片");
+        //                         console.log(i);
+        //                         console.log(j);
+        //                         console.log("===图片不存在===");
+        //                         console.log(that.picNotExsit1);
+
+        //                     if (that.picNotExsit1 && i <= 1 ){
+
+        //                 }
+
+        //                 })(i,j)
+        //             }
+        //             // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+        //         } else {
+        //             console.log(element);
+        //             let obs = await new Promise((resolve,reject)=>{
+        //                 this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
+        //                     {
+        //                         headers: { token: localStorage['token'] }, params: {
+        //                             longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
+        //                             accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+        //                             current: "1", recordTime: element.recordTime.toString()
+        //                         }
+        //                     })
+        //                     .subscribe(res => {
+        //                         console.log(JSON.stringify(res));
+        //                         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                         resolve('ok');
+        //                         // this.base.showAlert('提示', '提交成功', () => { });
+        //                     }, (msg) => {
+        //                         console.log(msg);
+                                
+        //                         reject('error');
+        //                         // this.base.showAlert('提示', '提交失败', () => { });
+        //                     });
+        //             }).catch((err)=>{
+        //                 console.log(err);
+        //             })
+        //             this.observers.push(obs);
+
+        //         }
+        //     // });
+        
+        //         })(j)
+        //     }
+        //     Promise.all(this.observers).then((resolve) => {
+        //         console.log(this.observers);
+        //         console.log(resolve);
+        //         loader.dismiss();
+        //         console.log("结束了嘛",this.isComplete);
+                
+        //         if (this.isComplete) {
+        //             console.log("*****清除缓存了******");
+        //             localStorage.removeItem('TrackCache');
+        //             localStorage.removeItem('TrackCache1');
+        //             localStorage.removeItem('TrackCache2');
+        //             localStorage.removeItem('TrackCache3');
+        //             localStorage.removeItem('TrackCache4');
+        //             localStorage.removeItem('TrackCache5');
+        //         }
+        //     }, (reject) => {
+        //         console.log(reject);
+        //         loader.dismiss();
+        //     }).catch((reason) => {
+        //         console.log(reason);
+        //         loader.dismiss();
+        //     })
+        // }
+   // }
     deviceBind() {
         //这里还没有实现，先弹框
         this.base.showAlert("成功", "", () => { });
