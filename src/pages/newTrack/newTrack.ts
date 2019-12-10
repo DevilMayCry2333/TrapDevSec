@@ -149,8 +149,8 @@ export class TrackPage {
             options.chunkedMode = false;
             options.httpMethod = "POST";
             options.params = {
-                longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                accuracyData: element.accuracyData.toString(),lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
+                accuracyData: element.accuracyData,lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                 current: i, recordTime: element.recordTime,
                 allLength: tmpStorage.length, curRow: j
             };
@@ -204,9 +204,9 @@ export class TrackPage {
                                     await that.httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
                                         {
                                             headers: { token: localStorage['token'] }, params: {
-                                                longtitudeData: that.currOptions.longtitudeData.toString(), latitudeData: that.currOptions.latitudeData.toString(), altitudeData: that.currOptions.altitudeData.toString(),
-                                                accuracyData: that.currOptions.accuracyData.toString(), lineName: that.currOptions.lineName, workContent: that.currOptions.workContent, lateIntravl: that.currOptions.lateIntravl.toString(), remarks: that.currOptions.remarks,
-                                                current: "1", recordTime: that.currOptions.recordTime.toString()
+                                                longtitudeData: that.curOptions.longtitudeData, latitudeData: that.curOptions.latitudeData, altitudeData: that.curOptions.altitudeData.toString(),
+                                                accuracyData: that.curOptions.accuracyData, lineName: that.curOptions.lineName, workContent: that.curOptions.workContent, lateIntravl: that.curOptions.lateIntravl.toString(), remarks: that.curOptions.remarks,
+                                                current: "1", recordTime: that.curOptions.recordTime.toString()
                                             }
                                         }).toPromise().then(res => {
                                             console.log("进入then");
@@ -249,8 +249,8 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
             httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
                                 {
                                     headers: { token: localStorage['token'] }, params: {
-                                        longtitudeData: element.longtitudeData.toString(), latitudeData: element.latitudeData.toString(), altitudeData: element.altitudeData.toString(),
-                                        accuracyData: element.accuracyData.toString(), lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
+                                        longtitudeData: element.longtitudeData, latitudeData: element.latitudeData, altitudeData: element.altitudeData,
+                                        accuracyData: element.accuracyData, lineName: element.lineName, workContent: element.workContent, lateIntravl: element.lateIntravl.toString(), remarks: element.remarks,
                                         current: "1", recordTime: element.recordTime.toString()
                                     }
                                 }).toPromise().then(res => {
@@ -596,6 +596,9 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
         console.log('track');
     }
     async submit() {
+            const loader = this.loadingCtrl.create({
+            content: "缓存数据正在提交，请勿退出",
+        });
         //this.canSubmit = true;
         if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
             this.base.showAlert("提示", "你还没有完成一个录制循环", () => { });
@@ -655,7 +658,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
                        options.params = {
                         longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
                         accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                           current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
+                        current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
                        };
                        options.headers = { token: localStorage['token'] };
                        const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -702,77 +705,75 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
                 Promise.all(this.observers).then((resolve) => {
                     console.log("进入resolve");
                     console.log(resolve);
-                    this.base.showAlert(resolve[0],"",()=>{});
-                    this.base.showAlert(typeof (resolve[0]), "", () => { });
+                    loader.dismiss();
+                    // this.base.showAlert(resolve[0],"",()=>{});
+                    // this.base.showAlert(typeof (resolve[0]), "", () => { });
                     console.log(resolve[0]);
                     console.log(typeof (resolve[0]));
                     
                     for(var i = 0 ; i < resolve.length; i++){
                         console.log(typeof(resolve[i]));
                         console.log(resolve[i]);
-                        
-                        
-                        if (resolve[i]!="ok"){
+                        if (resolve[i]==undefined||resolve[i]==""){
                             this.submitFail = true;
-                            let cacheData = {
-                                longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                                accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                                photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
-                                pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
-                                hasPic: this.hasPic
-                            };
-                            // console.log("cacheData");
-                            // console.log(cacheData);
-
-                            let TrackCache: any;
-                            TrackCache = localStorage.getItem('TrackCache');
-                            if (TrackCache == null) {
-                                TrackCache = [];
-                            } else {
-                                TrackCache = JSON.parse(TrackCache);
-                            }
-                            TrackCache.push(cacheData);
-                            localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                            this.base.showAlert('提示', '提交失败', () => { });
-                            break;
                         }
                     }
                     if(this.submitFail){
+                        let cacheData = {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                            photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
+                            pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
+                            hasPic: this.hasPic
+                        };
+                        // console.log("cacheData");
+                        // console.log(cacheData);
 
+                        let TrackCache: any;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        } else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        this.base.showAlert('提示', '提交失败', () => { });
                     }else{
                         this.base.showAlert('提示', '提交成功', () => { });
                     }
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (reject) => {
-                        console.log("submitReject");
+                    console.log("submitReject");
                     console.log(reject);
                     this.base.showAlert('提示', '提交失败', () => { });
                     Base.popTo(this.navCtrl, 'switchProjectPage');
+                    loader.dismiss();
                 }).catch((reason) => {
                     console.log("submitCatch");
-                    
                     console.log(reason);
                     this.base.showAlert('提示', '提交失败', () => { });
-                    // let cacheData = {
-                    //     longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                    //     accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
-                    //     photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
-                    //     pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
-                    //     hasPic: this.hasPic
-                    //     };
-                    //     // console.log("cacheData");
-                    //     // console.log(cacheData);
+                    let cacheData = {
+                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                        accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks, 
+                        photoSum: this.photosum, recordTime: JSON.stringify(this.recordTime),
+                        pic1: this.cachePhoto1, pic2: this.cachePhoto2, pic3: this.cachePhoto3, pic4: this.cachePhoto4, pic5: this.cachePhoto5, allLength: 1, curRow: 1,
+                        hasPic: this.hasPic
+                        };
+                        // console.log("cacheData");
+                        // console.log(cacheData);
 
-                    //     let TrackCache: any;
-                    //     TrackCache = localStorage.getItem('TrackCache');
-                    //     if (TrackCache == null) {
-                    //         TrackCache = [];
-                    //     } else {
-                    //         TrackCache = JSON.parse(TrackCache);
-                    //     }
-                    //     TrackCache.push(cacheData);   
-                    //     localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
+                        let TrackCache: any;
+                        TrackCache = localStorage.getItem('TrackCache');
+                        if (TrackCache == null) {
+                            TrackCache = [];
+                        } else {
+                            TrackCache = JSON.parse(TrackCache);
+                        }
+                        TrackCache.push(cacheData);   
+                        localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
                         Base.popTo(this.navCtrl, 'switchProjectPage');
+                        loader.dismiss();
                 })
 
 
