@@ -137,7 +137,7 @@ export class TrackPage {
         this.navCtrl.push(AboutPage);
     }
 
-    postTrack(element, httpClient, base, tmpStorage,i,j){
+    postTrack(element, httpClient, base, tmpStorage,j,i){
         var that = this;
         console.log(element);
         console.log("====图片路径====");
@@ -162,7 +162,7 @@ export class TrackPage {
             var uploadAddress;
             this.j = j;
             this.i = i;
-            if(i==1){
+            if(this.i==1){
                 uploadAddress = element.pic1;     //改了这里
             }else if(i==2){
                 uploadAddress = element.pic2;
@@ -181,7 +181,7 @@ export class TrackPage {
              return new Promise((resolve, reject) => {
                 fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddPhoto2', options)
                     .then((res) => {
-                        console.log("文件传输中,当前i:=>" + i);
+                        console.log("文件传输中,当前i:=>" + j);
                         console.log(this.currentNum);
                         console.log(tmpStorage.length);
                         // that.picture.push(res.response["imgId"]);
@@ -213,7 +213,7 @@ export class TrackPage {
                                             console.log(res);
                                             console.log("==="+ that.i);
                                             
-                                            if (that.i >= that.curTmpSotrage.length - 1) {
+                                            if (that.j >= that.curTmpSotrage.length - 1) {
                                                 that.isComplete = true;
                                             }else {
                                                 that.isComplete = false;
@@ -243,7 +243,7 @@ export class TrackPage {
        // })(i,j)       
     }
 
-postTrackPlus(element, httpClient, base, tmpStorage,i){
+postTrackPlus(element, httpClient, base, tmpStorage,j){
         var that = this;
         return new Promise((resolve, reject) => {
             httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
@@ -256,7 +256,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,i){
                                 }).toPromise().then(res => {
                                     console.log(JSON.stringify(res));
                                     console.log(JSON.parse(JSON.stringify(res)).message);
-                                    if (that.i >= that.curTmpSotrage.length - 1) {
+                                    if (that.j >= that.curTmpSotrage.length - 1) {
                                         that.isComplete = true;
                                     }else {
                                         that.isComplete = false;
@@ -308,7 +308,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,i){
             if (localStorage["TrackCache5"]) {
                 this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
             }
-            this.i = 0;
+            this.j = 0;
 
             let tmpDeviceList = [];
             this.curTmpSotrage = tmpStorage;
@@ -317,13 +317,13 @@ postTrackPlus(element, httpClient, base, tmpStorage,i){
                 content: "缓存数据正在提交，请勿退出",
             });
             loader.present();
-            for (var i = 0; i < tmpStorage.length; ++i) {
-                var element = tmpStorage[i];
+            for (var j = 0; j < tmpStorage.length; ++j) {
+                var element = tmpStorage[j];
                 that.curFail = false;
                 if(element.hasPic==true){
-                    for(var j = 1; j <= element.photoSum; ++j){
-                        that.j = j;
-                        await this.postTrack(tmpStorage[i],this.httpClient,this.base,tmpStorage,i,j).then(
+                    for(var i = 1; i <= element.photoSum; ++i){
+                        that.i = i;
+                        await this.postTrack(tmpStorage[j],this.httpClient,this.base,tmpStorage,j,i).then(
                             res=>{
                                 console.log("成功");
                                 console.log(res);
@@ -332,7 +332,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,i){
                                 console.log(msg);
                                 console.log(that.curFail);
                                 if(!that.curFail){
-                                    tmpDeviceList.push(tmpStorage[i]);
+                                    tmpDeviceList.push(tmpStorage[j]);
                                 }
                                 that.curFail = true;
                             }
@@ -341,23 +341,23 @@ postTrackPlus(element, httpClient, base, tmpStorage,i){
                         })
                     }
                 }else{
-                    await this.postTrackPlus(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
+                    await this.postTrackPlus(tmpStorage[j],this.httpClient,this.base,tmpStorage,j).then(
                         res=>{
                             console.log("成功");
                             console.log(res);
                         },msg=>{
                             console.log("失败");
                             console.log(msg);
-                            tmpDeviceList.push(tmpStorage[i]);
+                            tmpDeviceList.push(tmpStorage[j]);
                         }
                     ).catch((error)=>{
                         console.log(error);
                     })
                 }
             }
-            for (let i = 0; i < tmpDeviceList.length; ++i) {
-                this.indexList.push(tmpDeviceList[i]);
-                console.log(tmpDeviceList[i]);
+            for (let j = 0; j < tmpDeviceList.length; ++j) {
+                this.indexList.push(tmpDeviceList[j]);
+                console.log(tmpDeviceList[j]);
             }
             console.log("失败的缓存");
             console.log(this.indexList);
