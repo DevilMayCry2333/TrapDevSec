@@ -239,8 +239,7 @@ export class TrackPage {
                             }
                             reject('error');
                     })
-            })
-       // })(i,j)       
+            })    
     }
 
 postTrackPlus(element, httpClient, base, tmpStorage,j){
