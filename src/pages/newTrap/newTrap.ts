@@ -13,6 +13,7 @@ import { AboutPage } from '../about/about';
 import { TrapQueryPage} from '../trap-query/trap-query';
 import { File } from "@ionic-native/file";
 import { LoadingController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'app-trap',
@@ -478,54 +479,56 @@ export class TrapPage {
 
         var that = this;
         if (localStorage["maintenanceCache"]){
-            var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
-            let tmpDeviceList = [];
-            const loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
+            const alert = this.alertCtrl.create({
+                title: "是否要提交数据",
+                subTitle: "有缓存数据，是否要提交?，建议Wi-Fi或者4G网络环境下提交，4G以下网络环境提交时间可能会延长",
+                buttons: [
+                    {
+                        text: '确认', handler: async () => {
+                            console.log("确认");
+                            var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+                            let tmpDeviceList = [];
+                            const loader = this.loadingCtrl.create({
+                                content: "缓存数据正在提交，请勿退出",
+                            });
+                            loader.present();
+                            // tmpStorage.forEach(element => {
+                            for (let i = 0; i < tmpStorage.length; ++i) {
+                                await this.postMaintenance(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
+                                    res => {
+                                        console.log("成功");
+                                        console.log(res);
+                                    }, msg => {
+                                        console.log("失败");
+                                        console.log(msg);
+                                        tmpDeviceList.push(tmpStorage[i]);
+                                    }
+                                ).catch((error) => {
+                                    console.log(error);
+                                })
+                            }
+                            for (let i = 0; i < tmpDeviceList.length; ++i) {
+                                this.indexList.push(tmpDeviceList[i]);
+                                console.log(tmpDeviceList[i]);
+                            }
+                            console.log("失败的缓存");
+                            console.log(this.indexList);
+                            if (this.indexList.length <= 0) {
+                                console.log("清除缓存");
+                                localStorage.removeItem('maintenanceCache');
+                            } else {
+                                localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
+                            }
+                            loader.dismiss();
+                        }
+                    }, {
+                        text: '取消', handler: () => {
+                            console.log("取消");
+
+                        }
+                    }]
             });
-            loader.present();
-            // tmpStorage.forEach(element => {
-                for(let i = 0 ; i < tmpStorage.length ; ++i){
-                     await this.postMaintenance(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
-                         res=>{
-                             console.log("成功");
-                             console.log(res);
-                         },msg=>{
-                             console.log("失败");
-                             console.log(msg);
-                             tmpDeviceList.push(tmpStorage[i]);
-                         }
-                     ).catch((error)=>{
-                         console.log(error);
-                     })
-            }
-            for (let i = 0; i < tmpDeviceList.length; ++i) {
-                this.indexList.push(tmpDeviceList[i]);
-                console.log(tmpDeviceList[i]);
-            }
-            console.log("失败的缓存");
-            console.log(this.indexList);
-            if(this.indexList.length<=0){
-                console.log("清除缓存");
-                localStorage.removeItem('maintenanceCache');
-            }else{
-                localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
-            }
-            loader.dismiss();
-            // Promise.all(that.observers).then((resolve) => {
-            //     console.log(resolve);
-            //     loader.dismiss();
-            //         console.log("*****清除缓存了******");
-            //     if (that.isComplete){
-            //         localStorage.removeItem('maintenanceCache');
-            //     }
-            // }, (reject) => {
-            //     console.log(reject);
-            //     loader.dismiss();
-            // }).catch((reason) => {
-            //     console.log(reason);
-            //     loader.dismiss();
-            // })
+            alert.present();
 
         }
 
@@ -591,6 +594,7 @@ export class TrapPage {
     constructor(public navCtrl: NavController, 
         public qrScanner: QRScanner, 
         private base: Base, 
+        private alertCtrl:AlertController,
         private geolocation: Geolocation,
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
