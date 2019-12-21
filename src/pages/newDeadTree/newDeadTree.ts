@@ -772,7 +772,7 @@ export class DeadtreePage {
 
                 var flag = 0;
                 allDevice.forEach(element => {
-                    if ((element.scanId == params.id && element.id.charAt(8) == '4')){
+                    if ((element.scanId == params.id)){
                         flag = 1;
                     }
                 });
