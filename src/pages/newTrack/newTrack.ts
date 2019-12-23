@@ -12,7 +12,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-nati
 import { AboutPage } from '../about/about';
 import { Base64 } from '@ionic-native/base64';
 import { LoadingController } from 'ionic-angular';
-
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'app-track',
@@ -122,6 +122,7 @@ export class TrackPage {
         public navCtrl: NavController,
         public qrScanner: QRScanner,
         private base: Base,
+        private alertCtrl:AlertController,
         private geolocation: Geolocation,
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
@@ -291,84 +292,98 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
         console.log(localStorage["TrackCache5"]);
 
         if (localStorage["TrackCache"]) {
-            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
-            if (localStorage["TrackCache1"]) {
-                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
-            }
-            if (localStorage["TrackCache2"]) {
-                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
-            }
-            if (localStorage["TrackCache3"]) {
-                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
-            }
-            if (localStorage["TrackCache4"]) {
-                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
-            }
-            if (localStorage["TrackCache5"]) {
-                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
-            }
-            this.j = 0;
-
-            let tmpDeviceList = [];
-            this.curTmpSotrage = tmpStorage;
-            console.log(tmpStorage);
-            const loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-            });
-            loader.present();
-            for (var j = 0; j < tmpStorage.length; ++j) {
-                var element = tmpStorage[j];
-                that.curFail = false;
-                if(element.hasPic==true){
-                    for(var i = 1; i <= element.photoSum; ++i){
-                        that.i = i;
-                        await this.postTrack(tmpStorage[j],this.httpClient,this.base,tmpStorage,j,i).then(
-                            res=>{
-                                console.log("成功");
-                                console.log(res);
-                            },msg=>{
-                                console.log("失败");
-                                console.log(msg);
-                                console.log(that.curFail);
-                                if(!that.curFail){
-                                    tmpDeviceList.push(tmpStorage[j]);
-                                }
-                                that.curFail = true;
+            const alert = this.alertCtrl.create({
+                title: "有缓存数据，是否提交?",
+                subTitle: "提示：4G以下网络环境提交时间可能会延长，建议Wi-Fi状况良好或者4G网络环境下提交。",
+                buttons: [
+                    {
+                        text: '确认', handler: async () => {
+                            console.log("确认");
+                            var tmpStorage = JSON.parse(localStorage["TrackCache"]);
+                            if (localStorage["TrackCache1"]) {
+                                this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
                             }
-                        ).catch((error)=>{
-                            console.log(error);
-                        })
-                    }
-                }else{
-                    await this.postTrackPlus(tmpStorage[j],this.httpClient,this.base,tmpStorage,j).then(
-                        res=>{
-                            console.log("成功");
-                            console.log(res);
-                        },msg=>{
-                            console.log("失败");
-                            console.log(msg);
-                            tmpDeviceList.push(tmpStorage[j]);
-                        }
-                    ).catch((error)=>{
-                        console.log(error);
-                    })
-                }
-            }
-            for (let j = 0; j < tmpDeviceList.length; ++j) {
-                this.indexList.push(tmpDeviceList[j]);
-                console.log(tmpDeviceList[j]);
-            }
-            console.log("失败的缓存");
-            console.log(this.indexList);
-            if(this.indexList.length<=0){
-                console.log("清除缓存");
-                localStorage.removeItem('TrackCache');
-            }else{
-                localStorage.setItem('TrackCache', JSON.stringify(this.indexList));
-            }
-            loader.dismiss();
+                            if (localStorage["TrackCache2"]) {
+                                this.photoplib2 = JSON.parse(localStorage["TrackCache2"]);
+                            }
+                            if (localStorage["TrackCache3"]) {
+                                this.photoplib3 = JSON.parse(localStorage["TrackCache3"]);
+                            }
+                            if (localStorage["TrackCache4"]) {
+                                this.photoplib4 = JSON.parse(localStorage["TrackCache4"]);
+                            }
+                            if (localStorage["TrackCache5"]) {
+                                this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
+                            }
+                            this.j = 0;
 
-            
+                            let tmpDeviceList = [];
+                            this.curTmpSotrage = tmpStorage;
+                            console.log(tmpStorage);
+                            const loader = this.loadingCtrl.create({
+                                content: "缓存数据正在提交，请勿退出",
+                            });
+                            loader.present();
+                            for (var j = 0; j < tmpStorage.length; ++j) {
+                                var element = tmpStorage[j];
+                                that.curFail = false;
+                                if(element.hasPic==true){
+                                    for(var i = 1; i <= element.photoSum; ++i){
+                                        that.i = i;
+                                        await this.postTrack(tmpStorage[j],this.httpClient,this.base,tmpStorage,j,i).then(
+                                            res=>{
+                                                console.log("成功");
+                                                console.log(res);
+                                            },msg=>{
+                                                console.log("失败");
+                                                console.log(msg);
+                                                console.log(that.curFail);
+                                                if(!that.curFail){
+                                                    tmpDeviceList.push(tmpStorage[j]);
+                                                }
+                                                that.curFail = true;
+                                            }
+                                        ).catch((error)=>{
+                                            console.log(error);
+                                        })
+                                    }
+                                }else{
+                                    await this.postTrackPlus(tmpStorage[j],this.httpClient,this.base,tmpStorage,j).then(
+                                        res=>{
+                                            console.log("成功");
+                                            console.log(res);
+                                        },msg=>{
+                                            console.log("失败");
+                                            console.log(msg);
+                                            tmpDeviceList.push(tmpStorage[j]);
+                                        }
+                                    ).catch((error)=>{
+                                        console.log(error);
+                                    })
+                                }
+                            }
+                            for (let j = 0; j < tmpDeviceList.length; ++j) {
+                                this.indexList.push(tmpDeviceList[j]);
+                                console.log(tmpDeviceList[j]);
+                            }
+                            console.log("失败的缓存");
+                            console.log(this.indexList);
+                            if(this.indexList.length<=0){
+                                console.log("清除缓存");
+                                localStorage.removeItem('TrackCache');
+                            }else{
+                                localStorage.setItem('TrackCache', JSON.stringify(this.indexList));
+                            }
+                            loader.dismiss();
+                        }
+                    }, {
+                        text: '取消', handler: () => {
+                            console.log("取消");
+
+                        }
+                    }]
+                });
+                alert.present();
             // this.sleep(tmpStorage);
 
         }

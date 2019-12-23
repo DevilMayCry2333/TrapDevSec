@@ -12,6 +12,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-nati
 import { AboutPage } from '../about/about';
 import { MedicineQueryPage } from '../medicine-query/medicine-query';
 import { LoadingController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the NewMedicinePage page.
  *
@@ -74,6 +75,7 @@ export class NewMedicinePage {
     constructor(
           public qrScanner: QRScanner,
           private base: Base,
+          private alertCtrl:AlertController,
           private geolocation: Geolocation,
           private changeDetectorRef: ChangeDetectorRef,
           private httpClient: HttpClient,
@@ -286,41 +288,58 @@ async ionViewDidLoad() {
     console.log(localStorage['device']);
     var that = this;
     if (localStorage["medicineCache"]) {
-        let tmpDeviceList = [];
-        var tmpStorage = JSON.parse(localStorage["medicineCache"]);
-        //var i = 0;
-        //tmpStorage.forEach(element => {
-            const loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-            });
-            loader.present();
-            for(var i = 0 ; i < tmpStorage.length ; i++){
-                await this.postMedicine(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
-                    res=>{
-                        console.log("成功");
-                        console.log(res);
-                    },msg=>{
-                        console.log("失败");
-                        console.log(msg);
-                        tmpDeviceList.push(tmpStorage[i]);
+        const alert = this.alertCtrl.create({
+            title: "有缓存数据，是否提交?",
+            subTitle: "提示：4G以下网络环境提交时间可能会延长，建议Wi-Fi状况良好或者4G网络环境下提交。",
+            buttons: [
+                {
+                    text: '确认', handler: async () => {
+                            console.log("确认");
+                            let tmpDeviceList = [];
+                            var tmpStorage = JSON.parse(localStorage["medicineCache"]);
+                            //var i = 0;
+                            //tmpStorage.forEach(element => {
+                            const loader = this.loadingCtrl.create({
+                                content: "缓存数据正在提交，请勿退出",
+                            });
+                            loader.present();
+                            for(var i = 0 ; i < tmpStorage.length ; i++){
+                                await this.postMedicine(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
+                                    res=>{
+                                        console.log("成功");
+                                        console.log(res);
+                                    },msg=>{
+                                        console.log("失败");
+                                        console.log(msg);
+                                        tmpDeviceList.push(tmpStorage[i]);
+                                    }
+                                ).catch((error)=>{
+                                    console.log(error);
+                                })
                     }
-                ).catch((error)=>{
-                    console.log(error);
-                })
-       }
-       for (let i = 0; i < tmpDeviceList.length; ++i) {
-           this.indexList.push(tmpDeviceList[i]);
-           console.log(tmpDeviceList[i]);
-       }
-       console.log("失败的缓存");
-       console.log(this.indexList);
-       if(this.indexList.length<=0){
-           console.log("清除缓存");
-           localStorage.removeItem('medicineCache');
-       }else{
-           localStorage.setItem('medicineCache', JSON.stringify(this.indexList));
-       }
-       loader.dismiss();
+                            for (let i = 0; i < tmpDeviceList.length; ++i) {
+                                this.indexList.push(tmpDeviceList[i]);
+                                console.log(tmpDeviceList[i]);
+                            }
+                            console.log("失败的缓存");
+                            console.log(this.indexList);
+                            if(this.indexList.length<=0){
+                                console.log("清除缓存");
+                                localStorage.removeItem('medicineCache');
+                            }else{
+                                localStorage.setItem('medicineCache', JSON.stringify(this.indexList));
+                            }
+                            loader.dismiss();
+                        }
+                    }, {
+                        text: '取消', handler: () => {
+                            console.log("取消");
+
+                        }
+                    }]
+            });
+            alert.present();
+
     }
             //         await (async (i)=>{
             //             var element = tmpStorage[i];

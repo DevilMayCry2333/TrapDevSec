@@ -14,6 +14,7 @@ import { DeadTreesQueryPage} from '../dead-trees-query/dead-trees-query';
 import { LoadingController } from 'ionic-angular';
 import { Base64 } from '@ionic-native/base64';
 import { File } from "@ionic-native/file";
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'app-deadtree',
@@ -99,6 +100,7 @@ export class DeadtreePage {
     constructor(
         public qrScanner: QRScanner,
         private base: Base,
+        private alertCtrl:AlertController,
         private geolocation: Geolocation,
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
@@ -534,92 +536,103 @@ export class DeadtreePage {
 
         //deadCache
         if (localStorage["deadCache"]) {
-            var tmpStorage = JSON.parse(localStorage["deadCache"]);
-            // console.log("照片缓存");
+            const alert = this.alertCtrl.create({
+                title: "有缓存数据，是否提交?",
+                subTitle: "提示：4G以下网络环境提交时间可能会延长，建议Wi-Fi状况良好或者4G网络环境下提交。",
+                buttons: [
+                    {
+                        text: '确认', handler: async () => {
+                            console.log("确认");
+                            var tmpStorage = JSON.parse(localStorage["deadCache"]);
+                            // console.log("照片缓存");
+                            // console.log(localStorage["deadPhotoCache1"]);
+                            // console.log(localStorage["deadPhotoCache2"]);
+                            // console.log(localStorage["deadPhotoCache3"]);
 
-            // console.log(localStorage["deadPhotoCache1"]);
-            // console.log(localStorage["deadPhotoCache2"]);
-            // console.log(localStorage["deadPhotoCache3"]);
-
-
-
-            if (localStorage["deadPhotoCache1"]) {
-                this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
-            }
-            if (localStorage["deadPhotoCache2"]) {
-                this.photolib2 = JSON.parse(localStorage["deadPhotoCache2"]);
-            }
-            if (localStorage["deadPhotoCache3"]) {
-                this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
-            }
-
-            this.i = 0;
-            //i是一条一条的记录
-            // console.log(tmpStorage);
-            
-            // let n = this.awaitF();
-            // console.log(n);
-
-            let tmpDeviceList = [];
-            this.curTmpSotrage = tmpStorage;
-            console.log(tmpStorage);
-            const loader = this.loadingCtrl.create({
-                content: "缓存数据正在提交，请勿退出",
-            });
-            loader.present();
-            for (var i = 0; i < tmpStorage.length; ++i) {
-                var element = tmpStorage[i];
-                that.curFail = false;
-                if(element.hasPic==true){
-                    for(var j = 1; j <= element.photoSum; ++j){
-                        that.j = j;
-                        await this.postAdddeadtree(tmpStorage[i],this.httpClient,this.base,tmpStorage,i,j).then(
-                            res=>{
-                                console.log("成功");
-                                console.log(res);
-                            },msg=>{
-                                console.log("失败");
-                                console.log(msg);
-                                console.log(that.curFail);
-                                if(!that.curFail){
-                                    tmpDeviceList.push(tmpStorage[i]);
-                                }
-                                that.curFail = true;
+                            if (localStorage["deadPhotoCache1"]) {
+                                this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
                             }
-                        ).catch((error)=>{
-                            console.log(error);
-                        })
-                    }
-                }else{
-                    await this.postAdddeadtreePlus(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
-                        res=>{
-                            console.log("成功");
-                            console.log(res);
-                        },msg=>{
-                            console.log("失败");
-                            console.log(msg);
-                            tmpDeviceList.push(tmpStorage[i]);
-                        }
-                    ).catch((error)=>{
-                        console.log(error);
-                    })
-                }
-            }
-            for (let i = 0; i < tmpDeviceList.length; ++i) {
-                this.indexList.push(tmpDeviceList[i]);
-                console.log(tmpDeviceList[i]);
-            }
-            console.log("失败的缓存");
-            console.log(this.indexList);
-            if(this.indexList.length<=0){
-                console.log("清除缓存");
-                localStorage.removeItem('deadCache');
-            }else{
-                localStorage.setItem('deadCache', JSON.stringify(this.indexList));
-            }
-            loader.dismiss();
+                            if (localStorage["deadPhotoCache2"]) {
+                                this.photolib2 = JSON.parse(localStorage["deadPhotoCache2"]);
+                            }
+                            if (localStorage["deadPhotoCache3"]) {
+                                this.photolib3 = JSON.parse(localStorage["deadPhotoCache3"]);
+                            }
 
-            
+                            this.i = 0;
+                            //i是一条一条的记录
+                            // console.log(tmpStorage);
+                            
+                            // let n = this.awaitF();
+                            // console.log(n);
+
+                            let tmpDeviceList = [];
+                            this.curTmpSotrage = tmpStorage;
+                            console.log(tmpStorage);
+                            const loader = this.loadingCtrl.create({
+                                content: "缓存数据正在提交，请勿退出",
+                            });
+                            loader.present();
+                            for (var i = 0; i < tmpStorage.length; ++i) {
+                                var element = tmpStorage[i];
+                                that.curFail = false;
+                                if(element.hasPic==true){
+                                    for(var j = 1; j <= element.photoSum; ++j){
+                                        that.j = j;
+                                        await this.postAdddeadtree(tmpStorage[i],this.httpClient,this.base,tmpStorage,i,j).then(
+                                            res=>{
+                                                console.log("成功");
+                                                console.log(res);
+                                            },msg=>{
+                                                console.log("失败");
+                                                console.log(msg);
+                                                console.log(that.curFail);
+                                                if(!that.curFail){
+                                                    tmpDeviceList.push(tmpStorage[i]);
+                                                }
+                                                that.curFail = true;
+                                            }
+                                        ).catch((error)=>{
+                                            console.log(error);
+                                        })
+                                    }
+                                }else{
+                                    await this.postAdddeadtreePlus(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
+                                        res=>{
+                                            console.log("成功");
+                                            console.log(res);
+                                        },msg=>{
+                                            console.log("失败");
+                                            console.log(msg);
+                                            tmpDeviceList.push(tmpStorage[i]);
+                                        }
+                                    ).catch((error)=>{
+                                        console.log(error);
+                                    })
+                                }
+                            }
+                            for (let i = 0; i < tmpDeviceList.length; ++i) {
+                                this.indexList.push(tmpDeviceList[i]);
+                                console.log(tmpDeviceList[i]);
+                            }
+                            console.log("失败的缓存");
+                            console.log(this.indexList);
+                            if(this.indexList.length<=0){
+                                console.log("清除缓存");
+                                localStorage.removeItem('deadCache');
+                            }else{
+                                localStorage.setItem('deadCache', JSON.stringify(this.indexList));
+                            }
+                            loader.dismiss();
+                        }
+                    }, {
+                        text: '取消', handler: () => {
+                            console.log("取消");
+
+                        }
+                    }]
+                });
+                alert.present();
             // this.sleep(tmpStorage);
 
         }

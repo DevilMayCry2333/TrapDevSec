@@ -480,8 +480,8 @@ export class TrapPage {
         var that = this;
         if (localStorage["maintenanceCache"]){
             const alert = this.alertCtrl.create({
-                title: "是否要提交数据",
-                subTitle: "有缓存数据，是否要提交?，建议Wi-Fi或者4G网络环境下提交，4G以下网络环境提交时间可能会延长",
+                title: "有缓存数据，是否提交?",
+                subTitle: "提示：4G以下网络环境提交时间可能会延长，建议Wi-Fi状况良好或者4G网络环境下提交。",
                 buttons: [
                     {
                         text: '确认', handler: async () => {
