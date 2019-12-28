@@ -18,16 +18,16 @@ import { AlertController } from 'ionic-angular';
     templateUrl: 'newDry.html'
 })
 export class DryPage {
-    // longtitude="1.1234567";
-    // latitude="1.1234567";
-    // altitude="1.1234567";
-    // accuracy="1.1234567";
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
     deviceId:string
     deviceSerial: string
-    longtitude:string
-    accuracy: string
-    latitude: string
-    altitude: string
+    // longtitude:string
+    // accuracy: string
+    // latitude: string
+    // altitude: string
     woodStatusValue:string
     chestDiameter:number;
     injectName:string

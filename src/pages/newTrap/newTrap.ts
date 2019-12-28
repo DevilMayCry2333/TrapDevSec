@@ -22,14 +22,14 @@ import { AlertController } from 'ionic-angular';
 export class TrapPage {
     deviceId: string
     deviceSerial: string
-    // longtitude = "1.2"
-    // latitude = "1.2"
-    // altitude = "1.2"
-    // accuracy = "1.2"
-    longtitude: string
-    latitude: string
-    altitude: string
-    accuracy: string
+    longtitude = "1.2"
+    latitude = "1.2"
+    altitude = "1.2"
+    accuracy = "1.2"
+    // longtitude: string
+    // latitude: string
+    // altitude: string
+    // accuracy: string
     BeetleType:string
     injectTypeValue:string
     WorkContentValue:string
@@ -85,16 +85,16 @@ export class TrapPage {
     test(){
         localStorage.removeItem('maintenanceCache');
         //一秒3500,4000报错
-        for(var i = 0 ; i < 3500; i++){
-            this.deviceId = Math.ceil(Math.random() * 250 + 100000000000).toString();
+        for(var i = 0 ; i < 1000; i++){
+            this.deviceId = Math.ceil(i + 11000).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
             this.newbettle = "2";
             this.altitude = "14";
-            this.injectTypeValue = "测试";
-            this.WorkContentValue = "1";
+            this.injectTypeValue = "增强型";
+            this.WorkContentValue = "3";
             this.otherbettle = "7";
-            this.BeetleType = "1";
+            this.BeetleType = "7";
             this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                 {
                     headers: { token: localStorage['token'] }, params: {
