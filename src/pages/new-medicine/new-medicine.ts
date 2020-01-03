@@ -92,7 +92,9 @@ export class NewMedicinePage {
 }
 
   NavToMap() {
-    this.navCtrl.push(AboutPage);
+      this.navCtrl.push(AboutPage, {
+          project: '6'
+      });
 }
 
 

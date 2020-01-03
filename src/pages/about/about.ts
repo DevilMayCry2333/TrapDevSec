@@ -11,8 +11,7 @@ import { AlertController } from 'ionic-angular';
 import { File } from "@ionic-native/file";
 import { ChangeDetectorRef } from '@angular/core';
 import { Platform } from 'ionic-angular';
-
-
+import { NavParams} from 'ionic-angular';
 
 // import * as MarkerClusterer from "../../../node_modules/@types/markerclustererplus/index";
 declare var BMap;
@@ -51,14 +50,21 @@ export class AboutPage {
   // 精度
   accuracy = '';
 
+  project = '';
+
 
   constructor(public navCtrl: NavController, private httpClient: HttpClient, private base: Base,
     private coordinateConvertor: CoordinateConvertor, 
+    public navParams: NavParams,
     @Inject(AlertController) private alerts: AlertController, 
     private file: File, private geolocation: Geolocation, 
     private changeDetectorRef: ChangeDetectorRef,
     private appAvailability:AppAvailability,
     private platform: Platform) {
+
+      this.project = navParams.get('project');
+      console.log(this.project);
+      
 
     // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
     //
@@ -356,7 +362,7 @@ openBaiduMap() {
       })
     this.httpClient.get(this.base.BASE_URL + 'auth_api/device_list', {
       headers: { token: localStorage['token'] },
-      params: { searchText: "", limit: "2000", page: "1",isMap:"false" }
+      params: { searchText: "", limit: "2000", page: "1",isMap:"false",project:this.project }
     }).subscribe(res => {
 
       for (var i = 0; i < res['data'].length; i++) {

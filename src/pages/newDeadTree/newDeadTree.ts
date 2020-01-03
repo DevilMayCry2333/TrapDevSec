@@ -113,7 +113,9 @@ export class DeadtreePage {
     ) { }
 
     NavToMap() {
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage,{
+            project: '4'
+        });
     }
 
     bindNewId(){

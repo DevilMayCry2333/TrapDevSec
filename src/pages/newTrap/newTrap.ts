@@ -85,7 +85,7 @@ export class TrapPage {
     async test(){
         localStorage.removeItem('maintenanceCache');
         //一秒3500,4000报错
-        for(var i = 0 ; i < 2000; i++){
+        for(var i = 0 ; i < 1; i++){
                 console.log(i);
                 this.deviceId = Math.ceil(i + 10000).toString();
                 this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
@@ -542,7 +542,9 @@ export class TrapPage {
     }
 
     NavToMap(){
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage,{
+            project:'1'
+        });
     }
     constructor(public navCtrl: NavController, 
         public qrScanner: QRScanner, 

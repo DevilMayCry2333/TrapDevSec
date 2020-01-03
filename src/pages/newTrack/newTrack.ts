@@ -135,7 +135,9 @@ export class TrackPage {
     }
 
     NavToMap() {
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage,{
+            project: '5'
+        });
     }
 
     postTrack(element, httpClient, base, tmpStorage,j,i){

@@ -70,7 +70,9 @@ export class EnemyPage {
         ) { }
 
     NavToMap() {
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage,{
+            project: '3'
+        });
     }
     releaseNumInput(){
         let num1 = 0;

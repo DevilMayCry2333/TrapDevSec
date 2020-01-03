@@ -116,7 +116,9 @@ export class DryPage {
     }
     }
     NavToMap() {
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.push(AboutPage,{
+            project: '2'
+        });
     }
     bindNewId() {
         if(this.deviceId == undefined || this.deviceId=="" || this.deviceSerial == undefined || this.deviceSerial == ""){
