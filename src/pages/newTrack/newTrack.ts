@@ -136,7 +136,7 @@ export class TrackPage {
 
     NavToMap() {
         this.navCtrl.push(AboutPage,{
-            project: '5'
+            project: '6'
         });
     }
 
