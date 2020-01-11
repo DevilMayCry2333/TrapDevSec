@@ -373,6 +373,7 @@ openBaiduMap() {
           var point = this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
           point = new BMap.Point(point[1], point[0]);
           markers.push(point);
+           addText(res['data'][i]["customSerial"], point);
           // this.addMarker(point);
         }
       }
@@ -380,7 +381,21 @@ openBaiduMap() {
     })
 
 
-
+    function addText(text, point) {
+      var opts = {
+        position: point, // 指定文本标注所在的地理位置
+        offset: new BMap.Size(5, -5) //设置文本偏移量
+      };
+      var label = new BMap.Label(text, opts); // 创建文本标注对象
+      label.setStyle({
+        color: "green",
+        fontSize: "12px",
+        height: "20px",
+        lineHeight: "20px",
+        fontFamily: "微软雅黑"
+      });
+      map.addOverlay(label);
+    }
     function addMarker(point, index) {  // 创建图标对象   
       var myIcon = new BMap.Icon("http://106.15.90.78/myLocation.jpeg", new BMap.Size(23, 25), {
         // 指定定位位置。   
