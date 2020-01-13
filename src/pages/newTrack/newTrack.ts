@@ -1030,6 +1030,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
         } else {
             this.lineNameDis = true;
             this.startRecordIsClick = true;
+            this.base.showAlert("提示", "正在录制中，请开始施工!", () => { });
             //此处整合进submit
             // this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
             //     {
