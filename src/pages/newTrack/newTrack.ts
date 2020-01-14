@@ -662,6 +662,25 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
                     // this.canSubmit = false;
                     // return;
                 }
+                if(this.photosum<=0){
+                    let observer = await new Promise((resolve, reject) => {
+                        this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
+                        {
+                            headers: {token: localStorage['token']}, params:{
+                                longtitudeData: this.longtitudeData, latitudeData: this.latitudeData, altitudeData: this.altitudeData,
+                                accuracyData: this.accuracyData, lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl, remarks: this.remarks,
+                                current: "0", recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
+                            }
+                        })
+                        .toPromise().then(res => {
+                            resolve('ok');
+                        }, (msg) => {
+                            reject('error');
+                        });
+                    })
+                    this.observers.push(observer);
+                }
+
                 for (var j = 1; j <= this.photosum; j = j + 1) {
                     await (async (j)=>{
                        let options: FileUploadOptions = {};

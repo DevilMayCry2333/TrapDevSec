@@ -23,19 +23,19 @@ import { AlertController } from 'ionic-angular';
 export class DeadtreePage {
     deviceId: string;
     deviceSerial: string;
-    longtitude: string;
-    latitude: string;
-    altitude: string;
-    accuracy: string;
+    // longtitude: string;
+    // latitude: string;
+    // altitude: string;
+    // accuracy: string;
     batch = "1";
     currentImg:any;
     failI = -1;
     curFail:boolean;
     currentNum = 0;
-    // longtitude="1.1234567";
-    // latitude="1.1234567";
-    // altitude="1.1234567";
-    // accuracy="1.1234567";
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
     hasClear = false;
     diameter = 0;
     height = 0;
@@ -930,6 +930,28 @@ export class DeadtreePage {
                     this.canSubmit = false;
                     return;
                 }
+                console.log(this.photosum);
+
+                if(this.photosum<=0){
+                    let observer = await new Promise((resolve, reject) => {
+                        this.httpClient.post(this.base.BASE_URL + 'app/AddDeadtreePhoto', {},
+                        {
+                            headers: {token: localStorage['token']}, params:{
+                                deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                                accuracy: this.accuracy, diameter: this.diameter.toString(), height: this.height.toString(), volume: this.volume.toString(),
+                                killMethodsValue: this.killMethodsValue, remarks: this.remarks, current: "0", batch: this.batch,
+                                allLength: "1", curRow: "1"
+                            }
+                        })
+                        .toPromise().then(res => {
+                            resolve('ok');
+                        }, (msg) => {
+                            reject('error');
+                        });
+                    })
+                    this.observers.push(observer); 
+                }
+
                 for (var j = 1; j <= this.photosum; j = j + 1) {
                     await (async (j: string | number)=>{
                        let options: FileUploadOptions = {};
@@ -958,25 +980,25 @@ export class DeadtreePage {
                            uploadAddress = this.cachePhoto3;
                           // this.currentImg = this.photolib3;
                        }
-                    
-                       let observer = await new Promise((resolve, reject) => {
-                           fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                               .then((res) => {
-                                   if (JSON.parse(res.response).isComp == true) {
-                                       this.isComplete = true;
-                                   } else {
-                                       this.isComplete = false;
-                                   }
-                                   resolve('ok');
-                               }).catch((error) => {
-                                   this.picNotExist = true;
-                                   reject('error');
-                               })
-                       }).catch((reason)=>{
-                           console.log(reason);
-                       })
-                       console.log("await" + j);
-                       this.observers.push(observer); 
+
+                            let observer = await new Promise((resolve, reject) => {
+                                fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                    .then((res) => {
+                                        if (JSON.parse(res.response).isComp == true) {
+                                            this.isComplete = true;
+                                        } else {
+                                            this.isComplete = false;
+                                        }
+                                        resolve('ok');
+                                    }).catch((error) => {
+                                        this.picNotExist = true;
+                                        reject('error');
+                                    })
+                            }).catch((reason)=>{
+                                console.log(reason);
+                            })
+                            console.log("await" + j);
+                            this.observers.push(observer); 
                    })(j)
                }
                 Promise.all(this.observers).then((resolve) => {
