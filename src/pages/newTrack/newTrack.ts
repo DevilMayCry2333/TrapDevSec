@@ -662,6 +662,7 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
                     // this.canSubmit = false;
                     // return;
                 }
+                console.log(this.photosum);
                 if(this.photosum<=0){
                     let observer = await new Promise((resolve, reject) => {
                         this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
@@ -673,70 +674,78 @@ postTrackPlus(element, httpClient, base, tmpStorage,j){
                             }
                         })
                         .toPromise().then(res => {
+                            console.log(res);
                             resolve('ok');
                         }, (msg) => {
+                            console.log(msg);
+                            reject('error');
+                        }).catch((err)=>{
+                            console.log(err);
                             reject('error');
                         });
+                    }).catch((err)=>{
+                        console.log(err);
                     })
                     this.observers.push(observer);
+                }else{
+                    for (var j = 1; j <= this.photosum; j = j + 1) {
+                        await (async (j)=>{
+                           let options: FileUploadOptions = {};
+                           options.fileKey = "image";
+                           var time = Date.parse(Date());
+                           options.fileName = time + ".jpg";
+                           options.mimeType = "image/jpeg";
+                           options.chunkedMode = false;
+                           options.httpMethod = "POST";
+                           options.params = {
+                            longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
+                            accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
+                            current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
+                           };
+                           options.headers = { token: localStorage['token'] };
+                           const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                           var uploadAddress: string;
+                           
+                           if (j == 1) {
+                               uploadAddress = this.cachePhoto1;
+                               //this.currentImg = this.photolib1;
+                           } else if (j == 2) {
+                               uploadAddress = this.cachePhoto2;
+                              // this.currentImg = this.photolib2;
+                           } else if (j == 3) {
+                               uploadAddress = this.cachePhoto3;
+                              // this.currentImg = this.photolib3;
+                           }else if (j == 4) {
+                            uploadAddress = this.cachePhoto4;
+                           
+                        }else if (j == 5) {
+                            uploadAddress = this.cachePhoto5;
+                           
+                        }
+                        
+                           let observer = await new Promise((resolve, reject) => {
+                               fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
+                                   .then((res) => {
+                                       if (JSON.parse(res.response).isComp == true) {
+                                           this.isComplete = true;
+                                       } else {
+                                           this.isComplete = false;
+                                       }
+                                       resolve('ok');
+                                   }).catch((error) => {
+                                       console.log(error);
+                                       this.picNotExist = true;
+                                       reject('error');
+                                   })
+                           }).catch((reason)=>{
+                               console.log(reason);
+                           })
+                           console.log("await" + j);
+                           this.observers.push(observer);     
+                       })(j)
+                   }
                 }
 
-                for (var j = 1; j <= this.photosum; j = j + 1) {
-                    await (async (j)=>{
-                       let options: FileUploadOptions = {};
-                       options.fileKey = "image";
-                       var time = Date.parse(Date());
-                       options.fileName = time + ".jpg";
-                       options.mimeType = "image/jpeg";
-                       options.chunkedMode = false;
-                       options.httpMethod = "POST";
-                       options.params = {
-                        longtitudeData: this.longtitudeData.toString(), latitudeData: this.latitudeData.toString(), altitudeData: this.altitudeData.toString(),
-                        accuracyData: this.accuracyData.toString(), lineName: this.lineName, workContent: this.workContent, lateIntravl: this.lateIntravl.toString(), remarks: this.remarks,
-                        current: j, recordTime: JSON.stringify(this.recordTime), allLength: "1", curRow: "1", hasPic:"true"
-                       };
-                       options.headers = { token: localStorage['token'] };
-                       const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                       var uploadAddress: string;
-                       
-                       if (j == 1) {
-                           uploadAddress = this.cachePhoto1;
-                           //this.currentImg = this.photolib1;
-                       } else if (j == 2) {
-                           uploadAddress = this.cachePhoto2;
-                          // this.currentImg = this.photolib2;
-                       } else if (j == 3) {
-                           uploadAddress = this.cachePhoto3;
-                          // this.currentImg = this.photolib3;
-                       }else if (j == 4) {
-                        uploadAddress = this.cachePhoto4;
-                       
-                    }else if (j == 5) {
-                        uploadAddress = this.cachePhoto5;
-                       
-                    }
-                    
-                       let observer = await new Promise((resolve, reject) => {
-                           fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
-                               .then((res) => {
-                                   if (JSON.parse(res.response).isComp == true) {
-                                       this.isComplete = true;
-                                   } else {
-                                       this.isComplete = false;
-                                   }
-                                   resolve('ok');
-                               }).catch((error) => {
-                                   console.log(error);
-                                   this.picNotExist = true;
-                                   reject('error');
-                               })
-                       }).catch((reason)=>{
-                           console.log(reason);
-                       })
-                       console.log("await" + j);
-                       this.observers.push(observer);     
-                   })(j)
-               }
                 Promise.all(this.observers).then((resolve) => {
                     console.log("进入resolve");
                     console.log(resolve);

@@ -947,60 +947,66 @@ export class DeadtreePage {
                             resolve('ok');
                         }, (msg) => {
                             reject('error');
+                        }).catch((err)=>{
+                            console.log(err);
+                            reject('error');
                         });
+                    }).catch((err)=>{
+                        console.log(err);
                     })
-                    this.observers.push(observer); 
+                    this.observers.push(observer);
+                }else{
+                    for (var j = 1; j <= this.photosum; j = j + 1) {
+                        await (async (j: string | number)=>{
+                           let options: FileUploadOptions = {};
+                           options.fileKey = "image";
+                           var time = Date.parse(Date());
+                           options.fileName = time + ".jpg";
+                           options.mimeType = "image/jpeg";
+                           options.chunkedMode = false;
+                           options.httpMethod = "POST";
+                           options.params = {
+                               deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
+                               accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
+                               killMethodsValue: this.killMethodsValue, remarks: this.remarks, current: j, batch: this.batch,
+                               allLength: "1", curRow: "1"
+                           };
+                           options.headers = { token: localStorage['token'] };
+                           const fileTransfer: FileTransferObject = this.fileTransfer.create();
+                           var uploadAddress: string;
+                           if (j == 1) {
+                               uploadAddress = this.cachePhoto1;
+                               //this.currentImg = this.photolib1;
+                           } else if (j == 2) {
+                               uploadAddress = this.cachePhoto2;
+                              // this.currentImg = this.photolib2;
+                           } else if (j == 3) {
+                               uploadAddress = this.cachePhoto3;
+                              // this.currentImg = this.photolib3;
+                           }
+    
+                                let observer = await new Promise((resolve, reject) => {
+                                    fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
+                                        .then((res) => {
+                                            if (JSON.parse(res.response).isComp == true) {
+                                                this.isComplete = true;
+                                            } else {
+                                                this.isComplete = false;
+                                            }
+                                            resolve('ok');
+                                        }).catch((error) => {
+                                            this.picNotExist = true;
+                                            reject('error');
+                                        })
+                                }).catch((reason)=>{
+                                    console.log(reason);
+                                })
+                                console.log("await" + j);
+                                this.observers.push(observer); 
+                       })(j)
+                   }
                 }
-
-                for (var j = 1; j <= this.photosum; j = j + 1) {
-                    await (async (j: string | number)=>{
-                       let options: FileUploadOptions = {};
-                       options.fileKey = "image";
-                       var time = Date.parse(Date());
-                       options.fileName = time + ".jpg";
-                       options.mimeType = "image/jpeg";
-                       options.chunkedMode = false;
-                       options.httpMethod = "POST";
-                       options.params = {
-                           deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                           accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
-                           killMethodsValue: this.killMethodsValue, remarks: this.remarks, current: j, batch: this.batch,
-                           allLength: "1", curRow: "1"
-                       };
-                       options.headers = { token: localStorage['token'] };
-                       const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                       var uploadAddress: string;
-                       if (j == 1) {
-                           uploadAddress = this.cachePhoto1;
-                           //this.currentImg = this.photolib1;
-                       } else if (j == 2) {
-                           uploadAddress = this.cachePhoto2;
-                          // this.currentImg = this.photolib2;
-                       } else if (j == 3) {
-                           uploadAddress = this.cachePhoto3;
-                          // this.currentImg = this.photolib3;
-                       }
-
-                            let observer = await new Promise((resolve, reject) => {
-                                fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddDeadtreePhoto', options)
-                                    .then((res) => {
-                                        if (JSON.parse(res.response).isComp == true) {
-                                            this.isComplete = true;
-                                        } else {
-                                            this.isComplete = false;
-                                        }
-                                        resolve('ok');
-                                    }).catch((error) => {
-                                        this.picNotExist = true;
-                                        reject('error');
-                                    })
-                            }).catch((reason)=>{
-                                console.log(reason);
-                            })
-                            console.log("await" + j);
-                            this.observers.push(observer); 
-                   })(j)
-               }
+                
                 Promise.all(this.observers).then((resolve) => {
                     console.log(resolve);
                     loader.dismiss();
