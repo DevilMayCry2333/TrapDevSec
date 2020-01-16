@@ -52,6 +52,8 @@ export class AboutPage {
 
   project = '';
 
+  markers = [];
+
 
   constructor(public navCtrl: NavController, private httpClient: HttpClient, private base: Base,
     private coordinateConvertor: CoordinateConvertor, 
@@ -325,6 +327,7 @@ openBaiduMap() {
 
   ionViewDidEnter() {
     var myPoint = [];
+    this.markers = [];
     let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
     var point = new BMap.Point(116.331398, 39.897445);
     map.centerAndZoom(point, 12);
@@ -372,7 +375,8 @@ openBaiduMap() {
 
           var point = this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
           point = new BMap.Point(point[1], point[0]);
-          markers.push(point);
+          // markers.push(point);
+          this.markers.push(point);
            addText(res['data'][i]["customSerial"], point);
           // this.addMarker(point);
         }
@@ -432,7 +436,7 @@ openBaiduMap() {
 
     }
 
-    var markerClusterer = new BMap.PointCollection(markers, options);
+    var markerClusterer = new BMap.PointCollection(this.markers, options);
     // var marker = new BMap.Marker(point);
     this.map.addOverlay(markerClusterer);
   }

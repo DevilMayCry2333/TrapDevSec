@@ -28,14 +28,14 @@ import { AlertController } from 'ionic-angular';
 export class NewMedicinePage {
     deviceId:string
     deviceSerial: string
-    longtitude= "1.789456"
-    latitude="2.154548"
-    altitude="1.564465"
-    accuracy="0.999999"
-    // longtitude:string
-    // latitude:string  
-    // altitude:string
-    // accuracy:string
+    // longtitude= "1.789456"
+    // latitude="2.154548"
+    // altitude="1.564465"
+    // accuracy="0.999999"
+    longtitude:string
+    latitude:string  
+    altitude:string
+    accuracy:string
     // woodStatusValue:string       
     medicinename:any[]
     medicinenameValue:string     //
