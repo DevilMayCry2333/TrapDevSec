@@ -22,14 +22,14 @@ import { AlertController } from 'ionic-angular';
 export class TrapPage {
     deviceId: string
     deviceSerial: string
-    // longtitude = "1.2"
-    // latitude = "1.2"
-    // altitude = "1.2"
-    // accuracy = "1.2"
-    longtitude: string
-    latitude: string
-    altitude: string
-    accuracy: string
+    longtitude = "1.2"
+    latitude = "1.2"
+    altitude = "1.2"
+    accuracy = "1.2"
+    // longtitude: string
+    // latitude: string
+    // altitude: string
+    // accuracy: string
     BeetleType:string
     injectTypeValue:string
     WorkContentValue:string
