@@ -19,14 +19,22 @@ import { AlertController } from 'ionic-angular';
     templateUrl: 'newEnemy.html'
 })
 export class EnemyPage {
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
+
     deviceId: string
     deviceSerial: string
     subscription: Subscription;
-    longtitude: string
-    latitude: string
+
+    // longtitude: string
+    // latitude: string
+    // altitude: string
+    // accuracy: string
+
     imageData:null
-    altitude: string
-    accuracy: string
+
     predatorsTypeValue:string
     have_submit:boolean
     releaseNum: string
