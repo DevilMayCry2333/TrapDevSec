@@ -347,7 +347,6 @@ openBaiduMap() {
 
     this.locate();
 
-
     this.httpClient.get(this.base.BASE_URL + 'auth_api/user', { headers: { token: localStorage['token'] } })
       .subscribe(data => {
         // console.log(d);
