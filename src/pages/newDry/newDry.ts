@@ -82,7 +82,7 @@ export class DryPage {
         public events: Events
     ) {
         this.checkNetWork();
-        this.testCache();
+        // this.testCache();
     }
 
     static checkNetworkState: boolean = false;
