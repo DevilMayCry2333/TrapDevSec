@@ -401,38 +401,21 @@ export class TrapPage {
         console.log('ionViewDidEnter...');
     }
 
-    static checkNetworkState: boolean = false; //should be static
-
-    static previousStatus;
-
-    static previousNetWorkType;
+    static checkNetworkState: boolean = false;
 
     checkNetWork() {
-        this.network.onConnect().subscribe(() => {
-            if (!TrapPage.checkNetworkState && (this.network.type == '4g' || this.network.type == 'wifi')) {
-                console.log('NetWork Connected');
-                this.checkPostMaintenanceCache(); //todo
-                this.checkPostBindCache(); //todo
-                this.toast.create({
-                    message: '已联网(状态:' + this.network.type + ')',
-                    duration: 2000
-                }).present();
+        this.events.subscribe('ONLINE', () => {
+            if (!TrapPage.checkNetworkState) {
+                this.checkPostMaintenanceCache();
+                this.checkPostBindCache();
                 TrapPage.checkNetworkState = true;
             }
         });
-        this.network.onDisconnect().subscribe(() => {
+        this.events.subscribe('OFFLINE', () => {
             if (TrapPage.checkNetworkState) {
-                console.log('NetWork Disconnected');
-                this.toast.create({
-                    message: '进入无网状态',
-                    duration: 2000
-                }).present();
+                //TODO
                 TrapPage.checkNetworkState = false;
             }
-        });
-        this.network.onchange().subscribe(() => {
-            console.log('NetWork Status Changed (' + TrapPage.previousNetWorkType + '=>' + this.network.type + ')');
-            TrapPage.previousNetWorkType = this.network.type;
         });
     }
 

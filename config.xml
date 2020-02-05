@@ -3,7 +3,7 @@
     <name>松材线虫病防控工程管理系统</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -124,4 +124,5 @@
     <plugin name="com-badrit-base64" spec="~0.2.0" />
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
     <engine name="ios" spec="^4.5.5" />
+    <allow-navigation href="http://localhost:8100" sessionid="145f8b8e" />
 </widget>

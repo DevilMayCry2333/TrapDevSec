@@ -20,56 +20,37 @@ export class NetworkProvider {
                 public toast: ToastController) {
 
         console.log('NetworkProvider Provider');
-
         this.previousStatus = ConnectionStatusEnum.Online;
-
+        // this.initializeNetworkEvents();
     }
 
     //TODO publish events
     public initializeNetworkEvents(): void {
         this.network.onConnect().subscribe(() => {
-            if (this.previousStatus === ConnectionStatusEnum.Offline) {
-                this.eventCtrl.publish('network:online');
+            if (this.previousStatus === ConnectionStatusEnum.Offline && (this.network.type == '4g' || this.network.type == 'wifi')) {
+                this.eventCtrl.publish('ONLINE');
+                console.log('NetWork Connected');
+                this.toast.create({
+                    message: '已联网(状态:' + this.network.type + ')',
+                    duration: 2000
+                }).present();
+                this.previousStatus = ConnectionStatusEnum.Online;
             }
-            this.previousStatus = ConnectionStatusEnum.Online;
-            console.log('NetWork Connected');
-            this.toast.create({
-                message: '已联网(状态:' + this.network.type + ')',
-                duration: 2000
-            }).present()
         });
         this.network.onDisconnect().subscribe(() => {
             if (this.previousStatus === ConnectionStatusEnum.Online) {
-                this.eventCtrl.publish('network:offline');
+                this.eventCtrl.publish('OFFLINE');
+                console.log('NetWork Disconnected');
+                this.toast.create({
+                    message: '进入无网状态',
+                    duration: 2000
+                }).present();
+                this.previousStatus = ConnectionStatusEnum.Offline;
             }
-            this.previousStatus = ConnectionStatusEnum.Offline;
-            console.log('NetWork Disconnected');
-            this.toast.create({
-                message: '进入无网状态',
-                duration: 2000
-            }).present()
         });
         this.network.onchange().subscribe(() => {
             console.log('NetWork Status Changed To => ' + this.network.type);
         });
     }
 
-    //TODO To handle network state events when App initialized
-    /*initializeApp() {
-        this.platform.ready().then(() => {
-
-            this.networkProvider.initializeNetworkEvents();
-
-            // Offline event
-            this.events.subscribe('network:offline', () => {
-                alert('network:offline ==> ' + this.network.type);
-            });
-
-            // Online event
-            this.events.subscribe('network:online', () => {
-                alert('network:online ==> ' + this.network.type);
-            });
-
-        });
-    }*/
 }
