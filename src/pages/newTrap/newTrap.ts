@@ -16,11 +16,7 @@ import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import {Platform, Events} from 'ionic-angular';
 import {Network} from '@ionic-native/network'
-import {ConnectionStatusEnum, NetworkProvider} from '../../network/NetworkProvider';
 import {ToastController} from 'ionic-angular';
-import {timeout} from 'rxjs/operators'
-import {share} from 'rxjs/operators'
-import {publishReplay} from 'rxjs/operators'
 
 @Component({
     selector: 'app-trap',
@@ -747,7 +743,6 @@ export class TrapPage {
                 public platform: Platform,
                 public events: Events,
                 public network: Network,
-                public networkProvider: NetworkProvider,
                 public toast: ToastController) {
         console.log('constructor:');
         this.checkNetWork();
