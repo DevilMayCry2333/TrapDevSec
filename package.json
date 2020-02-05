@@ -32,6 +32,7 @@
     "@ionic-native/geolocation": "^4.20.0",
     "@ionic-native/in-app-browser": "^4.20.0",
     "@ionic-native/native-page-transitions": "^4.11.0",
+    "@ionic-native/network": "^4.20.0",
     "@ionic-native/qr-scanner": "^4.8.0",
     "@ionic-native/splash-screen": "4.8.0",
     "@ionic-native/status-bar": "4.8.0",
@@ -40,7 +41,6 @@
     "com-badrit-base64": "^0.2.0",
     "com.lampa.startapp": "^6.1.6",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
-    "cordova-android": "^7.1.4",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.2",
@@ -70,7 +70,8 @@
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.3",
     "tern": "^0.24.0",
-    "typescript": "^2.6.2"
+    "typescript": "^3.7.4",
+    "cordova-plugin-statusbar": "2.4.2"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -99,10 +100,12 @@
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
       "com-badrit-base64": {},
-      "cordova-plugin-appavailability": {}
+      "cordova-plugin-appavailability": {},
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
