@@ -9,8 +9,8 @@ export class Base {
   // BASE_URL = "http://39.108.184.47:8081/"
   BASE_URL = "http://106.15.200.245:50000/"
   // BASE_URL = "http://106.15.90.78:50000/"
-    // BASE_URL = "http://127.0.0.1:50000/"
-  // BASE_URL = "http://192.168.1.5:50000/"
+  //   BASE_URL = "http://192.168.1.7:50000/"
+  // BASE_URL = "http://192.168.199.199:50000/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,
@@ -41,7 +41,7 @@ export class Base {
     });
     return "";
   }
-  
+
   logger(info:string,storage:string){
     var that = this;
     this.file.checkFile(this.file.externalDataDirectory,storage).then(function (success){
@@ -70,7 +70,7 @@ export class Base {
     if(osVal == 1){
       this.file.readAsDataURL(this.file.tempDirectory,path).then((imageBase64)=>{
         console.log(imageBase64);
-        
+
         return imageBase64;
       })
     }else{
@@ -81,15 +81,15 @@ export class Base {
     }
 
   }
-  
+
   showPrompt(title, myName,func1, func2) {
     const prompt = this.alertCtrl.create({
       title: title,
       inputs: [
         {
           type:'text',
-          name: myName,  
-          placeholder: '设备id'        
+          name: myName,
+          placeholder: '设备id'
         }
 
       ],

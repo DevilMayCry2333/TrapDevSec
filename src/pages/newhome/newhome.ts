@@ -9,7 +9,7 @@ import { InjectQueryPage } from '../inject-query/inject-query';
 import { EnemyQueryPage } from '../enemy-query/enemy-query';
 import { DeadTreesQueryPage } from '../dead-trees-query/dead-trees-query';
 import { MedicineQueryPage } from '../medicine-query/medicine-query';
-
+import { NetworkProvider } from "../../network/NetworkProvider";
 
 @Component({
     selector: 'app-home',
@@ -17,14 +17,14 @@ import { MedicineQueryPage } from '../medicine-query/medicine-query';
 })
 export class NewHomePage {
     constructor(private httpClient: HttpClient,private navCtl:NavController,
-        private base: Base) {
-
+        private base: Base,private networkProvider: NetworkProvider) {
+        this.networkProvider.initializeNetworkEvents();
     }
     username: ''
     password: ''
     deviceId: ''
     scanId:''
-    
+
     ionViewDidLoad(){
         if (localStorage['token']){
             this.navCtl.push(switchProjectPage);
@@ -53,11 +53,11 @@ export class NewHomePage {
                             if(this.deviceId.charAt(8)=='1'){
                                 localStorage["TrapDeviceId"] = this.scanId;
                                 console.log(localStorage["TrapDeviceId"]);
-                                
+
                                 // setTimeout(()=>{
                                     this.navCtl.push(TrapQueryPage);
                                 // },100)
-                         
+
                             }else if(this.deviceId.charAt(8)=='2'){
                                 localStorage["InjectDeviceId"] = this.scanId;
                                 console.log(localStorage["TrapDeviceId"]);
@@ -89,7 +89,7 @@ export class NewHomePage {
         });
     };
 
-    
+
     login() {
         console.log(this.username);
         console.log(this.password);
@@ -108,7 +108,7 @@ export class NewHomePage {
                 res => {
                     console.log(res);
                     this.base.showConfirmAlert('提示', '用户名或者密码错了', () => {
-                        
+
                     }, () => { });
 
                 })

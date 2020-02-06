@@ -1,28 +1,29 @@
-import { Component } from '@angular/core';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-import { NavController } from 'ionic-angular';
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { ScanPage } from '../scan/scan'
-import { Base } from '../../common/base.js'
-import { Subscription } from "rxjs/Subscription";
-import { Geolocation } from "@ionic-native/geolocation";
-import { ChangeDetectorRef } from '@angular/core';
-import { Camera, CameraOptions } from "@ionic-native/camera";
-import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
-import { AboutPage } from '../about/about';
-import { EnemyQueryPage} from '../enemy-query/enemy-query';
-import { LoadingController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {QRScanner, QRScannerStatus} from '@ionic-native/qr-scanner';
+import {NavController} from 'ionic-angular';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {ScanPage} from '../scan/scan'
+import {Base} from '../../common/base.js'
+import {Subscription} from "rxjs/Subscription";
+import {Geolocation} from "@ionic-native/geolocation";
+import {ChangeDetectorRef} from '@angular/core';
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+import {AboutPage} from '../about/about';
+import {EnemyQueryPage} from '../enemy-query/enemy-query';
+import {LoadingController} from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
+import {Events} from 'ionic-angular';
 
 @Component({
     selector: 'app-enemy',
     templateUrl: 'newEnemy.html'
 })
 export class EnemyPage {
-    longtitude="1.1234567";
-    latitude="1.1234567";
-    altitude="1.1234567";
-    accuracy="1.1234567";
+    longtitude = "1.1234567";
+    latitude = "1.1234567";
+    altitude = "1.1234567";
+    accuracy = "1.1234567";
 
     deviceId: string
     deviceSerial: string
@@ -33,14 +34,14 @@ export class EnemyPage {
     // altitude: string
     // accuracy: string
 
-    imageData:null
+    imageData: null
 
-    predatorsTypeValue:string
-    have_submit:boolean
+    predatorsTypeValue: string
+    have_submit: boolean
     releaseNum: string
-    enemyType:any[]
+    enemyType: any[]
     indexList = [];
-    location_ready:boolean
+    location_ready: boolean
     remarks = ""
     users: any[] = [
         {
@@ -67,7 +68,7 @@ export class EnemyPage {
     constructor(
         public qrScanner: QRScanner,
         private base: Base,
-        private alertCtrl:AlertController,
+        private alertCtrl: AlertController,
         private geolocation: Geolocation,
         private changeDetectorRef: ChangeDetectorRef,
         private httpClient: HttpClient,
@@ -75,35 +76,156 @@ export class EnemyPage {
         private fileTransfer: FileTransfer,
         public navCtrl: NavController,
         public loadingCtrl: LoadingController,
-        ) { }
+        public events: Events
+    ) {
+        this.checkNetWork();
+        // this.testCache();
+    }
+
+    static checkNetworkState: boolean = false;
+
+    checkNetWork() {
+        this.events.subscribe('ONLINE', () => {
+            if (!EnemyPage.checkNetworkState) {
+                this.checkPostMaintenanceCache();
+                this.checkPostBindCache();
+                EnemyPage.checkNetworkState = true;
+            }
+        });
+        this.events.subscribe('OFFLINE', () => {
+            if (EnemyPage.checkNetworkState) {
+                //TODO
+                EnemyPage.checkNetworkState = false;
+            }
+        });
+    }
+
+    preSubmitted = 0;
+    curSubmitted = 0;
+
+    checkPostMaintenanceCache() {
+        if (this.curSubmitted >= this.preSubmitted) {
+            if (localStorage["enemyCache"]) {
+                (async () => {
+                    const tmpStorage = JSON.parse(localStorage["enemyCache"]);
+                    this.preSubmitted = tmpStorage.length;
+                    let tmpDeviceList = [];
+                    this.indexList = [];
+                    let resolved = 0, rejected = 0;
+                    for (let i = 0; i < tmpStorage.length; ++i) {
+                        await this.postEnemy(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
+                            res => {
+                                console.log("成功");
+                                console.log(res);
+                                resolved++;
+                            }, msg => {
+                                console.log("失败");
+                                console.log(msg);
+                                rejected++;
+                                tmpDeviceList.push(tmpStorage[i]);
+                            }
+                        ).catch((error) => {
+                            console.log(error);
+                        });
+                        this.curSubmitted = resolved + rejected;
+                    }
+                    for (let i = 0; i < tmpDeviceList.length; ++i) {
+                        this.indexList.push(tmpDeviceList[i]);
+                        console.log(tmpDeviceList[i]);
+                    }
+                    console.log("失败的缓存");
+                    console.log(this.indexList);
+                    if (this.indexList.length <= 0) {
+                        console.log("清除缓存");
+                        localStorage.removeItem('enemyCache');
+                        this.preSubmitted = 0;
+                        this.curSubmitted = 0;
+                    } else {
+                        localStorage.setItem('enemyCache', JSON.stringify(this.indexList));
+                    }
+                })();
+            }
+        }
+    }
+
+    checkPostBindCache() {
+        if (localStorage["eneBind"]) {
+            var tmpStorage2 = [];
+
+            tmpStorage2 = JSON.parse(localStorage["eneBind"]);
+
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+
+            console.log(tmpStorage2);
+            var i = 0;
+
+            tmpStorage2.forEach(element => {
+
+                console.log("===开始===");
+
+                console.log(element.scanId);
+                console.log(element.serial);
+
+                this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                    {
+                        headers: {token: localStorage['token']},
+                        params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
+                    })
+                    .subscribe(res => {
+                            console.log(res);
+                            i++;
+                            this.base.showAlert("成功绑定了", "", () => {
+                            });
+                            if (tmpStorage2.length == i) {
+                                localStorage.removeItem("eneBind");
+                                this.base.showAlert("清理了缓存", "", () => {
+                                });
+                            }
+                        },
+                        msg => {
+
+                        })
+
+            })
+
+
+        }
+    }
 
     NavToMap() {
-        this.navCtrl.push(AboutPage,{
+        this.navCtrl.push(AboutPage, {
             project: '3'
         });
     }
-    releaseNumInput(){
+
+    releaseNumInput() {
         let num1 = 0;
         if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         if (!this.releaseNum) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         num1 = parseInt(this.releaseNum);
         this.releaseNum = '' + num1;
         if (this.releaseNum == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
 
     }
+
     bindNewId() {
-        if(this.deviceId == undefined || this.deviceId=="" || this.deviceSerial == undefined || this.deviceSerial == ""){
-            this.base.showAlert("提示","请先输入设备ID和设备编号!",()=>{})
-        }else{
+        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
+            this.base.showAlert("提示", "请先输入设备ID和设备编号!", () => {
+            })
+        } else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
-                    headers: { token: localStorage['token'] }, params: {
+                    headers: {token: localStorage['token']}, params: {
                         scanId: this.deviceId, serial: this.deviceSerial, username: localStorage['username']
                     }
                 })
@@ -111,7 +233,8 @@ export class EnemyPage {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    this.base.showAlert('提示', '提交成功', () => { });
+                    this.base.showAlert('提示', '提交成功', () => {
+                    });
                     console.log("cacheData");
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
@@ -119,10 +242,11 @@ export class EnemyPage {
 
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                    this.base.showAlert("提交失败", "提交失败", () => { });
+                    this.base.showAlert("提交失败", "提交失败", () => {
+                    });
                     console.log(msg);
                     console.log("失败");
-                    var transferParam = { scanId: this.deviceId, serial: this.deviceSerial };
+                    var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
 
@@ -138,7 +262,7 @@ export class EnemyPage {
         }
     }
 
-    postEnemy(element, httpClient, base, tmpStorage,i) {
+    postEnemy(element, httpClient, base, tmpStorage, i) {
         var that = this;
         console.log(element);
         console.log("====图片路径====");
@@ -152,11 +276,18 @@ export class EnemyPage {
             options.chunkedMode = false;
             options.httpMethod = "POST";
             options.params = {
-                deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks,
-                allLength: tmpStorage.length, curRow: i
+                deviceId: element.deviceId,
+                longitude: element.longitude,
+                latitude: element.latitude,
+                altitude: element.altitude,
+                accuracy: element.accuracy,
+                predatorsTypeValue: element.predatorsTypeValue,
+                releaseNum: element.releaseNum,
+                remarks: element.remarks,
+                allLength: tmpStorage.length,
+                curRow: i
             };
-            options.headers = { token: localStorage['token'] };
+            options.headers = {token: localStorage['token']};
             console.log("options");
             console.log(options);
 
@@ -186,10 +317,17 @@ export class EnemyPage {
                         console.log("数据是", that.curOptions);
                         await httpClient.post(base.BASE_URL + 'app/AddEnemy', {},
                             {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                                    accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks,
-                                    allLength: tmpStorage.length, curRow: i
+                                headers: {token: localStorage['token']}, params: {
+                                    deviceId: element.deviceId,
+                                    longitude: element.longitude,
+                                    latitude: element.latitude,
+                                    altitude: element.altitude,
+                                    accuracy: element.accuracy,
+                                    predatorsTypeValue: element.predatorsTypeValue,
+                                    releaseNum: element.releaseNum,
+                                    remarks: element.remarks,
+                                    allLength: tmpStorage.length,
+                                    curRow: i
                                 }
                             })
                             .toPromise().then(res => {
@@ -221,31 +359,39 @@ export class EnemyPage {
                 console.log(element);
                 httpClient.post(base.BASE_URL + 'app/AddEnemy', {},
                     {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                            accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks,
-                            allLength: tmpStorage.length, curRow: i
+                        headers: {token: localStorage['token']}, params: {
+                            deviceId: element.deviceId,
+                            longitude: element.longitude,
+                            latitude: element.latitude,
+                            altitude: element.altitude,
+                            accuracy: element.accuracy,
+                            predatorsTypeValue: element.predatorsTypeValue,
+                            releaseNum: element.releaseNum,
+                            remarks: element.remarks,
+                            allLength: tmpStorage.length,
+                            curRow: i
                         }
                     }).toPromise().then(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        if (JSON.parse(JSON.stringify(res)).isComp == true) {
-                            that.isComplete = true;
-                        } else {
-                            that.isComplete = false;
-                        }
-                        resolve('ok');
-                    }, (msg) => {
-                        console.log(msg);
-                        reject('error');
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    });
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                        that.isComplete = true;
+                    } else {
+                        that.isComplete = false;
+                    }
+                    resolve('ok');
+                }, (msg) => {
+                    console.log(msg);
+                    reject('error');
+                    // this.base.showAlert('提示', '提交失败', () => { });
+                });
             })
         }
     }
-   async ionViewDidLoad() {
 
-        if (localStorage["eneBind"]) {
+    async ionViewDidLoad() {
+
+        /*if (localStorage["eneBind"]) {
             var tmpStorage2 = [];
 
             tmpStorage2 = JSON.parse(localStorage["eneBind"]);
@@ -265,18 +411,20 @@ export class EnemyPage {
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
-                        headers: { token: localStorage['token'] },
-                        params: new HttpParams({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                        headers: {token: localStorage['token']},
+                        params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                        console.log(res);
-                        i++;
-                        this.base.showAlert("成功绑定了", "", () => { });
-                        if (tmpStorage2.length == i) {
-                            localStorage.removeItem("eneBind");
-                            this.base.showAlert("清理了缓存", "", () => { });
-                        }
-                    },
+                            console.log(res);
+                            i++;
+                            this.base.showAlert("成功绑定了", "", () => {
+                            });
+                            if (tmpStorage2.length == i) {
+                                localStorage.removeItem("eneBind");
+                                this.base.showAlert("清理了缓存", "", () => {
+                                });
+                            }
+                        },
                         msg => {
 
                         })
@@ -284,13 +432,13 @@ export class EnemyPage {
             })
 
 
-        }
+        }*/
 
         console.log('ionViewDidLoad LocatePage');
         console.log(localStorage['device']);
         //var i = 0;
 
-        var that = this;
+        /*var that = this;
         if (localStorage["enemyCache"]) {
             const alert = this.alertCtrl.create({
                 title: "有缓存数据，是否提交?",
@@ -300,219 +448,219 @@ export class EnemyPage {
                         text: '确认', handler: async () => {
                             console.log("确认");
                             const loader = this.loadingCtrl.create({
-                            content: "缓存数据正在提交，请勿退出",
-                        });
-                        loader.present();
-                        var tmpStorage = JSON.parse(localStorage["enemyCache"]);
-                        let tmpDeviceList = [];
-          //  tmpStorage.forEach(element => {
-                        for(let i = 0 ; i < tmpStorage.length ; ++i){
-                            await this.postEnemy(tmpStorage[i],this.httpClient,this.base,tmpStorage,i).then(
-                                res=>{
-                                    console.log("成功");
-                                    console.log(res);
-                                },msg=>{
-                                    console.log("失败");
-                                    console.log(msg);
-                                    tmpDeviceList.push(tmpStorage[i]);
-                                }
-                            ).catch((error)=>{
-                                console.log(error);
-                            })
-                }
-                        for (let i = 0; i < tmpDeviceList.length; ++i) {
-                            this.indexList.push(tmpDeviceList[i]);
-                            console.log(tmpDeviceList[i]);
+                                content: "缓存数据正在提交，请勿退出",
+                            });
+                            loader.present();
+                            var tmpStorage = JSON.parse(localStorage["enemyCache"]);
+                            let tmpDeviceList = [];
+                            //  tmpStorage.forEach(element => {
+                            for (let i = 0; i < tmpStorage.length; ++i) {
+                                await this.postEnemy(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
+                                    res => {
+                                        console.log("成功");
+                                        console.log(res);
+                                    }, msg => {
+                                        console.log("失败");
+                                        console.log(msg);
+                                        tmpDeviceList.push(tmpStorage[i]);
+                                    }
+                                ).catch((error) => {
+                                    console.log(error);
+                                })
+                            }
+                            for (let i = 0; i < tmpDeviceList.length; ++i) {
+                                this.indexList.push(tmpDeviceList[i]);
+                                console.log(tmpDeviceList[i]);
+                            }
+                            console.log("失败的缓存");
+                            console.log(this.indexList);
+                            if (this.indexList.length <= 0) {
+                                console.log("清除缓存");
+                                localStorage.removeItem('enemyCache');
+                            } else {
+                                localStorage.setItem('enemyCache', JSON.stringify(this.indexList));
+                            }
+                            loader.dismiss();
                         }
-                        console.log("失败的缓存");
-                        console.log(this.indexList);
-                        if(this.indexList.length<=0){
-                            console.log("清除缓存");
-                            localStorage.removeItem('enemyCache');
-                        }else{
-                            localStorage.setItem('enemyCache', JSON.stringify(this.indexList));
+                    }, {
+                        text: '取消', handler: () => {
+                            console.log("取消");
+
                         }
-                        loader.dismiss();
-                    }
-                }, {
-                    text: '取消', handler: () => {
-                        console.log("取消");
-
-                    }
-                }]
-        });
-        alert.present();
-    }
+                    }]
+            });
+            alert.present();
+        }*/
 
 
-                //     await (async (i)=>{
-                //         var element = tmpStorage[i];
-                //         console.log(element);
-                //         console.log("====图片路径====");
-                // console.log(element);
-                // if (element.img != null) {
-                //     let options: FileUploadOptions = {};
-                //     options.fileKey = "image";
-                //     var time = Date.parse(Date());
-                //     options.fileName = time + ".jpg";
-                //     options.mimeType = "image/jpeg";
-                //     options.chunkedMode = false;
-                //     options.httpMethod = "POST";
-                //     options.params = {
-                //         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                //         accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
-                //     };
-                //     options.headers = { token: localStorage['token'] };
-                //     console.log("options");
-                //     console.log(options);
+        //     await (async (i)=>{
+        //         var element = tmpStorage[i];
+        //         console.log(element);
+        //         console.log("====图片路径====");
+        // console.log(element);
+        // if (element.img != null) {
+        //     let options: FileUploadOptions = {};
+        //     options.fileKey = "image";
+        //     var time = Date.parse(Date());
+        //     options.fileName = time + ".jpg";
+        //     options.mimeType = "image/jpeg";
+        //     options.chunkedMode = false;
+        //     options.httpMethod = "POST";
+        //     options.params = {
+        //         deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+        //         accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+        //     };
+        //     options.headers = { token: localStorage['token'] };
+        //     console.log("options");
+        //     console.log(options);
 
 
-                //     //创建文件对象
-                //     const fileTransfer: FileTransferObject = this.fileTransfer.create();
-                //     this.curOptions = options.params;
+        //     //创建文件对象
+        //     const fileTransfer: FileTransferObject = this.fileTransfer.create();
+        //     this.curOptions = options.params;
 
 
-                //     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
-                //     let observer = await new Promise((resolve,reject)=>{
-                //     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddEnemy', options)
-                //         .then((res) => {
-                //             //i++;
-                //             console.log(res);
-                //             console.log(JSON.stringify(res));
-                //             console.log(JSON.parse(JSON.stringify(res)).message);
+        //     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+        //     let observer = await new Promise((resolve,reject)=>{
+        //     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddEnemy', options)
+        //         .then((res) => {
+        //             //i++;
+        //             console.log(res);
+        //             console.log(JSON.stringify(res));
+        //             console.log(JSON.parse(JSON.stringify(res)).message);
 
 
-                //             if (JSON.parse(res.response).isComp == true) {
-                //                 this.isComplete = true;
-                //             } else {
-                //                 this.isComplete = false;
-                //             }
+        //             if (JSON.parse(res.response).isComp == true) {
+        //                 this.isComplete = true;
+        //             } else {
+        //                 this.isComplete = false;
+        //             }
 
-                //             resolve('ok');
+        //             resolve('ok');
 
-                //         },async (msg)=>{
-                //             await that.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-                //             {
-                //                 headers: { token: localStorage['token'] }, params: {
-                //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                //                     accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
-                //                 }
-                //             })
-                //             .toPromise().then(res => {
-                //                 console.log(JSON.parse(JSON.stringify(res)));
-                //                 if (JSON.parse(JSON.stringify(res)).isComp == true){
-                //                     this.isComplete = true;
-                //                 }else{
-                //                     this.isComplete = false;
-                //                 }
-                //                 this.isSubProcessFin = true;
-                //                 this.base.showAlert("提示", "无图片提交成功", () => { });
-                //                 resolve('ok');
-                //             }, msg => {
-                //                 console.log(msg);
-                //                 this.isSubProcessFin = false;
-                //                 reject('error');
-                //             })
-                //             if( this.isSubProcessFin == true){
-                //                 resolve('ok');
-                //             }else{
-                //                 reject('error');
-                //             }
-                //                 reject('error');
-                //         })
-                // }).catch((error)=>{
-                //     console.log(error);
-                // })
-                // that.observers.push(observer);
-
-
-                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
-
-                            // this.base.showAlert('提示', '提交成功', () => { });
-                        //     if (i >= tmpStorage.length)
-                        //         localStorage.removeItem('enemyCache');
-                        // }, (error) => {//发送失败(网络出错等)
-                        //     // this.base.showAlert('提示', '提交失败', () => { });
-
-                        //         this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-                        //             {
-                        //                 headers: { token: localStorage['token'] }, params: {
-                        //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-                        //                     accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
-                        //                 }
-                        //             })
-                        //             .subscribe(res => {
-                        //                 i++;
-                        //                 console.log(JSON.stringify(res));
-                        //                 console.log(JSON.parse(JSON.stringify(res)).message);
-                        //                 // this.base.showAlert('提示', '提交成功', () => { });
-                        //                 if (i >= tmpStorage.length)
-                        //                     localStorage.removeItem('enemyCache');
-                        //             }, (msg) => {
-                        //                 // this.base.showAlert('提示', '提交失败', () => { });
-                        //             });
+        //         },async (msg)=>{
+        //             await that.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+        //             {
+        //                 headers: { token: localStorage['token'] }, params: {
+        //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+        //                     accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+        //                 }
+        //             })
+        //             .toPromise().then(res => {
+        //                 console.log(JSON.parse(JSON.stringify(res)));
+        //                 if (JSON.parse(JSON.stringify(res)).isComp == true){
+        //                     this.isComplete = true;
+        //                 }else{
+        //                     this.isComplete = false;
+        //                 }
+        //                 this.isSubProcessFin = true;
+        //                 this.base.showAlert("提示", "无图片提交成功", () => { });
+        //                 resolve('ok');
+        //             }, msg => {
+        //                 console.log(msg);
+        //                 this.isSubProcessFin = false;
+        //                 reject('error');
+        //             })
+        //             if( this.isSubProcessFin == true){
+        //                 resolve('ok');
+        //             }else{
+        //                 reject('error');
+        //             }
+        //                 reject('error');
+        //         })
+        // }).catch((error)=>{
+        //     console.log(error);
+        // })
+        // that.observers.push(observer);
 
 
-                        // })
-    //             } else {
-    //                 let obs =  await new Promise((resolve,reject)=>{
-    //                 console.log(element);
-    //                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-    //                     {
-    //                         headers: { token: localStorage['token'] }, params: {
-    //                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
-    //                             accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
-    //                         }
-    //                     })
-    //                     .subscribe(res => {
-    //                         //i++;
-    //                         console.log(JSON.stringify(res));
-    //                         console.log(JSON.parse(JSON.stringify(res)).message);
-    //                         if (JSON.parse(JSON.stringify(res)).isComp == true) {
-    //                             this.isComplete = true;
-    //                         } else {
-    //                             this.isComplete = false;
-    //                         }
-    //                         resolve('ok');
-    //                     }, (msg) => {
-    //                         console.log(msg);
-    //                         reject('error');
-    //                         // this.base.showAlert('提示', '提交失败', () => { });
-    //                     });
-    //             }).catch((error)=>{
-    //                 console.log(error);
-    //             })
-    //             that.observers.push(obs);
+        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-    //         }
-    //     // });
-    //         })(i)
-    //     }
+        // this.base.showAlert('提示', '提交成功', () => { });
+        //     if (i >= tmpStorage.length)
+        //         localStorage.removeItem('enemyCache');
+        // }, (error) => {//发送失败(网络出错等)
+        //     // this.base.showAlert('提示', '提交失败', () => { });
 
-    //     Promise.all(that.observers).then((resolve) => {
-    //         console.log(resolve);
-    //         loader.dismiss();
-    //             console.log("*****清除缓存了******");
-    //         if (that.isComplete){
-    //             localStorage.removeItem('enemyCache');
-    //         }
-    //     }, (reject) => {
-    //         console.log(reject);
-    //         loader.dismiss();
-    //     }).catch((reason) => {
-    //         console.log(reason);
-    //         loader.dismiss();
-    //     })
+        //         this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+        //             {
+        //                 headers: { token: localStorage['token'] }, params: {
+        //                     deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+        //                     accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+        //                 }
+        //             })
+        //             .subscribe(res => {
+        //                 i++;
+        //                 console.log(JSON.stringify(res));
+        //                 console.log(JSON.parse(JSON.stringify(res)).message);
+        //                 // this.base.showAlert('提示', '提交成功', () => { });
+        //                 if (i >= tmpStorage.length)
+        //                     localStorage.removeItem('enemyCache');
+        //             }, (msg) => {
+        //                 // this.base.showAlert('提示', '提交失败', () => { });
+        //             });
 
-    // }
-                            // this.base.showAlert('提示', '提交成功', () => { });
-            //                 if(i>=tmpStorage.length)
-            //                     localStorage.removeItem('enemyCache');
-            //             }, (msg) => {
-            //                 // this.base.showAlert('提示', '提交失败', () => { });
-            //             });
-            //     }
-            // });
+
+        // })
+        //             } else {
+        //                 let obs =  await new Promise((resolve,reject)=>{
+        //                 console.log(element);
+        //                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+        //                     {
+        //                         headers: { token: localStorage['token'] }, params: {
+        //                             deviceId: element.deviceId, longitude: element.longitude, latitude: element.latitude, altitude: element.altitude,
+        //                             accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
+        //                         }
+        //                     })
+        //                     .subscribe(res => {
+        //                         //i++;
+        //                         console.log(JSON.stringify(res));
+        //                         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                         if (JSON.parse(JSON.stringify(res)).isComp == true) {
+        //                             this.isComplete = true;
+        //                         } else {
+        //                             this.isComplete = false;
+        //                         }
+        //                         resolve('ok');
+        //                     }, (msg) => {
+        //                         console.log(msg);
+        //                         reject('error');
+        //                         // this.base.showAlert('提示', '提交失败', () => { });
+        //                     });
+        //             }).catch((error)=>{
+        //                 console.log(error);
+        //             })
+        //             that.observers.push(obs);
+
+        //         }
+        //     // });
+        //         })(i)
+        //     }
+
+        //     Promise.all(that.observers).then((resolve) => {
+        //         console.log(resolve);
+        //         loader.dismiss();
+        //             console.log("*****清除缓存了******");
+        //         if (that.isComplete){
+        //             localStorage.removeItem('enemyCache');
+        //         }
+        //     }, (reject) => {
+        //         console.log(reject);
+        //         loader.dismiss();
+        //     }).catch((reason) => {
+        //         console.log(reason);
+        //         loader.dismiss();
+        //     })
+
+        // }
+        // this.base.showAlert('提示', '提交成功', () => { });
+        //                 if(i>=tmpStorage.length)
+        //                     localStorage.removeItem('enemyCache');
+        //             }, (msg) => {
+        //                 // this.base.showAlert('提示', '提交失败', () => { });
+        //             });
+        //     }
+        // });
         //     if (JSON.parse(JSON.stringify(res)).isComp == true) {
         //                             this.isComplete = true;
         //                         } else {
@@ -543,15 +691,15 @@ export class EnemyPage {
 
         this.httpClient.post(this.base.BASE_URL + 'app/getEnemyType', {},
             {
-                headers: { token: localStorage['token'] },
-                params: new HttpParams({ fromObject: { worker: localStorage['username'] } })
+                headers: {token: localStorage['token']},
+                params: new HttpParams({fromObject: {worker: localStorage['username']}})
             })
             .subscribe(res => {
-                var c: any = res;
-                this.enemyType = Array.from(c);
-                console.log(this.enemyType);
-                localStorage['EnemyType'] = JSON.stringify(res);
-            },
+                    var c: any = res;
+                    this.enemyType = Array.from(c);
+                    console.log(this.enemyType);
+                    localStorage['EnemyType'] = JSON.stringify(res);
+                },
                 res => {
                     console.log(res);
                 })
@@ -559,16 +707,39 @@ export class EnemyPage {
     }
 
 
-
     deviceBind() {
         //这里还没有实现，先弹框
-        this.base.showAlert("成功", "", () => { });
+        this.base.showAlert("成功", "", () => {
+        });
     }
 
+    testCache(){
+        console.log('generate cache...');
+        let maintenanceCache: any;
+        for (let i = 0; i < 100; i++) {
+            const cacheExp = {
+                deviceId: Math.ceil(i + 16180).toString(),
+                longitude: ((Math.random() * 0.1 + 119.23113951284115)).toString(),
+                latitude: ((Math.random() * 0.1 + 26.083115579358804)).toString(),
+                altitude: "14",
+                accuracy: "22",
+                predatorsTypeValue: "1",
+                releaseNum: "20",
+                remarks: "SB" + (i + 1).toString(),
+            };
+            maintenanceCache = localStorage.getItem('enemyCache');
+            if (maintenanceCache == null) {
+                maintenanceCache = [];
+            } else {
+                maintenanceCache = JSON.parse(maintenanceCache);
+            }
+            maintenanceCache.push(cacheExp);
+            localStorage.setItem('enemyCache', JSON.stringify(maintenanceCache));
+        }
+    }
 
-
-    test(){
-        for(var i = 0 ; i < 2000; i++){
+    test() {
+        for (var i = 0; i < 2000; i++) {
             this.deviceId = Math.ceil(i + 18201).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
@@ -578,43 +749,50 @@ export class EnemyPage {
             this.predatorsTypeValue = "1"
             this.releaseNum = "20"
             this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-            {
-                headers: { token: localStorage['token'] }, params: {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-                }
-            })
-        .subscribe(res => {
+                {
+                    headers: {token: localStorage['token']}, params: {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude,
+                        latitude: this.latitude,
+                        altitude: this.altitude,
+                        accuracy: this.accuracy,
+                        predatorsTypeValue: this.predatorsTypeValue,
+                        releaseNum: this.releaseNum,
+                        remarks: this.remarks
+                    }
+                })
+                .subscribe(res => {
 
-        }, (msg) => {
+                }, (msg) => {
 
-        });
+                });
+        }
     }
-    }
 
 
-    
-    
-    NavToQuery(){
+    NavToQuery() {
         // localStorage.setItem("queryEnemyID",this.deviceId);
         if (this.deviceId) {
             localStorage['queryEnemyID'] = this.deviceId;
             this.navCtrl.push(EnemyQueryPage);
-        }else{
-            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => { });
+        } else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!!!", () => {
+            });
         }
         // localStorage["queryEnemyID"] = this.deviceId.toString();
-        
 
-        
+
     }
+
     enemyClick() {
         console.log("enemy");
     }
+
     deviceIdInput() {
         console.log("ok");
         console.log(this.deviceId);
     }
+
     deviceSerialInput() {
         console.log(this.deviceSerial);
     }
@@ -641,6 +819,7 @@ export class EnemyPage {
             console.log(error)
         });
     }
+
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
@@ -701,7 +880,7 @@ export class EnemyPage {
                             // },5);
                             // if(this.altitude==null){
                             //   this.location_ready = false;
-                            //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                            //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});
                             // }
                         }
                         // else{
@@ -720,21 +899,25 @@ export class EnemyPage {
                     });
 
                     this.base.showConfirmAlert("成功", params.id, () => {
-                    }, () => { })
+                    }, () => {
+                    })
                 } else {
                     this.base.showConfirmAlert("二维码无效", params.id, () => {
-                    }, () => { })
+                    }, () => {
+                    })
                 }
             } else {
 
             }
         });
     };
+
     scan() {
         console.log("scan");
         console.log(localStorage['username']);
-        this.navCtrl.push(ScanPage, { callBack: this.callBack });
+        this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
+
     submit() {
         let num1 = 0;
         if (parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN) {
@@ -760,7 +943,8 @@ export class EnemyPage {
         // }
         this.have_submit = true;
         if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
-            this.base.showAlert("提示", "输入数量为空或不合法", () => { });
+            this.base.showAlert("提示", "输入数量为空或不合法", () => {
+            });
 
         } else {
             if (this.imageData != null) {
@@ -772,10 +956,16 @@ export class EnemyPage {
                 options.chunkedMode = false;
                 options.httpMethod = "POST";
                 options.params = {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks:this.remarks
+                    deviceId: this.deviceId,
+                    longitude: this.longtitude,
+                    latitude: this.latitude,
+                    altitude: this.altitude,
+                    accuracy: this.accuracy,
+                    predatorsTypeValue: this.predatorsTypeValue,
+                    releaseNum: this.releaseNum,
+                    remarks: this.remarks
                 };
-                options.headers = { token: localStorage['token'] };
+                options.headers = {token: localStorage['token']};
                 console.log("options");
                 console.log(options);
 
@@ -785,7 +975,8 @@ export class EnemyPage {
 
                 this.base.logger(JSON.stringify(options), "Img_newEnemyPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
-                    this.base.showAlert("提示", "输入数量为空或不合法", () => { });
+                    this.base.showAlert("提示", "输入数量为空或不合法", () => {
+                    });
                 }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
@@ -795,15 +986,23 @@ export class EnemyPage {
 
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                        this.base.showAlert('提示', '提交成功', () => { });
+                        this.base.showAlert('提示', '提交成功', () => {
+                        });
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (error) => {//发送失败(网络出错等)
-                        this.base.showAlert('提示', '提交失败', () => { });
+                        this.base.showAlert('提示', '提交失败', () => {
+                        });
                         // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                         let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks,
+                            deviceId: this.deviceId,
+                            longitude: this.longtitude,
+                            latitude: this.latitude,
+                            altitude: this.altitude,
+                            accuracy: this.accuracy,
+                            predatorsTypeValue: this.predatorsTypeValue,
+                            releaseNum: this.releaseNum,
+                            remarks: this.remarks,
                             img: this.imageData
                         };
                         let enemyCache: any;
@@ -825,71 +1024,91 @@ export class EnemyPage {
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
-                        // } 
+                        // }
 
                         localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                         //this.navCtrl.pop();
                         // confirm.dismiss()
-                            Base.popTo(this.navCtrl, 'switchProjectPage');
+                        Base.popTo(this.navCtrl, 'switchProjectPage');
                     }).catch((error) => {
-                        return new Promise((resolve, reject) => {
-                            this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
-                                {
-                                    headers: { token: localStorage['token'] }, params: {
-                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-                                    }
-                                })
-                                .subscribe(res => {
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
-                                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                                    this.base.showAlert('提示', '提交成功', () => { });
-                                    let cacheData = {
-                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-                                    };
-                                    console.log("cacheData");
-                                    console.log(cacheData);
-
-                                    Base.popTo(this.navCtrl, 'switchProjectPage');
-                                }, (msg) => {
-
-                                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
-
-                                    this.base.showAlert('提示', '提交失败', () => { });
-                                    let cacheData = {
-                                        deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                                        accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
-                                    };
-                                    console.log("cacheData");
-                                    console.log(cacheData);
-
-                                    let enemyCache: any;
-                                    enemyCache = localStorage.getItem('enemyCache');
-                                    if (enemyCache == null) {
-                                        enemyCache = [];
-                                    } else {
-                                        enemyCache = JSON.parse(enemyCache);
-                                    }
-                                    enemyCache.push(cacheData);
-                                    // try{
-                                    //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
-                                    // }catch(oException){
-                                    //     if(oException.name == 'QuotaExceededError'){
-                                    //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                    //         //console.log('已经超出本地存储限定大小！');
-                                    //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
-                                    //       // localStorage.clear();
-                                    //       // localStorage.setItem(key,value);
-                                    //     }
-                                    // }   
-                                    localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
-                                    console.log("Hello");
-                                    Base.popTo(this.navCtrl, 'switchProjectPage');
+                    return new Promise((resolve, reject) => {
+                        this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
+                            {
+                                headers: {token: localStorage['token']}, params: {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude,
+                                    latitude: this.latitude,
+                                    altitude: this.altitude,
+                                    accuracy: this.accuracy,
+                                    predatorsTypeValue: this.predatorsTypeValue,
+                                    releaseNum: this.releaseNum,
+                                    remarks: this.remarks
+                                }
+                            })
+                            .subscribe(res => {
+                                console.log(JSON.stringify(res));
+                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                this.base.showAlert('提示', '提交成功', () => {
                                 });
+                                let cacheData = {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude,
+                                    latitude: this.latitude,
+                                    altitude: this.altitude,
+                                    accuracy: this.accuracy,
+                                    predatorsTypeValue: this.predatorsTypeValue,
+                                    releaseNum: this.releaseNum,
+                                    remarks: this.remarks
+                                };
+                                console.log("cacheData");
+                                console.log(cacheData);
 
-                        })
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            }, (msg) => {
+
+                                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+
+                                this.base.showAlert('提示', '提交失败', () => {
+                                });
+                                let cacheData = {
+                                    deviceId: this.deviceId,
+                                    longitude: this.longtitude,
+                                    latitude: this.latitude,
+                                    altitude: this.altitude,
+                                    accuracy: this.accuracy,
+                                    predatorsTypeValue: this.predatorsTypeValue,
+                                    releaseNum: this.releaseNum,
+                                    remarks: this.remarks
+                                };
+                                console.log("cacheData");
+                                console.log(cacheData);
+
+                                let enemyCache: any;
+                                enemyCache = localStorage.getItem('enemyCache');
+                                if (enemyCache == null) {
+                                    enemyCache = [];
+                                } else {
+                                    enemyCache = JSON.parse(enemyCache);
+                                }
+                                enemyCache.push(cacheData);
+                                // try{
+                                //   localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                                // }catch(oException){
+                                //     if(oException.name == 'QuotaExceededError'){
+                                //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
+                                //         //console.log('已经超出本地存储限定大小！');
+                                //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
+                                //       // localStorage.clear();
+                                //       // localStorage.setItem(key,value);
+                                //     }
+                                // }
+                                localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
+                                console.log("Hello");
+                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            });
+
+                    })
 
                 });
             } else {
@@ -901,29 +1120,49 @@ export class EnemyPage {
 
                 let options: FileUploadOptions = {};
                 options.params = {
-                    deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                    accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                    deviceId: this.deviceId,
+                    longitude: this.longtitude,
+                    latitude: this.latitude,
+                    altitude: this.altitude,
+                    accuracy: this.accuracy,
+                    predatorsTypeValue: this.predatorsTypeValue,
+                    releaseNum: this.releaseNum,
+                    remarks: this.remarks
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
-                    this.base.showAlert("提示", "输入数量为空或不合法", () => { });
+                    this.base.showAlert("提示", "输入数量为空或不合法", () => {
+                    });
 
                 }
                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
                     {
-                        headers: { token: localStorage['token'] }, params: {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                        headers: {token: localStorage['token']}, params: {
+                            deviceId: this.deviceId,
+                            longitude: this.longtitude,
+                            latitude: this.latitude,
+                            altitude: this.altitude,
+                            accuracy: this.accuracy,
+                            predatorsTypeValue: this.predatorsTypeValue,
+                            releaseNum: this.releaseNum,
+                            remarks: this.remarks
                         }
                     })
                     .subscribe(res => {
                         console.log(JSON.stringify(res));
                         console.log(JSON.parse(JSON.stringify(res)).message);
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                        this.base.showAlert('提示', '提交成功', () => { });
+                        this.base.showAlert('提示', '提交成功', () => {
+                        });
                         let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                            deviceId: this.deviceId,
+                            longitude: this.longtitude,
+                            latitude: this.latitude,
+                            altitude: this.altitude,
+                            accuracy: this.accuracy,
+                            predatorsTypeValue: this.predatorsTypeValue,
+                            releaseNum: this.releaseNum,
+                            remarks: this.remarks
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -933,10 +1172,17 @@ export class EnemyPage {
 
                         // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                        this.base.showAlert('提示', '提交失败', () => { });
+                        this.base.showAlert('提示', '提交失败', () => {
+                        });
                         let cacheData = {
-                            deviceId: this.deviceId, longitude: this.longtitude, latitude: this.latitude, altitude: this.altitude,
-                            accuracy: this.accuracy, predatorsTypeValue: this.predatorsTypeValue, releaseNum: this.releaseNum, remarks: this.remarks
+                            deviceId: this.deviceId,
+                            longitude: this.longtitude,
+                            latitude: this.latitude,
+                            altitude: this.altitude,
+                            accuracy: this.accuracy,
+                            predatorsTypeValue: this.predatorsTypeValue,
+                            releaseNum: this.releaseNum,
+                            remarks: this.remarks
                         };
                         console.log("cacheData");
                         console.log(cacheData);
@@ -959,7 +1205,7 @@ export class EnemyPage {
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
-                        // }   
+                        // }
                         localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
                         console.log("Hello");
                         Base.popTo(this.navCtrl, 'switchProjectPage');
@@ -969,8 +1215,6 @@ export class EnemyPage {
         }
 
     }
-
-
 
 
 }

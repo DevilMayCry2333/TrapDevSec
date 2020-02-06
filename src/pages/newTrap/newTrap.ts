@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
-import { QRScanner } from '@ionic-native/qr-scanner';
-import { NavController } from 'ionic-angular';
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { ScanPage} from '../scan/scan'
+import {Component} from '@angular/core';
+import {QRScanner} from '@ionic-native/qr-scanner';
+import {NavController} from 'ionic-angular';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {ScanPage} from '../scan/scan'
 import {Base} from '../../common/base.js'
-import { Subscription } from "rxjs/Subscription";
-import { Geolocation } from "@ionic-native/geolocation";
-import { ChangeDetectorRef } from '@angular/core';
-import { Camera, CameraOptions } from "@ionic-native/camera";
-import { FileTransfer, FileTransferObject, FileUploadOptions } from "@ionic-native/file-transfer";
-import { AboutPage } from '../about/about';
-import { TrapQueryPage} from '../trap-query/trap-query';
-import { File } from "@ionic-native/file";
-import { LoadingController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import {Subscription} from "rxjs/Subscription";
+import {Geolocation} from "@ionic-native/geolocation";
+import {ChangeDetectorRef} from '@angular/core';
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+import {AboutPage} from '../about/about';
+import {TrapQueryPage} from '../trap-query/trap-query';
+import {File} from "@ionic-native/file";
+import {LoadingController} from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
+import {Platform, Events} from 'ionic-angular';
+import {Network} from '@ionic-native/network'
+import {ToastController} from 'ionic-angular';
 
 @Component({
     selector: 'app-trap',
@@ -30,24 +33,24 @@ export class TrapPage {
     // latitude: string
     // altitude: string
     // accuracy: string
-    BeetleType:string
-    injectTypeValue:string
-    WorkContentValue:string
+    BeetleType: string
+    injectTypeValue: string
+    WorkContentValue: string
     indexList = [];
-  
+
     isDisabled = false;
     picNotExist = false;
 
 
-    have_submit:boolean
+    have_submit: boolean
     imageData: null
 
     remarks = ''
 
     newbettle: string
-    otherbettleType:any[]
-    injectType:any[]
-    workContent:any[]
+    otherbettleType: any[]
+    injectType: any[]
+    workContent: any[]
     observers = [];
     isComplete = false;
     isSubProcessFin = false;
@@ -55,7 +58,7 @@ export class TrapPage {
     subscription: Subscription;
     // 是否定位成功
     location_ready = false;
-    otherbettle:string
+    otherbettle: string
 
     users: any[] = [
         {
@@ -77,41 +80,42 @@ export class TrapPage {
     curOptions: any;
 
 
-    deviceBind(){
+    deviceBind() {
         //这里还没有实现，先弹框
-        this.base.showAlert("成功","",()=>{});
+        this.base.showAlert("成功", "", () => {
+        });
     }
 
-    async test(){
+    async test() {
         localStorage.removeItem('maintenanceCache');
         //一秒3500,4000报错
-        for(var i = 0 ; i < 1; i++){
-                console.log(i);
-                this.deviceId = Math.ceil(i + 10000).toString();
-                this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
-                this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
-                this.newbettle = "2";
-                this.altitude = "14";
-                this.injectTypeValue = "增强型";
-                this.WorkContentValue = "3";
-                this.otherbettle = "7";
-                this.BeetleType = "7";
-                // await new Promise((resovle,reject)=>{
-                    this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                        {
-                            headers: { token: localStorage['token'] }, params: {
-                                deviceId: this.deviceId,
-                                longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                otherNum: this.otherbettle, otherType: this.BeetleType
-                            }
-                        }).toPromise().then(res => {
-                            // resovle('ok');
-                        }, (msg) => {
-                            // reject('error');
-                        });
-                // })
+        for (var i = 0; i < 1; i++) {
+            console.log(i);
+            this.deviceId = Math.ceil(i + 10000).toString();
+            this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
+            this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
+            this.newbettle = "2";
+            this.altitude = "14";
+            this.injectTypeValue = "增强型";
+            this.WorkContentValue = "3";
+            this.otherbettle = "7";
+            this.BeetleType = "7";
+            // await new Promise((resovle,reject)=>{
+            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                {
+                    headers: {token: localStorage['token']}, params: {
+                        deviceId: this.deviceId,
+                        longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
+                        maleNum: "1", femaleNum: "1", altitude: this.altitude,
+                        drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
+                        otherNum: this.otherbettle, otherType: this.BeetleType
+                    }
+                }).toPromise().then(res => {
+                // resovle('ok');
+            }, (msg) => {
+                // reject('error');
+            });
+            // })
 
 
         }
@@ -121,25 +125,27 @@ export class TrapPage {
 
     }
 
-    NavToQuery(){
-        if(this.deviceId){
+    NavToQuery() {
+        if (this.deviceId) {
             localStorage["TrapDeviceId"] = this.deviceId;
             this.navCtrl.push(TrapQueryPage);
-        }else{
-            this.base.showAlert("提示","请先扫码或输入数字的设备ID!",()=>{});
-            
+        } else {
+            this.base.showAlert("提示", "请先扫码或输入数字的设备ID!", () => {
+            });
+
         }
 
     }
 
     bindNewId() {
-        if(this.deviceId == undefined || this.deviceId=="" || this.deviceSerial == undefined || this.deviceSerial == ""){
-            this.base.showAlert("提示","请先输入设备ID和设备编号!",()=>{})
-        }else{
+        if (this.deviceId == undefined || this.deviceId == "" || this.deviceSerial == undefined || this.deviceSerial == "") {
+            this.base.showAlert("提示", "请先输入设备ID和设备编号!", () => {
+            })
+        } else {
             this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                 {
-                    headers: { token: localStorage['token'] }, params: {
-                        scanId: this.deviceId,serial:this.deviceSerial,
+                    headers: {token: localStorage['token']}, params: {
+                        scanId: this.deviceId, serial: this.deviceSerial,
                         username: localStorage['username']
                     }
                 })
@@ -147,7 +153,8 @@ export class TrapPage {
                     console.log(JSON.stringify(res));
                     console.log(JSON.parse(JSON.stringify(res)).message);
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                    this.base.showAlert('提示', '提交成功', () => { });
+                    this.base.showAlert('提示', '提交成功', () => {
+                    });
                     console.log("cacheData");
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
@@ -155,21 +162,22 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                        this.base.showAlert("提交","提交失败",()=>{});
-                        console.log(msg);
-                        console.log("失败");
-                        var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
-                        let BindIdCache: any;
-                        BindIdCache = localStorage.getItem('trapBind');
+                    this.base.showAlert("提交", "提交失败", () => {
+                    });
+                    console.log(msg);
+                    console.log("失败");
+                    var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
+                    let BindIdCache: any;
+                    BindIdCache = localStorage.getItem('trapBind');
 
-                        if (BindIdCache == null) {
-                            BindIdCache = [];
-                        } else {
-                            BindIdCache = JSON.parse(BindIdCache);
-                        }
-                        BindIdCache.push(transferParam);
+                    if (BindIdCache == null) {
+                        BindIdCache = [];
+                    } else {
+                        BindIdCache = JSON.parse(BindIdCache);
+                    }
+                    BindIdCache.push(transferParam);
 
-                        localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
+                    localStorage.setItem("trapBind", JSON.stringify(BindIdCache));
                 });
 
         }
@@ -185,8 +193,6 @@ export class TrapPage {
         //         console.log("===提交失败====");
 
         //             console.log(msg);
-
-
 
 
         //         })
@@ -215,7 +221,15 @@ export class TrapPage {
         });
     }
 
-    postMaintenance(element, httpClient, base, tmpStorage,i) {
+    resolvedList: Array<boolean>;
+    xhr = false;
+
+    postMaintenance(element, httpClient, base, tmpStorage, i) {
+        /*if (this.xhr || this.resolvedList[i]) {
+            return new Promise(() => {});
+        }*/
+        if (this.xhr) return;
+        this.xhr = true;
         var that = this;
         console.log(element);
         console.log("====图片路径====");
@@ -235,7 +249,7 @@ export class TrapPage {
                 drug: element.drug, remark: element.remark, workingContent: element.workingContent,
                 otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i
             };
-            options.headers = { token: localStorage['token'] };
+            options.headers = {token: localStorage['token']};
             console.log("options");
             console.log(options);
 
@@ -265,12 +279,21 @@ export class TrapPage {
                         console.log("数据是", that.curOptions);
                         await httpClient.post(base.BASE_URL + 'auth_api/maintenance', {},
                             {
-                                headers: { token: localStorage['token'] }, params: {
+                                headers: {token: localStorage['token']}, params: {
                                     deviceId: element.deviceId,
-                                    longitude: element.longitude, latitude: element.latitude, num: element.num,
-                                    maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                                    drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                                    otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                                    longitude: element.longitude,
+                                    latitude: element.latitude,
+                                    num: element.num,
+                                    maleNum: "1",
+                                    femaleNum: "1",
+                                    altitude: element.altitude,
+                                    drug: element.drug,
+                                    remark: element.remark,
+                                    workingContent: element.workingContent,
+                                    otherNum: element.otherNum,
+                                    otherType: element.otherType,
+                                    allLength: tmpStorage.length,
+                                    curRow: i.toString()
                                 }
                             })
                             .toPromise().then(res => {
@@ -334,40 +357,197 @@ export class TrapPage {
             return new Promise((resolve, reject) => {
                 console.log("=====Element图片为空=====");
                 console.log(element);
-                httpClient.post(base.BASE_URL + 'auth_api/maintenance', {},
+                this.xhr = httpClient.post(base.BASE_URL + 'auth_api/maintenance', {},
                     {
-                        headers: { token: localStorage['token'] }, params: {
+                        headers: {token: localStorage['token']}, params: {
                             deviceId: element.deviceId,
-                            longitude: element.longitude, latitude: element.latitude, num: element.num,
-                            maleNum: "1", femaleNum: "1", altitude: element.altitude,
-                            drug: element.drug, remark: element.remark, workingContent: element.workingContent,
-                            otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i.toString()
+                            longitude: element.longitude,
+                            latitude: element.latitude,
+                            num: element.num,
+                            maleNum: "1",
+                            femaleNum: "1",
+                            altitude: element.altitude,
+                            drug: element.drug,
+                            remark: element.remark,
+                            workingContent: element.workingContent,
+                            otherNum: element.otherNum,
+                            otherType: element.otherType,
+                            allLength: tmpStorage.length,
+                            curRow: i.toString()
                         }
-                    }).toPromise().then(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
-                        if (JSON.parse(JSON.stringify(res)).isComp == true) {
-                            that.isComplete = true;
-                        } else {
-                            that.isComplete = false;
-                        }
-                        resolve('ok');
-                    }, (msg) => {
-                        console.log(msg);
-                        reject('error');
-                        // this.base.showAlert('提示', '提交失败', () => { });
-                    });
+                    }).pipe(/*publishReplay()*//*share()*//*timeout(30000)*/)/*.timeout(1000)*/.toPromise().then(res => {
+                    console.log(JSON.stringify(res));
+                    console.log(JSON.parse(JSON.stringify(res)).message);
+                    if (JSON.parse(JSON.stringify(res)).isComp == true) {
+                        that.isComplete = true;
+                    } else {
+                        that.isComplete = false;
+                    }
+                    resolve('ok');
+                }, (msg) => {
+                    console.log(msg);
+                    reject('error');
+                    // this.base.showAlert('提示', '提交失败', () => { });
+                });
             })
         }
     }
+
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter...');
+    }
+
+    static checkNetworkState: boolean = false;
+
+    checkNetWork() {
+        this.events.subscribe('ONLINE', () => {
+            if (!TrapPage.checkNetworkState) {
+                this.checkPostMaintenanceCache();
+                this.checkPostBindCache();
+                TrapPage.checkNetworkState = true;
+            }
+        });
+        this.events.subscribe('OFFLINE', () => {
+            if (TrapPage.checkNetworkState) {
+                //TODO
+                TrapPage.checkNetworkState = false;
+            }
+        });
+    }
+
+    testCache() {
+        console.log('generate cache...');
+        let maintenanceCache: any;
+        for (let i = 0; i < 100; i++) {
+            const cacheExp = {
+                deviceId: "10005",
+                longitude: ((Math.random() * 0.1 + 119.23113951284115)).toString(),
+                latitude: ((Math.random() * 0.1 + 26.083115579358804)).toString(),
+                num: (i + 1).toString(),
+                maleNum: "1",
+                femaleNum: "1",
+                altitude: "1.2",
+                drug: "增强型",
+                remark: "SB",
+                workingContent: "3",
+                otherNum: "666",
+                otherType: "7"
+            };
+            maintenanceCache = localStorage.getItem('maintenanceCache');
+            if (maintenanceCache == null) {
+                maintenanceCache = [];
+            } else {
+                maintenanceCache = JSON.parse(maintenanceCache);
+            }
+            maintenanceCache.push(cacheExp);
+            localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
+        }
+    }
+
+    preSubmitted = 0;
+    curSubmitted = 0;
+
+    checkPostMaintenanceCache() {
+        console.log('check post cache...');
+        console.log('preSubmitted => ' + this.preSubmitted + ' curSubmitted => ' + this.curSubmitted);
+        if (this.curSubmitted >= this.preSubmitted) {
+            if (localStorage["maintenanceCache"]) {
+                (async () => {
+                    const tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
+                    console.log('tmpStorage.len => ', tmpStorage.length);
+                    this.preSubmitted = tmpStorage.length;
+                    let tmpDeviceList = [];
+                    this.indexList = [];
+                    // this.resolvedList = new Array<boolean>(tmpStorage.length);
+                    // this.resolvedList.fill(false);
+                    let resolved = 0, rejected = 0;
+                    for (let i = 0; i < tmpStorage.length; ++i) {
+                        this.xhr = false;
+                        await this.postMaintenance(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
+                            res => {
+                                console.log("成功");
+                                console.log(res);
+                                resolved++;
+                                // this.resolvedList[i] = true;
+                            }, msg => {
+                                console.log("失败");
+                                console.log(msg);
+                                rejected++;
+                                // if (!this.resolvedList[i])
+                                tmpDeviceList.push(tmpStorage[i]);
+                            }
+                        ).catch((error) => {
+                            console.log(error);
+                        });
+                        this.curSubmitted = resolved + rejected;
+                    }
+                    console.log('resolved =>' + resolved);
+                    console.log('rejected =>' + rejected);
+                    this.preSubmitted = resolved + rejected;
+                    for (let i = 0; i < tmpDeviceList.length; ++i) {
+                        this.indexList.push(tmpDeviceList[i]);
+                        console.log(tmpDeviceList[i]);
+                    }
+                    console.log("失败的缓存");
+                    console.log('indexList => ' + this.indexList);
+                    if (this.indexList.length <= 0) {
+                        console.log("清除缓存");
+                        localStorage.removeItem('maintenanceCache');
+                        this.preSubmitted = 0;
+                        this.curSubmitted = 0;
+                    } else {
+                        localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
+                    }
+                })()/*.then(/!*todo*!/)()*/;
+            }
+        }
+    }
+
+    checkPostBindCache() {
+        let i = 0;
+        if (localStorage["trapBind"]) {
+            var tmpStorage2 = [];
+
+            tmpStorage2 = JSON.parse(localStorage["trapBind"]);
+
+            console.log(tmpStorage2.length);
+            // localStorage.removeItem("trapBind");
+
+            console.log(tmpStorage2);
+
+            tmpStorage2.forEach(element => {
+                console.log("===开始===");
+
+                console.log(element.scanId);
+                console.log(element.serial);
+
+                this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
+                    {
+                        headers: {token: localStorage['token']},
+                        params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
+                    })
+                    .subscribe(res => {
+                            console.log(res);
+                            i++;
+                            if (tmpStorage2.length == i) {
+                                localStorage.removeItem("trapBind");
+                            }
+                        },
+                        msg => {
+                        })
+            })
+        }
+    }
+
     async ionViewDidLoad() {
+        console.log('preSubmitted => ' + this.preSubmitted + ' curSubmitted => ' + this.curSubmitted);
         console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['otherbettleType'])
-        console.log(localStorage['TrapWorkContent'])
-        console.log(localStorage['TrapinjectType'])
+        console.log(localStorage['otherbettleType']);
+        console.log(localStorage['TrapWorkContent']);
+        console.log(localStorage['TrapinjectType']);
         console.log(localStorage["maintenanceCache"]);
         // localStorage.removeItem('maintenanceCache');
-
+        console.log('check post cache...');
         if (localStorage["TrapWorkContent"]) {
             console.log(localStorage["TrapWorkContent"]);
             this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
@@ -389,9 +569,9 @@ export class TrapPage {
             console.log(this.injectType);
         }
 
-        
+
         var i = 0;
-        if (localStorage["trapBind"]){
+        /*if (localStorage["trapBind"]) {
             var tmpStorage2 = [];
 
             tmpStorage2 = JSON.parse(localStorage["trapBind"]);
@@ -409,29 +589,31 @@ export class TrapPage {
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
-                        headers: { token: localStorage['token'] },
-                        params: new HttpParams({ fromObject: { scanId: element.scanId, serial: element.serial } })
+                        headers: {token: localStorage['token']},
+                        params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                        console.log(res);
-                        i++;
-                        this.base.showAlert("提示", "成功绑定了", () => { });
-                        if (tmpStorage2.length == i) {
-                            localStorage.removeItem("trapBind");
-                            this.base.showAlert("提示", "清理了缓存", () => { });
-                        }
-                    },
+                            console.log(res);
+                            i++;
+                            this.base.showAlert("提示", "成功绑定了", () => {
+                            });
+                            if (tmpStorage2.length == i) {
+                                localStorage.removeItem("trapBind");
+                                this.base.showAlert("提示", "清理了缓存", () => {
+                                });
+                            }
+                        },
                         msg => {
 
                         })
 
-                })
+            })
 
 
-        }
+        }*/
 
         var that = this;
-        if (localStorage["maintenanceCache"]){
+        /*if (localStorage["maintenanceCache"]) {
             const alert = this.alertCtrl.create({
                 title: "有缓存数据，是否提交?",
                 subTitle: "提示：4G以下网络环境提交时间可能会延长，建议Wi-Fi状况良好或者4G网络环境下提交。",
@@ -483,80 +665,89 @@ export class TrapPage {
             });
             alert.present();
 
-        }
+        }*/
 
 
         this.httpClient.post(this.base.BASE_URL + 'app/getBeetle', {},
-            { headers: { token: localStorage['token'] }, 
-            params: new HttpParams({ fromObject: { username: localStorage['username']} }) })
+            {
+                headers: {token: localStorage['token']},
+                params: new HttpParams({fromObject: {username: localStorage['username']}})
+            })
             .subscribe(res => {
-                var c:any = res;
-                this.otherbettleType = Array.from(c);
-                console.log(this.otherbettleType);
-                localStorage['otherbettleType'] = JSON.stringify(res);
+                    var c: any = res;
+                    this.otherbettleType = Array.from(c);
+                    console.log(this.otherbettleType);
+                    localStorage['otherbettleType'] = JSON.stringify(res);
 
-            },
+                },
                 res => {
                     console.log(res);
                 })
-
 
 
         this.httpClient.post(this.base.BASE_URL + 'app/getInject', {},
             {
-                headers: { token: localStorage['token'] },
-                params: new HttpParams({ fromObject: { username: localStorage['username'] } })
+                headers: {token: localStorage['token']},
+                params: new HttpParams({fromObject: {username: localStorage['username']}})
             })
             .subscribe(res => {
-                var c: any = res;
-                this.injectType = Array.from(c);
-                console.log(this.injectType);
+                    var c: any = res;
+                    this.injectType = Array.from(c);
+                    console.log(this.injectType);
 
-                localStorage['TrapinjectType'] = JSON.stringify(res);
+                    localStorage['TrapinjectType'] = JSON.stringify(res);
 
-            },
+                },
                 res => {
                     console.log(res);
                 })
-
 
 
         this.httpClient.post(this.base.BASE_URL + 'app/getWorkContent', {},
             {
-                headers: { token: localStorage['token'] },
-                params: new HttpParams({ fromObject: { username: localStorage['username'] } })
+                headers: {token: localStorage['token']},
+                params: new HttpParams({fromObject: {username: localStorage['username']}})
             })
             .subscribe(res => {
-                var c: any = res;
-                this.workContent = Array.from(c);
-                console.log(this.workContent);
-                console.log(this.workContent);
+                    var c: any = res;
+                    this.workContent = Array.from(c);
+                    console.log(this.workContent);
+                    console.log(this.workContent);
 
-                localStorage['TrapWorkContent'] = JSON.stringify(res);
+                    localStorage['TrapWorkContent'] = JSON.stringify(res);
 
-            },
+                },
                 res => {
                     console.log(res);
                 })
 
     }
 
-    NavToMap(){
-        this.navCtrl.push(AboutPage,{
-            project:'1'
+    NavToMap() {
+        this.navCtrl.push(AboutPage, {
+            project: '1'
         });
     }
-    constructor(public navCtrl: NavController, 
-        public qrScanner: QRScanner, 
-        private base: Base, 
-        private alertCtrl:AlertController,
-        private geolocation: Geolocation,
-        private changeDetectorRef: ChangeDetectorRef,
-        private httpClient: HttpClient,
-        private camera: Camera,
-        private fileTransfer: FileTransfer,
-        public loadingCtrl: LoadingController,
-        private file:File) { }
+
+    constructor(public navCtrl: NavController,
+                public qrScanner: QRScanner,
+                private base: Base,
+                private alertCtrl: AlertController,
+                private geolocation: Geolocation,
+                private changeDetectorRef: ChangeDetectorRef,
+                private httpClient: HttpClient,
+                private camera: Camera,
+                private fileTransfer: FileTransfer,
+                public loadingCtrl: LoadingController,
+                private file: File,
+                public platform: Platform,
+                public events: Events,
+                public network: Network,
+                public toast: ToastController) {
+        console.log('constructor:');
+        this.checkNetWork();
+        // this.testCache();
+    }
 
     callBack = (params) => {
         return new Promise((resolve, reject) => {
@@ -573,9 +764,9 @@ export class TrapPage {
                     console.log("element");
                     // console.log(element);
                     if ((element.scanId == params.id && element.id.charAt(8) == '1'))
-                        flag=1;
+                        flag = 1;
                 });
-                if(flag==1){
+                if (flag == 1) {
                     this.deviceId = params.id;
                     let options = {
                         enableHighAccuracy: true,
@@ -619,7 +810,7 @@ export class TrapPage {
                             // },5);
                             // if(this.altitude==null){
                             //   this.location_ready = false;
-                            //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});        
+                            //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});
                             // }
                         }
                         // else{
@@ -638,16 +829,19 @@ export class TrapPage {
                     });
 
                     this.base.showConfirmAlert("成功", params.id, () => {
-                    }, () => { })
-                }else{
+                    }, () => {
+                    })
+                } else {
                     this.base.showConfirmAlert("二维码无效", params.id, () => {
-                    }, () => { })
+                    }, () => {
+                    })
                 }
             } else {
 
             }
         });
     };
+
     trapClick() {
         console.log("trap");
     }
@@ -655,13 +849,14 @@ export class TrapPage {
     scan() {
         console.log("scan");
         console.log(localStorage['username']);
-        this.navCtrl.push(ScanPage,{callBack:this.callBack});
+        this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
-    
-    test2(){
+
+    test2() {
         localStorage.removeItem('maintenanceCache');
     }
-    submit(){
+
+    submit() {
         this.isDisabled = true;
 
         this.have_submit = true;
@@ -700,22 +895,22 @@ export class TrapPage {
         }
 
 
-
-
         const beizhu = this.remarks.replace(/\s/g, '');
         const ischeck = /[^\a-\zA-\Z0-9\u4E00-\u9FA5]/;
 
         if (ischeck.test(beizhu)) {
             //this.remark = '';
-            this.base.showAlert('提示', '备注存在不合法字符', () => { });
-        }else{
+            this.base.showAlert('提示', '备注存在不合法字符', () => {
+            });
+        } else {
 
             console.log(this.injectTypeValue);
             console.log(this.WorkContentValue);
             console.log(this.BeetleType);
-            if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle){
-                this.base.showAlert("定位信息不准","或者是数据没有填完整",()=>{});
-            }else{
+            if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+                });
+            } else {
                 if (this.imageData != null) {
                     let options: FileUploadOptions = {};
                     options.fileKey = "image";
@@ -731,7 +926,7 @@ export class TrapPage {
                         drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
                         otherNum: this.otherbettle, otherType: this.BeetleType
                     };
-                    options.headers = { token: localStorage['token'] };
+                    options.headers = {token: localStorage['token']};
                     console.log("options");
                     console.log(options);
 
@@ -743,7 +938,8 @@ export class TrapPage {
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+                        });
                         return;
                     }
 
@@ -755,10 +951,12 @@ export class TrapPage {
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            this.base.showAlert('提示', '提交成功', () => {
+                            });
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (error) => {//发送失败(网络出错等)
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            this.base.showAlert('提示', '提交失败', () => {
+                            });
                             // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                             let cacheData = {
@@ -767,7 +965,7 @@ export class TrapPage {
                                 maleNum: "1", femaleNum: "1", altitude: this.altitude,
                                 drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
                                 otherNum: this.otherbettle, otherType: this.BeetleType,
-                                img:this.imageData
+                                img: this.imageData
                             };
                             let maintenanceCache: any;
                             maintenanceCache = localStorage.getItem('maintenanceCache');
@@ -788,39 +986,54 @@ export class TrapPage {
                             //       // localStorage.clear();
                             //       // localStorage.setItem(key,value);
                             //     }
-                            // } 
+                            // }
 
                             localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
                             //this.navCtrl.pop();
                             // confirm.dismiss()
-                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
                         })
-                    .catch((error) => {//发送失败(文件不存在等)
-                        this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
-                            {
-                                headers: { token: localStorage['token'] }, params: {
-                                    deviceId: this.deviceId,
-                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                    otherNum: this.otherbettle, otherType: this.BeetleType
-                                }
-                            })
-                            .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
-                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                                this.base.showAlert('提示', '提交成功', () => { });
-                                let cacheData = {
-                                    deviceId: this.deviceId,
-                                    longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
-                                    maleNum: "1", femaleNum: "1", altitude: this.altitude,
-                                    drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
-                                    otherNum: this.otherbettle, otherType: this.BeetleType
-                                };
-                                console.log("cacheData");
-                                console.log(cacheData);
-                            })
+                        .catch((error) => {//发送失败(文件不存在等)
+                            this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
+                                {
+                                    headers: {token: localStorage['token']}, params: {
+                                        deviceId: this.deviceId,
+                                        longitude: this.longtitude,
+                                        latitude: this.latitude,
+                                        num: this.newbettle,
+                                        maleNum: "1",
+                                        femaleNum: "1",
+                                        altitude: this.altitude,
+                                        drug: this.injectTypeValue,
+                                        remark: this.remarks,
+                                        workingContent: this.WorkContentValue,
+                                        otherNum: this.otherbettle,
+                                        otherType: this.BeetleType
+                                    }
+                                })
+                                .subscribe(res => {
+                                    console.log(JSON.stringify(res));
+                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                    this.base.showAlert('提示', '提交成功', () => {
+                                    });
+                                    let cacheData = {
+                                        deviceId: this.deviceId,
+                                        longitude: this.longtitude,
+                                        latitude: this.latitude,
+                                        num: this.newbettle,
+                                        maleNum: "1",
+                                        femaleNum: "1",
+                                        altitude: this.altitude,
+                                        drug: this.injectTypeValue,
+                                        remark: this.remarks,
+                                        workingContent: this.WorkContentValue,
+                                        otherNum: this.otherbettle,
+                                        otherType: this.BeetleType
+                                    };
+                                    console.log("cacheData");
+                                    console.log(cacheData);
+                                })
                         })
 
                 } else {
@@ -834,12 +1047,13 @@ export class TrapPage {
                     };
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => { });
+                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+                        });
                         return;
                     }
                     this.httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                         {
-                            headers: {token: localStorage['token']}, params:{
+                            headers: {token: localStorage['token']}, params: {
                                 deviceId: this.deviceId,
                                 longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
                                 maleNum: "1", femaleNum: "1", altitude: this.altitude,
@@ -851,7 +1065,8 @@ export class TrapPage {
                             console.log(JSON.stringify(res));
                             console.log(JSON.parse(JSON.stringify(res)).message);
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
-                            this.base.showAlert('提示', '提交成功', () => { });
+                            this.base.showAlert('提示', '提交成功', () => {
+                            });
                             let cacheData = {
                                 deviceId: this.deviceId,
                                 longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
@@ -861,13 +1076,14 @@ export class TrapPage {
                             };
                             console.log("cacheData");
                             console.log(cacheData);
-                            
+
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (msg) => {
 
                             // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
-                            this.base.showAlert('提示', '提交失败', () => { });
+                            this.base.showAlert('提示', '提交失败', () => {
+                            });
                             let cacheData = {
                                 deviceId: this.deviceId,
                                 longitude: this.longtitude, latitude: this.latitude, num: this.newbettle,
@@ -875,8 +1091,8 @@ export class TrapPage {
                                 drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
                                 otherNum: this.otherbettle, otherType: this.BeetleType
                             };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                            console.log("cacheData");
+                            console.log(cacheData);
 
                             let maintenanceCache: any;
                             maintenanceCache = localStorage.getItem('maintenanceCache');
@@ -896,13 +1112,13 @@ export class TrapPage {
                             //       // localStorage.clear();
                             //       // localStorage.setItem(key,value);
                             //     }
-                            // }   
+                            // }
                             localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
                             console.log("Hello");
 
                             //this.navCtrl.pop();
                             // confirm.dismiss();
-                                Base.popTo(this.navCtrl, 'switchProjectPage');
+                            Base.popTo(this.navCtrl, 'switchProjectPage');
                         });
 
                 }
@@ -910,51 +1126,64 @@ export class TrapPage {
         }
 
     }
+
     deviceIdInput() {
         console.log("ok");
         console.log(this.deviceId);
         let num1 = 0;
         if (parseInt(this.deviceId) < 0 || parseInt(this.deviceId) == NaN) {
-            this.base.showAlert('提示', '设备ID不合法', () => { });
+            this.base.showAlert('提示', '设备ID不合法', () => {
+            });
         }
         if (!this.deviceId) {
-            this.base.showAlert('提示', '设备ID不合法', () => { });
+            this.base.showAlert('提示', '设备ID不合法', () => {
+            });
         }
         num1 = parseInt(this.deviceId);
         this.deviceId = '' + num1;
         if (this.deviceId == 'NaN') {
-            this.base.showAlert('提示', '设备ID不合法', () => { });
+            this.base.showAlert('提示', '设备ID不合法', () => {
+            });
         }
 
     }
-    newBettleInput(){
+
+    newBettleInput() {
         let num1 = 0;
         if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         if (!this.newbettle) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         num1 = parseInt(this.newbettle);
         this.newbettle = '' + num1;
         if (this.newbettle == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
     }
-    otherBettleInput(){
+
+    otherBettleInput() {
         let num1 = 0;
         if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         if (!this.otherbettle) {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
         num1 = parseInt(this.otherbettle);
         this.otherbettle = '' + num1;
         if (this.otherbettle == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', () => { });
+            this.base.showAlert('提示', '请输入数字', () => {
+            });
         }
     }
+
     deviceSerialInput() {
         console.log(this.deviceSerial);
     }
