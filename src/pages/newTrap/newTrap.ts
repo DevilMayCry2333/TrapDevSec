@@ -260,7 +260,7 @@ export class TrapPage {
 
             // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
             return new Promise((resolve, reject) => {
-                fileTransfer.upload(element.img, base.BASE_URL + 'auth_api/maintenance', options)
+                fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
                     .then((res) => {
                         console.log("======进入文件上传=====");
                         console.log("====文件路径=====");
@@ -277,7 +277,7 @@ export class TrapPage {
 
                     }, async (msg) => {
                         console.log("数据是", that.curOptions);
-                        await httpClient.post(base.BASE_URL + 'auth_api/maintenance', {},
+                        await httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
                                     deviceId: element.deviceId,
@@ -357,7 +357,7 @@ export class TrapPage {
             return new Promise((resolve, reject) => {
                 console.log("=====Element图片为空=====");
                 console.log(element);
-                this.xhr = httpClient.post(base.BASE_URL + 'auth_api/maintenance', {},
+                this.xhr = httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                     {
                         headers: {token: localStorage['token']}, params: {
                             deviceId: element.deviceId,
