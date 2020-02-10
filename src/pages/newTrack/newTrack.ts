@@ -769,8 +769,7 @@ export class TrackPage {
     // }
     deviceBind() {
         //这里还没有实现，先弹框
-        this.base.showAlert("成功", "", () => {
-        });
+
     }
 
     trapClick() {
@@ -789,8 +788,6 @@ export class TrackPage {
         } else {
             // this.have_submit = true;
             this.canSubmit = true;
-            this.base.showAlert(this.flag, this.flag, () => {
-            });
 
             console.log("======PATH======");
             console.log(this.imageData);
