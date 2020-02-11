@@ -47,7 +47,7 @@ export class NewMedicinePage {
     workContentValue: string      //
     have_submit: boolean
     subscription: Subscription;
-    remarks: string
+    remarks = ''
     imageData: ""
     location_ready: boolean
     users: any[] = [
