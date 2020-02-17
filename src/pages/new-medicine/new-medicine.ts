@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {QRScanner, QRScannerStatus} from '@ionic-native/qr-scanner';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ScanPage} from '../scan/scan'
-import {Base} from '../../common/base.js'
+import {ScanPage} from '../scan/scan';
+import {Base} from '../../common/base.js';
 import {Subscription} from "rxjs/Subscription";
 import {Geolocation} from "@ionic-native/geolocation";
 import {ChangeDetectorRef} from '@angular/core';
@@ -883,7 +883,7 @@ export class NewMedicinePage {
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         num1 = this.medicinenumber;
-        this.medicinenumber = 0 + num1;
+        this.medicinenumber = num1;
         // if (this.medicinenumber == 'NaN') {
         //     console.log("medicinenumber不合法");
         //     this.medicinenumber = "";
@@ -901,7 +901,7 @@ export class NewMedicinePage {
             // this.base.showAlert('提示', '请输入数字', () => { });
         }
         num2 = this.controlarea;
-        this.controlarea = 0 + num2;
+        this.controlarea = num2;
         // if (this.controlarea == 'NaN') {
         //     console.log("controlarea不合法");
         //     this.controlarea = "";

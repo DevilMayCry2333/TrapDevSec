@@ -10,6 +10,7 @@ import { EnemyQueryPage } from '../enemy-query/enemy-query';
 import { DeadTreesQueryPage } from '../dead-trees-query/dead-trees-query';
 import { MedicineQueryPage } from '../medicine-query/medicine-query';
 import { NetworkProvider } from "../../network/NetworkProvider";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @Component({
     selector: 'app-home',
@@ -17,15 +18,26 @@ import { NetworkProvider } from "../../network/NetworkProvider";
 })
 export class NewHomePage {
     constructor(private httpClient: HttpClient,private navCtl:NavController,
-        private base: Base,private networkProvider: NetworkProvider) {
-        this.networkProvider.initializeNetworkEvents();
+        private base: Base,private networkProvider: NetworkProvider, 
+        private iAB: InAppBrowser) {
+            this.networkProvider.initializeNetworkEvents();
     }
     username: ''
     password: ''
     deviceId: ''
     scanId:''
+    version = 2.1;
 
     ionViewDidLoad(){
+        this.httpClient.get(this.base.BASE_URL + "app/version").subscribe((res)=>{
+            let latestVersion = parseInt(res.toString(), 10);
+            if (this.version < latestVersion) {
+              this.base.showConfirmAlert("更新","发现新版本，是否立即更新？", ()=>{
+                // this.iAB.create("http://192.168.101.34/app-debug.apk",'_system')
+                this.iAB.create("106.15.200.245/app-debug.apk",'_system')
+              }, ()=>{})
+            }
+          })
         if (localStorage['token']){
             this.navCtl.push(switchProjectPage);
         }
