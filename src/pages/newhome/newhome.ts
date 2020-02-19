@@ -26,15 +26,15 @@ export class NewHomePage {
     password: ''
     deviceId: ''
     scanId:''
-    version = 2.1;
+    version = 3.3
 
     ionViewDidLoad(){
         this.httpClient.get(this.base.BASE_URL + "app/version").subscribe((res)=>{
-            let latestVersion = parseInt(res.toString(), 10);
+            let latestVersion = Number(res.toString());
             if (this.version < latestVersion) {
               this.base.showConfirmAlert("更新","发现新版本，是否立即更新？", ()=>{
                 // this.iAB.create("http://192.168.101.34/app-debug.apk",'_system')
-                this.iAB.create("106.15.200.245/app-debug.apk",'_system')
+                this.iAB.create("http://106.15.200.245/app-debug.apk",'_system')
               }, ()=>{})
             }
           })
