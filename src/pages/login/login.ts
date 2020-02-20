@@ -26,7 +26,7 @@ export class LoginPage {
   username = '';
   password = '';
   startApp: any;
-  version = 3.1;
+  version = 3.4;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient,
               private base: Base, private nativePageTransitions: NativePageTransitions, private iAB: InAppBrowser) {
@@ -36,7 +36,8 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
 
     this.httpClient.get(this.base.BASE_URL + "app/version").subscribe((res)=>{
-      let latestVersion = parseInt(res.toString(), 10);
+      //let latestVersion = parseInt(res.toString(), 10);
+      let latestVersion = Number(res.toString());
       if (this.version < latestVersion) {
         this.base.showConfirmAlert("请更新","请更新", ()=>{
          // this.iAB.create("http://www.fjchenkang.com/app/app-debug.apk",'_system')

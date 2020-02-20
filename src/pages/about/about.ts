@@ -391,11 +391,14 @@ openBaiduMap() {
       };
       var label = new BMap.Label(text, opts); // 创建文本标注对象
       label.setStyle({
-        color: "green",
-        fontSize: "12px",
+        color: "black",
+        fontSize: "10px",
         height: "20px",
         lineHeight: "20px",
-        fontFamily: "微软雅黑"
+        fontFamily: "微软雅黑",
+        backgroundColor:"rgba(0,0,0,0)",
+        border :"0", 
+        
       });
       map.addOverlay(label);
     }
