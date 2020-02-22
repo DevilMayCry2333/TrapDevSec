@@ -26,7 +26,7 @@ export class NewHomePage {
     password: ''
     deviceId: ''
     scanId:''
-    version = 3.4
+    version = 3.5
 
     ionViewDidLoad(){
         this.httpClient.get(this.base.BASE_URL + "app/version").subscribe((res)=>{
