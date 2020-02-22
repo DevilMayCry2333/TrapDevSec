@@ -23,7 +23,7 @@ import {ToastController} from 'ionic-angular';
     templateUrl: 'newTrap.html',
 })
 export class TrapPage {
-    deviceId: string
+    deviceId: string 
     deviceSerial: string
     // longtitude = "1.2"
     // latitude = "1.2"
@@ -59,8 +59,8 @@ export class TrapPage {
     subscription: Subscription;
     // 是否定位成功
     location_ready = false;
-    // otherbettle: string
-    otherbettle="0"
+    otherbettle: string
+    // otherbettle="0"
 
     users: any[] = [
         {
@@ -120,6 +120,7 @@ export class TrapPage {
     
         if(otherId==this.BeetleType){
             this.canInput = true;
+            this.otherbettle="0";
         }else {
             this.canInput = false;
         }
