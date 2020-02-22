@@ -20,19 +20,19 @@ import {Events} from 'ionic-angular';
     templateUrl: 'newEnemy.html'
 })
 export class EnemyPage {
-    longtitude = "1.1234567";
-    latitude = "1.1234567";
-    altitude = "1.1234567";
-    accuracy = "1.1234567";
+    // longtitude = "1.1234567";
+    // latitude = "1.1234567";
+    // altitude = "1.1234567";
+    // accuracy = "1.1234567";
 
     deviceId: string
     deviceSerial: string
     subscription: Subscription;
 
-    // longtitude: string
-    // latitude: string
-    // altitude: string
-    // accuracy: string
+    longtitude: string
+    latitude: string
+    altitude: string
+    accuracy: string
 
     imageData: null
 

@@ -25,14 +25,14 @@ import {ToastController} from 'ionic-angular';
 export class TrapPage {
     deviceId: string
     deviceSerial: string
-    longtitude = "1.2"
-    latitude = "1.2"
-    altitude = "1.2"
-    accuracy = "1.2"
-    // longtitude: string
-    // latitude: string
-    // altitude: string
-    // accuracy: string
+    // longtitude = "1.2"
+    // latitude = "1.2"
+    // altitude = "1.2"
+    // accuracy = "1.2"
+    longtitude: string
+    latitude: string
+    altitude: string
+    accuracy: string
     BeetleType: string
     injectTypeValue: string
     WorkContentValue: string
@@ -41,6 +41,7 @@ export class TrapPage {
     isDisabled = false;
     picNotExist = false;
 
+    canInput=true;
 
     have_submit: boolean
     imageData: null
@@ -58,7 +59,8 @@ export class TrapPage {
     subscription: Subscription;
     // 是否定位成功
     location_ready = false;
-    otherbettle: string
+    // otherbettle: string
+    otherbettle="0"
 
     users: any[] = [
         {
@@ -79,11 +81,50 @@ export class TrapPage {
     ];
     curOptions: any;
 
+    constructor(public navCtrl: NavController,
+                public qrScanner: QRScanner,
+                private base: Base,
+                private alertCtrl: AlertController,
+                private geolocation: Geolocation,
+                private changeDetectorRef: ChangeDetectorRef,
+                private httpClient: HttpClient,
+                private camera: Camera,
+                private fileTransfer: FileTransfer,
+                public loadingCtrl: LoadingController,
+                private file: File,
+                public platform: Platform,
+                public events: Events,
+                public network: Network,
+                public toast: ToastController) {
+        console.log('constructor:');
+        this.checkNetWork();
+        // this.testCache();
+    }
 
-    deviceBind() {
-        //这里还没有实现，先弹框
-        this.base.showAlert("成功", "", () => {
-        });
+    otherTypeSelect() {
+        // console.log(this.otherbettleType);
+        // console.log(this.otherbettleType[0])
+        // console.log(this.otherbettleType[0].name)
+        // console.log(this.BeetleType);
+        // console.log(this.otherbettleType.length);
+        var otherId ='';
+        var len=this.otherbettleType.length;
+        for(var n=0;n<len;n++){
+            // console.log("看这里");
+            // console.log(this.otherbettleType[n]);
+            // console.log(this.otherbettleType[n].name);
+            if(this.otherbettleType[n].name=="无"){
+                otherId=this.otherbettleType[n].id;
+            }
+        }
+    
+        if(otherId==this.BeetleType){
+            this.canInput = true;
+        }else {
+            this.canInput = false;
+        }
+
+        
     }
 
     async test() {
@@ -729,25 +770,7 @@ export class TrapPage {
         });
     }
 
-    constructor(public navCtrl: NavController,
-                public qrScanner: QRScanner,
-                private base: Base,
-                private alertCtrl: AlertController,
-                private geolocation: Geolocation,
-                private changeDetectorRef: ChangeDetectorRef,
-                private httpClient: HttpClient,
-                private camera: Camera,
-                private fileTransfer: FileTransfer,
-                public loadingCtrl: LoadingController,
-                private file: File,
-                public platform: Platform,
-                public events: Events,
-                public network: Network,
-                public toast: ToastController) {
-        console.log('constructor:');
-        this.checkNetWork();
-        // this.testCache();
-    }
+
 
     callBack = (params) => {
         return new Promise((resolve, reject) => {

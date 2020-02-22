@@ -53,28 +53,28 @@
                 </ion-item>
             </div>
             <ion-item id="songmo">
-                <ion-label>松墨天牛:</ion-label>
+                <ion-label>松墨天牛(只):</ion-label>
                 <ion-input type="number" pattern="[0-9]*" [(ngModel)]="newbettle"></ion-input>
             </ion-item>
-            <ion-item id="qita">
-                <ion-label>其他天牛:</ion-label>
-                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle"></ion-input>
-            </ion-item>
             <ion-item id="type">
-                <ion-label>类型:</ion-label>
-                <ion-select [(ngModel)]="BeetleType" placeholder="请选择默认" cancelText="取消" okText="确定">
+                <ion-label>其它天牛类型:</ion-label>
+                <ion-select [(ngModel)]="BeetleType" (ionChange)="otherTypeSelect()" placeholder="请选择" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of otherbettleType" value="{{user.id}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
+            <ion-item id="qita">
+                <ion-label>其它天牛(只):</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="otherbettle" [disabled]="canInput"></ion-input>
+            </ion-item>
             <ion-item id="injectType">
                 <ion-label>药剂类型:</ion-label>
-                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择默认" cancelText="取消" okText="确定">
+                <ion-select [(ngModel)]="injectTypeValue" placeholder="请选择" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of injectType">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item id="workcontent">
                 <ion-label>工作内容:</ion-label>
-                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择默认" cancelText="取消" okText="确定">
+                <ion-select [(ngModel)]="WorkContentValue" placeholder="请选择" cancelText="取消" okText="确定">
                     <ion-option *ngFor="let user of workContent" value="{{user.fvalue}}">{{user.name}}</ion-option>
                 </ion-select>
             </ion-item>
