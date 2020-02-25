@@ -918,11 +918,11 @@ export class NewMedicinePage {
         //     this.workContentValue = "0";
         // }
 
-        var r = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
-        var flag1=r.test(this.medicinenumber.toString())
-        var flag2=r.test(this.controlarea.toString())
-        console.log(flag1);
-        console.log(flag2);
+        // var r = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
+        // var flag1=r.test(this.medicinenumber.toString())
+        // var flag2=r.test(this.controlarea.toString())
+        // console.log(flag1);
+        // console.log(flag2);
 
         if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
