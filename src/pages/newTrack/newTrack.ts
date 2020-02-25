@@ -1286,12 +1286,8 @@ export class TrackPage {
             this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => {
             });
         } else {
-                if(!flag1 || !flag2){
-                    this.base.showAlert("提示", "线路名称及工作内容，只可填写汉字、英文、数字和符号“-”、“_”,和“.”", () => {
-                    });
-                }
-                if(Number(this.lateIntravl) < 0 || Number(this.lateIntravl) == 0){
-                    this.base.showAlert("提示", "时间间隔须大于0", () => {
+                if(!flag1 || !flag2 || Number(this.lateIntravl) < 0 || Number(this.lateIntravl) == 0){
+                    this.base.showAlert("提示", "线路名称及工作内容，只可填写汉字、英文、数字和符号“-”、“_”,和“.”。延时设置须填写大于0的数。", () => {
                     });
                 }
                 else{

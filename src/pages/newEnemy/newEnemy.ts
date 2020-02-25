@@ -946,7 +946,7 @@ export class EnemyPage {
         var r = /^([1-9]\d*|[0]{1,1})$/;
         var flag=r.test(this.releaseNum);
         console.log(flag);
-        if (flag || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+        if (!flag || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 

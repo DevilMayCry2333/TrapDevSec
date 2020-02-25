@@ -939,8 +939,16 @@ export class DryPage {
         //let num1 = 0;
         console.log(this.injectNum);
 
-        var r1 = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
-        var flag1=r1.test(this.chestDiameter.toString())
+        //var r1 = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
+        var r1=Math.sign(this.chestDiameter);
+        var flag1= true;
+        console.log(r1);
+        if(r1==1 ||r1==0){
+             flag1=true;
+        }
+        else{
+             flag1=false;
+        }
         console.log(flag1);
         var r2 = /^([1-9]\d*|[0]{1,1})$/;
         var flag2=r2.test(this.injectNum);
@@ -972,7 +980,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (flag1 || flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || this.chestDiameter < 0 || this.chestDiameter == NaN || !this.chestDiameter) {
+        if (!flag1 || !flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || this.chestDiameter < 0 || this.chestDiameter == NaN || !this.chestDiameter) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 

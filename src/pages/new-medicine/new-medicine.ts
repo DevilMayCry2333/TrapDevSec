@@ -924,7 +924,7 @@ export class NewMedicinePage {
         console.log(flag1);
         console.log(flag2);
 
-        if (flag1 || flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
+        if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 
