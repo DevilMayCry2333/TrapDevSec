@@ -20,13 +20,14 @@ import {Events} from 'ionic-angular';
     templateUrl: 'newTrack.html'
 })
 export class TrackPage {
-    longtitude: string;
-    latitude: string;
-    altitude: string;
-    accuracy: string;
-    // longtitude = "1.1234567";
-    // latitude = "1.1234567";
-    // altitude = "1.1234567";
+    // longtitude: string;
+    // latitude: string;
+    // altitude: string;
+    // accuracy: string;
+    longtitude = "1.1234567";
+    latitude = "1.1234567";
+    altitude = "1.1234567";
+    accuracy= "1.1234567";
 
     longtitudeData: Array<string>;
     latitudeData: Array<string>;
@@ -782,7 +783,7 @@ export class TrackPage {
         });
         //this.canSubmit = true;
         if (this.isStopRecord == false || this.endRecordIsClick == false || this.startRecordIsClick == false) {
-            this.base.showAlert("提示", "你还没有完成一个录制循环", () => {
+            this.base.showAlert("提示", "你还没有完成一个录制循环!", () => {
             });
             this.canSubmit = false;
         } else {
@@ -804,8 +805,8 @@ export class TrackPage {
             // }
 
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
-                // this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", () => { });
-                // this.canSubmit = false;
+                this.base.showAlert("提示", "定位信息不准确！", () => { });
+                this.canSubmit = false;
             } else {
 
                 // var options: string = "deviceId: " + this.id +
@@ -822,11 +823,11 @@ export class TrackPage {
                 //     current: "1", recordTime: JSON.stringify(this.recordTime), myDate: new Date()
                 // };
                 // this.base.logger(JSON.stringify(options), "newTrackPar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
+                //if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.lineName || !this.workContent || !this.lateIntravl) {
                     // this.base.showAlert("提示", "定位信息不准或者是数据没有填完整", () => { });
                     // this.canSubmit = false;
                     // return;
-                }
+                //}
                 console.log(this.photosum);
                 if (this.photosum <= 0) {
                     let observer = await new Promise((resolve, reject) => {
@@ -1272,101 +1273,120 @@ export class TrackPage {
     }
 
     startRecord() {
-        if (!this.lateIntravl) {
+        console.log(this.lineName);
+        console.log(this.workContent);
+        
+        var r = /^([\w\u4E00-\u9FA5_\-.]+)+$/;  //中英文、数字和符号“.”、“-”、“_”、“()”、“（）”
+        var flag1=r.test(this.lineName);
+        var flag2=r.test(this.workContent);
+        console.log(flag1);
+        console.log(flag2);
+        
+        if (!this.lateIntravl || !this.workContent || !this.lineName ||this.lateIntravl == 'NaN') {
             this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => {
             });
         } else {
-            this.lineNameDis = true;
-            this.startRecordIsClick = true;
-            this.base.showAlert("提示", "正在录制中，请开始施工!", () => {
-            });
-            //此处整合进submit
-            // this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
-            //     {
-            //         headers: { token: localStorage['token'] }, params: {
-            //             linename: this.lineName,
-            //         }
-            //     }).subscribe(res => {
-            //         console.log(res);
-            //     })
-
-            this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
-            console.log(this.recordTime.startTime);
-
-            let options = {
-                enableHighAccuracy: true,
-                timeout: 99999999,
-                maximumAge: 0
-            };
-            let that = this
-            let watch = this.geolocation.watchPosition(options);
-            let longtitudeData: Array<string> = [];
-            let latitudeData: Array<string> = [];
-            let altitudeData: Array<string> = [];
-            let accuracyData: Array<string> = [];
-
-            this.myIntravl = setInterval(() => {
-                // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
-                // this.location_ready = true;
-                longtitudeData.push(this.longtitude);
-                latitudeData.push(this.latitude);
-                altitudeData.push(this.altitude);
-                accuracyData.push(this.accuracy);
-                this.longtitudeData = longtitudeData;
-                this.latitudeData = latitudeData;
-                this.altitudeData = altitudeData;
-                this.accuracyData = accuracyData;
-                console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
-            }, Number(this.lateIntravl) * 1000);
-
-            this.subscription = watch.subscribe((data) => {
-                // data can be a set of coordinates, or an error (if an error occurred).
-                if (data['coords']) {
-                    // this.changeDetectorRef.detectChanges();
-                    // setTimeout(() => {
-                    this.latitude = String(data.coords.latitude);
-                    sessionStorage['latitude'] = String(data.coords.latitude);
-                    this.longtitude = String(data.coords.longitude);
-                    sessionStorage['longitude'] = String(data.coords.longitude);
-                    this.altitude = String(data.coords.altitude);
-                    sessionStorage['altitude'] = String(data.coords.altitude);
-
-                    this.accuracy = String(data.coords.accuracy);
-
-                    // 不是可以在这里直接判断海拔是不是null吗。。。。
-                    if (data.coords.altitude == null) {
-                        this.altitude = '-10000';
-                        sessionStorage['altitude'] = '-10000';
-                        //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-
-                    }
-
-                    // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
-                    // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
-                    // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
-                    // document.getElementById('sumbit_button').removeAttribute('disabled')
-                    that.changeDetectorRef.detectChanges()
-                    // },5);
-                    // if(this.altitude==null){
-                    //   this.location_ready = false;
-                    //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});
-                    // }
+                if(!flag1 || !flag2){
+                    this.base.showAlert("提示", "线路名称及工作内容，只可填写汉字、英文、数字和符号“-”、“_”,和“.”", () => {
+                    });
                 }
-                // else{
-                //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
-                // }
-            }, res => {
-                // setTimeout(() => {
-                //    this.base.showAlert('提示','wu',()=>{});
-                this.location_ready = false;
-                that.changeDetectorRef.detectChanges()
+                if(Number(this.lateIntravl) < 0 || Number(this.lateIntravl) == 0){
+                    this.base.showAlert("提示", "时间间隔须大于0", () => {
+                    });
+                }
+                else{
+                    this.lineNameDis = true;
+                    this.startRecordIsClick = true;
+                    this.base.showAlert("提示", "正在录制中，请开始施工!", () => {
+                    });
+                    //此处整合进submit
+                    // this.httpClient.post(this.base.BASE_URL + 'app/addLineName', {},
+                    //     {
+                    //         headers: { token: localStorage['token'] }, params: {
+                    //             linename: this.lineName,
+                    //         }
+                    //     }).subscribe(res => {
+                    //         console.log(res);
+                    //     })
 
-                // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
-                // },5);
+                    this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                    console.log(this.recordTime.startTime);
 
-                // alert();
-            });
-        }
+                    let options = {
+                        enableHighAccuracy: true,
+                        timeout: 99999999,
+                        maximumAge: 0
+                    };
+                    let that = this
+                    let watch = this.geolocation.watchPosition(options);
+                    let longtitudeData: Array<string> = [];
+                    let latitudeData: Array<string> = [];
+                    let altitudeData: Array<string> = [];
+                    let accuracyData: Array<string> = [];
+
+                    this.myIntravl = setInterval(() => {
+                        // this.base.showAlert("注意", this.longtitude + "," + this.latitude + "," + this.altitude,()=>{ });
+                        // this.location_ready = true;
+                        longtitudeData.push(this.longtitude);
+                        latitudeData.push(this.latitude);
+                        altitudeData.push(this.altitude);
+                        accuracyData.push(this.accuracy);
+                        this.longtitudeData = longtitudeData;
+                        this.latitudeData = latitudeData;
+                        this.altitudeData = altitudeData;
+                        this.accuracyData = accuracyData;
+                        console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
+                    }, Number(this.lateIntravl) * 1000);
+
+                    this.subscription = watch.subscribe((data) => {
+                        // data can be a set of coordinates, or an error (if an error occurred).
+                        if (data['coords']) {
+                            // this.changeDetectorRef.detectChanges();
+                            // setTimeout(() => {
+                            this.latitude = String(data.coords.latitude);
+                            sessionStorage['latitude'] = String(data.coords.latitude);
+                            this.longtitude = String(data.coords.longitude);
+                            sessionStorage['longitude'] = String(data.coords.longitude);
+                            this.altitude = String(data.coords.altitude);
+                            sessionStorage['altitude'] = String(data.coords.altitude);
+
+                            this.accuracy = String(data.coords.accuracy);
+
+                            // 不是可以在这里直接判断海拔是不是null吗。。。。
+                            if (data.coords.altitude == null) {
+                                this.altitude = '-10000';
+                                sessionStorage['altitude'] = '-10000';
+                                //this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+
+                            }
+
+                            // document.getElementById('latitude').innerText="纬度:" + sessionStorage['latitude']
+                            // document.getElementById('longitude').innerText="经度:" + sessionStorage['longitude']
+                            // document.getElementById('altitude').innerText="海拔:" + sessionStorage['altitude']
+                            // document.getElementById('sumbit_button').removeAttribute('disabled')
+                            that.changeDetectorRef.detectChanges()
+                            // },5);
+                            // if(this.altitude==null){
+                            //   this.location_ready = false;
+                            //   this.base.showAlert('提示','海拔获取失败，请重新获取',()=>{});
+                            // }
+                        }
+                        // else{
+                        //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
+                        // }
+                    }, res => {
+                        // setTimeout(() => {
+                        //    this.base.showAlert('提示','wu',()=>{});
+                        this.location_ready = false;
+                        that.changeDetectorRef.detectChanges()
+
+                        // 这个是在数据更新后。。。强制刷一下页面。。。放在数据变更后才有用。。。
+                        // },5);
+
+                        // alert();
+                    });
+                }
+            }
     }
 
     stopRecord() {

@@ -53,12 +53,12 @@
             </div>
             <ion-item id="meter">
                 <ion-label>桩径(cm):</ion-label>
-                <ion-input [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="diameter" (ionChange)="diameterInput()"></ion-input>
             </ion-item>
 
             <ion-item id="height">
                 <ion-label>树高(m):</ion-label>
-                <ion-input [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="height" (ionChange)="heightInput()"></ion-input>
             </ion-item>
 
             <ion-item id="volume">

@@ -25,14 +25,14 @@ import {ToastController} from 'ionic-angular';
 export class TrapPage {
     deviceId: string 
     deviceSerial: string
-    // longtitude = "1.2"
-    // latitude = "1.2"
-    // altitude = "1.2"
-    // accuracy = "1.2"
-    longtitude: string
-    latitude: string
-    altitude: string
-    accuracy: string
+    longtitude = "1.2"
+    latitude = "1.2"
+    altitude = "1.2"
+    accuracy = "1.2"
+    // longtitude: string
+    // latitude: string
+    // altitude: string
+    // accuracy: string
     BeetleType: string
     injectTypeValue: string
     WorkContentValue: string
@@ -49,6 +49,8 @@ export class TrapPage {
     remarks = ''
 
     newbettle: string
+    otherbettle: string
+    // otherbettle="0"
     otherbettleType: any[]
     injectType: any[]
     workContent: any[]
@@ -59,8 +61,7 @@ export class TrapPage {
     subscription: Subscription;
     // 是否定位成功
     location_ready = false;
-    otherbettle: string
-    // otherbettle="0"
+
 
     users: any[] = [
         {
@@ -882,41 +883,45 @@ export class TrapPage {
 
     submit() {
         this.isDisabled = true;
-
         this.have_submit = true;
         console.log(this.injectTypeValue);
         console.log(this.WorkContentValue);
         console.log(this.BeetleType);
-        let num1 = 0;
-        if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
-            // this.base.showAlert('提示', '请输入数字', () => { });
-            this.newbettle = "";
-        }
-        if (!this.newbettle) {
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num1 = parseInt(this.newbettle);
-        this.newbettle = '' + num1;
-        if (this.newbettle == 'NaN') {
-            this.newbettle = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
+        //let num1 = 0;
+        var r = /^(0|[1-9]\d*)$/;
+        var flag1=r.test(this.newbettle);
+        var flag2=r.test(this.otherbettle );
+        console.log(flag1);
+        console.log(flag2);
+        // if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        //     this.newbettle = "";
+        // }
+        // if (!this.newbettle) {
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // num1 = parseInt(this.newbettle);
+        // this.newbettle = '' + num1;
+        // if (this.newbettle == 'NaN') {
+        //     this.newbettle = "";
+        //      this.base.showAlert('提示', '请输入数字', () => { });
+        // }
 
-        let num2 = 0;
-        if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
-            this.otherbettle = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        if (!this.otherbettle) {
-            this.otherbettle = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num2 = parseInt(this.otherbettle);
-        this.otherbettle = '' + num2;
-        if (this.otherbettle == 'NaN') {
-            this.otherbettle = "";
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
+        // let num2 = 0;
+        // if (parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN) {
+        //     this.otherbettle = "";
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // if (!this.otherbettle) {
+        //     this.otherbettle = "";
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // num2 = parseInt(this.otherbettle);
+        // this.otherbettle = '' + num2;
+        // if (this.otherbettle == 'NaN') {
+        //     this.otherbettle = "";
+        //     this.base.showAlert('提示', '请输入数字', () => { });
+        // }
 
 
         const beizhu = this.remarks.replace(/\s/g, '');
@@ -931,8 +936,8 @@ export class TrapPage {
             console.log(this.injectTypeValue);
             console.log(this.WorkContentValue);
             console.log(this.BeetleType);
-            if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+            if (flag1 || flag2 || !this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+                this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                 });
             } else {
                 if (this.imageData != null) {

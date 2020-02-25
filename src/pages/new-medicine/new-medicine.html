@@ -69,13 +69,13 @@
             <!-- 药剂数量 -->
             <ion-item id="medicinenumber">
                 <ion-label>药剂质量(kg)：</ion-label>
-                <ion-input [(ngModel)]="medicinenumber"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="medicinenumber"></ion-input>
             </ion-item>
 
             <!-- 防治面积 -->
             <ion-item id="controlarea">
                 <ion-label>防治面积(m²):</ion-label>
-                <ion-input [(ngModel)]="controlarea"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="controlarea"></ion-input>
             </ion-item>
 
 

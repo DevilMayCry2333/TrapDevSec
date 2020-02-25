@@ -24,22 +24,22 @@ import {Events} from 'ionic-angular';
 export class DeadtreePage {
     deviceId: string;
     deviceSerial: string;
-    longtitude: string;
-    latitude: string;
-    altitude: string;
-    accuracy: string;
+    // longtitude: string;
+    // latitude: string;
+    // altitude: string;
+    // accuracy: string;
     batch = "1";
     currentImg: any;
     failI = -1;
     curFail: boolean;
     currentNum = 0;
-    // longtitude="1.1234567";
-    // latitude="1.1234567";
-    // altitude="1.1234567";
-    // accuracy="1.1234567";
+    longtitude="1.1234567";
+    latitude="1.1234567";
+    altitude="1.1234567";
+    accuracy="1.1234567";
     hasClear = false;
-    diameter = 0;
-    height = 0;
+    diameter:number;
+    height:number;
     volume = 0;
     observers = [];
     picture = [];
@@ -1103,26 +1103,21 @@ export class DeadtreePage {
     }
 
     async submit() {
+        this.canSubmit = true;
         const loader = this.loadingCtrl.create({
             content: "缓存数据正在提交，请勿退出",
         });
         // this.have_submit = true;
-        this.canSubmit = true;
-        let num1 = 0;
-        if (this.volume < 0 || this.volume == NaN) {
-            this.diameter = 0;
-            this.height = 0;
-            this.volume = 0;
+        
+        // let num1 = 0;
+        // if (this.volume < 0 || this.volume == NaN || !this.volume) {
+        //     // this.diameter = 0;
+        //     // this.height = 0;
+        //     // this.volume = 0;
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
 
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        if (!this.volume) {
-            this.diameter = 0;
-            this.height = 0;
-            this.volume = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num1 = this.volume;
+        // num1 = this.volume;
 
         // if (!this.diameter){
         //     this.diameter = 0;
@@ -1136,8 +1131,9 @@ export class DeadtreePage {
         // if (!this.killMethodsValue){
         //     this.killMethodsValue = "0";
         // }
+
         if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN || !this.volume || this.volume < 0 || this.volume == NaN) {
-            this.base.showAlert("提示", "数量输入为空或者不合法！", () => {
+            this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
             this.canSubmit = false;
         } else {
@@ -1148,7 +1144,7 @@ export class DeadtreePage {
 
             // this.base.logger(JSON.stringify(options), "NoImg_newDeadTreePar.txt");
             if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN || !this.volume || this.volume < 0 || this.volume == NaN) {
-                this.base.showAlert("提示", "数量输入为空或者不合法！", () => {
+                this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                 });
                 this.canSubmit = false;
                 return;

@@ -62,7 +62,7 @@
             </ion-item>
             <ion-item id="chestDiameter">
                 <ion-label>胸径(cm):</ion-label>
-                <ion-input [(ngModel)]="chestDiameter"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="chestDiameter"></ion-input>
             </ion-item>
             <ion-item id="injectName">
                 <ion-label>注剂类型：</ion-label>

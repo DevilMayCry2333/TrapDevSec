@@ -30,19 +30,19 @@ import {Events} from 'ionic-angular';
 export class NewMedicinePage {
     deviceId: string
     deviceSerial: string
-    // longtitude = "1.789456"
-    // latitude = "2.154548"
-    // altitude = "1.564465"
-    // accuracy = "0.999999"
-    longtitude:string
-    latitude:string
-    altitude:string
-    accuracy:string
+    longtitude = "1.789456"
+    latitude = "2.154548"
+    altitude = "1.564465"
+    accuracy = "0.999999"
+    // longtitude:string
+    // latitude:string
+    // altitude:string
+    // accuracy:string
     // woodStatusValue:string
     medicinename: any[]
     medicinenameValue: string     //
-    medicinenumber = 0;
-    controlarea = 0;
+    medicinenumber:number;
+    controlarea:number;
     medicineworkContent: any[]
     workContentValue: string      //
     have_submit: boolean
@@ -869,39 +869,39 @@ export class NewMedicinePage {
 
     submit() {
         this.have_submit = true;
-        let num1 = 0;
-        console.log(this.medicinenumber);
-        // if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
-        if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
-            console.log("medicinenumber不合法");
-            this.medicinenumber = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        if (!this.medicinenumber) {
-            console.log("medicinenumber不合法");
-            this.medicinenumber = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num1 = this.medicinenumber;
-        this.medicinenumber = num1;
+        // let num1 = 0;
+        // console.log(this.medicinenumber);
+        // // if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
+        // if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
+        //     console.log("medicinenumber不合法");
+        //     this.medicinenumber = 0;
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // if (!this.medicinenumber) {
+        //     console.log("medicinenumber不合法");
+        //     this.medicinenumber = 0;
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // num1 = this.medicinenumber;
+        // this.medicinenumber = num1;
         // if (this.medicinenumber == 'NaN') {
         //     console.log("medicinenumber不合法");
         //     this.medicinenumber = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
-        let num2 = 0;
-        if (this.controlarea < 0 || this.controlarea == NaN) {
-            console.log("controlarea不合法");
-            this.controlarea = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        if (!this.controlarea) {
-            console.log("controlarea不合法");
-            this.controlarea = 0;
-            // this.base.showAlert('提示', '请输入数字', () => { });
-        }
-        num2 = this.controlarea;
-        this.controlarea = num2;
+        // let num2 = 0;
+        // if (this.controlarea < 0 || this.controlarea == NaN) {
+        //     console.log("controlarea不合法");
+        //     this.controlarea = 0;
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // if (!this.controlarea) {
+        //     console.log("controlarea不合法");
+        //     this.controlarea = 0;
+        //     // this.base.showAlert('提示', '请输入数字', () => { });
+        // }
+        // num2 = this.controlarea;
+        // this.controlarea = num2;
         // if (this.controlarea == 'NaN') {
         //     console.log("controlarea不合法");
         //     this.controlarea = "";
@@ -917,8 +917,15 @@ export class NewMedicinePage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
-            this.base.showAlert("提示", "数量输入为空或者不合法", () => {
+
+        var r = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
+        var flag1=r.test(this.medicinenumber.toString())
+        var flag2=r.test(this.controlarea.toString())
+        console.log(flag1);
+        console.log(flag2);
+
+        if (flag1 || flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
+            this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 
         } else {
