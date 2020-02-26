@@ -4,6 +4,8 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 
 import {AboutPage} from '../pages/about/about';
+import {AboutPage2} from '../pages/about2/about';
+
 import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -79,7 +81,7 @@ class MyErrorHandler implements ErrorHandler {
         TrackQueryPage,
         NewMedicinePage,
         MedicineQueryPage,
-
+        AboutPage2,
         ScanPage,
         NewHomePage,
         DryPage,
@@ -132,6 +134,7 @@ class MyErrorHandler implements ErrorHandler {
         switchProjectPage,
         TrapPage,
         LoginPage,
+        AboutPage2,
         // DeviceBeetleFillPage,
         // DeviceForestFillPage,
         LocatePage,

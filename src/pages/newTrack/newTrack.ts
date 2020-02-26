@@ -9,7 +9,7 @@ import {Geolocation} from "@ionic-native/geolocation";
 import {ChangeDetectorRef} from '@angular/core';
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
-import {AboutPage} from '../about/about';
+import {AboutPage2} from '../about2/about';
 import {Base64} from '@ionic-native/base64';
 import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
@@ -252,7 +252,7 @@ export class TrackPage {
     }
 
     NavToMap() {
-        this.navCtrl.push(AboutPage, {
+        this.navCtrl.push(AboutPage2, {
             project: '6'
         });
     }
