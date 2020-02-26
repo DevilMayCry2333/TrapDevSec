@@ -45,7 +45,7 @@ export class DryPage {
     injectNum: string
     have_submit: boolean
     workContent: any[]
-    remarks: string
+    remarks=""
     location_ready: boolean
     observers = [];
     indexList = [];
