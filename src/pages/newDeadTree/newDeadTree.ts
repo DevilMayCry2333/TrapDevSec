@@ -76,6 +76,8 @@ export class DeadtreePage {
     subscription: Subscription
     threePhotos = false;
     canSubmit = true;
+    flag1=true;
+    flag2=true;
     users: any[] = [
         {
             id: 1,
@@ -117,6 +119,35 @@ export class DeadtreePage {
         // this.testCache();
     }
 
+    diameterInput() {
+        // console.log(this.diameter);
+        //限制桩径和树高防止数据过大，代入公式计算会超出范围
+        if(this.diameter>100000){
+            this.flag1=false;
+            // this.base.showAlert("提示", "桩径输入太大了!", () => {
+            // })
+        }else{
+            this.flag1=true;
+            var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
+            this.volume = tmp;
+            // console.log(this.volume.toString());
+        }
+
+    }
+
+    heightInput() {
+        // console.log(this.height);
+        if(this.height>100000){
+            this.flag2=false;
+            // this.base.showAlert("提示", "树高输入太大了!", () => {
+            // })
+        }else{
+            this.flag2=true;
+            var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
+            this.volume = tmp;
+        }
+
+    }
     static checkNetworkState: boolean = false;
 
     checkNetwork() {
@@ -985,18 +1016,7 @@ export class DeadtreePage {
         });
     }
 
-    diameterInput() {
-        // console.log(this.diameter);
-        var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
-        this.volume = tmp;
-        // console.log(this.volume.toString());
-    }
 
-    heightInput() {
-        // console.log(this.height);
-        var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
-        this.volume = tmp;
-    }
 
 
     callBack = (params) => {
@@ -1132,8 +1152,8 @@ export class DeadtreePage {
         //     this.killMethodsValue = "0";
         // }
 
-        if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.killMethodsValue || !this.height || this.height < 0 || this.height == NaN || !this.diameter || this.diameter < 0 || this.diameter == NaN || !this.volume || this.volume < 0 || this.volume == NaN) {
-            this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
+        if (!this.flag1 ||!this.flag2 ) {
+            this.base.showAlert("提示", "桩径或树高太大！", () => {
             });
             this.canSubmit = false;
         } else {
