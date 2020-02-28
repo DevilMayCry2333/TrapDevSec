@@ -802,6 +802,7 @@ export class TrapPage {
                     let watch = this.geolocation.watchPosition(options);
 
                     this.subscription = watch.subscribe((data) => {
+                        console.log("检测到数据:",data);              
                         // data can be a set of coordinates, or an error (if an error occurred).
                         if (data['coords']) {
                             // setTimeout(() => {
