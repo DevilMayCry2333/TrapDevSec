@@ -14,7 +14,7 @@
         <div id="ID">
             <ion-item id="one">
                 <ion-label>设备ID：</ion-label>
-                <ion-input style="font-size: 80%; margin-left:-5%;" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>
+                <ion-input style="font-size: 80%; margin-left:-5%;" disabled="true" placeholder="请点击扫描按钮" [(ngModel)]="deviceId" (ionChange)="deviceIdInput()"></ion-input>
             </ion-item>
             <button id="saomiao" ion-button (click)="scan()">扫码</button>
         </div>
@@ -72,7 +72,7 @@
             </ion-item>
             <ion-item id="number">
                 <ion-label>注剂数量:</ion-label>
-                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"></ion-input>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="injectNum"  placeholder="请输入整数"></ion-input>
             </ion-item>
             <ion-item id="workcontent">
                 <ion-label>工作内容:</ion-label>

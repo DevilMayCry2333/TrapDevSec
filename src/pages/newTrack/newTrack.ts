@@ -1247,20 +1247,20 @@ export class TrackPage {
 
     LateInput() {
         let num1 = 0;
-        if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN) {
+        if (parseInt(this.lateIntravl) < 0 || parseInt(this.lateIntravl) == NaN || '' + parseInt(this.lateIntravl) == 'NaN' || !this.lateIntravl) {
             this.base.showAlert('提示', '请输入数字', () => {
             });
         }
-        if (!this.lateIntravl) {
-            this.base.showAlert('提示', '请输入数字', () => {
-            });
-        }
-        num1 = parseInt(this.lateIntravl);
-        this.lateIntravl = '' + num1;
-        if (this.lateIntravl == 'NaN') {
-            this.base.showAlert('提示', '请输入数字', () => {
-            });
-        }
+        // if (!this.lateIntravl) {
+        //     this.base.showAlert('提示', '请输入数字', () => {
+        //     });
+        // }
+        // num1 = parseInt(this.lateIntravl);
+        // this.lateIntravl = '' + num1;
+        // if (this.lateIntravl == 'NaN') {
+        //     this.base.showAlert('提示', '请输入数字', () => {
+        //     });
+        // }
     }
 
     test() {
@@ -1277,12 +1277,12 @@ export class TrackPage {
         console.log(this.workContent);
         
         var r = /^([\w\u4E00-\u9FA5_\-.]+)+$/;  //中英文、数字和符号“.”、“-”、“_”、“()”、“（）”
-        var flag1=r.test(this.lineName);
-        var flag2=r.test(this.workContent);
+        var flag1=r.test(this.lineName);  //线路名称
+        var flag2=r.test(this.workContent);  //工作内容
         console.log(flag1);
         console.log(flag2);
         
-        if (!this.lateIntravl || !this.workContent || !this.lineName ||this.lateIntravl == 'NaN') {
+        if (!this.lateIntravl ||this.lateIntravl == 'NaN' || !this.workContent || !this.lineName ) {
             this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => {
             });
         } else {
