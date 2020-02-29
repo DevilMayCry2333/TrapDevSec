@@ -41,6 +41,7 @@
     "com-badrit-base64": "^0.2.0",
     "com.lampa.startapp": "^6.1.6",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
+    "cordova-android": "^7.1.4",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.2",
@@ -106,8 +107,8 @@
       "cordova-plugin-network-information": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

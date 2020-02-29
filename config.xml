@@ -121,10 +121,10 @@
     </plugin>
     <plugin name="com-badrit-base64" spec="~0.2.0" />
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
-    <engine name="android" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.12">
         <variable name="ANDROID_SUPPORT_VERSION" value="28.+" />
     </plugin>
     <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="^7.1.4" />
 </widget>
