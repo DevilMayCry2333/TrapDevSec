@@ -120,7 +120,7 @@ export class DeadtreePage {
     }
 
     diameterInput() {
-        // console.log(this.diameter);
+        //  
         //限制桩径和树高防止数据过大，代入公式计算会超出范围
         if(this.diameter>100000){
             this.flag1=false;
@@ -130,13 +130,13 @@ export class DeadtreePage {
             this.flag1=true;
             var tmp: number = 0.714265437 * 0.0001 * Math.pow(this.diameter * 0.7, 1.867010) * Math.pow(this.height, 0.9014632);
             this.volume = tmp;
-            // console.log(this.volume.toString());
+            //  
         }
 
     }
 
     heightInput() {
-        // console.log(this.height);
+        //  
         if(this.height>100000){
             this.flag2=false;
             // this.base.showAlert("提示", "树高输入太大了!", () => {
@@ -175,10 +175,10 @@ export class DeadtreePage {
             if (localStorage["deadCache"]) {
                 (async () => {
                     const tmpStorage = JSON.parse(localStorage["deadCache"]);
-                    // console.log("照片缓存");
-                    // console.log(localStorage["deadPhotoCache1"]);
-                    // console.log(localStorage["deadPhotoCache2"]);
-                    // console.log(localStorage["deadPhotoCache3"]);
+                    //  
+                    //  
+                    //  
+                    //  
 
                     if (localStorage["deadPhotoCache1"]) {
                         this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
@@ -192,16 +192,16 @@ export class DeadtreePage {
 
                     this.i = 0;
                     //i是一条一条的记录
-                    // console.log(tmpStorage);
+                    //  
 
                     // let n = this.awaitF();
-                    // console.log(n);
+                    //  
                     this.preSubmitted = tmpStorage.length;
                     let tmpDeviceList = [];
                     this.indexList = [];
                     let resolved = 0, rejected = 0;
                     this.curTmpSotrage = tmpStorage;
-                    console.log(tmpStorage);
+                     
                     for (let i = 0; i < tmpStorage.length; ++i) {
                         let element = tmpStorage[i];
                         that.curFail = false;
@@ -210,13 +210,13 @@ export class DeadtreePage {
                                 that.j = j;
                                 await this.postAdddeadtree(tmpStorage[i], this.httpClient, this.base, tmpStorage, i, j).then(
                                     res => {
-                                        console.log("成功");
-                                        console.log(res);
+                                         
+                                         
                                         resolved++;
                                     }, msg => {
-                                        console.log("失败");
-                                        console.log(msg);
-                                        console.log(that.curFail);
+                                         
+                                         
+                                         
                                         rejected++;
                                         if (!that.curFail) {
                                             tmpDeviceList.push(tmpStorage[i]);
@@ -224,23 +224,23 @@ export class DeadtreePage {
                                         that.curFail = true;
                                     }
                                 ).catch((error) => {
-                                    console.log(error);
+                                     
                                 });
                             }
                         } else {
                             await this.postAdddeadtreePlus(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                                 res => {
-                                    console.log("成功");
-                                    console.log(res);
+                                     
+                                     
                                     resolved++;
                                 }, msg => {
-                                    console.log("失败");
-                                    console.log(msg);
+                                     
+                                     
                                     rejected++;
                                     tmpDeviceList.push(tmpStorage[i]);
                                 }
                             ).catch((error) => {
-                                console.log(error);
+                                 
                             })
                         }
                         this.curSubmitted = resolved + rejected;
@@ -248,12 +248,12 @@ export class DeadtreePage {
                     this.preSubmitted = resolved + rejected;
                     for (let i = 0; i < tmpDeviceList.length; ++i) {
                         this.indexList.push(tmpDeviceList[i]);
-                        console.log(tmpDeviceList[i]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log(this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('deadCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -319,12 +319,12 @@ export class DeadtreePage {
                     }
                 })
                 .subscribe(res => {
-                    // console.log(JSON.stringify(res));
-                    // console.log(JSON.parse(JSON.stringify(res)).message);
+                    //  
+                    //  
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
-                    // console.log("cacheData");
+                    //  
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
@@ -333,8 +333,8 @@ export class DeadtreePage {
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
-                    // console.log(msg);
-                    // console.log("失败");
+                    //  
+                    //  
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
@@ -372,15 +372,15 @@ export class DeadtreePage {
         for (var i = 0; i < tmpStorage.length; i++) {
             for (var j = 0; j < tmpStorage.length; j++) {
                 ((i: number, j: number) => {
-                    // console.log(tmpStorage[i]);
-                    // console.log(tmpStorage[j]);
+                    //  
+                    //  
                 })
             }
         }
     }
 
     testCache() {
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -409,8 +409,8 @@ export class DeadtreePage {
 
     postAdddeadtree(element, httpClient, base, tmpStorage, i, j) {
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
         let options: FileUploadOptions = {};
         options.fileKey = "image";
         var time = Date.parse(Date());
@@ -435,8 +435,8 @@ export class DeadtreePage {
             curRow: i
         };
         options.headers = {token: localStorage['token']};
-        console.log("options");
-        console.log(options);
+         
+         
         //创建文件对象
         const fileTransfer: FileTransferObject = this.fileTransfer.create();
         var uploadAddress;
@@ -452,7 +452,7 @@ export class DeadtreePage {
             uploadAddress = element.pic3;
             that.currentImg = that.photolib3;
         }
-        console.log(uploadAddress);
+         
         that.picNotExist = false;
 
         this.curTmpSotrage = tmpStorage;
@@ -460,26 +460,26 @@ export class DeadtreePage {
         return new Promise((resolve, reject) => {
             fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
                 .then((res) => {
-                    console.log("文件传输中,当前i:=>" + i);
-                    console.log(this.currentNum);
-                    console.log(tmpStorage.length);
+                     
+                     
+                     
                     // that.picture.push(res.response["imgId"]);
-                    console.log(res);
-                    console.log(JSON.parse(res.response));
-                    console.log(JSON.parse(res.response).isComp);
+                     
+                     
+                     
                     if (JSON.parse(res.response).isComp == true) {
                         this.isComplete = true;
                     } else {
                         this.isComplete = false;
                     }
-                    console.log("传输中isComp" + this.isComplete);
+                     
                     resolve('ok');
                 }, async (msg) => {
-                    console.log("进入msg");
-                    console.log(msg);
+                     
+                     
                     that.picNotExist = true;
                     if (this.j <= 1) {
-                        console.log("数据是", that.curOptions);
+                         
                         await that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -499,24 +499,24 @@ export class DeadtreePage {
                                     curRow: '1'
                                 }
                             }).toPromise().then(res => {
-                            console.log("进入then");
-                            console.log(res);
-                            console.log("===" + that.i);
+                             
+                             
+                             
 
                             if (that.i >= that.curTmpSotrage.length - 1) {
                                 that.isComplete = true;
                             } else {
                                 that.isComplete = false;
                             }
-                            console.log(that.isComplete);
+                             
                             that.subProcessFin = true;
                             resolve('ok');
                             // that.base.showAlert("全部成功了", "", () => { });
-                            // console.log(JSON.stringify(res));
-                            // console.log(JSON.parse(JSON.stringify(res)).message);
+                            //  
+                            //  
                         }, (msg) => {
-                            console.log("进入error");
-                            console.log(msg);
+                             
+                             
                             that.subProcessFin = false;
                             reject('error');
                             // this.base.showAlert('提示', '提交失败', () => { });
@@ -552,18 +552,18 @@ export class DeadtreePage {
                         batch: element.batch
                     }
                 }).toPromise().then(res => {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
+                 
+                 
                 if (that.i >= that.curTmpSotrage.length - 1) {
                     that.isComplete = true;
                 } else {
                     that.isComplete = false;
                 }
-                console.log(that.isComplete);
+                 
                 that.subProcessFin = true;
                 resolve('ok');
             }, (msg) => {
-                console.log(msg);
+                 
                 reject('error');
                 // this.base.showAlert('提示', '提交失败', () => { });
             });
@@ -579,13 +579,13 @@ export class DeadtreePage {
     //以下内容注释掉
     // for ( var i = 0; i < tmpStorage.length; i++) {
     //     await (async (i)=>{
-    //         console.log("外层的i" + i);
+    //          
 
     //         var element = tmpStorage[i];
     //         if (element.hasPic == true) {
     //                     for (var j = 1; j <= element.photoSum; j = j + 1) {
     //                          await (async (i,j)=>{
-    //                             console.log("asynci" + i);
+    //                              
     //                             // (async (j)=>{
     //                             let options: FileUploadOptions = {};
     //                             options.fileKey = "image";
@@ -601,16 +601,16 @@ export class DeadtreePage {
     //                                 allLength: tmpStorage.length, curRow: i
     //                             };
     //                             options.headers = { token: localStorage['token'] };
-    //                             // console.log("options");
-    //                             // console.log(options);
+    //                             //  
+    //                             //  
     //                             const fileTransfer: FileTransferObject = that.fileTransfer.create();
-    //                             // console.log("===当前照片====");
-    //                             // console.log(that.currentImg);
+    //                             //  
+    //                             //  
 
-    //                             // console.log(i);
+    //                             //  
 
-    //                             // console.log(that.currentImg[that.i].img);
-    //                             // console.log(that.currentImg[i].img);
+    //                             //  
+    //                             //  
     //                             var uploadAddress;
     //                             if (j == 1) {
     //                                 uploadAddress = element.pic1;
@@ -622,7 +622,7 @@ export class DeadtreePage {
     //                                 uploadAddress = element.pic3;
     //                                 that.currentImg = that.photolib3;
     //                             }
-    //                             console.log(uploadAddress);
+    //                              
     //                              that.picNotExist = false;
     //                              this.j = j;
     //                              this.i = i;
@@ -631,26 +631,26 @@ export class DeadtreePage {
     //                             let observer = await new Promise((resolve, reject) => {
     //                                 fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddDeadtreePhoto', options)
     //                                     .then((res) => {
-    //                                         console.log("文件传输中,当前i:=>" + i);
-    //                                         console.log(this.currentNum);
-    //                                         console.log(tmpStorage.length);
+    //                                          
+    //                                          
+    //                                          
     //                                         // that.picture.push(res.response["imgId"]);
-    //                                         console.log(res);
-    //                                         console.log(JSON.parse(res.response));
-    //                                         console.log(JSON.parse(res.response).isComp);
+    //                                          
+    //                                          
+    //                                          
     //                                         if (JSON.parse(res.response).isComp == true) {
     //                                             this.isComplete = true;
     //                                         } else {
     //                                             this.isComplete = false;
     //                                         }
-    //                                         console.log("传输中isComp" + this.isComplete);
+    //                                          
     //                                         resolve('ok');
     //                                     },async (msg)=>{
-    //                                         console.log("进入msg");
-    //                                             console.log(msg);
+    //                                          
+    //                                              
     //                                             that.picNotExist = true;
     //                                             if (this.j <= 1) {
-    //                                                 console.log("数据是", that.curOptions);
+    //                                                  
     //                                                     await that.httpClient.post(that.base.BASE_URL + 'app/AddDeadtreePhoto', {},
     //                                                         {
     //                                                             headers: { token: localStorage['token'] }, params: {
@@ -660,22 +660,22 @@ export class DeadtreePage {
     //                                                                 current: '1', allLength: '1', curRow: '1'
     //                                                             }
     //                                                         }).toPromise().then(res => {
-    //                                                             console.log("进入then");
-    //                                                             console.log(res);
-    //                                                             console.log("==="+ that.i);
+    //                                                              
+    //                                                              
+    //                                                              
 
     //                                                             if (that.i >= that.curTmpSotrage.length - 1) {
     //                                                                 that.isComplete = true;
     //                                                             }
-    //                                                             console.log(that.isComplete);
+    //                                                              
     //                                                             that.subProcessFin = true;
     //                                                             resolve('ok');
     //                                                             // that.base.showAlert("全部成功了", "", () => { });
-    //                                                             // console.log(JSON.stringify(res));
-    //                                                             // console.log(JSON.parse(JSON.stringify(res)).message);
+    //                                                             //  
+    //                                                             //  
     //                                                         }, (msg) => {
-    //                                                             console.log("进入error");
-    //                                                             console.log(msg);
+    //                                                              
+    //                                                              
     //                                                             that.subProcessFin = false;
     //                                                             reject('error');
     //                                                             // this.base.showAlert('提示', '提交失败', () => { });
@@ -689,15 +689,15 @@ export class DeadtreePage {
     //                                             reject('error');
     //                                     })
     //                             }).catch((err) => {
-    //                                 console.log(err);
+    //                                  
     //                             })
-    //                             console.log("await" + j);
+    //                              
     //                             //  if (!that.picNotExist)
     //                                 this.observers.push(observer);
-    //                              console.log("照片是否存在");
-    //                             console.log(that.picNotExist);
+    //                               
+    //                              
 
-    //                                 // console.log(that.observers);
+    //                                 //  
     //                         })(i,j)
     //                             // })(j)
     //                     }
@@ -718,7 +718,7 @@ export class DeadtreePage {
     //                         reject('error');
     //                     });
     //             }).catch((reason)=>{
-    //                 console.log(reason);
+    //                  
     //             })
     //             that.observers.push(obsernoPic);
     //         }
@@ -728,20 +728,20 @@ export class DeadtreePage {
 
 
     //     Promise.all(this.observers).then((resolve) => {
-    //         console.log(resolve);
-    //         console.log(that.observers);
+    //          
+    //          
     //         loader.dismiss();
-    //         console.log("结束了嘛", this.isComplete);
+    //          
     //         if (that.isComplete) {
-    //             console.log("*****清除缓存了******");
+    //              
     //             localStorage.removeItem('deadCache');
     //         }
     //     }, (reject) => {
-    //         console.log(reject);
+    //          
     //         loader.dismiss();
     //     }).catch((reason) => {
     //         loader.dismiss();
-    //         console.log(reason);
+    //          
     //     })
 
 
@@ -793,12 +793,12 @@ export class DeadtreePage {
                 buttons: [
                     {
                         text: '确认', handler: async () => {
-                            console.log("确认");
+                             
                             var tmpStorage = JSON.parse(localStorage["deadCache"]);
-                            // console.log("照片缓存");
-                            // console.log(localStorage["deadPhotoCache1"]);
-                            // console.log(localStorage["deadPhotoCache2"]);
-                            // console.log(localStorage["deadPhotoCache3"]);
+                            //  
+                            //  
+                            //  
+                            //  
 
                             if (localStorage["deadPhotoCache1"]) {
                                 this.photolib1 = JSON.parse(localStorage["deadPhotoCache1"]);
@@ -812,14 +812,14 @@ export class DeadtreePage {
 
                             this.i = 0;
                             //i是一条一条的记录
-                            // console.log(tmpStorage);
+                            //  
 
                             // let n = this.awaitF();
-                            // console.log(n);
+                            //  
 
                             let tmpDeviceList = [];
                             this.curTmpSotrage = tmpStorage;
-                            console.log(tmpStorage);
+                             
                             const loader = this.loadingCtrl.create({
                                 content: "缓存数据正在提交，请勿退出",
                             });
@@ -832,44 +832,44 @@ export class DeadtreePage {
                                         that.j = j;
                                         await this.postAdddeadtree(tmpStorage[i], this.httpClient, this.base, tmpStorage, i, j).then(
                                             res => {
-                                                console.log("成功");
-                                                console.log(res);
+                                                 
+                                                 
                                             }, msg => {
-                                                console.log("失败");
-                                                console.log(msg);
-                                                console.log(that.curFail);
+                                                 
+                                                 
+                                                 
                                                 if (!that.curFail) {
                                                     tmpDeviceList.push(tmpStorage[i]);
                                                 }
                                                 that.curFail = true;
                                             }
                                         ).catch((error) => {
-                                            console.log(error);
+                                             
                                         })
                                     }
                                 } else {
                                     await this.postAdddeadtreePlus(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                                         res => {
-                                            console.log("成功");
-                                            console.log(res);
+                                             
+                                             
                                         }, msg => {
-                                            console.log("失败");
-                                            console.log(msg);
+                                             
+                                             
                                             tmpDeviceList.push(tmpStorage[i]);
                                         }
                                     ).catch((error) => {
-                                        console.log(error);
+                                         
                                     })
                                 }
                             }
                             for (let i = 0; i < tmpDeviceList.length; ++i) {
                                 this.indexList.push(tmpDeviceList[i]);
-                                console.log(tmpDeviceList[i]);
+                                 
                             }
-                            console.log("失败的缓存");
-                            console.log(this.indexList);
+                             
+                             
                             if (this.indexList.length <= 0) {
-                                console.log("清除缓存");
+                                 
                                 localStorage.removeItem('deadCache');
                             } else {
                                 localStorage.setItem('deadCache', JSON.stringify(this.indexList));
@@ -878,7 +878,7 @@ export class DeadtreePage {
                         }
                     }, {
                         text: '取消', handler: () => {
-                            console.log("取消");
+                             
 
                         }
                     }]
@@ -889,10 +889,10 @@ export class DeadtreePage {
         }*/
 
         if (localStorage["deadKill"]) {
-            // console.log(localStorage["deadKill"]);
+            //  
             this.killMethods = JSON.parse(localStorage["deadKill"]);
-            // console.log("缓存");
-            // console.log(this.killMethods);
+            //  
+            //  
         }
         this.httpClient.post(this.base.BASE_URL + 'app/getKillMethods', {},
             {
@@ -902,13 +902,13 @@ export class DeadtreePage {
             .subscribe(res => {
                     var c: any = res;
                     this.killMethods = Array.from(c);
-                    // console.log("subb", res);
-                    // console.log(this.killMethods);
+                    //  
+                    //  
                     localStorage['deadKill'] = JSON.stringify(res);
 
                 },
                 res => {
-                    // console.log(res);
+                    //  
                 })
 
     }
@@ -966,17 +966,17 @@ export class DeadtreePage {
             // };
 
             // options.headers = { token: localStorage['token'] };
-            // console.log("options");
-            // console.log(options);
+            //  
+            //  
 
             //上传文件对象
             // const fileTransfer: FileTransferObject = this.fileTransfer.create();
             //此处整合进submit()
             // fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddDeadtreePhoto2', options)
             //     .then((res) => {
-            // console.log(res);
-            // console.log(JSON.stringify(res));
-            // console.log(JSON.parse(JSON.stringify(res)).message);
+            //  
+            //  
+            //  
 
             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -1117,8 +1117,8 @@ export class DeadtreePage {
     };
 
     scan() {
-        // console.log("scan");
-        // console.log(localStorage['username']);
+        //  
+        //  
         this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
 
@@ -1169,7 +1169,7 @@ export class DeadtreePage {
                 this.canSubmit = false;
                 return;
             }
-            console.log(this.photosum);
+             
 
             if (this.photosum <= 0) {
                 let observer = await new Promise((resolve, reject) => {
@@ -1197,11 +1197,11 @@ export class DeadtreePage {
                     }, (msg) => {
                         reject('error');
                     }).catch((err) => {
-                        console.log(err);
+                         
                         reject('error');
                     });
                 }).catch((err) => {
-                    console.log(err);
+                     
                 })
                 this.observers.push(observer);
             } else {
@@ -1258,16 +1258,16 @@ export class DeadtreePage {
                                 reject('error');
                             })
                         }).catch((reason) => {
-                            console.log(reason);
+                             
                         })
-                        console.log("await" + j);
+                         
                         this.observers.push(observer);
                     })(j)
                 }
             }
 
             Promise.all(this.observers).then((resolve) => {
-                console.log(resolve);
+                 
                 loader.dismiss();
                 for (var i = 0; i < resolve.length; i++) {
                     if (resolve[i] == undefined || resolve[i] == "") {
@@ -1295,8 +1295,8 @@ export class DeadtreePage {
                         allLength: 1,
                         curRow: 1
                     };
-                    // console.log("cacheData");
-                    // console.log(cacheData);
+                    //  
+                    //  
 
                     let deadCache: any;
                     deadCache = localStorage.getItem('deadCache');
@@ -1315,13 +1315,13 @@ export class DeadtreePage {
                 }
                 Base.popTo(this.navCtrl, 'switchProjectPage');
             }, (reject) => {
-                console.log(reject);
+                 
                 this.base.showAlert('提示', '提交失败', () => {
                 });
                 Base.popTo(this.navCtrl, 'switchProjectPage');
                 loader.dismiss();
             }).catch((reason) => {
-                console.log(reason);
+                 
 
                 this.base.showAlert('提示', '提交失败', () => {
                 });
@@ -1345,8 +1345,8 @@ export class DeadtreePage {
                     allLength: 1,
                     curRow: 1
                 };
-                // console.log("cacheData");
-                // console.log(cacheData);
+                //  
+                //  
 
                 let deadCache: any;
                 deadCache = localStorage.getItem('deadCache');
@@ -1372,8 +1372,8 @@ export class DeadtreePage {
             //         }
             //     })
             //     .subscribe(res => {
-            //         // console.log(JSON.stringify(res));
-            //         // console.log(JSON.parse(JSON.stringify(res)).message);
+            //         //  
+            //         //  
             //         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
             //         this.base.showAlert('提示', '提交成功', () => { });
             //         let cacheData = {
@@ -1381,8 +1381,8 @@ export class DeadtreePage {
             //             accuracy: this.accuracy, diameter: this.diameter, height: this.height, volume: this.volume,
             //             killMethodsValue: this.killMethodsValue, remarks: this.remarks, hasPic: this.hasPic, batch: this.batch
             //         };
-            //         // console.log("cacheData");
-            //         // console.log(cacheData);
+            //         //  
+            //         //  
 
             //         Base.popTo(this.navCtrl, 'switchProjectPage');
             //     }, (msg) => {
@@ -1398,8 +1398,8 @@ export class DeadtreePage {
             //             photoSum: this.photosum, batch: this.batch,
             //             pic1:this.cachePhoto1,pic2:this.cachePhoto2,pic3:this.cachePhoto3
             //         };
-            //         // console.log("cacheData");
-            //         // console.log(cacheData);
+            //         //  
+            //         //  
 
             //         let deadCache: any;
             //         deadCache = localStorage.getItem('deadCache');
@@ -1419,7 +1419,7 @@ export class DeadtreePage {
 
 
     trapClick() {
-        // console.log('deadtree');
+        //  
     }
 
     test3() {
@@ -1453,8 +1453,8 @@ export class DeadtreePage {
                             }
                         })
                         .subscribe(res => {
-                            // console.log(JSON.stringify(res));
-                            // console.log(JSON.parse(JSON.stringify(res)).message);
+                            //  
+                            //  
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                             // this.base.showAlert('提示', '提交成功', () => { });
                             let cacheData = {
@@ -1469,8 +1469,8 @@ export class DeadtreePage {
                                 killMethodsValue: this.killMethodsValue,
                                 remarks: this.remarks
                             };
-                            // console.log("cacheData");
-                            // console.log(cacheData);
+                            //  
+                            //  
 
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (msg) => {
@@ -1503,12 +1503,12 @@ export class DeadtreePage {
     }
 
     deviceIdInput() {
-        // console.log('ok');
-        // console.log(this.deviceId);
+        //  
+        //  
     }
 
     deviceSerialInput() {
-        // console.log(this.deviceSerial);
+        //  
     }
 
 }

@@ -42,7 +42,7 @@ export class CachePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CachePage');
+     
   }
 
   postMaintenance(cache, httpClient, base) {
@@ -91,7 +91,7 @@ export class CachePage {
       return new Promise(function (resolve, reject) {
         fileTransfer.upload(cache.img, 'http://39.108.184.47:8081/auth_api/maintenance', options)
           .then((res) => {
-            // console.log(res);
+            //  
             resolve('ok');
            
              
@@ -117,19 +117,19 @@ export class CachePage {
                       otherType: cache.otherType, otherNum: cache.otherNum
                     }
                   }).toPromise().then(res => {
-                    console.log("OK");
+                     
                     resolve('ok')
                     //  this.base.showAlert('提示', 'false'+res['data'], ()=>{});
 
                   },
                     res => {
-                      console.log("ERROR");
+                       
                       reject('error')
                     }
                   )
               })
 
-            // console.log(error);
+            //  
             // reject('error')
 
           })
@@ -145,13 +145,13 @@ export class CachePage {
                     otherType: cache.otherType, otherNum: cache.otherNum
                   }
                 }).toPromise().then(res => {
-                  console.log("OK");
+                   
                   resolve('ok')
                   //  this.base.showAlert('提示', 'false'+res['data'], ()=>{});
 
                 },
                   res => {
-                    console.log("ERROR");
+                     
                     reject('error')
                   }
                 )
@@ -159,7 +159,7 @@ export class CachePage {
             
             //发送失败(文件不存在等)
             // alert("出错" + error);
-            // console.log(error);
+            //  
          //   this.base.showAlert('提示', 'false3', ()=>{});
             // reject('error')
 
@@ -321,10 +321,10 @@ export class CachePage {
 
     //sd 卡上面
     // this.file.createFile(this.file.applicationStorageDirectory, "new_file.txt", true).then(function (success) {
-    //   console.log(success);
+    //    
     //   // success
     // }, function (error) {
-    //   console.log(error);
+    //    
     //   // error
     // });
 

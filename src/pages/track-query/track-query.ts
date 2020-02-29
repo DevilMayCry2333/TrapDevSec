@@ -18,7 +18,7 @@ export class TrackQueryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrackQueryPage');
+     
   }
 
 }

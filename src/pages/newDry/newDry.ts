@@ -118,29 +118,29 @@ export class DryPage {
                     for (let i = 0; i < tmpStorage.length; ++i) {
                         await this.postDry(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                             res => {
-                                console.log("成功");
-                                console.log(res);
+                                 
+                                 
                                 resolved++;
                             }, msg => {
-                                console.log("失败");
-                                console.log(msg);
+                                 
+                                 
                                 rejected++;
                                 tmpDeviceList.push(tmpStorage[i]);
                             }
                         ).catch((error) => {
-                            console.log(error);
+                             
                         });
                         this.curSubmitted = resolved + rejected;
                     }
                     this.preSubmitted = resolved + rejected;
                     for (let i = 0; i < tmpDeviceList.length; ++i) {
                         this.indexList.push(tmpDeviceList[i]);
-                        console.log(tmpDeviceList[i]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log(this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('DryCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -157,18 +157,18 @@ export class DryPage {
             var tmpStorage2 = [];
             tmpStorage2 = JSON.parse(localStorage["dryBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
             var i = 0;
 
             tmpStorage2.forEach(element => {
 
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -176,7 +176,7 @@ export class DryPage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("成功绑定了", "", () => {
                             });
@@ -208,7 +208,7 @@ export class DryPage {
     }
 
     testCache() {
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -290,12 +290,12 @@ export class DryPage {
                     }
                 })
                 .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
-                    console.log("cacheData");
+                     
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
@@ -304,8 +304,8 @@ export class DryPage {
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
-                    console.log(msg);
-                    console.log("失败");
+                     
+                     
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
@@ -326,8 +326,8 @@ export class DryPage {
 
     postDry(element, httpClient, base, tmpStorage, i) {
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
         if (element.img != null) {
             let options: FileUploadOptions = {};
             options.fileKey = "image";
@@ -350,8 +350,8 @@ export class DryPage {
                 injectName: element.injectNameValue
             };
             options.headers = {token: localStorage['token']};
-            console.log("options");
-            console.log(options);
+             
+             
 
 
             //创建文件对象
@@ -362,11 +362,11 @@ export class DryPage {
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
-                        console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
+                         
+                         
+                         
 
-                        console.log(res);
+                         
                         if (JSON.parse(res.response).isComp == true) {
                             that.isComplete = true;
                         } else {
@@ -376,7 +376,7 @@ export class DryPage {
                         resolve('ok');
 
                     }, async (msg) => {
-                        console.log("数据是", that.curOptions);
+                         
                         await httpClient.post(base.BASE_URL + 'app/AddInjectData', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -394,7 +394,7 @@ export class DryPage {
                                 }
                             })
                             .toPromise().then(res => {
-                                console.log(JSON.parse(JSON.stringify(res)));
+                                 
                                 if (JSON.parse(JSON.stringify(res)).isComp == true) {
                                     that.isComplete = true;
                                 } else {
@@ -404,7 +404,7 @@ export class DryPage {
                                 // that.base.showAlert("提示", "无图片提交成功", () => { });
                                 resolve('ok');
                             }, msg => {
-                                console.log(msg);
+                                 
                                 that.isSubProcessFin = false;
                                 reject('error');
                             })
@@ -418,8 +418,8 @@ export class DryPage {
             })
         } else {
             return new Promise((resolve, reject) => {
-                console.log("=====Element图片为空=====");
-                console.log(element);
+                 
+                 
                 httpClient.post(base.BASE_URL + 'app/AddInjectData', {},
                     {
                         headers: {token: localStorage['token']}, params: {
@@ -436,8 +436,8 @@ export class DryPage {
                             injectName: element.injectNameValue
                         }
                     }).toPromise().then(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     if (JSON.parse(JSON.stringify(res)).isComp == true) {
                         that.isComplete = true;
                     } else {
@@ -445,7 +445,7 @@ export class DryPage {
                     }
                     resolve('ok');
                 }, (msg) => {
-                    console.log(msg);
+                     
                     reject('error');
                     // this.base.showAlert('提示', '提交失败', () => { });
                 });
@@ -461,18 +461,18 @@ export class DryPage {
         //     var tmpStorage2 = [];
         //     tmpStorage2 = JSON.parse(localStorage["dryBind"]);
         //
-        //     console.log(tmpStorage2.length);
+        //      
         //     // localStorage.removeItem("trapBind");
         //
-        //     console.log(tmpStorage2);
+        //      
         //     var i = 0;
         //
         //     tmpStorage2.forEach(element => {
         //
-        //         console.log("===开始===");
+        //          
         //
-        //         console.log(element.scanId);
-        //         console.log(element.serial);
+        //          
+        //          
         //
         //         this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
         //             {
@@ -480,7 +480,7 @@ export class DryPage {
         //                 params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
         //             })
         //             .subscribe(res => {
-        //                     console.log(res);
+        //                      
         //                     i++;
         //                     this.base.showAlert("成功绑定了", "", () => {
         //                     });
@@ -500,8 +500,8 @@ export class DryPage {
         // }
 
         // var that = this;
-        // console.log('ionViewDidLoad LocatePage');
-        // console.log(localStorage['device']);
+        //  
+        //  
         // if (localStorage["DryCache"]) {
         //     const alert = this.alertCtrl.create({
         //         title: "有缓存数据，是否提交?",
@@ -509,7 +509,7 @@ export class DryPage {
         //         buttons: [
         //             {
         //                 text: '确认', handler: async () => {
-        //                     console.log("确认");
+        //                      
         //                     const loader = this.loadingCtrl.create({
         //                         content: "缓存数据正在提交，请勿退出",
         //                     });
@@ -521,25 +521,25 @@ export class DryPage {
         //                     for (let i = 0; i < tmpStorage.length; ++i) {
         //                         await this.postDry(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
         //                             res => {
-        //                                 console.log("成功");
-        //                                 console.log(res);
+        //                                  
+        //                                  
         //                             }, msg => {
-        //                                 console.log("失败");
-        //                                 console.log(msg);
+        //                                  
+        //                                  
         //                                 tmpDeviceList.push(tmpStorage[i]);
         //                             }
         //                         ).catch((error) => {
-        //                             console.log(error);
+        //                              
         //                         })
         //                     }
         //                     for (let i = 0; i < tmpDeviceList.length; ++i) {
         //                         this.indexList.push(tmpDeviceList[i]);
-        //                         console.log(tmpDeviceList[i]);
+        //                          
         //                     }
-        //                     console.log("失败的缓存");
-        //                     console.log(this.indexList);
+        //                      
+        //                      
         //                     if (this.indexList.length <= 0) {
-        //                         console.log("清除缓存");
+        //                          
         //                         localStorage.removeItem('DryCache');
         //                     } else {
         //                         localStorage.setItem('DryCache', JSON.stringify(this.indexList));
@@ -548,7 +548,7 @@ export class DryPage {
         //                 }
         //             }, {
         //                 text: '取消', handler: () => {
-        //                     console.log("取消");
+        //                      
         //
         //                 }
         //             }]
@@ -558,8 +558,8 @@ export class DryPage {
 
         //                 await (async (i)=>{
         //                     var element = tmpStorage[i];
-        //                     console.log(element);
-        //                     console.log("====图片路径====");
+        //                      
+        //                      
 
         //             if (element.img != null) {
         //                 let options: FileUploadOptions = {};
@@ -575,8 +575,8 @@ export class DryPage {
         //                     workingContent: element.workingContent,chestDiameter:element.chestDiameter,injectName:element.injectNameValue
         //                 };
         //                 options.headers = { token: localStorage['token'] };
-        //                 console.log("options");
-        //                 console.log(options);
+        //                  
+        //                  
 
 
         //                 //创建文件对象
@@ -588,11 +588,11 @@ export class DryPage {
         //                 let observer = await new Promise((resolve,reject)=>{
         //                     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddInjectData', options)
         //                         .then((res) => {
-        //                             console.log("======进入文件上传=====");
-        //                             console.log("====文件路径=====");
-        //                             console.log(element.img);
+        //                              
+        //                              
+        //                              
 
-        //                             console.log(res);
+        //                              
         //                             if (JSON.parse(res.response).isComp == true) {
         //                                 this.isComplete = true;
         //                             } else {
@@ -602,7 +602,7 @@ export class DryPage {
         //                             resolve('ok');
 
         //                         },async (msg)=>{
-        //                             console.log("数据是", that.curOptions);
+        //                              
         //                             await that.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
         //                             {
         //                                 headers: { token: localStorage['token'] }, params: {
@@ -612,7 +612,7 @@ export class DryPage {
         //                                 }
         //                             })
         //                             .toPromise().then(res => {
-        //                                 console.log(JSON.parse(JSON.stringify(res)));
+        //                                  
         //                                 if (JSON.parse(JSON.stringify(res)).isComp == true){
         //                                     this.isComplete = true;
         //                                 }else{
@@ -622,7 +622,7 @@ export class DryPage {
         //                                 this.base.showAlert("提示", "缓存删除照片的数据提交成功", () => { });
         //                                 resolve('ok');
         //                             }, msg => {
-        //                                 console.log(msg);
+        //                                  
         //                                 this.isSubProcessFin = false;
         //                                 reject('error');
         //                             })
@@ -634,16 +634,16 @@ export class DryPage {
         //                                 reject('error');
         //                         })
         //                 }).catch((error)=>{
-        //                     console.log(error);
+        //                      
         //                 })
         //                 that.observers.push(observer);
 
 
         //                 // fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddInjectData', options)
         //                 //     .then((res) => {
-        //                 //         console.log(res);
-        //                 //         console.log(JSON.stringify(res));
-        //                 //         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                 //          
+        //                 //          
+        //                 //          
         //                 //         i++;
         //                 //         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -651,7 +651,7 @@ export class DryPage {
         //                 //         if (i >= tmpStorage.length)
         //                 //             localStorage.removeItem('DryCache');
         //                 //     }, (error) => {//发送失败(网络出错等)
-        //                 //         console.log(error);
+        //                 //          
         //                 //             this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
         //                 //                 {
         //                 //                     headers: { token: localStorage['token'] }, params: {
@@ -662,8 +662,8 @@ export class DryPage {
         //                 //                 })
         //                 //                 .subscribe(res => {
         //                 //                     i++;
-        //                 //                     console.log(JSON.stringify(res));
-        //                 //                     console.log(JSON.parse(JSON.stringify(res)).message);
+        //                 //                      
+        //                 //                      
         //                 //                     // this.base.showAlert('提示', '提交成功', () => { });
         //                 //                     if(i>=tmpStorage.length)
         //                 //                         localStorage.removeItem('DryCache');
@@ -674,7 +674,7 @@ export class DryPage {
         //                 //     })
         //             } else {
         //                 let obs =  await new Promise((resolve,reject)=>{
-        //                 console.log(element);
+        //                  
         //                 this.httpClient.post(this.base.BASE_URL + 'app/AddInjectData', {},
         //                     {
         //                         headers: { token: localStorage['token'] }, params: {
@@ -685,8 +685,8 @@ export class DryPage {
         //                     })
         //                     .subscribe(res => {
         //                         //i++;
-        //                         console.log(JSON.stringify(res));
-        //                         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                          
+        //                          
         //                         // this.base.showAlert('提示', '提交成功', () => { });
         //                         // if(i>=tmpStorage.length)
         //                         //     localStorage.removeItem('DryCache');
@@ -697,39 +697,39 @@ export class DryPage {
         //                         }
         //                         resolve('ok');
         //                     }, (msg) => {
-        //                         console.log(msg);
+        //                          
         //                         reject('error');
         //                         // this.base.showAlert('提示', '提交失败', () => { });
         //                     });
         //                 }).catch((error)=>{
-        //                     console.log(error);
+        //                      
         //                 })
         //                 that.observers.push(obs);
         //             }
         //         })(i)
         //     }
         //     Promise.all(that.observers).then((resolve) => {
-        //         console.log(resolve);
+        //          
         //         loader.dismiss();
-        //             console.log("*****清除缓存了******");
+        //              
         //         if (that.isComplete){
         //             localStorage.removeItem('DryCache');
         //         }
         //     }, (reject) => {
-        //         console.log(reject);
+        //          
         //         loader.dismiss();
         //     }).catch((reason) => {
-        //         console.log(reason);
+        //          
         //         loader.dismiss();
         //     })
 
         // }
 
         if (localStorage["InjectWoodStatus"]) {
-            console.log(localStorage["InjectWoodStatus"]);
+             
             this.woodStatus = JSON.parse(localStorage["InjectWoodStatus"]);
-            console.log("缓存");
-            console.log(this.woodStatus);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getWoodStatus', {},
@@ -740,20 +740,20 @@ export class DryPage {
             .subscribe(res => {
                     var c: any = res;
                     this.woodStatus = Array.from(c);
-                    console.log(this.woodStatus);
+                     
                     localStorage['InjectWoodStatus'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
 
         if (localStorage["InjectName"]) {
-            console.log(localStorage["InjectName"]);
+             
             this.injectName = JSON.parse(localStorage["InjectName"]);
-            console.log("缓存");
-            console.log(this.injectName);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getInjectname', {},
@@ -766,20 +766,20 @@ export class DryPage {
 
 
                     this.injectName = c;
-                    console.log(this.injectName);
+                     
                     localStorage['InjectName'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
 
         if (localStorage["InjectWorkContent"]) {
-            console.log(localStorage["InjectWorkContent"]);
+             
             this.workContent = JSON.parse(localStorage["InjectWorkContent"]);
-            console.log("缓存");
-            console.log(this.workContent);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getWorkingContent', {},
@@ -790,12 +790,12 @@ export class DryPage {
             .subscribe(res => {
                     var c: any = res;
                     this.workContent = Array.from(c);
-                    console.log(this.workContent);
+                     
                     localStorage['InjectWorkContent'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
     }
@@ -826,18 +826,18 @@ export class DryPage {
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
-                console.log(params.id);
+                 
                 var allDevice = JSON.parse(localStorage["device"]);
-                console.log(localStorage["device"]);
-                console.log("Array");
-                console.log(allDevice[0]);
+                 
+                 
+                 
 
                 var flag = 0;
-                console.log(params.id.charAt(8) === "2");
+                 
 
                 allDevice.forEach(element => {
-                    console.log("element");
-                    // console.log(element);
+                     
+                    //  
                     if ((element.scanId == params.id && element.id.charAt(8) == '2') || params.id.charAt(8) == '7')
                         flag = 1;
                 });
@@ -929,45 +929,45 @@ export class DryPage {
     }
 
     scan() {
-        console.log("scan");
-        console.log(localStorage['username']);
+         
+         
         this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
 
     submit() {
         this.have_submit = true;
         //let num1 = 0;
-        console.log(this.injectNum);
+         
 
         //var r1 = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
         var r1=Math.sign(this.chestDiameter);
         var flag1= true;
-        console.log(r1);
+         
         if(r1==1 ||r1==0){
              flag1=true;
         }
         else{
              flag1=false;
         }
-        console.log(flag1);
+         
         var r2 = /^([1-9]\d*|[0]{1,1})$/;
         var flag2=r2.test(this.injectNum);
-        console.log(flag2);
+         
 
         // if (parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN) {
-        //     console.log("injectNum不合法");
+        //      
         //     this.injectNum = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // if (!this.injectNum) {
-        //     console.log("injectNum不合法");
+        //      
         //     this.injectNum = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // num1 = parseInt(this.injectNum);
         // this.injectNum = '' + num1;
         // if (this.injectNum == 'NaN') {
-        //     console.log("injectNum不合法");
+        //      
         //     this.injectNum = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
@@ -1007,8 +1007,8 @@ export class DryPage {
                     injectName: this.injectNameValue
                 };
                 options.headers = {token: localStorage['token']};
-                console.log("options");
-                console.log(options);
+                 
+                 
 
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -1022,9 +1022,9 @@ export class DryPage {
                 }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
+                         
 
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -1064,7 +1064,7 @@ export class DryPage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
@@ -1094,8 +1094,8 @@ export class DryPage {
                                 }
                             })
                             .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                 
+                                 
                                 // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                 this.base.showAlert('提示', '提交成功', () => {
                                 });
@@ -1112,8 +1112,8 @@ export class DryPage {
                                     chestDiameter: this.chestDiameter,
                                     injectNameValue: this.injectNameValue
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, (msg) => {
@@ -1135,8 +1135,8 @@ export class DryPage {
                                     chestDiameter: this.chestDiameter,
                                     injectNameValue: this.injectNameValue
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 let DryCache: any;
                                 DryCache = localStorage.getItem('DryCache');
@@ -1151,14 +1151,14 @@ export class DryPage {
                                 // }catch(oException){
                                 //     if(oException.name == 'QuotaExceededError'){
                                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                //         //console.log('已经超出本地存储限定大小！');
+                                //         // 
                                 //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                                 //       // localStorage.clear();
                                 //       // localStorage.setItem(key,value);
                                 //     }
                                 // }
                                 localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                                console.log("Hello");
+                                 
 
                                 //this.navCtrl.pop();
                                 // confirm.dismiss();
@@ -1210,8 +1210,8 @@ export class DryPage {
                         }
                     })
                     .subscribe(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => {
                         });
@@ -1228,8 +1228,8 @@ export class DryPage {
                             chestDiameter: this.chestDiameter,
                             injectNameValue: this.injectNameValue
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
@@ -1251,8 +1251,8 @@ export class DryPage {
                             chestDiameter: this.chestDiameter,
                             injectNameValue: this.injectNameValue
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         let DryCache: any;
                         DryCache = localStorage.getItem('DryCache');
@@ -1267,14 +1267,14 @@ export class DryPage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
                         // }
                         localStorage.setItem('DryCache', JSON.stringify(DryCache));
-                        console.log("Hello");
+                         
 
                         //this.navCtrl.pop();
                         // confirm.dismiss();
@@ -1286,16 +1286,16 @@ export class DryPage {
     }
 
     dryClick() {
-        console.log("dry");
+         
     }
 
     deviceIdInput() {
-        console.log("ok");
-        console.log(this.deviceId);
+         
+         
     }
 
     deviceSerialInput() {
-        console.log(this.deviceSerial);
+         
     }
 
     injectNumInput() {

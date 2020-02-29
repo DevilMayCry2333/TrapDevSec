@@ -74,7 +74,7 @@ export class LocatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LocatePage');
+     
   }
 
   locate() {

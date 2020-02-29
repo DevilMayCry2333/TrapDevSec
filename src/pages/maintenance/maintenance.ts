@@ -62,7 +62,7 @@ export class MaintenancePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MaintenancePage');
+     
     this.loadOtherBeetleList()
   }
 
@@ -217,9 +217,9 @@ export class MaintenancePage {
 
       fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
         .then((res) => {
-          console.log(res);
-          console.log(JSON.stringify(res));
-          console.log(JSON.parse(JSON.stringify(res)).message);
+           
+           
+           
 
           this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -247,7 +247,7 @@ export class MaintenancePage {
           // }catch(oException){
           //     if(oException.name == 'QuotaExceededError'){
           //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-          //         //console.log('已经超出本地存储限定大小！');
+          //         // 
           //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
           //       // localStorage.clear();
           //       // localStorage.setItem(key,value);
@@ -262,7 +262,7 @@ export class MaintenancePage {
         //.catch((error) => {//发送失败(文件不存在等)
           // alert("出错" + error);
           //alert('失败');
-          //console.log(error);
+          // 
         //});
     } else {
       
@@ -280,8 +280,8 @@ export class MaintenancePage {
             maleNum: this.maleNum, femaleNum: this.femaleNum, altitude: this.altitude,
             drug: this.drug, remark: this.remark, workingContent: this.workingContent, otherNum: this.otherNum, otherType: this.otherType}})
         .subscribe(res => {
-          console.log(JSON.stringify(res));
-          console.log(JSON.parse(JSON.stringify(res)).message);
+           
+           
           this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
               this.base.showAlert('提示', '提交成功', ()=>{});
               Base.popTo(this.navCtrl, 'DetailPage');
@@ -307,14 +307,14 @@ export class MaintenancePage {
           // }catch(oException){
           //     if(oException.name == 'QuotaExceededError'){
           //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-          //         //console.log('已经超出本地存储限定大小！');
+          //         // 
           //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
           //       // localStorage.clear();
           //       // localStorage.setItem(key,value);
           //     }
           // }   
           localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-          console.log("Hello");
+           
 
           //this.navCtrl.pop();
           confirm.dismiss();

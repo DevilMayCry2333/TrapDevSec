@@ -153,7 +153,7 @@ export class ScanPage {
           // permission was denied, but not permanently. You can ask for permission again at a later time.
         }
       })
-      .catch((e: any) => console.log('Error is', e));
+      .catch((e: any) =>  
   }
   autoScan(){
     let name='deviceid';

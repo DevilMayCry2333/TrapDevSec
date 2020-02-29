@@ -22,7 +22,7 @@ export class DeadTreesQueryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeadTreesQueryPage');
+     
     this.httpClient.post(this.base.BASE_URL + 'app/DeadWorker', {},
       {
         params: {
@@ -30,7 +30,7 @@ export class DeadTreesQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })
@@ -44,7 +44,7 @@ export class DeadTreesQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })

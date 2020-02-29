@@ -164,7 +164,7 @@ export class TrackPage {
         if (this.curSubmitted >= this.preSubmitted) {
             if (localStorage["TrackCache"]) {
                 (async () => {
-                    console.log("确认");
+                     
                     let tmpStorage = JSON.parse(localStorage["TrackCache"]);
                     if (localStorage["TrackCache1"]) {
                         this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
@@ -187,7 +187,7 @@ export class TrackPage {
                     this.indexList = [];
                     let resolved = 0, rejected = 0;
                     this.curTmpSotrage = tmpStorage;
-                    console.log(tmpStorage);
+                     
                     for (let j = 0; j < tmpStorage.length; ++j) {
                         let element = tmpStorage[j];
                         that.curFail = false;
@@ -196,13 +196,13 @@ export class TrackPage {
                                 that.i = i;
                                 await this.postTrack(tmpStorage[j], this.httpClient, this.base, tmpStorage, j, i).then(
                                     res => {
-                                        console.log("成功");
-                                        console.log(res);
+                                         
+                                         
                                         resolved++;
                                     }, msg => {
-                                        console.log("失败");
-                                        console.log(msg);
-                                        console.log(that.curFail);
+                                         
+                                         
+                                         
                                         if (!that.curFail) {
                                             tmpDeviceList.push(tmpStorage[j]);
                                         }
@@ -210,23 +210,23 @@ export class TrackPage {
                                         rejected++;
                                     }
                                 ).catch((error) => {
-                                    console.log(error);
+                                     
                                 })
                             }
                         } else {
                             await this.postTrackPlus(tmpStorage[j], this.httpClient, this.base, tmpStorage, j).then(
                                 res => {
-                                    console.log("成功");
-                                    console.log(res);
+                                     
+                                     
                                     resolved++;
                                 }, msg => {
-                                    console.log("失败");
-                                    console.log(msg);
+                                     
+                                     
                                     tmpDeviceList.push(tmpStorage[j]);
                                     rejected++;
                                 }
                             ).catch((error) => {
-                                console.log(error);
+                                 
                             })
                         }
                         this.curSubmitted = resolved + rejected;
@@ -234,12 +234,12 @@ export class TrackPage {
                     this.preSubmitted = resolved + rejected;
                     for (let j = 0; j < tmpDeviceList.length; ++j) {
                         this.indexList.push(tmpDeviceList[j]);
-                        console.log(tmpDeviceList[j]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log(this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('TrackCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -258,7 +258,7 @@ export class TrackPage {
     }
 
     testCache() {
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -285,8 +285,8 @@ export class TrackPage {
 
     postTrack(element, httpClient, base, tmpStorage, j, i) {
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
         let options: FileUploadOptions = {};
         options.fileKey = "image";
         var time = Date.parse(Date());
@@ -309,8 +309,8 @@ export class TrackPage {
             curRow: j
         };
         options.headers = {token: localStorage['token']};
-        console.log("options");
-        console.log(options);
+         
+         
         //创建文件对象
         const fileTransfer: FileTransferObject = this.fileTransfer.create();
         var uploadAddress;
@@ -327,7 +327,7 @@ export class TrackPage {
         } else if (i == 5) {
             uploadAddress = element.pic5;
         }
-        console.log(uploadAddress);
+         
         that.picNotExist = false;
 
         this.curTmpSotrage = tmpStorage;
@@ -335,26 +335,26 @@ export class TrackPage {
         return new Promise((resolve, reject) => {
             fileTransfer.upload(uploadAddress, that.base.BASE_URL + 'app/AddPhoto2', options)
                 .then((res) => {
-                    console.log("文件传输中,当前i:=>" + j);
-                    console.log(this.currentNum);
-                    console.log(tmpStorage.length);
+                     
+                     
+                     
                     // that.picture.push(res.response["imgId"]);
-                    console.log(res);
-                    console.log(JSON.parse(res.response));
-                    console.log(JSON.parse(res.response).isComp);
+                     
+                     
+                     
                     if (JSON.parse(res.response).isComp == true) {
                         this.isComplete = true;
                     } else {
                         this.isComplete = false;
                     }
-                    console.log("传输中isComp" + this.isComplete);
+                     
                     resolve('ok');
                 }, async (msg) => {
-                    console.log("进入msg");
-                    console.log(msg);
+                     
+                     
                     that.picNotExist = true;
                     if (this.j <= 1) {
-                        console.log("数据是", that.curOptions);
+                         
                         await that.httpClient.post(that.base.BASE_URL + 'app/AddPhoto2', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -370,24 +370,24 @@ export class TrackPage {
                                     recordTime: that.curOptions.recordTime.toString()
                                 }
                             }).toPromise().then(res => {
-                            console.log("进入then");
-                            console.log(res);
-                            console.log("===" + that.i);
+                             
+                             
+                             
 
                             if (that.j >= that.curTmpSotrage.length - 1) {
                                 that.isComplete = true;
                             } else {
                                 that.isComplete = false;
                             }
-                            console.log(that.isComplete);
+                             
                             that.subProcessFin = true;
                             resolve('ok');
                             // that.base.showAlert("全部成功了", "", () => { });
-                            // console.log(JSON.stringify(res));
-                            // console.log(JSON.parse(JSON.stringify(res)).message);
+                            //  
+                            //  
                         }, (msg) => {
-                            console.log("进入error");
-                            console.log(msg);
+                             
+                             
                             that.subProcessFin = false;
                             reject('error');
                             // this.base.showAlert('提示', '提交失败', () => { });
@@ -421,18 +421,18 @@ export class TrackPage {
                         recordTime: element.recordTime.toString()
                     }
                 }).toPromise().then(res => {
-                console.log(JSON.stringify(res));
-                console.log(JSON.parse(JSON.stringify(res)).message);
+                 
+                 
                 if (that.j >= that.curTmpSotrage.length - 1) {
                     that.isComplete = true;
                 } else {
                     that.isComplete = false;
                 }
-                console.log(that.isComplete);
+                 
                 that.subProcessFin = true;
                 resolve('ok');
             }, (msg) => {
-                console.log(msg);
+                 
                 reject('error');
                 // this.base.showAlert('提示', '提交失败', () => { });
             });
@@ -451,12 +451,12 @@ export class TrackPage {
         this.fivePhotos = false;
         this.canSubmit = true;
 
-        console.log(localStorage["TrackCache"]);
-        console.log(localStorage["TrackCache1"]);
-        console.log(localStorage["TrackCache2"]);
-        console.log(localStorage["TrackCache3"]);
-        console.log(localStorage["TrackCache4"]);
-        console.log(localStorage["TrackCache5"]);
+         
+         
+         
+         
+         
+         
 
         /*if (localStorage["TrackCache"]) {
             const alert = this.alertCtrl.create({
@@ -465,7 +465,7 @@ export class TrackPage {
                 buttons: [
                     {
                         text: '确认', handler: async () => {
-                            console.log("确认");
+                             
                             var tmpStorage = JSON.parse(localStorage["TrackCache"]);
                             if (localStorage["TrackCache1"]) {
                                 this.photoplib1 = JSON.parse(localStorage["TrackCache1"]);
@@ -486,7 +486,7 @@ export class TrackPage {
 
                             let tmpDeviceList = [];
                             this.curTmpSotrage = tmpStorage;
-                            console.log(tmpStorage);
+                             
                             const loader = this.loadingCtrl.create({
                                 content: "缓存数据正在提交，请勿退出",
                             });
@@ -499,44 +499,44 @@ export class TrackPage {
                                         that.i = i;
                                         await this.postTrack(tmpStorage[j], this.httpClient, this.base, tmpStorage, j, i).then(
                                             res => {
-                                                console.log("成功");
-                                                console.log(res);
+                                                 
+                                                 
                                             }, msg => {
-                                                console.log("失败");
-                                                console.log(msg);
-                                                console.log(that.curFail);
+                                                 
+                                                 
+                                                 
                                                 if (!that.curFail) {
                                                     tmpDeviceList.push(tmpStorage[j]);
                                                 }
                                                 that.curFail = true;
                                             }
                                         ).catch((error) => {
-                                            console.log(error);
+                                             
                                         })
                                     }
                                 } else {
                                     await this.postTrackPlus(tmpStorage[j], this.httpClient, this.base, tmpStorage, j).then(
                                         res => {
-                                            console.log("成功");
-                                            console.log(res);
+                                             
+                                             
                                         }, msg => {
-                                            console.log("失败");
-                                            console.log(msg);
+                                             
+                                             
                                             tmpDeviceList.push(tmpStorage[j]);
                                         }
                                     ).catch((error) => {
-                                        console.log(error);
+                                         
                                     })
                                 }
                             }
                             for (let j = 0; j < tmpDeviceList.length; ++j) {
                                 this.indexList.push(tmpDeviceList[j]);
-                                console.log(tmpDeviceList[j]);
+                                 
                             }
-                            console.log("失败的缓存");
-                            console.log(this.indexList);
+                             
+                             
                             if (this.indexList.length <= 0) {
-                                console.log("清除缓存");
+                                 
                                 localStorage.removeItem('TrackCache');
                             } else {
                                 localStorage.setItem('TrackCache', JSON.stringify(this.indexList));
@@ -545,7 +545,7 @@ export class TrackPage {
                         }
                     }, {
                         text: '取消', handler: () => {
-                            console.log("取消");
+                             
 
                         }
                     }]
@@ -570,7 +570,7 @@ export class TrackPage {
     //         for(var j = 0 ; j < tmpStorage.length ; j++){
     //             await (async (j)=>{
     //             var element = tmpStorage[j];
-    //             console.log(element);
+    //              
 
     //         if (element.hasPic ==true ) {
 
@@ -591,15 +591,15 @@ export class TrackPage {
     //                     if (localStorage["TrackCache5"]) {
     //                         this.photoplib5 = JSON.parse(localStorage["TrackCache5"]);
     //                     }
-    //                 console.log("====当前第几条数据====");
-    //                 console.log(j);
-    //                 console.log("=====当前第几张照片====");
-    //                 console.log(i);
+    //                  
+    //                  
+    //                  
+    //                  
 
-    //                 console.log("三种形态");
-    //                     console.log(element.recordTime);
-    //                     console.log(JSON.stringify(element.recordTime));
-    //                     console.log(JSON.parse(element.recordTime));
+    //                  
+    //                      
+    //                      
+    //                      
 
     //                 let options: FileUploadOptions = {};
     //                 options.fileKey = "image";
@@ -615,8 +615,8 @@ export class TrackPage {
     //                     allLength: tmpStorage.length, curRow: j
     //                 };
     //                 options.headers = { token: localStorage['token'] };
-    //                 console.log("options");
-    //                 console.log(options);
+    //                  
+    //                  
     //                 var uploadAddress;
     //                 if(i==1){
     //                     uploadAddress = element.pic1;     //改了这里
@@ -629,28 +629,28 @@ export class TrackPage {
     //                 }else if(i==5){
     //                     uploadAddress = element.pic5;
     //                 }
-    //                     console.log(uploadAddress);
+    //                      
     //                     this.picNotExsit1 = false;
     //                     this.i = i;
     //                     this.j = j;
     //                     this.curtmpStorage = tmpStorage;
     //                     this.currOptions = options.params;
-    //                     console.log("初始化后值为");
-    //                     console.log(this.picNotExsit1);
+    //                      
+    //                      
     //                         //创建文件对象
     //                         const fileTransfer: FileTransferObject = this.fileTransfer.create();
     //                         let observer = await new Promise((resovle,reject)=>{
     //                             fileTransfer.upload(uploadAddress, this.base.BASE_URL + 'app/AddPhoto2', options)
     //                                 .then((res) => {
-    //                                     console.log("进入then");
+    //                                      
 
-    //                                     console.log(res);
+    //                                      
     //                                     if (JSON.parse(res.response).isComp == true) {
     //                                         this.isComplete = true;
     //                                     } else {
     //                                         this.isComplete = false;
     //                                     }
-    //                                     console.log("传输中isComp" + this.isComplete);
+    //                                      
 
     //                                     resovle('ok');
     //                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
@@ -658,11 +658,11 @@ export class TrackPage {
     //                                     // this.base.showAlert('提示', '提交成功', () => { });
     //                                     // Base.popTo(this.navCtrl, 'switchProjectPage');
     //                                 },async (msg)=>{
-    //                                         console.log("进入error");
-    //                                         console.log(msg);
+    //                                          
+    //                                          
     //                                         that.picNotExsit1 = true;
     //                                         if (this.i <= 1) {
-    //                                             console.log(that.currOptions);
+    //                                              
     //                                                 await this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
     //                                                     {
     //                                                         headers: { token: localStorage['token'] }, params: {
@@ -672,16 +672,16 @@ export class TrackPage {
     //                                                         }
     //                                                     })
     //                                                     .toPromise().then(res => {
-    //                                                         console.log("进入ok");
-    //                                                         console.log(JSON.stringify(res));
-    //                                                         console.log(JSON.parse(JSON.stringify(res)).message);
+    //                                                          
+    //                                                          
+    //                                                          
     //                                                         if (that.j >= that.curtmpStorage.length-1)
     //                                                             that.isComplete = true;
     //                                                         that.subProcessFin = true;
     //                                                         resovle('ok');
     //                                                     }, (msg) => {
-    //                                                         console.log("进入fail");
-    //                                                         console.log(msg);
+    //                                                          
+    //                                                          
     //                                                         that.subProcessFin = false;
     //                                                         reject('error');
     //                                                     });
@@ -694,16 +694,16 @@ export class TrackPage {
     //                                         reject('error');
     //                                 })
     //                         }).catch((err)=>{
-    //                             console.log(err);
+    //                              
     //                         })
 
     //                     // if (!that.picNotExsit1)
     //                             this.observers.push(observer);
-    //                         console.log("第几张图片");
-    //                         console.log(i);
-    //                         console.log(j);
-    //                         console.log("===图片不存在===");
-    //                         console.log(that.picNotExsit1);
+    //                          
+    //                          
+    //                          
+    //                          
+    //                          
 
     //                     if (that.picNotExsit1 && i <= 1 ){
 
@@ -713,7 +713,7 @@ export class TrackPage {
     //             }
     //             // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
     //         } else {
-    //             console.log(element);
+    //              
     //             let obs = await new Promise((resolve,reject)=>{
     //                 this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
     //                     {
@@ -724,18 +724,18 @@ export class TrackPage {
     //                         }
     //                     })
     //                     .subscribe(res => {
-    //                         console.log(JSON.stringify(res));
-    //                         console.log(JSON.parse(JSON.stringify(res)).message);
+    //                          
+    //                          
     //                         resolve('ok');
     //                         // this.base.showAlert('提示', '提交成功', () => { });
     //                     }, (msg) => {
-    //                         console.log(msg);
+    //                          
 
     //                         reject('error');
     //                         // this.base.showAlert('提示', '提交失败', () => { });
     //                     });
     //             }).catch((err)=>{
-    //                 console.log(err);
+    //                  
     //             })
     //             this.observers.push(obs);
 
@@ -745,13 +745,13 @@ export class TrackPage {
     //         })(j)
     //     }
     //     Promise.all(this.observers).then((resolve) => {
-    //         console.log(this.observers);
-    //         console.log(resolve);
+    //          
+    //          
     //         loader.dismiss();
-    //         console.log("结束了嘛",this.isComplete);
+    //          
 
     //         if (this.isComplete) {
-    //             console.log("*****清除缓存了******");
+    //              
     //             localStorage.removeItem('TrackCache');
     //             localStorage.removeItem('TrackCache1');
     //             localStorage.removeItem('TrackCache2');
@@ -760,10 +760,10 @@ export class TrackPage {
     //             localStorage.removeItem('TrackCache5');
     //         }
     //     }, (reject) => {
-    //         console.log(reject);
+    //          
     //         loader.dismiss();
     //     }).catch((reason) => {
-    //         console.log(reason);
+    //          
     //         loader.dismiss();
     //     })
     // }
@@ -774,7 +774,7 @@ export class TrackPage {
     }
 
     trapClick() {
-        console.log('track');
+         
     }
 
     async submit() {
@@ -790,8 +790,8 @@ export class TrackPage {
             // this.have_submit = true;
             this.canSubmit = true;
 
-            console.log("======PATH======");
-            console.log(this.imageData);
+             
+             
             var myImage: string = this.imageData;
 
             // if (!this.lineName){
@@ -828,7 +828,7 @@ export class TrackPage {
                     // this.canSubmit = false;
                     // return;
                 //}
-                console.log(this.photosum);
+                 
                 if (this.photosum <= 0) {
                     let observer = await new Promise((resolve, reject) => {
                         this.httpClient.post(this.base.BASE_URL + 'app/AddPhoto2', {},
@@ -850,17 +850,17 @@ export class TrackPage {
                                 }
                             })
                             .toPromise().then(res => {
-                            console.log(res);
+                             
                             resolve('ok');
                         }, (msg) => {
-                            console.log(msg);
+                             
                             reject('error');
                         }).catch((err) => {
-                            console.log(err);
+                             
                             reject('error');
                         });
                     }).catch((err) => {
-                        console.log(err);
+                         
                     })
                     this.observers.push(observer);
                 } else {
@@ -919,31 +919,31 @@ export class TrackPage {
                                         }
                                         resolve('ok');
                                     }).catch((error) => {
-                                    console.log(error);
+                                     
                                     this.picNotExist = true;
                                     reject('error');
                                 })
                             }).catch((reason) => {
-                                console.log(reason);
+                                 
                             })
-                            console.log("await" + j);
+                             
                             this.observers.push(observer);
                         })(j)
                     }
                 }
 
                 Promise.all(this.observers).then((resolve) => {
-                    console.log("进入resolve");
-                    console.log(resolve);
+                     
+                     
                     loader.dismiss();
                     // this.base.showAlert(resolve[0],"",()=>{});
                     // this.base.showAlert(typeof (resolve[0]), "", () => { });
-                    console.log(resolve[0]);
-                    console.log(typeof (resolve[0]));
+                     
+                     
 
                     for (var i = 0; i < resolve.length; i++) {
-                        console.log(typeof (resolve[i]));
-                        console.log(resolve[i]);
+                         
+                         
                         if (resolve[i] == undefined || resolve[i] == "") {
                             this.submitFail = true;
                         }
@@ -969,8 +969,8 @@ export class TrackPage {
                             curRow: 1,
                             hasPic: this.hasPic
                         };
-                        // console.log("cacheData");
-                        // console.log(cacheData);
+                        //  
+                        //  
 
                         let TrackCache: any;
                         TrackCache = localStorage.getItem('TrackCache');
@@ -989,15 +989,15 @@ export class TrackPage {
                     }
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (reject) => {
-                    console.log("submitReject");
-                    console.log(reject);
+                     
+                     
                     this.base.showAlert('提示', '提交失败', () => {
                     });
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                     loader.dismiss();
                 }).catch((reason) => {
-                    console.log("submitCatch");
-                    console.log(reason);
+                     
+                     
                     this.base.showAlert('提示', '提交失败', () => {
                     });
                     let cacheData = {
@@ -1020,8 +1020,8 @@ export class TrackPage {
                         curRow: 1,
                         hasPic: this.hasPic
                     };
-                    // console.log("cacheData");
-                    // console.log(cacheData);
+                    //  
+                    //  
 
                     let TrackCache: any;
                     TrackCache = localStorage.getItem('TrackCache');
@@ -1046,8 +1046,8 @@ export class TrackPage {
                 //         }
                 //     })
                 // .subscribe(res => {
-                //     console.log(JSON.stringify(res));
-                //     console.log(JSON.parse(JSON.stringify(res)).message);
+                //      
+                //      
                 //     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                 //     this.base.showAlert('提示', '提交成功', () => { });
                 //     if (this.hasPic == true) {
@@ -1064,7 +1064,7 @@ export class TrackPage {
                 //         };
                 //     }
 
-                //     console.log("cacheData");
+                //      
                 //     //这一行
                 //     Base.popTo(this.navCtrl, 'switchProjectPage');
                 // }, (msg) => {
@@ -1088,7 +1088,7 @@ export class TrackPage {
                 //         }
                 //         TrackCache.push(cacheData);
                 //         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                //         console.log("Hello");
+                //          
                 //         //还有这一行
                 //         Base.popTo(this.navCtrl, 'switchProjectPage');
                 //     } else {
@@ -1106,7 +1106,7 @@ export class TrackPage {
                 //         }
                 //         TrackCache.push(cacheData);
                 //         localStorage.setItem('TrackCache', JSON.stringify(TrackCache));
-                //         console.log("Hello");
+                //          
                 //         //还有这一行
                 //         Base.popTo(this.navCtrl, 'switchProjectPage');
                 //     }
@@ -1158,15 +1158,15 @@ export class TrackPage {
                 //     current: this.photosum
                 // };
                 // options.headers = { token: localStorage['token'] };
-                // console.log("options");
-                // console.log(options);
+                //  
+                //  
 
-                // console.log(this.photosum);
-                // console.log(this.imageData);
+                //  
+                //  
 
-                // console.log("======imageData====");
-                // console.log(imageData);
-                // console.log(this.imageData);
+                //  
+                //  
+                //  
 
 
                 //创建文件对象
@@ -1174,9 +1174,9 @@ export class TrackPage {
 
                 // fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddPhoto', options)
                 //     .then((res) => {
-                //         console.log(res);
-                //         console.log(JSON.stringify(res));
-                //         console.log(JSON.parse(JSON.stringify(res)).message);
+                //          
+                //          
+                //          
                 // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                 // this.base.showAlert('提示', '提交成功', () => { });
@@ -1217,7 +1217,7 @@ export class TrackPage {
                 // }catch(oException){
                 //     if(oException.name == 'QuotaExceededError'){
                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                //         //console.log('已经超出本地存储限定大小！');
+                //         // 
                 //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                 //       // localStorage.clear();
                 //       // localStorage.setItem(key,value);
@@ -1273,14 +1273,14 @@ export class TrackPage {
     }
 
     startRecord() {
-        console.log(this.lineName);
-        console.log(this.workContent);
+         
+         
         
         var r = /^([\w\u4E00-\u9FA5_\-.]+)+$/;  //中英文、数字和符号“.”、“-”、“_”、“()”、“（）”
         var flag1=r.test(this.lineName);  //线路名称
         var flag2=r.test(this.workContent);  //工作内容
-        console.log(flag1);
-        console.log(flag2);
+         
+         
         
         if (!this.lateIntravl ||this.lateIntravl == 'NaN' || !this.workContent || !this.lineName ) {
             this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => {
@@ -1302,11 +1302,11 @@ export class TrackPage {
                     //             linename: this.lineName,
                     //         }
                     //     }).subscribe(res => {
-                    //         console.log(res);
+                    //          
                     //     })
 
                     this.recordTime.startTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
-                    console.log(this.recordTime.startTime);
+                     
 
                     let options = {
                         enableHighAccuracy: true,
@@ -1331,7 +1331,7 @@ export class TrackPage {
                         this.latitudeData = latitudeData;
                         this.altitudeData = altitudeData;
                         this.accuracyData = accuracyData;
-                        console.log(this.longtitude + "," + this.latitude + "," + this.altitude);
+                         
                     }, Number(this.lateIntravl) * 1000);
 
                     this.subscription = watch.subscribe((data) => {
@@ -1396,7 +1396,7 @@ export class TrackPage {
             this.endRecordIsClick = true;
             clearInterval(this.myIntravl);
             this.recordTime.endTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
-            console.log(this.recordTime.endTime);
+             
         }
 
     }

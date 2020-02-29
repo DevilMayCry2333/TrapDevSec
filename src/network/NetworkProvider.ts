@@ -19,7 +19,7 @@ export class NetworkProvider {
                 public eventCtrl: Events,
                 public toast: ToastController) {
 
-        console.log('NetworkProvider Provider');
+         
         this.previousStatus = ConnectionStatusEnum.Online;
         // this.initializeNetworkEvents();
     }
@@ -29,7 +29,7 @@ export class NetworkProvider {
         this.network.onConnect().subscribe(() => {
             if (this.previousStatus === ConnectionStatusEnum.Offline && (this.network.type == '4g' || this.network.type == 'wifi')) {
                 this.eventCtrl.publish('ONLINE');
-                console.log('NetWork Connected');
+                 
                 this.toast.create({
                     message: '已联网(状态:' + this.network.type + ')',
                     duration: 2000
@@ -40,7 +40,7 @@ export class NetworkProvider {
         this.network.onDisconnect().subscribe(() => {
             if (this.previousStatus === ConnectionStatusEnum.Online) {
                 this.eventCtrl.publish('OFFLINE');
-                console.log('NetWork Disconnected');
+                 
                 this.toast.create({
                     message: '进入无网状态',
                     duration: 2000
@@ -49,7 +49,7 @@ export class NetworkProvider {
             }
         });
         this.network.onchange().subscribe(() => {
-            console.log('NetWork Status Changed To => ' + this.network.type);
+             
         });
     }
 

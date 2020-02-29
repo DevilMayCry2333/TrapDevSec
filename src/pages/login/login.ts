@@ -33,7 +33,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+     
 
     this.httpClient.get(this.base.BASE_URL + "app/version").subscribe((res)=>{
       //let latestVersion = parseInt(res.toString(), 10);
@@ -60,7 +60,7 @@ export class LoginPage {
     this.httpClient.post(this.base.BASE_URL + 'login', {},
       {params: new HttpParams({fromObject: {username: localStorage['username'], password: localStorage['password']}})})
       .subscribe(res => {
-          console.log(res['token']);
+           
           localStorage['token'] = res['token'];
           sessionStorage['isLogin'] = true
           this.nativePageTransitions.slide(this.base.transitionOptions);
@@ -77,7 +77,7 @@ export class LoginPage {
     this.httpClient.post(this.base.BASE_URL + 'login', {},
       {params: new HttpParams({fromObject: {username: this.username, password: this.password}})})
       .subscribe(res => {
-          console.log(res['token']);
+           
           localStorage['token'] = res['token'];
           // 直接把用户名密码存了
           localStorage['username'] = this.username;

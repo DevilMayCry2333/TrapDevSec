@@ -36,7 +36,7 @@ export class DeviceDataPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeviceDataPage');
+     
     this.loadProvince()
     this.role = parseInt(localStorage['role'])
   }

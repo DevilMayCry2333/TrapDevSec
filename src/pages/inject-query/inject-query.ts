@@ -22,7 +22,7 @@ export class InjectQueryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InjectQueryPage');
+     
     this.httpClient.post(this.base.BASE_URL + 'app/InjectWorker', {},
       {
         params: {
@@ -30,7 +30,7 @@ export class InjectQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })
@@ -44,7 +44,7 @@ export class InjectQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })

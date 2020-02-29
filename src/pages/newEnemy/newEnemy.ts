@@ -115,28 +115,28 @@ export class EnemyPage {
                     for (let i = 0; i < tmpStorage.length; ++i) {
                         await this.postEnemy(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                             res => {
-                                console.log("成功");
-                                console.log(res);
+                                 
+                                 
                                 resolved++;
                             }, msg => {
-                                console.log("失败");
-                                console.log(msg);
+                                 
+                                 
                                 rejected++;
                                 tmpDeviceList.push(tmpStorage[i]);
                             }
                         ).catch((error) => {
-                            console.log(error);
+                             
                         });
                         this.curSubmitted = resolved + rejected;
                     }
                     for (let i = 0; i < tmpDeviceList.length; ++i) {
                         this.indexList.push(tmpDeviceList[i]);
-                        console.log(tmpDeviceList[i]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log(this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('enemyCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -154,18 +154,18 @@ export class EnemyPage {
 
             tmpStorage2 = JSON.parse(localStorage["eneBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
             var i = 0;
 
             tmpStorage2.forEach(element => {
 
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -173,7 +173,7 @@ export class EnemyPage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("成功绑定了", "", () => {
                             });
@@ -230,12 +230,12 @@ export class EnemyPage {
                     }
                 })
                 .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
-                    console.log("cacheData");
+                     
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
@@ -244,8 +244,8 @@ export class EnemyPage {
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
-                    console.log(msg);
-                    console.log("失败");
+                     
+                     
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
@@ -264,8 +264,8 @@ export class EnemyPage {
 
     postEnemy(element, httpClient, base, tmpStorage, i) {
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
 
         if (element.img != null) {
             let options: FileUploadOptions = {};
@@ -288,8 +288,8 @@ export class EnemyPage {
                 curRow: i
             };
             options.headers = {token: localStorage['token']};
-            console.log("options");
-            console.log(options);
+             
+             
 
 
             //创建文件对象
@@ -300,11 +300,11 @@ export class EnemyPage {
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
-                        console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
+                         
+                         
+                         
 
-                        console.log(res);
+                         
                         if (JSON.parse(res.response).isComp == true) {
                             that.isComplete = true;
                         } else {
@@ -314,7 +314,7 @@ export class EnemyPage {
                         resolve('ok');
 
                     }, async (msg) => {
-                        console.log("数据是", that.curOptions);
+                         
                         await httpClient.post(base.BASE_URL + 'app/AddEnemy', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -331,7 +331,7 @@ export class EnemyPage {
                                 }
                             })
                             .toPromise().then(res => {
-                                console.log(JSON.parse(JSON.stringify(res)));
+                                 
                                 if (JSON.parse(JSON.stringify(res)).isComp == true) {
                                     that.isComplete = true;
                                 } else {
@@ -341,7 +341,7 @@ export class EnemyPage {
                                 // that.base.showAlert("提示", "无图片提交成功", () => { });
                                 resolve('ok');
                             }, msg => {
-                                console.log(msg);
+                                 
                                 that.isSubProcessFin = false;
                                 reject('error');
                             })
@@ -355,8 +355,8 @@ export class EnemyPage {
             })
         } else {
             return new Promise((resolve, reject) => {
-                console.log("=====Element图片为空=====");
-                console.log(element);
+                 
+                 
                 httpClient.post(base.BASE_URL + 'app/AddEnemy', {},
                     {
                         headers: {token: localStorage['token']}, params: {
@@ -372,8 +372,8 @@ export class EnemyPage {
                             curRow: i
                         }
                     }).toPromise().then(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     if (JSON.parse(JSON.stringify(res)).isComp == true) {
                         that.isComplete = true;
                     } else {
@@ -381,7 +381,7 @@ export class EnemyPage {
                     }
                     resolve('ok');
                 }, (msg) => {
-                    console.log(msg);
+                     
                     reject('error');
                     // this.base.showAlert('提示', '提交失败', () => { });
                 });
@@ -396,18 +396,18 @@ export class EnemyPage {
 
             tmpStorage2 = JSON.parse(localStorage["eneBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
             var i = 0;
 
             tmpStorage2.forEach(element => {
 
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -415,7 +415,7 @@ export class EnemyPage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("成功绑定了", "", () => {
                             });
@@ -434,8 +434,8 @@ export class EnemyPage {
 
         }*/
 
-        console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['device']);
+         
+         
         //var i = 0;
 
         /*var that = this;
@@ -446,7 +446,7 @@ export class EnemyPage {
                 buttons: [
                     {
                         text: '确认', handler: async () => {
-                            console.log("确认");
+                             
                             const loader = this.loadingCtrl.create({
                                 content: "缓存数据正在提交，请勿退出",
                             });
@@ -457,25 +457,25 @@ export class EnemyPage {
                             for (let i = 0; i < tmpStorage.length; ++i) {
                                 await this.postEnemy(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                                     res => {
-                                        console.log("成功");
-                                        console.log(res);
+                                         
+                                         
                                     }, msg => {
-                                        console.log("失败");
-                                        console.log(msg);
+                                         
+                                         
                                         tmpDeviceList.push(tmpStorage[i]);
                                     }
                                 ).catch((error) => {
-                                    console.log(error);
+                                     
                                 })
                             }
                             for (let i = 0; i < tmpDeviceList.length; ++i) {
                                 this.indexList.push(tmpDeviceList[i]);
-                                console.log(tmpDeviceList[i]);
+                                 
                             }
-                            console.log("失败的缓存");
-                            console.log(this.indexList);
+                             
+                             
                             if (this.indexList.length <= 0) {
-                                console.log("清除缓存");
+                                 
                                 localStorage.removeItem('enemyCache');
                             } else {
                                 localStorage.setItem('enemyCache', JSON.stringify(this.indexList));
@@ -484,7 +484,7 @@ export class EnemyPage {
                         }
                     }, {
                         text: '取消', handler: () => {
-                            console.log("取消");
+                             
 
                         }
                     }]
@@ -495,9 +495,9 @@ export class EnemyPage {
 
         //     await (async (i)=>{
         //         var element = tmpStorage[i];
-        //         console.log(element);
-        //         console.log("====图片路径====");
-        // console.log(element);
+        //          
+        //          
+        //  
         // if (element.img != null) {
         //     let options: FileUploadOptions = {};
         //     options.fileKey = "image";
@@ -511,8 +511,8 @@ export class EnemyPage {
         //         accuracy: element.accuracy, predatorsTypeValue: element.predatorsTypeValue, releaseNum: element.releaseNum, remarks: element.remarks
         //     };
         //     options.headers = { token: localStorage['token'] };
-        //     console.log("options");
-        //     console.log(options);
+        //      
+        //      
 
 
         //     //创建文件对象
@@ -525,9 +525,9 @@ export class EnemyPage {
         //     fileTransfer.upload(element.img, this.base.BASE_URL + 'app/AddEnemy', options)
         //         .then((res) => {
         //             //i++;
-        //             console.log(res);
-        //             console.log(JSON.stringify(res));
-        //             console.log(JSON.parse(JSON.stringify(res)).message);
+        //              
+        //              
+        //              
 
 
         //             if (JSON.parse(res.response).isComp == true) {
@@ -547,7 +547,7 @@ export class EnemyPage {
         //                 }
         //             })
         //             .toPromise().then(res => {
-        //                 console.log(JSON.parse(JSON.stringify(res)));
+        //                  
         //                 if (JSON.parse(JSON.stringify(res)).isComp == true){
         //                     this.isComplete = true;
         //                 }else{
@@ -557,7 +557,7 @@ export class EnemyPage {
         //                 this.base.showAlert("提示", "无图片提交成功", () => { });
         //                 resolve('ok');
         //             }, msg => {
-        //                 console.log(msg);
+        //                  
         //                 this.isSubProcessFin = false;
         //                 reject('error');
         //             })
@@ -569,7 +569,7 @@ export class EnemyPage {
         //                 reject('error');
         //         })
         // }).catch((error)=>{
-        //     console.log(error);
+        //      
         // })
         // that.observers.push(observer);
 
@@ -591,8 +591,8 @@ export class EnemyPage {
         //             })
         //             .subscribe(res => {
         //                 i++;
-        //                 console.log(JSON.stringify(res));
-        //                 console.log(JSON.parse(JSON.stringify(res)).message);
+        //                  
+        //                  
         //                 // this.base.showAlert('提示', '提交成功', () => { });
         //                 if (i >= tmpStorage.length)
         //                     localStorage.removeItem('enemyCache');
@@ -604,7 +604,7 @@ export class EnemyPage {
         // })
         //             } else {
         //                 let obs =  await new Promise((resolve,reject)=>{
-        //                 console.log(element);
+        //                  
         //                 this.httpClient.post(this.base.BASE_URL + 'app/AddEnemy', {},
         //                     {
         //                         headers: { token: localStorage['token'] }, params: {
@@ -614,8 +614,8 @@ export class EnemyPage {
         //                     })
         //                     .subscribe(res => {
         //                         //i++;
-        //                         console.log(JSON.stringify(res));
-        //                         console.log(JSON.parse(JSON.stringify(res)).message);
+        //                          
+        //                          
         //                         if (JSON.parse(JSON.stringify(res)).isComp == true) {
         //                             this.isComplete = true;
         //                         } else {
@@ -623,12 +623,12 @@ export class EnemyPage {
         //                         }
         //                         resolve('ok');
         //                     }, (msg) => {
-        //                         console.log(msg);
+        //                          
         //                         reject('error');
         //                         // this.base.showAlert('提示', '提交失败', () => { });
         //                     });
         //             }).catch((error)=>{
-        //                 console.log(error);
+        //                  
         //             })
         //             that.observers.push(obs);
 
@@ -638,17 +638,17 @@ export class EnemyPage {
         //     }
 
         //     Promise.all(that.observers).then((resolve) => {
-        //         console.log(resolve);
+        //          
         //         loader.dismiss();
-        //             console.log("*****清除缓存了******");
+        //              
         //         if (that.isComplete){
         //             localStorage.removeItem('enemyCache');
         //         }
         //     }, (reject) => {
-        //         console.log(reject);
+        //          
         //         loader.dismiss();
         //     }).catch((reason) => {
-        //         console.log(reason);
+        //          
         //         loader.dismiss();
         //     })
 
@@ -668,12 +668,12 @@ export class EnemyPage {
         //                         }
         //                         resolve('ok');
         //                     }, (msg) => {
-        //                         console.log(msg);
+        //                          
         //                         reject('error');
         //                         // this.base.showAlert('提示', '提交失败', () => { });
         //                     });
         //             }).catch((error)=>{
-        //                 console.log(error);
+        //                  
         //             })
         //             that.observers.push(obs);
 
@@ -683,10 +683,10 @@ export class EnemyPage {
         //     }
         // }
         if (localStorage["EnemyType"]) {
-            console.log(localStorage["EnemyType"]);
+             
             this.enemyType = JSON.parse(localStorage["EnemyType"]);
-            console.log("缓存");
-            console.log(this.enemyType);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getEnemyType', {},
@@ -697,11 +697,11 @@ export class EnemyPage {
             .subscribe(res => {
                     var c: any = res;
                     this.enemyType = Array.from(c);
-                    console.log(this.enemyType);
+                     
                     localStorage['EnemyType'] = JSON.stringify(res);
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
     }
@@ -714,7 +714,7 @@ export class EnemyPage {
     }
 
     testCache(){
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -785,16 +785,16 @@ export class EnemyPage {
     }
 
     enemyClick() {
-        console.log("enemy");
+         
     }
 
     deviceIdInput() {
-        console.log("ok");
-        console.log(this.deviceId);
+         
+         
     }
 
     deviceSerialInput() {
-        console.log(this.deviceSerial);
+         
     }
 
     takePhoto() {
@@ -823,16 +823,16 @@ export class EnemyPage {
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
-                console.log(params.id);
+                 
                 var allDevice = JSON.parse(localStorage["device"]);
-                console.log(localStorage["device"]);
-                console.log("Array");
-                console.log(allDevice[0]);
+                 
+                 
+                 
 
                 var flag = 0;
                 allDevice.forEach(element => {
-                    console.log("element");
-                    console.log(element);
+                     
+                     
                     if ((element.scanId == params.id && element.id.charAt(8) == '3'))
                         flag = 1;
                 });
@@ -913,8 +913,8 @@ export class EnemyPage {
     };
 
     scan() {
-        console.log("scan");
-        console.log(localStorage['username']);
+         
+         
         this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
 
@@ -945,7 +945,7 @@ export class EnemyPage {
 
         var r = /^([1-9]\d*|[0]{1,1})$/;
         var flag=r.test(this.releaseNum);
-        console.log(flag);
+         
         if (!flag || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
@@ -970,8 +970,8 @@ export class EnemyPage {
                     remarks: this.remarks
                 };
                 options.headers = {token: localStorage['token']};
-                console.log("options");
-                console.log(options);
+                 
+                 
 
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -984,9 +984,9 @@ export class EnemyPage {
                 }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
+                         
 
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -1023,7 +1023,7 @@ export class EnemyPage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
@@ -1050,8 +1050,8 @@ export class EnemyPage {
                                 }
                             })
                             .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                 
+                                 
                                 // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                 this.base.showAlert('提示', '提交成功', () => {
                                 });
@@ -1065,8 +1065,8 @@ export class EnemyPage {
                                     releaseNum: this.releaseNum,
                                     remarks: this.remarks
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, (msg) => {
@@ -1085,8 +1085,8 @@ export class EnemyPage {
                                     releaseNum: this.releaseNum,
                                     remarks: this.remarks
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 let enemyCache: any;
                                 enemyCache = localStorage.getItem('enemyCache');
@@ -1101,14 +1101,14 @@ export class EnemyPage {
                                 // }catch(oException){
                                 //     if(oException.name == 'QuotaExceededError'){
                                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                //         //console.log('已经超出本地存储限定大小！');
+                                //         // 
                                 //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                                 //       // localStorage.clear();
                                 //       // localStorage.setItem(key,value);
                                 //     }
                                 // }
                                 localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
-                                console.log("Hello");
+                                 
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             });
 
@@ -1153,8 +1153,8 @@ export class EnemyPage {
                         }
                     })
                     .subscribe(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => {
                         });
@@ -1168,8 +1168,8 @@ export class EnemyPage {
                             releaseNum: this.releaseNum,
                             remarks: this.remarks
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
@@ -1188,8 +1188,8 @@ export class EnemyPage {
                             releaseNum: this.releaseNum,
                             remarks: this.remarks
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         let enemyCache: any;
                         enemyCache = localStorage.getItem('enemyCache');
@@ -1204,14 +1204,14 @@ export class EnemyPage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
                         // }
                         localStorage.setItem('enemyCache', JSON.stringify(enemyCache));
-                        console.log("Hello");
+                         
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     });
 

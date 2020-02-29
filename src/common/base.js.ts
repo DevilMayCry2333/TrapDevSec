@@ -37,7 +37,7 @@ export class Base {
 
   readLogger(filename):string{
     this.file.readAsText(this.file.externalDataDirectory,filename).then(function (success){
-      console.log(success);
+       
       return success;
     });
     return "";
@@ -46,21 +46,21 @@ export class Base {
   logger(info:string,storage:string){
     var that = this;
     this.file.checkFile(this.file.externalDataDirectory,storage).then(function (success){
-      console.log(success);
+       
       that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { append: true }).then(function (success) {
-        console.log(success);
+         
         // success
       }, function (error) {
-        console.log(error);
+         
         // error
       });
     },function(err){
-      console.log(err);
+       
         that.file.writeFile(that.file.externalDataDirectory, storage, '[' + info + '],', { replace: true }).then(function (success) {
-          console.log(success);
+           
           // success
         }, function (error) {
-          console.log(error);
+           
           // error
         });
 
@@ -70,13 +70,13 @@ export class Base {
   convertToBase64(path,osVal){
     if(osVal == 1){
       this.file.readAsDataURL(this.file.tempDirectory,path).then((imageBase64)=>{
-        console.log(imageBase64);
+         
 
         return imageBase64;
       })
     }else{
       this.file.readAsDataURL(this.file.externalDataDirectory, path).then((imageBase64) => {
-        console.log(imageBase64);
+         
         return imageBase64;
       })
     }

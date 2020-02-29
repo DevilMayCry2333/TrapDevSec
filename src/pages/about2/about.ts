@@ -65,7 +65,7 @@ export class AboutPage2 {
     private platform: Platform) {
 
       this.project = navParams.get('project');
-      console.log(this.project);
+       
       
 
     // let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
@@ -94,8 +94,8 @@ openBaiduMap() {
 
   var point = new BMap.Point(116.331398, 39.897445);
   point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-  console.log(point[0]);
-  console.log(point[1]);
+   
+   
   
   
   this.appAvailability.check(app).then(
@@ -107,11 +107,11 @@ openBaiduMap() {
       }
     },
     (no: boolean) => {
-      console.log(this.latitude);
-      console.log(this.longitude);
+       
+       
       
       var url:string = "http://api.map.baidu.com/marker?location=" + point[0] + "," + point[1] + "&title=我的位置&content=百度奎科大厦&output=html&src=webapp.baidu.openAPIdemo";
-      console.log(url);
+       
       window.open(url);
     }
   )
@@ -235,13 +235,13 @@ openBaiduMap() {
     }
 
     point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-    console.log("Point1进来");
-    console.log(point);
+     
+     
 
     var point2 = new BMap.Point(point[1], point[0]);
     // var point2 = new BMap.Point(119.24242762534455, 26.085565172849666);
-    console.log("进来的");
-    console.log(point2);
+     
+     
 
 
     var mk = new BMap.Marker(point2);
@@ -257,10 +257,10 @@ openBaiduMap() {
     addMarker(point2, 0);
     // }
     // this.file.writeFile(this.file.externalDataDirectory, "new_location2.txt", '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']', { replace: true }).then(function (success) {
-    //   console.log(success);
+    //    
     //   // success
     // }, function (error) {
-    //   console.log(error);
+    //    
     //   // error
     // });
 
@@ -284,17 +284,17 @@ openBaiduMap() {
     //     alert.present();
     //     setTimeout(() => {
     //       var point = this.coordinateConvertor.wgs2bd(Number(this.latitude), Number(this.longitude));
-    //       console.log("point1=>");
-    //       console.log(point);
+    //        
+    //        
 
-    //       console.log(this.latitude);
-    //       console.log(this.longitude);
-    //       console.log(this.altitude);
+    //        
+    //        
+    //        
 
 
     //       var point2 = new BMap.Point(point[1], point[0]);
-    //       console.log("point2=>");
-    //       console.log(point2);
+    //        
+    //        
 
     //       var mk = new BMap.Marker(point2);
     //       map.addOverlay(mk);
@@ -312,10 +312,10 @@ openBaiduMap() {
     //       append += '[' + this.latitude + ',' + this.longitude + ',' + this.altitude + ']';
 
     //       that.file.writeFile(that.file.externalDataDirectory, "new_location3.txt", append, { replace: true }).then(function (success) {
-    //         console.log(success);
+    //          
     //         // success
     //       }, function (error) {
-    //         console.log(error);
+    //          
     //         // error
     //       });
 
@@ -326,7 +326,7 @@ openBaiduMap() {
   }
 
   ionViewDidEnter() {
-    console.log("about2");
+     
     var myPoint = [];
     this.markers = [];
     let map = this.map = new BMap.Map(this.map_container2.nativeElement, { enableMapClick: true });//创建地图实例
@@ -350,7 +350,7 @@ openBaiduMap() {
 
     this.httpClient.get(this.base.BASE_URL + 'auth_api/user', { headers: { token: localStorage['token'] } })
       .subscribe(data => {
-        // console.log(d);
+        //  
         var center = '';
         if (data['town'] != null)
           center = data['town'] + center;
@@ -369,18 +369,18 @@ openBaiduMap() {
     }).subscribe(res => {
       for (var i = 0; i < res['data'].length; i++) {
         this.markers = [];
-        // console.log(res['data'][i]);
+        //  
         for(var j = 0; j < res['data'][i].trackGroup.length; j++){
           var point = this.coordinateConvertor.wgs2bd(res['data'][i].trackGroup[j].latitude, res['data'][i].trackGroup[j].longitude);
           point = new BMap.Point(point[1], point[0]);
           addText(res['data'][i].trackGroup[j].linename, point);
           this.markers.push(point);
         }
-        // console.log("mark",this.markers);
+        //  
         this.addMarker()
         // if (res['data'][i].longitude && res['data'][i].latitude) {
         //   if (i == 0)
-        //     console.log(res['data'][i].latitude);
+        //      
 
         //   var point = this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
         //   point = new BMap.Point(point[1], point[0]);

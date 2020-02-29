@@ -116,7 +116,7 @@ export class NewMedicinePage {
         if (this.curSubmitted >= this.preSubmitted) {
             if (localStorage["medicineCache"]) {
                 (async () => {
-                    console.log("确认");
+                     
                     let tmpDeviceList = [];
                     const tmpStorage = JSON.parse(localStorage["medicineCache"]);
                     this.preSubmitted = tmpStorage.length;
@@ -125,29 +125,29 @@ export class NewMedicinePage {
                     for (let i = 0; i < tmpStorage.length; i++) {
                         await this.postMedicine(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                             res => {
-                                console.log("成功");
-                                console.log(res);
+                                 
+                                 
                                 resolved++;
                             }, msg => {
-                                console.log("失败");
-                                console.log(msg);
+                                 
+                                 
                                 rejected++;
                                 tmpDeviceList.push(tmpStorage[i]);
                             }
                         ).catch((error) => {
-                            console.log(error);
+                             
                         });
                         this.curSubmitted = resolved + rejected;
                     }
                     this.preSubmitted = resolved + rejected;
                     for (let i = 0; i < tmpDeviceList.length; ++i) {
                         this.indexList.push(tmpDeviceList[i]);
-                        console.log(tmpDeviceList[i]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log(this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('medicineCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -165,18 +165,18 @@ export class NewMedicinePage {
 
             tmpStorage2 = JSON.parse(localStorage["medicineBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
             var i = 0;
 
             tmpStorage2.forEach(element => {
 
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -184,7 +184,7 @@ export class NewMedicinePage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("成功绑定了", "", () => {
                             });
@@ -226,12 +226,12 @@ export class NewMedicinePage {
                     }
                 })
                 .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
-                    console.log("cacheData");
+                     
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
@@ -240,8 +240,8 @@ export class NewMedicinePage {
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
-                    console.log(msg);
-                    console.log("失败");
+                     
+                     
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
@@ -259,7 +259,7 @@ export class NewMedicinePage {
     }
 
     testCache() {
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -287,8 +287,8 @@ export class NewMedicinePage {
 
     postMedicine(element, httpClient, base, tmpStorage, i) {
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
 
         if (element.img != null) {
             let options: FileUploadOptions = {};
@@ -313,8 +313,8 @@ export class NewMedicinePage {
                 curRow: i
             };
             options.headers = {token: localStorage['token']};
-            console.log("options");
-            console.log(options);
+             
+             
 
 
             //创建文件对象
@@ -325,11 +325,11 @@ export class NewMedicinePage {
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, base.BASE_URL + 'app/Addmedicine', options)
                     .then((res) => {
-                        console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
+                         
+                         
+                         
 
-                        console.log(res);
+                         
                         if (JSON.parse(res.response).isComp == true) {
                             that.isComplete = true;
                         } else {
@@ -339,7 +339,7 @@ export class NewMedicinePage {
                         resolve('ok');
 
                     }, async (msg) => {
-                        console.log("数据是", that.curOptions);
+                         
                         await httpClient.post(base.BASE_URL + 'app/Addmedicine', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -358,7 +358,7 @@ export class NewMedicinePage {
                                 }
                             })
                             .toPromise().then(res => {
-                                console.log(JSON.parse(JSON.stringify(res)));
+                                 
                                 if (JSON.parse(JSON.stringify(res)).isComp == true) {
                                     that.isComplete = true;
                                 } else {
@@ -368,7 +368,7 @@ export class NewMedicinePage {
                                 // that.base.showAlert("提示", "无图片提交成功", () => { });
                                 resolve('ok');
                             }, msg => {
-                                console.log(msg);
+                                 
                                 that.isSubProcessFin = false;
                                 reject('error');
                             })
@@ -382,8 +382,8 @@ export class NewMedicinePage {
             })
         } else {
             return new Promise((resolve, reject) => {
-                console.log("=====Element图片为空=====");
-                console.log(element);
+                 
+                 
                 httpClient.post(base.BASE_URL + 'app/Addmedicine', {},
                     {
                         headers: {token: localStorage['token']}, params: {
@@ -401,8 +401,8 @@ export class NewMedicinePage {
                             curRow: i
                         }
                     }).toPromise().then(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     if (JSON.parse(JSON.stringify(res)).isComp == true) {
                         that.isComplete = true;
                     } else {
@@ -410,7 +410,7 @@ export class NewMedicinePage {
                     }
                     resolve('ok');
                 }, (msg) => {
-                    console.log(msg);
+                     
                     reject('error');
                     // this.base.showAlert('提示', '提交失败', () => { });
                 });
@@ -419,24 +419,24 @@ export class NewMedicinePage {
     }
 
     async ionViewDidLoad() {
-        // console.log('ionViewDidLoad NewMedicinePage');
+        //  
         /*if (localStorage["medicineBind"]) {
             var tmpStorage2 = [];
 
             tmpStorage2 = JSON.parse(localStorage["medicineBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
             var i = 0;
 
             tmpStorage2.forEach(element => {
 
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -444,7 +444,7 @@ export class NewMedicinePage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("成功绑定了", "", () => {
                             });
@@ -460,8 +460,8 @@ export class NewMedicinePage {
             })
         }*/
 
-        console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['device']);
+         
+         
         var that = this;
         /*if (localStorage["medicineCache"]) {
             const alert = this.alertCtrl.create({
@@ -470,7 +470,7 @@ export class NewMedicinePage {
                 buttons: [
                     {
                         text: '确认', handler: async () => {
-                            console.log("确认");
+                             
                             let tmpDeviceList = [];
                             var tmpStorage = JSON.parse(localStorage["medicineCache"]);
                             //var i = 0;
@@ -482,25 +482,25 @@ export class NewMedicinePage {
                             for (var i = 0; i < tmpStorage.length; i++) {
                                 await this.postMedicine(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                                     res => {
-                                        console.log("成功");
-                                        console.log(res);
+                                         
+                                         
                                     }, msg => {
-                                        console.log("失败");
-                                        console.log(msg);
+                                         
+                                         
                                         tmpDeviceList.push(tmpStorage[i]);
                                     }
                                 ).catch((error) => {
-                                    console.log(error);
+                                     
                                 })
                             }
                             for (let i = 0; i < tmpDeviceList.length; ++i) {
                                 this.indexList.push(tmpDeviceList[i]);
-                                console.log(tmpDeviceList[i]);
+                                 
                             }
-                            console.log("失败的缓存");
-                            console.log(this.indexList);
+                             
+                             
                             if (this.indexList.length <= 0) {
-                                console.log("清除缓存");
+                                 
                                 localStorage.removeItem('medicineCache');
                             } else {
                                 localStorage.setItem('medicineCache', JSON.stringify(this.indexList));
@@ -509,7 +509,7 @@ export class NewMedicinePage {
                         }
                     }, {
                         text: '取消', handler: () => {
-                            console.log("取消");
+                             
 
                         }
                     }]
@@ -520,9 +520,9 @@ export class NewMedicinePage {
 
         //         await (async (i)=>{
         //             var element = tmpStorage[i];
-        //             console.log(element);
-        //             console.log("====图片路径====");
-        //             console.log(element);
+        //              
+        //              
+        //              
         // if (element.img != null) {
         //     let options: FileUploadOptions = {};
         //     options.fileKey = "image";
@@ -537,8 +537,8 @@ export class NewMedicinePage {
         //         workContentValue: element.workContentValue,controlarea:element.controlarea
         //     };
         //     options.headers = { token: localStorage['token'] };
-        //     console.log("options");
-        //     console.log(options);
+        //      
+        //      
 
 
         //     //创建文件对象
@@ -551,9 +551,9 @@ export class NewMedicinePage {
         //     let observer = await new Promise((resolve,reject)=>{
         //         fileTransfer.upload(element.img, this.base.BASE_URL + 'app/Addmedicine', options)
         //             .then((res) => {
-        //                     console.log(res);
-        //                     console.log(JSON.stringify(res));
-        //                     console.log(JSON.parse(JSON.stringify(res)).message);
+        //                      
+        //                      
+        //                      
         //                     if (JSON.parse(res.response).isComp == true) {
         //                         this.isComplete = true;
         //                     } else {
@@ -572,7 +572,7 @@ export class NewMedicinePage {
         //                         }
         //                     })
         //                     .toPromise().then(res => {
-        //                         console.log(JSON.parse(JSON.stringify(res)));
+        //                          
         //                         if (JSON.parse(JSON.stringify(res)).isComp == true){
         //                             this.isComplete = true;
         //                         }else{
@@ -582,7 +582,7 @@ export class NewMedicinePage {
         //                         this.base.showAlert("提示", "无图片提交成功", () => { });
         //                         resolve('ok');
         //                     }, msg => {
-        //                         console.log(msg);
+        //                          
         //                         this.isSubProcessFin = false;
         //                         reject('error');
         //                     })
@@ -594,7 +594,7 @@ export class NewMedicinePage {
         //                         reject('error');
         //                 })
         //         }).catch((error)=>{
-        //             console.log(error);
+        //              
         //         })
         //         that.observers.push(observer);
         //     i++;
@@ -604,7 +604,7 @@ export class NewMedicinePage {
         //     if (i >= tmpStorage.length)
         //         localStorage.removeItem('medicineCache');
         // }, (error) => {//发送失败(网络出错等)
-        //     console.log(error);
+        //      
         //         this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
         //             {
         //                 headers: { token: localStorage['token'] }, params: {
@@ -615,8 +615,8 @@ export class NewMedicinePage {
         //             })
         //             .subscribe(res => {
         //                 i++;
-        //                 console.log(JSON.stringify(res));
-        //                 console.log(JSON.parse(JSON.stringify(res)).message);
+        //                  
+        //                  
         //                 // this.base.showAlert('提示', '提交成功', () => { });
         //                 if(i>=tmpStorage.length)
         //                     localStorage.removeItem('medicineCache');
@@ -626,7 +626,7 @@ export class NewMedicinePage {
         //     // this.base.showAlert('提示', '提交失败', () => { });
         // })
         //         } else {
-        //             console.log(element);
+        //              
         //             let obs =  await new Promise((resolve,reject)=>{
         //             this.httpClient.post(this.base.BASE_URL + 'app/Addmedicine', {},
         //                 {
@@ -638,8 +638,8 @@ export class NewMedicinePage {
         //                 })
         //                 .subscribe(res => {
         //                     // i++;
-        //                     // console.log(JSON.stringify(res));
-        //                     // console.log(JSON.parse(JSON.stringify(res)).message);
+        //                     //  
+        //                     //  
         //                     // // this.base.showAlert('提示', '提交成功', () => { });
         //                     // if(i>=tmpStorage.length)
         //                     //     localStorage.removeItem('medicineCache');
@@ -650,12 +650,12 @@ export class NewMedicinePage {
         //                     }
         //                     resolve('ok');
         //                 }, (msg) => {
-        //                     console.log(msg);
+        //                      
         //                     reject('error');
         //                     // this.base.showAlert('提示', '提交失败', () => { });
         //                 });
         //             }).catch((error)=>{
-        //                 console.log(error);
+        //                  
         //             })
         //             that.observers.push(obs);
 
@@ -664,17 +664,17 @@ export class NewMedicinePage {
         //         })(i)
         //     }
         //                 Promise.all(that.observers).then((resolve) => {
-        //                     console.log(resolve);
+        //                      
         //                     loader.dismiss();
-        //                         console.log("*****清除缓存了******");
+        //                          
         //                     if (that.isComplete){
         //                         localStorage.removeItem('medicineCache');
         //                     }
         //                 }, (reject) => {
-        //                     console.log(reject);
+        //                      
         //                     loader.dismiss();
         //                 }).catch((reason) => {
-        //                     console.log(reason);
+        //                      
         //                     loader.dismiss();
         //                 })
 
@@ -682,10 +682,10 @@ export class NewMedicinePage {
 
         // 药剂名称
         if (localStorage["Medicinename"]) {
-            console.log(localStorage["Medicinename"]);
+             
             this.medicinename = JSON.parse(localStorage["Medicinename"]);
-            console.log("缓存");
-            console.log(this.medicinename);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getMedicinename', {},
@@ -696,12 +696,12 @@ export class NewMedicinePage {
             .subscribe(res => {
                     var c: any = res;
                     this.medicinename = Array.from(c);
-                    console.log(this.medicinename);
+                     
                     localStorage['Medicinename'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
         //药剂质量不需要后端获取
@@ -709,10 +709,10 @@ export class NewMedicinePage {
 
         // 工作内容
         if (localStorage["MedicineWorkContent"]) {
-            console.log(localStorage["MedicineWorkContent"]);
+             
             this.medicineworkContent = JSON.parse(localStorage["MedicineWorkContent"]);
-            console.log("缓存");
-            console.log(this.medicineworkContent);
+             
+             
         }
 
         this.httpClient.post(this.base.BASE_URL + 'app/getMedicineWorkContent', {},
@@ -723,12 +723,12 @@ export class NewMedicinePage {
             .subscribe(res => {
                     var c: any = res;
                     this.medicineworkContent = Array.from(c);
-                    console.log(this.medicineworkContent);
+                     
                     localStorage['MedicineWorkContent'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
     }
@@ -759,18 +759,18 @@ export class NewMedicinePage {
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
-                console.log(params.id);
+                 
                 var allDevice = JSON.parse(localStorage["device"]);
-                console.log(localStorage["device"]);
-                console.log("Array");
-                console.log(allDevice[0]);
+                 
+                 
+                 
 
                 var flag = 0;
-                console.log(params.id.charAt(8) === "5");
+                 
 
                 allDevice.forEach(element => {
-                    console.log("element");
-                    // console.log(element);
+                     
+                    //  
                     if ((element.scanId == params.id && element.id.charAt(8) == '5'))
                         flag = 1;
                 });
@@ -862,48 +862,48 @@ export class NewMedicinePage {
     }
 
     scan() {
-        console.log("scan");
-        console.log(localStorage['username']);
+         
+         
         this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
 
     submit() {
         this.have_submit = true;
         // let num1 = 0;
-        // console.log(this.medicinenumber);
+        //  
         // // if (parseInt(this.medicinenumber) < 0 || parseInt(this.medicinenumber) == NaN) {
         // if (this.medicinenumber < 0 || this.medicinenumber == NaN) {
-        //     console.log("medicinenumber不合法");
+        //      
         //     this.medicinenumber = 0;
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // if (!this.medicinenumber) {
-        //     console.log("medicinenumber不合法");
+        //      
         //     this.medicinenumber = 0;
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // num1 = this.medicinenumber;
         // this.medicinenumber = num1;
         // if (this.medicinenumber == 'NaN') {
-        //     console.log("medicinenumber不合法");
+        //      
         //     this.medicinenumber = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // let num2 = 0;
         // if (this.controlarea < 0 || this.controlarea == NaN) {
-        //     console.log("controlarea不合法");
+        //      
         //     this.controlarea = 0;
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // if (!this.controlarea) {
-        //     console.log("controlarea不合法");
+        //      
         //     this.controlarea = 0;
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
         // num2 = this.controlarea;
         // this.controlarea = num2;
         // if (this.controlarea == 'NaN') {
-        //     console.log("controlarea不合法");
+        //      
         //     this.controlarea = "";
         //     // this.base.showAlert('提示', '请输入数字', () => { });
         // }
@@ -921,8 +921,8 @@ export class NewMedicinePage {
         // var r = /^(?:[1-9]\d*|0)(?:\.\d+)?$/;
         // var flag1=r.test(this.medicinenumber.toString())
         // var flag2=r.test(this.controlarea.toString())
-        // console.log(flag1);
-        // console.log(flag2);
+        //  
+        //  
 
         if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
@@ -950,8 +950,8 @@ export class NewMedicinePage {
                     controlarea: this.controlarea
                 };
                 options.headers = {token: localStorage['token']};
-                console.log("options");
-                console.log(options);
+                 
+                 
 
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
@@ -965,9 +965,9 @@ export class NewMedicinePage {
                 }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/Addmedicine', options)
                     .then((res) => {
-                        console.log(res);
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
+                         
 
                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -1006,7 +1006,7 @@ export class NewMedicinePage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
@@ -1035,8 +1035,8 @@ export class NewMedicinePage {
                                 }
                             })
                             .subscribe(res => {
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                 
+                                 
                                 // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                 this.base.showAlert('提示', '提交成功', () => {
                                 });
@@ -1052,8 +1052,8 @@ export class NewMedicinePage {
                                     workContentValue: this.workContentValue,
                                     controlarea: this.controlarea
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, (msg) => {
@@ -1074,8 +1074,8 @@ export class NewMedicinePage {
                                     workContentValue: this.workContentValue,
                                     controlarea: this.controlarea
                                 };
-                                console.log("cacheData");
-                                console.log(cacheData);
+                                 
+                                 
 
                                 let medicineCache: any;
                                 medicineCache = localStorage.getItem('medicineCache');
@@ -1090,14 +1090,14 @@ export class NewMedicinePage {
                                 // }catch(oException){
                                 //     if(oException.name == 'QuotaExceededError'){
                                 //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                                //         //console.log('已经超出本地存储限定大小！');
+                                //         // 
                                 //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                                 //       // localStorage.clear();
                                 //       // localStorage.setItem(key,value);
                                 //     }
                                 // }
                                 localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
-                                console.log("Hello");
+                                 
 
                                 //this.navCtrl.pop();
                                 // confirm.dismiss();
@@ -1143,8 +1143,8 @@ export class NewMedicinePage {
                         }
                     })
                     .subscribe(res => {
-                        console.log(JSON.stringify(res));
-                        console.log(JSON.parse(JSON.stringify(res)).message);
+                         
+                         
                         // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => {
                         });
@@ -1160,8 +1160,8 @@ export class NewMedicinePage {
                             workContentValue: this.workContentValue,
                             controlarea: this.controlarea
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
@@ -1182,8 +1182,8 @@ export class NewMedicinePage {
                             workContentValue: this.workContentValue,
                             controlarea: this.controlarea
                         };
-                        console.log("cacheData");
-                        console.log(cacheData);
+                         
+                         
 
                         let medicineCache: any;
                         medicineCache = localStorage.getItem('medicineCache');
@@ -1198,14 +1198,14 @@ export class NewMedicinePage {
                         // }catch(oException){
                         //     if(oException.name == 'QuotaExceededError'){
                         //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                        //         //console.log('已经超出本地存储限定大小！');
+                        //         // 
                         //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                         //       // localStorage.clear();
                         //       // localStorage.setItem(key,value);
                         //     }
                         // }
                         localStorage.setItem('medicineCache', JSON.stringify(medicineCache));
-                        console.log("Hello");
+                         
 
                         //this.navCtrl.pop();
                         // confirm.dismiss();
@@ -1218,16 +1218,16 @@ export class NewMedicinePage {
     }
 
     medicineClick() {
-        console.log("medicine");
+         
     }
 
     deviceIdInput() {
-        console.log("ok");
-        console.log(this.deviceId);
+         
+         
     }
 
     deviceSerialInput() {
-        console.log(this.deviceSerial);
+         
     }
 
 

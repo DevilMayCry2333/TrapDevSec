@@ -10,6 +10,7 @@ import { NewHomePage} from "../newhome/newhome";
 import { Base } from '../../common/base.js'
 import { AlertController } from 'ionic-angular';
 import {NewMedicinePage} from '../new-medicine/new-medicine'
+import {Diagnostic} from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'app-switchProject',
@@ -19,7 +20,18 @@ export class switchProjectPage {
 
     constructor(private navCtl: NavController, 
         private alertCtrl: AlertController,
-        private httpClient: HttpClient, private base: Base) { }
+        private httpClient: HttpClient, private base: Base,
+        private diagnostic: Diagnostic) {
+            //安卓限定
+            this.diagnostic.getLocationMode().then((status) => {
+                if (status == this.diagnostic.locationMode.DEVICE_ONLY) {
+
+                } else {
+                  this.base.showAlert('提示', '请设置为仅限设备', ()=>{this.diagnostic.switchToLocationSettings();});
+                }
+              }).catch((e)=>{alert(e)})
+
+         }
 
     ionViewDidLoad(){
         this.httpClient.post(this.base.BASE_URL + 'app/getMyDevice', {},
@@ -36,7 +48,7 @@ export class switchProjectPage {
     }
 
     trapClick() {
-        console.log("trap");
+         
         // this.navCtl.push(NewMedicinePage);
         this.navCtl.push(TrapPage);
     }
@@ -48,7 +60,7 @@ export class switchProjectPage {
     }
 
     medicineClick() {
-        //console.log("trap");         //控制台输出
+        //          //控制台输出
         this.navCtl.push(NewMedicinePage);
         //this.navCtl.push(TrapPage);
     }
@@ -61,12 +73,12 @@ export class switchProjectPage {
                     text: '确认', handler: () => {
                     localStorage.removeItem("token");
                     this.navCtl.push(NewHomePage);
-                        console.log("ok");
+                         
                     }
                 },
                 {
                     text: '取消', handler: () => {
-                        console.log("cancel");
+                         
                     }
                 }
 

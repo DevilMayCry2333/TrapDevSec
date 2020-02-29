@@ -97,23 +97,23 @@ export class TrapPage {
                 public events: Events,
                 public network: Network,
                 public toast: ToastController) {
-        console.log('constructor:');
+         
         this.checkNetWork();
         // this.testCache();
     }
 
     otherTypeSelect() {
-        // console.log(this.otherbettleType);
+        //  
         // console.log(this.otherbettleType[0])
         // console.log(this.otherbettleType[0].name)
-        // console.log(this.BeetleType);
-        // console.log(this.otherbettleType.length);
+        //  
+        //  
         var otherId ='';
         var len=this.otherbettleType.length;
         for(var n=0;n<len;n++){
-            // console.log("看这里");
-            // console.log(this.otherbettleType[n]);
-            // console.log(this.otherbettleType[n].name);
+            //  
+            //  
+            //  
             if(this.otherbettleType[n].name=="无"){
                 otherId=this.otherbettleType[n].id;
             }
@@ -133,7 +133,7 @@ export class TrapPage {
         localStorage.removeItem('maintenanceCache');
         //一秒3500,4000报错
         for (var i = 0; i < 1; i++) {
-            console.log(i);
+             
             this.deviceId = Math.ceil(i + 10000).toString();
             this.longtitude = ((Math.random() * 0.1 + 119.23113951284115)).toString();
             this.latitude = ((Math.random() * 0.1 + 26.083115579358804)).toString();
@@ -193,12 +193,12 @@ export class TrapPage {
                     }
                 })
                 .subscribe(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
-                    console.log("cacheData");
+                     
 
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
@@ -207,8 +207,8 @@ export class TrapPage {
 
                     this.base.showAlert("提交", "提交失败", () => {
                     });
-                    console.log(msg);
-                    console.log("失败");
+                     
+                     
                     var transferParam = {scanId: this.deviceId, serial: this.deviceSerial};
                     let BindIdCache: any;
                     BindIdCache = localStorage.getItem('trapBind');
@@ -230,12 +230,12 @@ export class TrapPage {
         //         params: new HttpParams({ fromObject: { scanId: this.deviceId, serial: this.deviceSerial } })
         //     })
         //     .subscribe(res => {
-        //         console.log(res);
+        //          
         //         this.base.showAlert("成功", "", () => { });
         //     },(msg) => {
-        //         console.log("===提交失败====");
+        //          
 
-        //             console.log(msg);
+        //              
 
 
         //         })
@@ -274,8 +274,8 @@ export class TrapPage {
         if (this.xhr) return;
         this.xhr = true;
         var that = this;
-        console.log(element);
-        console.log("====图片路径====");
+         
+         
 
         if (element.img != null) {
             let options: FileUploadOptions = {};
@@ -293,8 +293,8 @@ export class TrapPage {
                 otherNum: element.otherNum, otherType: element.otherType, allLength: tmpStorage.length, curRow: i
             };
             options.headers = {token: localStorage['token']};
-            console.log("options");
-            console.log(options);
+             
+             
 
 
             //创建文件对象
@@ -305,11 +305,11 @@ export class TrapPage {
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
                     .then((res) => {
-                        console.log("======进入文件上传=====");
-                        console.log("====文件路径=====");
-                        console.log(element.img);
+                         
+                         
+                         
 
-                        console.log(res);
+                         
                         if (JSON.parse(res.response).isComp == true) {
                             that.isComplete = true;
                         } else {
@@ -319,7 +319,7 @@ export class TrapPage {
                         resolve('ok');
 
                     }, async (msg) => {
-                        console.log("数据是", that.curOptions);
+                         
                         await httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                             {
                                 headers: {token: localStorage['token']}, params: {
@@ -340,7 +340,7 @@ export class TrapPage {
                                 }
                             })
                             .toPromise().then(res => {
-                                console.log(JSON.parse(JSON.stringify(res)));
+                                 
                                 if (JSON.parse(JSON.stringify(res)).isComp == true) {
                                     that.isComplete = true;
                                 } else {
@@ -350,7 +350,7 @@ export class TrapPage {
                                 // that.base.showAlert("提示", "无图片提交成功", () => { });
                                 resolve('ok');
                             }, msg => {
-                                console.log(msg);
+                                 
                                 that.isSubProcessFin = false;
                                 reject('error');
                             })
@@ -376,7 +376,7 @@ export class TrapPage {
             //                 }
             //             })
             //             .toPromise().then(res => {
-            //                 console.log(JSON.parse(JSON.stringify(res)));
+            //                  
             //                 if (JSON.parse(JSON.stringify(res)).isComp == true){
             //                     this.isComplete = true;
             //                 }else{
@@ -385,12 +385,12 @@ export class TrapPage {
             //                 this.base.showAlert("提示", "无图片提交成功", () => { });
             //                 resolve('ok');
             //             }, msg => {
-            //                 console.log(msg);
+            //                  
             //                 reject('error');
             //             })
 
             //     }).catch((error) => {
-            //         console.log(error);
+            //          
             //     });
             //     that.observers.push(obs);
             // }
@@ -398,8 +398,8 @@ export class TrapPage {
 
         } else {
             return new Promise((resolve, reject) => {
-                console.log("=====Element图片为空=====");
-                console.log(element);
+                 
+                 
                 this.xhr = httpClient.post(this.base.BASE_URL + 'auth_api/maintenance', {},
                     {
                         headers: {token: localStorage['token']}, params: {
@@ -419,8 +419,8 @@ export class TrapPage {
                             curRow: i.toString()
                         }
                     }).pipe(/*publishReplay()*//*share()*//*timeout(30000)*/)/*.timeout(1000)*/.toPromise().then(res => {
-                    console.log(JSON.stringify(res));
-                    console.log(JSON.parse(JSON.stringify(res)).message);
+                     
+                     
                     if (JSON.parse(JSON.stringify(res)).isComp == true) {
                         that.isComplete = true;
                     } else {
@@ -428,7 +428,7 @@ export class TrapPage {
                     }
                     resolve('ok');
                 }, (msg) => {
-                    console.log(msg);
+                     
                     reject('error');
                     // this.base.showAlert('提示', '提交失败', () => { });
                 });
@@ -437,7 +437,7 @@ export class TrapPage {
     }
 
     ionViewDidEnter() {
-        console.log('ionViewDidEnter...');
+         
     }
 
     static checkNetworkState: boolean = false;
@@ -459,7 +459,7 @@ export class TrapPage {
     }
 
     testCache() {
-        console.log('generate cache...');
+         
         let maintenanceCache: any;
         for (let i = 0; i < 100; i++) {
             const cacheExp = {
@@ -491,13 +491,13 @@ export class TrapPage {
     curSubmitted = 0;
 
     checkPostMaintenanceCache() {
-        console.log('check post cache...');
-        console.log('preSubmitted => ' + this.preSubmitted + ' curSubmitted => ' + this.curSubmitted);
+         
+         
         if (this.curSubmitted >= this.preSubmitted) {
             if (localStorage["maintenanceCache"]) {
                 (async () => {
                     const tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
-                    console.log('tmpStorage.len => ', tmpStorage.length);
+                     
                     this.preSubmitted = tmpStorage.length;
                     let tmpDeviceList = [];
                     this.indexList = [];
@@ -508,33 +508,33 @@ export class TrapPage {
                         this.xhr = false;
                         await this.postMaintenance(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                             res => {
-                                console.log("成功");
-                                console.log(res);
+                                 
+                                 
                                 resolved++;
                                 // this.resolvedList[i] = true;
                             }, msg => {
-                                console.log("失败");
-                                console.log(msg);
+                                 
+                                 
                                 rejected++;
                                 // if (!this.resolvedList[i])
                                 tmpDeviceList.push(tmpStorage[i]);
                             }
                         ).catch((error) => {
-                            console.log(error);
+                             
                         });
                         this.curSubmitted = resolved + rejected;
                     }
-                    console.log('resolved =>' + resolved);
-                    console.log('rejected =>' + rejected);
+                     
+                     
                     this.preSubmitted = resolved + rejected;
                     for (let i = 0; i < tmpDeviceList.length; ++i) {
                         this.indexList.push(tmpDeviceList[i]);
-                        console.log(tmpDeviceList[i]);
+                         
                     }
-                    console.log("失败的缓存");
-                    console.log('indexList => ' + this.indexList);
+                     
+                     
                     if (this.indexList.length <= 0) {
-                        console.log("清除缓存");
+                         
                         localStorage.removeItem('maintenanceCache');
                         this.preSubmitted = 0;
                         this.curSubmitted = 0;
@@ -553,16 +553,16 @@ export class TrapPage {
 
             tmpStorage2 = JSON.parse(localStorage["trapBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
 
             tmpStorage2.forEach(element => {
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -570,7 +570,7 @@ export class TrapPage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             if (tmpStorage2.length == i) {
                                 localStorage.removeItem("trapBind");
@@ -583,33 +583,33 @@ export class TrapPage {
     }
 
     async ionViewDidLoad() {
-        console.log('preSubmitted => ' + this.preSubmitted + ' curSubmitted => ' + this.curSubmitted);
-        console.log('ionViewDidLoad LocatePage');
-        console.log(localStorage['otherbettleType']);
-        console.log(localStorage['TrapWorkContent']);
-        console.log(localStorage['TrapinjectType']);
-        console.log(localStorage["maintenanceCache"]);
+         
+         
+         
+         
+         
+         
         // localStorage.removeItem('maintenanceCache');
-        console.log('check post cache...');
+         
         if (localStorage["TrapWorkContent"]) {
-            console.log(localStorage["TrapWorkContent"]);
+             
             this.workContent = JSON.parse(localStorage["TrapWorkContent"]);
-            console.log("缓存");
-            console.log(this.workContent);
+             
+             
         }
 
         if (localStorage["otherbettleType"]) {
-            console.log(localStorage["otherbettleType"]);
+             
             this.otherbettleType = JSON.parse(localStorage["otherbettleType"]);
-            console.log("缓存");
-            console.log(this.otherbettleType);
+             
+             
         }
 
         if (localStorage["TrapinjectType"]) {
-            console.log(localStorage["TrapinjectType"]);
+             
             this.injectType = JSON.parse(localStorage["TrapinjectType"]);
-            console.log("缓存");
-            console.log(this.injectType);
+             
+             
         }
 
 
@@ -619,16 +619,16 @@ export class TrapPage {
 
             tmpStorage2 = JSON.parse(localStorage["trapBind"]);
 
-            console.log(tmpStorage2.length);
+             
             // localStorage.removeItem("trapBind");
 
-            console.log(tmpStorage2);
+             
 
             tmpStorage2.forEach(element => {
-                console.log("===开始===");
+                 
 
-                console.log(element.scanId);
-                console.log(element.serial);
+                 
+                 
 
                 this.httpClient.post(this.base.BASE_URL + 'app/bindId', {},
                     {
@@ -636,7 +636,7 @@ export class TrapPage {
                         params: new HttpParams({fromObject: {scanId: element.scanId, serial: element.serial}})
                     })
                     .subscribe(res => {
-                            console.log(res);
+                             
                             i++;
                             this.base.showAlert("提示", "成功绑定了", () => {
                             });
@@ -663,7 +663,7 @@ export class TrapPage {
                 buttons: [
                     {
                         text: '确认', handler: async () => {
-                            console.log("确认");
+                             
                             var tmpStorage = JSON.parse(localStorage["maintenanceCache"]);
                             let tmpDeviceList = [];
                             const loader = this.loadingCtrl.create({
@@ -674,25 +674,25 @@ export class TrapPage {
                             for (let i = 0; i < tmpStorage.length; ++i) {
                                 await this.postMaintenance(tmpStorage[i], this.httpClient, this.base, tmpStorage, i).then(
                                     res => {
-                                        console.log("成功");
-                                        console.log(res);
+                                         
+                                         
                                     }, msg => {
-                                        console.log("失败");
-                                        console.log(msg);
+                                         
+                                         
                                         tmpDeviceList.push(tmpStorage[i]);
                                     }
                                 ).catch((error) => {
-                                    console.log(error);
+                                     
                                 })
                             }
                             for (let i = 0; i < tmpDeviceList.length; ++i) {
                                 this.indexList.push(tmpDeviceList[i]);
-                                console.log(tmpDeviceList[i]);
+                                 
                             }
-                            console.log("失败的缓存");
-                            console.log(this.indexList);
+                             
+                             
                             if (this.indexList.length <= 0) {
-                                console.log("清除缓存");
+                                 
                                 localStorage.removeItem('maintenanceCache');
                             } else {
                                 localStorage.setItem('maintenanceCache', JSON.stringify(this.indexList));
@@ -701,7 +701,7 @@ export class TrapPage {
                         }
                     }, {
                         text: '取消', handler: () => {
-                            console.log("取消");
+                             
 
                         }
                     }]
@@ -719,12 +719,12 @@ export class TrapPage {
             .subscribe(res => {
                     var c: any = res;
                     this.otherbettleType = Array.from(c);
-                    console.log(this.otherbettleType);
+                     
                     localStorage['otherbettleType'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
 
@@ -736,13 +736,13 @@ export class TrapPage {
             .subscribe(res => {
                     var c: any = res;
                     this.injectType = Array.from(c);
-                    console.log(this.injectType);
+                     
 
                     localStorage['TrapinjectType'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
 
@@ -754,14 +754,14 @@ export class TrapPage {
             .subscribe(res => {
                     var c: any = res;
                     this.workContent = Array.from(c);
-                    console.log(this.workContent);
-                    console.log(this.workContent);
+                     
+                     
 
                     localStorage['TrapWorkContent'] = JSON.stringify(res);
 
                 },
                 res => {
-                    console.log(res);
+                     
                 })
 
     }
@@ -777,17 +777,17 @@ export class TrapPage {
     callBack = (params) => {
         return new Promise((resolve, reject) => {
             if (params) {
-                console.log(params.id);
+                 
                 var allDevice = JSON.parse(localStorage["device"]);
-                console.log(localStorage["device"]);
-                console.log("Array");
-                console.log(allDevice[0]);
+                 
+                 
+                 
 
                 var flag = 0;
-                console.log(params.id.charAt(8) == '1');
+                 
                 allDevice.forEach(element => {
-                    console.log("element");
-                    // console.log(element);
+                     
+                    //  
                     if ((element.scanId == params.id && element.id.charAt(8) == '1'))
                         flag = 1;
                 });
@@ -802,7 +802,7 @@ export class TrapPage {
                     let watch = this.geolocation.watchPosition(options);
 
                     this.subscription = watch.subscribe((data) => {
-                        console.log("检测到数据:",data);              
+                         
                         // data can be a set of coordinates, or an error (if an error occurred).
                         if (data['coords']) {
                             // setTimeout(() => {
@@ -869,12 +869,12 @@ export class TrapPage {
     };
 
     trapClick() {
-        console.log("trap");
+         
     }
 
     scan() {
-        console.log("scan");
-        console.log(localStorage['username']);
+         
+         
         this.navCtrl.push(ScanPage, {callBack: this.callBack});
     }
 
@@ -885,15 +885,15 @@ export class TrapPage {
     submit() {
         this.isDisabled = true;
         this.have_submit = true;
-        console.log(this.injectTypeValue);
-        console.log(this.WorkContentValue);
-        console.log(this.BeetleType);
+         
+         
+         
         //let num1 = 0;
         var r = /^(0|[1-9]\d*)$/;
         var flag1=r.test(this.newbettle);
         var flag2=r.test(this.otherbettle );
-        console.log(flag1);
-        console.log(flag2);
+         
+         
         // if (parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN) {
         //     this.base.showAlert('提示', '请输入数字', () => { });
         //     this.newbettle = "";
@@ -934,9 +934,9 @@ export class TrapPage {
             });
         } else {
 
-            console.log(this.injectTypeValue);
-            console.log(this.WorkContentValue);
-            console.log(this.BeetleType);
+             
+             
+             
             if (!flag1 || !flag2 || !this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
                 this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                 });
@@ -957,8 +957,8 @@ export class TrapPage {
                         otherNum: this.otherbettle, otherType: this.BeetleType
                     };
                     options.headers = {token: localStorage['token']};
-                    console.log("options");
-                    console.log(options);
+                     
+                     
 
 
                     //创建文件对象
@@ -975,9 +975,9 @@ export class TrapPage {
 
                     fileTransfer.upload(this.imageData, this.base.BASE_URL + 'auth_api/maintenance', options)
                         .then((res) => {
-                            console.log(res);
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
+                             
+                             
+                             
 
                             // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
@@ -1011,7 +1011,7 @@ export class TrapPage {
                             // }catch(oException){
                             //     if(oException.name == 'QuotaExceededError'){
                             //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                            //         //console.log('已经超出本地存储限定大小！');
+                            //         // 
                             //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                             //       // localStorage.clear();
                             //       // localStorage.setItem(key,value);
@@ -1042,8 +1042,8 @@ export class TrapPage {
                                     }
                                 })
                                 .subscribe(res => {
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
                                     // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                     this.base.showAlert('提示', '提交成功', () => {
                                     });
@@ -1061,8 +1061,8 @@ export class TrapPage {
                                         otherNum: this.otherbettle,
                                         otherType: this.BeetleType
                                     };
-                                    console.log("cacheData");
-                                    console.log(cacheData);
+                                     
+                                     
                                 })
                         })
 
@@ -1092,8 +1092,8 @@ export class TrapPage {
                             }
                         })
                         .subscribe(res => {
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
+                             
+                             
                             // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                             this.base.showAlert('提示', '提交成功', () => {
                             });
@@ -1104,8 +1104,8 @@ export class TrapPage {
                                 drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
                                 otherNum: this.otherbettle, otherType: this.BeetleType
                             };
-                            console.log("cacheData");
-                            console.log(cacheData);
+                             
+                             
 
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (msg) => {
@@ -1121,8 +1121,8 @@ export class TrapPage {
                                 drug: this.injectTypeValue, remark: this.remarks, workingContent: this.WorkContentValue,
                                 otherNum: this.otherbettle, otherType: this.BeetleType
                             };
-                            console.log("cacheData");
-                            console.log(cacheData);
+                             
+                             
 
                             let maintenanceCache: any;
                             maintenanceCache = localStorage.getItem('maintenanceCache');
@@ -1137,14 +1137,14 @@ export class TrapPage {
                             // }catch(oException){
                             //     if(oException.name == 'QuotaExceededError'){
                             //         this.base.showAlert('提示', '无法提交，缓存容量不足，请及时处理', ()=>{});
-                            //         //console.log('已经超出本地存储限定大小！');
+                            //         // 
                             //             // 可进行超出限定大小之后的操作，如下面可以先清除记录，再次保存
                             //       // localStorage.clear();
                             //       // localStorage.setItem(key,value);
                             //     }
                             // }
                             localStorage.setItem('maintenanceCache', JSON.stringify(maintenanceCache));
-                            console.log("Hello");
+                             
 
                             //this.navCtrl.pop();
                             // confirm.dismiss();
@@ -1158,8 +1158,8 @@ export class TrapPage {
     }
 
     deviceIdInput() {
-        console.log("ok");
-        console.log(this.deviceId);
+         
+         
         let num1 = 0;
         if (parseInt(this.deviceId) < 0 || parseInt(this.deviceId) == NaN) {
             this.base.showAlert('提示', '设备ID不合法', () => {
@@ -1215,7 +1215,7 @@ export class TrapPage {
     }
 
     deviceSerialInput() {
-        console.log(this.deviceSerial);
+         
     }
 
 }

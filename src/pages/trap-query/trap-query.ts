@@ -23,8 +23,8 @@ export class TrapQueryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrapQueryPage');
-    console.log(localStorage["TrapDeviceId"]);
+     
+     
 
     this.httpClient.post(this.base.BASE_URL + 'app/TrapWorker', {},
       {
@@ -33,7 +33,7 @@ export class TrapQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })
@@ -47,7 +47,7 @@ export class TrapQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })

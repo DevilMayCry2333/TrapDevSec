@@ -18,14 +18,14 @@ export class EnemyQueryPage {
   dataList:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,private httpClient:HttpClient,private base:Base) {
-    console.log(localStorage['queryEnemyID']);
+     
     // this.dataList = localStorage["queryEnemyID"];
-    //   console.log(this.dataList);
+    //    
 
   }
 
   ionViewDidLoad() {
-    console.log(localStorage['queryEnemyID']);
+     
     this.httpClient.post(this.base.BASE_URL + 'app/queryById', {},
       {
         params: {
@@ -33,18 +33,18 @@ export class EnemyQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })
 
-    console.log('ionViewDidLoad EnemyQueryPage');
+     
     
   }
   ionViewWillEnter(){
-    console.log(localStorage['queryEnemyID']);
+     
 
-    console.log(localStorage['queryEnemyID']);
+     
     this.httpClient.post(this.base.BASE_URL + 'app/queryById', {},
       {
         params: {
@@ -52,7 +52,7 @@ export class EnemyQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })

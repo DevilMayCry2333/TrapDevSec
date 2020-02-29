@@ -22,7 +22,7 @@ export class PhotoUploadPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PhotoUploadPage');
+     
   }
 
   takePhoto() {
@@ -84,16 +84,16 @@ export class PhotoUploadPage {
 
     fileTransfer.upload(imageData, this.base.BASE_URL + 'auth_api/device_img', options)
       .then((res) => {
-        console.log(res);
+         
         alert('发送成功');
       }, (error) => {//发送失败(网络出错等)
         alert('发送失败');
-        console.log(error);
+         
       })
       .catch((error) => {//发送失败(文件不存在等)
         // alert("出错" + error);
         alert('失败');
-        console.log(error);
+         
       });
   }
 

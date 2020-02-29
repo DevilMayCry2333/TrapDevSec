@@ -20,8 +20,8 @@ export class MedicineQueryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MedicineQueryPage');
-    console.log(localStorage["MedicineDeviceId"]);
+     
+     
 
     this.httpClient.post(this.base.BASE_URL + 'app/MedicineWorker', {},
       {
@@ -30,7 +30,7 @@ export class MedicineQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
       })
   }
@@ -42,7 +42,7 @@ export class MedicineQueryPage {
         }
       })
       .subscribe(res => {
-        console.log(res);
+         
         this.dataList = res;
 
       })

@@ -2,12 +2,12 @@
         this.fivePhotos = false;
         this.canSubmit = true;
 
-        console.log(localStorage["TrackCache"]);
-        console.log(localStorage["TrackCache1"]);
-        console.log(localStorage["TrackCache2"]);
-        console.log(localStorage["TrackCache3"]);
-        console.log(localStorage["TrackCache4"]);
-        console.log(localStorage["TrackCache5"]);
+         
+         
+         
+         
+         
+         
 
         if (localStorage["TrackCache"]) {
             const loader = this.loadingCtrl.create({
@@ -43,21 +43,21 @@
                             linename: element.lineName,
                         }
                     }).subscribe(res => {
-                        console.log(res);
+                         
 
                     })
 
 
-                console.log(element);
+                 
 
                 if (element.hasPic ==true ) {
 
                     for(var i = 1; i <= element.photoSum; i++){
 
-                        console.log("====当前第几条数据====");
-                        console.log(j);
-                        console.log("=====当前第几张照片====");
-                        console.log(i);
+                         
+                         
+                         
+                         
 
                         let options: FileUploadOptions = {};
                         options.fileKey = "image";
@@ -72,17 +72,17 @@
                             current: i, recordTime: JSON.parse(element.recordTime)
                         };
                         options.headers = { token: localStorage['token'] };
-                        console.log("options");
-                        console.log(options);
+                         
+                         
 
                         if(i==1){
                                 //创建文件对象
                                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
                                 fileTransfer.upload(this.photoplib1[j].img, this.base.BASE_URL + 'app/AddPhoto', options)
                                     .then((res) => {
-                                        console.log(res);
-                                        console.log(JSON.stringify(res));
-                                        console.log(JSON.parse(JSON.stringify(res)).message);
+                                         
+                                         
+                                         
                                         // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                                         // this.base.showAlert('提示', '提交成功', () => { });
@@ -100,9 +100,9 @@
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
                             fileTransfer.upload(this.photoplib2[j].img, this.base.BASE_URL + 'app/AddPhoto', options)
                                 .then((res) => {
-                                    console.log(res);
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
+                                     
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                                     // this.base.showAlert('提示', '提交成功', () => { });
@@ -120,9 +120,9 @@
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
                             fileTransfer.upload(this.photoplib3[j].img, this.base.BASE_URL + 'app/AddPhoto', options)
                                 .then((res) => {
-                                    console.log(res);
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
+                                     
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                                     // this.base.showAlert('提示', '提交成功', () => { });
@@ -139,9 +139,9 @@
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
                             fileTransfer.upload(this.photoplib4[j].img, this.base.BASE_URL + 'app/AddPhoto2', options)
                                 .then((res) => {
-                                    console.log(res);
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
+                                     
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                                     // this.base.showAlert('提示', '提交成功', () => { });
@@ -158,9 +158,9 @@
                             const fileTransfer: FileTransferObject = this.fileTransfer.create();
                             fileTransfer.upload(this.photoplib5[j].img, this.base.BASE_URL + 'app/AddPhoto2', options)
                                 .then((res) => {
-                                    console.log(res);
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
+                                     
                                     // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                                     // this.base.showAlert('提示', '提交成功', () => { });
@@ -185,8 +185,8 @@
                                     }
                                 })
                                 .subscribe(res => {
-                                    console.log(JSON.stringify(res));
-                                    console.log(JSON.parse(JSON.stringify(res)).message);
+                                     
+                                     
                                     // this.base.showAlert('提示', '提交成功', () => { });
                                     localStorage.removeItem('TrackCache');
                                 }, (msg) => {
@@ -199,9 +199,9 @@
                     }
 
                     setTimeout(()=>{
-                        console.log(JSON.stringify(element.recordTime));
+                         
 
-                        console.log(element.recordTime.toString());
+                         
                         this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                             {
                                 headers: { token: localStorage['token'] }, params: {
@@ -212,8 +212,8 @@
                             })
                             .subscribe(res => {
                                 j++;
-                                console.log(JSON.stringify(res));
-                                console.log(JSON.parse(JSON.stringify(res)).message);
+                                 
+                                 
                                 // this.base.showAlert('提示', '缓存提交成功', () => { });
                                 if(j>=tmpStorage.length)
                                     localStorage.removeItem('TrackCache');
@@ -226,7 +226,7 @@
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 } else {
-                    console.log(element);
+                     
                     this.httpClient.post(this.base.BASE_URL + 'app/AddTrack', {},
                         {
                             headers: { token: localStorage['token'] }, params: {
@@ -236,8 +236,8 @@
                             }
                         })
                         .subscribe(res => {
-                            console.log(JSON.stringify(res));
-                            console.log(JSON.parse(JSON.stringify(res)).message);
+                             
+                             
                             // this.base.showAlert('提示', '提交成功', () => { });
                             j++;
                             if(j>=tmpStorage.length)

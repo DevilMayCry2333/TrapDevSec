@@ -44,8 +44,8 @@ export class NewHomePage {
     }
 
     scan() {
-        console.log("scan");
-        console.log(localStorage['username']);
+         
+         
         this.navCtl.push(ScanPage, { callBack: this.callBack });
     }
 
@@ -55,16 +55,16 @@ export class NewHomePage {
                 // this.base.showConfirmAlert("成功", params.id, () => {
                 // }, () => { })
                     this.scanId = params.id;
-                    console.log(this.scanId);
+                     
                 this.httpClient.post(this.base.BASE_URL + 'app/queryDeviceId', {},
                         { params: new HttpParams({ fromObject: { scanId: this.scanId } }) })
                         .subscribe(res => {
-                            console.log(res);
+                             
                             this.deviceId = res[0].id;
-                            console.log(this.deviceId);
+                             
                             if(this.deviceId.charAt(8)=='1'){
                                 localStorage["TrapDeviceId"] = this.scanId;
-                                console.log(localStorage["TrapDeviceId"]);
+                                 
 
                                 // setTimeout(()=>{
                                     this.navCtl.push(TrapQueryPage);
@@ -72,7 +72,7 @@ export class NewHomePage {
 
                             }else if(this.deviceId.charAt(8)=='2'){
                                 localStorage["InjectDeviceId"] = this.scanId;
-                                console.log(localStorage["TrapDeviceId"]);
+                                 
                                 // setTimeout(() => {
                                 this.navCtl.push(InjectQueryPage);
                                 // },100)
@@ -103,13 +103,13 @@ export class NewHomePage {
 
 
     login() {
-        console.log(this.username);
-        console.log(this.password);
+         
+         
         this.httpClient.post(this.base.BASE_URL + 'login', {},
             { params: new HttpParams({ fromObject: { username: this.username, password: this.password } }) })
             .subscribe(res => {
-                console.log(res);
-                console.log(res['token']);
+                 
+                 
                 localStorage['token'] = res['token'];
                 // 直接把用户名密码存了
                 localStorage['username'] = this.username;
@@ -118,7 +118,7 @@ export class NewHomePage {
                 this.navCtl.push(switchProjectPage);
             },
                 res => {
-                    console.log(res);
+                     
                     this.base.showConfirmAlert('提示', '用户名或者密码错了', () => {
 
                     }, () => { });

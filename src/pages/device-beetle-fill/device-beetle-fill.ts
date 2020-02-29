@@ -33,11 +33,11 @@ export class DeviceBeetleFillPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeviceBeetleFillPage');
+     
   }
 
   submit() {
-    console.log("提交");
+     
     
     let deviceBeetle = {};
     deviceBeetle["deviceId"] = this.navParams.get("id");
@@ -63,11 +63,11 @@ export class DeviceBeetleFillPage {
       deviceBeetleCache.push(deviceBeetle);
       
           this.file.writeFile(this.file.externalDataDirectory, "new_file5.txt", JSON.stringify(deviceBeetleCache), { replace: true }).then(function (success) {
-            console.log("newfile5");
-            console.log(success);
+             
+             
             // success
           }, function (error) {
-            console.log(error);
+             
             // error
           });
 

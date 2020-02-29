@@ -37,7 +37,7 @@ export class DeviceForestFillPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeviceForestFillPage');
+     
   }
 
   submit() {
