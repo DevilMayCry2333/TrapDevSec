@@ -800,9 +800,11 @@ export class TrapPage {
                     };
                     let that = this
                     let watch = this.geolocation.watchPosition(options);
+                    let tmp;
+                    let tmp2;
                     console.log(watch);
-
                     this.subscription = watch.subscribe((data) => {
+                        tmp = data;
                         console.log("GPS数据:" + data);
                         // data can be a set of coordinates, or an error (if an error occurred).
                         if (data['coords']) {
@@ -843,7 +845,9 @@ export class TrapPage {
                         // else{
                         //   this.base.showAlert('提示','gps信号弱，请等待',()=>{});
                         // }
-                    }, res => {
+                    }, (res) => {
+                        tmp2 = res;
+                        console.log("错误数据:" + res);
                         // setTimeout(() => {
                         //    this.base.showAlert('提示','wu',()=>{});
                         this.location_ready = false;
@@ -854,7 +858,9 @@ export class TrapPage {
 
                         // alert();
                     });
-
+                    console.log(tmp);
+                    console.log(tmp2);
+                    
                     this.base.showConfirmAlert("成功", params.id, () => {
                     }, () => {
                     })
