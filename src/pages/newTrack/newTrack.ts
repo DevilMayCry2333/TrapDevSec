@@ -20,14 +20,14 @@ import {Events} from 'ionic-angular';
     templateUrl: 'newTrack.html'
 })
 export class TrackPage {
-    // longtitude: string;
-    // latitude: string;
-    // altitude: string;
-    // accuracy: string;
-    longtitude = "1.1234567";
-    latitude = "1.1234567";
-    altitude = "1.1234567";
-    accuracy= "1.1234567";
+    longtitude: string;
+    latitude: string;
+    altitude: string;
+    accuracy: string;
+    // longtitude = "1.1234567";
+    // latitude = "1.1234567";
+    // altitude = "1.1234567";
+    // accuracy= "1.1234567";
 
     longtitudeData: Array<string>;
     latitudeData: Array<string>;
@@ -1286,7 +1286,7 @@ export class TrackPage {
             this.base.showAlert("提示", "请先输入线路名称、工作内容和延时间隔!", () => {
             });
         } else {
-                if(!flag1 || !flag2 || Number(this.lateIntravl) < 0 || Number(this.lateIntravl) == 0){
+                if(!flag1 || !flag2 || Number(this.lateIntravl) < 0 || Number(this.lateIntravl) == 0||Number(this.lateIntravl) > 999999999){
                     this.base.showAlert("提示", "线路名称及工作内容，只可填写汉字、英文、数字和符号“-”、“_”,和“.”。延时设置须填写大于0的数。", () => {
                     });
                 }

@@ -20,16 +20,16 @@ import {Events} from 'ionic-angular';
     templateUrl: 'newDry.html'
 })
 export class DryPage {
-    longtitude="1.1234567";
-    latitude="1.1234567";
-    altitude="1.1234567";
-    accuracy="1.1234567";
+    // longtitude="1.1234567";
+    // latitude="1.1234567";
+    // altitude="1.1234567";
+    // accuracy="1.1234567";
     deviceId: string
     deviceSerial: string
-    // longtitude: string
-    // accuracy: string
-    // latitude: string
-    // altitude: string
+    longtitude: string
+    accuracy: string
+    latitude: string
+    altitude: string
     woodStatusValue: string
     chestDiameter: number;
     injectName: string
@@ -980,7 +980,7 @@ export class DryPage {
         // if (!this.workContentValue){
         //     this.workContentValue = "0";
         // }
-        if (!flag1 || !flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || this.chestDiameter < 0 || this.chestDiameter == NaN || !this.chestDiameter) {
+        if (!flag1 || !flag2 || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.workContentValue || !this.injectNameValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) >999999999 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN' || this.chestDiameter < 0 || this.chestDiameter >999999999 || this.chestDiameter == NaN || !this.chestDiameter) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 

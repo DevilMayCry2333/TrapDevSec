@@ -20,19 +20,19 @@ import {Events} from 'ionic-angular';
     templateUrl: 'newEnemy.html'
 })
 export class EnemyPage {
-    longtitude = "1.1234567";
-    latitude = "1.1234567";
-    altitude = "1.1234567";
-    accuracy = "1.1234567";
+    // longtitude = "1.1234567";
+    // latitude = "1.1234567";
+    // altitude = "1.1234567";
+    // accuracy = "1.1234567";
 
     deviceId: string
     deviceSerial: string
     subscription: Subscription;
 
-    // longtitude: string
-    // latitude: string
-    // altitude: string
-    // accuracy: string
+    longtitude: string
+    latitude: string
+    altitude: string
+    accuracy: string
 
     imageData: null
 
@@ -946,7 +946,7 @@ export class EnemyPage {
         var r = /^([1-9]\d*|[0]{1,1})$/;
         var flag=r.test(this.releaseNum);
          
-        if (!flag || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+        if (!flag || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) > 999999999 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 
@@ -978,8 +978,8 @@ export class EnemyPage {
 
 
                 this.base.logger(JSON.stringify(options), "Img_newEnemyPar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
-                    this.base.showAlert("提示", "输入数量为空或不合法", () => {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) > 999999999 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                     });
                 }
                 fileTransfer.upload(this.imageData, this.base.BASE_URL + 'app/AddEnemy', options)
@@ -1134,8 +1134,8 @@ export class EnemyPage {
                     remarks: this.remarks
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_newEnemyPar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
-                    this.base.showAlert("提示", "输入数量为空或不合法", () => {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) > 999999999 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
+                    this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                     });
 
                 }

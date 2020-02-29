@@ -30,14 +30,14 @@ import {Events} from 'ionic-angular';
 export class NewMedicinePage {
     deviceId: string
     deviceSerial: string
-    longtitude = "1.789456"
-    latitude = "2.154548"
-    altitude = "1.564465"
-    accuracy = "0.999999"
-    // longtitude:string
-    // latitude:string
-    // altitude:string
-    // accuracy:string
+    // longtitude = "1.789456"
+    // latitude = "2.154548"
+    // altitude = "1.564465"
+    // accuracy = "0.999999"
+    longtitude:string
+    latitude:string
+    altitude:string
+    accuracy:string
     // woodStatusValue:string
     medicinename: any[]
     medicinenameValue: string     //
@@ -924,7 +924,7 @@ export class NewMedicinePage {
         //  
         //  
 
-        if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
+        if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber >999999999 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea >999999999 || this.controlarea == NaN) {
             this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
             });
 
@@ -958,8 +958,8 @@ export class NewMedicinePage {
 
 
                 this.base.logger(JSON.stringify(options), "Img_MedicinePar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
-                    this.base.showAlert("提示", "数量输入为空或者不合法", () => {
+                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber >999999999 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea >999999999|| this.controlarea == NaN) {
+                    this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                     });
                     return;
                 }
@@ -1122,8 +1122,8 @@ export class NewMedicinePage {
                     controlarea: this.controlarea, myDate: new Date()
                 };
                 this.base.logger(JSON.stringify(options), "NoImg_MedicinePar.txt");
-                if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea == NaN) {
-                    this.base.showAlert("提示", "数量输入为空或者不合法", () => {
+                if ( !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.medicinenameValue || !this.workContentValue || !this.medicinenumber || this.medicinenumber < 0 || this.medicinenumber >999999999 || this.medicinenumber == NaN || !this.controlarea || this.controlarea < 0 || this.controlarea >999999999 || this.controlarea == NaN) {
+                    this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                     });
                     return;
                 }

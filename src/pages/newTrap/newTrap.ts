@@ -25,14 +25,14 @@ import {ToastController} from 'ionic-angular';
 export class TrapPage {
     deviceId: string 
     deviceSerial: string
-    longtitude = "1.2"
-    latitude = "1.2"
-    altitude = "1.2"
-    accuracy = "1.2"
-    // longtitude: string
-    // latitude: string
-    // altitude: string
-    // accuracy: string
+    // longtitude = "1.2"
+    // latitude = "1.2"
+    // altitude = "1.2"
+    // accuracy = "1.2"
+    longtitude: string
+    latitude: string
+    altitude: string
+    accuracy: string
     BeetleType: string
     injectTypeValue: string
     WorkContentValue: string
@@ -940,11 +940,7 @@ export class TrapPage {
             this.base.showAlert('提示', '备注存在不合法字符', () => {
             });
         } else {
-
-             
-             
-             
-            if (!flag1 || !flag2 || !this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
+            if (!flag1 || !flag2 || !this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) >999999999 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) > 999999999|| parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
                 this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                 });
             } else {
@@ -974,8 +970,8 @@ export class TrapPage {
 
                     // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
-                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) >999999999 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) > 999999999|| parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType) {
+                        this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                         });
                         return;
                     }
@@ -1083,8 +1079,8 @@ export class TrapPage {
                         otherNum: this.otherbettle, otherType: this.BeetleType
                     };
                     this.base.logger(JSON.stringify(options), "NonImg_TrapPar.txt");
-                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType || !this.newbettle || !this.otherbettle) {
-                        this.base.showAlert("定位信息不准", "或者是数据没有填完整", () => {
+                    if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) > 999999999|| parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) > 999999999|| parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType ) {
+                        this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                         });
                         return;
                     }
