@@ -23,13 +23,13 @@ export class switchProjectPage {
         private httpClient: HttpClient, private base: Base,
         private diagnostic: Diagnostic) {
             //安卓限定
-            this.diagnostic.getLocationMode().then((status) => {
-                if (status == this.diagnostic.locationMode.DEVICE_ONLY) {
-                    this.diagnostic.switchToLocationSettings();
-                } else {
-                  this.base.showAlert('提示', '请设置为仅限设备', ()=>{this.diagnostic.switchToLocationSettings();});
-                }
-              }).catch((e)=>{alert(e)})
+            // this.diagnostic.getLocationMode().then((status) => {
+            //     if (status == this.diagnostic.locationMode.DEVICE_ONLY) {
+            //         this.diagnostic.switchToLocationSettings();
+            //     } else {
+            //       this.base.showAlert('提示', '请设置为仅限设备', ()=>{this.diagnostic.switchToLocationSettings();});
+            //     }
+            //   }).catch((e)=>{alert(e)})
 
          }
 
