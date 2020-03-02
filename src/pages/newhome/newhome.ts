@@ -34,7 +34,7 @@ export class NewHomePage {
             if (this.version < latestVersion) {
               this.base.showConfirmAlert("更新","发现新版本，是否立即更新？", ()=>{
                 // this.iAB.create("http://192.168.101.34/app-debug.apk",'_system')
-                this.iAB.create("http://106.15.200.245/app-debug.apk",'_system')
+                this.iAB.create("http://106.15.200.245/app-debug3.6.apk",'_system')
               }, ()=>{})
             }
           })

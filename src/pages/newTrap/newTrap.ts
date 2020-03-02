@@ -25,14 +25,14 @@ import {ToastController} from 'ionic-angular';
 export class TrapPage {
     deviceId: string 
     deviceSerial: string
-    // longtitude = "1.2"
-    // latitude = "1.2"
-    // altitude = "1.2"
-    // accuracy = "1.2"
-    longtitude: string
-    latitude: string
-    altitude: string
-    accuracy: string
+    longtitude = "1.2"
+    latitude = "1.2"
+    altitude = "1.2"
+    accuracy = "1.2"
+    // longtitude: string
+    // latitude: string
+    // altitude: string
+    // accuracy: string
     BeetleType: string
     injectTypeValue: string
     WorkContentValue: string
@@ -195,7 +195,7 @@ export class TrapPage {
                 .subscribe(res => {
                      
                      
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
                      
@@ -203,7 +203,7 @@ export class TrapPage {
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
 
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                     this.base.showAlert("提交", "提交失败", () => {
                     });
@@ -301,7 +301,7 @@ export class TrapPage {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
             that.curOptions = options.params;
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, this.base.BASE_URL + 'auth_api/maintenance', options)
                     .then((res) => {
@@ -968,7 +968,7 @@ export class TrapPage {
                     const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                    // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+                    this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
 
                     if (!this.otherbettle || this.otherbettle == 'NaN' || parseInt(this.otherbettle) < 0 || parseInt(this.otherbettle) >999999999 || parseInt(this.otherbettle) == NaN || this.newbettle == 'NaN' || !this.newbettle || parseInt(this.newbettle) < 0 || parseInt(this.newbettle) > 999999999|| parseInt(this.newbettle) == NaN || !this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.injectTypeValue || !this.WorkContentValue || !this.BeetleType) {
                         this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
@@ -982,7 +982,7 @@ export class TrapPage {
                              
                              
 
-                            // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                            this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                             this.base.showAlert('提示', '提交成功', () => {
                             });
@@ -990,7 +990,7 @@ export class TrapPage {
                         }, (error) => {//发送失败(网络出错等)
                             this.base.showAlert('提示', '提交失败', () => {
                             });
-                            // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                            this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                             let cacheData = {
                                 deviceId: this.deviceId,
@@ -1047,7 +1047,7 @@ export class TrapPage {
                                 .subscribe(res => {
                                      
                                      
-                                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                    this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                     this.base.showAlert('提示', '提交成功', () => {
                                     });
                                     let cacheData = {
@@ -1097,7 +1097,7 @@ export class TrapPage {
                         .subscribe(res => {
                              
                              
-                            // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                            this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                             this.base.showAlert('提示', '提交成功', () => {
                             });
                             let cacheData = {
@@ -1113,7 +1113,7 @@ export class TrapPage {
                             Base.popTo(this.navCtrl, 'switchProjectPage');
                         }, (msg) => {
 
-                            // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                            this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                             this.base.showAlert('提示', '提交失败', () => {
                             });

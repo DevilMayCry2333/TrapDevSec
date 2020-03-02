@@ -292,7 +292,7 @@ export class DryPage {
                 .subscribe(res => {
                      
                      
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                     this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
                      
@@ -300,7 +300,7 @@ export class DryPage {
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
 
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                     this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
@@ -358,7 +358,7 @@ export class DryPage {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
             that.curOptions = options.params;
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, base.BASE_URL + 'app/AddInjectData', options)
                     .then((res) => {
@@ -1013,8 +1013,8 @@ export class DryPage {
                 //创建文件对象
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
-
-                this.base.logger(JSON.stringify(options), "Img_newDryPar.txt");
+                //有照片的请求前参数
+                this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.woodStatusValue || !this.injectNum || !this.workContentValue || parseInt(this.injectNum) < 0 || parseInt(this.injectNum) == NaN || !this.injectNum || this.injectNum == 'NaN') {
                     this.base.showAlert("提示", "数量输入为空或者不合法", () => {
                     });
@@ -1025,8 +1025,8 @@ export class DryPage {
                          
                          
                          
-
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        //请求后
+                        this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                         this.base.showAlert('提示', '提交成功', () => {
                         });
@@ -1034,7 +1034,8 @@ export class DryPage {
                     }, (error) => {//发送失败(网络出错等)
                         this.base.showAlert('提示', '提交失败', () => {
                         });
-                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                        //请求错误
+                        this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                         let cacheData = {
                             deviceId: this.deviceId,
@@ -1095,8 +1096,8 @@ export class DryPage {
                             })
                             .subscribe(res => {
                                  
-                                 
-                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                //请求后 
+                                this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                 this.base.showAlert('提示', '提交成功', () => {
                                 });
                                 let cacheData = {
@@ -1117,8 +1118,8 @@ export class DryPage {
 
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, (msg) => {
-
-                                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                                //请求错误
+                                this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                                 this.base.showAlert('提示', '提交失败', () => {
                                 });
@@ -1212,7 +1213,7 @@ export class DryPage {
                     .subscribe(res => {
                          
                          
-                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => {
                         });
                         let cacheData = {
@@ -1234,7 +1235,7 @@ export class DryPage {
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
 
-                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                         this.base.showAlert('提示', '提交失败', () => {
                         });
