@@ -321,7 +321,7 @@ export class DeadtreePage {
                 .subscribe(res => {
                     //  
                     //  
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
                     //  
@@ -329,7 +329,7 @@ export class DeadtreePage {
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
 
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });

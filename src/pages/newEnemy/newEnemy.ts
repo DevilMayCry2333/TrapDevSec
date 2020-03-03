@@ -232,7 +232,7 @@ export class EnemyPage {
                 .subscribe(res => {
                      
                      
-                    // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                    this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                     this.base.showAlert('提示', '提交成功', () => {
                     });
                      
@@ -240,7 +240,7 @@ export class EnemyPage {
                     Base.popTo(this.navCtrl, 'switchProjectPage');
                 }, (msg) => {
 
-                    // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                    this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                     this.base.showAlert("提交失败", "提交失败", () => {
                     });
@@ -296,7 +296,7 @@ export class EnemyPage {
             const fileTransfer: FileTransferObject = this.fileTransfer.create();
             that.curOptions = options.params;
 
-            // this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
+            this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
             return new Promise((resolve, reject) => {
                 fileTransfer.upload(element.img, base.BASE_URL + 'app/AddEnemy', options)
                     .then((res) => {
@@ -977,7 +977,7 @@ export class EnemyPage {
                 const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
 
-                this.base.logger(JSON.stringify(options), "Img_newEnemyPar.txt");
+                this.base.logger(JSON.stringify(options), "Img_maintenance_submit_function_fileTransferPar.txt");
                 if (!this.altitude || !this.longtitude || !this.latitude || !this.accuracy || !this.predatorsTypeValue || !this.releaseNum || parseInt(this.releaseNum) < 0 || parseInt(this.releaseNum) > 999999999 || parseInt(this.releaseNum) == NaN || !this.releaseNum || this.releaseNum == 'NaN') {
                     this.base.showAlert("提示", "数据未填写，或填写格式错误！", () => {
                     });
@@ -988,7 +988,7 @@ export class EnemyPage {
                          
                          
 
-                        // this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
+                        this.base.logger(JSON.stringify(res), "Img_maintenance_submit_function_fileTransferRes.txt");
 
                         this.base.showAlert('提示', '提交成功', () => {
                         });
@@ -996,7 +996,7 @@ export class EnemyPage {
                     }, (error) => {//发送失败(网络出错等)
                         this.base.showAlert('提示', '提交失败', () => {
                         });
-                        // this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
+                        this.base.logger(JSON.stringify(error), "Img_maintenance_submit_function_fileTransferError.txt");
 
                         let cacheData = {
                             deviceId: this.deviceId,
@@ -1052,7 +1052,7 @@ export class EnemyPage {
                             .subscribe(res => {
                                  
                                  
-                                // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                                this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                                 this.base.showAlert('提示', '提交成功', () => {
                                 });
                                 let cacheData = {
@@ -1071,7 +1071,7 @@ export class EnemyPage {
                                 Base.popTo(this.navCtrl, 'switchProjectPage');
                             }, (msg) => {
 
-                                // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                                this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                                 this.base.showAlert('提示', '提交失败', () => {
                                 });
@@ -1155,7 +1155,7 @@ export class EnemyPage {
                     .subscribe(res => {
                          
                          
-                        // this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
+                        this.base.logger(JSON.stringify(res), "NonImg_maintenance_submit_function_fileTransferRes.txt");
                         this.base.showAlert('提示', '提交成功', () => {
                         });
                         let cacheData = {
@@ -1174,7 +1174,7 @@ export class EnemyPage {
                         Base.popTo(this.navCtrl, 'switchProjectPage');
                     }, (msg) => {
 
-                        // this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
+                        this.base.logger(JSON.stringify(msg), "NonImg_maintenance_submit_function_fileTransferError.txt");
 
                         this.base.showAlert('提示', '提交失败', () => {
                         });
