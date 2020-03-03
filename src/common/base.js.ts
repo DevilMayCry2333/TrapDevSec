@@ -12,7 +12,7 @@ export class Base {
   // BASE_URL = "http://106.15.90.78:50000/"
   //   BASE_URL = "http://192.168.1.7:50000/"
   //BASE_URL = "http://127.0.0.1:50000/"
-  //BASE_URL = "http://118.178.94.5:50000/"
+  // BASE_URL = "http://118.178.94.5:50000/"
   transitionOptions: NativeTransitionOptions = {
     direction: 'left',
     duration: 200,
