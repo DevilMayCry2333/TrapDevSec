@@ -838,8 +838,10 @@ export class DryPage {
                 allDevice.forEach(element => {
                      
                     //  
-                    if ((element.scanId == params.id && element.id.charAt(8) == '2') || params.id.charAt(8) == '7')
+                    if ((element.scanId == params.id && element.id.charAt(8) == '2') || params.id.charAt(8) == '7'){
                         flag = 1;
+                        this.deviceSerial = element.customSerial;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;

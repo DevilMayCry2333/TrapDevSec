@@ -771,8 +771,10 @@ export class NewMedicinePage {
                 allDevice.forEach(element => {
                      
                     //  
-                    if ((element.scanId == params.id && element.id.charAt(8) == '5'))
+                    if ((element.scanId == params.id && element.id.charAt(8) == '5')){
                         flag = 1;
+                        this.deviceSerial = element.customSerial;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;
