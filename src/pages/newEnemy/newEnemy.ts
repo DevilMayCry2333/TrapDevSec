@@ -833,8 +833,10 @@ export class EnemyPage {
                 allDevice.forEach(element => {
                      
                      
-                    if ((element.scanId == params.id && element.id.charAt(8) == '3'))
+                    if ((element.scanId == params.id && element.id.charAt(8) == '3')){
                         flag = 1;
+                        this.deviceSerial = element.customSerial;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;

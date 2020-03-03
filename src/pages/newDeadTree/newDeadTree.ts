@@ -1028,6 +1028,7 @@ export class DeadtreePage {
                 allDevice.forEach(element => {
                     if ((element.scanId == params.id)) {
                         flag = 1;
+                        this.deviceSerial = element.customSerial;
                     }
                 });
                 if (flag == 1) {

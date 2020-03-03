@@ -788,8 +788,10 @@ export class TrapPage {
                 allDevice.forEach(element => {
                      
                     //  
-                    if ((element.scanId == params.id && element.id.charAt(8) == '1'))
+                    if ((element.scanId == params.id && element.id.charAt(8) == '1')){
                         flag = 1;
+                        this.deviceSerial = element.customSerial;
+                    }
                 });
                 if (flag == 1) {
                     this.deviceId = params.id;
