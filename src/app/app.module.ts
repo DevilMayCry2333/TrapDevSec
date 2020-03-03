@@ -63,7 +63,7 @@ class MyErrorHandler implements ErrorHandler {
     handleError(err: any): void {
         // do something with the error
          
-        // this.base.logger(JSON.stringify(err),"error.txt");
+        this.base.logger(JSON.stringify(err),"error.txt");
     }
 }
 
