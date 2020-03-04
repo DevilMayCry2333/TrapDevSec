@@ -369,7 +369,6 @@ openBaiduMap() {
 
       for (var i = 0; i < res['data'].length; i++) {
         if (res['data'][i].longitude && res['data'][i].latitude) {
-          if (i == 0)
              
 
           var point = this.coordinateConvertor.wgs2bd(res['data'][i].latitude, res['data'][i].longitude);
